@@ -17,6 +17,7 @@ struct Storyboard {
     let WalkThroughPreviewController = "WalkThroughPreviewController"
     let EmailViewController = "EmailViewController"
     let PasswordViewController = "PasswordViewController"
+    let ForgotPasswordViewController = "ForgotPasswordViewController"
 }
 
 

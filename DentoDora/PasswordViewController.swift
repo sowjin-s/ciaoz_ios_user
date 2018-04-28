@@ -58,7 +58,7 @@ extension PasswordViewController {
         self.scrollView.addSubview(viewScroll)
         self.buttonCreateAccount.addTarget(self, action: #selector(self.createAccountAction), for: .touchUpInside)
         self.buttonForgotPassword.addTarget(self, action: #selector(self.forgotPasswordAction), for: .touchUpInside)
-        self.textFieldPassword.setPasswordView()
+//        self.textFieldPassword.setPasswordView()
         
     }
     
@@ -126,7 +126,7 @@ extension PasswordViewController {
     
     @IBAction private func forgotPasswordAction(){
         
-        
+        self.push(id: Storyboard.Ids.ForgotPasswordViewController, animation: true)
         
     }
 

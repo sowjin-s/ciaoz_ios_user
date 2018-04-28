@@ -39,6 +39,7 @@
 		088B5D382022163700D5342C /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088B5D372022163700D5342C /* Reachability.swift */; };
 		088DC901200FCCA00095D552 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088DC900200FCCA00095D552 /* ViewExtension.swift */; };
 		08B73D0420947C5C00B60F74 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B73D0320947C5C00B60F74 /* PasswordViewController.swift */; };
+		08BAFC602094B495002292C0 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BAFC5F2094B495002292C0 /* ForgotPasswordViewController.swift */; };
 		08C8F2272004A60A0065CE24 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C8F2262004A60A0065CE24 /* Image.swift */; };
 		08CEA1AB2073B47F00553DE2 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CEA1AA2073B47F00553DE2 /* Application.swift */; };
 		08D0DD0B20946A25002822B6 /* Raleway-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 08D0DD0A20946A24002822B6 /* Raleway-Medium.ttf */; };
@@ -148,6 +149,7 @@
 		088B5D372022163700D5342C /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		088DC900200FCCA00095D552 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		08B73D0320947C5C00B60F74 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
+		08BAFC5F2094B495002292C0 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		08C8F2262004A60A0065CE24 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		08CEA1AA2073B47F00553DE2 /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		08D0DD0A20946A24002822B6 /* Raleway-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Medium.ttf"; sourceTree = "<group>"; };
@@ -397,6 +399,7 @@
 				08B73D0220947C4900B60F74 /* Password */,
 				084BB9492094400E00EFD493 /* Email */,
 				082D1B9320933C4E0000B7C8 /* WalkThrough */,
+				08BAFC612094B49B002292C0 /* ForgotPassword */,
 			);
 			name = "User Storyboard";
 			sourceTree = "<group>";
@@ -508,6 +511,14 @@
 			children = (
 			);
 			name = TextField;
+			sourceTree = "<group>";
+		};
+		08BAFC612094B49B002292C0 /* ForgotPassword */ = {
+			isa = PBXGroup;
+			children = (
+				08BAFC5F2094B495002292C0 /* ForgotPasswordViewController.swift */,
+			);
+			name = ForgotPassword;
 			sourceTree = "<group>";
 		};
 		08ED0E4A206CE1120016732B /* Media */ = {
@@ -1090,6 +1101,7 @@
 				086BAF5C200777890087F15A /* Global.swift in Sources */,
 				889480211FECE717006AF5A9 /* Button.swift in Sources */,
 				08DDE6692093633B009FEBC6 /* WalkThroughPreviewController.swift in Sources */,
+				08BAFC602094B495002292C0 /* ForgotPasswordViewController.swift in Sources */,
 				086BAF6220078A200087F15A /* ErrorMessages.swift in Sources */,
 				084577612073614300E890F5 /* AVPlayerHelper.swift in Sources */,
 				08CEA1AB2073B47F00553DE2 /* Application.swift in Sources */,

@@ -44,6 +44,7 @@ struct Constants {
     let enterPassword = "Enter Password"
     let password = "Password"
     let iForgotPassword = "I forgot my password"
+    let enterYourMailIdForrecovery = "Enter your mail ID for recovery"
 }
 
 
