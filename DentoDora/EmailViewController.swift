@@ -1,0 +1,146 @@
+//
+//  EmailViewController.swift
+//  User
+//
+//  Created by CSS on 28/04/18.
+//  Copyright © 2018 Appoets. All rights reserved.
+//
+
+import UIKit
+
+class EmailViewController: UIViewController {
+    
+    @IBOutlet private var viewNext: UIView!
+    @IBOutlet private var textFieldEmail : HoshiTextField!
+    @IBOutlet private var buttonCreateAcount : UIButton!
+    @IBOutlet private var scrollView : UIScrollView!
+    @IBOutlet private var viewScroll : UIView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.initialLoads()
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+       
+    }
+
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        self.viewNext.makeRoundedCorner()
+        self.viewScroll.frame = self.scrollView.bounds
+        self.scrollView.contentSize = self.viewScroll.bounds.size
+    }
+
+}
+
+//MARK:- Methods
+
+extension EmailViewController {
+    
+    private func initialLoads(){
+        
+        self.setDesigns()
+        self.localize()
+        self.view.dismissKeyBoardonTap()
+        self.viewNext.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.nextAction)))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.backButtonClick))
+        if #available(iOS 11.0, *) {
+            self.navigationController?.navigationBar.prefersLargeTitles = true
+        }
+        self.scrollView.addSubview(viewScroll)
+        self.buttonCreateAcount.addTarget(self, action: #selector(self.createAccountAction), for: .touchUpInside)
+        
+    }
+    
+    
+    private func setDesigns(){
+        
+        self.textFieldEmail.borderActiveColor = .primary
+        self.textFieldEmail.borderInactiveColor = .lightGray
+        self.textFieldEmail.placeholderColor = .gray
+        self.textFieldEmail.textColor = .black
+        self.textFieldEmail.delegate = self
+        self.textFieldEmail.font = UIFont(name: FontCustom.clanPro_Book.rawValue, size: 2)
+        
+    }
+    
+    
+    private func localize(){
+        
+        self.textFieldEmail.placeholder = Constants.string.emailPlaceHolder.localize()
+        self.buttonCreateAcount.setAttributedTitle(NSAttributedString(string: Constants.string.iNeedTocreateAnAccount.localize(), attributes: [.font : UIFont(name: FontCustom.clanPro_NarrMedium.rawValue, size: 14) ?? UIFont.systemFont(ofSize: 14)]), for: .normal)
+        self.navigationItem.title = Constants.string.whatsYourEmailAddress.localize()
+    }
+    
+    
+    //MARK:- Next View Tap Action
+    
+    @IBAction private func nextAction(){
+        
+       self.viewNext.addPressAnimation()
+       
+       guard  let emailText = self.textFieldEmail.text, !emailText.isEmpty else {
+            
+            self.view.make(toast: ErrorMessage.list.enterEmail) {
+                self.textFieldEmail.becomeFirstResponder()
+            }
+            
+            return
+        }
+        
+        
+        guard Common.isValid(email: emailText) else {
+            self.view.make(toast: ErrorMessage.list.enterValidEmail) {
+                self.textFieldEmail.becomeFirstResponder()
+            }
+            
+            return
+
+        }
+        
+        if let passwordVC = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.Ids.PasswordViewController) as? PasswordViewController {
+            
+            passwordVC.set(email: emailText)
+            self.navigationController?.pushViewController(passwordVC, animated: true)
+            
+        }
+        
+        
+        
+    }
+    
+    //MARK:- Create Account
+    
+    @IBAction private func createAccountAction(){
+        
+       
+        
+    }
+    
+    
+    
+}
+
+extension EmailViewController : UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        return textField.resignFirstResponder()
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        textFieldEmail.placeholder = Constants.string.email.localize()
+        
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField.text?.count == 0 {
+            textFieldEmail.placeholder = Constants.string.emailPlaceHolder.localize()
+        }
+    }
+    
+}
+
