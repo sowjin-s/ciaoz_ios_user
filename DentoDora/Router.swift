@@ -20,17 +20,20 @@ class Router {
         let presenter : PostPresenterInputProtocol&PostPresenterOutputProtocol = Presenter()
         let interactor : PostInteractorInputProtocol&PostInteractorOutputProtocol = Interactor()
         let webService : PostWebServiceProtocol = Webservice()
-        let view : (PostViewProtocol & UIViewController) = user.instantiateViewController(withIdentifier: Storyboard.Ids.LaunchViewController) as! ViewController
+        if let view : (PostViewProtocol & UIViewController) = user.instantiateViewController(withIdentifier: Storyboard.Ids.LaunchViewController) as? ViewController {
+          
+            presenter.controller = view
+            view.presenter = presenter
+            presenterObject = view.presenter
+            
+        }
         
         webService.interactor = interactor
         interactor.webService = webService
         interactor.presenter = presenter
         presenter.interactor = interactor
-        presenter.controller = view
-        view.presenter = presenter
-        presenterObject = view.presenter
-         
-        return user.instantiateViewController(withIdentifier: retrieveUserData() ? Storyboard.Ids.LaunchViewController : Storyboard.Ids.LaunchViewController)
+       
+        return user.instantiateViewController(withIdentifier: retrieveUserData() ? Storyboard.Ids.SocialLoginViewController : Storyboard.Ids.SocialLoginViewController)
     }
     
 }

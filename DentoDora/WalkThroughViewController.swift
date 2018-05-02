@@ -23,9 +23,6 @@ class WalkThroughViewController: UIPageViewController {
         self.dataSource = self
         self.delegate = self
     }
-
-  
-
 }
 
 extension WalkThroughViewController {

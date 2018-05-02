@@ -9,13 +9,11 @@
 import UIKit
 
 typealias ViewController = (UIViewController & PostViewProtocol)
-var presenterObject : PostPresenterInputProtocol?
+var presenterObject :PostPresenterInputProtocol?
 
-
-//MARK:- Constant Strings
+// MARK: - Constant Strings
 
 struct Constants {
-    
     static let string = Constants()
     
     let Done = "Done"
@@ -35,7 +33,16 @@ struct Constants {
     let signIn = "SIGN IN"
     let signUp = "SIGNUP"
     let orConnectWithSocial = "Or connect with social"
-    let walkthroughDummy = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"
+    let walkthroughDummy = """
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+     when an unknown printer took a galley of type and scrambled it to make a
+    type specimen book. It has survived not only five centuries, but also the leap
+    into electronic typesetting, remaining essentially unchanged.It
+    was popularised in the 1960s with the release of Letraset sheets
+    containing Lorem Ipsum passages, and more recently with desktop publishing
+    software like Aldus PageMaker including versions of Lorem Ipsum
+    """
     let emailPlaceHolder = "name@example.com"
     let email = "Email"
     let iNeedTocreateAnAccount = "I need to create an account"
@@ -45,8 +52,10 @@ struct Constants {
     let password = "Password"
     let iForgotPassword = "I forgot my password"
     let enterYourMailIdForrecovery = "Enter your mail ID for recovery"
+    let chooseAnAccount = "Choose an account"
+    let facebook = "Facebook"
+    let google = "Google"
 }
-
 
 //Defaults Keys
 
@@ -54,8 +63,7 @@ struct Keys {
     
     static let list = Keys()
     let userData = "userData"
-    
-    let id = "id"
+    let idKey = "id"
     let name = "name"
     
 }

@@ -2,9 +2,9 @@
 import UIKit
 import Foundation
 
-fileprivate var bottomConstraint : NSLayoutConstraint?
-fileprivate var imageCompletion : ((UIImage?)->())?
-fileprivate var constraintValue : CGFloat = 0
+private var bottomConstraint : NSLayoutConstraint?
+private var imageCompletion : ((UIImage?)->())?
+private var constraintValue : CGFloat = 0
 
 extension UIViewController {
     
@@ -141,10 +141,10 @@ extension UIViewController {
     func showImage(with completion : @escaping ((UIImage?)->())){
         
         let alert = UIAlertController(title: Constants.string.selectSource, message: nil, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: Constants.string.camera, style: .default, handler: { (Void) in
+        alert.addAction(UIAlertAction(title: Constants.string.camera, style: .default, handler: { (_) in
             self.chooseImage(with: .camera)
         }))
-        alert.addAction(UIAlertAction(title: Constants.string.photoLibrary, style: .default, handler: { (Void) in
+        alert.addAction(UIAlertAction(title: Constants.string.photoLibrary, style: .default, handler: { (_) in
             self.chooseImage(with: .photoLibrary)
         }))
         alert.addAction(UIAlertAction(title: Constants.string.Cancel, style: .cancel, handler:nil))
@@ -153,10 +153,8 @@ extension UIViewController {
         self.present(alert, animated: true, completion: nil)
         
     }
-    
-    
-    
-    //MARK:- Show Image Picker
+
+    // MARK:- Show Image Picker
     
     private func chooseImage(with source : UIImagePickerControllerSourceType){
         

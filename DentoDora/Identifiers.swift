@@ -18,6 +18,7 @@ struct Storyboard {
     let EmailViewController = "EmailViewController"
     let PasswordViewController = "PasswordViewController"
     let ForgotPasswordViewController = "ForgotPasswordViewController"
+    let SocialLoginViewController = "SocialLoginViewController"
 }
 
 

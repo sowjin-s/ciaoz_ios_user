@@ -34,7 +34,7 @@ class User : NSObject, NSCoding, JSONSerializable {
     
     required convenience init?(coder aDecoder: NSCoder) {
         
-        let id = aDecoder.decodeObject(forKey: Keys.list.id) as? Int
+        let id = aDecoder.decodeObject(forKey: Keys.list.idKey) as? Int
         let name = aDecoder.decodeObject(forKey: Keys.list.name) as? String
         
         self.init(id: id, name: name)
@@ -44,7 +44,7 @@ class User : NSObject, NSCoding, JSONSerializable {
     
     func encode(with aCoder: NSCoder) {
         
-        aCoder.encode(self.id, forKey: Keys.list.id)
+        aCoder.encode(self.id, forKey: Keys.list.idKey)
         aCoder.encode(self.name, forKey: Keys.list.name)
         
     }

@@ -6,7 +6,8 @@ target 'User' do
   use_frameworks!
 
     pod 'Alamofire'
-
+    pod 'KWDrawerController', '~> 4.1.2'
+    #pod 'SwiftLint'
 
   target 'UserTests' do
     inherit! :search_paths

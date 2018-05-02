@@ -67,10 +67,10 @@ extension EmailViewController {
     }
     
     
-    private func localize(){
-        
+    private func localize() {
         self.textFieldEmail.placeholder = Constants.string.emailPlaceHolder.localize()
-        self.buttonCreateAcount.setAttributedTitle(NSAttributedString(string: Constants.string.iNeedTocreateAnAccount.localize(), attributes: [.font : UIFont(name: FontCustom.clanPro_NarrMedium.rawValue, size: 14) ?? UIFont.systemFont(ofSize: 14)]), for: .normal)
+        let attr :[NSAttributedStringKey : Any]  = [.font : UIFont(name: FontCustom.clanPro_NarrMedium.rawValue, size: 14) ?? UIFont.systemFont(ofSize: 14)]
+        self.buttonCreateAcount.setAttributedTitle(NSAttributedString(string: Constants.string.iNeedTocreateAnAccount.localize(), attributes: attr), for: .normal)
         self.navigationItem.title = Constants.string.whatsYourEmailAddress.localize()
     }
     

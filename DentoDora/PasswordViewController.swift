@@ -33,10 +33,10 @@ class PasswordViewController: UIViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        self.viewNext.makeRoundedCorner()
-        self.viewScroll.frame = self.scrollView.bounds
-        self.scrollView.contentSize = self.viewScroll.bounds.size
+        self.setFrame()
     }
+    
+    
 
 }
 
@@ -56,13 +56,22 @@ extension PasswordViewController {
             self.navigationController?.navigationBar.prefersLargeTitles = true
         }
         self.scrollView.addSubview(viewScroll)
+        self.setFrame()
         self.buttonCreateAccount.addTarget(self, action: #selector(self.createAccountAction), for: .touchUpInside)
         self.buttonForgotPassword.addTarget(self, action: #selector(self.forgotPasswordAction), for: .touchUpInside)
 //        self.textFieldPassword.setPasswordView()
         
     }
     
-    private func setDesigns(){
+    private func setFrame(){
+        
+        self.viewNext.makeRoundedCorner()
+        self.viewScroll.frame = self.scrollView.bounds
+        self.scrollView.contentSize = self.viewScroll.bounds.size
+        self.scrollView.contentOffset = .zero
+    }
+    
+    private func setDesigns() {
         
         self.textFieldPassword.borderActiveColor = .primary
         self.textFieldPassword.borderInactiveColor = .lightGray
@@ -73,7 +82,7 @@ extension PasswordViewController {
         
     }
     
-    private func localize(){
+    private func localize() {
         
         self.textFieldPassword.placeholder = Constants.string.enterPassword.localize()
         self.buttonCreateAccount.setAttributedTitle(NSAttributedString(string: Constants.string.iNeedTocreateAnAccount.localize(), attributes: [.font : UIFont(name: FontCustom.clanPro_NarrMedium.rawValue, size: 14) ?? UIFont.systemFont(ofSize: 14)]), for: .normal)
@@ -84,7 +93,7 @@ extension PasswordViewController {
     
     //MARK:- Set Values
     
-    func set(email : String?){
+    func set(email : String?) {
         
         self.email = email
         
@@ -93,7 +102,7 @@ extension PasswordViewController {
     
     //MARK:- Next View Tap Action
     
-    @IBAction private func nextAction(){
+    @IBAction private func nextAction() {
         
         self.viewNext.addPressAnimation()
         
@@ -115,7 +124,7 @@ extension PasswordViewController {
     
     //MARK:- Create Account
 
-    @IBAction private func createAccountAction(){
+    @IBAction private func createAccountAction() {
         
         
         
@@ -124,7 +133,7 @@ extension PasswordViewController {
     //MARK:- Forgot Password
 
     
-    @IBAction private func forgotPasswordAction(){
+    @IBAction private func forgotPasswordAction() {
         
         self.push(id: Storyboard.Ids.ForgotPasswordViewController, animation: true)
         

@@ -1,16 +1,22 @@
 PODS:
   - Alamofire (4.7.0)
+  - KWDrawerController (4.1.3):
+    - KWDrawerController/Core (= 4.1.3)
+  - KWDrawerController/Core (4.1.3)
 
 DEPENDENCIES:
   - Alamofire
+  - KWDrawerController (~> 4.1.2)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Alamofire
+    - KWDrawerController
 
 SPEC CHECKSUMS:
   Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
+  KWDrawerController: 49a6597be74c1fb10ed690e89def27866bbd460a
 
-PODFILE CHECKSUM: be8c1babbf1277f609684299798e87bff05a1f21
+PODFILE CHECKSUM: 661e63b75f8162540544379f70b64199ca7aba12
 
 COCOAPODS: 1.5.0

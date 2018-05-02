@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2R9-4a-Txq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Zo8-Ug-usp">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -7,10 +7,16 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="ClanPro-NarrNews.otf">
+            <string>ClanPro-NarrNews</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Launch View Controller-->
         <scene sceneID="QuK-mo-kEz">
@@ -457,6 +463,60 @@
                 </view>
             </objects>
             <point key="canvasLocation" x="2170" y="960"/>
+        </scene>
+        <!--Social Login View Controller-->
+        <scene sceneID="0fS-J2-NGR">
+            <objects>
+                <tableViewController storyboardIdentifier="SocialLoginViewController" id="Zo8-Ug-usp" customClass="SocialLoginViewController" customModule="User" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ZNW-Ix-8nx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="SocialLoginCell" rowHeight="70" id="3QX-O9-QwV" customClass="SocialLoginCell" customModule="User" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="70"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3QX-O9-QwV" id="9Qf-Yn-nQZ">
+                                    <rect key="frame" x="0.0" y="0.0" width="341" height="69.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nrU-hT-ga6">
+                                            <rect key="frame" x="24" y="21" width="28" height="27.5"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Facebook" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4c0-Fz-ESP">
+                                            <rect key="frame" x="68" y="21.5" width="257" height="28"/>
+                                            <fontDescription key="fontDescription" name="ClanPro-NarrNews" family="Clan Pro" pointSize="14"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="4c0-Fz-ESP" firstAttribute="centerY" secondItem="nrU-hT-ga6" secondAttribute="centerY" id="0fI-WT-L6h"/>
+                                        <constraint firstItem="4c0-Fz-ESP" firstAttribute="height" secondItem="nrU-hT-ga6" secondAttribute="height" id="6Ys-R8-G3B"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="4c0-Fz-ESP" secondAttribute="trailing" constant="8" id="COh-VL-6TX"/>
+                                        <constraint firstItem="nrU-hT-ga6" firstAttribute="height" secondItem="9Qf-Yn-nQZ" secondAttribute="height" multiplier="0.4" id="NmO-Ds-6XM"/>
+                                        <constraint firstItem="nrU-hT-ga6" firstAttribute="width" secondItem="9Qf-Yn-nQZ" secondAttribute="height" multiplier="0.4" id="bE9-7J-c1C"/>
+                                        <constraint firstItem="nrU-hT-ga6" firstAttribute="leading" secondItem="9Qf-Yn-nQZ" secondAttribute="leadingMargin" constant="8" id="fhX-E6-HZl"/>
+                                        <constraint firstItem="nrU-hT-ga6" firstAttribute="centerY" secondItem="9Qf-Yn-nQZ" secondAttribute="centerY" id="oa1-03-Gca"/>
+                                        <constraint firstItem="4c0-Fz-ESP" firstAttribute="leading" secondItem="nrU-hT-ga6" secondAttribute="trailing" constant="16" id="ysF-Xk-hZe"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="imageViewTitle" destination="nrU-hT-ga6" id="1RL-lt-mYx"/>
+                                    <outlet property="labelTitle" destination="4c0-Fz-ESP" id="LEk-6G-UPk"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="Zo8-Ug-usp" id="fmQ-S8-7cd"/>
+                            <outlet property="delegate" destination="Zo8-Ug-usp" id="RrM-8V-o79"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4pd-Hy-3e7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2855.1999999999998" y="957.57121439280365"/>
         </scene>
     </scenes>
     <resources>
