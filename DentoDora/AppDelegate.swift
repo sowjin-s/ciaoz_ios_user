@@ -9,7 +9,8 @@
 
 import UIKit
 import UserNotifications
-
+import GoogleMaps
+import GooglePlaces
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        
         self.appearence()
         setLocalization(language: .english)
+        self.google()
         return true
        
         
@@ -87,9 +89,21 @@ extension AppDelegate {
     }
     
     
-
-    
 }
+    
+    // MARK:- Google
+    
+extension AppDelegate {
+    
+    func google(){
+        
+        GMSServices.provideAPIKey(googleMapKey)
+        GMSPlacesClient.provideAPIKey(googleMapKey)
+        
+    }
+        
+}
+    
 
 
 

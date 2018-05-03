@@ -1,22 +1,35 @@
 PODS:
   - Alamofire (4.7.0)
+  - GoogleMaps (2.6.0):
+    - GoogleMaps/Maps (= 2.6.0)
+  - GoogleMaps/Base (2.6.0)
+  - GoogleMaps/Maps (2.6.0):
+    - GoogleMaps/Base
+  - GooglePlaces (2.6.0):
+    - GoogleMaps/Base (= 2.6.0)
   - KWDrawerController (4.1.3):
     - KWDrawerController/Core (= 4.1.3)
   - KWDrawerController/Core (4.1.3)
 
 DEPENDENCIES:
   - Alamofire
+  - GoogleMaps
+  - GooglePlaces
   - KWDrawerController (~> 4.1.2)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Alamofire
+    - GoogleMaps
+    - GooglePlaces
     - KWDrawerController
 
 SPEC CHECKSUMS:
   Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
+  GoogleMaps: 42f91c68b7fa2f84d5c86597b18ceb99f5414c7f
+  GooglePlaces: f6ddf33b75cef69e888907d9947c57198ed845f3
   KWDrawerController: 49a6597be74c1fb10ed690e89def27866bbd460a
 
-PODFILE CHECKSUM: 661e63b75f8162540544379f70b64199ca7aba12
+PODFILE CHECKSUM: 18f0839d2e74370f7d4f254dc872af3ee35eed60
 
 COCOAPODS: 1.5.0

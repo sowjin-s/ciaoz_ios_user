@@ -8,6 +8,8 @@ target 'User' do
     pod 'Alamofire'
     pod 'KWDrawerController', '~> 4.1.2'
     #pod 'SwiftLint'
+    pod 'GoogleMaps'
+    pod 'GooglePlaces'
 
   target 'UserTests' do
     inherit! :search_paths

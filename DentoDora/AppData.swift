@@ -8,7 +8,7 @@
 
 import UIKit
 
-let AppName = "JWChat"
+let AppName = "Dento Dora"
 var deviceToken = Constants.string.noDevice
-
+let googleMapKey = "AIzaSyC-9miTMyYDjsdhgkCkiFF34hxNTILbMrI"
 

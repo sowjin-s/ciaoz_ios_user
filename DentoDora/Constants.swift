@@ -55,6 +55,20 @@ struct Constants {
     let chooseAnAccount = "Choose an account"
     let facebook = "Facebook"
     let google = "Google"
+    let payment = "Payment"
+    let yourTrips = "Your Trips"
+    let coupon = "Coupon"
+    let wallet = "Wallet"
+    let passbook = "Passbook"
+    let settings = "Settings"
+    let help = "Help"
+    let share = "Share"
+    let inviteReferral = "Invite Referral"
+    let faqSupport = "FAQ Support"
+    let termsAndConditions = "Terms and Conditions"
+    let privacyPolicy = "Privacy Policy"
+    let logout = "Logout"
+    
 }
 
 //Defaults Keys
