@@ -68,7 +68,6 @@ extension PasswordViewController {
         self.viewNext.makeRoundedCorner()
         self.viewScroll.frame = self.scrollView.bounds
         self.scrollView.contentSize = self.viewScroll.bounds.size
-        self.scrollView.contentOffset = .zero
     }
     
     private func setDesigns() {
@@ -126,7 +125,8 @@ extension PasswordViewController {
 
     @IBAction private func createAccountAction() {
         
-        
+        self.push(id: Storyboard.Ids.SignUpTableViewController, animation: true)
+
         
     }
     

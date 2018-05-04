@@ -68,6 +68,15 @@ struct Constants {
     let termsAndConditions = "Terms and Conditions"
     let privacyPolicy = "Privacy Policy"
     let logout = "Logout"
+    let profile = "Profile"
+    let first = "First"
+    let last = "Last"
+    let phoneNumber = "Phone Number"
+    let tripType = "Trip Trip"
+    let bussiness = "Bussiness"
+    let personal = "Personal"
+    let save = "save"
+    let lookingToChangePassword = "Looking to change password"
     
 }
 
@@ -82,11 +91,13 @@ struct Keys {
     
 }
 
-//ENUM STATUS
+//ENUM TRIP TYPE
 
-enum Status : String {
-    case ONLINE = "ONLINE"
-    case OFFLINE = "OFFLINE"
+enum TripType : String, Codable {
+    
+    case Business
+    case Personal
+    
 }
 
 

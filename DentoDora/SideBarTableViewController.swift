@@ -48,6 +48,8 @@ extension SideBarTableViewController {
     
     private func initialLoads() {
         
+        
+        
     }
     
     // MARK:- Set Designs

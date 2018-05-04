@@ -115,7 +115,7 @@ extension EmailViewController {
     
     @IBAction private func createAccountAction(){
         
-       
+        self.push(id: Storyboard.Ids.SignUpTableViewController, animation: true)
         
     }
     

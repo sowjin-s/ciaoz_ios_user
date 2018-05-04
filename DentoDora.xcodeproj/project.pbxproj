@@ -11,6 +11,9 @@
 		08001A0C203C241E0076D324 /* countryCodes.json in Resources */ = {isa = PBXBuildFile; fileRef = 08001A0A203C241E0076D324 /* countryCodes.json */; };
 		08001A0D203C241E0076D324 /* CountryPicker.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 08001A0B203C241E0076D324 /* CountryPicker.bundle */; };
 		08032BD520481349006BFC4E /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08032BD2204812A0006BFC4E /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0805BDBE209C41AF00ACDC38 /* LocationSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805BDBD209C41AF00ACDC38 /* LocationSelectionViewController.swift */; };
+		0805BDC1209C504900ACDC38 /* SignUpTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805BDC0209C504900ACDC38 /* SignUpTableViewController.swift */; };
+		0805BDC3209C54F900ACDC38 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805BDC2209C54F900ACDC38 /* ProfileViewController.swift */; };
 		08147B7F208A1A9700C5CFD3 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08147B7E208A1A9600C5CFD3 /* SafariServices.framework */; };
 		08147B81208A23F600C5CFD3 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08147B80208A23F600C5CFD3 /* Bundle.swift */; };
 		082D1B7E2093159A0000B7C8 /* TextFieldEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082D1B7C209315990000B7C8 /* TextFieldEffects.swift */; };
@@ -128,6 +131,9 @@
 		08001A0A203C241E0076D324 /* countryCodes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countryCodes.json; sourceTree = "<group>"; };
 		08001A0B203C241E0076D324 /* CountryPicker.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CountryPicker.bundle; sourceTree = "<group>"; };
 		08032BD2204812A0006BFC4E /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Alamofire.framework; sourceTree = "<group>"; };
+		0805BDBD209C41AF00ACDC38 /* LocationSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSelectionViewController.swift; sourceTree = "<group>"; };
+		0805BDC0209C504900ACDC38 /* SignUpTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpTableViewController.swift; sourceTree = "<group>"; };
+		0805BDC2209C54F900ACDC38 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		080A8B60206B718700154B2D /* WebRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebRTC.framework; path = WhatsAppClone/Lib/include/WebRTC/WebRTC.framework; sourceTree = "<group>"; };
 		08147B7E208A1A9600C5CFD3 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		08147B80208A23F600C5CFD3 /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
@@ -253,6 +259,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0805BDBC209C418700ACDC38 /* LocationSelection */ = {
+			isa = PBXGroup;
+			children = (
+				0805BDBD209C41AF00ACDC38 /* LocationSelectionViewController.swift */,
+			);
+			name = LocationSelection;
+			sourceTree = "<group>";
+		};
+		0805BDBF209C503D00ACDC38 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				0805BDC0209C504900ACDC38 /* SignUpTableViewController.swift */,
+			);
+			name = SignUp;
+			sourceTree = "<group>";
+		};
 		082D1B6A209310840000B7C8 /* Reachability */ = {
 			isa = PBXGroup;
 			children = (
@@ -412,11 +434,13 @@
 		082D1B9420933C5B0000B7C8 /* User Storyboard */ = {
 			isa = PBXGroup;
 			children = (
+				0805BDBF209C503D00ACDC38 /* SignUp */,
 				086C90112099F32F002CD9B1 /* Social Login */,
 				08B73D0220947C4900B60F74 /* Password */,
 				084BB9492094400E00EFD493 /* Email */,
 				082D1B9320933C4E0000B7C8 /* WalkThrough */,
 				08BAFC612094B49B002292C0 /* ForgotPassword */,
+				0805BDC2209C54F900ACDC38 /* ProfileViewController.swift */,
 			);
 			name = "User Storyboard";
 			sourceTree = "<group>";
@@ -541,6 +565,7 @@
 		08B7DC70209A1487002CF17A /* Main StoryBoard */ = {
 			isa = PBXGroup;
 			children = (
+				0805BDBC209C418700ACDC38 /* LocationSelection */,
 				08B7DC73209A14A6002CF17A /* Home */,
 				08B7DC76209A14E4002CF17A /* SideBar */,
 			);
@@ -1225,6 +1250,7 @@
 				08147B81208A23F600C5CFD3 /* Bundle.swift in Sources */,
 				8871FBD81FE7DD72002335D5 /* Constants.swift in Sources */,
 				38492B382000F6A8001830AD /* String.swift in Sources */,
+				0805BDBE209C41AF00ACDC38 /* LocationSelectionViewController.swift in Sources */,
 				08C8F2272004A60A0065CE24 /* Image.swift in Sources */,
 				8894801B1FECE111006AF5A9 /* Colors.swift in Sources */,
 				088DC901200FCCA00095D552 /* ViewExtension.swift in Sources */,
@@ -1236,12 +1262,14 @@
 				082D1B81209318C30000B7C8 /* User.swift in Sources */,
 				082D1B8520931B3D0000B7C8 /* Country.swift in Sources */,
 				883389571FE8F10F006B6C05 /* Error.swift in Sources */,
+				0805BDC1209C504900ACDC38 /* SignUpTableViewController.swift in Sources */,
 				08F595E82076466300369048 /* ParallaxHeaderMode.swift in Sources */,
 				082D1B92209333F10000B7C8 /* FontHelper.swift in Sources */,
 				082D1B7E2093159A0000B7C8 /* TextFieldEffects.swift in Sources */,
 				8833895D1FE8FC22006B6C05 /* Identifiers.swift in Sources */,
 				084182B7200F689500527D0D /* PresenterProcessor.swift in Sources */,
 				08DF19C82006221B00B83AE3 /* AppData.swift in Sources */,
+				0805BDC3209C54F900ACDC38 /* ProfileViewController.swift in Sources */,
 				08B7DC75209A14E0002CF17A /* SideBarTableViewController.swift in Sources */,
 				8871FBDA1FE7DD7F002335D5 /* WebConstants.swift in Sources */,
 			);
