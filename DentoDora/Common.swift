@@ -70,5 +70,16 @@ class Common {
         return rc
         
     }
+    
+    class func storeUserData(from profile : Profile?){
+    
+        User.main.id = profile?.id
+        User.main.email = profile?.email
+        User.main.firstName = profile?.first_name
+        User.main.lastName = profile?.last_name
+        User.main.mobile = profile?.mobile
+        storeInUserDefaults()
+    
+    }
         
 }

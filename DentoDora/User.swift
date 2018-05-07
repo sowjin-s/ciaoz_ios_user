@@ -12,32 +12,42 @@ import Foundation
 class User : NSObject, NSCoding, JSONSerializable {
     
     static var main = initializeUserData()
-    
-    //@objc dynamic var id = 0
-    
+  
     var id : Int?
-    var name : String?
-
+    var accessToken : String?
+    var firstName : String?
+    var lastName :String?
+    var picture : String?
+    var email : String?
+    var mobile : String?
     
-    init(id : Int?, name : String?){
+    
+    init(id : Int?, accessToken : String?, firstName : String?, lastName : String?, mobile : String?, email : String?){
                 
         self.id = id
-        self.name = name
-      
+        self.accessToken = accessToken
+        self.firstName = firstName
+        self.lastName = lastName
+        self.mobile = mobile
+        self.email = email
+        
     }
     
     convenience
     override init(){
-        self.init(id: nil, name: nil)
+        self.init(id: nil, accessToken: nil, firstName : nil, lastName : nil, mobile : nil, email : nil)
     }
     
     
     required convenience init?(coder aDecoder: NSCoder) {
         
         let id = aDecoder.decodeObject(forKey: Keys.list.idKey) as? Int
-        let name = aDecoder.decodeObject(forKey: Keys.list.name) as? String
-        
-        self.init(id: id, name: name)
+        let accessToken = aDecoder.decodeObject(forKey: Keys.list.accessToken) as? String
+        let firstName = aDecoder.decodeObject(forKey: Keys.list.firstName) as? String
+        let lastName = aDecoder.decodeObject(forKey: Keys.list.lastName) as? String
+        let mobile = aDecoder.decodeObject(forKey: Keys.list.mobile) as? String
+        let email = aDecoder.decodeObject(forKey: Keys.list.email) as? String
+        self.init(id: id, accessToken : accessToken, firstName : firstName, lastName : lastName, mobile : mobile, email: email)
         
     }
     
@@ -45,7 +55,11 @@ class User : NSObject, NSCoding, JSONSerializable {
     func encode(with aCoder: NSCoder) {
         
         aCoder.encode(self.id, forKey: Keys.list.idKey)
-        aCoder.encode(self.name, forKey: Keys.list.name)
+        aCoder.encode(self.accessToken, forKey: Keys.list.accessToken)
+        aCoder.encode(self.firstName, forKey: Keys.list.firstName)
+        aCoder.encode(self.lastName, forKey: Keys.list.lastName)
+        aCoder.encode(self.mobile, forKey: Keys.list.mobile)
+        aCoder.encode(self.email, forKey: Keys.list.email)
         
     }
     

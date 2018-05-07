@@ -14,12 +14,13 @@ struct Storyboard {
     static let Ids = Storyboard()
     
     let LaunchViewController = "LaunchViewController"
-    let WalkThroughPreviewController = "WalkThroughPreviewController"
     let EmailViewController = "EmailViewController"
     let PasswordViewController = "PasswordViewController"
     let ForgotPasswordViewController = "ForgotPasswordViewController"
     let SocialLoginViewController = "SocialLoginViewController"
     let SignUpTableViewController = "SignUpTableViewController"
+    let WalkThroughPreviewController = "WalkThroughPreviewController"
+    let DrawerController = "DrawerController"
 }
 
 

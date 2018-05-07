@@ -54,14 +54,14 @@ internal func createActivityIndicator(_ uiView : UIView)->UIView{
     let loadingView: UIView = UIView()
     loadingView.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
     loadingView.center = container.center
-    loadingView.backgroundColor = UIColor(white:0.1, alpha: 0.7)
+    loadingView.backgroundColor = .primary//UIColor(white:0.1, alpha: 0.7)
     loadingView.clipsToBounds = true
     loadingView.layer.cornerRadius = 10
     loadingView.layer.shadowRadius = 5
     loadingView.layer.shadowOffset = CGSize(width: 0, height: 4)
     loadingView.layer.opacity = 2
     loadingView.layer.masksToBounds = false
-    loadingView.layer.shadowColor = UIColor.primary.cgColor
+    loadingView.layer.shadowColor = UIColor.gray.cgColor
     
     let actInd: UIActivityIndicatorView = UIActivityIndicatorView()
     actInd.frame = CGRect(x: 0, y: 0, width: 40, height: 40)

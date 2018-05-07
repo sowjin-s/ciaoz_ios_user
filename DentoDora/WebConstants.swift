@@ -22,5 +22,7 @@ struct WebConstants {
     let Authorization = "Authorization"
     let access_token = "access_token"
     let CFBundleShortVersionString = "CFBundleShortVersionString"
-    
+    let password = "password"
+    let bearer = "Bearer "
+    let picture = "picture"
 }

@@ -127,12 +127,10 @@ protocol PostPresenterInputProtocol : class {
 //MARK:- Presenter Output
 
 protocol PostPresenterOutputProtocol : class {
-    
-  
-    
+ 
     func onError(api : Base, error : CustomError)
-    
-
+    func sendOath(api : Base , data : Data)
+    func sendProfile(api : Base, data : Data)
     
 }
 
@@ -142,16 +140,33 @@ protocol PostPresenterOutputProtocol : class {
 protocol PostViewProtocol : class {
     
     var presenter : PostPresenterInputProtocol? {get set}
-    
-    
+
     func onError(api : Base, message : String, statusCode code : Int)
-    
+    func getOath(api : Base , data : LoginRequest?)
+    func getProfile(api : Base, data : Profile?)
     
 }
 
 
 extension PostViewProtocol {
     
+    var presenter: PostPresenterInputProtocol? {
+        
+        get {
+            presenterObject?.controller = self
+            self.presenter = presenterObject
+            return presenterObject
+        }
+        set(newValue){
+            
+            presenterObject = newValue
+        }
+        
+    }
+    
+    
+    func getOath(api : Base , data : LoginRequest?) { return }
+    func getProfile(api : Base, data : Profile?) { return }
     
 }
 

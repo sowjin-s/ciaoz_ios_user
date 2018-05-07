@@ -87,8 +87,12 @@ struct Keys {
     static let list = Keys()
     let userData = "userData"
     let idKey = "id"
-    let name = "name"
-    
+    let accessToken = "accesstoken"
+    let firstName = "firstName"
+    let lastName = "lastName"
+    let picture = "picture"
+    let email = "email"
+    let mobile = "mobile"
 }
 
 //ENUM TRIP TYPE
@@ -131,4 +135,13 @@ enum Language : String {
 }
 
 
+// MARK:- Login Type
+
+enum LoginType : String, Codable {
+    
+    case facebook
+    case google
+    case manual
+    
+}
 

@@ -65,6 +65,8 @@ class SignUpTableViewController: UITableViewController {
         
     }
     
+    
+    
 }
 
 extension SignUpTableViewController {
@@ -182,6 +184,8 @@ extension SignUpTableViewController {
     
     
     func SetNavigationcontroller(){
+       
+        self.navigationController?.navigationBar.isHidden = true
         if #available(iOS 11.0, *) {
             self.navigationController?.navigationBar.prefersLargeTitles = true
             self.navigationController?.navigationBar.barTintColor = UIColor.white

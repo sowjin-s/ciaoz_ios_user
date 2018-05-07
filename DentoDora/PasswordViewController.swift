@@ -16,6 +16,12 @@ class PasswordViewController: UIViewController {
     @IBOutlet private var buttonCreateAccount : UIButton!
     @IBOutlet private var scrollView : UIScrollView!
     @IBOutlet private var viewScroll : UIView!
+    
+    private lazy var loader : UIView = {
+       
+        return createActivityIndicator(self.view)
+        
+    }()
 
     private var email : String?
     
@@ -119,6 +125,12 @@ extension PasswordViewController {
             return
         }
         
+        
+        loader.isHidden = false
+        
+        self.presenter?.post(api: .login, data: MakeJson.login(with: email, password: passwordText))
+        
+        
     }
     
     //MARK:- Create Account
@@ -142,6 +154,8 @@ extension PasswordViewController {
 }
 
 
+//MARK:- UITextFieldDelegate
+
 extension PasswordViewController : UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -160,5 +174,52 @@ extension PasswordViewController : UITextFieldDelegate {
             textFieldPassword.placeholder = Constants.string.enterPassword.localize()
         }
     }
+    
+    
+}
+
+
+//MARK:- PostViewProtocol
+
+extension PasswordViewController : PostViewProtocol {
+   
+    func onError(api: Base, message: String, statusCode code: Int) {
+        
+       let alert = showAlert(message: message)
+        
+        DispatchQueue.main.async {
+            self.present(alert, animated: true, completion: {
+                self.loader.isHidden = true
+            })
+        }
+        
+    }
+    
+    func getOath(api: Base, data: LoginRequest?) {
+        
+        guard let accessToken = data?.access_token else {
+            self.onError(api: api, message: ErrorMessage.list.serverError.localize(), statusCode: 0)
+            return
+        }
+           
+            User.main.accessToken = accessToken
+            self.presenter?.get(api: .getProfile, parameters: nil)
+                
+         
+       
+    }
+    
+    
+    func getProfile(api: Base, data: Profile?) {
+        
+        Common.storeUserData(from: data)
+        let drawer = Router.main.instantiateViewController(withIdentifier: Storyboard.Ids.DrawerController)
+        self.present(drawer, animated: true, completion: {
+            self.navigationController?.viewControllers.removeAll()
+        })
+        
+        
+    }
+    
     
 }

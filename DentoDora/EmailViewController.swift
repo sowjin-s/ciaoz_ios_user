@@ -32,6 +32,11 @@ class EmailViewController: UIViewController {
         self.viewScroll.frame = self.scrollView.bounds
         self.scrollView.contentSize = self.viewScroll.bounds.size
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = false
+    }
 
 }
 
@@ -40,7 +45,7 @@ class EmailViewController: UIViewController {
 extension EmailViewController {
     
     private func initialLoads(){
-        
+        self.navigationController?.navigationBar.isHidden = false
         self.setDesigns()
         self.localize()
         self.view.dismissKeyBoardonTap()
@@ -68,10 +73,12 @@ extension EmailViewController {
     
     
     private func localize() {
+        
         self.textFieldEmail.placeholder = Constants.string.emailPlaceHolder.localize()
         let attr :[NSAttributedStringKey : Any]  = [.font : UIFont(name: FontCustom.clanPro_NarrMedium.rawValue, size: 14) ?? UIFont.systemFont(ofSize: 14)]
         self.buttonCreateAcount.setAttributedTitle(NSAttributedString(string: Constants.string.iNeedTocreateAnAccount.localize(), attributes: attr), for: .normal)
         self.navigationItem.title = Constants.string.whatsYourEmailAddress.localize()
+        
     }
     
     

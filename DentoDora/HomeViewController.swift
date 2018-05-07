@@ -13,6 +13,7 @@ import GoogleMaps
 class HomeViewController: UIViewController {
     
     @IBOutlet private var viewSideMenu : UIView!
+    @IBOutlet weak private var viewMapOuter : UIView!
     
     private var viewMap : GMSMapView!
 
@@ -47,7 +48,7 @@ extension HomeViewController {
         
         self.viewMap = GMSMapView(frame: self.view.frame)
         self.viewMap.delegate = self
-        self.view.addSubview(viewMap)
+        self.viewMapOuter.addSubview(viewMap)
         
     }
     

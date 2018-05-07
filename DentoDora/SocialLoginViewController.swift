@@ -26,6 +26,7 @@ class SocialLoginViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.localize()
+        self.navigationController?.isNavigationBarHidden = false
     }
 
 }

@@ -67,6 +67,15 @@ extension Presenter : PostPresenterOutputProtocol {
         controller?.onError(api: api, message: error.localizedDescription , statusCode: error.statusCode)
     }
     
+    func sendOath(api: Base, data: Data) {
+        
+        controller?.getOath(api: api, data: PresenterProcessor.shared.loginRequest(data: data))
+    }
+    
+    func sendProfile(api: Base, data: Data) {
+        
+        controller?.getProfile(api: api, data: PresenterProcessor.shared.profile(data: data))
+    }
     
 }
 

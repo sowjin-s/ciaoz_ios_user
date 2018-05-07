@@ -11,4 +11,5 @@ import UIKit
 let AppName = "Dento Dora"
 var deviceToken = Constants.string.noDevice
 let googleMapKey = "AIzaSyC-9miTMyYDjsdhgkCkiFF34hxNTILbMrI"
-
+let appSecretKey = "cIDpVMdgIz9nvyH3vMwQzOIcYSSBePq9QRjeDgs0"
+let appClientId = 2

@@ -34,11 +34,14 @@ enum StatusCode : Int {
 }
 
 
-internal let baseUrl = ""
+internal let baseUrl = "http://206.189.31.117/"
 
 enum Base : String{
   
     case signUp = "/api/user/signup"
+    case login = "/oauth/token"
+    case getProfile = "/api/user/details"
+    case updateProfile = "/api/user/update/profile"
    
     init(fromRawValue: String){
         self = Base(rawValue: fromRawValue) ?? .signUp

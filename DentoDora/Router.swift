@@ -33,7 +33,7 @@ class Router {
         interactor.presenter = presenter
         presenter.interactor = interactor
        
-        return user.instantiateViewController(withIdentifier: retrieveUserData() ? Storyboard.Ids.SocialLoginViewController : Storyboard.Ids.SocialLoginViewController)
+        return retrieveUserData() ? main.instantiateViewController(withIdentifier: Storyboard.Ids.DrawerController) : user.instantiateViewController(withIdentifier: Storyboard.Ids.LaunchViewController)
     }
     
 }

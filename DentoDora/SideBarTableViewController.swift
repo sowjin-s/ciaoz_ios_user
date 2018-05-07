@@ -13,6 +13,7 @@ class SideBarTableViewController: UITableViewController {
     @IBOutlet private var imageViewProfile : UIImageView!
     @IBOutlet private var labelName : UILabel!
     @IBOutlet private var viewShadow : UIView!
+    @IBOutlet private weak var profileImageCenterContraint : NSLayoutConstraint!
 
     private let sideBarList = [Constants.string.payment,Constants.string.yourTrips,Constants.string.coupon,Constants.string.wallet,Constants.string.passbook,Constants.string.settings,Constants.string.help,Constants.string.share,Constants.string.inviteReferral,Constants.string.faqSupport,Constants.string.termsAndConditions,Constants.string.privacyPolicy,Constants.string.logout]
     
@@ -48,7 +49,11 @@ extension SideBarTableViewController {
     
     private func initialLoads() {
         
-        
+       // self.drawerController?.fadeColor = UIColor
+        self.drawerController?.shadowOpacity = 0.2
+        let fadeWidth = self.view.frame.width*(1/5)
+        self.profileImageCenterContraint.constant = -(fadeWidth/2)
+        self.drawerController?.drawerWidth = Float(self.view.frame.width - fadeWidth)
         
     }
     

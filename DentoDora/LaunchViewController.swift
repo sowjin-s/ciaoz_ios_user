@@ -29,7 +29,12 @@ class LaunchViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
-     }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = true
+    }
 
     
 }
@@ -45,6 +50,10 @@ extension LaunchViewController {
       
         self.setLocalization()
         self.setDesigns()
+        self.buttonSignIn.addTarget(self, action: #selector(self.buttonSignInAction), for: .touchUpInside)
+        self.buttonSignUp.addTarget(self, action: #selector(self.buttonSignUpAction), for: .touchUpInside)
+        self.buttonSocialLogin.addTarget(self, action: #selector(self.buttonSocialLoginAction), for: .touchUpInside)
+        
     }
     
     
@@ -65,6 +74,25 @@ extension LaunchViewController {
        buttonSignUp.setTitle(Constants.string.signUp.localize(), for: .normal)
        buttonSignIn.setTitle(Constants.string.signIn.localize(), for: .normal)
        buttonSocialLogin.setTitle(Constants.string.orConnectWithSocial.localize(), for: .normal)
+        
+    }
+    
+    
+    @IBAction private func buttonSignInAction(){
+
+        self.push(id: Storyboard.Ids.EmailViewController, animation: true)
+        
+    }
+    
+    @IBAction private func buttonSignUpAction(){
+        
+        self.push(id: Storyboard.Ids.SignUpTableViewController, animation: true)
+        
+    }
+    
+    @IBAction private func buttonSocialLoginAction(){
+        
+        self.push(id: Storyboard.Ids.SocialLoginViewController, animation: true)
         
     }
     

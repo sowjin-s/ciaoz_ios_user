@@ -40,11 +40,11 @@ extension UIViewController {
     
     //MARK:- Present
     
-    func present(id : String, animation : Bool){
+    func present(id : String, animation : Bool, fromSB storyBoard: UIStoryboard = Router.main){
         
-        if let vc = self.storyboard?.instantiateViewController(withIdentifier: id){
-            self.present(vc, animated: animation, completion: nil)
-        }
+           let vc = storyBoard.instantiateViewController(withIdentifier: id)
+           self.present(vc, animated: animation, completion: nil)
+        
         
     }
     

@@ -23,15 +23,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.appearence()
         setLocalization(language: .english)
         self.google()
-        return true
+       // return true
        
         
-        let navigationController = Router.setWireFrame()
-//       navigationController.isNavigationBarHidden = true
+         let navigationController = UINavigationController(rootViewController: Router.setWireFrame())
+         navigationController.isNavigationBarHidden = true
          window?.rootViewController = navigationController
          window?.becomeKey()
          window?.makeKeyAndVisible()
-         self.appearence()
          return true
     }
 }

@@ -10,6 +10,7 @@ import UIKit
 
 class ProfileViewController: UITableViewController {
     
+    @IBOutlet private weak var viewImageChange : UIView!
     @IBOutlet private weak var imageViewProfile : UIImageView!
     @IBOutlet private weak var textFieldFirst : HoshiTextField!
     @IBOutlet private weak var textFieldLast : HoshiTextField!
@@ -26,7 +27,7 @@ class ProfileViewController: UITableViewController {
     @IBOutlet private weak var viewPersonal : UIView!
     
     
-    private var tripType :TripType = .Business {
+    private var tripType :TripType = .Business { // Store Radio option TripType
         
         didSet {
             
@@ -36,6 +37,15 @@ class ProfileViewController: UITableViewController {
         }
         
     }
+    
+    private var changedImage : UIImage?
+    
+    private lazy var loader : UIView = {
+       
+        return createActivityIndicator(UIScreen.main.focusedView ?? self.view)
+        
+    }()
+    
 
     override func viewDidLoad() {
         
@@ -59,9 +69,30 @@ extension ProfileViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.backButtonClick))
         self.localize()
         self.setDesign()
+        self.setProfile()
         self.view.dismissKeyBoardonTap()
         
     }
+    
+    // MARK:- Set Profile Details
+    
+    private func setProfile(){
+        
+        Cache.image(forUrl: User.main.picture) { (image) in
+            if image != nil {
+                self.imageViewProfile.image = image
+            }
+        }
+        
+        self.textFieldFirst.text = User.main.firstName
+        self.textFieldLast.text = User.main.lastName
+        self.textFieldEmail.text = User.main.email
+        self.textFieldPhone.text = User.main.mobile
+        
+        
+    }
+    
+    
     
     //MARK:- Set Designs
     
@@ -72,11 +103,25 @@ extension ProfileViewController {
         self.buttonSave.setAttributedTitle(NSAttributedString(string: Constants.string.save.uppercased().localize(), attributes: attributes), for: .normal)
         self.viewPersonal.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.setTripTypeAction(sender:))))
         self.viewBusiness.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.setTripTypeAction(sender:))))
+        self.viewImageChange.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.changeImage)))
     }
+    
+    // MARK:- Show Image
+    
+    @IBAction private func changeImage(){
+        
+        self.showImage { (image) in
+            if image != nil {
+                self.imageViewProfile.image = image
+                self.changedImage = image
+            }
+        }
+    }
+    
     
     // MARK:- Trip Type Action
     
-  @IBAction private func setTripTypeAction(sender : UITapGestureRecognizer) {
+   @IBAction private func setTripTypeAction(sender : UITapGestureRecognizer) {
         
         guard let senderView = sender.view else { return }
         
@@ -84,11 +129,68 @@ extension ProfileViewController {
         
     }
     
+    // MARK:- Update Profile Details
+    
+    @IBAction private func buttonSaveAction(){
+        
+        self.view.endEditingForce()
+        
+        guard let firstName = self.textFieldFirst.text, firstName.count>0 else {
+            UIScreen.main.focusedView?.make(toast: ErrorMessage.list.enterFirstName.localize())
+            return
+        }
+        
+        guard let lastName = self.textFieldLast.text, lastName.count>0 else {
+            UIScreen.main.focusedView?.make(toast: ErrorMessage.list.enterLastName.localize())
+            return
+        }
+        
+        guard let mobile = self.textFieldPhone.text, mobile.count>0 else {
+            UIScreen.main.focusedView?.make(toast: ErrorMessage.list.enterMobileNumber.localize())
+            return
+        }
+        
+        guard let email = self.textFieldEmail.text, email.count>0 else {
+            UIScreen.main.focusedView?.make(toast: ErrorMessage.list.enterEmail.localize())
+            return
+        }
+        
+        guard Common.isValid(email: email) else {
+            UIScreen.main.focusedView?.make(toast: ErrorMessage.list.enterValidEmail.localize())
+            return
+        }
+        
+        var data : Data?
+        
+        if self.changedImage != nil, let dataImg = UIImagePNGRepresentation(self.changedImage!) {
+            data = dataImg
+        }
+        
+        
+        var profile = Profile()
+        profile.device_token = deviceToken
+        profile.email = email
+        profile.first_name = firstName
+        profile.last_name = User.main.lastName
+        profile.mobile = mobile
+    
+        var json = profile.JSONRepresentation
+        json.removeValue(forKey: "id")
+        
+        self.loader.isHidden = false
+        self.presenter?.post(api: .updateProfile, imageData: data == nil ? nil : [WebConstants.string.picture : data!], parameters: json)
+        
+        
+        
+    }
+  
     private func setLayout(){
         
         self.imageViewProfile.makeRoundedCorner()
         
     }
+    
+    
     
     
     // MARK:- Localize
@@ -141,17 +243,28 @@ extension ProfileViewController {
 }
 
 
-//// MARK:- Tableview
-//
-//extension ProfileViewController {
-//
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//
-//        if indexPath.row == 3 {  // Trip Type
-//
-//            self.setTripType()
-//        }
-//
-//    }
-//
-//}
+// MARK:- PostviewProtocol
+
+extension ProfileViewController : PostViewProtocol {
+    
+    func onError(api: Base, message: String, statusCode code: Int) {
+        
+        DispatchQueue.main.async {
+            self.view.make(toast: message)
+            self.loader.isHidden = true
+        }
+        
+    }
+    
+    func getProfile(api: Base, data: Profile?) {
+        
+        Common.storeUserData(from: data)
+        DispatchQueue.main.async {
+            self.loader.isHidden = true
+            self.setProfile()
+        }
+        
+    }
+    
+    
+}
