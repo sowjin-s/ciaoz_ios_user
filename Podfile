@@ -10,6 +10,7 @@ target 'User' do
     #pod 'SwiftLint'
     pod 'GoogleMaps'
     pod 'GooglePlaces'
+    pod 'lottie-ios'
 
   target 'UserTests' do
     inherit! :search_paths

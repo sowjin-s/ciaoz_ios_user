@@ -21,6 +21,8 @@ struct Storyboard {
     let SignUpTableViewController = "SignUpTableViewController"
     let WalkThroughPreviewController = "WalkThroughPreviewController"
     let DrawerController = "DrawerController"
+    let ProfileViewController = "ProfileViewController"
+    let LocationSelectionViewController = "LocationSelectionViewController"
 }
 
 

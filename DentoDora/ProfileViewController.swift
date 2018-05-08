@@ -58,6 +58,16 @@ class ProfileViewController: UITableViewController {
         self.setLayout()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = false
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = true
+    }
+    
 }
 
 // MARK:- Methods
@@ -67,6 +77,7 @@ extension ProfileViewController {
     private func initialLoads() {
         
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.backButtonClick))
+        self.navigationItem.title = Constants.string.profile.localize()
         self.localize()
         self.setDesign()
         self.setProfile()
@@ -79,8 +90,8 @@ extension ProfileViewController {
     private func setProfile(){
         
         Cache.image(forUrl: User.main.picture) { (image) in
-            if image != nil {
-                self.imageViewProfile.image = image
+            DispatchQueue.main.async {
+                self.imageViewProfile.image = image == nil ? #imageLiteral(resourceName: "userPlaceholder") : image
             }
         }
         
@@ -104,6 +115,7 @@ extension ProfileViewController {
         self.viewPersonal.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.setTripTypeAction(sender:))))
         self.viewBusiness.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.setTripTypeAction(sender:))))
         self.viewImageChange.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.changeImage)))
+        self.buttonSave.addTarget(self, action: #selector(self.buttonSaveAction), for: .touchUpInside)
     }
     
     // MARK:- Show Image
@@ -176,7 +188,7 @@ extension ProfileViewController {
     
         var json = profile.JSONRepresentation
         json.removeValue(forKey: "id")
-        
+
         self.loader.isHidden = false
         self.presenter?.post(api: .updateProfile, imageData: data == nil ? nil : [WebConstants.string.picture : data!], parameters: json)
         

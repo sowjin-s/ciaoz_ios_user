@@ -10,12 +10,14 @@ PODS:
   - KWDrawerController (4.1.3):
     - KWDrawerController/Core (= 4.1.3)
   - KWDrawerController/Core (4.1.3)
+  - lottie-ios (2.5.0)
 
 DEPENDENCIES:
   - Alamofire
   - GoogleMaps
   - GooglePlaces
   - KWDrawerController (~> 4.1.2)
+  - lottie-ios
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -23,13 +25,15 @@ SPEC REPOS:
     - GoogleMaps
     - GooglePlaces
     - KWDrawerController
+    - lottie-ios
 
 SPEC CHECKSUMS:
   Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
   GoogleMaps: 42f91c68b7fa2f84d5c86597b18ceb99f5414c7f
   GooglePlaces: f6ddf33b75cef69e888907d9947c57198ed845f3
   KWDrawerController: 49a6597be74c1fb10ed690e89def27866bbd460a
+  lottie-ios: d699fdee68d7b63e721d949388b015fef1aaa4ac
 
-PODFILE CHECKSUM: 18f0839d2e74370f7d4f254dc872af3ee35eed60
+PODFILE CHECKSUM: af665d8447c242f101890c6e477038f7a6aa1576
 
 COCOAPODS: 1.5.0

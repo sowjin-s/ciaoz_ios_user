@@ -77,7 +77,7 @@ struct Constants {
     let personal = "Personal"
     let save = "save"
     let lookingToChangePassword = "Looking to change password"
-    
+    let areYouSure = "Are you sure?"
 }
 
 //Defaults Keys

@@ -530,27 +530,37 @@
                             <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qOk-jC-cwR">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="qOk-jC-cwR">
                                     <rect key="frame" x="137.5" y="50" width="100" height="100"/>
-                                    <color key="backgroundColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </imageView>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3Ig-4F-UiS">
-                                    <rect key="frame" x="207" y="120" width="30" height="30"/>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uzz-kC-7K4">
+                                    <rect key="frame" x="187.5" y="100" width="50" height="50"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="editImage" translatesAutoresizingMaskIntoConstraints="NO" id="3Ig-4F-UiS">
+                                            <rect key="frame" x="25" y="25" width="25" height="25"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </imageView>
+                                    </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="30" id="YHI-a2-YKE"/>
-                                        <constraint firstAttribute="height" constant="30" id="c0S-pz-81g"/>
+                                        <constraint firstItem="3Ig-4F-UiS" firstAttribute="centerY" secondItem="Uzz-kC-7K4" secondAttribute="centerY" multiplier="1.5" id="9NE-Rr-3fB"/>
+                                        <constraint firstItem="3Ig-4F-UiS" firstAttribute="width" secondItem="Uzz-kC-7K4" secondAttribute="width" multiplier="1:2" id="UiJ-KZ-Iv2"/>
+                                        <constraint firstItem="3Ig-4F-UiS" firstAttribute="height" secondItem="Uzz-kC-7K4" secondAttribute="height" multiplier="1:2" id="bpF-ie-60b"/>
+                                        <constraint firstItem="3Ig-4F-UiS" firstAttribute="centerX" secondItem="Uzz-kC-7K4" secondAttribute="centerX" multiplier="1.5" id="pB6-Up-RAa"/>
                                     </constraints>
-                                </imageView>
+                                </view>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="qOk-jC-cwR" firstAttribute="width" secondItem="RfN-H0-r1w" secondAttribute="height" multiplier="100:200" id="B5B-FR-S1t"/>
-                                <constraint firstItem="3Ig-4F-UiS" firstAttribute="bottom" secondItem="qOk-jC-cwR" secondAttribute="bottom" id="HKu-uT-fSJ"/>
-                                <constraint firstItem="3Ig-4F-UiS" firstAttribute="trailing" secondItem="qOk-jC-cwR" secondAttribute="trailing" id="NWq-ON-FaP"/>
+                                <constraint firstItem="Uzz-kC-7K4" firstAttribute="bottom" secondItem="qOk-jC-cwR" secondAttribute="bottom" id="US4-fm-Uo7"/>
                                 <constraint firstItem="qOk-jC-cwR" firstAttribute="height" secondItem="RfN-H0-r1w" secondAttribute="height" multiplier="100 : 200" id="Vjs-N6-DDe"/>
                                 <constraint firstItem="qOk-jC-cwR" firstAttribute="centerX" secondItem="RfN-H0-r1w" secondAttribute="centerX" id="cMr-ly-jMR"/>
                                 <constraint firstItem="qOk-jC-cwR" firstAttribute="centerY" secondItem="RfN-H0-r1w" secondAttribute="centerY" id="hwz-pO-atZ"/>
+                                <constraint firstItem="Uzz-kC-7K4" firstAttribute="height" secondItem="qOk-jC-cwR" secondAttribute="height" multiplier="1:2" id="nOG-V0-mE6"/>
+                                <constraint firstItem="Uzz-kC-7K4" firstAttribute="width" secondItem="qOk-jC-cwR" secondAttribute="width" multiplier="1:2" id="taq-7N-EEE"/>
+                                <constraint firstItem="Uzz-kC-7K4" firstAttribute="trailing" secondItem="qOk-jC-cwR" secondAttribute="trailing" id="utx-EF-O6Y"/>
                             </constraints>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="hwg-Oh-QPw">
@@ -872,6 +882,7 @@
                         <outlet property="textFieldLast" destination="ftQ-hE-Z1g" id="Ki5-aV-DLd"/>
                         <outlet property="textFieldPhone" destination="B2S-4Z-xsA" id="NFn-Ce-Xqx"/>
                         <outlet property="viewBusiness" destination="Occ-2I-6iZ" id="tSh-4a-El3"/>
+                        <outlet property="viewImageChange" destination="Uzz-kC-7K4" id="dRA-Da-6io"/>
                         <outlet property="viewPersonal" destination="9fe-PR-SgE" id="4M9-yS-50n"/>
                     </connections>
                 </tableViewController>
@@ -1663,7 +1674,9 @@
     <resources>
         <image name="check-box-empty" width="64" height="64"/>
         <image name="circle-shape-outline" width="128" height="128"/>
+        <image name="editImage" width="32" height="32"/>
         <image name="forward" width="64" height="64"/>
         <image name="radio-on-button" width="128" height="128"/>
+        <image name="userPlaceholder" width="128" height="128"/>
     </resources>
 </document>
