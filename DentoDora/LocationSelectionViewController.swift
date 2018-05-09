@@ -31,8 +31,8 @@ class LocationSelectionViewController: UIViewController {
 extension LocationSelectionViewController {
     
     private func initialLoads() {
-        
-        self.viewBottom.show(with: .top, duration: 5, completion: nil) 
+        self.view.backgroundColor = .clear
+        self.viewBottom.show(with: .bottom, duration: 2, completion: nil)
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.backButtonClick)))
     }
     

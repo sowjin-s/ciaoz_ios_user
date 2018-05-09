@@ -19,9 +19,12 @@ class HomeViewController: UIViewController {
     @IBOutlet weak private var viewFavouriteDestination : UIView!
     @IBOutlet weak private var viewSourceLocation : UIView!
     @IBOutlet weak private var viewDestinationLocation : UIView!
+    @IBOutlet weak private var viewAddress : UIView!
+    @IBOutlet weak private var textFieldSourceLocation : UITextField!
+    @IBOutlet weak private var textFieldDestinationLocation : UITextField!
     
     private let transition = CircularTransition()  // Translation to for location Tap
-    private var viewMap : GMSMapView!
+    private var mapViewHelper : GoogleMapsHelper?
     private var favouriteViewSource : LottieView?
     private var favouriteViewDestination : LottieView?
     
@@ -36,11 +39,30 @@ class HomeViewController: UIViewController {
             self.isAddLottie(view: &favouriteViewDestination, in: viewFavouriteDestination, isAdd: !isDestinationFavourited)
         }
     }
+    
+    
+    private var sourceLocationDetail : LocationDetail? {  // Source Location Detail
+        didSet{
+             self.textFieldSourceLocation.text = sourceLocationDetail?.address
+        }
+    }
+    
+    private var destinationLocationDetail : LocationDetail? {  // Destination Location Detail
+        didSet{
+            self.textFieldDestinationLocation.text = destinationLocationDetail?.address
+        }
+    }
+    
+    private var currentLocation : Bind<LocationCoordinate>?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initialLoads()
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.localize()
     }
 
     override func didReceiveMemoryWarning() {
@@ -68,6 +90,21 @@ extension HomeViewController {
         self.viewFavouriteSource.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.favouriteLocationAction(sender:))))
         self.viewSourceLocation.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.locationTapAction(sender:))))
         self.viewDestinationLocation.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.locationTapAction(sender:))))
+        self.currentLocation?.bind(listener: { (locationCoordinate) in
+            // TODO:- Handle Current Location
+            if locationCoordinate != nil {
+                self.mapViewHelper?.moveTo(location: locationCoordinate!)
+            }
+        })
+        
+    }
+    
+    // MARK:- Localize
+    
+    private func localize(){
+        
+        self.textFieldSourceLocation.placeholder = Constants.string.source.localize()
+        self.textFieldDestinationLocation.placeholder = Constants.string.destination.localize()
         
     }
     
@@ -75,9 +112,11 @@ extension HomeViewController {
     
     private func addMapView(){
         
-        self.viewMap = GMSMapView(frame: self.view.frame)
-        self.viewMap.delegate = self
-        self.viewMapOuter.addSubview(viewMap)
+        self.mapViewHelper = GoogleMapsHelper()
+        self.mapViewHelper?.getMapView(in: self.viewMapOuter)
+        self.mapViewHelper?.getCurrentLocation(onReceivingLocation: { (location) in
+            self.currentLocation?.value = location
+        })
         
     }
     
@@ -99,12 +138,21 @@ extension HomeViewController {
     
     @IBAction private func locationTapAction(sender : UITapGestureRecognizer) {
         
-        guard let senderView = sender.view else { return } 
+        guard let senderView = sender.view else { return }
         
-        if let locationVC = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.Ids.LocationSelectionViewController){
-           // locationVC.transitioningDelegate = self
-            self.present(locationVC, animated: true, completion: nil)
+        if let locationView = Bundle.main.loadNibNamed("LocationSelectionView", owner: self, options: [:])?.first as? LocationSelectionView {
+            locationView.frame = self.view.bounds
+            self.view.addSubview(locationView)
+            locationView.backButton { (locationDetail) in
+                if senderView == self.viewSourceLocation{
+                    self.sourceLocationDetail = locationDetail
+                } else {
+                    self.destinationLocationDetail = locationDetail
+                }
+                
+            }
         }
+        
         
     }
     

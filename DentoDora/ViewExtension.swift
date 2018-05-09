@@ -45,11 +45,15 @@ extension UIView {
         animation.type = kCATransitionPush
         animation.subtype = transition.type
         animation.duration = duration
+       
         self.layer.add(animation, forKey: kCATransitionPush)
         DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
             completion?()
         }
     }
+    
+    
+    
     
     
     func dismissKeyBoardonTap(){

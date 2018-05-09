@@ -10,6 +10,9 @@
 		08001A07203BFF8B0076D324 /* Bind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08001A06203BFF8B0076D324 /* Bind.swift */; };
 		08001A0C203C241E0076D324 /* countryCodes.json in Resources */ = {isa = PBXBuildFile; fileRef = 08001A0A203C241E0076D324 /* countryCodes.json */; };
 		08001A0D203C241E0076D324 /* CountryPicker.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 08001A0B203C241E0076D324 /* CountryPicker.bundle */; };
+		0802718720A2DBE200EAE8C8 /* LocationSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0802718620A2DBE200EAE8C8 /* LocationSelectionView.swift */; };
+		0802718920A2DC0100EAE8C8 /* LocationSelectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0802718820A2DC0100EAE8C8 /* LocationSelectionView.xib */; };
+		0802718B20A2FF1600EAE8C8 /* GoogleMapsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0802718A20A2FF1600EAE8C8 /* GoogleMapsHelper.swift */; };
 		08032BD520481349006BFC4E /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08032BD2204812A0006BFC4E /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0805BDBE209C41AF00ACDC38 /* LocationSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805BDBD209C41AF00ACDC38 /* LocationSelectionViewController.swift */; };
 		0805BDC1209C504900ACDC38 /* SignUpTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805BDC0209C504900ACDC38 /* SignUpTableViewController.swift */; };
@@ -136,6 +139,9 @@
 		08001A06203BFF8B0076D324 /* Bind.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bind.swift; sourceTree = "<group>"; };
 		08001A0A203C241E0076D324 /* countryCodes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countryCodes.json; sourceTree = "<group>"; };
 		08001A0B203C241E0076D324 /* CountryPicker.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CountryPicker.bundle; sourceTree = "<group>"; };
+		0802718620A2DBE200EAE8C8 /* LocationSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSelectionView.swift; sourceTree = "<group>"; };
+		0802718820A2DC0100EAE8C8 /* LocationSelectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationSelectionView.xib; sourceTree = "<group>"; };
+		0802718A20A2FF1600EAE8C8 /* GoogleMapsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapsHelper.swift; sourceTree = "<group>"; };
 		08032BD2204812A0006BFC4E /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Alamofire.framework; sourceTree = "<group>"; };
 		0805BDBD209C41AF00ACDC38 /* LocationSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSelectionViewController.swift; sourceTree = "<group>"; };
 		0805BDC0209C504900ACDC38 /* SignUpTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpTableViewController.swift; sourceTree = "<group>"; };
@@ -271,6 +277,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0802718C20A30A7500EAE8C8 /* GoogleMapsHelper */ = {
+			isa = PBXGroup;
+			children = (
+				0802718A20A2FF1600EAE8C8 /* GoogleMapsHelper.swift */,
+			);
+			name = GoogleMapsHelper;
+			sourceTree = "<group>";
+		};
 		0805BDBC209C418700ACDC38 /* LocationSelection */ = {
 			isa = PBXGroup;
 			children = (
@@ -533,6 +547,7 @@
 				08F3CBBE202471F400F5EEDF /* Formatter */,
 				08457762207363E000E890F5 /* AVPlayer */,
 				081548FF20A1DF6B004D0F7D /* Lottie */,
+				0802718C20A30A7500EAE8C8 /* GoogleMapsHelper */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -934,6 +949,8 @@
 			isa = PBXGroup;
 			children = (
 				082D1B9720933D1B0000B7C8 /* WalkThrough */,
+				0802718620A2DBE200EAE8C8 /* LocationSelectionView.swift */,
+				0802718820A2DC0100EAE8C8 /* LocationSelectionView.xib */,
 			);
 			name = XIB;
 			sourceTree = "<group>";
@@ -1114,6 +1131,7 @@
 				08001A0D203C241E0076D324 /* CountryPicker.bundle in Resources */,
 				8894E2291FE7D7980097B4B3 /* Main.storyboard in Resources */,
 				086C901A209A05EA002CD9B1 /* ClanPro-NarrNews.otf in Resources */,
+				0802718920A2DC0100EAE8C8 /* LocationSelectionView.xib in Resources */,
 				086C901C209A05EA002CD9B1 /* ClanPro-NarrBook.otf in Resources */,
 				081548FC20A1DEA2004D0F7D /* heart.json in Resources */,
 			);
@@ -1282,6 +1300,7 @@
 				08001A07203BFF8B0076D324 /* Bind.swift in Sources */,
 				08ECB216200DD0220008BF27 /* NavigationBar.swift in Sources */,
 				8894801D1FECE1BD006AF5A9 /* Int.swift in Sources */,
+				0802718720A2DBE200EAE8C8 /* LocationSelectionView.swift in Sources */,
 				8894E2241FE7D7980097B4B3 /* AppDelegate.swift in Sources */,
 				086BAF5E200778200087F15A /* Toast.swift in Sources */,
 				38492B3A2000F741001830AD /* JsonSerializing.swift in Sources */,
@@ -1298,6 +1317,7 @@
 				08147B81208A23F600C5CFD3 /* Bundle.swift in Sources */,
 				8871FBD81FE7DD72002335D5 /* Constants.swift in Sources */,
 				38492B382000F6A8001830AD /* String.swift in Sources */,
+				0802718B20A2FF1600EAE8C8 /* GoogleMapsHelper.swift in Sources */,
 				0805BDBE209C41AF00ACDC38 /* LocationSelectionViewController.swift in Sources */,
 				08C8F2272004A60A0065CE24 /* Image.swift in Sources */,
 				8894801B1FECE111006AF5A9 /* Colors.swift in Sources */,

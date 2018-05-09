@@ -78,6 +78,8 @@ struct Constants {
     let save = "save"
     let lookingToChangePassword = "Looking to change password"
     let areYouSure = "Are you sure?"
+    let source = "Source"
+    let destination = "Destination"
 }
 
 //Defaults Keys
