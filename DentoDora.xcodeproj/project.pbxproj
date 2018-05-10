@@ -34,6 +34,11 @@
 		082D1B92209333F10000B7C8 /* FontHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082D1B91209333F10000B7C8 /* FontHelper.swift */; };
 		082D1B9620933C890000B7C8 /* WalkThroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082D1B9520933C890000B7C8 /* WalkThroughView.swift */; };
 		082D1B9920933D300000B7C8 /* WalkThroughView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082D1B9820933D300000B7C8 /* WalkThroughView.xib */; };
+		083A59AA20A434E000D64574 /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083A59A820A434E000D64574 /* LocationTableViewCell.swift */; };
+		083A59AB20A434E000D64574 /* LocationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083A59A920A434E000D64574 /* LocationTableViewCell.xib */; };
+		083A59B120A4351D00D64574 /* LocationHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083A59AF20A4351D00D64574 /* LocationHeaderTableViewCell.swift */; };
+		083A59B220A4351D00D64574 /* LocationHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083A59B020A4351D00D64574 /* LocationHeaderTableViewCell.xib */; };
+		083A59B520A454F800D64574 /* GooglePlacesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083A59B420A454F800D64574 /* GooglePlacesHelper.swift */; };
 		084182B5200F508900527D0D /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084182B4200F508900527D0D /* TableView.swift */; };
 		084182B7200F689500527D0D /* PresenterProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084182B6200F689500527D0D /* PresenterProcessor.swift */; };
 		084577612073614300E890F5 /* AVPlayerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084577602073614300E890F5 /* AVPlayerHelper.swift */; };
@@ -55,6 +60,7 @@
 		086C901E209A05EA002CD9B1 /* ClanPro-NarrMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 086C9018209A05E9002CD9B1 /* ClanPro-NarrMedium.otf */; };
 		086C901F209A05EA002CD9B1 /* ClanPro-News.otf in Resources */ = {isa = PBXBuildFile; fileRef = 086C9019209A05EA002CD9B1 /* ClanPro-News.otf */; };
 		087DCFAE2077920A0040BDBB /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087DCFAD2077920A0040BDBB /* Sequence.swift */; };
+		088185C320A4688200F07AFF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 088185C220A4688200F07AFF /* GoogleService-Info.plist */; };
 		088B5D382022163700D5342C /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088B5D372022163700D5342C /* Reachability.swift */; };
 		088DC901200FCCA00095D552 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088DC900200FCCA00095D552 /* ViewExtension.swift */; };
 		08B73D0420947C5C00B60F74 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B73D0320947C5C00B60F74 /* PasswordViewController.swift */; };
@@ -164,6 +170,11 @@
 		082D1B91209333F10000B7C8 /* FontHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontHelper.swift; sourceTree = "<group>"; };
 		082D1B9520933C890000B7C8 /* WalkThroughView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkThroughView.swift; sourceTree = "<group>"; };
 		082D1B9820933D300000B7C8 /* WalkThroughView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalkThroughView.xib; sourceTree = "<group>"; };
+		083A59A820A434E000D64574 /* LocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
+		083A59A920A434E000D64574 /* LocationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationTableViewCell.xib; sourceTree = "<group>"; };
+		083A59AF20A4351D00D64574 /* LocationHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHeaderTableViewCell.swift; sourceTree = "<group>"; };
+		083A59B020A4351D00D64574 /* LocationHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationHeaderTableViewCell.xib; sourceTree = "<group>"; };
+		083A59B420A454F800D64574 /* GooglePlacesHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GooglePlacesHelper.swift; sourceTree = "<group>"; };
 		084182B4200F508900527D0D /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
 		084182B6200F689500527D0D /* PresenterProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenterProcessor.swift; sourceTree = "<group>"; };
 		084577602073614300E890F5 /* AVPlayerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVPlayerHelper.swift; sourceTree = "<group>"; };
@@ -185,6 +196,7 @@
 		086C9018209A05E9002CD9B1 /* ClanPro-NarrMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ClanPro-NarrMedium.otf"; path = "../../Eztreep/User/eztreep_ios_user/User/ClanPro-NarrMedium.otf"; sourceTree = "<group>"; };
 		086C9019209A05EA002CD9B1 /* ClanPro-News.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ClanPro-News.otf"; path = "../../Eztreep/User/eztreep_ios_user/User/ClanPro-News.otf"; sourceTree = "<group>"; };
 		087DCFAD2077920A0040BDBB /* Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequence.swift; sourceTree = "<group>"; };
+		088185C220A4688200F07AFF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		088B5D372022163700D5342C /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		088DC900200FCCA00095D552 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		08B73D0320947C5C00B60F74 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
@@ -277,12 +289,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0802718C20A30A7500EAE8C8 /* GoogleMapsHelper */ = {
+		0802718C20A30A7500EAE8C8 /* GoogleHelper */ = {
 			isa = PBXGroup;
 			children = (
 				0802718A20A2FF1600EAE8C8 /* GoogleMapsHelper.swift */,
+				083A59B420A454F800D64574 /* GooglePlacesHelper.swift */,
 			);
-			name = GoogleMapsHelper;
+			name = GoogleHelper;
 			sourceTree = "<group>";
 		};
 		0805BDBC209C418700ACDC38 /* LocationSelection */ = {
@@ -497,6 +510,35 @@
 			name = WalkThrough;
 			sourceTree = "<group>";
 		};
+		083A599F20A4317C00D64574 /* Location Selection */ = {
+			isa = PBXGroup;
+			children = (
+				0802718620A2DBE200EAE8C8 /* LocationSelectionView.swift */,
+				0802718820A2DC0100EAE8C8 /* LocationSelectionView.xib */,
+				083A59AC20A434ED00D64574 /* LocationCell */,
+				083A59B320A436D000D64574 /* LocationHeaderCell */,
+			);
+			name = "Location Selection";
+			sourceTree = "<group>";
+		};
+		083A59AC20A434ED00D64574 /* LocationCell */ = {
+			isa = PBXGroup;
+			children = (
+				083A59A820A434E000D64574 /* LocationTableViewCell.swift */,
+				083A59A920A434E000D64574 /* LocationTableViewCell.xib */,
+			);
+			name = LocationCell;
+			sourceTree = "<group>";
+		};
+		083A59B320A436D000D64574 /* LocationHeaderCell */ = {
+			isa = PBXGroup;
+			children = (
+				083A59AF20A4351D00D64574 /* LocationHeaderTableViewCell.swift */,
+				083A59B020A4351D00D64574 /* LocationHeaderTableViewCell.xib */,
+			);
+			name = LocationHeaderCell;
+			sourceTree = "<group>";
+		};
 		084182BA200F6BE200527D0D /* Requests */ = {
 			isa = PBXGroup;
 			children = (
@@ -547,7 +589,7 @@
 				08F3CBBE202471F400F5EEDF /* Formatter */,
 				08457762207363E000E890F5 /* AVPlayer */,
 				081548FF20A1DF6B004D0F7D /* Lottie */,
-				0802718C20A30A7500EAE8C8 /* GoogleMapsHelper */,
+				0802718C20A30A7500EAE8C8 /* GoogleHelper */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -805,6 +847,7 @@
 		8871FBDF1FE7EB48002335D5 /* Plist Files */ = {
 			isa = PBXGroup;
 			children = (
+				088185C220A4688200F07AFF /* GoogleService-Info.plist */,
 				8894E22F1FE7D7980097B4B3 /* Info.plist */,
 			);
 			name = "Plist Files";
@@ -949,8 +992,7 @@
 			isa = PBXGroup;
 			children = (
 				082D1B9720933D1B0000B7C8 /* WalkThrough */,
-				0802718620A2DBE200EAE8C8 /* LocationSelectionView.swift */,
-				0802718820A2DC0100EAE8C8 /* LocationSelectionView.xib */,
+				083A599F20A4317C00D64574 /* Location Selection */,
 			);
 			name = XIB;
 			sourceTree = "<group>";
@@ -1125,9 +1167,12 @@
 				8894E22E1FE7D7980097B4B3 /* LaunchScreen.storyboard in Resources */,
 				086C901F209A05EA002CD9B1 /* ClanPro-News.otf in Resources */,
 				8894E22B1FE7D7980097B4B3 /* Assets.xcassets in Resources */,
+				083A59AB20A434E000D64574 /* LocationTableViewCell.xib in Resources */,
+				083A59B220A4351D00D64574 /* LocationHeaderTableViewCell.xib in Resources */,
 				086C901E209A05EA002CD9B1 /* ClanPro-NarrMedium.otf in Resources */,
 				086C901D209A05EA002CD9B1 /* ClanPro-Medium.otf in Resources */,
 				082D1B9920933D300000B7C8 /* WalkThroughView.xib in Resources */,
+				088185C320A4688200F07AFF /* GoogleService-Info.plist in Resources */,
 				08001A0D203C241E0076D324 /* CountryPicker.bundle in Resources */,
 				8894E2291FE7D7980097B4B3 /* Main.storyboard in Resources */,
 				086C901A209A05EA002CD9B1 /* ClanPro-NarrNews.otf in Resources */,
@@ -1300,6 +1345,7 @@
 				08001A07203BFF8B0076D324 /* Bind.swift in Sources */,
 				08ECB216200DD0220008BF27 /* NavigationBar.swift in Sources */,
 				8894801D1FECE1BD006AF5A9 /* Int.swift in Sources */,
+				083A59B520A454F800D64574 /* GooglePlacesHelper.swift in Sources */,
 				0802718720A2DBE200EAE8C8 /* LocationSelectionView.swift in Sources */,
 				8894E2241FE7D7980097B4B3 /* AppDelegate.swift in Sources */,
 				086BAF5E200778200087F15A /* Toast.swift in Sources */,
@@ -1309,9 +1355,11 @@
 				0809321820A067EF00B88318 /* LoginRequest.swift in Sources */,
 				08B73D0420947C5C00B60F74 /* PasswordViewController.swift in Sources */,
 				8871FBD51FE7DC8E002335D5 /* Protocol.swift in Sources */,
+				083A59AA20A434E000D64574 /* LocationTableViewCell.swift in Sources */,
 				08F595E32076462A00369048 /* UIAplication+RLT.swift in Sources */,
 				086BAF6420078E220087F15A /* ViewController.swift in Sources */,
 				8894801F1FECE2CA006AF5A9 /* Label.swift in Sources */,
+				083A59B120A4351D00D64574 /* LocationHeaderTableViewCell.swift in Sources */,
 				086BAF5720076E0D0087F15A /* MakeJson.swift in Sources */,
 				086606E62005144400A79566 /* ImageView.swift in Sources */,
 				08147B81208A23F600C5CFD3 /* Bundle.swift in Sources */,
@@ -1524,7 +1572,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/DentoDora/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.appoets.WhatsApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.appoets.dentoDoraUser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1550,7 +1598,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/DentoDora/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.appoets.WhatsApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.appoets.dentoDoraUser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";

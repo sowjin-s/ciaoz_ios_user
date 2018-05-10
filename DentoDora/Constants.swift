@@ -80,6 +80,9 @@ struct Constants {
     let areYouSure = "Are you sure?"
     let source = "Source"
     let destination = "Destination"
+    let home = "Home"
+    let work = "Work"
+    let addLocation = "Add Location"
 }
 
 //Defaults Keys

@@ -34,6 +34,8 @@ struct XIB {
     
     static let Names = XIB()
     let WalkThroughView = "WalkThroughView"
+    let LocationTableViewCell = "LocationTableViewCell"
+    let LocationHeaderTableViewCell = "LocationHeaderTableViewCell"
 }
 
 

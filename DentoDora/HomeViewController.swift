@@ -53,7 +53,9 @@ class HomeViewController: UIViewController {
         }
     }
     
-    private var currentLocation : Bind<LocationCoordinate>?
+    private var favouriteLocations = [(String, LocationDetail?)]() // Favourite Locations of User
+    
+    private var currentLocation = Bind<LocationCoordinate>(defaultMapLocation)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,13 +86,14 @@ extension HomeViewController {
     private func initialLoads(){
         
         self.addMapView()
+        self.getFavouriteLocations()
         self.viewSideMenu.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sideMenuAction)))
         self.navigationController?.isNavigationBarHidden = true
         self.viewFavouriteDestination.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.favouriteLocationAction(sender:))))
         self.viewFavouriteSource.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.favouriteLocationAction(sender:))))
         self.viewSourceLocation.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.locationTapAction(sender:))))
         self.viewDestinationLocation.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.locationTapAction(sender:))))
-        self.currentLocation?.bind(listener: { (locationCoordinate) in
+        self.currentLocation.bind(listener: { (locationCoordinate) in
             // TODO:- Handle Current Location
             if locationCoordinate != nil {
                 self.mapViewHelper?.moveTo(location: locationCoordinate!)
@@ -115,7 +118,7 @@ extension HomeViewController {
         self.mapViewHelper = GoogleMapsHelper()
         self.mapViewHelper?.getMapView(in: self.viewMapOuter)
         self.mapViewHelper?.getCurrentLocation(onReceivingLocation: { (location) in
-            self.currentLocation?.value = location
+            self.currentLocation.value = location
         })
         
     }
@@ -138,23 +141,33 @@ extension HomeViewController {
     
     @IBAction private func locationTapAction(sender : UITapGestureRecognizer) {
         
-        guard let senderView = sender.view else { return }
+      //  guard let senderView = sender.view else { return }
         
         if let locationView = Bundle.main.loadNibNamed("LocationSelectionView", owner: self, options: [:])?.first as? LocationSelectionView {
             locationView.frame = self.view.bounds
             self.view.addSubview(locationView)
-            locationView.backButton { (locationDetail) in
-                if senderView == self.viewSourceLocation{
-                    self.sourceLocationDetail = locationDetail
-                } else {
-                    self.destinationLocationDetail = locationDetail
-                }
+            locationView.setValues(address: (sourceLocationDetail,destinationLocationDetail), favourites: self.favouriteLocations) { (address) in
+                
+                self.sourceLocationDetail = address.source
+                self.destinationLocationDetail = address.destination
                 
             }
         }
         
         
     }
+    
+    // MARK:- Get Favourite Locations
+    
+    private func getFavouriteLocations(){
+        
+        self.favouriteLocations.append((Constants.string.home,nil))
+        self.favouriteLocations.append((Constants.string.work,nil))
+        
+    }
+    
+    
+    
     
     // MARK:- SideMenu Button Action
     
