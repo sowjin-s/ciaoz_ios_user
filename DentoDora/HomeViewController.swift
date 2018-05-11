@@ -153,9 +153,22 @@ extension HomeViewController {
                 
             }
         }
+    }
+    
+    
+    // MARK:- Send Request
+    
+    private func sendRequest(){
         
+        if self.destinationLocationDetail != nil {
+            
+            
+        }
         
     }
+    
+    
+    
     
     // MARK:- Get Favourite Locations
     

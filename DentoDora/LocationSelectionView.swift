@@ -194,11 +194,7 @@ extension LocationSelectionView : UITableViewDataSource, UITableViewDelegate {
             
             if self.favouriteLocations[indexPath.row].location != nil {
                 
-                if textFieldSource.isEditing {
-                    self.address?.source = self.favouriteLocations[indexPath.row].location
-                } else {
-                    self.address?.destination = self.favouriteLocations[indexPath.row].location
-                }
+               self.autoFill(at: indexPath)
                 
             } else {
                 
@@ -207,14 +203,25 @@ extension LocationSelectionView : UITableViewDataSource, UITableViewDelegate {
                     self.favouriteLocations[indexPath.row].location = (place.formattedAddress ?? .Empty, place.coordinate)
                     DispatchQueue.main.async {
                         self.tableViewBottom.reloadData()
+                        self.autoFill(at: indexPath)
                     }
+                    
                 })
             }
         }
         
     }
     
+    // MARK:- Auto Fill At
     
+    private func autoFill(at indexPath : IndexPath){
+        
+        if textFieldSource.isEditing {
+            self.address?.source = self.favouriteLocations[indexPath.row].location
+        } else {
+            self.address?.destination = self.favouriteLocations[indexPath.row].location
+        }
+    }
     
     
     // MARK:- Get Table View Cell

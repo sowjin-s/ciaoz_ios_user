@@ -34,6 +34,10 @@
 		082D1B92209333F10000B7C8 /* FontHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082D1B91209333F10000B7C8 /* FontHelper.swift */; };
 		082D1B9620933C890000B7C8 /* WalkThroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082D1B9520933C890000B7C8 /* WalkThroughView.swift */; };
 		082D1B9920933D300000B7C8 /* WalkThroughView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082D1B9820933D300000B7C8 /* WalkThroughView.xib */; };
+		082F77CB20A5A12100D6474B /* ServiceSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082F77CA20A5A12100D6474B /* ServiceSelectionView.swift */; };
+		082F77CD20A5A13900D6474B /* ServiceSelectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082F77CC20A5A13900D6474B /* ServiceSelectionView.xib */; };
+		082F77D120A5AA2200D6474B /* ServiceSelectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082F77CF20A5AA2200D6474B /* ServiceSelectionCollectionViewCell.swift */; };
+		082F77D220A5AA2200D6474B /* ServiceSelectionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082F77D020A5AA2200D6474B /* ServiceSelectionCollectionViewCell.xib */; };
 		083A59AA20A434E000D64574 /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083A59A820A434E000D64574 /* LocationTableViewCell.swift */; };
 		083A59AB20A434E000D64574 /* LocationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083A59A920A434E000D64574 /* LocationTableViewCell.xib */; };
 		083A59B120A4351D00D64574 /* LocationHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083A59AF20A4351D00D64574 /* LocationHeaderTableViewCell.swift */; };
@@ -170,6 +174,10 @@
 		082D1B91209333F10000B7C8 /* FontHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontHelper.swift; sourceTree = "<group>"; };
 		082D1B9520933C890000B7C8 /* WalkThroughView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkThroughView.swift; sourceTree = "<group>"; };
 		082D1B9820933D300000B7C8 /* WalkThroughView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalkThroughView.xib; sourceTree = "<group>"; };
+		082F77CA20A5A12100D6474B /* ServiceSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceSelectionView.swift; sourceTree = "<group>"; };
+		082F77CC20A5A13900D6474B /* ServiceSelectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceSelectionView.xib; sourceTree = "<group>"; };
+		082F77CF20A5AA2200D6474B /* ServiceSelectionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceSelectionCollectionViewCell.swift; sourceTree = "<group>"; };
+		082F77D020A5AA2200D6474B /* ServiceSelectionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceSelectionCollectionViewCell.xib; sourceTree = "<group>"; };
 		083A59A820A434E000D64574 /* LocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
 		083A59A920A434E000D64574 /* LocationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationTableViewCell.xib; sourceTree = "<group>"; };
 		083A59AF20A4351D00D64574 /* LocationHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHeaderTableViewCell.swift; sourceTree = "<group>"; };
@@ -510,11 +518,38 @@
 			name = WalkThrough;
 			sourceTree = "<group>";
 		};
-		083A599F20A4317C00D64574 /* Location Selection */ = {
+		082F77C920A5A0E500D6474B /* LocationSelectionView */ = {
 			isa = PBXGroup;
 			children = (
 				0802718620A2DBE200EAE8C8 /* LocationSelectionView.swift */,
 				0802718820A2DC0100EAE8C8 /* LocationSelectionView.xib */,
+			);
+			name = LocationSelectionView;
+			sourceTree = "<group>";
+		};
+		082F77CE20A5A14900D6474B /* ServiceSelectionView */ = {
+			isa = PBXGroup;
+			children = (
+				082F77CA20A5A12100D6474B /* ServiceSelectionView.swift */,
+				082F77CC20A5A13900D6474B /* ServiceSelectionView.xib */,
+				082F77D320A5AA2900D6474B /* Cell */,
+			);
+			name = ServiceSelectionView;
+			sourceTree = "<group>";
+		};
+		082F77D320A5AA2900D6474B /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				082F77CF20A5AA2200D6474B /* ServiceSelectionCollectionViewCell.swift */,
+				082F77D020A5AA2200D6474B /* ServiceSelectionCollectionViewCell.xib */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		083A599F20A4317C00D64574 /* Location Selection */ = {
+			isa = PBXGroup;
+			children = (
+				082F77C920A5A0E500D6474B /* LocationSelectionView */,
 				083A59AC20A434ED00D64574 /* LocationCell */,
 				083A59B320A436D000D64574 /* LocationHeaderCell */,
 			);
@@ -993,6 +1028,7 @@
 			children = (
 				082D1B9720933D1B0000B7C8 /* WalkThrough */,
 				083A599F20A4317C00D64574 /* Location Selection */,
+				082F77CE20A5A14900D6474B /* ServiceSelectionView */,
 			);
 			name = XIB;
 			sourceTree = "<group>";
@@ -1168,6 +1204,7 @@
 				086C901F209A05EA002CD9B1 /* ClanPro-News.otf in Resources */,
 				8894E22B1FE7D7980097B4B3 /* Assets.xcassets in Resources */,
 				083A59AB20A434E000D64574 /* LocationTableViewCell.xib in Resources */,
+				082F77CD20A5A13900D6474B /* ServiceSelectionView.xib in Resources */,
 				083A59B220A4351D00D64574 /* LocationHeaderTableViewCell.xib in Resources */,
 				086C901E209A05EA002CD9B1 /* ClanPro-NarrMedium.otf in Resources */,
 				086C901D209A05EA002CD9B1 /* ClanPro-Medium.otf in Resources */,
@@ -1177,6 +1214,7 @@
 				8894E2291FE7D7980097B4B3 /* Main.storyboard in Resources */,
 				086C901A209A05EA002CD9B1 /* ClanPro-NarrNews.otf in Resources */,
 				0802718920A2DC0100EAE8C8 /* LocationSelectionView.xib in Resources */,
+				082F77D220A5AA2200D6474B /* ServiceSelectionCollectionViewCell.xib in Resources */,
 				086C901C209A05EA002CD9B1 /* ClanPro-NarrBook.otf in Resources */,
 				081548FC20A1DEA2004D0F7D /* heart.json in Resources */,
 			);
@@ -1359,6 +1397,7 @@
 				08F595E32076462A00369048 /* UIAplication+RLT.swift in Sources */,
 				086BAF6420078E220087F15A /* ViewController.swift in Sources */,
 				8894801F1FECE2CA006AF5A9 /* Label.swift in Sources */,
+				082F77D120A5AA2200D6474B /* ServiceSelectionCollectionViewCell.swift in Sources */,
 				083A59B120A4351D00D64574 /* LocationHeaderTableViewCell.swift in Sources */,
 				086BAF5720076E0D0087F15A /* MakeJson.swift in Sources */,
 				086606E62005144400A79566 /* ImageView.swift in Sources */,
@@ -1366,6 +1405,7 @@
 				8871FBD81FE7DD72002335D5 /* Constants.swift in Sources */,
 				38492B382000F6A8001830AD /* String.swift in Sources */,
 				0802718B20A2FF1600EAE8C8 /* GoogleMapsHelper.swift in Sources */,
+				082F77CB20A5A12100D6474B /* ServiceSelectionView.swift in Sources */,
 				0805BDBE209C41AF00ACDC38 /* LocationSelectionViewController.swift in Sources */,
 				08C8F2272004A60A0065CE24 /* Image.swift in Sources */,
 				8894801B1FECE111006AF5A9 /* Colors.swift in Sources */,

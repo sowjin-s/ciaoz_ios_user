@@ -36,6 +36,7 @@ struct XIB {
     let WalkThroughView = "WalkThroughView"
     let LocationTableViewCell = "LocationTableViewCell"
     let LocationHeaderTableViewCell = "LocationHeaderTableViewCell"
+    let ServiceSelectionCollectionViewCell = "ServiceSelectionCollectionViewCell"
 }
 
 
