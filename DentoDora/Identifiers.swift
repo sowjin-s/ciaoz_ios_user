@@ -37,6 +37,7 @@ struct XIB {
     let LocationTableViewCell = "LocationTableViewCell"
     let LocationHeaderTableViewCell = "LocationHeaderTableViewCell"
     let ServiceSelectionCollectionViewCell = "ServiceSelectionCollectionViewCell"
+    let LocationSelectionView = "LocationSelectionView"
 }
 
 

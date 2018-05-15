@@ -19,7 +19,7 @@ class LocationSelectionView: UIView {
     @IBOutlet private weak var viewSourceCancel : UIView!
     @IBOutlet private weak var viewDestinationCancel : UIView!
   
-    typealias Address = (source : LocationDetail?,destination : LocationDetail?)
+    typealias Address = (source : Bind<LocationDetail>?,destination : LocationDetail?)
    
     private var completion : ((Address)->Void)? // On dismiss send address
     
@@ -27,7 +27,7 @@ class LocationSelectionView: UIView {
     {
         didSet{
             if address?.source != nil {
-                self.textFieldSource.text = self.address?.source?.address
+                self.textFieldSource.text = self.address?.source?.value?.address
             }
             if address?.destination != nil {
                 self.textFieldDestination.text = self.address?.destination?.address
@@ -48,7 +48,9 @@ class LocationSelectionView: UIView {
         }
     }
     
-    private var favouriteLocations = [(address :String,location :LocationDetail?)]()
+    typealias FavouriteLocation = (address :String,location :LocationDetail?)
+    
+    private var favouriteLocations = [FavouriteLocation]()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -194,8 +196,8 @@ extension LocationSelectionView : UITableViewDataSource, UITableViewDelegate {
             
             if self.favouriteLocations[indexPath.row].location != nil {
                 
-               self.autoFill(at: indexPath)
-                
+                self.autoFill(with: self.favouriteLocations[indexPath.row].location)
+
             } else {
                 
                 self.googlePlacesHelper?.getGoogleAutoComplete(completion: { (place) in
@@ -203,24 +205,52 @@ extension LocationSelectionView : UITableViewDataSource, UITableViewDelegate {
                     self.favouriteLocations[indexPath.row].location = (place.formattedAddress ?? .Empty, place.coordinate)
                     DispatchQueue.main.async {
                         self.tableViewBottom.reloadData()
-                        self.autoFill(at: indexPath)
+                        self.autoFill(with: self.favouriteLocations[indexPath.row].location)
                     }
                     
                 })
             }
+        } else {
+            
+            self.autoFill(with: (datasource[indexPath.row].attributedFullText.string, LocationCoordinate(latitude: 0, longitude: 0)))
+            
+            if datasource.count > indexPath.row, let placeID = datasource[indexPath.row].placeID{
+                
+                GMSPlacesClient.shared().lookUpPlaceID(placeID) { (place, error) in
+                    
+                    if error != nil {
+                        
+                        self.make(toast: error!.localizedDescription)
+                        
+                    } else if let addressString = place?.formattedAddress, let coordinate = place?.coordinate{
+                        
+                        self.autoFill(with: (addressString,coordinate))
+                    }
+                    
+                }
+                
+            }
+            
         }
         
     }
     
     // MARK:- Auto Fill At
     
-    private func autoFill(at indexPath : IndexPath){
+    private func autoFill(with location : LocationDetail?){ //, with array : [T]
         
         if textFieldSource.isEditing {
-            self.address?.source = self.favouriteLocations[indexPath.row].location
+            self.address?.source?.value = location//array  array [indexPath.row].location
+            self.address?.source = self.address?.source // Temporary fix to call didSet
         } else {
-            self.address?.destination = self.favouriteLocations[indexPath.row].location
+            self.address?.destination = location
         }
+        
+        if self.address?.source?.value != nil, self.address?.destination != nil {
+            self.completion?(self.address!)
+            self.backButtonAction()
+        }
+        
     }
     
     

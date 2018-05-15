@@ -8,6 +8,7 @@
 
 import Foundation
 import GoogleMaps
+import MapKit
 
 typealias LocationCoordinate = CLLocationCoordinate2D
 typealias LocationDetail = (address : String, coordinate :LocationCoordinate)
@@ -16,11 +17,10 @@ typealias LocationDetail = (address : String, coordinate :LocationCoordinate)
 class GoogleMapsHelper : NSObject {
     
     var mapView : GMSMapView?
-    private var locationManager : CLLocationManager?
+    var locationManager : CLLocationManager?
     private var currentLocation : ((LocationCoordinate)->Void)?
     
     func getMapView(withDelegate delegate: GMSMapViewDelegate? = nil, in view : UIView, withPosition position :LocationCoordinate = defaultMapLocation, zoom : Float = 15) {
-        
         
        mapView = GMSMapView(frame: view.frame)
        mapView?.delegate = delegate
@@ -39,12 +39,13 @@ class GoogleMapsHelper : NSObject {
         self.currentLocation = onReceivingLocation
     }
     
-    func moveTo(location : LocationCoordinate = defaultMapLocation) {
+    func moveTo(location : LocationCoordinate = defaultMapLocation, with center : CGPoint) {
         
         CATransaction.begin()
         CATransaction.setAnimationDuration(2)
         CATransaction.setCompletionBlock {
             self.mapView?.camera = GMSCameraPosition.camera(withTarget: location, zoom: 15)
+            self.mapView?.center = center
         }
         CATransaction.commit()
     }
