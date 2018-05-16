@@ -11,17 +11,65 @@ import UIKit
 class ServiceSelectionView: UIView {
     
     @IBOutlet private weak var collectionViewService : UICollectionView!
+    @IBOutlet private weak var labelServiceTitle : UILabel!
+    @IBOutlet private var buttonService : UIButton!
+    @IBOutlet private var buttonMore : UIButton!
+    @IBOutlet private weak var buttonChange : UIButton!
+    @IBOutlet private weak var buttonGetPricing : UIButton!
+    @IBOutlet private weak var labelCardNumber : UILabel!
+    @IBOutlet private weak var imageViewCard : UIImageView!
     
+    var isServiceSelected = true {
+        didSet{
+            self.changeCollectionData()
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.initialLoads()
+        self.localize()
+    }
+
+}
+
+// MARK:- Methods
+
+extension ServiceSelectionView {
+    
+    private func initialLoads() {
         
         self.collectionViewService.delegate = self
         self.collectionViewService.dataSource = self
         self.collectionViewService.register(UINib(nibName: XIB.Names.ServiceSelectionCollectionViewCell, bundle: nil), forCellWithReuseIdentifier: XIB.Names.ServiceSelectionCollectionViewCell)
+        
     }
-
+    
+    // MARK:- Localize
+    
+    private func localize(){
+        
+        self.buttonMore.setTitle(Constants.string.more.localize(), for: .normal)
+        self.buttonService.setTitle(Constants.string.service.localize(), for: .normal)
+        self.buttonChange.setTitle(Constants.string.change.localize().uppercased(), for: .normal)
+        self.buttonGetPricing.setTitle(Constants.string.getPricing.localize(), for: .normal)
+        
+    }
+    
+    private func changeCollectionData(){
+        
+        DispatchQueue.main.async {
+            self.labelServiceTitle.text = (self.isServiceSelected ? Constants.string.selectService : Constants.string.more).localize()
+            self.buttonService.isHidden = self.isServiceSelected
+            self.buttonMore.isHidden = self.isServiceSelected
+            self.collectionViewService.reloadData()
+        }
+    }
+    
+    
 }
+
+
 
 // MARK:- UICollectionView
 
@@ -52,3 +100,6 @@ extension ServiceSelectionView : UICollectionViewDelegate, UICollectionViewDataS
     }
     
 }
+
+
+

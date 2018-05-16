@@ -50,13 +50,17 @@ class HomeViewController: UIViewController {
     
     private var sourceLocationDetail : Bind<LocationDetail>? = Bind<LocationDetail>(nil) {  // Source Location Detail
         didSet{
-             self.textFieldSourceLocation.text = sourceLocationDetail?.value?.address
+            DispatchQueue.main.async {
+                 self.textFieldSourceLocation.text = self.sourceLocationDetail?.value?.address
+            }
         }
     }
     
     private var destinationLocationDetail : LocationDetail? {  // Destination Location Detail
         didSet{
-            self.textFieldDestinationLocation.text = destinationLocationDetail?.address
+            DispatchQueue.main.async {
+                self.textFieldDestinationLocation.text = self.destinationLocationDetail?.address
+            }
         }
     }
     
@@ -224,9 +228,9 @@ extension HomeViewController {
                 self.sourceLocationDetail = address.source
                 self.destinationLocationDetail = address.destination
                 
-                if let sourceCoordinate = self.sourceLocationDetail?.value?.coordinate, let destinationCoordinate = self.destinationLocationDetail?.coordinate {  // Draw polyline from source to destination
+               /* if let sourceCoordinate = self.sourceLocationDetail?.value?.coordinate, let destinationCoordinate = self.destinationLocationDetail?.coordinate {  // Draw polyline from source to destination
                     self.mapViewHelper?.mapView?.drawPolygon(from: sourceCoordinate, to: destinationCoordinate)
-                }
+                }*/
             }
             self.view.addSubview(locationView)
             
@@ -247,7 +251,6 @@ extension HomeViewController {
         }
         
     }
-    
     
     
     
@@ -315,11 +318,26 @@ extension HomeViewController : GMSMapViewDelegate {
                 self.sourceMarker.map = nil
                 self.imageViewMarkerCenter.image = #imageLiteral(resourceName: "destinationPin")
                 self.imageViewMarkerCenter.isHidden = false
+                if let location = mapViewHelper?.mapView?.projection.coordinate(for: viewMapOuter.center) {
+                    self.mapViewHelper?.getPlaceAddress(from: location, on: { (locationDetail) in
+                        print(locationDetail)
+                        self.sourceLocationDetail?.value = locationDetail
+                        let sLocation = self.sourceLocationDetail
+                        self.sourceLocationDetail = sLocation
+                    })
+                }
+                
                 
             } else if self.selectedLocationView == self.viewDestinationLocation {
                 self.destinationMarker.map = nil
                 self.imageViewMarkerCenter.image = #imageLiteral(resourceName: "sourcePin")
                 self.imageViewMarkerCenter.isHidden = false
+                if let location = mapViewHelper?.mapView?.projection.coordinate(for: viewMapOuter.center) {
+                    self.mapViewHelper?.getPlaceAddress(from: location, on: { (locationDetail) in
+                        print(locationDetail)
+                        self.destinationLocationDetail = locationDetail
+                    })
+                }
             }
             
         } else {

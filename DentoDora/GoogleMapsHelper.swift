@@ -13,13 +13,38 @@ import MapKit
 typealias LocationCoordinate = CLLocationCoordinate2D
 typealias LocationDetail = (address : String, coordinate :LocationCoordinate)
 
+private struct Place : Decodable {
+    
+    var results : [Address]?
+    
+}
+
+private struct Address : Decodable {
+    
+    var formatted_address : String?
+    var geometry : Geometry?
+}
+
+private struct Geometry : Decodable {
+    
+    var location : Location?
+    
+}
+
+private struct Location : Decodable {
+    
+    var lat : Double?
+    var lng : Double?
+}
+
+
 
 class GoogleMapsHelper : NSObject {
     
     var mapView : GMSMapView?
     var locationManager : CLLocationManager?
     private var currentLocation : ((LocationCoordinate)->Void)?
-    
+   
     func getMapView(withDelegate delegate: GMSMapViewDelegate? = nil, in view : UIView, withPosition position :LocationCoordinate = defaultMapLocation, zoom : Float = 15) {
         
        mapView = GMSMapView(frame: view.frame)
@@ -48,6 +73,56 @@ class GoogleMapsHelper : NSObject {
             self.mapView?.center = center
         }
         CATransaction.commit()
+    }
+    
+    func getPlaceAddress(from location : LocationCoordinate, on completion : @escaping ((LocationDetail)->())){
+        
+        /*if !geoCoder.isGeocoding {
+            
+            geoCoder.reverseGeocodeLocation(CLLocation(latitude: location.latitude, longitude: location.longitude)) { (placeMarks, error) in
+                
+                guard error == nil, let placeMarks = placeMarks else {
+                    print("Error in retrieving geocoding \(error?.localizedDescription ?? .Empty)")
+                    return
+                }
+            
+                
+                
+                guard let placemark = placeMarks.first, let address = (placeMarks.first?.addressDictionary!["FormattedAddressLines"] as? Array<String>)?.joined(separator: ","), let coordinate = placemark.location else {
+                    print("Error on parsing geocoding ")
+                    return
+                }
+                
+                
+                completion((address,coordinate.coordinate))
+                
+                print(placeMarks)
+                
+            }
+            
+        } */
+        
+        
+        let urlString = "https://maps.googleapis.com/maps/api/geocode/json?latlng=\(location.latitude),\(location.longitude)&key=\(googleMapKey)"
+        
+        guard let url = URL(string: urlString) else {
+            print("Error in creating URL Geocoding")
+            return
+        }
+       
+        
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            
+            if let places = data?.getDecodedObject(from: Place.self), let address = places.results?.first?.formatted_address, let lattitude = places.results?.first?.geometry?.location?.lat, let longitude = places.results?.first?.geometry?.location?.lng {
+                
+                completion((address, LocationCoordinate(latitude: lattitude, longitude: longitude)))
+            }
+            
+            
+        }.resume()
+        
+    
+        
     }
     
     

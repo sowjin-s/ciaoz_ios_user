@@ -83,6 +83,12 @@ struct Constants {
     let home = "Home"
     let work = "Work"
     let addLocation = "Add Location"
+    let selectService = "Select Service"
+    let service = "Service"
+    let more = "More"
+    let change = "change"
+    let getPricing = "GET PRICING"
+    
 }
 
 //Defaults Keys

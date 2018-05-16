@@ -25,6 +25,7 @@
 		08147B81208A23F600C5CFD3 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08147B80208A23F600C5CFD3 /* Bundle.swift */; };
 		081548FC20A1DEA2004D0F7D /* heart.json in Resources */ = {isa = PBXBuildFile; fileRef = 081548FB20A1DEA2004D0F7D /* heart.json */; };
 		081548FE20A1DF66004D0F7D /* LottieHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081548FD20A1DF66004D0F7D /* LottieHelper.swift */; };
+		0826325E20AC6DA900EBC529 /* HomeViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826325D20AC6DA900EBC529 /* HomeViewController+Extension.swift */; };
 		082D1B7E2093159A0000B7C8 /* TextFieldEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082D1B7C209315990000B7C8 /* TextFieldEffects.swift */; };
 		082D1B7F2093159A0000B7C8 /* HoshiTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082D1B7D2093159A0000B7C8 /* HoshiTextField.swift */; };
 		082D1B81209318C30000B7C8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082D1B80209318C30000B7C8 /* User.swift */; };
@@ -166,6 +167,7 @@
 		08147B80208A23F600C5CFD3 /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		081548FB20A1DEA2004D0F7D /* heart.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = heart.json; sourceTree = "<group>"; };
 		081548FD20A1DF66004D0F7D /* LottieHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieHelper.swift; sourceTree = "<group>"; };
+		0826325D20AC6DA900EBC529 /* HomeViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewController+Extension.swift"; sourceTree = "<group>"; };
 		082D1B7C209315990000B7C8 /* TextFieldEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldEffects.swift; sourceTree = "<group>"; };
 		082D1B7D2093159A0000B7C8 /* HoshiTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HoshiTextField.swift; sourceTree = "<group>"; };
 		082D1B80209318C30000B7C8 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -709,6 +711,7 @@
 			isa = PBXGroup;
 			children = (
 				08B7DC71209A14A1002CF17A /* HomeViewController.swift */,
+				0826325D20AC6DA900EBC529 /* HomeViewController+Extension.swift */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -1418,6 +1421,7 @@
 				082D1B8320931AB70000B7C8 /* ErrorLog.swift in Sources */,
 				086BAF60200778330087F15A /* Common.swift in Sources */,
 				883389541FE8EE81006B6C05 /* Interactor.swift in Sources */,
+				0826325E20AC6DA900EBC529 /* HomeViewController+Extension.swift in Sources */,
 				086C90132099F34A002CD9B1 /* SocialLoginViewController.swift in Sources */,
 				082D1B81209318C30000B7C8 /* User.swift in Sources */,
 				082D1B8520931B3D0000B7C8 /* Country.swift in Sources */,

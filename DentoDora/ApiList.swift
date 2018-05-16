@@ -42,7 +42,8 @@ enum Base : String{
     case login = "/oauth/token"
     case getProfile = "/api/user/details"
     case updateProfile = "/api/user/update/profile"
-   
+    case googleMaps = "https://maps.googleapis.com/maps/api/geocode/json"
+    
     init(fromRawValue: String){
         self = Base(rawValue: fromRawValue) ?? .signUp
     }
