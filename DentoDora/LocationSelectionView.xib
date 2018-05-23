@@ -76,7 +76,7 @@
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                             </subviews>
-                                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                            <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="19U-Ci-70f" secondAttribute="trailing" constant="4" id="0tX-eN-qqI"/>
                                                 <constraint firstItem="19U-Ci-70f" firstAttribute="centerY" secondItem="uzZ-eJ-qEi" secondAttribute="centerY" id="98R-2t-GJX"/>
@@ -130,7 +130,7 @@
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                             </subviews>
-                                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                            <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstItem="bq8-H7-0m3" firstAttribute="centerY" secondItem="GM4-I2-3BQ" secondAttribute="centerY" id="BGL-Fp-hKq"/>
                                                 <constraint firstItem="bq8-H7-0m3" firstAttribute="height" secondItem="GM4-I2-3BQ" secondAttribute="height" multiplier="0.8" id="Gv9-ye-L7u"/>

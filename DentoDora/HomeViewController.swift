@@ -10,6 +10,7 @@ import UIKit
 import KWDrawerController
 import GoogleMaps
 import GooglePlaces
+import DateTimePicker
 
 class HomeViewController: UIViewController {
     
@@ -21,7 +22,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak private var viewSourceLocation : UIView!
     @IBOutlet weak private var viewDestinationLocation : UIView!
     @IBOutlet weak private var viewAddress : UIView!
-    @IBOutlet weak private var viewAddressOuter : UIView!
+    @IBOutlet weak var viewAddressOuter : UIView!
     @IBOutlet weak private var textFieldSourceLocation : UITextField!
     @IBOutlet weak private var textFieldDestinationLocation : UITextField!
     @IBOutlet weak private var imageViewMarkerCenter : UIImageView!
@@ -48,13 +49,12 @@ class HomeViewController: UIViewController {
     }
     
     
-    private var sourceLocationDetail : Bind<LocationDetail>? = Bind<LocationDetail>(nil) {  // Source Location Detail
-        didSet{
-            DispatchQueue.main.async {
-                 self.textFieldSourceLocation.text = self.sourceLocationDetail?.value?.address
-            }
-        }
-    }
+    private var sourceLocationDetail : Bind<LocationDetail>? = Bind<LocationDetail>(nil)
+//    {  // Source Location Detail
+//        didSet{
+//
+//        }
+//    }
     
     private var destinationLocationDetail : LocationDetail? {  // Destination Location Detail
         didSet{
@@ -68,6 +68,13 @@ class HomeViewController: UIViewController {
     
     private var currentLocation = Bind<LocationCoordinate>(defaultMapLocation)
     
+    var serviceSelectionView : ServiceSelectionView?
+    
+    var rideSelectionView : RequestSelectionView?
+    
+    var requestLoaderView : LoaderView?
+    
+    var rideStatusView : RideStatusView?
     
     //MARKERS
     
@@ -91,7 +98,7 @@ class HomeViewController: UIViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        self.viewCurrentLocation.makeRoundedCorner()
+        self.viewLayouts()
     }
 
 }
@@ -117,7 +124,53 @@ extension HomeViewController {
             }
         })
         self.viewCurrentLocation.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.getCurrentLocation)))
+        
+        //self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.serviceView)))
+        
+        self.sourceLocationDetail?.bind(listener: { (locationDetail) in
+            DispatchQueue.main.async {
+                self.textFieldSourceLocation.text = locationDetail?.address
+            }
+        })
+        self.viewDestinationLocation.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
     }
+    
+    
+    // MARK:- View Will Layouts
+    
+    private func viewLayouts() {
+        
+        self.viewCurrentLocation.makeRoundedCorner()
+        self.mapViewHelper?.mapView?.frame = viewMapOuter.bounds
+        
+    }
+    
+    
+    func showLoaderView() {
+        
+        if let singleView = Bundle.main.loadNibNamed(XIB.Names.LoaderView, owner: self, options: [:])?.first as? LoaderView {
+            singleView.frame = self.viewMapOuter.bounds
+            self.requestLoaderView = singleView
+            DispatchQueue.main.asyncAfter(deadline: .now()+5) {
+                self.requestLoaderView?.endLoader()
+            }
+            
+            self.requestLoaderView?.onCancel = {
+                self.requestLoaderView = nil
+            }
+            self.viewMapOuter.addSubview(singleView)
+        }
+        
+        
+      /*
+        if self.serviceSelectionView == nil {
+            self.showServiceSelectionView()
+        } else {
+            self.removeServiceView()
+        }  */
+        
+    }
+    
     
     @IBAction private func getCurrentLocation(){
         
@@ -130,7 +183,7 @@ extension HomeViewController {
     // MARK:- Localize
     
     private func localize(){
-        
+
         self.textFieldSourceLocation.placeholder = Constants.string.source.localize()
         self.textFieldDestinationLocation.placeholder = Constants.string.destination.localize()
         
@@ -143,6 +196,11 @@ extension HomeViewController {
         self.mapViewHelper = GoogleMapsHelper()
         self.mapViewHelper?.getMapView(withDelegate: self, in: self.viewMapOuter)
         self.mapViewHelper?.getCurrentLocation(onReceivingLocation: { (location) in
+            if self.sourceLocationDetail?.value == nil {
+                self.mapViewHelper?.getPlaceAddress(from: location, on: { (locationDetail) in
+                    self.sourceLocationDetail?.value = locationDetail
+                })
+            }
             self.currentLocation.value = location
         })
         
@@ -270,8 +328,11 @@ extension HomeViewController {
     
    @IBAction private func sideMenuAction(){
         
-        self.drawerController?.openSide(.left)
-        
+       // self.drawerController?.openSide(.left)
+       // self.serviceView()
+       // self.showRideNowView()
+          self.showRideStatusView()
+    
     }
     
     // MARK:- Add or remove lottie View
@@ -280,7 +341,7 @@ extension HomeViewController {
         
         if isAdd {
             let frame =  view.bounds//CGRect(x: viewToBeAdded.frame.maxX/2, y: viewToBeAdded.frame.maxY/2, width: viewToBeAdded.frame.width/2, height: viewToBeAdded.frame.height/2)
-            lottieView = LottieHelper().addHeart(with: frame)
+            lottieView = LottieHelper().addLottie(with: frame)
             view.addSubview(lottieView!)
             lottieView?.play()
         } else {
@@ -294,6 +355,26 @@ extension HomeViewController {
         
     }
     
+    // MARK:- Show DateTimePicker
+    
+    func schedulePickerView(on completion : @escaping ((Date)->())){
+        
+        var dateComponents = DateComponents()
+        dateComponents.day = 60
+        let now = Date()
+        let calendar = Calendar.current.date(byAdding: dateComponents, to: now)
+        let datePicker = DateTimePicker.show(selected: nil, minimumDate: now, maximumDate: calendar, timeInterval: .default)
+        datePicker.includeMonth = true
+        datePicker.is12HourFormat = true
+        datePicker.dateFormat = DateFormat.list.hhmmddMMMyyyy
+        datePicker.highlightColor = .primary
+        datePicker.completionHandler = { date in
+            completion(date)
+            print(date)
+            
+        }
+    }
+    
 }
 
 
@@ -301,16 +382,27 @@ extension HomeViewController {
 
 extension HomeViewController : GMSMapViewDelegate {
     
+    func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
+        
+        if self.isUserInteractingWithMap {
+            self.isMapInteracted(false)
+        }
+    }
     
     func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
         
         print("Gesture ",gesture)
         self.isUserInteractingWithMap = gesture
+        
     }
     
     func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
         
         print(#function)
+        
+        if self.isUserInteractingWithMap {
+            self.isMapInteracted(true)
+        }
         
         if isUserInteractingWithMap {
             
@@ -322,8 +414,8 @@ extension HomeViewController : GMSMapViewDelegate {
                     self.mapViewHelper?.getPlaceAddress(from: location, on: { (locationDetail) in
                         print(locationDetail)
                         self.sourceLocationDetail?.value = locationDetail
-                        let sLocation = self.sourceLocationDetail
-                        self.sourceLocationDetail = sLocation
+//                        let sLocation = self.sourceLocationDetail
+//                        self.sourceLocationDetail = sLocation
                     })
                 }
                 
@@ -380,6 +472,8 @@ extension HomeViewController : UIViewControllerTransitioningDelegate {
     }
     
 }
+
+
 
 
 

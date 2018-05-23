@@ -93,7 +93,7 @@ extension LocationSelectionView {
             self.viewTop.alpha = 1
         }) { _ in
             self.tableViewBottom.isHidden = false
-            self.tableViewBottom.show(with: .bottom, duration: 0.2, completion: nil)
+            self.tableViewBottom.show(with: .bottom, duration: 0.3, completion: nil)
         }
         
         self.tableViewBottom.delegate = self
@@ -104,7 +104,7 @@ extension LocationSelectionView {
         self.tableViewBottom.register(UINib(nibName: XIB.Names.LocationHeaderTableViewCell, bundle: nil), forCellReuseIdentifier:XIB.Names.LocationHeaderTableViewCell)
         self.viewBack.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.backButtonAction)))
         [self.viewSourceCancel, self.viewDestinationCancel].forEach({ $0?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.clearButtonAction(sender:))))})
-
+        self.textFieldDestination.becomeFirstResponder()
     }
     
     // MARK:- OnTap Clear Button
@@ -226,13 +226,9 @@ extension LocationSelectionView : UITableViewDataSource, UITableViewDelegate {
                         
                         self.autoFill(with: (addressString,coordinate))
                     }
-                    
                 }
-                
             }
-            
         }
-        
     }
     
     // MARK:- Auto Fill At

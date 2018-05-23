@@ -214,7 +214,7 @@ extension ProfileViewController {
         self.textFieldPhone.placeholder = Constants.string.phoneNumber.localize()
         self.textFieldEmail.placeholder = Constants.string.email.localize()
         self.labelTripType.text = Constants.string.tripType.localize()
-        self.labelBusiness.text = Constants.string.bussiness.localize()
+        self.labelBusiness.text = Constants.string.business.localize()
         self.labelPersonal.text = Constants.string.personal.localize()
         self.buttonChangePassword.setTitle(Constants.string.lookingToChangePassword.localize(), for: .normal)
         

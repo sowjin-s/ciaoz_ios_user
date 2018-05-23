@@ -25,7 +25,12 @@
 		08147B81208A23F600C5CFD3 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08147B80208A23F600C5CFD3 /* Bundle.swift */; };
 		081548FC20A1DEA2004D0F7D /* heart.json in Resources */ = {isa = PBXBuildFile; fileRef = 081548FB20A1DEA2004D0F7D /* heart.json */; };
 		081548FE20A1DF66004D0F7D /* LottieHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081548FD20A1DF66004D0F7D /* LottieHelper.swift */; };
+		0823428820AD774C0055DDF8 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0823428720AD774C0055DDF8 /* LoaderView.swift */; };
+		0823428A20AD775A0055DDF8 /* LoaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0823428920AD775A0055DDF8 /* LoaderView.xib */; };
+		0823428C20AD7AB80055DDF8 /* bouncy_mapmaker.json in Resources */ = {isa = PBXBuildFile; fileRef = 0823428B20AD7AB70055DDF8 /* bouncy_mapmaker.json */; };
 		0826325E20AC6DA900EBC529 /* HomeViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826325D20AC6DA900EBC529 /* HomeViewController+Extension.swift */; };
+		0826C13620B011C80005D0D8 /* RequestSelectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0826C13520B011C80005D0D8 /* RequestSelectionView.xib */; };
+		0826C13820B011DC0005D0D8 /* RequestSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826C13720B011DC0005D0D8 /* RequestSelectionView.swift */; };
 		082D1B7E2093159A0000B7C8 /* TextFieldEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082D1B7C209315990000B7C8 /* TextFieldEffects.swift */; };
 		082D1B7F2093159A0000B7C8 /* HoshiTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082D1B7D2093159A0000B7C8 /* HoshiTextField.swift */; };
 		082D1B81209318C30000B7C8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082D1B80209318C30000B7C8 /* User.swift */; };
@@ -69,6 +74,8 @@
 		088185C320A4688200F07AFF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 088185C220A4688200F07AFF /* GoogleService-Info.plist */; };
 		088B5D382022163700D5342C /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088B5D372022163700D5342C /* Reachability.swift */; };
 		088DC901200FCCA00095D552 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088DC900200FCCA00095D552 /* ViewExtension.swift */; };
+		08A39DA020B5BB8100314935 /* RideStatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08A39D9F20B5BB8100314935 /* RideStatusView.xib */; };
+		08A39DA220B5BB9300314935 /* RideStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A39DA120B5BB9300314935 /* RideStatusView.swift */; };
 		08B73D0420947C5C00B60F74 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B73D0320947C5C00B60F74 /* PasswordViewController.swift */; };
 		08B7DC72209A14A1002CF17A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B7DC71209A14A1002CF17A /* HomeViewController.swift */; };
 		08B7DC75209A14E0002CF17A /* SideBarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B7DC74209A14E0002CF17A /* SideBarTableViewController.swift */; };
@@ -167,7 +174,12 @@
 		08147B80208A23F600C5CFD3 /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		081548FB20A1DEA2004D0F7D /* heart.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = heart.json; sourceTree = "<group>"; };
 		081548FD20A1DF66004D0F7D /* LottieHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieHelper.swift; sourceTree = "<group>"; };
+		0823428720AD774C0055DDF8 /* LoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
+		0823428920AD775A0055DDF8 /* LoaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoaderView.xib; sourceTree = "<group>"; };
+		0823428B20AD7AB70055DDF8 /* bouncy_mapmaker.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bouncy_mapmaker.json; sourceTree = "<group>"; };
 		0826325D20AC6DA900EBC529 /* HomeViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewController+Extension.swift"; sourceTree = "<group>"; };
+		0826C13520B011C80005D0D8 /* RequestSelectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RequestSelectionView.xib; sourceTree = "<group>"; };
+		0826C13720B011DC0005D0D8 /* RequestSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestSelectionView.swift; sourceTree = "<group>"; };
 		082D1B7C209315990000B7C8 /* TextFieldEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldEffects.swift; sourceTree = "<group>"; };
 		082D1B7D2093159A0000B7C8 /* HoshiTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HoshiTextField.swift; sourceTree = "<group>"; };
 		082D1B80209318C30000B7C8 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -211,6 +223,8 @@
 		088185C220A4688200F07AFF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		088B5D372022163700D5342C /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		088DC900200FCCA00095D552 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
+		08A39D9F20B5BB8100314935 /* RideStatusView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RideStatusView.xib; sourceTree = "<group>"; };
+		08A39DA120B5BB9300314935 /* RideStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideStatusView.swift; sourceTree = "<group>"; };
 		08B73D0320947C5C00B60F74 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		08B7DC71209A14A1002CF17A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		08B7DC74209A14E0002CF17A /* SideBarTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarTableViewController.swift; sourceTree = "<group>"; };
@@ -331,6 +345,7 @@
 			isa = PBXGroup;
 			children = (
 				081548FB20A1DEA2004D0F7D /* heart.json */,
+				0823428B20AD7AB70055DDF8 /* bouncy_mapmaker.json */,
 				08641D8D20A1B2AD00AA0D1F /* Circular Transition */,
 			);
 			name = Animation;
@@ -342,6 +357,26 @@
 				081548FD20A1DF66004D0F7D /* LottieHelper.swift */,
 			);
 			name = Lottie;
+			sourceTree = "<group>";
+		};
+		0823428620AD772E0055DDF8 /* LoaderView */ = {
+			isa = PBXGroup;
+			children = (
+				0823428720AD774C0055DDF8 /* LoaderView.swift */,
+				0823428920AD775A0055DDF8 /* LoaderView.xib */,
+			);
+			name = LoaderView;
+			sourceTree = "<group>";
+		};
+		0826C13420B0119E0005D0D8 /* HomePage */ = {
+			isa = PBXGroup;
+			children = (
+				08A39D9E20B5BB6700314935 /* Ride Status */,
+				083A599F20A4317C00D64574 /* Location Selection */,
+				082F77CE20A5A14900D6474B /* ServiceSelectionView */,
+				08A39D9D20B5BB5900314935 /* Request Selection */,
+			);
+			name = HomePage;
 			sourceTree = "<group>";
 		};
 		082D1B6A209310840000B7C8 /* Reachability */ = {
@@ -682,6 +717,31 @@
 			name = "Social Login";
 			sourceTree = "<group>";
 		};
+		08A39D9A20B583C900314935 /* PickerView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = PickerView;
+			sourceTree = "<group>";
+		};
+		08A39D9D20B5BB5900314935 /* Request Selection */ = {
+			isa = PBXGroup;
+			children = (
+				0826C13520B011C80005D0D8 /* RequestSelectionView.xib */,
+				0826C13720B011DC0005D0D8 /* RequestSelectionView.swift */,
+			);
+			name = "Request Selection";
+			sourceTree = "<group>";
+		};
+		08A39D9E20B5BB6700314935 /* Ride Status */ = {
+			isa = PBXGroup;
+			children = (
+				08A39D9F20B5BB8100314935 /* RideStatusView.xib */,
+				08A39DA120B5BB9300314935 /* RideStatusView.swift */,
+			);
+			name = "Ride Status";
+			sourceTree = "<group>";
+		};
 		08B73D0220947C4900B60F74 /* Password */ = {
 			isa = PBXGroup;
 			children = (
@@ -700,6 +760,7 @@
 		08B7DC70209A1487002CF17A /* Main StoryBoard */ = {
 			isa = PBXGroup;
 			children = (
+				08A39D9A20B583C900314935 /* PickerView */,
 				0805BDBC209C418700ACDC38 /* LocationSelection */,
 				08B7DC73209A14A6002CF17A /* Home */,
 				08B7DC76209A14E4002CF17A /* SideBar */,
@@ -1032,9 +1093,9 @@
 		8894E25D1FE7D9170097B4B3 /* XIB */ = {
 			isa = PBXGroup;
 			children = (
+				0823428620AD772E0055DDF8 /* LoaderView */,
 				082D1B9720933D1B0000B7C8 /* WalkThrough */,
-				083A599F20A4317C00D64574 /* Location Selection */,
-				082F77CE20A5A14900D6474B /* ServiceSelectionView */,
+				0826C13420B0119E0005D0D8 /* HomePage */,
 			);
 			name = XIB;
 			sourceTree = "<group>";
@@ -1210,18 +1271,22 @@
 				086C901F209A05EA002CD9B1 /* ClanPro-News.otf in Resources */,
 				8894E22B1FE7D7980097B4B3 /* Assets.xcassets in Resources */,
 				083A59AB20A434E000D64574 /* LocationTableViewCell.xib in Resources */,
+				0823428A20AD775A0055DDF8 /* LoaderView.xib in Resources */,
 				082F77CD20A5A13900D6474B /* ServiceSelectionView.xib in Resources */,
 				083A59B220A4351D00D64574 /* LocationHeaderTableViewCell.xib in Resources */,
 				086C901E209A05EA002CD9B1 /* ClanPro-NarrMedium.otf in Resources */,
+				0823428C20AD7AB80055DDF8 /* bouncy_mapmaker.json in Resources */,
 				086C901D209A05EA002CD9B1 /* ClanPro-Medium.otf in Resources */,
 				082D1B9920933D300000B7C8 /* WalkThroughView.xib in Resources */,
 				088185C320A4688200F07AFF /* GoogleService-Info.plist in Resources */,
 				08001A0D203C241E0076D324 /* CountryPicker.bundle in Resources */,
 				8894E2291FE7D7980097B4B3 /* Main.storyboard in Resources */,
+				0826C13620B011C80005D0D8 /* RequestSelectionView.xib in Resources */,
 				086C901A209A05EA002CD9B1 /* ClanPro-NarrNews.otf in Resources */,
 				0802718920A2DC0100EAE8C8 /* LocationSelectionView.xib in Resources */,
 				082F77D220A5AA2200D6474B /* ServiceSelectionCollectionViewCell.xib in Resources */,
 				086C901C209A05EA002CD9B1 /* ClanPro-NarrBook.otf in Resources */,
+				08A39DA020B5BB8100314935 /* RideStatusView.xib in Resources */,
 				081548FC20A1DEA2004D0F7D /* heart.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1320,13 +1385,21 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-User/Pods-User-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/DateTimePicker/DateTimePicker.framework",
+				"${BUILT_PRODUCTS_DIR}/DynamicBlurView/DynamicBlurView.framework",
+				"${BUILT_PRODUCTS_DIR}/FloatRatingView/FloatRatingView.framework",
 				"${BUILT_PRODUCTS_DIR}/KWDrawerController/KWDrawerController.framework",
+				"${BUILT_PRODUCTS_DIR}/PopupDialog/PopupDialog.framework",
 				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DateTimePicker.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DynamicBlurView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FloatRatingView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KWDrawerController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PopupDialog.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1401,6 +1474,7 @@
 				08B73D0420947C5C00B60F74 /* PasswordViewController.swift in Sources */,
 				8871FBD51FE7DC8E002335D5 /* Protocol.swift in Sources */,
 				083A59AA20A434E000D64574 /* LocationTableViewCell.swift in Sources */,
+				0826C13820B011DC0005D0D8 /* RequestSelectionView.swift in Sources */,
 				08F595E32076462A00369048 /* UIAplication+RLT.swift in Sources */,
 				086BAF6420078E220087F15A /* ViewController.swift in Sources */,
 				8894801F1FECE2CA006AF5A9 /* Label.swift in Sources */,
@@ -1408,6 +1482,7 @@
 				083A59B120A4351D00D64574 /* LocationHeaderTableViewCell.swift in Sources */,
 				086BAF5720076E0D0087F15A /* MakeJson.swift in Sources */,
 				086606E62005144400A79566 /* ImageView.swift in Sources */,
+				08A39DA220B5BB9300314935 /* RideStatusView.swift in Sources */,
 				08147B81208A23F600C5CFD3 /* Bundle.swift in Sources */,
 				8871FBD81FE7DD72002335D5 /* Constants.swift in Sources */,
 				38492B382000F6A8001830AD /* String.swift in Sources */,
@@ -1436,6 +1511,7 @@
 				084182B7200F689500527D0D /* PresenterProcessor.swift in Sources */,
 				08DF19C82006221B00B83AE3 /* AppData.swift in Sources */,
 				0805BDC3209C54F900ACDC38 /* ProfileViewController.swift in Sources */,
+				0823428820AD774C0055DDF8 /* LoaderView.swift in Sources */,
 				08B7DC75209A14E0002CF17A /* SideBarTableViewController.swift in Sources */,
 				8871FBDA1FE7DD7F002335D5 /* WebConstants.swift in Sources */,
 			);

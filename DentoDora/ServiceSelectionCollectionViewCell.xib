@@ -26,6 +26,11 @@
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hNq-dB-2rl">
                         <rect key="frame" x="20" y="150" width="161" height="28"/>
                         <state key="normal" title="Button"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </button>
                 </subviews>
             </view>
@@ -41,6 +46,10 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="201" height="186"/>
+            <connections>
+                <outlet property="buttonService" destination="hNq-dB-2rl" id="qJ0-r8-Lxi"/>
+                <outlet property="imageViewService" destination="YAW-a7-FC3" id="bjc-c4-fwA"/>
+            </connections>
             <point key="canvasLocation" x="6.5" y="41"/>
         </collectionViewCell>
     </objects>

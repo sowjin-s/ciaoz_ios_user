@@ -12,8 +12,8 @@ class ServiceSelectionView: UIView {
     
     @IBOutlet private weak var collectionViewService : UICollectionView!
     @IBOutlet private weak var labelServiceTitle : UILabel!
-    @IBOutlet private var buttonService : UIButton!
-    @IBOutlet private var buttonMore : UIButton!
+    @IBOutlet var buttonService : UIButton!
+    @IBOutlet var buttonMore : UIButton!
     @IBOutlet private weak var buttonChange : UIButton!
     @IBOutlet private weak var buttonGetPricing : UIButton!
     @IBOutlet private weak var labelCardNumber : UILabel!
@@ -42,7 +42,7 @@ extension ServiceSelectionView {
         self.collectionViewService.delegate = self
         self.collectionViewService.dataSource = self
         self.collectionViewService.register(UINib(nibName: XIB.Names.ServiceSelectionCollectionViewCell, bundle: nil), forCellWithReuseIdentifier: XIB.Names.ServiceSelectionCollectionViewCell)
-        
+        self.isServiceSelected = true
     }
     
     // MARK:- Localize
@@ -59,9 +59,10 @@ extension ServiceSelectionView {
     private func changeCollectionData(){
         
         DispatchQueue.main.async {
+            
             self.labelServiceTitle.text = (self.isServiceSelected ? Constants.string.selectService : Constants.string.more).localize()
             self.buttonService.isHidden = self.isServiceSelected
-            self.buttonMore.isHidden = self.isServiceSelected
+            self.buttonMore.isHidden = !self.isServiceSelected
             self.collectionViewService.reloadData()
         }
     }
@@ -87,13 +88,17 @@ extension ServiceSelectionView : UICollectionViewDelegate, UICollectionViewDataS
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        return CGSize(width: collectionView.frame.width-10, height: collectionView.frame.height-10)
+        let width = (collectionView.frame.width/3.5)
+        let height = collectionView.frame.height-10
+        return CGSize(width: width, height: height)
     }
     
     private func getCellFor(itemAt indexPath : IndexPath)->UICollectionViewCell{
         
-        
+        if let collectionCell = self.collectionViewService.dequeueReusableCell(withReuseIdentifier: XIB.Names.ServiceSelectionCollectionViewCell, for: indexPath) as? ServiceSelectionCollectionViewCell {
+            
+            return collectionCell
+        }
         
         
         return UICollectionViewCell()

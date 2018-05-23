@@ -52,8 +52,17 @@ extension UIView {
         }
     }
     
+    // MARK:- Dismiss view
     
-    
+    func dismissView(with duration : TimeInterval = 0.3, onCompletion completion : (()->Void)?){
+        
+        UIView.animate(withDuration: duration, animations: {
+            self.frame.origin.y += self.frame.height
+        }) { (_) in
+            self.removeFromSuperview()
+            completion?()
+        }
+    }
     
     
     func dismissKeyBoardonTap(){
@@ -309,5 +318,20 @@ extension UIView {
         }
     }
     
+    // MARK:- Create Half Circle
+    
+    func createCircleShapeLayer(strokeColor: UIColor, fillColor: UIColor) ->CAShapeLayer{
+        let layer = CAShapeLayer()
+        let circularPath = UIBezierPath(arcCenter: .zero, radius: self.bounds.width/2, startAngle: .pi, endAngle: 0 , clockwise: true)
+        layer.path = circularPath.cgPath
+        layer.strokeColor = strokeColor.cgColor
+       // layer.lineWidth = 20
+        layer.fillColor = fillColor.cgColor
+        layer.lineCap = kCALineCapRound
+      //  layer.lineDashPhase
+        layer.position = CGPoint(x: self.bounds.width/2, y: self.bounds.height)
+       
+        return layer
+    }
     
 }

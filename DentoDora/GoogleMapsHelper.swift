@@ -48,6 +48,7 @@ class GoogleMapsHelper : NSObject {
     func getMapView(withDelegate delegate: GMSMapViewDelegate? = nil, in view : UIView, withPosition position :LocationCoordinate = defaultMapLocation, zoom : Float = 15) {
         
        mapView = GMSMapView(frame: view.frame)
+       mapView?.isMyLocationEnabled = true
        mapView?.delegate = delegate
        mapView?.camera = GMSCameraPosition.camera(withTarget: position, zoom: 15)
        view.addSubview(mapView!)

@@ -23,6 +23,7 @@ struct Storyboard {
     let DrawerController = "DrawerController"
     let ProfileViewController = "ProfileViewController"
     let LocationSelectionViewController = "LocationSelectionViewController"
+    
 }
 
 
@@ -38,7 +39,12 @@ struct XIB {
     let LocationHeaderTableViewCell = "LocationHeaderTableViewCell"
     let ServiceSelectionCollectionViewCell = "ServiceSelectionCollectionViewCell"
     let LocationSelectionView = "LocationSelectionView"
+    let ServiceSelectionView = "ServiceSelectionView"
+    let RequestSelectionView = "RequestSelectionView"
+    let LoaderView = "LoaderView"
+    let RideStatusView = "RideStatusView"
 }
+
 
 
 //MARK:- Notification

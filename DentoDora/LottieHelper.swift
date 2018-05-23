@@ -14,9 +14,9 @@ typealias LottieView = LOTAnimationView
 class LottieHelper {
 
 
-    func addHeart(with frame : CGRect)->LottieView{
+    func addLottie(file : String = "heart", with frame : CGRect)->LottieView{
         
-        let heartView = LOTAnimationView(name: "heart")
+        let heartView = LOTAnimationView(name: file)
         heartView.frame = frame
         return heartView
     }

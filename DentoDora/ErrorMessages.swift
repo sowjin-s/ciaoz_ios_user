@@ -20,4 +20,7 @@ struct ErrorMessage {
     let enterFirstName = "Enter FirstName"
     let enterLastName = "Enter LastName"
     let enterMobileNumber = "Enter Mobile Number"
+    let enterCountry = "Enter Country"
+    let enterTimezone = "Enter TimeZone"
+    let enterConfirmPassword = "Enter Confirm Password"
 }

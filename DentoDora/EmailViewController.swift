@@ -45,18 +45,19 @@ class EmailViewController: UIViewController {
 extension EmailViewController {
     
     private func initialLoads(){
+       
+        if #available(iOS 11.0, *) {
+            self.navigationController?.navigationBar.prefersLargeTitles = true
+        }
         self.navigationController?.navigationBar.isHidden = false
         self.setDesigns()
         self.localize()
         self.view.dismissKeyBoardonTap()
         self.viewNext.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.nextAction)))
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.backButtonClick))
-        if #available(iOS 11.0, *) {
-            self.navigationController?.navigationBar.prefersLargeTitles = true
-        }
         self.scrollView.addSubview(viewScroll)
         self.buttonCreateAcount.addTarget(self, action: #selector(self.createAccountAction), for: .touchUpInside)
-        
+        self.scrollView.contentOffset = .zero
     }
     
     

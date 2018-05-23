@@ -27,6 +27,7 @@ struct Constants {
     let MobileNumber = "Mobile Number"
     let next = "Next"
     let selectSource = "Select Source"
+    let ConfirmPassword = "ConfirmPassword"
     let camera = "Camera"
     let photoLibrary = "Photo Library"
     let walkthrough = "Walkthrough"
@@ -43,6 +44,10 @@ struct Constants {
     containing Lorem Ipsum passages, and more recently with desktop publishing
     software like Aldus PageMaker including versions of Lorem Ipsum
     """
+    let country = "Country"
+    let timeZone = "Time Zone"
+    let referalCode = "Referral Code"
+    let business = "Business"
     let emailPlaceHolder = "name@example.com"
     let email = "Email"
     let iNeedTocreateAnAccount = "I need to create an account"
@@ -73,11 +78,11 @@ struct Constants {
     let last = "Last"
     let phoneNumber = "Phone Number"
     let tripType = "Trip Trip"
-    let bussiness = "Bussiness"
     let personal = "Personal"
     let save = "save"
     let lookingToChangePassword = "Looking to change password"
     let areYouSure = "Are you sure?"
+    let sure = "Sure"
     let source = "Source"
     let destination = "Destination"
     let home = "Home"
@@ -88,7 +93,18 @@ struct Constants {
     let more = "More"
     let change = "change"
     let getPricing = "GET PRICING"
-    
+    let cancelRequest = "Cancel Request"
+    let cancelRequestDescription = "Are you sure want to cancel the request?"
+    let findingDriver = "Finding Driver..."
+    let dueToHighDemandPriceMayVary = "Due to high demand price may vary"
+    let estimatedFare = "Estimated Fare"
+    let ETA = "ETA"
+    let model = "Model"
+    let useWalletAmount = "Use Wallet Amount"
+    let scheduleRide = "schedule ride"
+    let rideNow = "ride now"
+    let scheduleARide = "Schedule your Ride"
+    let select = "Select"
 }
 
 //Defaults Keys
@@ -123,6 +139,7 @@ struct DateFormat {
     static let list = DateFormat()
     let yyyy_mm_dd_HH_MM_ss = "yyyy-MM-dd HH:mm:ss"
     let MMM_dd_yyyy_hh_mm_ss_a = "MMM dd, yyyy hh:mm:ss a"
+    let hhmmddMMMyyyy = "hh:mm a - dd:MMM:yyyy"
 }
 
 

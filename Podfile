@@ -11,7 +11,9 @@ target 'User' do
     pod 'GoogleMaps'
     pod 'GooglePlaces'
     pod 'lottie-ios'
-
+    pod 'DateTimePicker'
+    pod 'PopupDialog', '~> 0.7'
+    pod 'FloatRatingView', '~> 2.0.0'
   target 'UserTests' do
     inherit! :search_paths
     # Pods for testing
