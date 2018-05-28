@@ -12,7 +12,7 @@ class MakeJson {
     
     // MARK:- SignUp
     
-   class func signUp(loginBy : LoginType = .manual, email : String?, password : String?, socialId : String? = nil, firstName : String?, lastName : String?, mobile : Int?)->[String : Any] {
+   class func signUp(loginBy : LoginType = .manual, email : String?, password : String?, socialId : String? = nil, firstName : String?, lastName : String?, mobile : Int?)->UserData {
         
         var userDataObject = UserData()
         userDataObject.device_id = UUID().uuidString
@@ -26,21 +26,21 @@ class MakeJson {
         userDataObject.password = password
         userDataObject.social_unique_id = socialId
     
-        var json = userDataObject.JSONRepresentation
-        
-        if socialId == nil {
-            
-            json.removeValue(forKey: "social_unique_id")
-        }
-        
-        return json
+//        var json = userDataObject.JSONRepresentation
+//
+//        if socialId == nil {
+//
+//            json.removeValue(forKey: "social_unique_id")
+//        }
+    
+        return userDataObject
         
     }
     
     
     // MARK:- Login
     
-   class func login(with userName : String?, password : String?) -> Data?{
+   class func login(withUser userName : String?, password : String?) -> Data?{
         
         var loginData = LoginRequest()
         

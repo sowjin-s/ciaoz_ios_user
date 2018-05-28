@@ -49,11 +49,20 @@ extension HomeViewController {
     func isMapInteracted(_ isHide : Bool){
        
         UIView.animate(withDuration: 0.2) {
+            
             self.serviceSelectionView?.frame.origin.y = (self.view.frame.height-(isHide ? 0 : self.serviceSelectionView?.frame.height ?? 0))
             self.rideSelectionView?.frame.origin.y = (self.view.frame.height-(isHide ? 0 : self.rideSelectionView?.frame.height ?? 0))
+            self.rideStatusView?.frame.origin.y = (self.view.frame.height-(isHide ? 0 : self.rideStatusView?.frame.height ?? 0))
+             self.invoiceView?.frame.origin.y = (self.view.frame.height-(isHide ? 0 : self.invoiceView?.frame.height ?? 0))
+             self.ratingView?.frame.origin.y = (self.view.frame.height-(isHide ? 0 : self.ratingView?.frame.height ?? 0))
+            
             self.serviceSelectionView?.alpha = isHide ? 0 : 1
             self.viewAddressOuter.alpha = isHide ? 0 : 1
             self.rideSelectionView?.alpha = isHide ? 0 : 1
+            self.rideStatusView?.alpha = isHide ? 0 : 1
+            self.invoiceView?.alpha = isHide ? 0 : 1
+            self.ratingView?.alpha = isHide ? 0 : 1
+            
         }
        
     }
@@ -119,5 +128,63 @@ extension HomeViewController {
         })
         
     }
+    
+    
+    // MARK:- Show Invoice View
+    
+    func showInvoiceView() {
+        
+        guard self.invoiceView == nil else { return }
+        
+        if let invoice = Bundle.main.loadNibNamed(XIB.Names.InvoiceView, owner: self, options: [:])?.first as? InvoiceView {
+            
+            invoice.frame = CGRect(origin: CGPoint(x: 0, y: self.view.frame.height-invoice.frame.height), size: CGSize(width: self.view.frame.width, height: invoice.frame.height))
+            invoiceView = invoice
+            self.view.addSubview(invoiceView!)
+            invoiceView?.show(with: .bottom, completion: nil)
+        }
+        
+    }
+    
+    
+    // MARK:- Remove RideStatus View
+    
+    func removeInvoiceView() {
+        
+        self.invoiceView?.dismissView(onCompletion: {
+            self.invoiceView = nil
+        })
+        
+    }
+    
+    
+    // MARK:- Show RideStatus View
+    
+    func showRatingView() {
+        
+        guard self.ratingView == nil else { return }
+        
+        if let rating = Bundle.main.loadNibNamed(XIB.Names.RatingView, owner: self, options: [:])?.first as? RatingView {
+            
+            rating.frame = CGRect(origin: CGPoint(x: 0, y: self.view.frame.height-rating.frame.height), size: CGSize(width: self.view.frame.width, height: rating.frame.height))
+            ratingView = rating
+            self.view.addSubview(ratingView!)
+            ratingView?.show(with: .bottom, completion: nil)
+        }
+        
+    }
+    
+    
+    // MARK:- Remove RideStatus View
+    
+    func removeRatingView() {
+        
+        self.ratingView?.dismissView(onCompletion: {
+            self.ratingView = nil
+        })
+        
+    }
+    
+    
     
 }

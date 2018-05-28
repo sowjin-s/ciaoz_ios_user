@@ -35,6 +35,7 @@ class YourTripsPassbookViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         registerCell()
         switchViewAction()
     }
@@ -47,7 +48,8 @@ extension YourTripsPassbookViewController {
     private func initalLoads() {
         self.navigationController?.isNavigationBarHidden = false
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.backButtonClick))
-        self.navigationItem.title = Constants.string.yourTrips.localize()
+        self.navigationItem.title = (isYourTripsSelected ? Constants.string.yourTrips : Constants.string.passbook).localize()
+        self.localize()
     }
  
     private func localize(){
@@ -60,6 +62,7 @@ extension YourTripsPassbookViewController {
     private func registerCell(){
         
         tripTabelView.register(UINib(nibName: XIB.Names.YourTripCell, bundle: nil), forCellReuseIdentifier: XIB.Names.YourTripCell)
+        tripTabelView.register(UINib(nibName: XIB.Names.PassbookTableViewCell, bundle: nil), forCellReuseIdentifier: XIB.Names.PassbookTableViewCell)
         
     }
     
@@ -88,15 +91,31 @@ extension YourTripsPassbookViewController : UITableViewDelegate,UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: XIB.Names.YourTripCell, for: indexPath) as? YourTripCell {
-             cell.isPastButton = isFirstBlockSelected
-             return cell
-        }
-       
-        return UITableViewCell()
+        
+        return self.getCell(for: indexPath, in: tableView)
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 220.0*(UIScreen.main.bounds.height/568)
+        return (isYourTripsSelected ? 220.0 : 120)*(UIScreen.main.bounds.height/568)
     }
+    
+    private func getCell(for indexPath : IndexPath, in tableView : UITableView)->UITableViewCell {
+        
+        if isYourTripsSelected {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: XIB.Names.YourTripCell, for: indexPath) as? YourTripCell {
+                cell.isPastButton = isFirstBlockSelected
+                return cell
+            }
+        } else {
+            
+            if let cell = tableView.dequeueReusableCell(withIdentifier: XIB.Names.PassbookTableViewCell, for: indexPath) as? PassbookTableViewCell {
+                cell.isWalletSelected = isFirstBlockSelected
+                return cell
+            }
+            
+        }
+        return UITableViewCell()
+        
+    }
+    
     
 }

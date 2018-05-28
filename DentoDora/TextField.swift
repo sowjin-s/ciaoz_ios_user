@@ -8,8 +8,19 @@
 
 import UIKit
 
-@IBDesignable
 class TextField: UITextField {
+    
+    override func textRect(forBounds bounds: CGRect) -> CGRect {
+        return CGRect(x: bounds.origin.x+XPadding, y: bounds.origin.y, width: bounds.width, height: bounds.height)
+    }
+    
+    override func editingRect(forBounds bounds: CGRect) -> CGRect {
+        return CGRect(x: bounds.origin.x+XPadding, y: bounds.origin.y, width: bounds.width, height: bounds.height)
+    }
+    
+   @IBInspectable
+    var XPadding : CGFloat = 0
+    
     
     let layerr = CALayer()
 

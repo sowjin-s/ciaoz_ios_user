@@ -9,27 +9,42 @@
 import UIKit
 
 class WalletViewController: UIViewController {
-
+    
+    @IBOutlet private weak var labelBalance : Label!
+    @IBOutlet private weak var textFieldAmount : UITextField!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        self.initalLoads()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
+}
 
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+extension WalletViewController {
+    
+    private func initalLoads() {
+        
+        self.navigationController?.isNavigationBarHidden = false
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.backButtonClick))
+        self.navigationItem.title = Constants.string.wallet.localize()
     }
-    */
-
+    
+    @IBAction private func buttonAmountAction(sender : UIButton) {
+        
+        textFieldAmount.text = sender.title(for: .normal)
+        
+    }
+    
+    
+    @IBAction private func buttonAddAmountClick() {
+        
+        print("Clicked")
+    }
+    
 }

@@ -18,7 +18,7 @@ struct Constants {
     
     let Done = "Done"
     let Back = "Back"
-   
+    let delete = "Delete"
     let noDevice = "no device"
     let manual = "manual"
     let OK = "OK"
@@ -57,6 +57,7 @@ struct Constants {
     let password = "Password"
     let iForgotPassword = "I forgot my password"
     let enterYourMailIdForrecovery = "Enter your mail ID for recovery"
+    let registerDetails = "Enter the details you used to register"
     let chooseAnAccount = "Choose an account"
     let facebook = "Facebook"
     let google = "Google"
@@ -80,7 +81,7 @@ struct Constants {
     let tripType = "Trip Trip"
     let personal = "Personal"
     let save = "save"
-    let lookingToChangePassword = "Looking to change password"
+    let lookingToChangePassword = "Looking to change password?"
     let areYouSure = "Are you sure?"
     let sure = "Sure"
     let source = "Source"
@@ -105,6 +106,32 @@ struct Constants {
     let rideNow = "ride now"
     let scheduleARide = "Schedule your Ride"
     let select = "Select"
+    let driverAccepted = "Driver accepted your request."
+    let youAreOnRide = "You are on ride."
+    let bookingId = "Booking ID"
+    let distanceTravelled = "Distance Travelled"
+    let timeTaken = "Time Taken"
+    let baseFare = "Base Fare"
+    let cash = "Cash"
+    let paynow = "Pay Now"
+    let rateyourtrip = "Rate your trip with"
+    let writeYourComments = "Write your comments"
+    let distanceFare = "Distance Fare"
+    let tax = "Tax"
+    let total = "Total"
+    let submit = "Submit"
+    let driverArrived = "Driver has arrived at your location."
+    let peakInfo = "Due to peak hours, charges will be varied based on availability of provider."
+    let call = "Call"
+    let past = "Past"
+    let upcoming = "Upcoming"
+    let addCardPayments = "Add card for payments"
+    let paymentMethods = "Payment Methods"
+    let yourCards = "Your Cards"
+    let walletHistory = "Wallet History"
+    let couponHistory = "Coupon History"
+    let enterCouponCode = "Enter Coupon Code"
+    let addCouponCode = "Add Coupon Code"
 }
 
 //Defaults Keys
@@ -170,6 +197,20 @@ enum LoginType : String, Codable {
     case facebook
     case google
     case manual
+    
+}
+
+
+// MARK:- Ride Status
+
+enum RideStatus : String, Codable {
+    
+    case searching
+    case started
+    case arrived
+    case pickedup
+    case dropped
+    case completed
     
 }
 

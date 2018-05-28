@@ -2,7 +2,6 @@ PODS:
   - Alamofire (4.7.0)
   - DateTimePicker (1.2.1)
   - DynamicBlurView (2.0.2)
-  - FloatRatingView (2.0)
   - GoogleMaps (2.6.0):
     - GoogleMaps/Maps (= 2.6.0)
   - GoogleMaps/Base (2.6.0)
@@ -20,7 +19,6 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - DateTimePicker
-  - FloatRatingView (~> 2.0.0)
   - GoogleMaps
   - GooglePlaces
   - KWDrawerController (~> 4.1.2)
@@ -32,7 +30,6 @@ SPEC REPOS:
     - Alamofire
     - DateTimePicker
     - DynamicBlurView
-    - FloatRatingView
     - GoogleMaps
     - GooglePlaces
     - KWDrawerController
@@ -43,13 +40,12 @@ SPEC CHECKSUMS:
   Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
   DateTimePicker: c7b10f7dfe6eb06014c88df964a0a994f246b791
   DynamicBlurView: aa6db4defc6e537eb86fc5e58dd3991666178399
-  FloatRatingView: 857ab8f10040d06a42fc979f486c8f9fecd2f2e5
   GoogleMaps: 42f91c68b7fa2f84d5c86597b18ceb99f5414c7f
   GooglePlaces: f6ddf33b75cef69e888907d9947c57198ed845f3
   KWDrawerController: 49a6597be74c1fb10ed690e89def27866bbd460a
   lottie-ios: d699fdee68d7b63e721d949388b015fef1aaa4ac
   PopupDialog: 39598b7d41719f5c025b4b70e62728bae7734fef
 
-PODFILE CHECKSUM: 59e467c77eeeb7909d2bf1abfad99b24183723f8
+PODFILE CHECKSUM: 1afae731702255351208ed624b1630b72cf0d2e3
 
 COCOAPODS: 1.5.0

@@ -34,7 +34,6 @@ enum StatusCode : Int {
 }
 
 
-internal let baseUrl = "http://206.189.31.117/"
 
 enum Base : String{
   

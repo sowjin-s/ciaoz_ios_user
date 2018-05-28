@@ -9,7 +9,7 @@
 
 extension Int {
     
-    static func val(val : Int?)->Int{
+    static func removeNil(_ val : Int?)->Int{
     
          return val ?? 0
     }

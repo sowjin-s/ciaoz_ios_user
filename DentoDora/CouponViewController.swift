@@ -10,10 +10,14 @@ import UIKit
 
 class CouponViewController: UIViewController {
 
+    @IBOutlet private weak var labelMessage : UILabel!
+    @IBOutlet private var textFieldCouponCode : TextField!
+    @IBOutlet private weak var labelAddCouponString : UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        self.initalLoads()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,15 +25,24 @@ class CouponViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+}
 
-    /*
-    // MARK: - Navigation
+// MARK:- Methods
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+extension CouponViewController {
+    
+    private func initalLoads() {
+        self.navigationController?.isNavigationBarHidden = false
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.backButtonClick))
+        self.navigationItem.title = Constants.string.coupon.localize()
+        self.localize()
     }
-    */
-
+    
+    
+    
+    private func localize() {
+        self.textFieldCouponCode.placeholder = Constants.string.enterCouponCode.localize()
+        self.labelAddCouponString.text = Constants.string.addCouponCode.localize()
+    }
+    
 }

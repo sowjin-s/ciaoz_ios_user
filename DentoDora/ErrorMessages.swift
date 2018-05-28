@@ -23,4 +23,5 @@ struct ErrorMessage {
     let enterCountry = "Enter Country"
     let enterTimezone = "Enter TimeZone"
     let enterConfirmPassword = "Enter Confirm Password"
+    let passwordDonotMatch = "Password and Confirm password donot match"
 }

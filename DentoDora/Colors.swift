@@ -21,13 +21,13 @@ enum Color : Int {
         switch id {
         case self.primary.rawValue:
             return .primary
-        
+            
         case self.secondary.rawValue:
             return .secondary
             
         case self.lightBlue.rawValue:
             return .lightBlue
-        
+            
         case self.brightBlue.rawValue:
             return .brightBlue
             
@@ -50,7 +50,7 @@ extension UIColor {
     
     // Secondary Color
     static var secondary : UIColor {
-        return UIColor(red: 238/255, green: 98/255, blue: 145/255, alpha: 1)
+        return UIColor(red: 236/255, green: 112/255, blue: 103/255, alpha: 1)
     }
     
     // Secondary Color

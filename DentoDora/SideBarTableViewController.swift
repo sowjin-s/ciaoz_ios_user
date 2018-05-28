@@ -15,7 +15,9 @@ class SideBarTableViewController: UITableViewController {
     @IBOutlet private var viewShadow : UIView!
     @IBOutlet private weak var profileImageCenterContraint : NSLayoutConstraint!
 
-    private let sideBarList = [Constants.string.payment,Constants.string.yourTrips,Constants.string.coupon,Constants.string.wallet,Constants.string.passbook,Constants.string.settings,Constants.string.help,Constants.string.share,Constants.string.inviteReferral,Constants.string.faqSupport,Constants.string.termsAndConditions,Constants.string.privacyPolicy,Constants.string.logout]
+   // private let sideBarList = [Constants.string.payment,Constants.string.yourTrips,Constants.string.coupon,Constants.string.wallet,Constants.string.passbook,Constants.string.settings,Constants.string.help,Constants.string.share,Constants.string.inviteReferral,Constants.string.faqSupport,Constants.string.termsAndConditions,Constants.string.privacyPolicy,Constants.string.logout]
+    
+       private let sideBarList = [Constants.string.payment,Constants.string.yourTrips,Constants.string.coupon,Constants.string.wallet,Constants.string.passbook,Constants.string.settings,Constants.string.help,Constants.string.share,Constants.string.logout]
     
     private let cellId = "cellId"
     
@@ -41,6 +43,7 @@ class SideBarTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         self.localize()
         self.setValues()
+        self.navigationController?.isNavigationBarHidden = true
     }
     
     override func viewWillLayoutSubviews() {
@@ -114,12 +117,38 @@ extension SideBarTableViewController {
     private func select(at indexPath : IndexPath) {
         
         switch (indexPath.section,indexPath.row) {
-        case (0,12):
+            
+        case (0,0):
+            self.push(to: Storyboard.Ids.PaymentViewController)
+        case (0,1):
+            fallthrough
+        case (0,4):
+            if let vc = self.drawerController?.getViewController(for: .none)?.storyboard?.instantiateViewController(withIdentifier: Storyboard.Ids.YourTripsPassbookViewController) as? YourTripsPassbookViewController {
+                vc.isYourTripsSelected = indexPath.row == 1
+                self.drawerController?.getViewController(for: .none)?.navigationController?.pushViewController(vc, animated: true)
+            }
+        case (0,2):
+            self.push(to: Storyboard.Ids.CouponViewController)
+        case (0,3):
+            self.push(to: Storyboard.Ids.WalletViewController)
+        case (0,5):
+            self.push(to: Storyboard.Ids.SettingTableViewController)
+        case (0,6):
+            self.push(to: Storyboard.Ids.HelpViewController)
+        case (0,7):
+            break
+        case (0,8):
             self.logout()
             
         default:
             break
         }
+        
+    }
+    
+    private func push(to identifier : String) {
+        
+         self.drawerController?.getViewController(for: .none)?.push(id: identifier, animation: true)
         
     }
     

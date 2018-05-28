@@ -7,89 +7,91 @@
 //
 
 import UIKit
+import PopupDialog
 
 class SettingTableViewController: UITableViewController {
+    
+    private let tableCellId = "tableCellid"
+    private var numberOfRows = 2
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+         self.navigationItem.rightBarButtonItem = self.editButtonItem
+        self.initalLoads()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+}
+
+//MARK:- Methods
+extension SettingTableViewController {
+    
+    private func initalLoads() {
+        self.navigationController?.isNavigationBarHidden = false
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.backButtonClick))
+        self.navigationItem.title = Constants.string.settings.localize()
     }
+    
+}
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
-    }
 
-    /*
+
+extension SettingTableViewController {
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
+        
+        if let tableCell = tableView.dequeueReusableCell(withIdentifier: tableCellId, for: indexPath) as? SettingTableCell {
+            
+            tableCell.imageViewIcon?.image = indexPath.row == 0 ? #imageLiteral(resourceName: "home") : #imageLiteral(resourceName: "work")
+            return tableCell
+        }
+        return UITableViewCell()
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return numberOfRows
     }
-    */
-
-    /*
-    // Override to support editing the table view.
+    
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
         if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+            
+            let popDialog = PopupDialog(title: Constants.string.areYouSure.localize(), message: nil)
+            let cancelButton =  PopupDialogButton(title: Constants.string.Cancel.localize(), action: {
+                popDialog.dismiss()
+            })
+            cancelButton.titleColor = .primary
+            let sureButton = PopupDialogButton(title: Constants.string.delete.localize()) {
+                self.numberOfRows-=1
+                self.tableView.reloadData()
+            }
+            sureButton.titleColor = .red
+            popDialog.addButtons([sureButton,cancelButton])
+            self.present(popDialog, animated: true, completion: nil)
+            
+        }
+        
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100*(UIScreen.main.bounds.height/568)
     }
-    */
+    
+}
 
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
+class SettingTableCell : UITableViewCell {
+    
+    @IBOutlet var labelTitle : UILabel!
+    @IBOutlet var labelAddress : UILabel!
+    @IBOutlet var imageViewIcon : UIImageView!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.imageView?.contentMode = .scaleAspectFit
     }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
 }

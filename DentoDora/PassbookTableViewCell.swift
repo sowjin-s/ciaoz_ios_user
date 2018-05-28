@@ -9,10 +9,24 @@
 import UIKit
 
 class PassbookTableViewCell: UITableViewCell {
+    
+    @IBOutlet private weak var labelDate :UILabel!
+    @IBOutlet private weak var labelAmountString :UILabel!
+    @IBOutlet private weak var labelOffer :UILabel!
+    @IBOutlet private weak var labelCredit :UILabel!
+    @IBOutlet private weak var labelPaymentType :UILabel!
+    @IBOutlet private weak var labelCouponStatus : UILabel!
+    
 
+    var isWalletSelected = true {
+        didSet {
+            self.labelCouponStatus.isHidden = isWalletSelected
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -18,12 +18,17 @@ struct Storyboard {
     let PasswordViewController = "PasswordViewController"
     let ForgotPasswordViewController = "ForgotPasswordViewController"
     let SocialLoginViewController = "SocialLoginViewController"
-    let SignUpTableViewController = "SignUpTableViewController"
+    let SignUpTableViewController = "SignUpUserTableViewController"
     let WalkThroughPreviewController = "WalkThroughPreviewController"
     let DrawerController = "DrawerController"
     let ProfileViewController = "ProfileViewController"
     let LocationSelectionViewController = "LocationSelectionViewController"
-    
+    let PaymentViewController = "PaymentViewController"
+    let YourTripsPassbookViewController = "YourTripsPassbookViewController"
+    let CouponViewController = "CouponViewController"
+    let WalletViewController = "WalletViewController"
+    let HelpViewController = "HelpViewController"
+    let SettingTableViewController = "SettingTableViewController"
 }
 
 
@@ -43,7 +48,12 @@ struct XIB {
     let RequestSelectionView = "RequestSelectionView"
     let LoaderView = "LoaderView"
     let RideStatusView = "RideStatusView"
+    let InvoiceView = "InvoiceView"
+    let RatingView = "RatingView"
+    let YourTripCell = "YourTripCell"
+    let PassbookTableViewCell = "PassbookTableViewCell"
 }
+
 
 
 

@@ -44,10 +44,9 @@ extension Interactor : PostInteractorOutputProtocol {
         switch api {
             
          case .login :
-            
             self.presenter?.sendOath(api: api, data: response)
-        case .getProfile, .updateProfile:
             
+         case .getProfile, .updateProfile, .signUp:
             self.presenter?.sendProfile(api: api, data: response)
             
         default :

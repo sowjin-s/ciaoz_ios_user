@@ -114,8 +114,7 @@ extension UIView {
                 }
                 
             }()
-        }
-        
+        } 
     }
     
     
@@ -180,7 +179,7 @@ extension UIView {
             return UIColor(cgColor: self.layer.borderColor ?? UIColor.clear.cgColor)
         }
         set(newValue) {
-            self.layer.borderColor = borderColor.cgColor
+            self.layer.borderColor = newValue.cgColor
         }
         
     }
@@ -332,6 +331,32 @@ extension UIView {
         layer.position = CGPoint(x: self.bounds.width/2, y: self.bounds.height)
        
         return layer
+    }
+    
+    func showAnimateView(_ view: UIView, isShow: Bool, direction: Transition, duration : Float = 0.8 ) {
+        if isShow {
+            view.isHidden = false
+            self.bringSubview(toFront: view)
+            print(direction.type)
+            pushTransition(CFTimeInterval(duration), view: view, withDirection: direction)
+            
+            
+        }
+        else {
+            self.sendSubview(toBack: view)
+            view.isHidden = true
+            pushTransition(CFTimeInterval(duration), view: view, withDirection: direction)
+        }
+    }
+    
+    func pushTransition(_ duration: CFTimeInterval, view: UIView, withDirection direction: Transition) {
+        let animation = CATransition()
+        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        animation.type = kCATransitionPush
+        animation.subtype = direction.type
+        animation.duration = duration
+        view.layer.add(animation, forKey: kCATransitionMoveIn)
+        
     }
     
 }

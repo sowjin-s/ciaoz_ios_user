@@ -69,12 +69,11 @@ class HomeViewController: UIViewController {
     private var currentLocation = Bind<LocationCoordinate>(defaultMapLocation)
     
     var serviceSelectionView : ServiceSelectionView?
-    
     var rideSelectionView : RequestSelectionView?
-    
     var requestLoaderView : LoaderView?
-    
     var rideStatusView : RideStatusView?
+    var invoiceView : InvoiceView?
+    var ratingView : RatingView?
     
     //MARKERS
     
@@ -88,6 +87,7 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = true
         self.localize()
     }
 
@@ -328,10 +328,12 @@ extension HomeViewController {
     
    @IBAction private func sideMenuAction(){
         
-       // self.drawerController?.openSide(.left)
+        self.drawerController?.openSide(.left)
        // self.serviceView()
        // self.showRideNowView()
-          self.showRideStatusView()
+         // self.showRideStatusView()
+      // self.showInvoiceView()
+       //  self.showRatingView()
     
     }
     

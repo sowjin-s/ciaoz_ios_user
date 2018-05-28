@@ -17,4 +17,6 @@ struct Profile : JSONSerializable {
     var mobile : String?
     var picture : String?
     var device_token : String?
+    var access_token : String?
 }
+
