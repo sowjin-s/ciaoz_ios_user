@@ -14,24 +14,30 @@ class PresenterProcessor {
     static let shared = PresenterProcessor()
 
     
-    func success(api : Base, response : Data)->String {
+    func success(api : Base, response : Data)->String? {
         
-        return .Empty
+        return response.getDecodedObject(from: DefaultMessage.self)?.message
         
     }
     
     // MARK:- Send Oath
     
-    func loginRequest(data : Data)->LoginRequest?{
+    func loginRequest(data : Data)->LoginRequest? {
         
         return data.getDecodedObject(from: LoginRequest.self)
     }
     
     // MARK:- Send Profile
     
-    func profile(data : Data)->Profile?{
+    func profile(data : Data)->Profile? {
         
         return data.getDecodedObject(from: Profile.self)
+    }
+    
+    //MARK:- UserData
+    
+    func userData(data : Data)->UserDataResponse? {
+        return data.getDecodedObject(from: ForgotResponse.self)?.user
     }
     
 }

@@ -59,8 +59,6 @@ class SignUpUserTableViewController: UITableViewController {
     }()
     
     
-    var presenter : PostPresenterInputProtocol?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setNavigationcontroller()
@@ -149,7 +147,7 @@ extension SignUpUserTableViewController {
         
         sender.view?.addPressAnimation()
         self.view.endEditingForce()
-        guard let email = emailtext.text, !email.isEmpty else {
+        guard let email = emailtext.text?.trimmingCharacters(in: .whitespaces), !email.isEmpty else {
             self.showToast(string: ErrorMessage.list.enterEmail.localize())
             return
         }
@@ -203,6 +201,7 @@ extension SignUpUserTableViewController {
        let akPhone = AKFPhoneNumber(countryCode: "in", phoneNumber: phoneNumber)
        let accountKitVC = accountKit.viewControllerForPhoneLogin(with: akPhone, state: UUID().uuidString)
        accountKitVC.enableSendToFacebook = true
+       self.prepareLogin(viewcontroller: accountKitVC)
        self.present(accountKitVC, animated: true, completion: nil)
       
         
@@ -244,20 +243,23 @@ extension SignUpUserTableViewController : PostViewProtocol {
         
         if api == .signUp, data != nil {
             
-            User.main.id = data?.id
-            User.main.firstName = data?.first_name
-            User.main.lastName = data?.last_name
-            User.main.email = data?.email
-            User.main.mobile = data?.mobile
+            Common.storeUserData(from: data)
             self.presenter?.post(api: .login, data: MakeJson.login(withUser: userInfo?.email,password:userInfo?.password))
             return
             
-        } else if api == .login, data?.access_token != nil {
-            
-            User.main.accessToken = data?.access_token
-            storeInUserDefaults()
+        } else {
+            loader.isHideInMainThread(true)
         }
+    }
+    
+    func getOath(api: Base, data: LoginRequest?) {
         
+        if api == .login, let accessToken = data?.access_token {
+            
+            User.main.accessToken = accessToken
+            storeInUserDefaults()
+            self.present(id: Storyboard.Ids.DrawerController, animation: true)
+        }
         loader.isHideInMainThread(true)
         
     }
@@ -295,9 +297,9 @@ extension SignUpUserTableViewController : UITextFieldDelegate {
     }
     
 //    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//        
+//
 //       // let count = range.length-range.location
-//        
+//
 //        if textField == passwordText {
 //            let isEditable = Int.removeNil(passwordText.text?.count)<passwordLengthMax
 //            passwordText.borderActiveColor = isEditable ? .primary : .red

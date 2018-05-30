@@ -49,6 +49,11 @@ extension Interactor : PostInteractorOutputProtocol {
          case .getProfile, .updateProfile, .signUp:
             self.presenter?.sendProfile(api: api, data: response)
             
+        case .changePassword, .resetPassword:
+            self.presenter?.sendSuccess(api: api, data: response)
+            
+        case .forgotPassword:
+            self.presenter?.sendUserData(api: api, data: response)
         default :
             break
             

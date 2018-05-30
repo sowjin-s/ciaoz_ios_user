@@ -18,9 +18,7 @@ class PasswordViewController: UIViewController {
     @IBOutlet private var viewScroll : UIView!
     
     private lazy var loader : UIView = {
-       
         return createActivityIndicator(self.view)
-        
     }()
 
     private var email : String?
@@ -41,9 +39,6 @@ class PasswordViewController: UIViewController {
         super.viewWillLayoutSubviews()
         self.setFrame()
     }
-    
-    
-
 }
 
 
@@ -125,9 +120,7 @@ extension PasswordViewController {
             return
         }
         
-        
-        loader.isHidden = false
-                
+        self.loader.isHidden = false
         self.presenter?.post(api: .login, data: MakeJson.login(withUser: email, password: passwordText))
         
         
@@ -147,7 +140,10 @@ extension PasswordViewController {
     
     @IBAction private func forgotPasswordAction() {
         
-        self.push(id: Storyboard.Ids.ForgotPasswordViewController, animation: true)
+        if let forgotVC = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.Ids.ForgotPasswordViewController) as? ForgotPasswordViewController {
+            forgotVC.emailString = email
+            self.navigationController?.pushViewController(forgotVC, animated: true)
+        }
         
     }
 
@@ -212,7 +208,10 @@ extension PasswordViewController : PostViewProtocol {
     
     func getProfile(api: Base, data: Profile?) {
         
+        guard data != nil  else { return  }
+        
         Common.storeUserData(from: data)
+        storeInUserDefaults()
         let drawer = Router.main.instantiateViewController(withIdentifier: Storyboard.Ids.DrawerController)
         self.present(drawer, animated: true, completion: {
             self.navigationController?.viewControllers.removeAll()

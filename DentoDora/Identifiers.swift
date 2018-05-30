@@ -29,6 +29,7 @@ struct Storyboard {
     let WalletViewController = "WalletViewController"
     let HelpViewController = "HelpViewController"
     let SettingTableViewController = "SettingTableViewController"
+    let ChangeResetPasswordController = "ChangeResetPasswordController"
 }
 
 

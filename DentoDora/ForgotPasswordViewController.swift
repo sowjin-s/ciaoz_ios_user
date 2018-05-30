@@ -15,6 +15,12 @@ class ForgotPasswordViewController: UIViewController {
     @IBOutlet private var scrollView : UIScrollView!
     @IBOutlet private var viewScroll : UIView!
     
+    private lazy var loader : UIView = {
+        return createActivityIndicator(UIScreen.main.focusedView ?? self.view)
+    }()
+    
+    var emailString : String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initialLoads()
@@ -49,7 +55,7 @@ extension ForgotPasswordViewController {
             self.navigationController?.navigationBar.prefersLargeTitles = true
         }
         self.scrollView.addSubview(viewScroll)
-       
+        self.textFieldEmail.text = emailString
     }
     
     
@@ -79,45 +85,25 @@ extension ForgotPasswordViewController {
         self.viewNext.addPressAnimation()
         
         guard  let emailText = self.textFieldEmail.text, !emailText.isEmpty else {
-            
             self.view.make(toast: ErrorMessage.list.enterEmail) {
                 self.textFieldEmail.becomeFirstResponder()
             }
-            
             return
         }
-        
         
         guard Common.isValid(email: emailText) else {
             self.view.make(toast: ErrorMessage.list.enterValidEmail) {
                 self.textFieldEmail.becomeFirstResponder()
             }
-            
             return
-            
         }
         
-        if let passwordVC = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.Ids.PasswordViewController) as? PasswordViewController {
-            
-            passwordVC.set(email: emailText)
-            self.navigationController?.pushViewController(passwordVC, animated: true)
-            
-        }
-        
-        
-        
+        let userData = UserData()
+        userData.email = emailText
+        self.loader.isHidden = false
+        self.presenter?.post(api: .forgotPassword, data: userData.toData())
+    
     }
-    
-    //MARK:- Create Account
-    
-    @IBAction private func createAccountAction(){
-        
-        
-        
-    }
-    
-    
-    
 }
 
 extension ForgotPasswordViewController : UITextFieldDelegate {
@@ -137,6 +123,32 @@ extension ForgotPasswordViewController : UITextFieldDelegate {
         if textField.text?.count == 0 {
             textFieldEmail.placeholder = Constants.string.emailPlaceHolder.localize()
         }
+    }
+    
+}
+
+//MARK:- PostViewProtocol
+
+extension ForgotPasswordViewController : PostViewProtocol {
+    
+    func onError(api: Base, message: String, statusCode code: Int) {
+        DispatchQueue.main.async {
+            self.view.make(toast: message)
+            self.loader.isHidden = true
+        }
+    }
+    
+    func getUserData(api: Base, data: UserDataResponse?) {
+        
+        if data != nil {
+            if let vc = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.Ids.ChangeResetPasswordController) as? ChangeResetPasswordController {
+                vc.set(user: data!)
+                vc.isChangePassword = false
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            
+        }
+        self.loader.isHideInMainThread(true)
     }
     
 }

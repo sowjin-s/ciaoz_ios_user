@@ -1,4 +1,5 @@
-    
+
+
 //
 //  AppDelegate.swift
 //  Centros_Camprios
@@ -23,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.appearence()
         setLocalization(language: .english)
         self.google()
-       // return true
+      //  return true
        
         
          let navigationController = UINavigationController(rootViewController: Router.setWireFrame())

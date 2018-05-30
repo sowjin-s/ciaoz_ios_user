@@ -56,7 +56,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ev1-eM-gOG">
-                                    <rect key="frame" x="127.5" y="19" width="65" height="65"/>
+                                    <rect key="frame" x="15.5" y="19" width="65" height="65"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6pH-A6-CoR">
                                             <rect key="frame" x="3.5" y="3.5" width="58.5" height="58.5"/>
@@ -71,23 +71,32 @@
                                         <constraint firstItem="6pH-A6-CoR" firstAttribute="width" secondItem="ev1-eM-gOG" secondAttribute="width" multiplier="0.9" id="yt3-la-BSG"/>
                                     </constraints>
                                 </view>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dmA-0A-i6O">
-                                    <rect key="frame" x="0.0" y="90" width="319" height="23"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="22.5" id="sUg-Jl-hTX"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="6dp-U1-tiq">
+                                    <rect key="frame" x="89" y="22.5" width="146.5" height="58.5"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dmA-0A-i6O">
+                                            <rect key="frame" x="0.0" y="0.0" width="146.5" height="29.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gCY-Vs-0wd">
+                                            <rect key="frame" x="0.0" y="29.5" width="146.5" height="29"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </stackView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstItem="dmA-0A-i6O" firstAttribute="centerX" secondItem="ev1-eM-gOG" secondAttribute="centerX" id="5cI-hj-DTh"/>
-                                <constraint firstItem="ev1-eM-gOG" firstAttribute="centerX" secondItem="jPB-ic-AjE" secondAttribute="centerX" id="KRk-cg-FHm"/>
+                                <constraint firstItem="6dp-U1-tiq" firstAttribute="centerY" secondItem="6pH-A6-CoR" secondAttribute="centerY" id="2tk-Vz-sg9"/>
+                                <constraint firstItem="ev1-eM-gOG" firstAttribute="centerX" secondItem="jPB-ic-AjE" secondAttribute="centerX" multiplier="0.3" id="KRk-cg-FHm"/>
                                 <constraint firstItem="ev1-eM-gOG" firstAttribute="centerY" secondItem="jPB-ic-AjE" secondAttribute="centerY" multiplier="0.8" id="QIj-27-b4R"/>
-                                <constraint firstItem="dmA-0A-i6O" firstAttribute="top" secondItem="ev1-eM-gOG" secondAttribute="bottom" constant="6" id="eD5-C4-9yh"/>
-                                <constraint firstItem="dmA-0A-i6O" firstAttribute="leading" secondItem="jPB-ic-AjE" secondAttribute="leading" id="qEv-OT-mmh"/>
+                                <constraint firstItem="6dp-U1-tiq" firstAttribute="height" secondItem="6pH-A6-CoR" secondAttribute="height" id="lcQ-xu-ZWJ"/>
+                                <constraint firstItem="6dp-U1-tiq" firstAttribute="width" secondItem="6pH-A6-CoR" secondAttribute="width" multiplier="2.5" id="ov8-jK-y1v"/>
+                                <constraint firstItem="6dp-U1-tiq" firstAttribute="leading" secondItem="ev1-eM-gOG" secondAttribute="trailing" constant="8" id="qUJ-j5-Tv7"/>
                                 <constraint firstItem="ev1-eM-gOG" firstAttribute="height" secondItem="jPB-ic-AjE" secondAttribute="width" multiplier="65:320" id="rwi-vh-55r"/>
                                 <constraint firstItem="ev1-eM-gOG" firstAttribute="width" secondItem="jPB-ic-AjE" secondAttribute="width" multiplier="65:320" id="sBc-Ti-fPE"/>
                             </constraints>
@@ -109,7 +118,8 @@
                     </tableView>
                     <connections>
                         <outlet property="imageViewProfile" destination="6pH-A6-CoR" id="1c0-H3-ulm"/>
-                        <outlet property="labelName" destination="dmA-0A-i6O" id="AmC-4x-5v0"/>
+                        <outlet property="labelEmail" destination="gCY-Vs-0wd" id="ae2-lF-9Jf"/>
+                        <outlet property="labelName" destination="dmA-0A-i6O" id="3Gr-V8-mx5"/>
                         <outlet property="profileImageCenterContraint" destination="KRk-cg-FHm" id="oin-9l-tvH"/>
                         <outlet property="viewShadow" destination="ev1-eM-gOG" id="DS4-7y-5L9"/>
                     </connections>

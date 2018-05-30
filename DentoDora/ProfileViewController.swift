@@ -76,6 +76,11 @@ extension ProfileViewController {
     
     private func initialLoads() {
         
+        self.viewPersonal.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.setTripTypeAction(sender:))))
+        self.viewBusiness.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.setTripTypeAction(sender:))))
+        self.viewImageChange.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.changeImage)))
+        self.buttonSave.addTarget(self, action: #selector(self.buttonSaveAction), for: .touchUpInside)
+        self.buttonChangePassword.addTarget(self, action: #selector(self.changePasswordAction), for: .touchUpInside)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.backButtonClick))
         self.navigationItem.title = Constants.string.profile.localize()
         self.localize()
@@ -112,10 +117,11 @@ extension ProfileViewController {
         var attributes : [ NSAttributedStringKey : Any ] = [.font : UIFont(name: FontCustom.clanPro_NarrMedium.rawValue, size: 18) ?? UIFont.systemFont(ofSize: 18, weight: .bold)]
         attributes.updateValue(UIColor.white, forKey: NSAttributedStringKey.foregroundColor)
         self.buttonSave.setAttributedTitle(NSAttributedString(string: Constants.string.save.uppercased().localize(), attributes: attributes), for: .normal)
-        self.viewPersonal.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.setTripTypeAction(sender:))))
-        self.viewBusiness.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.setTripTypeAction(sender:))))
-        self.viewImageChange.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.changeImage)))
-        self.buttonSave.addTarget(self, action: #selector(self.buttonSaveAction), for: .touchUpInside)
+        [textFieldFirst, textFieldLast, textFieldEmail, textFieldPhone].forEach({
+            $0?.borderInactiveColor = nil
+            $0?.borderActiveColor = nil
+        })
+        
     }
     
     // MARK:- Show Image
@@ -179,7 +185,7 @@ extension ProfileViewController {
         }
         
         
-        var profile = Profile()
+        let profile = Profile()
         profile.device_token = deviceToken
         profile.email = email
         profile.first_name = firstName
@@ -188,7 +194,9 @@ extension ProfileViewController {
     
         var json = profile.JSONRepresentation
         json.removeValue(forKey: "id")
-
+        json.removeValue(forKey: "picture")
+        json.removeValue(forKey: "access_token")
+        
         self.loader.isHidden = false
         self.presenter?.post(api: .updateProfile, imageData: data == nil ? nil : [WebConstants.string.picture : data!], parameters: json)
         
@@ -202,9 +210,6 @@ extension ProfileViewController {
         
     }
     
-    
-    
-    
     // MARK:- Localize
     
     private func localize() {
@@ -217,6 +222,17 @@ extension ProfileViewController {
         self.labelBusiness.text = Constants.string.business.localize()
         self.labelPersonal.text = Constants.string.personal.localize()
         self.buttonChangePassword.setTitle(Constants.string.lookingToChangePassword.localize(), for: .normal)
+        
+    }
+    
+    //MARK:- Button Change Password Action
+    
+    @IBAction private func changePasswordAction() {
+        
+        if let vc = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.Ids.ChangeResetPasswordController) as? ChangeResetPasswordController {
+            vc.isChangePassword = true
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
         
     }
     

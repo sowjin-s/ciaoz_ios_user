@@ -36,6 +36,7 @@ extension CouponViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.backButtonClick))
         self.navigationItem.title = Constants.string.coupon.localize()
         self.localize()
+        self.view.dismissKeyBoardonTap()
     }
     
     

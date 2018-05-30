@@ -34,6 +34,11 @@ struct Constants {
     let signIn = "SIGN IN"
     let signUp = "SIGNUP"
     let orConnectWithSocial = "Or connect with social"
+    let changePassword = "Change Password"
+    let resetPassword = "Reset Password"
+    let enterOtp = "Enter OTP"
+    let otpIncorrect = "OTP incorrect"
+    let enterCurrentPassword = "Enter Current Password"
     let walkthroughDummy = """
       Lorem Ipsum is simply dummy text of the printing and typesetting industry.
     Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
@@ -54,7 +59,10 @@ struct Constants {
     let whatsYourEmailAddress = "What's your Email Address?"
     let welcomeBackPassword = "Welcome back, sign in to continue"
     let enterPassword = "Enter Password"
+    let enterNewpassword = "Enter New Password"
+    let enterConfirmPassword = "Enter Confirm Password"
     let password = "Password"
+    let newPassword = "New Password"
     let iForgotPassword = "I forgot my password"
     let enterYourMailIdForrecovery = "Enter your mail ID for recovery"
     let registerDetails = "Enter the details you used to register"
@@ -132,6 +140,7 @@ struct Constants {
     let couponHistory = "Coupon History"
     let enterCouponCode = "Enter Coupon Code"
     let addCouponCode = "Add Coupon Code"
+    let resetPasswordDescription = "Note : Please enter the OTP send to your registered email address"
 }
 
 //Defaults Keys

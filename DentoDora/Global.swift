@@ -8,6 +8,7 @@
 
 import UIKit
 import Foundation
+import PopupDialog
 
 var currentBundle : Bundle!
 
@@ -18,14 +19,16 @@ internal func showAlert(message : String?, handler : ((UIAlertAction) -> Void)? 
     alert.addAction(UIAlertAction(title:  Constants.string.OK, style: .default, handler: handler))
     alert.view.tintColor = .primary
     return alert
+    
+    
 }
 
 
 //MARK:- Show Alert With Action
 
-internal func showAlert(message : String?, okHandler : ((UIAlertAction)->Void)?, fromView : UIViewController){
+ func showAlert(message : String?, okHandler : (()->Void)?, fromView : UIViewController){
     
-    let alert = UIAlertController(title: AppName,
+   /* let alert = UIAlertController(title: AppName,
                                   message: message,
         preferredStyle: .alert)
     let okAction = UIAlertAction(title: Constants.string.OK, style: .default, handler: okHandler)
@@ -34,8 +37,15 @@ internal func showAlert(message : String?, okHandler : ((UIAlertAction)->Void)?,
     
     alert.addAction(okAction)
     alert.addAction(cancelAction)
-    alert.view.tintColor = .primary
+    alert.view.tintColor = .primary */
     
+    let alert = PopupDialog(title: message, message: nil)
+    let okButton =  PopupDialogButton(title: Constants.string.OK.localize(), action: {
+        okHandler?()
+        alert.dismiss()
+    })
+    alert.transitionStyle = .zoomIn
+    alert.addButton(okButton)
     fromView.present(alert, animated: true, completion: nil)
     
 }

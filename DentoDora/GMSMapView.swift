@@ -55,7 +55,7 @@ extension GMSMapView {
                         self.drawPath(with: points)
                     }
                     
-                    print(route.routes?.first?.overview_polyline?.points)
+                   // print(route.routes?.first?.overview_polyline?.points)
                     
                 } catch let error {
                     
@@ -77,12 +77,16 @@ extension GMSMapView {
         
         DispatchQueue.main.async {
             
-            let path = GMSPath(fromEncodedPath: points)
+            guard let path = GMSPath(fromEncodedPath: points) else { return }
             let polyline = GMSPolyline(path: path)
             polyline.strokeWidth = 3.0
             polyline.strokeColor = .primary
             polyline.map = self
-            self.animate(toZoom: 12)
+            var bounds = GMSCoordinateBounds()
+            for index in 1...path.count() {
+                bounds = bounds.includingCoordinate(path.coordinate(at: index))
+            }
+            self.animate(with: .fit(bounds))
         }
         
     }

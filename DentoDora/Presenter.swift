@@ -60,7 +60,9 @@ extension Presenter : PostPresenterInputProtocol {
 //MARK:- Implementation PostPresenterOutputProtocol
 
 extension Presenter : PostPresenterOutputProtocol {
-
+    func sendUserData(api: Base, data: Data) {
+        controller?.getUserData(api: api, data: PresenterProcessor.shared.userData(data: data))
+    }
     
     func onError(api: Base, error: CustomError) {
         
@@ -75,6 +77,10 @@ extension Presenter : PostPresenterOutputProtocol {
     func sendProfile(api: Base, data: Data) {
         
         controller?.getProfile(api: api, data: PresenterProcessor.shared.profile(data: data))
+    }
+    
+    func sendSuccess(api: Base, data: Data) {
+        controller?.success(api: api, message: PresenterProcessor.shared.success(api: api, response: data))
     }
     
 }

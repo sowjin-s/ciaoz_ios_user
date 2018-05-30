@@ -131,7 +131,8 @@ protocol PostPresenterOutputProtocol : class {
     func onError(api : Base, error : CustomError)
     func sendOath(api : Base , data : Data)
     func sendProfile(api : Base, data : Data)
-    
+    func sendSuccess(api : Base, data : Data)
+    func sendUserData(api : Base, data : Data)
 }
 
 
@@ -144,6 +145,8 @@ protocol PostViewProtocol : class {
     func onError(api : Base, message : String, statusCode code : Int)
     func getOath(api : Base , data : LoginRequest?)
     func getProfile(api : Base, data : Profile?)
+    func success(api : Base, message : String?)
+    func getUserData(api : Base, data : UserDataResponse?)
     
 }
 
@@ -167,7 +170,8 @@ extension PostViewProtocol {
     
     func getOath(api : Base , data : LoginRequest?) { return }
     func getProfile(api : Base, data : Profile?) { return }
-    
+    func success(api : Base, message : String?) { return }
+    func getUserData(api : Base, data : UserDataResponse?) { return }
 }
 
 

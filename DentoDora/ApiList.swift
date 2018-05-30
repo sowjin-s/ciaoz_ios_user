@@ -41,6 +41,9 @@ enum Base : String{
     case login = "/oauth/token"
     case getProfile = "/api/user/details"
     case updateProfile = "/api/user/update/profile"
+    case resetPassword = "/api/user/reset/password"
+    case changePassword = "/api/user/change/password"
+    case forgotPassword = "/api/user/forgot/password"
     case googleMaps = "https://maps.googleapis.com/maps/api/geocode/json"
     
     init(fromRawValue: String){

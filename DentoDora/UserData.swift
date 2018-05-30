@@ -8,17 +8,45 @@
 
 import Foundation
 
-struct UserData : JSONSerializable {
+class UserData : UserBase {
+    
+    var id : Int?
+    var first_name : String?
+    var last_name : String?
+    var email : String?
+    var mobile : Int?
     
     var device_type : DeviceType?
     var device_token : String?
     var login_by : LoginType?
-    var email : String?
-    var mobile : Int?
     var password : String?
+    var old_password : String?
+    var password_confirmation : String?
     var social_unique_id : String?
-    var first_name : String?
-    var last_name : String?
     var device_id : String?
-
+    var otp : Int?
+  
 }
+
+class ForgotResponse : JSONSerializable {
+    
+    var user : UserDataResponse?
+}
+
+class UserDataResponse : JSONSerializable {
+    
+    var id : Int?
+    var email : String?
+    var device_type : DeviceType?
+    var device_token : String?
+    var login_by : LoginType?
+    var password : String?
+    var old_password : String?
+    var password_confirmation : String?
+    var social_unique_id : String?
+    var device_id : String?
+    var otp : Int?
+    
+}
+
+

@@ -12,6 +12,7 @@ class SideBarTableViewController: UITableViewController {
     
     @IBOutlet private var imageViewProfile : UIImageView!
     @IBOutlet private var labelName : UILabel!
+    @IBOutlet private var labelEmail : UILabel!
     @IBOutlet private var viewShadow : UIView!
     @IBOutlet private weak var profileImageCenterContraint : NSLayoutConstraint!
 
@@ -61,8 +62,8 @@ extension SideBarTableViewController {
         
        // self.drawerController?.fadeColor = UIColor
         self.drawerController?.shadowOpacity = 0.2
-        let fadeWidth = self.view.frame.width*(1/5)
-        self.profileImageCenterContraint.constant = -(fadeWidth/2)
+        let fadeWidth = self.view.frame.width*(0.2)
+        self.profileImageCenterContraint.constant = 0//-(fadeWidth/3)
         self.drawerController?.drawerWidth = Float(self.view.frame.width - fadeWidth)
         self.viewShadow.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.imageViewAction)))
        
@@ -89,7 +90,7 @@ extension SideBarTableViewController {
         }
         
         self.labelName.text = String.removeNil(User.main.firstName)+" "+String.removeNil(User.main.lastName)
-        
+        self.labelEmail.text = User.main.email
     }
     
     
@@ -106,8 +107,8 @@ extension SideBarTableViewController {
     @IBAction private func imageViewAction() {
         
         let homeVC = Router.user.instantiateViewController(withIdentifier: Storyboard.Ids.ProfileViewController)
-        
-        self.drawerController?.getViewController(for: .none)?.navigationController?.pushViewController(homeVC, animated: true)
+        (self.drawerController?.getViewController(for: .none) as? UINavigationController)?.pushViewController(homeVC, animated: true)
+        self.drawerController?.closeSide()
         
     }
     

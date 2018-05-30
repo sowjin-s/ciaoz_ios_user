@@ -28,6 +28,13 @@ class HomeViewController: UIViewController {
     @IBOutlet weak private var imageViewMarkerCenter : UIImageView!
     
     private var selectedLocationView = UIView() // View to change the location pinpoint
+    {
+        didSet{
+            if !([viewSourceLocation, viewDestinationLocation].contains(selectedLocationView)) {
+                [viewSourceLocation, viewDestinationLocation].forEach({ $0?.transform = .identity })
+            }
+        }
+    }
     
     private var isUserInteractingWithMap = false // Boolean to handle Mapview User interaction
     
@@ -204,9 +211,6 @@ extension HomeViewController {
             self.currentLocation.value = location
         })
         
-        self.sourceMarker.icon = #imageLiteral(resourceName: "destinationPin").resizeImage(newWidth: 30)
-        self.destinationMarker.icon = #imageLiteral(resourceName: "sourcePin").resizeImage(newWidth: 30)
-        
     }
     
     
@@ -268,10 +272,10 @@ extension HomeViewController {
         
         marker.position = coordinate
         marker.appearAnimation = .pop
+        marker.icon = marker == self.sourceMarker ? #imageLiteral(resourceName: "destinationPin").resizeImage(newWidth: 30) : #imageLiteral(resourceName: "sourcePin").resizeImage(newWidth: 30)
         marker.map = self.mapViewHelper?.mapView
         marker.map?.center = viewMapOuter.center
         self.mapViewHelper?.mapView?.animate(toLocation: coordinate)
-        
     }
     
     
@@ -285,14 +289,26 @@ extension HomeViewController {
                 
                 self.sourceLocationDetail = address.source
                 self.destinationLocationDetail = address.destination
+                self.drawPolyline()
                 
-               /* if let sourceCoordinate = self.sourceLocationDetail?.value?.coordinate, let destinationCoordinate = self.destinationLocationDetail?.coordinate {  // Draw polyline from source to destination
-                    self.mapViewHelper?.mapView?.drawPolygon(from: sourceCoordinate, to: destinationCoordinate)
-                }*/
             }
             self.view.addSubview(locationView)
             
             self.selectedLocationView.transform = .identity
+            self.selectedLocationView = UIView()
+        }
+        
+    }
+    
+    //MARK:- Draw Polyline
+    
+    private func drawPolyline() {
+        
+        if let sourceCoordinate = self.sourceLocationDetail?.value?.coordinate, let destinationCoordinate = self.destinationLocationDetail?.coordinate {  // Draw polyline from source to destination
+            self.mapViewHelper?.mapView?.clear()
+            self.selectionViewAction(in: self.viewSourceLocation)
+            self.selectionViewAction(in: self.viewDestinationLocation)
+            self.mapViewHelper?.mapView?.drawPolygon(from: sourceCoordinate, to: destinationCoordinate)
             self.selectedLocationView = UIView()
         }
         
@@ -388,6 +404,8 @@ extension HomeViewController : GMSMapViewDelegate {
         
         if self.isUserInteractingWithMap {
             self.isMapInteracted(false)
+            self.drawPolyline()
+
         }
     }
     
@@ -413,6 +431,7 @@ extension HomeViewController : GMSMapViewDelegate {
                 self.imageViewMarkerCenter.image = #imageLiteral(resourceName: "destinationPin")
                 self.imageViewMarkerCenter.isHidden = false
                 if let location = mapViewHelper?.mapView?.projection.coordinate(for: viewMapOuter.center) {
+                    self.sourceLocationDetail?.value?.coordinate = location
                     self.mapViewHelper?.getPlaceAddress(from: location, on: { (locationDetail) in
                         print(locationDetail)
                         self.sourceLocationDetail?.value = locationDetail
@@ -427,6 +446,7 @@ extension HomeViewController : GMSMapViewDelegate {
                 self.imageViewMarkerCenter.image = #imageLiteral(resourceName: "sourcePin")
                 self.imageViewMarkerCenter.isHidden = false
                 if let location = mapViewHelper?.mapView?.projection.coordinate(for: viewMapOuter.center) {
+                    self.destinationLocationDetail?.coordinate = location
                     self.mapViewHelper?.getPlaceAddress(from: location, on: { (locationDetail) in
                         print(locationDetail)
                         self.destinationLocationDetail = locationDetail

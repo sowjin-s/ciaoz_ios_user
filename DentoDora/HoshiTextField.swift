@@ -17,7 +17,7 @@ open class HoshiTextField: TextFieldEffects {
      
      This property applies a color to the lower edge of the control. The default value for this property is a clear color.
      */
-    @IBInspectable dynamic open var borderInactiveColor: UIColor? {
+    @IBInspectable dynamic open var borderInactiveColor: UIColor? = .lightGray{
         didSet {
             updateBorder()
         }
@@ -28,7 +28,7 @@ open class HoshiTextField: TextFieldEffects {
      
      This property applies a color to the lower edge of the control. The default value for this property is a clear color.
      */
-    @IBInspectable dynamic open var borderActiveColor: UIColor? {
+    @IBInspectable dynamic open var borderActiveColor: UIColor?  = .primary{
         didSet {
             updateBorder()
         }
