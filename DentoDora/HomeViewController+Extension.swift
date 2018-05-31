@@ -27,13 +27,15 @@ extension HomeViewController {
             self.serviceSelectionView?.show(with: .bottom, completion: nil)
             self.view.addSubview(self.serviceSelectionView!)
             
-        }
-        self.serviceSelectionView?.onClickPricing = { selectedItem in
-            if source.count > selectedItem, let id = source[selectedItem].id {
-                self.getEstimateFareFor(serviceId: id)
+            self.serviceSelectionView?.onClickPricing = { selectedItem in
+                if let id = selectedItem?.id {
+                    self.service = selectedItem
+                    self.getEstimateFareFor(serviceId: id)
+                }
+                self.removeServiceView()
             }
-            self.removeServiceView()
         }
+        
         self.serviceSelectionView?.set(source: source)
     }
     
@@ -48,7 +50,7 @@ extension HomeViewController {
     // MARK:- Remove Service View  
     
     func removeServiceView() {
-    
+        
         self.serviceSelectionView?.dismissView(onCompletion: {
             self.serviceSelectionView = nil
         })
@@ -58,14 +60,14 @@ extension HomeViewController {
     // MARK:- Temporarily Hide Service View
     
     func isMapInteracted(_ isHide : Bool){
-       
+        
         UIView.animate(withDuration: 0.2) {
             
             self.serviceSelectionView?.frame.origin.y = (self.view.frame.height-(isHide ? 0 : self.serviceSelectionView?.frame.height ?? 0))
             self.rideSelectionView?.frame.origin.y = (self.view.frame.height-(isHide ? 0 : self.rideSelectionView?.frame.height ?? 0))
             self.rideStatusView?.frame.origin.y = (self.view.frame.height-(isHide ? 0 : self.rideStatusView?.frame.height ?? 0))
-             self.invoiceView?.frame.origin.y = (self.view.frame.height-(isHide ? 0 : self.invoiceView?.frame.height ?? 0))
-             self.ratingView?.frame.origin.y = (self.view.frame.height-(isHide ? 0 : self.ratingView?.frame.height ?? 0))
+            self.invoiceView?.frame.origin.y = (self.view.frame.height-(isHide ? 0 : self.invoiceView?.frame.height ?? 0))
+            self.ratingView?.frame.origin.y = (self.view.frame.height-(isHide ? 0 : self.ratingView?.frame.height ?? 0))
             
             self.serviceSelectionView?.alpha = isHide ? 0 : 1
             self.viewAddressOuter.alpha = isHide ? 0 : 1
@@ -75,7 +77,7 @@ extension HomeViewController {
             self.ratingView?.alpha = isHide ? 0 : 1
             
         }
-       
+        
     }
     
     
@@ -83,23 +85,29 @@ extension HomeViewController {
     
     func showRideNowView(with fare : EstimateFare){
         
-        guard self.rideSelectionView == nil  else { return }
+        if self.rideSelectionView == nil {
+            self.viewAddressOuter.isHidden = true
+            self.rideSelectionView = Bundle.main.loadNibNamed(XIB.Names.RequestSelectionView, owner: self, options: [:])?.first as? RequestSelectionView
+            self.rideSelectionView?.frame = CGRect(x: 0, y: self.view.frame.height-self.rideSelectionView!.bounds.height, width: self.view.frame.width, height: self.rideSelectionView!.frame.height)
+            self.rideSelectionView?.show(with: .bottom, completion: nil)
+            self.rideSelectionView?.rideNowAction = { estimateFare in
+                self.removeRideNowView()
+                if estimateFare != nil {
+                    self.createRequest(for: estimateFare!, isScheduled: false, scheduleDate: nil)
+                }
+            }
+            self.rideSelectionView?.scheduleAction = { estimateFare in
+                self.schedulePickerView(on: { (date) in
+                    print(date)
+                    if estimateFare != nil {
+                        self.createRequest(for: estimateFare!, isScheduled: true, scheduleDate: date)
+                    }
+                })
+            }
+            self.view.addSubview(self.rideSelectionView!)
+        }
         
-        self.rideSelectionView = Bundle.main.loadNibNamed(XIB.Names.RequestSelectionView, owner: self, options: [:])?.first as? RequestSelectionView
-        self.rideSelectionView?.frame = CGRect(x: 0, y: self.view.frame.height-self.rideSelectionView!.bounds.height, width: self.view.frame.width, height: self.rideSelectionView!.frame.height)
-        self.rideSelectionView?.show(with: .bottom, completion: nil)
         self.rideSelectionView?.setValues(values: fare)
-        self.rideSelectionView?.rideNowAction = {
-            self.removeRideNowView()
-            self.showLoaderView()
-        }
-        
-        self.rideSelectionView?.scheduleAction = {
-            self.schedulePickerView(on: { (date) in
-                print(date)
-            })
-        }
-        self.view.addSubview(self.rideSelectionView!)
         
     }
     
@@ -110,13 +118,14 @@ extension HomeViewController {
         
         self.rideSelectionView?.dismissView(onCompletion: {
             self.rideSelectionView = nil
+            self.viewAddressOuter.isHidden = false
         })
     }
     
     
     // MARK:- Show RideStatus View
     
-     func showRideStatusView() {
+    func showRideStatusView() {
         
         guard self.rideStatusView == nil else { return }
         

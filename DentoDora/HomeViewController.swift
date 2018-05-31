@@ -87,10 +87,14 @@ class HomeViewController: UIViewController {
         return createActivityIndicator(self.view)
     }()
     
+    var currentRequestId = 0
+    
     //MARKERS
     
     private var sourceMarker = GMSMarker()
     private var destinationMarker = GMSMarker()
+    
+    var service : Service?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -163,12 +167,11 @@ extension HomeViewController {
         if let singleView = Bundle.main.loadNibNamed(XIB.Names.LoaderView, owner: self, options: [:])?.first as? LoaderView {
             singleView.frame = self.viewMapOuter.bounds
             self.requestLoaderView = singleView
-            DispatchQueue.main.asyncAfter(deadline: .now()+5) {
-                self.requestLoaderView?.endLoader()
-            }
-            
             self.requestLoaderView?.onCancel = {
                 self.requestLoaderView = nil
+                var request = Request()
+                request.request_id = self.currentRequestId
+                self.presenter?.post(api: .cancelRequest, data: request.toData())
             }
             self.viewMapOuter.addSubview(singleView)
         }
@@ -180,6 +183,14 @@ extension HomeViewController {
         } else {
             self.removeServiceView()
         }  */
+        
+    }
+    
+    //MARK:- Remove Loader View
+    
+    func removeLoaderView() {
+        
+        self.requestLoaderView?.endLoader()
         
     }
     
@@ -523,7 +534,7 @@ extension HomeViewController  {
     
     func getEstimateFareFor(serviceId : Int) {
         
-        DispatchQueue.global(qos: .default).async {
+        DispatchQueue.global(qos: .userInteractive).async {
             
             var estimateFare = EstimateFareRequest()
             guard let sourceLocation = self.sourceLocationDetail?.value?.coordinate, let destinationLocation = self.destinationLocationDetail?.coordinate else {
@@ -556,7 +567,37 @@ extension HomeViewController  {
         
     }
     
+    // Create Request
     
+    func createRequest(for fare : EstimateFare, isScheduled : Bool, scheduleDate : Date?) {
+       
+        self.showLoaderView()
+        DispatchQueue.global(qos: .background).async {
+            
+            var request = Request()
+            request.d_address = self.destinationLocationDetail?.address
+            request.d_latitude = self.destinationLocationDetail?.coordinate.latitude
+            request.d_longitude = self.destinationLocationDetail?.coordinate.longitude
+            request.s_address = self.sourceLocationDetail?.value?.address
+            request.s_latitude = self.sourceLocationDetail?.value?.coordinate.latitude
+            request.s_longitude = self.sourceLocationDetail?.value?.coordinate.longitude
+            request.service_type = self.service?.id
+            request.payment_mode = .cash
+            request.distance = "\(fare.distance ?? 0)"
+            request.use_wallet = fare.useWallet
+            
+            if isScheduled {
+                if let dateString = Formatter.shared.getString(from: scheduleDate, format: DateFormat.list.ddMMyyyyhhmma) {
+                    
+                    let dateArray = dateString.components(separatedBy: "")
+                    request.schedule_date = dateArray.first
+                    request.schedule_time = dateArray.last
+                }
+            }
+            self.presenter?.post(api: .sendRequest, data: request.toData())
+            
+        }
+    }
 }
 
 
@@ -565,7 +606,8 @@ extension HomeViewController : PostViewProtocol {
     func onError(api: Base, message: String, statusCode code: Int) {
         
         DispatchQueue.main.async {
-            self.loader.isHidden = true
+             self.loader.isHidden = true
+             self.removeLoaderView()
              showAlert(message: message, okHandler: nil, fromView: self)
         }
     }
@@ -590,9 +632,18 @@ extension HomeViewController : PostViewProtocol {
        
         if data != nil {
             DispatchQueue.main.async {
-                self.showRideNowView(with: data!)
+                var estimateFare = data
+                estimateFare?.model = self.service?.name
+                self.showRideNowView(with: estimateFare!)
             }
         }
+    }
+    
+    func getRequest(api: Base, data: Request?) {
+        
+        print(data?.request_id ?? 0)
+        self.currentRequestId = data?.request_id ?? 0
+        
     }
     
 }

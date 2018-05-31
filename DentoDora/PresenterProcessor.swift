@@ -45,6 +45,11 @@ class PresenterProcessor {
         return data.getDecodedObject(from: EstimateFare.self)
     }
     
+    //MARK:- Send Request
+    func request(data : Data)->Request?{
+        return data.getDecodedObject(from: Request.self)
+    }
+    
 }
 
 

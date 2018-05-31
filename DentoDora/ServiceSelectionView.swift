@@ -26,10 +26,10 @@ class ServiceSelectionView: UIView {
     }
     
     private var datasource = [Service]()
-    var onClickPricing : ((_ selectedIndex : Int)->Void)? // Get Pricing List
+    var onClickPricing : ((_ selectedItem : Service?)->Void)? // Get Pricing List
     var onClickChangePayment : (()->Void)? // Onlclick Change Pricing
     
-    private var selectedItem = 0 // Current Selected Item
+    private var selectedItem : Service? // Current Selected Item
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -80,8 +80,9 @@ extension ServiceSelectionView {
         
         self.datasource = source
         self.collectionViewService.reloadData()
-        self.collectionViewService.selectItem(at: IndexPath(item: selectedItem, section: 0), animated: true, scrollPosition: .top)
-
+        self.collectionViewService.selectItem(at: IndexPath(item: 0, section: 0), animated: true, scrollPosition: .top)
+        self.selectedItem = source.first
+        self.collectionViewService.cellForItem(at: IndexPath(item: 0, section: 0))?.isSelected = true
     }
     
     @IBAction private func onClickGetPricing() {
@@ -108,7 +109,9 @@ extension ServiceSelectionView : UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        self.selectedItem = indexPath.row
+        if datasource.count>indexPath.row {
+            self.selectedItem = self.datasource[indexPath.row]
+        }
         
     }
     
@@ -121,7 +124,6 @@ extension ServiceSelectionView : UICollectionViewDelegate, UICollectionViewDataS
     private func getCellFor(itemAt indexPath : IndexPath)->UICollectionViewCell{
         
         if let collectionCell = self.collectionViewService.dequeueReusableCell(withReuseIdentifier: XIB.Names.ServiceSelectionCollectionViewCell, for: indexPath) as? ServiceSelectionCollectionViewCell {
-            
             if datasource.count > indexPath.row {
                 collectionCell.set(value: datasource[indexPath.row])
             }

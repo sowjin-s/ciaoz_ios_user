@@ -33,7 +33,7 @@ class ServiceSelectionCollectionViewCell: UICollectionViewCell {
         buttonService.setTitle(value.name, for: .normal)
         Cache.image(forUrl: value.image) { (image) in
                 DispatchQueue.main.async {
-                    self.imageViewService.image = image == nil ? #imageLiteral(resourceName: "walkthrough1") : image
+                    self.imageViewService.image = image == nil ? #imageLiteral(resourceName: "sedan-car-model") : image
                 }
         }
         
@@ -53,7 +53,7 @@ class ServiceSelectionCollectionViewCell: UICollectionViewCell {
 private extension ServiceSelectionCollectionViewCell {
     
     private func initialLoads(){
-        self.imageViewService.image = #imageLiteral(resourceName: "walkthrough1")
+        self.imageViewService.image = #imageLiteral(resourceName: "sedan-car-model")
         
         //self.initialFrame = self.imageViewService.frame.size
     }

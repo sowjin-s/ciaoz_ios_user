@@ -60,6 +60,9 @@ extension Interactor : PostInteractorOutputProtocol {
             
         case .estimateFare:
             self.presenter?.sendEstimateFare(api: api, data: response)
+        
+        case .sendRequest:
+            self.presenter?.sendRequest(api: api, data: response)
             
         default :
             break

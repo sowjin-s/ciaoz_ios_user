@@ -96,6 +96,7 @@
 		088185C320A4688200F07AFF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 088185C220A4688200F07AFF /* GoogleService-Info.plist */; };
 		088B5D382022163700D5342C /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088B5D372022163700D5342C /* Reachability.swift */; };
 		088DC901200FCCA00095D552 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088DC900200FCCA00095D552 /* ViewExtension.swift */; };
+		089B4F7520C03A0300DDEAF3 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B4F7420C03A0300DDEAF3 /* Request.swift */; };
 		08A39DA020B5BB8100314935 /* RideStatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08A39D9F20B5BB8100314935 /* RideStatusView.xib */; };
 		08A39DA220B5BB9300314935 /* RideStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A39DA120B5BB9300314935 /* RideStatusView.swift */; };
 		08B73D0420947C5C00B60F74 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B73D0320947C5C00B60F74 /* PasswordViewController.swift */; };
@@ -269,6 +270,7 @@
 		088185C220A4688200F07AFF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		088B5D372022163700D5342C /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		088DC900200FCCA00095D552 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
+		089B4F7420C03A0300DDEAF3 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		08A39D9F20B5BB8100314935 /* RideStatusView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RideStatusView.xib; sourceTree = "<group>"; };
 		08A39DA120B5BB9300314935 /* RideStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideStatusView.swift; sourceTree = "<group>"; };
 		08B73D0320947C5C00B60F74 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
@@ -1236,6 +1238,7 @@
 				08BF24BF20BD864C003A4B96 /* Default.swift */,
 				081E9CF420BFCC0E004C6884 /* Service.swift */,
 				081E9CFA20BFFB88004C6884 /* EstimateFare.swift */,
+				089B4F7420C03A0300DDEAF3 /* Request.swift */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -1642,6 +1645,7 @@
 				08F595E92076466300369048 /* UIScrollView+ParallaxHeader.swift in Sources */,
 				08001A07203BFF8B0076D324 /* Bind.swift in Sources */,
 				08ECB216200DD0220008BF27 /* NavigationBar.swift in Sources */,
+				089B4F7520C03A0300DDEAF3 /* Request.swift in Sources */,
 				8894801D1FECE1BD006AF5A9 /* Int.swift in Sources */,
 				083A59B520A454F800D64574 /* GooglePlacesHelper.swift in Sources */,
 				0802718720A2DBE200EAE8C8 /* LocationSelectionView.swift in Sources */,

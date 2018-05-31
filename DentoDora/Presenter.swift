@@ -92,6 +92,10 @@ extension Presenter : PostPresenterOutputProtocol {
         controller?.getEstimateFare(api: api, data: PresenterProcessor.shared.estimateFare(data: data))
     }
     
+    func sendRequest(api: Base, data: Data) {
+        controller?.getRequest(api: api, data: PresenterProcessor.shared.request(data: data))
+    }
+    
 }
 
 

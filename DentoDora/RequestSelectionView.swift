@@ -26,6 +26,9 @@ class RequestSelectionView: UIView {
     @IBOutlet private weak var buttonRideNow : UIButton!
     @IBOutlet private weak var viewUseWallet : UIView!
     
+    @IBOutlet private weak var labelDistanceString : UILabel!
+    @IBOutlet private weak var labelDistance : UILabel!
+    
     private var isHideSurge = false {
         didSet {
             constraintSurgeViewHeight.constant = isHideSurge ? 0 : 30
@@ -33,14 +36,17 @@ class RequestSelectionView: UIView {
         }
     }
     
-    var scheduleAction : (()->())?
-    var rideNowAction : (()->())?
+    var scheduleAction : ((EstimateFare?)->())?
+    var rideNowAction : ((EstimateFare?)->())?
     
     var isWalletChecked = false {  // Handle Wallet
         didSet {
             self.imageViewWallet.image = isWalletChecked ? #imageLiteral(resourceName: "check") : #imageLiteral(resourceName: "check-box-empty")
+            self.estimateFare?.useWallet = isWalletChecked.hashValue
         }
     }
+    
+    private var estimateFare : EstimateFare?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -76,29 +82,34 @@ extension RequestSelectionView {
         self.buttonScheduleRide.setTitle(Constants.string.scheduleRide.localize().uppercased(), for: .normal)
         self.buttonRideNow.setTitle(Constants.string.rideNow.localize().uppercased(), for: .normal)
         self.viewUseWallet.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.useWalletAction)))
+        self.labelDistanceString.text = Constants.string.totalDistance.localize()
     }
     
     
     func setValues(values : EstimateFare?) {
        
+        self.isHideSurge = values?.surge == false.hashValue
         self.labelSurge.text = values?.surge_value
-        self.labelETA.text = "\(values?.distance ?? 0) \(distanceType.localize())"
+        self.labelDistance.text = "\(values?.distance ?? 0) \(distanceType.localize())"
         self.labelEstimation.text = "\(String.removeNil(User.main.currency)) \(values?.estimated_fare ?? 0)"
         self.labelModel.text = values?.model
-        
+        self.labelETA.text = values?.time
+        self.viewUseWallet.isHidden = (values?.wallet_balance == 0)
+        self.estimateFare = values
     }
     
     
     @IBAction private func buttonScheduleAction(){
-        self.scheduleAction?()
+        self.scheduleAction?(self.estimateFare)
     }
     
     @IBAction private func buttonRideNowAction(){
-        self.rideNowAction?()
+        self.rideNowAction?(self.estimateFare)
     }
     
     @IBAction private func useWalletAction(){
         self.isWalletChecked = !isWalletChecked
+        
     }
     
     

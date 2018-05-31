@@ -15,7 +15,9 @@ struct EstimateFare : JSONSerializable {
     var time : String?
     var surge_value : String?
     var model :String?
-    var surge
+    var surge :Int?
+    var wallet_balance : Int?
+    var useWallet : Int?
 }
 
 

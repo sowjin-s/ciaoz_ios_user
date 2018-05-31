@@ -135,6 +135,7 @@ protocol PostPresenterOutputProtocol : class {
     func sendUserData(api : Base, data : Data)
     func sendServicesList(api : Base, data : Data)
     func sendEstimateFare(api : Base, data : Data)
+    func sendRequest(api : Base, data : Data)
 }
 
 
@@ -151,6 +152,7 @@ protocol PostViewProtocol : class {
     func getUserData(api : Base, data : UserDataResponse?)
     func getServiceList(api : Base, data : [Service])
     func getEstimateFare(api : Base, data : EstimateFare?)
+    func getRequest(api : Base, data : Request?)
 }
 
 
@@ -177,6 +179,8 @@ extension PostViewProtocol {
     func getUserData(api : Base, data : UserDataResponse?) { return }
     func getServiceList(api : Base, data : [Service]) { return }
     func getEstimateFare(api : Base, data : EstimateFare?) { return }
+    func getRequest(api : Base, data : Request?) { return }
+
 }
 
 

@@ -143,6 +143,7 @@ struct Constants {
     let resetPasswordDescription = "Note : Please enter the OTP send to your registered email address"
     let latitude = "latitude"
     let longitude = "longitude"
+    let totalDistance = "Total Distance"
 }
 
 //Defaults Keys
@@ -172,10 +173,10 @@ enum TripType : String, Codable {
 
 //Payment Type
 
-enum  PaymentType : String {
+enum  PaymentType : String, Codable {
     
-    case cash
-    case card
+    case cash = "CASH"
+    case card = "CARD"
     
 }
 
@@ -188,6 +189,7 @@ struct DateFormat {
     let yyyy_mm_dd_HH_MM_ss = "yyyy-MM-dd HH:mm:ss"
     let MMM_dd_yyyy_hh_mm_ss_a = "MMM dd, yyyy hh:mm:ss a"
     let hhmmddMMMyyyy = "hh:mm a - dd:MMM:yyyy"
+    let ddMMyyyyhhmma = "dd-MM-yyyy hh:mma"
 }
 
 
