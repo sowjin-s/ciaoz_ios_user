@@ -18,5 +18,6 @@ class Profile : JSONSerializable {
     var picture : String?
     var device_token : String?
     var access_token : String?
+    var currency : String?
 }
 

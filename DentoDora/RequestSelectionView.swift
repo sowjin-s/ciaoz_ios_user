@@ -79,6 +79,16 @@ extension RequestSelectionView {
     }
     
     
+    func setValues(values : EstimateFare?) {
+       
+        self.labelSurge.text = values?.surge_value
+        self.labelETA.text = "\(values?.distance ?? 0) \(distanceType.localize())"
+        self.labelEstimation.text = "\(String.removeNil(User.main.currency)) \(values?.estimated_fare ?? 0)"
+        self.labelModel.text = values?.model
+        
+    }
+    
+    
     @IBAction private func buttonScheduleAction(){
         self.scheduleAction?()
     }

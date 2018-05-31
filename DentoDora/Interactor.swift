@@ -54,6 +54,13 @@ extension Interactor : PostInteractorOutputProtocol {
             
         case .forgotPassword:
             self.presenter?.sendUserData(api: api, data: response)
+        
+        case .servicesList, .getProviders:
+            self.presenter?.sendServicesList(api: api, data: response)
+            
+        case .estimateFare:
+            self.presenter?.sendEstimateFare(api: api, data: response)
+            
         default :
             break
             

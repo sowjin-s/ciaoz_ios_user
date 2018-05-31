@@ -27,6 +27,10 @@
 		08147B81208A23F600C5CFD3 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08147B80208A23F600C5CFD3 /* Bundle.swift */; };
 		081548FC20A1DEA2004D0F7D /* heart.json in Resources */ = {isa = PBXBuildFile; fileRef = 081548FB20A1DEA2004D0F7D /* heart.json */; };
 		081548FE20A1DF66004D0F7D /* LottieHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081548FD20A1DF66004D0F7D /* LottieHelper.swift */; };
+		081E9CF520BFCC0E004C6884 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081E9CF420BFCC0E004C6884 /* Service.swift */; };
+		081E9CF920BFFB6C004C6884 /* EstimateFareRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081E9CF820BFFB6C004C6884 /* EstimateFareRequest.swift */; };
+		081E9CFB20BFFB88004C6884 /* EstimateFare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081E9CFA20BFFB88004C6884 /* EstimateFare.swift */; };
+		081E9CFD20BFFE57004C6884 /* suv.json in Resources */ = {isa = PBXBuildFile; fileRef = 081E9CFC20BFFE57004C6884 /* suv.json */; };
 		0823428820AD774C0055DDF8 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0823428720AD774C0055DDF8 /* LoaderView.swift */; };
 		0823428A20AD775A0055DDF8 /* LoaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0823428920AD775A0055DDF8 /* LoaderView.xib */; };
 		0823428C20AD7AB80055DDF8 /* bouncy_mapmaker.json in Resources */ = {isa = PBXBuildFile; fileRef = 0823428B20AD7AB70055DDF8 /* bouncy_mapmaker.json */; };
@@ -196,6 +200,10 @@
 		08147B80208A23F600C5CFD3 /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		081548FB20A1DEA2004D0F7D /* heart.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = heart.json; sourceTree = "<group>"; };
 		081548FD20A1DF66004D0F7D /* LottieHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieHelper.swift; sourceTree = "<group>"; };
+		081E9CF420BFCC0E004C6884 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		081E9CF820BFFB6C004C6884 /* EstimateFareRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EstimateFareRequest.swift; sourceTree = "<group>"; };
+		081E9CFA20BFFB88004C6884 /* EstimateFare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimateFare.swift; sourceTree = "<group>"; };
+		081E9CFC20BFFE57004C6884 /* suv.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = suv.json; sourceTree = "<group>"; };
 		0823428720AD774C0055DDF8 /* LoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
 		0823428920AD775A0055DDF8 /* LoaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoaderView.xib; sourceTree = "<group>"; };
 		0823428B20AD7AB70055DDF8 /* bouncy_mapmaker.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bouncy_mapmaker.json; sourceTree = "<group>"; };
@@ -393,6 +401,7 @@
 		081548FA20A1DE67004D0F7D /* Animation */ = {
 			isa = PBXGroup;
 			children = (
+				081E9CFC20BFFE57004C6884 /* suv.json */,
 				081548FB20A1DEA2004D0F7D /* heart.json */,
 				0823428B20AD7AB70055DDF8 /* bouncy_mapmaker.json */,
 				08641D8D20A1B2AD00AA0D1F /* Circular Transition */,
@@ -1216,6 +1225,7 @@
 		8894E2571FE7D87B0097B4B3 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				081E9CF820BFFB6C004C6884 /* EstimateFareRequest.swift */,
 				082D1B8420931B3D0000B7C8 /* Country.swift */,
 				082D1B8220931AB70000B7C8 /* ErrorLog.swift */,
 				082D1B80209318C30000B7C8 /* User.swift */,
@@ -1224,6 +1234,8 @@
 				0809321920A08E0200B88318 /* Profile.swift */,
 				08BF24BD20BD80AE003A4B96 /* UserBase.swift */,
 				08BF24BF20BD864C003A4B96 /* Default.swift */,
+				081E9CF420BFCC0E004C6884 /* Service.swift */,
+				081E9CFA20BFFB88004C6884 /* EstimateFare.swift */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -1429,6 +1441,7 @@
 				086C901F209A05EA002CD9B1 /* ClanPro-News.otf in Resources */,
 				8894E22B1FE7D7980097B4B3 /* Assets.xcassets in Resources */,
 				083A59AB20A434E000D64574 /* LocationTableViewCell.xib in Resources */,
+				081E9CFD20BFFE57004C6884 /* suv.json in Resources */,
 				0823428A20AD775A0055DDF8 /* LoaderView.xib in Resources */,
 				082F77CD20A5A13900D6474B /* ServiceSelectionView.xib in Resources */,
 				083617BD20B6C756009C9658 /* RatingView.xib in Resources */,
@@ -1640,6 +1653,7 @@
 				08F2B6B920123D2000CAB24E /* Cache.swift in Sources */,
 				0809321820A067EF00B88318 /* LoginRequest.swift in Sources */,
 				08B73D0420947C5C00B60F74 /* PasswordViewController.swift in Sources */,
+				081E9CF520BFCC0E004C6884 /* Service.swift in Sources */,
 				8871FBD51FE7DC8E002335D5 /* Protocol.swift in Sources */,
 				083A59AA20A434E000D64574 /* LocationTableViewCell.swift in Sources */,
 				0826C13820B011DC0005D0D8 /* RequestSelectionView.swift in Sources */,
@@ -1652,6 +1666,8 @@
 				086606E62005144400A79566 /* ImageView.swift in Sources */,
 				083617C320B70D7F009C9658 /* YourTripsPassbookViewController.swift in Sources */,
 				083617B320B6943A009C9658 /* FloatRatingView.swift in Sources */,
+				081E9CF920BFFB6C004C6884 /* EstimateFareRequest.swift in Sources */,
+				081E9CFB20BFFB88004C6884 /* EstimateFare.swift in Sources */,
 				08A39DA220B5BB9300314935 /* RideStatusView.swift in Sources */,
 				08147B81208A23F600C5CFD3 /* Bundle.swift in Sources */,
 				8871FBD81FE7DD72002335D5 /* Constants.swift in Sources */,

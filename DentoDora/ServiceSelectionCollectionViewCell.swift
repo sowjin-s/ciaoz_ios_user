@@ -28,6 +28,17 @@ class ServiceSelectionCollectionViewCell: UICollectionViewCell {
         }
     }
 
+    func set(value : Service) {
+        
+        buttonService.setTitle(value.name, for: .normal)
+        Cache.image(forUrl: value.image) { (image) in
+                DispatchQueue.main.async {
+                    self.imageViewService.image = image == nil ? #imageLiteral(resourceName: "walkthrough1") : image
+                }
+        }
+        
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.initialLoads()
@@ -43,6 +54,7 @@ private extension ServiceSelectionCollectionViewCell {
     
     private func initialLoads(){
         self.imageViewService.image = #imageLiteral(resourceName: "walkthrough1")
+        
         //self.initialFrame = self.imageViewService.frame.size
     }
 }

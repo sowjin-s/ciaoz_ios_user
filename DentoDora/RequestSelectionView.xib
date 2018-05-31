@@ -282,9 +282,9 @@
                 <outlet property="constraintSurgeViewHeight" destination="n9E-PR-r0a" id="KHf-D8-Ee6"/>
                 <outlet property="imageViewWallet" destination="hHJ-Bn-99j" id="DjH-Ao-RGW"/>
                 <outlet property="labelETA" destination="xIY-zQ-EuH" id="ufx-cY-h7F"/>
-                <outlet property="labelETAString" destination="Q0e-nA-8OU" id="lef-wg-Otj"/>
+                <outlet property="labelETAString" destination="zmy-CB-eUg" id="hPs-Yy-OlU"/>
                 <outlet property="labelEstimation" destination="2A6-q7-Mp5" id="8tR-aY-3Nz"/>
-                <outlet property="labelEstimationString" destination="Zll-Nh-itj" id="13q-P3-f2L"/>
+                <outlet property="labelEstimationString" destination="Q0e-nA-8OU" id="557-Le-LaD"/>
                 <outlet property="labelModel" destination="5KW-M6-dbG" id="a7p-nx-8Xv"/>
                 <outlet property="labelModelString" destination="Zll-Nh-itj" id="GQJ-HR-8aa"/>
                 <outlet property="labelSurge" destination="8ZT-ax-wt5" id="are-c9-U4s"/>

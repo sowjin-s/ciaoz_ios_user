@@ -39,7 +39,7 @@ class HomeViewController: UIViewController {
     private var isUserInteractingWithMap = false // Boolean to handle Mapview User interaction
     
     private let transition = CircularTransition()  // Translation to for location Tap
-    private var mapViewHelper : GoogleMapsHelper?
+    var mapViewHelper : GoogleMapsHelper?
     private var favouriteViewSource : LottieView?
     private var favouriteViewDestination : LottieView?
     
@@ -81,6 +81,11 @@ class HomeViewController: UIViewController {
     var rideStatusView : RideStatusView?
     var invoiceView : InvoiceView?
     var ratingView : RatingView?
+    
+    
+    lazy var loader  : UIView = {
+        return createActivityIndicator(self.view)
+    }()
     
     //MARKERS
     
@@ -206,6 +211,7 @@ extension HomeViewController {
             if self.sourceLocationDetail?.value == nil {
                 self.mapViewHelper?.getPlaceAddress(from: location, on: { (locationDetail) in
                     self.sourceLocationDetail?.value = locationDetail
+                    self.getProviderInCurrentLocation()
                 })
             }
             self.currentLocation.value = location
@@ -289,8 +295,8 @@ extension HomeViewController {
                 
                 self.sourceLocationDetail = address.source
                 self.destinationLocationDetail = address.destination
-                self.drawPolyline()
-                
+                self.drawPolyline() // Draw polyline between source and destination
+                self.getServicesList() // get Services
             }
             self.view.addSubview(locationView)
             
@@ -404,8 +410,9 @@ extension HomeViewController : GMSMapViewDelegate {
         
         if self.isUserInteractingWithMap {
             self.isMapInteracted(false)
-            self.drawPolyline()
-
+            if [self.viewSourceLocation, self.viewDestinationLocation].contains(selectedLocationView) {
+                self.drawPolyline()
+            }
         }
     }
     
@@ -414,19 +421,21 @@ extension HomeViewController : GMSMapViewDelegate {
         print("Gesture ",gesture)
         self.isUserInteractingWithMap = gesture
         
+        if self.isUserInteractingWithMap {
+            self.isMapInteracted(true)
+        }
+        
     }
     
     func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
         
         print(#function)
-        
-        if self.isUserInteractingWithMap {
-            self.isMapInteracted(true)
-        }
+       // return
         
         if isUserInteractingWithMap {
             
-            if self.selectedLocationView == self.viewSourceLocation {
+            if self.selectedLocationView == self.viewSourceLocation, self.sourceLocationDetail != nil {
+                
                 self.sourceMarker.map = nil
                 self.imageViewMarkerCenter.image = #imageLiteral(resourceName: "destinationPin")
                 self.imageViewMarkerCenter.isHidden = false
@@ -441,7 +450,8 @@ extension HomeViewController : GMSMapViewDelegate {
                 }
                 
                 
-            } else if self.selectedLocationView == self.viewDestinationLocation {
+            } else if self.selectedLocationView == self.viewDestinationLocation, self.destinationLocationDetail != nil {
+                
                 self.destinationMarker.map = nil
                 self.imageViewMarkerCenter.image = #imageLiteral(resourceName: "sourcePin")
                 self.imageViewMarkerCenter.isHidden = false
@@ -454,7 +464,8 @@ extension HomeViewController : GMSMapViewDelegate {
                 }
             }
             
-        } else {
+        }
+        else {
             self.destinationMarker.map = self.mapViewHelper?.mapView
             self.sourceMarker.map = self.mapViewHelper?.mapView
             self.imageViewMarkerCenter.isHidden = true
@@ -496,6 +507,95 @@ extension HomeViewController : UIViewControllerTransitioningDelegate {
 }
 
 
+// MARK:- Service Calls
+
+extension HomeViewController  {
+    
+    // Get Services provided by Provider 
+    
+    private func getServicesList() {
+        
+        self.presenter?.get(api: .servicesList, parameters: nil)
+        
+    }
+    
+    // Get Estimate Fare
+    
+    func getEstimateFareFor(serviceId : Int) {
+        
+        DispatchQueue.global(qos: .default).async {
+            
+            var estimateFare = EstimateFareRequest()
+            guard let sourceLocation = self.sourceLocationDetail?.value?.coordinate, let destinationLocation = self.destinationLocationDetail?.coordinate else {
+                return
+            }
+            estimateFare.s_latitude = sourceLocation.latitude
+            estimateFare.s_longitude = sourceLocation.longitude
+            estimateFare.d_latitude = destinationLocation.latitude
+            estimateFare.d_longitude = destinationLocation.longitude
+            estimateFare.service_type = serviceId
+            
+            self.presenter?.get(api: .estimateFare, parameters: estimateFare.JSONRepresentation)
+            
+        }
+    }
+    
+    // Get Providers In Current Location
+    
+    private func getProviderInCurrentLocation(){
+        
+        DispatchQueue.global(qos: .background).async {
+            
+            guard let currentLoc = self.currentLocation.value  else { return }
+            
+            let json = [Constants.string.latitude : currentLoc.latitude, Constants.string.longitude : currentLoc.longitude]
+            
+            self.presenter?.get(api: .getProviders, parameters: json)
+            
+        }
+        
+    }
+    
+    
+}
+
+
+extension HomeViewController : PostViewProtocol {
+    
+    func onError(api: Base, message: String, statusCode code: Int) {
+        
+        DispatchQueue.main.async {
+            self.loader.isHidden = true
+             showAlert(message: message, okHandler: nil, fromView: self)
+        }
+    }
+    
+    func getServiceList(api: Base, data: [Service]) {
+        
+        if api == .getProviders {  // Show Providers in Current Location
+            DispatchQueue.main.async {
+               // self.showProviderInCurrentLocation(with: data)
+                //TODO:- Map Load to be fixed
+            }
+            return
+        }
+        
+        DispatchQueue.main.async {  // Show Services
+            self.showServiceSelectionView(with: data)
+        }
+        
+    }
+    
+    func getEstimateFare(api: Base, data: EstimateFare?) {
+       
+        if data != nil {
+            DispatchQueue.main.async {
+                self.showRideNowView(with: data!)
+            }
+        }
+    }
+    
+}
 
 
 

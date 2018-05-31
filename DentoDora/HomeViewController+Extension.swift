@@ -8,22 +8,33 @@
 
 import Foundation
 import UIKit
+import Lottie
+import GoogleMaps
 
 extension HomeViewController {
     
     // MARK:- Show Service View
     
-    func showServiceSelectionView() {
+    func showServiceSelectionView(with source : [Service]) {
+        
         
         if self.serviceSelectionView == nil {
+            
             self.serviceSelectionView = Bundle.main.loadNibNamed(XIB.Names.ServiceSelectionView, owner: self, options: [:])?.first as? ServiceSelectionView
+            self.serviceSelectionView?.frame = CGRect(origin: CGPoint(x: 0, y: self.view.frame.height-self.serviceSelectionView!.frame.height), size: CGSize(width: self.view.frame.width, height: self.serviceSelectionView!.frame.height))
+            self.serviceSelectionView?.buttonMore.addTarget(self, action: #selector(self.buttonMoreServiceAction(sender:)), for: .touchUpInside)
+            self.serviceSelectionView?.buttonService.addTarget(self, action: #selector(self.buttonMoreServiceAction(sender:)), for: .touchUpInside)
+            self.serviceSelectionView?.show(with: .bottom, completion: nil)
+            self.view.addSubview(self.serviceSelectionView!)
+            
         }
-        
-        self.serviceSelectionView?.frame = CGRect(origin: CGPoint(x: 0, y: self.view.frame.height-self.serviceSelectionView!.frame.height), size: CGSize(width: self.view.frame.width, height: self.serviceSelectionView!.frame.height))
-        self.serviceSelectionView?.buttonMore.addTarget(self, action: #selector(self.buttonMoreServiceAction(sender:)), for: .touchUpInside)
-        self.serviceSelectionView?.buttonService.addTarget(self, action: #selector(self.buttonMoreServiceAction(sender:)), for: .touchUpInside)
-        self.serviceSelectionView?.show(with: .bottom, completion: nil)
-        self.view.addSubview(self.serviceSelectionView!)
+        self.serviceSelectionView?.onClickPricing = { selectedItem in
+            if source.count > selectedItem, let id = source[selectedItem].id {
+                self.getEstimateFareFor(serviceId: id)
+            }
+            self.removeServiceView()
+        }
+        self.serviceSelectionView?.set(source: source)
     }
     
     // MARK:- Service View Button More and Service Action
@@ -70,13 +81,14 @@ extension HomeViewController {
     
     // MARK:- Show Ride Now view
     
-    func showRideNowView(){
+    func showRideNowView(with fare : EstimateFare){
         
         guard self.rideSelectionView == nil  else { return }
         
         self.rideSelectionView = Bundle.main.loadNibNamed(XIB.Names.RequestSelectionView, owner: self, options: [:])?.first as? RequestSelectionView
         self.rideSelectionView?.frame = CGRect(x: 0, y: self.view.frame.height-self.rideSelectionView!.bounds.height, width: self.view.frame.width, height: self.rideSelectionView!.frame.height)
         self.rideSelectionView?.show(with: .bottom, completion: nil)
+        self.rideSelectionView?.setValues(values: fare)
         self.rideSelectionView?.rideNowAction = {
             self.removeRideNowView()
             self.showLoaderView()
@@ -185,6 +197,28 @@ extension HomeViewController {
         
     }
     
+    
+    // MARK:- Show Providers In Current Location
+    
+    func showProviderInCurrentLocation(with data : [Service]) {
+        
+        
+        for locationData in data where locationData.longitude != nil && locationData.latitude != nil {
+            
+            let lottieView = LottieView(name: "suv")
+            lottieView.frame = CGRect(origin: .zero, size: CGSize(width: 50, height: 50))
+            lottieView.loopAnimation = true;
+            lottieView.play()
+            
+            let marker = GMSMarker(position: CLLocationCoordinate2DMake(locationData.latitude!, locationData.longitude!))
+            marker.iconView = lottieView
+            marker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
+            marker.map = mapViewHelper?.mapView
+            
+            
+        }
+        
+    }
     
     
 }

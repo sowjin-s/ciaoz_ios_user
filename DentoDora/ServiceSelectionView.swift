@@ -16,14 +16,20 @@ class ServiceSelectionView: UIView {
     @IBOutlet var buttonMore : UIButton!
     @IBOutlet private weak var buttonChange : UIButton!
     @IBOutlet private weak var buttonGetPricing : UIButton!
-    @IBOutlet private weak var labelCardNumber : UILabel!
-    @IBOutlet private weak var imageViewCard : UIImageView!
+    @IBOutlet weak var labelCardNumber : UILabel!
+    @IBOutlet weak var imageViewCard : UIImageView!
     
     var isServiceSelected = true {
         didSet{
             self.changeCollectionData()
         }
     }
+    
+    private var datasource = [Service]()
+    var onClickPricing : ((_ selectedIndex : Int)->Void)? // Get Pricing List
+    var onClickChangePayment : (()->Void)? // Onlclick Change Pricing
+    
+    private var selectedItem = 0 // Current Selected Item
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -43,6 +49,9 @@ extension ServiceSelectionView {
         self.collectionViewService.dataSource = self
         self.collectionViewService.register(UINib(nibName: XIB.Names.ServiceSelectionCollectionViewCell, bundle: nil), forCellWithReuseIdentifier: XIB.Names.ServiceSelectionCollectionViewCell)
         self.isServiceSelected = true
+        self.buttonGetPricing.addTarget(self, action: #selector(self.onClickGetPricing), for: .touchUpInside)
+        self.imageViewCard.image = #imageLiteral(resourceName: "money_icon")
+        self.labelCardNumber.text = Constants.string.cash.localize()
     }
     
     // MARK:- Localize
@@ -62,11 +71,22 @@ extension ServiceSelectionView {
             
             self.labelServiceTitle.text = (self.isServiceSelected ? Constants.string.selectService : Constants.string.more).localize()
             self.buttonService.isHidden = self.isServiceSelected
-            self.buttonMore.isHidden = !self.isServiceSelected
+         //   self.buttonMore.isHidden = !self.isServiceSelected
             self.collectionViewService.reloadData()
         }
     }
+    //MARK:- Set Source 
+    func set(source : [Service]) {
+        
+        self.datasource = source
+        self.collectionViewService.reloadData()
+        self.collectionViewService.selectItem(at: IndexPath(item: selectedItem, section: 0), animated: true, scrollPosition: .top)
+
+    }
     
+    @IBAction private func onClickGetPricing() {
+        self.onClickPricing?(self.selectedItem)
+    }
     
 }
 
@@ -83,9 +103,14 @@ extension ServiceSelectionView : UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return 3
+        return self.datasource.count
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        self.selectedItem = indexPath.row
+        
+    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (collectionView.frame.width/3.5)
@@ -96,6 +121,10 @@ extension ServiceSelectionView : UICollectionViewDelegate, UICollectionViewDataS
     private func getCellFor(itemAt indexPath : IndexPath)->UICollectionViewCell{
         
         if let collectionCell = self.collectionViewService.dequeueReusableCell(withReuseIdentifier: XIB.Names.ServiceSelectionCollectionViewCell, for: indexPath) as? ServiceSelectionCollectionViewCell {
+            
+            if datasource.count > indexPath.row {
+                collectionCell.set(value: datasource[indexPath.row])
+            }
             
             return collectionCell
         }

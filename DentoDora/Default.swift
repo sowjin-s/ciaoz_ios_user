@@ -10,5 +10,5 @@ import Foundation
 
 struct DefaultMessage : JSONSerializable {
     
-    var message : String?
+    var message :String?
 }

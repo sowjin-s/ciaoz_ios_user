@@ -19,7 +19,12 @@ class Cache {
     
     class func image(forUrl : String?, completion : @escaping (UIImage?)-> ()){
         
-        DispatchQueue.global(qos: .background).async {  // Retrieve the image in Background
+        let queue = OperationQueue.init()
+        queue.qualityOfService = .background
+        queue.name = ProcessInfo().globallyUniqueString
+        queue.addOperation {
+            
+            let completion = completion
             
             var image : UIImage? = nil
             
@@ -42,9 +47,9 @@ class Cache {
                         return
                     }
                     
-                        Cache.shared.setObject(imageData, forKey: url as AnyObject)
-                        completion(imageData) // return Image
-                        return
+                    Cache.shared.setObject(imageData, forKey: url as AnyObject)
+                    completion(imageData) // return Image
+                    return
                     
                 }catch let error {
                     print("Image Cache Error : ",error.localizedDescription)
@@ -55,10 +60,16 @@ class Cache {
                 
             }
             
-            completion(image)
-            
+            completion(image) 
             
         }
+        
+//        DispatchQueue.global(qos: .background).async {  // Retrieve the image in Background
+//
+//
+//
+//
+//        }
     }
     
     

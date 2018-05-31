@@ -141,6 +141,8 @@ struct Constants {
     let enterCouponCode = "Enter Coupon Code"
     let addCouponCode = "Add Coupon Code"
     let resetPasswordDescription = "Note : Please enter the OTP send to your registered email address"
+    let latitude = "latitude"
+    let longitude = "longitude"
 }
 
 //Defaults Keys
@@ -156,6 +158,7 @@ struct Keys {
     let picture = "picture"
     let email = "email"
     let mobile = "mobile"
+    let currency = "currency"
 }
 
 //ENUM TRIP TYPE
@@ -164,6 +167,15 @@ enum TripType : String, Codable {
     
     case Business
     case Personal
+    
+}
+
+//Payment Type
+
+enum  PaymentType : String {
+    
+    case cash
+    case card
     
 }
 

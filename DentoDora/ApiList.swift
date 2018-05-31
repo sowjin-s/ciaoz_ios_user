@@ -45,6 +45,9 @@ enum Base : String{
     case changePassword = "/api/user/change/password"
     case forgotPassword = "/api/user/forgot/password"
     case googleMaps = "https://maps.googleapis.com/maps/api/geocode/json"
+    case servicesList = "/api/user/services"
+    case estimateFare = "/api/user/estimated/fare"
+    case getProviders = "/api/user/show/providers"
     
     init(fromRawValue: String){
         self = Base(rawValue: fromRawValue) ?? .signUp
