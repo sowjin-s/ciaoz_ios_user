@@ -77,6 +77,7 @@
 		085361A620B8308A001DD97C /* PassbookTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 085361A420B8308A001DD97C /* PassbookTableViewCell.xib */; };
 		085361A920B85CBF001DD97C /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085361A820B85CBF001DD97C /* SettingTableViewController.swift */; };
 		0855521520039E91002B01BC /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0855521420039E91002B01BC /* TextField.swift */; };
+		085C6FF420C194B000C13A74 /* Rate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085C6FF320C194B000C13A74 /* Rate.swift */; };
 		08641D8F20A1B51C00AA0D1F /* CircularTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08641D8E20A1B51C00AA0D1F /* CircularTransition.swift */; };
 		086606E62005144400A79566 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086606E52005144400A79566 /* ImageView.swift */; };
 		086BAF5720076E0D0087F15A /* MakeJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BAF5620076E0D0087F15A /* MakeJson.swift */; };
@@ -97,6 +98,9 @@
 		088B5D382022163700D5342C /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088B5D372022163700D5342C /* Reachability.swift */; };
 		088DC901200FCCA00095D552 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088DC900200FCCA00095D552 /* ViewExtension.swift */; };
 		089B4F7520C03A0300DDEAF3 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B4F7420C03A0300DDEAF3 /* Request.swift */; };
+		089B4F7720C10FD600DDEAF3 /* HomePageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B4F7620C10FD600DDEAF3 /* HomePageHelper.swift */; };
+		089B4F7920C1144F00DDEAF3 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B4F7820C1144F00DDEAF3 /* Provider.swift */; };
+		089B4F7B20C116D600DDEAF3 /* Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B4F7A20C116D600DDEAF3 /* Payment.swift */; };
 		08A39DA020B5BB8100314935 /* RideStatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08A39D9F20B5BB8100314935 /* RideStatusView.xib */; };
 		08A39DA220B5BB9300314935 /* RideStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A39DA120B5BB9300314935 /* RideStatusView.swift */; };
 		08B73D0420947C5C00B60F74 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B73D0320947C5C00B60F74 /* PasswordViewController.swift */; };
@@ -251,6 +255,7 @@
 		085361A420B8308A001DD97C /* PassbookTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PassbookTableViewCell.xib; sourceTree = "<group>"; };
 		085361A820B85CBF001DD97C /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
 		0855521420039E91002B01BC /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		085C6FF320C194B000C13A74 /* Rate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rate.swift; sourceTree = "<group>"; };
 		08641D8E20A1B51C00AA0D1F /* CircularTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularTransition.swift; sourceTree = "<group>"; };
 		086606E52005144400A79566 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		086BAF5620076E0D0087F15A /* MakeJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeJson.swift; sourceTree = "<group>"; };
@@ -271,6 +276,9 @@
 		088B5D372022163700D5342C /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		088DC900200FCCA00095D552 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		089B4F7420C03A0300DDEAF3 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		089B4F7620C10FD600DDEAF3 /* HomePageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageHelper.swift; sourceTree = "<group>"; };
+		089B4F7820C1144F00DDEAF3 /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
+		089B4F7A20C116D600DDEAF3 /* Payment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payment.swift; sourceTree = "<group>"; };
 		08A39D9F20B5BB8100314935 /* RideStatusView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RideStatusView.xib; sourceTree = "<group>"; };
 		08A39DA120B5BB9300314935 /* RideStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideStatusView.swift; sourceTree = "<group>"; };
 		08B73D0320947C5C00B60F74 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
@@ -927,6 +935,7 @@
 			children = (
 				08B7DC71209A14A1002CF17A /* HomeViewController.swift */,
 				0826325D20AC6DA900EBC529 /* HomeViewController+Extension.swift */,
+				089B4F7620C10FD600DDEAF3 /* HomePageHelper.swift */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -1239,6 +1248,9 @@
 				081E9CF420BFCC0E004C6884 /* Service.swift */,
 				081E9CFA20BFFB88004C6884 /* EstimateFare.swift */,
 				089B4F7420C03A0300DDEAF3 /* Request.swift */,
+				089B4F7820C1144F00DDEAF3 /* Provider.swift */,
+				089B4F7A20C116D600DDEAF3 /* Payment.swift */,
+				085C6FF320C194B000C13A74 /* Rate.swift */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -1655,6 +1667,7 @@
 				883389591FE8F26D006B6C05 /* Presenter.swift in Sources */,
 				083617BF20B6E3C6009C9658 /* WalletViewController.swift in Sources */,
 				08F2B6B920123D2000CAB24E /* Cache.swift in Sources */,
+				089B4F7B20C116D600DDEAF3 /* Payment.swift in Sources */,
 				0809321820A067EF00B88318 /* LoginRequest.swift in Sources */,
 				08B73D0420947C5C00B60F74 /* PasswordViewController.swift in Sources */,
 				081E9CF520BFCC0E004C6884 /* Service.swift in Sources */,
@@ -1662,6 +1675,7 @@
 				083A59AA20A434E000D64574 /* LocationTableViewCell.swift in Sources */,
 				0826C13820B011DC0005D0D8 /* RequestSelectionView.swift in Sources */,
 				08F595E32076462A00369048 /* UIAplication+RLT.swift in Sources */,
+				089B4F7720C10FD600DDEAF3 /* HomePageHelper.swift in Sources */,
 				086BAF6420078E220087F15A /* ViewController.swift in Sources */,
 				8894801F1FECE2CA006AF5A9 /* Label.swift in Sources */,
 				082F77D120A5AA2200D6474B /* ServiceSelectionCollectionViewCell.swift in Sources */,
@@ -1677,6 +1691,7 @@
 				8871FBD81FE7DD72002335D5 /* Constants.swift in Sources */,
 				38492B382000F6A8001830AD /* String.swift in Sources */,
 				085361A920B85CBF001DD97C /* SettingTableViewController.swift in Sources */,
+				089B4F7920C1144F00DDEAF3 /* Provider.swift in Sources */,
 				0802718B20A2FF1600EAE8C8 /* GoogleMapsHelper.swift in Sources */,
 				082F77CB20A5A12100D6474B /* ServiceSelectionView.swift in Sources */,
 				0805BDBE209C41AF00ACDC38 /* LocationSelectionViewController.swift in Sources */,
@@ -1702,6 +1717,7 @@
 				0809321620A0642700B88318 /* UserData.swift in Sources */,
 				081548FE20A1DF66004D0F7D /* LottieHelper.swift in Sources */,
 				084182B7200F689500527D0D /* PresenterProcessor.swift in Sources */,
+				085C6FF420C194B000C13A74 /* Rate.swift in Sources */,
 				08DF19C82006221B00B83AE3 /* AppData.swift in Sources */,
 				0805BDC3209C54F900ACDC38 /* ProfileViewController.swift in Sources */,
 				0823428820AD774C0055DDF8 /* LoaderView.swift in Sources */,

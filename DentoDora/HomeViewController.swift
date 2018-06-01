@@ -16,7 +16,7 @@ class HomeViewController: UIViewController {
     
     @IBOutlet private var viewSideMenu : UIView!
     @IBOutlet private var viewCurrentLocation : UIView!
-    @IBOutlet weak private var viewMapOuter : UIView!
+    @IBOutlet weak var viewMapOuter : UIView!
     @IBOutlet weak private var viewFavouriteSource : UIView!
     @IBOutlet weak private var viewFavouriteDestination : UIView!
     @IBOutlet weak private var viewSourceLocation : UIView!
@@ -63,7 +63,7 @@ class HomeViewController: UIViewController {
 //        }
 //    }
     
-    private var destinationLocationDetail : LocationDetail? {  // Destination Location Detail
+    var destinationLocationDetail : LocationDetail? {  // Destination Location Detail
         didSet{
             DispatchQueue.main.async {
                 self.textFieldDestinationLocation.text = self.destinationLocationDetail?.address
@@ -73,7 +73,7 @@ class HomeViewController: UIViewController {
     
     private var favouriteLocations = [(String, LocationDetail?)]() // Favourite Locations of User
     
-    private var currentLocation = Bind<LocationCoordinate>(defaultMapLocation)
+    var currentLocation = Bind<LocationCoordinate>(defaultMapLocation)
     
     var serviceSelectionView : ServiceSelectionView?
     var rideSelectionView : RequestSelectionView?
@@ -95,6 +95,7 @@ class HomeViewController: UIViewController {
     private var destinationMarker = GMSMarker()
     
     var service : Service?
+    var homePageHelper : HomePageHelper?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -149,6 +150,8 @@ extension HomeViewController {
             }
         })
         self.viewDestinationLocation.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
+        self.checkForProviderStatus()
+    
     }
     
     
@@ -160,40 +163,6 @@ extension HomeViewController {
         self.mapViewHelper?.mapView?.frame = viewMapOuter.bounds
         
     }
-    
-    
-    func showLoaderView() {
-        
-        if let singleView = Bundle.main.loadNibNamed(XIB.Names.LoaderView, owner: self, options: [:])?.first as? LoaderView {
-            singleView.frame = self.viewMapOuter.bounds
-            self.requestLoaderView = singleView
-            self.requestLoaderView?.onCancel = {
-                self.requestLoaderView = nil
-                var request = Request()
-                request.request_id = self.currentRequestId
-                self.presenter?.post(api: .cancelRequest, data: request.toData())
-            }
-            self.viewMapOuter.addSubview(singleView)
-        }
-        
-        
-      /*
-        if self.serviceSelectionView == nil {
-            self.showServiceSelectionView()
-        } else {
-            self.removeServiceView()
-        }  */
-        
-    }
-    
-    //MARK:- Remove Loader View
-    
-    func removeLoaderView() {
-        
-        self.requestLoaderView?.endLoader()
-        
-    }
-    
     
     @IBAction private func getCurrentLocation(){
         
@@ -222,7 +191,7 @@ extension HomeViewController {
             if self.sourceLocationDetail?.value == nil {
                 self.mapViewHelper?.getPlaceAddress(from: location, on: { (locationDetail) in
                     self.sourceLocationDetail?.value = locationDetail
-                    self.getProviderInCurrentLocation()
+                   // self.getProviderInCurrentLocation()
                 })
             }
             self.currentLocation.value = location
@@ -330,20 +299,6 @@ extension HomeViewController {
         }
         
     }
-    
-    
-    // MARK:- Send Request
-    
-    private func sendRequest(){
-        
-        if self.destinationLocationDetail != nil {
-            
-            
-        }
-        
-    }
-    
-    
     
     // MARK:- Get Favourite Locations
     
@@ -522,6 +477,30 @@ extension HomeViewController : UIViewControllerTransitioningDelegate {
 
 extension HomeViewController  {
     
+    // Check For Service Status
+    
+    private func checkForProviderStatus() {
+       
+        if self.homePageHelper == nil {
+             self.homePageHelper = HomePageHelper()
+        }
+        self.homePageHelper?.startListening(on: { (error, request) in
+            
+            if error != nil {
+                DispatchQueue.main.async {
+                    showAlert(message: error?.localizedDescription, okHandler: nil, fromView: self)
+                }
+            } else if request != nil {
+                
+                print(request!)
+                self.handle(request: request!)
+            } else {
+                self.removeUnnecessaryView(with: .none)
+            }
+        })
+    }
+    
+    
     // Get Services provided by Provider 
     
     private func getServicesList() {
@@ -574,7 +553,7 @@ extension HomeViewController  {
         self.showLoaderView()
         DispatchQueue.global(qos: .background).async {
             
-            var request = Request()
+            let request = Request()
             request.d_address = self.destinationLocationDetail?.address
             request.d_latitude = self.destinationLocationDetail?.coordinate.latitude
             request.d_longitude = self.destinationLocationDetail?.coordinate.longitude
@@ -582,7 +561,7 @@ extension HomeViewController  {
             request.s_latitude = self.sourceLocationDetail?.value?.coordinate.latitude
             request.s_longitude = self.sourceLocationDetail?.value?.coordinate.longitude
             request.service_type = self.service?.id
-            request.payment_mode = .cash
+            request.payment_mode = .CASH
             request.distance = "\(fare.distance ?? 0)"
             request.use_wallet = fare.useWallet
             
@@ -643,7 +622,15 @@ extension HomeViewController : PostViewProtocol {
         
         print(data?.request_id ?? 0)
         self.currentRequestId = data?.request_id ?? 0
+        self.checkForProviderStatus()
         
+    }
+    
+    func success(api: Base, message: String?) {
+        DispatchQueue.main.async {
+            self.loader.isHidden = true
+            self.view.makeToast(message)
+        }
     }
     
 }

@@ -18,6 +18,7 @@ protocol PostWebServiceProtocol : class {
     
     func retrieve(api : Base, url : String?, data : Data?, imageData: [String : Data]?, paramters : [String : Any]?, type : HttpType, completion : ((CustomError?, Data?)->())?)
     
+    
 }
 
 

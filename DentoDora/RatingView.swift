@@ -21,6 +21,13 @@ class RatingView: UIView {
         self.initialLoads()
     }
     
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        self.imageViewProvider.makeRoundedCorner()
+    }
+    
+    var onclickRating : ((_ rating : Int,_ comments : String)->Void)?
+    
 }
 
 extension RatingView {
@@ -30,6 +37,9 @@ extension RatingView {
         self.textViewComments.delegate = self
         textViewDidEndEditing(textViewComments)
         self.localize()
+        self.buttonSubmit.addTarget(self, action: #selector(self.buttonActionRating), for: .touchUpInside)
+        self.viewRating.minRating = 1
+        self.viewRating.maxRating = 5
     }
     
     //MARK:- Localize
@@ -40,10 +50,17 @@ extension RatingView {
         self.buttonSubmit.setTitle(Constants.string.submit.localize(), for: .normal)
     }
     
-    override func draw(_ rect: CGRect) {
-        super.draw(rect)
-        self.imageViewProvider.makeRoundedCorner()
+    @IBAction private func buttonActionRating() {
+        self.onclickRating?(Int(viewRating.rating), textViewComments.text)
     }
+    
+    func set(request : Request) {
+        
+        self.labelRating.text = "\(Constants.string.rateyourtrip.localize()) \(String.removeNil(request.provider?.first_name)) \(String.removeNil(request.provider?.last_name))"
+        
+    }
+    
+    
     
 }
 

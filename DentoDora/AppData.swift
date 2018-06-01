@@ -18,3 +18,4 @@ let defaultMapLocation = LocationCoordinate(latitude: 13.009245, longitude: 80.2
 let baseUrl = "http://159.65.85.174"
 let passwordLengthMax = 10
 let distanceType = "miles"
+let requestCheckInterval : TimeInterval = 5

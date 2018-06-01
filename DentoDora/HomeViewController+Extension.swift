@@ -125,11 +125,9 @@ extension HomeViewController {
     
     // MARK:- Show RideStatus View
     
-    func showRideStatusView() {
+    func showRideStatusView(with request : Request) {
         
-        guard self.rideStatusView == nil else { return }
-        
-        if let rideStatus = Bundle.main.loadNibNamed(XIB.Names.RideStatusView, owner: self, options: [:])?.first as? RideStatusView {
+        if self.rideStatusView == nil, let rideStatus = Bundle.main.loadNibNamed(XIB.Names.RideStatusView, owner: self, options: [:])?.first as? RideStatusView {
             
             rideStatus.frame = CGRect(origin: CGPoint(x: 0, y: self.view.frame.height-rideStatus.frame.height), size: CGSize(width: self.view.frame.width, height: rideStatus.frame.height))
             rideStatusView = rideStatus
@@ -137,6 +135,15 @@ extension HomeViewController {
             rideStatus.show(with: .bottom, completion: nil)
         }
         
+        rideStatusView?.set(values: request)
+        rideStatusView?.onClickCancel = {
+            self.loader.isHidden = false
+            self.cancelCurrentRide()
+        }
+        rideStatusView?.onClickShare = {
+            self.shareRide()
+        }
+
     }
     
     
@@ -153,16 +160,23 @@ extension HomeViewController {
     
     // MARK:- Show Invoice View
     
-    func showInvoiceView() {
+    func showInvoiceView(with request : Request) {
         
-        guard self.invoiceView == nil else { return }
-        
-        if let invoice = Bundle.main.loadNibNamed(XIB.Names.InvoiceView, owner: self, options: [:])?.first as? InvoiceView {
+        if self.invoiceView == nil, let invoice = Bundle.main.loadNibNamed(XIB.Names.InvoiceView, owner: self, options: [:])?.first as? InvoiceView {
             
             invoice.frame = CGRect(origin: CGPoint(x: 0, y: self.view.frame.height-invoice.frame.height), size: CGSize(width: self.view.frame.width, height: invoice.frame.height))
             invoiceView = invoice
+            self.invoiceView?.set(request: request)
             self.view.addSubview(invoiceView!)
             invoiceView?.show(with: .bottom, completion: nil)
+        }
+        self.invoiceView?.onClickPaynow = {
+            print("Called",#function)
+            self.loader.isHidden = false
+            let requestObj = Request()
+            requestObj.request_id = request.id
+            self.presenter?.post(api: .payNow, data: requestObj.toData())
+            
         }
         
     }
@@ -181,7 +195,7 @@ extension HomeViewController {
     
     // MARK:- Show RideStatus View
     
-    func showRatingView() {
+    func showRatingView(with request : Request) {
         
         guard self.ratingView == nil else { return }
         
@@ -191,6 +205,17 @@ extension HomeViewController {
             ratingView = rating
             self.view.addSubview(ratingView!)
             ratingView?.show(with: .bottom, completion: nil)
+        }
+        ratingView?.set(request: request)
+        ratingView?.onclickRating = { (rating, comments) in
+            if self.currentRequestId > 0 {
+                var rate = Rate()
+                rate.request_id = self.currentRequestId
+                rate.rating = rating
+                rate.comments = comments
+                self.presenter?.post(api: .rateProvider, data: rate.toData())
+            }
+            self.removeRatingView()
         }
         
     }
@@ -229,5 +254,125 @@ extension HomeViewController {
         
     }
     
+    // MARK:- Show Loader View
+    
+    func showLoaderView() {
+        
+        if self.requestLoaderView == nil, let singleView = Bundle.main.loadNibNamed(XIB.Names.LoaderView, owner: self, options: [:])?.first as? LoaderView {
+            singleView.frame = self.viewMapOuter.bounds
+            self.requestLoaderView = singleView
+            self.requestLoaderView?.onCancel = {
+                self.removeLoaderView()
+                self.requestLoaderView = nil
+                self.cancelCurrentRide()
+            }
+            self.viewMapOuter.addSubview(singleView)
+            DispatchQueue.main.asyncAfter(deadline: .now()+0.5) { // Hiding Address View
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.viewAddressOuter.isHidden = true
+                })
+            }
+        }
+    }
+    
+    // MARK:- Remove Loader View
+    
+    func removeLoaderView() {
+        
+        self.requestLoaderView?.endLoader()
+        self.viewAddressOuter.isHidden = false
+        self.mapViewHelper?.mapView?.clear()
+        self.destinationLocationDetail = nil
+    }
+    
+    // MARK:- Handle Request Data
+    
+    func handle(request : Request) {
+        
+        guard let status = request.status, request.id != nil else { return }
+        self.currentRequestId = request.id!
+        switch status{
+            
+        case .searching:
+             self.showLoaderView()
+            
+        case .accepted, .arrived, .started, .pickedup:
+            self.showRideStatusView(with: request)
+            
+        case .dropped:
+            self.showInvoiceView(with: request)
+        
+        case .completed:
+            self.showRatingView(with: request)
+            
+        default:
+            break
+        }
+        
+        self.removeUnnecessaryView(with: status)
+        
+    }
+    
+    // MARK:- Remove Other Views
+    
+    func removeUnnecessaryView(with status : RideStatus) {
+        
+        if ![RideStatus.searching].contains(status) {
+            self.removeLoaderView()
+            
+        }
+        if ![RideStatus.started, .accepted, .arrived, .pickedup].contains(status) {
+            self.removeRideStatusView()
+            
+        }
+        if ![RideStatus.completed].contains(status) {
+            self.removeRatingView()
+            
+        }
+        if ![RideStatus.dropped].contains(status) {
+            self.removeInvoiceView()
+            
+        }
+        if [RideStatus.none, .cancelled].contains(status) {
+            self.currentRequestId = 0 // Remove Current Request
+            
+        }
+        
+        self.removeServiceView()
+        self.removeRideNowView()
+        
+    }
+
+    
+    // MARK:- Share Ride
+    func shareRide() {
+        if let currentLocation  = currentLocation.value {
+            
+            let format = "http://maps.google.com/maps?q=loc:\(currentLocation.latitude),\(currentLocation.longitude)"
+            let  message = "\(AppName) :- \(String.removeNil(User.main.firstName)) \(String.removeNil(User.main.lastName)) \(Constants.string.wouldLikeToShare) \(format)"
+            self.share(items: [#imageLiteral(resourceName: "logo"), message])
+        }
+    }
+    
+    
+    // MARK:- Share Items
+    
+    func share(items : [Any]) {
+        
+        let activityController = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        self.present(activityController, animated: true, completion: nil)
+        
+    }
+    
+    // MARK:- Cancel Current Ride
+    
+    private func cancelCurrentRide() {
+        
+        if self.currentRequestId>0 {
+            let request = Request()
+            request.request_id = self.currentRequestId
+            self.presenter?.post(api: .cancelRequest, data: request.toData())
+        }
+    }
     
 }

@@ -144,6 +144,8 @@ struct Constants {
     let latitude = "latitude"
     let longitude = "longitude"
     let totalDistance = "Total Distance"
+    let shareRide = "Share Ride"
+    let wouldLikeToShare = "would like to share a ride with you at"
 }
 
 //Defaults Keys
@@ -175,8 +177,8 @@ enum TripType : String, Codable {
 
 enum  PaymentType : String, Codable {
     
-    case cash = "CASH"
-    case card = "CARD"
+    case CASH = "CASH"
+    case CARD = "CARD"
     
 }
 
@@ -228,12 +230,15 @@ enum LoginType : String, Codable {
 
 enum RideStatus : String, Codable {
     
-    case searching
-    case started
-    case arrived
-    case pickedup
-    case dropped
-    case completed
+    case searching = "SEARCHING"
+    case accepted = "ACCEPTED"
+    case started = "STARTED"
+    case arrived = "ARRIVED"
+    case pickedup = "PICKEDUP"
+    case dropped = "DROPPED"
+    case completed = "COMPLETED"
+    case cancelled = "CANCELLED"
+    case none
     
 }
 

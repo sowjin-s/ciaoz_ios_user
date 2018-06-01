@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Request : JSONSerializable {
+class Request : JSONSerializable {
     
     var s_latitude : Double?
     var s_longitude : Double?
@@ -25,6 +25,75 @@ struct Request : JSONSerializable {
     var schedule_time : String?
     var request_id : Int?
     var current_provider : Int?
+    var id : Int?
+    var booking_id : String?
+    var travel_time : String?
+    var status : RideStatus?
+    var provider : Provider?
+    var service : Service?
+    var provider_service : Service?
+    var payment : Payment?
+    
+  /*
+    enum CodingKeys: String, CodingKey {
+        
+        case id = "id"
+        case booking_id = "booking_id"
+        case status = "status"
+        case payment_mode = "payment_mode"
+        case distance = "distance"
+        case s_address = "s_address"
+        case s_latitude = "s_latitude"
+        case s_longitude = "s_longitude"
+        case d_address = "d_address"
+        case d_latitude = "d_latitude"
+        case d_longitude = "d_longitude"
+        case use_wallet = "use_wallet"
+        case schedule_date = "schedule_date"
+        case request_id = "request_id"
+        case current_provider = "current_provider"
+        case schedule_time = "schedule_time"
+        case provider
+        case service_type
+        
+    }
+ 
+  */
+    
+ 
+    required init(from decoder: Decoder) throws {
+        
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        id = try? values.decode(Int.self, forKey: .id)
+        booking_id = try? values.decode(String.self, forKey: .booking_id)
+        s_address = try? values.decode(String.self, forKey: .s_address)
+        s_latitude = try? values.decode(Double.self, forKey: .s_latitude)
+        s_longitude = try? values.decode(Double.self, forKey: .s_longitude)
+        d_address = try? values.decode(String.self, forKey: .d_address)
+        d_latitude = try? values.decode(Double.self, forKey: .d_latitude)
+        d_longitude = try? values.decode(Double.self, forKey: .d_longitude)
+        use_wallet = try? values.decode(Int.self, forKey: .use_wallet)
+        if values.contains(.provider) {
+             provider = try? values.decode(Provider.self, forKey: .provider)
+        }
+        service = try? values.decode(Service.self, forKey: .service_type)
+        service_type =  try? values.decode(Int.self, forKey: .service_type)
+        schedule_date = try? values.decode(String.self, forKey: .schedule_date)
+        schedule_time = try? values.decode(String.self, forKey: .schedule_time)
+        request_id = try? values.decode(Int.self, forKey: .request_id)
+        current_provider = try? values.decode(Int.self, forKey: .current_provider)
+        if values.contains(.status) {
+            status = try? values.decode(RideStatus.self, forKey: .status)
+        }
+        provider_service = try? values.decode(Service.self, forKey: .provider_service)
+        payment = try? values.decode(Payment.self, forKey: .payment)
+        travel_time = try? values.decode(String.self, forKey: .travel_time)
+        payment_mode = try? values.decode(PaymentType.self, forKey: .payment_mode)
+    }
+ 
+    init() {   }
+ 
+    
     
 }
 

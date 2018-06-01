@@ -28,6 +28,8 @@ class InvoiceView: UIView {
     @IBOutlet private weak var labelPaymentType : UILabel!
     @IBOutlet private weak var buttonPayNow : UIButton!
     
+    var onClickPaynow : (()->Void)?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.intialLoads()
@@ -40,6 +42,7 @@ class InvoiceView: UIView {
 extension InvoiceView {
     
     func intialLoads() {
+        self.buttonPayNow.addTarget(self, action: #selector(self.buttonPaynowAction), for: .touchUpInside)
         self.localize()
     }
     
@@ -56,6 +59,26 @@ extension InvoiceView {
         self.labelTaxString.text = Constants.string.tax.localize()
         self.buttonPayNow.setTitle(Constants.string.paynow.localize(), for: .normal)
         
+    }
+    
+    func set(request : Request) {
+        
+        self.labelBooking.text = request.booking_id
+        self.labelDistanceTravelled.text = "\(Int.removeNil(request.payment?.distance)) \(distanceType)"
+        self.labelTimeTaken.text = request.travel_time
+        self.labelBaseFare.text = "\(String.removeNil(User.main.currency)) \(Int.removeNil(request.payment?.fixed))"
+        self.labelDistanceFare.text = "\(String.removeNil(User.main.currency)) \(Int.removeNil(request.payment?.distance))"
+        self.labelTax.text = "\(String.removeNil(User.main.currency)) \(Int.removeNil(request.payment?.tax))"
+        self.labelTotal.text = "\(String.removeNil(User.main.currency)) \(Int.removeNil(request.payment?.total))"
+        self.labelPaymentType.text = request.payment_mode?.rawValue
+        self.imageViewPaymentType.image = request.payment_mode == .CASH ? #imageLiteral(resourceName: "money_icon") : #imageLiteral(resourceName: "visa")
+        self.buttonPayNow.isHidden = request.payment_mode == .CASH
+        
+    }
+    
+    @IBAction private func buttonPaynowAction() {
+        
+        self.onClickPaynow?()
     }
     
 }

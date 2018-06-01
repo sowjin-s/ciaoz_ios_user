@@ -35,8 +35,8 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aw5-Qu-5Ts">
-                            <rect key="frame" x="18" y="7.5" width="288" height="16.5"/>
-                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                            <rect key="frame" x="18" y="5.5" width="288" height="19.5"/>
+                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>

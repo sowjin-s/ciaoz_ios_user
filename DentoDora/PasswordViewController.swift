@@ -200,9 +200,7 @@ extension PasswordViewController : PostViewProtocol {
            
             User.main.accessToken = accessToken
             self.presenter?.get(api: .getProfile, parameters: nil)
-                
-         
-       
+        
     }
     
     

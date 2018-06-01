@@ -49,7 +49,7 @@ extension Interactor : PostInteractorOutputProtocol {
          case .getProfile, .updateProfile, .signUp:
             self.presenter?.sendProfile(api: api, data: response)
             
-        case .changePassword, .resetPassword:
+        case .changePassword, .resetPassword, .cancelRequest, .payNow:
             self.presenter?.sendSuccess(api: api, data: response)
             
         case .forgotPassword:

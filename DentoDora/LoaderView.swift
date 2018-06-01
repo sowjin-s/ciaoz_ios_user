@@ -53,7 +53,6 @@ extension LoaderView {
         }) { (_) in
             self.removeFromSuperview()
         }
-        self.onCancel?()
     }
  
     @IBAction private func cancelButtonClick(){
@@ -65,7 +64,7 @@ extension LoaderView {
         })
         cancelButton.titleColor = .primary
         let sureButton = PopupDialogButton(title: Constants.string.sure.localize()) {
-            self.endLoader()
+             self.onCancel?()
         }
         sureButton.titleColor = .red
         alert.addButtons([cancelButton,sureButton])

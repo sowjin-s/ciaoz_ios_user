@@ -87,7 +87,7 @@ extension ProfileViewController {
         self.setDesign()
         self.setProfile()
         self.view.dismissKeyBoardonTap()
-        
+        self.presenter?.get(api: .getProfile, parameters: nil)
     }
     
     // MARK:- Set Profile Details
