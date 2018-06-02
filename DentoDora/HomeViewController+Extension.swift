@@ -26,7 +26,7 @@ extension HomeViewController {
             self.serviceSelectionView?.buttonService.addTarget(self, action: #selector(self.buttonMoreServiceAction(sender:)), for: .touchUpInside)
             self.serviceSelectionView?.show(with: .bottom, completion: nil)
             self.view.addSubview(self.serviceSelectionView!)
-            
+            self.isOnBooking = true
             self.serviceSelectionView?.onClickPricing = { selectedItem in
                 if let id = selectedItem?.id {
                     self.service = selectedItem
@@ -53,6 +53,7 @@ extension HomeViewController {
         
         self.serviceSelectionView?.dismissView(onCompletion: {
             self.serviceSelectionView = nil
+            self.isOnBooking = false
         })
         
     }
@@ -104,6 +105,7 @@ extension HomeViewController {
                     }
                 })
             }
+            self.isOnBooking = true
             self.view.addSubview(self.rideSelectionView!)
         }
         
@@ -119,6 +121,7 @@ extension HomeViewController {
         self.rideSelectionView?.dismissView(onCompletion: {
             self.rideSelectionView = nil
             self.viewAddressOuter.isHidden = false
+            self.isOnBooking = false
         })
     }
     
@@ -262,7 +265,7 @@ extension HomeViewController {
             singleView.frame = self.viewMapOuter.bounds
             self.requestLoaderView = singleView
             self.requestLoaderView?.onCancel = {
-                self.removeLoaderView()
+                self.removeLoaderViewAndClearMapview()
                 self.requestLoaderView = nil
                 self.cancelCurrentRide()
             }
@@ -277,7 +280,7 @@ extension HomeViewController {
     
     // MARK:- Remove Loader View
     
-    func removeLoaderView() {
+    func removeLoaderViewAndClearMapview() {
         
         self.requestLoaderView?.endLoader()
         self.viewAddressOuter.isHidden = false
@@ -318,7 +321,7 @@ extension HomeViewController {
     func removeUnnecessaryView(with status : RideStatus) {
         
         if ![RideStatus.searching].contains(status) {
-            self.removeLoaderView()
+            self.removeLoaderViewAndClearMapview()
             
         }
         if ![RideStatus.started, .accepted, .arrived, .pickedup].contains(status) {

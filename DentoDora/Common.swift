@@ -79,6 +79,7 @@ class Common {
         User.main.lastName = profile?.last_name
         User.main.mobile = profile?.mobile
         User.main.currency = profile?.currency
+        User.main.picture = profile?.picture
     }
         
 }

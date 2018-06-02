@@ -37,6 +37,7 @@
 		0826325E20AC6DA900EBC529 /* HomeViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826325D20AC6DA900EBC529 /* HomeViewController+Extension.swift */; };
 		0826C13620B011C80005D0D8 /* RequestSelectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0826C13520B011C80005D0D8 /* RequestSelectionView.xib */; };
 		0826C13820B011DC0005D0D8 /* RequestSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826C13720B011DC0005D0D8 /* RequestSelectionView.swift */; };
+		082745E820C2A06B00C6F8F3 /* YourTripModelResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082745E720C2A06B00C6F8F3 /* YourTripModelResponse.swift */; };
 		082D14D520BAB7AC00536E1B /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082D14D420BAB7AC00536E1B /* Colors.swift */; };
 		082D1B7E2093159A0000B7C8 /* TextFieldEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082D1B7C209315990000B7C8 /* TextFieldEffects.swift */; };
 		082D1B7F2093159A0000B7C8 /* HoshiTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082D1B7D2093159A0000B7C8 /* HoshiTextField.swift */; };
@@ -215,6 +216,7 @@
 		0826325D20AC6DA900EBC529 /* HomeViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewController+Extension.swift"; sourceTree = "<group>"; };
 		0826C13520B011C80005D0D8 /* RequestSelectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RequestSelectionView.xib; sourceTree = "<group>"; };
 		0826C13720B011DC0005D0D8 /* RequestSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestSelectionView.swift; sourceTree = "<group>"; };
+		082745E720C2A06B00C6F8F3 /* YourTripModelResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourTripModelResponse.swift; sourceTree = "<group>"; };
 		082D14D420BAB7AC00536E1B /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		082D1B7C209315990000B7C8 /* TextFieldEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldEffects.swift; sourceTree = "<group>"; };
 		082D1B7D2093159A0000B7C8 /* HoshiTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HoshiTextField.swift; sourceTree = "<group>"; };
@@ -1251,6 +1253,7 @@
 				089B4F7820C1144F00DDEAF3 /* Provider.swift */,
 				089B4F7A20C116D600DDEAF3 /* Payment.swift */,
 				085C6FF320C194B000C13A74 /* Rate.swift */,
+				082745E720C2A06B00C6F8F3 /* YourTripModelResponse.swift */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -1631,6 +1634,7 @@
 				38492B3C2000F78C001830AD /* GradientView.swift in Sources */,
 				083617B820B6AE49009C9658 /* InvoiceView.swift in Sources */,
 				0855521520039E91002B01BC /* TextField.swift in Sources */,
+				082745E820C2A06B00C6F8F3 /* YourTripModelResponse.swift in Sources */,
 				082D1B9620933C890000B7C8 /* WalkThroughView.swift in Sources */,
 				083617C620B70FF9009C9658 /* HelpViewController.swift in Sources */,
 				08BF24C020BD864C003A4B96 /* Default.swift in Sources */,

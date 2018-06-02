@@ -53,6 +53,8 @@ enum Base : String{
     case checkRequest = "/api/user/request/check"
     case payNow = "/api/user/payment"
     case rateProvider = "/api/user/rate/provider"
+    case historyList = "/api/user/trips"
+    case upcomingList = "/api/user/upcoming/trips"
     
     init(fromRawValue: String){
         self = Base(rawValue: fromRawValue) ?? .signUp

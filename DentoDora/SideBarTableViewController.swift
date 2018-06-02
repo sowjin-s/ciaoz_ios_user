@@ -83,12 +83,11 @@ extension SideBarTableViewController {
     
     private func setValues(){
         
-        Cache.image(forUrl: User.main.picture) { (image) in
+        Cache.image(forUrl: baseUrl+"/storage/"+String.removeNil(User.main.picture)) { (image) in
                DispatchQueue.main.async {
                 self.imageViewProfile.image = image == nil ? #imageLiteral(resourceName: "userPlaceholder") : image
             }
         }
-        
         self.labelName.text = String.removeNil(User.main.firstName)+" "+String.removeNil(User.main.lastName)
         self.labelEmail.text = User.main.email
     }
@@ -195,6 +194,7 @@ extension SideBarTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.select(at: indexPath)
+        self.drawerController?.closeSide()
     }
     
     

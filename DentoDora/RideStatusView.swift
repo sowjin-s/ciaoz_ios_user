@@ -21,6 +21,8 @@ class RideStatusView: UIView {
     @IBOutlet private weak var labelPeakDescription : UILabel!
     @IBOutlet private weak var buttonCall : UIButton!
     @IBOutlet private weak var buttonCancel : UIButton!
+    @IBOutlet private weak var labelOtp : UILabel!
+
     
     private var currentStatus : RideStatus = .none {
         didSet{
@@ -56,6 +58,7 @@ extension RideStatusView {
         self.initRating()
         self.localize()
         self.buttonCall.addTarget(self, action: #selector(self.callAction), for: .touchUpInside)
+        self.buttonCancel.addTarget(self, action: #selector(self.cancelShareAction), for: .touchUpInside)
     }
     
     // MARK:- Localization
@@ -120,6 +123,7 @@ extension RideStatusView {
         self.labelServiceName.text = values.service?.name
         self.labelServiceNumber.text = values.provider_service?.service_number
         self.labelServiceDescription.text = values.provider_service?.service_model
+        self.labelOtp.text = Constants.string.otp.localize()+": "+String.removeNil(values.otp)
         
     }
     

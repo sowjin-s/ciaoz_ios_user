@@ -23,7 +23,7 @@ class User : NSObject, NSCoding, JSONSerializable {
     var currency : String?
     
     
-    init(id : Int?, accessToken : String?, firstName : String?, lastName : String?, mobile : String?, email : String?, currency : String?){
+    init(id : Int?, accessToken : String?, firstName : String?, lastName : String?, mobile : String?, email : String?, currency : String?, picture : String?){
                 
         self.id = id
         self.accessToken = accessToken
@@ -32,11 +32,12 @@ class User : NSObject, NSCoding, JSONSerializable {
         self.mobile = mobile
         self.email = email
         self.currency = currency
+        self.picture = picture
     }
     
     convenience
     override init(){
-        self.init(id: nil, accessToken: nil, firstName : nil, lastName : nil, mobile : nil, email : nil, currency : nil)
+        self.init(id: nil, accessToken: nil, firstName : nil, lastName : nil, mobile : nil, email : nil, currency : nil, picture : nil)
     }
     
     
@@ -49,7 +50,8 @@ class User : NSObject, NSCoding, JSONSerializable {
         let mobile = aDecoder.decodeObject(forKey: Keys.list.mobile) as? String
         let email = aDecoder.decodeObject(forKey: Keys.list.email) as? String
         let currency = aDecoder.decodeObject(forKey: Keys.list.currency) as? String
-        self.init(id: id, accessToken : accessToken, firstName : firstName, lastName : lastName, mobile : mobile, email: email, currency : currency)
+        let picture = aDecoder.decodeObject(forKey: Keys.list.picture) as? String
+        self.init(id: id, accessToken : accessToken, firstName : firstName, lastName : lastName, mobile : mobile, email: email, currency : currency, picture : picture)
         
     }
     
@@ -63,6 +65,7 @@ class User : NSObject, NSCoding, JSONSerializable {
         aCoder.encode(self.mobile, forKey: Keys.list.mobile)
         aCoder.encode(self.email, forKey: Keys.list.email)
         aCoder.encode(self.currency, forKey: Keys.list.currency)
+        aCoder.encode(self.picture, forKey: Keys.list.picture)
         
     }
     

@@ -96,6 +96,10 @@ extension Presenter : PostPresenterOutputProtocol {
         controller?.getRequest(api: api, data: PresenterProcessor.shared.request(data: data))
     }
     
+    func sendRequestArray(api: Base, data: Data) {
+        controller?.getRequestArray(api: api, data: PresenterProcessor.shared.requestArray(data: data))
+    }
+    
 }
 
 

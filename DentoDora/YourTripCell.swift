@@ -46,6 +46,41 @@ class YourTripCell: UITableViewCell {
         
     }
     
+    // MARK:- Set Values
+    
+    func set(values : Request) {
+        print(isPastButton)
+        Cache.image(forUrl: values.service?.image) { (image) in
+            if image != nil {
+                self.upCommingCarImage.image = image
+            }
+        }
+        Cache.image(forUrl: values.static_map) { (image) in
+            if image != nil {
+                self.mapImageView.image = image
+            }
+        }
+        
+        self.upCommingBookingIDLlabel.text = Constants.string.bookingId+": "+String.removeNil(values.booking_id)
+        self.upCommingCarName.text = values.service?.name
+        self.upCommingCarName.isHidden = isPastButton
+        
+        if let dateObject = Formatter.shared.getDate(from: isPastButton ? values.assigned_at : values.schedule_at, format: DateFormat.list.yyyy_mm_dd_HH_MM_ss),
+            let dateString = Formatter.shared.getString(from: dateObject, format: DateFormat.list.ddMMMyyyy),
+            let timeString = Formatter.shared.getString(from: dateObject, format: DateFormat.list.hh_mm_a)
+        {
+            
+            self.upCommingDateLabel.text = dateString+" \(Constants.string.at.localize()) "+timeString
+        }
+        if self.isPastButton {
+            self.labelModel.text = values.service?.name
+            self.labelPrice.text = "\(String.removeNil(User.main.currency)) \(Int.removeNil(values.payment?.total))"
+        }
+        
+    }
+    
+    
+    
 //    private func setCommonFont(){
 //        
 //        setFont(TextField: nil, label: upCommingBookingIDLlabel, Button: nil, size: nil)

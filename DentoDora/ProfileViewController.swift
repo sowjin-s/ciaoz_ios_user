@@ -88,18 +88,19 @@ extension ProfileViewController {
         self.setProfile()
         self.view.dismissKeyBoardonTap()
         self.presenter?.get(api: .getProfile, parameters: nil)
+        
     }
     
     // MARK:- Set Profile Details
     
     private func setProfile(){
         
-        Cache.image(forUrl: User.main.picture) { (image) in
+        Cache.image(forUrl: baseUrl+"/storage/"+String.removeNil(User.main.picture)) { (image) in
             DispatchQueue.main.async {
                 self.imageViewProfile.image = image == nil ? #imageLiteral(resourceName: "userPlaceholder") : image
             }
         }
-        
+    
         self.textFieldFirst.text = User.main.firstName
         self.textFieldLast.text = User.main.lastName
         self.textFieldEmail.text = User.main.email
@@ -121,7 +122,7 @@ extension ProfileViewController {
             $0?.borderInactiveColor = nil
             $0?.borderActiveColor = nil
         })
-        
+        self.textFieldEmail.isEnabled = false
     }
     
     // MARK:- Show Image
@@ -130,8 +131,8 @@ extension ProfileViewController {
         
         self.showImage { (image) in
             if image != nil {
-                self.imageViewProfile.image = image
-                self.changedImage = image
+                self.imageViewProfile.image = image?.resizeImage(newWidth: 200)
+                self.changedImage = self.imageViewProfile.image
             }
         }
     }
@@ -168,15 +169,15 @@ extension ProfileViewController {
             return
         }
         
-        guard let email = self.textFieldEmail.text, email.count>0 else {
-            UIScreen.main.focusedView?.make(toast: ErrorMessage.list.enterEmail.localize())
-            return
-        }
+//        guard let email = self.textFieldEmail.text, email.count>0 else {
+//            UIScreen.main.focusedView?.make(toast: ErrorMessage.list.enterEmail.localize())
+//            return
+//        }
         
-        guard Common.isValid(email: email) else {
-            UIScreen.main.focusedView?.make(toast: ErrorMessage.list.enterValidEmail.localize())
-            return
-        }
+//        guard Common.isValid(email: email) else {
+//            UIScreen.main.focusedView?.make(toast: ErrorMessage.list.enterValidEmail.localize())
+//            return
+//        }
         
         var data : Data?
         
@@ -187,9 +188,9 @@ extension ProfileViewController {
         
         let profile = Profile()
         profile.device_token = deviceToken
-        profile.email = email
+        profile.email = User.main.email
         profile.first_name = firstName
-        profile.last_name = User.main.lastName
+        profile.last_name = lastName
         profile.mobile = mobile
     
         var json = profile.JSONRepresentation
@@ -285,11 +286,12 @@ extension ProfileViewController : PostViewProtocol {
     }
     
     func getProfile(api: Base, data: Profile?) {
-        
         Common.storeUserData(from: data)
+        storeInUserDefaults()
         DispatchQueue.main.async {
             self.loader.isHidden = true
             self.setProfile()
+            UIScreen.main.focusedView?.make(toast: Constants.string.profileUpdated.localize())
         }
         
     }

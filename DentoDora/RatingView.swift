@@ -40,6 +40,7 @@ extension RatingView {
         self.buttonSubmit.addTarget(self, action: #selector(self.buttonActionRating), for: .touchUpInside)
         self.viewRating.minRating = 1
         self.viewRating.maxRating = 5
+        self.viewRating.rating = 1 
     }
     
     //MARK:- Localize

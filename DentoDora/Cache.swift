@@ -17,6 +17,7 @@ class Cache {
     }()
     
     
+    
     class func image(forUrl : String?, completion : @escaping (UIImage?)-> ()){
         
         let queue = OperationQueue.init()

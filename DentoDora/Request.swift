@@ -16,6 +16,7 @@ class Request : JSONSerializable {
     var d_longitude : Double?
     var service_type : Int?
     var distance : String?
+    var distanceInt : Int?
     var payment_mode : PaymentType?
     var card_id : String?
     var s_address : String?
@@ -33,6 +34,10 @@ class Request : JSONSerializable {
     var service : Service?
     var provider_service : Service?
     var payment : Payment?
+    var otp : String?
+    var assigned_at : String?
+    var schedule_at : String?
+    var static_map : String?
     
   /*
     enum CodingKeys: String, CodingKey {
@@ -65,6 +70,7 @@ class Request : JSONSerializable {
         
         let values = try decoder.container(keyedBy: CodingKeys.self)
         id = try? values.decode(Int.self, forKey: .id)
+        status = try? values.decode(RideStatus.self, forKey: .status)
         booking_id = try? values.decode(String.self, forKey: .booking_id)
         s_address = try? values.decode(String.self, forKey: .s_address)
         s_latitude = try? values.decode(Double.self, forKey: .s_latitude)
@@ -76,6 +82,10 @@ class Request : JSONSerializable {
         if values.contains(.provider) {
              provider = try? values.decode(Provider.self, forKey: .provider)
         }
+        if values.contains(.distance) {
+            distance = try? values.decode(String.self, forKey: .distance)
+            distanceInt = try? values.decode(Int.self, forKey: .distance)
+        }
         service = try? values.decode(Service.self, forKey: .service_type)
         service_type =  try? values.decode(Int.self, forKey: .service_type)
         schedule_date = try? values.decode(String.self, forKey: .schedule_date)
@@ -83,12 +93,16 @@ class Request : JSONSerializable {
         request_id = try? values.decode(Int.self, forKey: .request_id)
         current_provider = try? values.decode(Int.self, forKey: .current_provider)
         if values.contains(.status) {
-            status = try? values.decode(RideStatus.self, forKey: .status)
+           // status = try? values.decode(RideStatus.self, forKey: .status)
         }
-        provider_service = try? values.decode(Service.self, forKey: .provider_service)
-        payment = try? values.decode(Payment.self, forKey: .payment)
+       // provider_service = try? values.decode(Service.self, forKey: .provider_service)
+       // payment = try? values.decode(Payment.self, forKey: .payment)
         travel_time = try? values.decode(String.self, forKey: .travel_time)
-        payment_mode = try? values.decode(PaymentType.self, forKey: .payment_mode)
+        //payment_mode = try? values.decode(PaymentType.self, forKey: .payment_mode)
+        otp = try? values.decode(String.self, forKey: .otp)
+        assigned_at = try? values.decode(String.self, forKey: .assigned_at)
+        schedule_at = try? values.decode(String.self, forKey: .schedule_at)
+        static_map = try? values.decode(String.self, forKey: .static_map)
     }
  
     init() {   }

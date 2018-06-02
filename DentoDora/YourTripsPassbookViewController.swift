@@ -16,7 +16,7 @@ class YourTripsPassbookViewController: UIViewController {
     @IBOutlet var upCommingBtn: UIButton!
     
     //@IBOutlet var upCommingUnderLineView: UIView!
-    @IBOutlet var tripTabelView: UITableView!
+    //@IBOutlet var tripTabelView: UITableView!
     @IBOutlet private var underLineView: UIView!
     @IBOutlet private var tableViewList : UITableView!
     
@@ -29,6 +29,15 @@ class YourTripsPassbookViewController: UIViewController {
         }
     }
     
+    lazy var loader  : UIView = {
+        return createActivityIndicator(UIScreen.main.focusedView ?? self.view)
+    }()
+    
+    
+    private var datasourceYourTripsUpcoming = [Request]()
+    private var datasourceYourTripsPast = [Request]()
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initalLoads()
@@ -36,7 +45,6 @@ class YourTripsPassbookViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        registerCell()
         switchViewAction()
     }
     
@@ -46,10 +54,15 @@ class YourTripsPassbookViewController: UIViewController {
 extension YourTripsPassbookViewController {
     
     private func initalLoads() {
+        self.registerCell()
+        self.switchViewAction()
         self.navigationController?.isNavigationBarHidden = false
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.backButtonClick))
         self.navigationItem.title = (isYourTripsSelected ? Constants.string.yourTrips : Constants.string.passbook).localize()
         self.localize()
+        self.loader.isHidden = false
+        self.presenter?.get(api: .upcomingList, parameters: nil)
+        self.presenter?.get(api: .historyList, parameters: nil)
     }
  
     private func localize(){
@@ -61,8 +74,8 @@ extension YourTripsPassbookViewController {
     
     private func registerCell(){
         
-        tripTabelView.register(UINib(nibName: XIB.Names.YourTripCell, bundle: nil), forCellReuseIdentifier: XIB.Names.YourTripCell)
-        tripTabelView.register(UINib(nibName: XIB.Names.PassbookTableViewCell, bundle: nil), forCellReuseIdentifier: XIB.Names.PassbookTableViewCell)
+        tableViewList.register(UINib(nibName: XIB.Names.YourTripCell, bundle: nil), forCellReuseIdentifier: XIB.Names.YourTripCell)
+        tableViewList.register(UINib(nibName: XIB.Names.PassbookTableViewCell, bundle: nil), forCellReuseIdentifier: XIB.Names.PassbookTableViewCell)
         
     }
     
@@ -83,11 +96,13 @@ extension YourTripsPassbookViewController {
     }
 }
 
+// MARK:- UITableViewDelegate
+
 extension YourTripsPassbookViewController : UITableViewDelegate,UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return getCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -95,7 +110,7 @@ extension YourTripsPassbookViewController : UITableViewDelegate,UITableViewDataS
         return self.getCell(for: indexPath, in: tableView)
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return (isYourTripsSelected ? 220.0 : 120)*(UIScreen.main.bounds.height/568)
+        return (isYourTripsSelected ? (200.0-(isFirstBlockSelected ? 20 : 0)) : 120)*(UIScreen.main.bounds.height/568)
     }
     
     private func getCell(for indexPath : IndexPath, in tableView : UITableView)->UITableViewCell {
@@ -103,6 +118,10 @@ extension YourTripsPassbookViewController : UITableViewDelegate,UITableViewDataS
         if isYourTripsSelected {
             if let cell = tableView.dequeueReusableCell(withIdentifier: XIB.Names.YourTripCell, for: indexPath) as? YourTripCell {
                 cell.isPastButton = isFirstBlockSelected
+                let datasource = (self.isFirstBlockSelected ? self.datasourceYourTripsPast : self.datasourceYourTripsUpcoming)
+                if datasource.count>indexPath.row{
+                    cell.set(values: datasource[indexPath.row])
+                }
                 return cell
             }
         } else {
@@ -117,5 +136,47 @@ extension YourTripsPassbookViewController : UITableViewDelegate,UITableViewDataS
         
     }
     
+    private func getCount()->Int {
+        
+        if isYourTripsSelected {
+            return (isFirstBlockSelected ? self.datasourceYourTripsPast : self.datasourceYourTripsUpcoming).count
+        } else {
+            return (isFirstBlockSelected ? self.datasourceYourTripsPast : self.datasourceYourTripsUpcoming).count
+        }
+        
+    }
+    
     
 }
+
+// MARK:- PostviewProtocol
+
+extension YourTripsPassbookViewController : PostViewProtocol  {
+    
+    func onError(api: Base, message: String, statusCode code: Int) {
+        print("Called", #function)
+        DispatchQueue.main.async {
+            self.loader.isHidden = true
+            showAlert(message: message, okHandler: nil, fromView: self)
+        }
+    }
+    
+    func getRequestArray(api: Base, data: [Request]) {
+        print("Called", #function,data)
+        
+        if api == .historyList {
+            self.datasourceYourTripsPast = data
+        } else if api == .upcomingList {
+            self.datasourceYourTripsUpcoming = data
+        }
+        
+        DispatchQueue.main.async {
+            self.loader.isHidden = true
+            self.tableViewList.reloadData()
+        }
+        
+    }
+    
+}
+
+

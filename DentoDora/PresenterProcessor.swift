@@ -28,28 +28,35 @@ class PresenterProcessor {
         return data.getDecodedObject(from: Profile.self)
     }
     
-    //MARK:- UserData
+    // MARK:- UserData
     
     func userData(data : Data)->UserDataResponse? {
         return data.getDecodedObject(from: ForgotResponse.self)?.user
     }
     
-    //MARK:- Service List
+    // MARK:- Service List
     
     func serviceList(data : Data)->[Service] {
         return data.getDecodedObject(from: [Service].self) ?? []
     }
     
-    //MARK:- Estimate Fare
+    // MARK:- Estimate Fare
+    
     func estimateFare(data : Data)->EstimateFare? {
         return data.getDecodedObject(from: EstimateFare.self)
     }
     
-    //MARK:- Send Request
+    // MARK:- Send Request
+    
     func request(data : Data)->Request?{
         return data.getDecodedObject(from: Request.self)
     }
     
+    // MARK:- Your Trips Modal
+    
+    func requestArray (data : Data)->[Request] {
+        return data.getDecodedObject(from: [Request].self) ?? []
+    }
     
     
 }

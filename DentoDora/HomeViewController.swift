@@ -26,6 +26,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak private var textFieldSourceLocation : UITextField!
     @IBOutlet weak private var textFieldDestinationLocation : UITextField!
     @IBOutlet weak private var imageViewMarkerCenter : UIImageView!
+    @IBOutlet weak private var imageViewSideBar : UIImageView!
     
     private var selectedLocationView = UIView() // View to change the location pinpoint
     {
@@ -33,6 +34,12 @@ class HomeViewController: UIViewController {
             if !([viewSourceLocation, viewDestinationLocation].contains(selectedLocationView)) {
                 [viewSourceLocation, viewDestinationLocation].forEach({ $0?.transform = .identity })
             }
+        }
+    }
+    
+    var isOnBooking = false {  // Boolean to handle back using side menu button
+        didSet {
+            self.imageViewSideBar.image = isOnBooking ? #imageLiteral(resourceName: "back-icon") : #imageLiteral(resourceName: "menu_icon")
         }
     }
     
@@ -57,16 +64,11 @@ class HomeViewController: UIViewController {
     
     
     private var sourceLocationDetail : Bind<LocationDetail>? = Bind<LocationDetail>(nil)
-//    {  // Source Location Detail
-//        didSet{
-//
-//        }
-//    }
     
     var destinationLocationDetail : LocationDetail? {  // Destination Location Detail
         didSet{
             DispatchQueue.main.async {
-                self.textFieldDestinationLocation.text = self.destinationLocationDetail?.address
+                self.textFieldDestinationLocation.text = (self.destinationLocationDetail?.address.isEmpty ?? true) ? nil : self.destinationLocationDetail?.address
             }
         }
     }
@@ -316,7 +318,14 @@ extension HomeViewController {
     
    @IBAction private func sideMenuAction(){
         
-        self.drawerController?.openSide(.left)
+    
+    if self.isOnBooking {
+        self.removeLoaderViewAndClearMapview()
+        self.removeUnnecessaryView(with: .none)
+    } else {
+         self.drawerController?.openSide(.left)
+    }
+    
        // self.serviceView()
        // self.showRideNowView()
          // self.showRideStatusView()
@@ -586,7 +595,7 @@ extension HomeViewController : PostViewProtocol {
         
         DispatchQueue.main.async {
              self.loader.isHidden = true
-             self.removeLoaderView()
+             //self.removeLoaderViewAndClearMapview()
              showAlert(message: message, okHandler: nil, fromView: self)
         }
     }

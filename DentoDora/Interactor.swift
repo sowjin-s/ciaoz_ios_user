@@ -63,6 +63,9 @@ extension Interactor : PostInteractorOutputProtocol {
         
         case .sendRequest:
             self.presenter?.sendRequest(api: api, data: response)
+        
+        case .historyList, .upcomingList:
+            self.presenter?.sendRequestArray(api: api, data: response)
             
         default :
             break

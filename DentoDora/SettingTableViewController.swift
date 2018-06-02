@@ -13,7 +13,9 @@ class SettingTableViewController: UITableViewController {
     
     private let tableCellId = "tableCellid"
     private var numberOfRows = 2
-
+    
+    private let header = [Constants.string.favourites, Constants.string.changeLanguage]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
          self.navigationItem.rightBarButtonItem = self.editButtonItem
@@ -42,6 +44,15 @@ extension SettingTableViewController {
 
 extension SettingTableViewController {
     
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return self.header.count
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return self.header[section]
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if let tableCell = tableView.dequeueReusableCell(withIdentifier: tableCellId, for: indexPath) as? SettingTableCell {
@@ -53,7 +64,7 @@ extension SettingTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return numberOfRows
+        return section == 1 ? numberOfRows : Language.count
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {

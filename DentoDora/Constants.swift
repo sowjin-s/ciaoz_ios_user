@@ -146,6 +146,11 @@ struct Constants {
     let totalDistance = "Total Distance"
     let shareRide = "Share Ride"
     let wouldLikeToShare = "would like to share a ride with you at"
+    let profileUpdated = "Profile updated successfully"
+    let otp = "Otp"
+    let at = "at"
+    let favourites = "Favourites"
+    let changeLanguage = "Change Language"
 }
 
 //Defaults Keys
@@ -192,6 +197,8 @@ struct DateFormat {
     let MMM_dd_yyyy_hh_mm_ss_a = "MMM dd, yyyy hh:mm:ss a"
     let hhmmddMMMyyyy = "hh:mm a - dd:MMM:yyyy"
     let ddMMyyyyhhmma = "dd-MM-yyyy hh:mma"
+    let ddMMMyyyy = "dd MMM yyyy"
+    let hh_mm_a = "hh mm a"
 }
 
 
@@ -208,11 +215,10 @@ enum DeviceType : String, Codable {
 //Lanugage
 
 enum Language : String {
-    
     case english = "en"
-    case spanish = "es"
-    
+    static var count: Int{ return 1 }
 }
+
 
 
 // MARK:- Login Type

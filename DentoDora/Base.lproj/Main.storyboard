@@ -358,6 +358,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="imageViewMarkerCenter" destination="eF8-Hp-TcZ" id="sc8-0r-kyX"/>
+                        <outlet property="imageViewSideBar" destination="1Mn-hj-Dkq" id="8E0-WB-ivZ"/>
                         <outlet property="textFieldDestinationLocation" destination="N5R-Mr-wMu" id="vMG-JI-Plc"/>
                         <outlet property="textFieldSourceLocation" destination="IKL-XO-jhY" id="RTN-Ea-mW2"/>
                         <outlet property="viewAddress" destination="fx1-9G-vOI" id="J2a-aT-ZlU"/>
@@ -855,16 +856,16 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BKu-RE-f7m">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="CNV-wU-WzE">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3nC-sF-MYj">
-                                                        <rect key="frame" x="0.0" y="0.0" width="160" height="40"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="160" height="50"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H4L-7H-5t8">
-                                                                <rect key="frame" x="0.0" y="0.0" width="160" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="160" height="50"/>
                                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <state key="normal" title="Past">
                                                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -896,10 +897,10 @@
                                                         </variation>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mn8-IZ-9Ay">
-                                                        <rect key="frame" x="160" y="0.0" width="160" height="40"/>
+                                                        <rect key="frame" x="160" y="0.0" width="160" height="50"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MJS-yF-WyX">
-                                                                <rect key="frame" x="0.0" y="0.0" width="160" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="160" height="50"/>
                                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <state key="normal" title="Upcoming">
                                                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -951,10 +952,10 @@
                                                 </items>
                                             </navigationBar>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rwg-5R-cMi">
-                                                <rect key="frame" x="0.0" y="39" width="160" height="1"/>
+                                                <rect key="frame" x="0.0" y="48" width="160" height="2"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="1" id="UdG-i6-pgz"/>
+                                                    <constraint firstAttribute="height" constant="2" id="UdG-i6-pgz"/>
                                                 </constraints>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="backgroundColorId">
@@ -975,7 +976,7 @@
                                             <constraint firstItem="1dV-sr-K2a" firstAttribute="leading" secondItem="BKu-RE-f7m" secondAttribute="leading" id="szh-pl-jaf"/>
                                             <constraint firstItem="rwg-5R-cMi" firstAttribute="leading" secondItem="CNV-wU-WzE" secondAttribute="leading" id="tsI-wi-o5C"/>
                                             <constraint firstAttribute="bottom" secondItem="CNV-wU-WzE" secondAttribute="bottom" id="wzx-Ah-9MA"/>
-                                            <constraint firstAttribute="height" constant="40" id="xMS-rT-b4J"/>
+                                            <constraint firstAttribute="height" constant="50" id="xMS-rT-b4J"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="subviews">
@@ -984,8 +985,8 @@
                                         </variation>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="O3g-Tr-kxp">
-                                        <rect key="frame" x="0.0" y="40" width="320" height="508"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <rect key="frame" x="0.0" y="50" width="320" height="498"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <connections>
                                             <outlet property="dataSource" destination="BMl-Hm-2M3" id="z19-DD-zvF"/>
                                             <outlet property="delegate" destination="BMl-Hm-2M3" id="hz4-dz-Qo1"/>
@@ -1023,8 +1024,7 @@
                     </view>
                     <connections>
                         <outlet property="pastBtn" destination="H4L-7H-5t8" id="z7g-Ma-Ccp"/>
-                        <outlet property="tableViewList" destination="O3g-Tr-kxp" id="mMz-lE-3oe"/>
-                        <outlet property="tripTabelView" destination="O3g-Tr-kxp" id="Ket-nn-PmK"/>
+                        <outlet property="tableViewList" destination="O3g-Tr-kxp" id="dy8-Kb-6ti"/>
                         <outlet property="underLineView" destination="rwg-5R-cMi" id="4om-ey-q8b"/>
                         <outlet property="upCommingBtn" destination="MJS-yF-WyX" id="HwT-Un-xbY"/>
                     </connections>
