@@ -22,22 +22,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DentoDora/LocationSelectionView.swift"
-            timestampString = "548252084.57561"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "294"
-            endingLineNumber = "294"
-            landmarkName = "textFieldDidBeginEditing(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -172,11 +156,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DentoDora/HomeViewController.swift"
-            timestampString = "549645034.184813"
+            timestampString = "549803704.106086"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "412"
-            endingLineNumber = "412"
+            startingLineNumber = "413"
+            endingLineNumber = "413"
             landmarkName = "mapView(_:didChange:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -188,7 +172,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "Yes"
             filePath = "DentoDora/GMSMapView.swift"
-            timestampString = "549543825.634343"
+            timestampString = "549809136.162703"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "52"
@@ -228,7 +212,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DentoDora/HomeViewController+Extension.swift"
-            timestampString = "549645034.185022"
+            timestampString = "549785257.715914"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "178"
@@ -244,7 +228,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DentoDora/HomeViewController+Extension.swift"
-            timestampString = "549645034.185758"
+            timestampString = "549785257.716998"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "168"
@@ -308,7 +292,7 @@
                   moduleName = "User"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/css/Documents/Jeff%20Space/Appoets/Projects/DentoDora/DentoDora/ProfileViewController.swift"
-                  timestampString = "549645034.897102"
+                  timestampString = "549810058.6209511"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "98"
@@ -323,7 +307,7 @@
                   moduleName = "User"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/css/Documents/Jeff%20Space/Appoets/Projects/DentoDora/DentoDora/ProfileViewController.swift"
-                  timestampString = "549645034.902853"
+                  timestampString = "549810058.622871"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "99"
@@ -340,7 +324,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DentoDora/HomeViewController+Extension.swift"
-            timestampString = "549645034.186579"
+            timestampString = "549785257.717459"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "133"
@@ -372,7 +356,7 @@
                   moduleName = "User"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/css/Documents/Jeff%20Space/Appoets/Projects/DentoDora/DentoDora/YourTripCell.swift"
-                  timestampString = "549645034.931137"
+                  timestampString = "549810058.632303"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "53"
@@ -387,7 +371,7 @@
                   moduleName = "User"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/css/Documents/Jeff%20Space/Appoets/Projects/DentoDora/DentoDora/YourTripCell.swift"
-                  timestampString = "549645034.9371639"
+                  timestampString = "549810058.634272"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "54"
@@ -436,7 +420,7 @@
                   moduleName = "User"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/css/Documents/Jeff%20Space/Appoets/Projects/DentoDora/DentoDora/YourTripCell.swift"
-                  timestampString = "549645034.970196"
+                  timestampString = "549810058.667056"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "58"
@@ -451,7 +435,7 @@
                   moduleName = "User"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/css/Documents/Jeff%20Space/Appoets/Projects/DentoDora/DentoDora/YourTripCell.swift"
-                  timestampString = "549645034.975361"
+                  timestampString = "549810058.668938"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "59"
@@ -467,12 +451,28 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DentoDora/Cache.swift"
-            timestampString = "549645034.187461"
+            filePath = "DentoDora/HomeViewController+Extension.swift"
+            timestampString = "549785257.718004"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
+            startingLineNumber = "295"
+            endingLineNumber = "295"
+            landmarkName = "handle(request:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DentoDora/Cache.swift"
+            timestampString = "549794328.687843"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
             landmarkName = "image(forUrl:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -483,13 +483,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DentoDora/HomeViewController.swift"
-            timestampString = "549645034.1875581"
+            filePath = "DentoDora/SettingTableViewController.swift"
+            timestampString = "549812229.690447"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "493"
-            endingLineNumber = "493"
-            landmarkName = "checkForProviderStatus()"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
+            landmarkName = "tableView(_:commit:forRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -499,13 +499,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DentoDora/HomeViewController.swift"
-            timestampString = "549645034.187639"
+            filePath = "DentoDora/SettingTableViewController.swift"
+            timestampString = "549812229.690581"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "498"
-            endingLineNumber = "498"
-            landmarkName = "checkForProviderStatus()"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
+            landmarkName = "tableView(_:editingStyleForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -515,13 +515,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DentoDora/HomeViewController+Extension.swift"
-            timestampString = "549645034.187718"
+            filePath = "DentoDora/RideStatusView.swift"
+            timestampString = "549812229.690685"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "295"
-            endingLineNumber = "295"
-            landmarkName = "handle(request:)"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
+            landmarkName = "callAction()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

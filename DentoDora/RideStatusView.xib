@@ -232,10 +232,23 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fNm-Rj-eYl">
-                    <rect key="frame" x="16" y="24" width="344" height="0.0"/>
+                    <rect key="frame" x="16" y="24" width="0.0" height="0.0"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <directionalEdgeInsets key="directionalLayoutMargins" top="8" leading="8" bottom="8" trailing="8"/>
                     <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="14"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="size" keyPath="offsetShadow">
+                            <size key="value" width="0.5" height="0.5"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="opacityShadow">
+                            <real key="value" value="0.5"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="colorShadow">
+                            <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                 </label>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -245,10 +258,15 @@
                 <constraint firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="IMt-t4-wPb"/>
                 <constraint firstItem="q1j-YP-CUQ" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="LAm-TD-AtK"/>
                 <constraint firstItem="fNm-Rj-eYl" firstAttribute="leading" secondItem="q1j-YP-CUQ" secondAttribute="leading" constant="16" id="XIs-ed-cVI"/>
-                <constraint firstItem="q1j-YP-CUQ" firstAttribute="trailing" secondItem="fNm-Rj-eYl" secondAttribute="trailing" id="jIy-J2-3bs"/>
+                <constraint firstItem="q1j-YP-CUQ" firstAttribute="trailing" secondItem="fNm-Rj-eYl" secondAttribute="trailing" placeholder="YES" id="jIy-J2-3bs"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="q1j-YP-CUQ"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="jIy-J2-3bs"/>
+                </mask>
+            </variation>
             <connections>
                 <outlet property="buttonCall" destination="UJR-o8-JZQ" id="dXF-85-Cj4"/>
                 <outlet property="buttonCancel" destination="Gee-J5-q4F" id="VLO-C3-Edt"/>

@@ -73,7 +73,7 @@ class HomeViewController: UIViewController {
         }
     }
     
-    private var favouriteLocations = [(String, LocationDetail?)]() // Favourite Locations of User
+  //  private var favouriteLocations : LocationService? //[(type : String,address: [LocationDetail])]() // Favourite Locations of User
     
     var currentLocation = Bind<LocationCoordinate>(defaultMapLocation)
     
@@ -273,7 +273,7 @@ extension HomeViewController {
         
         if let locationView = Bundle.main.loadNibNamed(XIB.Names.LocationSelectionView, owner: self, options: [:])?.first as? LocationSelectionView {
             locationView.frame = self.view.bounds
-            locationView.setValues(address: (sourceLocationDetail,destinationLocationDetail), favourites: self.favouriteLocations) { (address) in
+            locationView.setValues(address: (sourceLocationDetail,destinationLocationDetail)) { (address) in
                 
                 self.sourceLocationDetail = address.source
                 self.destinationLocationDetail = address.destination
@@ -303,15 +303,16 @@ extension HomeViewController {
     }
     
     // MARK:- Get Favourite Locations
-    
+
     private func getFavouriteLocations(){
-        
-        self.favouriteLocations.append((Constants.string.home,nil))
-        self.favouriteLocations.append((Constants.string.work,nil))
-        
+
+        favouriteLocations.append((Constants.string.home,nil))
+        favouriteLocations.append((Constants.string.work,nil))
+        self.presenter?.get(api: .locationService, parameters: nil)
+
     }
-    
-    
+
+
     
     
     // MARK:- SideMenu Button Action
@@ -609,7 +610,6 @@ extension HomeViewController : PostViewProtocol {
             }
             return
         }
-        
         DispatchQueue.main.async {  // Show Services
             self.showServiceSelectionView(with: data)
         }
@@ -636,10 +636,19 @@ extension HomeViewController : PostViewProtocol {
     }
     
     func success(api: Base, message: String?) {
+        
+        if api == .locationServicePostDelete {
+            self.presenter?.get(api: .locationService, parameters: nil)
+        }
         DispatchQueue.main.async {
             self.loader.isHidden = true
             self.view.makeToast(message)
         }
+    }
+    
+    func getLocationService(api: Base, data: LocationService?) {
+        
+        storeFavouriteLocations(from: data)
     }
     
 }

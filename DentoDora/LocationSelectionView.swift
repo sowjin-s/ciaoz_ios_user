@@ -48,9 +48,9 @@ class LocationSelectionView: UIView {
         }
     }
     
-    typealias FavouriteLocation = (address :String,location :LocationDetail?)
+  
     
-    private var favouriteLocations = [FavouriteLocation]()
+    private var locationSerivce : LocationService?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -120,11 +120,10 @@ extension LocationSelectionView {
         self.datasource = []
     }
     
-    func setValues(address : Address,favourites : [(String, LocationDetail?)], completion :@escaping (Address)->Void){
+    func setValues(address : Address, completion :@escaping (Address)->Void){
         
         self.address = address
         self.completion = completion
-        self.favouriteLocations = favourites
         
     }
     
@@ -194,18 +193,26 @@ extension LocationSelectionView : UITableViewDataSource, UITableViewDelegate {
         
         if indexPath.section == 0 {
             
-            if self.favouriteLocations[indexPath.row].location != nil {
+            if favouriteLocations[indexPath.row].location != nil {
                 
-                self.autoFill(with: self.favouriteLocations[indexPath.row].location)
+                self.autoFill(with: favouriteLocations[indexPath.row].location)
 
             } else {
                 
                 self.googlePlacesHelper?.getGoogleAutoComplete(completion: { (place) in
                     
-                    self.favouriteLocations[indexPath.row].location = (place.formattedAddress ?? .Empty, place.coordinate)
+                    favouriteLocations[indexPath.row].location = (place.formattedAddress ?? .Empty, place.coordinate)
+                    
+                    var service = Service() // Save Favourite location in Server 
+                    service.address = place.formattedAddress
+                    service.latitude = place.coordinate.latitude
+                    service.longitude = place.coordinate.longitude
+                    service.type = indexPath.row == 0 ? Constants.string.home : Constants.string.work
+                    self.presenter?.post(api: Base.locationServicePostDelete, data: service.toData())
+                    
                     DispatchQueue.main.async {
                         self.tableViewBottom.reloadData()
-                        self.autoFill(with: self.favouriteLocations[indexPath.row].location)
+                        self.autoFill(with: favouriteLocations[indexPath.row].location)
                     }
                     
                 })
@@ -258,8 +265,8 @@ extension LocationSelectionView : UITableViewDataSource, UITableViewDelegate {
             
             if let tableCell = self.tableViewBottom.dequeueReusableCell(withIdentifier: XIB.Names.LocationHeaderTableViewCell, for: indexPath) as? LocationHeaderTableViewCell, favouriteLocations.count>indexPath.row {
             
-                tableCell.textLabel?.text = favouriteLocations[indexPath.row].0.localize()
-                tableCell.detailTextLabel?.text = favouriteLocations[indexPath.row].1?.address ?? Constants.string.addLocation.localize()
+                tableCell.textLabel?.text = favouriteLocations[indexPath.row].address.localize()
+                tableCell.detailTextLabel?.text = favouriteLocations[indexPath.row].location?.address ?? Constants.string.addLocation.localize()
                 return tableCell
             }
             
@@ -317,6 +324,34 @@ extension LocationSelectionView : UITextFieldDelegate {
         return true
         
     }
+}
 
+// MARK:- PostViewProtocol
+
+extension LocationSelectionView : PostViewProtocol {
+    
+    func onError(api: Base, message: String, statusCode code: Int) {
+      
+        DispatchQueue.main.async {
+            if let viewController = UIApplication.topViewController() {
+                showAlert(message: message, okHandler: nil, fromView: viewController)
+            }
+        }
+    }
+    
+    func getLocationService(api: Base, data: LocationService?) {
+        
+        storeFavouriteLocations(from: data)
+        
+    }
+    
+    func success(api: Base, message: String?) {
+        
+        if api == .locationServicePostDelete {
+            self.presenter?.get(api: .locationService, parameters: nil)
+        }
+        
+    }
+    
     
 }

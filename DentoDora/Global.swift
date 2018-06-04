@@ -12,8 +12,43 @@ import PopupDialog
 
 var currentBundle : Bundle!
 
+// Store Favourite Locations
+
+typealias FavouriteLocation = (address :String,location :LocationDetail?)
+
+var favouriteLocations = [FavouriteLocation]()
+
+// MARK:- Store Favourite Locations
+
+func storeFavouriteLocations(from locationService : LocationService?) {
+    
+    favouriteLocations.removeAll()
+    
+    // Append Favourite Locations to Service
+    if let location = locationService?.home?.first, let address = location.address, let latiude = location.latitude, let longitude = location.longitude {
+        favouriteLocations.append((Constants.string.home.localize(), LocationDetail(address, LocationCoordinate(latitude: latiude, longitude: longitude))))
+    } else {
+        favouriteLocations.append((Constants.string.home.localize(), nil))
+    }
+    
+    if let location = locationService?.work?.first, let address = location.address, let latiude = location.latitude, let longitude = location.longitude {
+        favouriteLocations.append((Constants.string.work.localize(), LocationDetail(address, LocationCoordinate(latitude: latiude, longitude: longitude))))
+    } else {
+        favouriteLocations.append((Constants.string.work.localize(), nil))
+    }
+    
+    if let recents = locationService?.recent {
+        
+        for recent in recents where recent.address != nil && recent.latitude != nil && recent.longitude != nil{
+        favouriteLocations.append((recent.address!, LocationDetail(recent.address!, LocationCoordinate(latitude: recent.latitude!, longitude: recent.longitude!))))
+        }
+    }
+    
+}
+
+
 //MARK:- Show Alert
-internal func showAlert(message : String?, handler : ((UIAlertAction) -> Void)? = nil)->UIAlertController{
+func showAlert(message : String?, handler : ((UIAlertAction) -> Void)? = nil)->UIAlertController{
     
     let alert = UIAlertController(title: AppName, message: message, preferredStyle: .alert)
     alert.addAction(UIAlertAction(title:  Constants.string.OK, style: .default, handler: handler))

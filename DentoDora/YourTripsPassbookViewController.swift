@@ -63,6 +63,7 @@ extension YourTripsPassbookViewController {
         self.loader.isHidden = false
         self.presenter?.get(api: .upcomingList, parameters: nil)
         self.presenter?.get(api: .historyList, parameters: nil)
+        
     }
  
     private func localize(){

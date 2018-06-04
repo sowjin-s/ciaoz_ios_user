@@ -100,6 +100,13 @@ extension Presenter : PostPresenterOutputProtocol {
         controller?.getRequestArray(api: api, data: PresenterProcessor.shared.requestArray(data: data))
     }
     
+    func sendLocationService(api: Base, data: Data) {
+        controller?.getLocationService(api: api, data: PresenterProcessor.shared.locationService(data: data))
+    }
+    
+    func sendCouponWallet(api: Base, data: Data) {
+        controller?.getCouponWallet(api: api, data: PresenterProcessor.shared.couponWallet(data: data))
+    }
 }
 
 

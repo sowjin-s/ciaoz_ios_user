@@ -13,10 +13,11 @@ struct Service : JSONSerializable {
     var id : Int?
     var name : String?
     var image : String?
+    var address : String?
     var latitude :Double?
     var longitude :Double?
     var service_number : String?
     var service_model : String?
-    
+    var type : String?
 }
 

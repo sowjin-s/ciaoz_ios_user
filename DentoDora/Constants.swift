@@ -151,6 +151,8 @@ struct Constants {
     let at = "at"
     let favourites = "Favourites"
     let changeLanguage = "Change Language"
+    let noFavouritesFound = "No favourite address available"
+    let cannotMakeCallAtThisMoment = "Cannot make call at this moment"
 }
 
 //Defaults Keys
@@ -167,6 +169,7 @@ struct Keys {
     let email = "email"
     let mobile = "mobile"
     let currency = "currency"
+    let language = "language"
 }
 
 //ENUM TRIP TYPE
@@ -216,7 +219,8 @@ enum DeviceType : String, Codable {
 
 enum Language : String {
     case english = "en"
-    static var count: Int{ return 1 }
+    case spanish = "es"
+    static var count: Int{ return 2 }
 }
 
 

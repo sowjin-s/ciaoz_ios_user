@@ -138,6 +138,8 @@ protocol PostPresenterOutputProtocol : class {
     func sendEstimateFare(api : Base, data : Data)
     func sendRequest(api : Base, data : Data)
     func sendRequestArray(api : Base, data : Data)
+    func sendLocationService(api : Base, data : Data)
+    func sendCouponWallet(api : Base, data : Data)
 }
 
 
@@ -156,7 +158,8 @@ protocol PostViewProtocol : class {
     func getEstimateFare(api : Base, data : EstimateFare?)
     func getRequest(api : Base, data : Request?)
     func getRequestArray(api : Base, data : [Request])
-    
+    func getLocationService(api : Base, data : LocationService?)
+    func getCouponWallet(api : Base, data : [CouponWallet])
 }
 
 
@@ -185,6 +188,9 @@ extension PostViewProtocol {
     func getEstimateFare(api : Base, data : EstimateFare?) { return }
     func getRequest(api : Base, data : Request?) { return }
     func getRequestArray(api : Base, data : [Request]) { return }
+    func getLocationService(api : Base, data : LocationService?) { return }
+    func getCouponWallet(api : Base, data : [CouponWallet]) { return }
+
 }
 
 

@@ -72,10 +72,6 @@ extension AppDelegate {
     func application(_ application: UIApplication,
                      didReceiveRemoteNotification notification: [AnyHashable : Any],
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-
-      
-       
-        
         print("Notification  :  ", notification)
 
         completionHandler(.newData)

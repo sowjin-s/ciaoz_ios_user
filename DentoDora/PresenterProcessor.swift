@@ -58,6 +58,18 @@ class PresenterProcessor {
         return data.getDecodedObject(from: [Request].self) ?? []
     }
     
+    // MARK:- Location Service
+    
+    func locationService(data : Data)->LocationService? {
+        return data.getDecodedObject(from: LocationService.self)
+    }
+    
+    // MARK:- Coupon Wallet
+    
+    func couponWallet(data : Data)->[CouponWallet]{
+        return data.getDecodedObject(from: [CouponWallet].self) ?? []
+    }
+    
     
 }
 

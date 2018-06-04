@@ -104,6 +104,8 @@
 		089B4F7B20C116D600DDEAF3 /* Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B4F7A20C116D600DDEAF3 /* Payment.swift */; };
 		08A39DA020B5BB8100314935 /* RideStatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08A39D9F20B5BB8100314935 /* RideStatusView.xib */; };
 		08A39DA220B5BB9300314935 /* RideStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A39DA120B5BB9300314935 /* RideStatusView.swift */; };
+		08A8821320C512760088BC5A /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A8821220C512760088BC5A /* LocationService.swift */; };
+		08A8821520C572510088BC5A /* Coupons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A8821420C572510088BC5A /* Coupons.swift */; };
 		08B73D0420947C5C00B60F74 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B73D0320947C5C00B60F74 /* PasswordViewController.swift */; };
 		08B7DC72209A14A1002CF17A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B7DC71209A14A1002CF17A /* HomeViewController.swift */; };
 		08B7DC75209A14E0002CF17A /* SideBarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B7DC74209A14E0002CF17A /* SideBarTableViewController.swift */; };
@@ -283,6 +285,8 @@
 		089B4F7A20C116D600DDEAF3 /* Payment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payment.swift; sourceTree = "<group>"; };
 		08A39D9F20B5BB8100314935 /* RideStatusView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RideStatusView.xib; sourceTree = "<group>"; };
 		08A39DA120B5BB9300314935 /* RideStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideStatusView.swift; sourceTree = "<group>"; };
+		08A8821220C512760088BC5A /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		08A8821420C572510088BC5A /* Coupons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coupons.swift; sourceTree = "<group>"; };
 		08B73D0320947C5C00B60F74 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		08B7DC71209A14A1002CF17A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		08B7DC74209A14E0002CF17A /* SideBarTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarTableViewController.swift; sourceTree = "<group>"; };
@@ -1254,6 +1258,8 @@
 				089B4F7A20C116D600DDEAF3 /* Payment.swift */,
 				085C6FF320C194B000C13A74 /* Rate.swift */,
 				082745E720C2A06B00C6F8F3 /* YourTripModelResponse.swift */,
+				08A8821220C512760088BC5A /* LocationService.swift */,
+				08A8821420C572510088BC5A /* Coupons.swift */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -1703,6 +1709,7 @@
 				08BF24BB20BD71F3003A4B96 /* ChangeResetPasswordController.swift in Sources */,
 				08C8F2272004A60A0065CE24 /* Image.swift in Sources */,
 				088DC901200FCCA00095D552 /* ViewExtension.swift in Sources */,
+				08A8821320C512760088BC5A /* LocationService.swift in Sources */,
 				083617C920B711BF009C9658 /* PaymentViewController.swift in Sources */,
 				082D1B892093287A0000B7C8 /* LaunchViewController.swift in Sources */,
 				082D1B8320931AB70000B7C8 /* ErrorLog.swift in Sources */,
@@ -1716,6 +1723,7 @@
 				0805BDC1209C504900ACDC38 /* SignUpUserTableViewController.swift in Sources */,
 				08F595E82076466300369048 /* ParallaxHeaderMode.swift in Sources */,
 				082D1B92209333F10000B7C8 /* FontHelper.swift in Sources */,
+				08A8821520C572510088BC5A /* Coupons.swift in Sources */,
 				082D1B7E2093159A0000B7C8 /* TextFieldEffects.swift in Sources */,
 				8833895D1FE8FC22006B6C05 /* Identifiers.swift in Sources */,
 				0809321620A0642700B88318 /* UserData.swift in Sources */,

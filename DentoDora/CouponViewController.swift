@@ -14,6 +14,11 @@ class CouponViewController: UIViewController {
     @IBOutlet private var textFieldCouponCode : TextField!
     @IBOutlet private weak var labelAddCouponString : UILabel!
     
+    lazy var loader  : UIView = {
+        return createActivityIndicator(self.view)
+    }()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initalLoads()
@@ -24,6 +29,7 @@ class CouponViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     
 }
 
@@ -44,6 +50,42 @@ extension CouponViewController {
     private func localize() {
         self.textFieldCouponCode.placeholder = Constants.string.enterCouponCode.localize()
         self.labelAddCouponString.text = Constants.string.addCouponCode.localize()
+    }
+    
+    @IBAction private func buttonCouponAction(sender : UIButton) {
+        self.view.endEditingForce()
+        guard let promo = textFieldCouponCode.text else {
+            self.view.make(toast: Constants.string.enterCouponCode.localize())
+            return
+        }
+        
+        self.loader.isHidden = false
+        var promocode = Coupon()
+        promocode.promocode = promo
+        self.presenter?.post(api: .addPromocode, data: promocode.toData())
+        
+    }
+}
+
+// MARK:- PostViewProtocol
+
+extension CouponViewController : PostViewProtocol {
+    
+    func onError(api: Base, message: String, statusCode code: Int) {
+        
+        DispatchQueue.main.async {
+            self.loader.isHidden = true
+            //self.removeLoaderViewAndClearMapview()
+            showAlert(message: message, okHandler: nil, fromView: self)
+        }
+    }
+    
+    func success(api: Base, message: String?) {
+        
+        DispatchQueue.main.async {
+            self.loader.isHidden = true
+            self.view.makeToast(message)
+        }
     }
     
 }
