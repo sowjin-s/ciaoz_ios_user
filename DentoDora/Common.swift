@@ -81,5 +81,15 @@ class Common {
         User.main.currency = profile?.currency
         User.main.picture = profile?.picture
     }
+    
+    class func call(to number : String?) {
+        
+        if let providerNumber = number, let url = URL(string: "tel://\(providerNumber)"), UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        } else {
+            UIScreen.main.focusedView?.make(toast: Constants.string.cannotMakeCallAtThisMoment.localize())
+        }
+        
+    }
         
 }

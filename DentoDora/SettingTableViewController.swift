@@ -26,6 +26,9 @@ class SettingTableViewController: UITableViewController {
     
     private var locationService : LocationService?
     
+    private var mapHelper : GoogleMapsHelper?
+    private var placesHelper : GooglePlacesHelper?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
@@ -157,16 +160,22 @@ extension SettingTableViewController {
             UserDefaults.standard.set(self.selectedLanguage.rawValue, forKey: Keys.list.language)
             self.tableView.reloadRows(at: [IndexPath(row: 0, section: 1),IndexPath(row: 1, section: 1)], with: .automatic)
         } else if indexPath.section ==  0{
-            
-            GooglePlacesHelper().getGoogleAutoComplete { (place) in
-                GoogleMapsHelper().getPlaceAddress(from: place.coordinate, on: { (locationDetail) in
+            self.loader.isHidden = false
+            if self.mapHelper == nil {
+                self.mapHelper = GoogleMapsHelper()
+            }
+            if self.placesHelper == nil {
+                self.placesHelper = GooglePlacesHelper()
+            }
+            self.loader.isHidden = true
+            self.placesHelper?.getGoogleAutoComplete { (place) in
+                self.mapHelper?.getPlaceAddress(from: place.coordinate, on: { (locationDetail) in
                     var service = Service() // Save Favourite location in Server
                     service.address = place.formattedAddress
                     service.latitude = place.coordinate.latitude
                     service.longitude = place.coordinate.longitude
                     service.type = indexPath.row == 0 ? Constants.string.home : Constants.string.work
                     self.presenter?.post(api: Base.locationServicePostDelete, data: service.toData())
-                    
                 })
             }
         }

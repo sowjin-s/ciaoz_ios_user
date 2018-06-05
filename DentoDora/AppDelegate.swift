@@ -12,6 +12,7 @@ import UIKit
 import UserNotifications
 import GoogleMaps
 import GooglePlaces
+import IQKeyboardManager
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.appearence()
         setLocalization(language: .english)
         self.google()
+        self.IQKeyboard()
       //  return true
        
         
@@ -91,13 +93,18 @@ extension AppDelegate {
     
 extension AppDelegate {
     
-    func google(){
+    private func google(){
         
         GMSServices.provideAPIKey(googleMapKey)
         GMSPlacesClient.provideAPIKey(googleMapKey)
         
     }
+    
+    private func IQKeyboard() {
         
+        IQKeyboardManager.shared().isEnabled = true
+    }
+    
 }
     
 

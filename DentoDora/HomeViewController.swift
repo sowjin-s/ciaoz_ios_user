@@ -27,6 +27,17 @@ class HomeViewController: UIViewController {
     @IBOutlet weak private var textFieldDestinationLocation : UITextField!
     @IBOutlet weak private var imageViewMarkerCenter : UIImageView!
     @IBOutlet weak private var imageViewSideBar : UIImageView!
+    @IBOutlet weak var buttonSOS : UIButton!
+    
+    lazy var markerProviderLocation : GMSMarker = {  // Provider Location Marker
+        
+        let marker = GMSMarker()
+        marker.icon = #imageLiteral(resourceName: "map-vehicle-icon-black")
+        marker.map = self.mapViewHelper?.mapView
+        return marker
+        
+    }()
+    
     
     private var selectedLocationView = UIView() // View to change the location pinpoint
     {
@@ -44,8 +55,8 @@ class HomeViewController: UIViewController {
     }
     
     private var isUserInteractingWithMap = false // Boolean to handle Mapview User interaction
-    
-    private let transition = CircularTransition()  // Translation to for location Tap
+    private var riderStatus : RideStatus = .none // Provider Current Status
+   // private let transition = CircularTransition()  // Translation to for location Tap
     var mapViewHelper : GoogleMapsHelper?
     private var favouriteViewSource : LottieView?
     private var favouriteViewDestination : LottieView?
@@ -119,6 +130,9 @@ class HomeViewController: UIViewController {
         super.viewWillLayoutSubviews()
         self.viewLayouts()
     }
+    
+    var tempLat = 13.05864944
+    var tempLong = 80.25398977
 
 }
 
@@ -153,7 +167,17 @@ extension HomeViewController {
         })
         self.viewDestinationLocation.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
         self.checkForProviderStatus()
-    
+        self.buttonSOS.isHidden = true
+        self.buttonSOS.addTarget(self, action: #selector(self.buttonSOSAction), for: .touchUpInside)
+        
+        
+        let timer =  Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) { (_) in
+            
+            self.tempLat -= 0.00002
+            self.tempLong -= 0.00002
+            self.moveProviderMarker(to: LocationCoordinate(latitude: self.tempLat, longitude: self.tempLong))
+        }
+        timer.fire()
     }
     
     
@@ -290,9 +314,10 @@ extension HomeViewController {
     
     //MARK:- Draw Polyline
     
-    private func drawPolyline() {
+     func drawPolyline() {
         
-        if let sourceCoordinate = self.sourceLocationDetail?.value?.coordinate, let destinationCoordinate = self.destinationLocationDetail?.coordinate {  // Draw polyline from source to destination
+        if let sourceCoordinate = self.sourceLocationDetail?.value?.coordinate,
+           let destinationCoordinate = self.destinationLocationDetail?.coordinate {  // Draw polyline from source to destination
             self.mapViewHelper?.mapView?.clear()
             self.selectionViewAction(in: self.viewSourceLocation)
             self.selectionViewAction(in: self.viewDestinationLocation)
@@ -321,8 +346,10 @@ extension HomeViewController {
         
     
     if self.isOnBooking {
-        self.removeLoaderViewAndClearMapview()
+        self.removeLoaderView()
         self.removeUnnecessaryView(with: .none)
+        self.clearMapview()
+        self.viewAddressOuter.isHidden = false
     } else {
          self.drawerController?.openSide(.left)
     }
@@ -451,7 +478,7 @@ extension HomeViewController : GMSMapViewDelegate {
     
 }
 
-// MARK:-  UIViewControllerTransitioningDelegate
+/*// MARK:-  UIViewControllerTransitioningDelegate
 
 extension HomeViewController : UIViewControllerTransitioningDelegate {
     
@@ -480,7 +507,7 @@ extension HomeViewController : UIViewControllerTransitioningDelegate {
         return nil
     }
     
-}
+} */
 
 
 // MARK:- Service Calls
@@ -501,8 +528,18 @@ extension HomeViewController  {
                     showAlert(message: error?.localizedDescription, okHandler: nil, fromView: self)
                 }
             } else if request != nil {
-                
                 print(request!)
+                
+                if let pLatitude = request?.provider?.latitude, let pLongitude = request?.provider?.longitude {
+                    DispatchQueue.main.async {
+                        self.moveProviderMarker(to: LocationCoordinate(latitude: pLatitude, longitude: pLongitude))
+                    }
+                }
+                
+                guard self.riderStatus != request?.status else {
+                    return
+                }
+                self.riderStatus = request?.status ?? .none
                 self.handle(request: request!)
             } else {
                 self.removeUnnecessaryView(with: .none)

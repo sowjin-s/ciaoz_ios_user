@@ -36,6 +36,8 @@ class YourTripsPassbookViewController: UIViewController {
     
     private var datasourceYourTripsUpcoming = [Request]()
     private var datasourceYourTripsPast = [Request]()
+    private var datasourceCoupon = [CouponWallet]()
+    private var datasourceWallet = [CouponWallet]()
 
     
     override func viewDidLoad() {
@@ -61,8 +63,14 @@ extension YourTripsPassbookViewController {
         self.navigationItem.title = (isYourTripsSelected ? Constants.string.yourTrips : Constants.string.passbook).localize()
         self.localize()
         self.loader.isHidden = false
-        self.presenter?.get(api: .upcomingList, parameters: nil)
-        self.presenter?.get(api: .historyList, parameters: nil)
+       
+        if isYourTripsSelected {
+            self.presenter?.get(api: .upcomingList, parameters: nil)
+            self.presenter?.get(api: .historyList, parameters: nil)
+        } else {
+            self.presenter?.get(api: .walletPassbook, parameters: nil)
+            self.presenter?.get(api: .couponPassbook, parameters: nil)
+        }
         
     }
  
@@ -95,6 +103,14 @@ extension YourTripsPassbookViewController {
         self.isFirstBlockSelected = sender.tag == 1
         tableViewList.reloadData()
     }
+    
+    private func reloadTable() {
+        DispatchQueue.main.async {
+            self.loader.isHidden = true
+            self.tableViewList.reloadData()
+        }
+    }
+    
 }
 
 // MARK:- UITableViewDelegate
@@ -170,13 +186,20 @@ extension YourTripsPassbookViewController : PostViewProtocol  {
         } else if api == .upcomingList {
             self.datasourceYourTripsUpcoming = data
         }
-        
-        DispatchQueue.main.async {
-            self.loader.isHidden = true
-            self.tableViewList.reloadData()
-        }
-        
+        reloadTable()
     }
+    
+    func getCouponWallet(api: Base, data: [CouponWallet]) {
+        
+        if api == .couponPassbook {
+            self.datasourceCoupon = data
+        } else if api == .walletPassbook {
+            self.datasourceWallet = data
+        }
+        reloadTable()
+    }
+    
+    
     
 }
 

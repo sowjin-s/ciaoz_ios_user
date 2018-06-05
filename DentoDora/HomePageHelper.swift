@@ -11,7 +11,6 @@ import Foundation
 class HomePageHelper {
     
     private var timer : Timer?
-    private var status : RideStatus = .none
     
     // MARK:- Start Listening for Provider Status Changes
     func startListening(on completion : @escaping ((CustomError?,Request?)->Void)) {
@@ -30,8 +29,10 @@ class HomePageHelper {
     
     //MARK:- Stop Listening
     func stopListening() {
+        // DispatchQueue.main.async {
             self.timer?.invalidate()
             self.timer = nil
+       // }
     }
     
     //MARK:- Get Request Data From Service
@@ -41,18 +42,19 @@ class HomePageHelper {
         Webservice().retrieve(api: .checkRequest, url: nil, data: nil, imageData: nil, paramters: nil, type: .GET) { (error, data) in
             
             guard let data = data,
-                let request = data.getDecodedObject(from: RequestModal.self)?.data?.first,
-                request.status != self.status  else {
-                    
+                let request = data.getDecodedObject(from: RequestModal.self)?.data
+                else {
                 completion(error, nil)
-                DispatchQueue.main.async {
-                    self.stopListening()
-                }
+                DispatchQueue.main.async { self.stopListening() }
                 return
-                    
             }
             
-            completion(nil, request)
+            guard let requestFirst = request.first else {
+                completion(nil, nil)
+                DispatchQueue.main.async { self.stopListening() }
+                return
+            }
+            completion(nil, requestFirst)
            
         }
     }

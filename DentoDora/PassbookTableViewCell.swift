@@ -21,13 +21,27 @@ class PassbookTableViewCell: UITableViewCell {
     var isWalletSelected = true {
         didSet {
             self.labelCouponStatus.isHidden = isWalletSelected
+            self.labelAmountString.text = (isWalletSelected ? Constants.string.amount : Constants.string.offer).localize()
+            self.labelCredit.text = (isWalletSelected ? Constants.string.creditedBy : Constants.string.CouponCode).localize()
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
+    }
+    
+    func set(values : CouponWallet) {
+        
+        if let dateObject = Formatter.shared.getDate(from:  values.created_at, format: DateFormat.list.yyyy_mm_dd_HH_MM_ss) {
+            self.labelDate.text = Formatter.shared.getString(from: dateObject, format: DateFormat.list.ddMMMyyyy)
+        }
+        self.labelCouponStatus.text = values.promocode?.status?.localize()
+        self.labelPaymentType.text = isWalletSelected ? values.via : values.promocode?.promo_code
+        let discountValue = values.promocode?.discount_type == Constants.string.amount.lowercased() ? "\(User.main.currency ?? .Empty) \(values.promocode?.discount ?? .Empty)" : "\(values.promocode?.discount ?? .Empty) % \(Constants.string.OFF.localize())"
+        self.labelOffer.text = isWalletSelected ? "\(User.main.currency ?? .Empty) \(values.amount ?? "0")" : "\(discountValue)"
         
     }
+    
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

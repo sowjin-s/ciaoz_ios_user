@@ -69,6 +69,9 @@ extension Interactor : PostInteractorOutputProtocol {
             
         case .locationService:
             self.presenter?.sendLocationService(api: api, data: response)
+        
+        case .walletPassbook, .couponPassbook:
+            self.presenter?.sendCouponWallet(api: api, data: response)
             
         default :
             break

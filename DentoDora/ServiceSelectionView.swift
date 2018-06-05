@@ -131,7 +131,6 @@ extension ServiceSelectionView : UICollectionViewDelegate, UICollectionViewDataS
             return collectionCell
         }
         
-        
         return UICollectionViewCell()
     }
     

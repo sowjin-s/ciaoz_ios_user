@@ -14,6 +14,8 @@ target 'User' do
     pod 'DateTimePicker'
     pod 'PopupDialog', '~> 0.7'
     #pod 'FloatRatingView', '~> 2.0.0'
+    pod 'IQKeyboardManager'
+    
   target 'UserTests' do
     inherit! :search_paths
     # Pods for testing

@@ -106,6 +106,7 @@
 		08A39DA220B5BB9300314935 /* RideStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A39DA120B5BB9300314935 /* RideStatusView.swift */; };
 		08A8821320C512760088BC5A /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A8821220C512760088BC5A /* LocationService.swift */; };
 		08A8821520C572510088BC5A /* Coupons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A8821420C572510088BC5A /* Coupons.swift */; };
+		08A8823620C6DEBE0088BC5A /* KeyboardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A8823520C6DEBE0088BC5A /* KeyboardHelper.swift */; };
 		08B73D0420947C5C00B60F74 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B73D0320947C5C00B60F74 /* PasswordViewController.swift */; };
 		08B7DC72209A14A1002CF17A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B7DC71209A14A1002CF17A /* HomeViewController.swift */; };
 		08B7DC75209A14E0002CF17A /* SideBarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B7DC74209A14E0002CF17A /* SideBarTableViewController.swift */; };
@@ -287,6 +288,7 @@
 		08A39DA120B5BB9300314935 /* RideStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideStatusView.swift; sourceTree = "<group>"; };
 		08A8821220C512760088BC5A /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		08A8821420C572510088BC5A /* Coupons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coupons.swift; sourceTree = "<group>"; };
+		08A8823520C6DEBE0088BC5A /* KeyboardHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHelper.swift; sourceTree = "<group>"; };
 		08B73D0320947C5C00B60F74 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		08B7DC71209A14A1002CF17A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		08B7DC74209A14E0002CF17A /* SideBarTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarTableViewController.swift; sourceTree = "<group>"; };
@@ -794,6 +796,7 @@
 		0846135F20627389002616EF /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				08A8823420C6DDE20088BC5A /* Keyboard Helper */,
 				08F595E02076460F00369048 /* Parallalex */,
 				08F3CBBD202471DC00F5EEDF /* Toast */,
 				0846135E20627374002616EF /* Bind */,
@@ -902,6 +905,14 @@
 				08A39DA120B5BB9300314935 /* RideStatusView.swift */,
 			);
 			name = "Ride Status";
+			sourceTree = "<group>";
+		};
+		08A8823420C6DDE20088BC5A /* Keyboard Helper */ = {
+			isa = PBXGroup;
+			children = (
+				08A8823520C6DEBE0088BC5A /* KeyboardHelper.swift */,
+			);
+			name = "Keyboard Helper";
 			sourceTree = "<group>";
 		};
 		08B73D0220947C4900B60F74 /* Password */ = {
@@ -1586,6 +1597,7 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/DateTimePicker/DateTimePicker.framework",
 				"${BUILT_PRODUCTS_DIR}/DynamicBlurView/DynamicBlurView.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/KWDrawerController/KWDrawerController.framework",
 				"${BUILT_PRODUCTS_DIR}/PopupDialog/PopupDialog.framework",
 				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
@@ -1595,6 +1607,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DateTimePicker.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DynamicBlurView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KWDrawerController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PopupDialog.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
@@ -1689,6 +1702,7 @@
 				086BAF6420078E220087F15A /* ViewController.swift in Sources */,
 				8894801F1FECE2CA006AF5A9 /* Label.swift in Sources */,
 				082F77D120A5AA2200D6474B /* ServiceSelectionCollectionViewCell.swift in Sources */,
+				08A8823620C6DEBE0088BC5A /* KeyboardHelper.swift in Sources */,
 				083A59B120A4351D00D64574 /* LocationHeaderTableViewCell.swift in Sources */,
 				086BAF5720076E0D0087F15A /* MakeJson.swift in Sources */,
 				086606E62005144400A79566 /* ImageView.swift in Sources */,

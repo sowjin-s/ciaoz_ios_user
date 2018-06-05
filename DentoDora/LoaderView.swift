@@ -45,29 +45,18 @@ extension LoaderView {
     }
     
     
-    func endLoader(){
+    func endLoader(on completion : @escaping (()->Void)){
         
         UIView.animate(withDuration: 0.3, animations: {
-            self.lottieView.transform = CGAffineTransform(scaleX: 5, y: 5)
+            self.lottieView.transform = CGAffineTransform(scaleX: 10, y: 10)
             self.lottieView.alpha = 0
         }) { (_) in
+            completion()
             self.removeFromSuperview()
         }
     }
  
     @IBAction private func cancelButtonClick(){
-        
-       
-        let alert = PopupDialog(title: Constants.string.cancelRequest.localize(), message: Constants.string.cancelRequestDescription.localize())
-        let cancelButton =  PopupDialogButton(title: Constants.string.Cancel.localize(), action: {
-             alert.dismiss()
-        })
-        cancelButton.titleColor = .primary
-        let sureButton = PopupDialogButton(title: Constants.string.sure.localize()) {
-             self.onCancel?()
-        }
-        sureButton.titleColor = .red
-        alert.addButtons([cancelButton,sureButton])
-        UIApplication.topViewController()?.present(alert, animated: true, completion: nil)
+        self.onCancel?()
     }
 }

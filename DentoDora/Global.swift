@@ -86,6 +86,27 @@ func showAlert(message : String?, handler : ((UIAlertAction) -> Void)? = nil)->U
 }
 
 
+//MARK:- Show Alert With Action
+
+func showAlert(message : String?, okHandler : (()->Void)?, cancelHandler : (()->Void)?, fromView : UIViewController){
+    
+    let alert = PopupDialog(title: message, message: nil)
+    let okButton =  PopupDialogButton(title: Constants.string.OK.localize(), action: {
+        okHandler?()
+        alert.dismiss()
+    })
+    let cancelButton =  PopupDialogButton(title: Constants.string.Cancel.localize(), action: {
+        cancelHandler?()
+        alert.dismiss()
+    })
+    alert.transitionStyle = .zoomIn
+    cancelButton.titleColor = .red
+    okButton.titleColor = .primary
+    alert.addButton(okButton)
+    alert.addButton(cancelButton)
+    fromView.present(alert, animated: true, completion: nil)
+    
+}
 
 //MARK:- ShowLoader
 

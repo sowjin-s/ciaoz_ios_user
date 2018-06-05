@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import Lottie
 import GoogleMaps
+import PopupDialog
 
 extension HomeViewController {
     
@@ -105,6 +106,7 @@ extension HomeViewController {
                     }
                 })
             }
+            self.viewAddressOuter.isHidden = true
             self.isOnBooking = true
             self.view.addSubview(self.rideSelectionView!)
         }
@@ -120,7 +122,6 @@ extension HomeViewController {
         
         self.rideSelectionView?.dismissView(onCompletion: {
             self.rideSelectionView = nil
-            self.viewAddressOuter.isHidden = false
             self.isOnBooking = false
         })
     }
@@ -130,14 +131,18 @@ extension HomeViewController {
     
     func showRideStatusView(with request : Request) {
         
+        self.viewAddressOuter.isHidden = true
         if self.rideStatusView == nil, let rideStatus = Bundle.main.loadNibNamed(XIB.Names.RideStatusView, owner: self, options: [:])?.first as? RideStatusView {
-            
             rideStatus.frame = CGRect(origin: CGPoint(x: 0, y: self.view.frame.height-rideStatus.frame.height), size: CGSize(width: self.view.frame.width, height: rideStatus.frame.height))
             rideStatusView = rideStatus
             self.view.addSubview(rideStatus)
             rideStatus.show(with: .bottom, completion: nil)
         }
-        
+        // Change Provider Location 
+        if let latitude = request.provider?.latitude, let longitude = request.provider?.longitude {
+            self.moveProviderMarker(to: LocationCoordinate(latitude: latitude, longitude: longitude))
+        }
+        self.buttonSOS.isHidden = !(request.status == .pickedup)
         rideStatusView?.set(values: request)
         rideStatusView?.onClickCancel = {
             self.loader.isHidden = false
@@ -153,7 +158,7 @@ extension HomeViewController {
     // MARK:- Remove RideStatus View
     
     func removeRideStatusView() {
-        
+        self.buttonSOS.isHidden = true
         self.rideStatusView?.dismissView(onCompletion: {
             self.rideStatusView = nil
         })
@@ -166,7 +171,7 @@ extension HomeViewController {
     func showInvoiceView(with request : Request) {
         
         if self.invoiceView == nil, let invoice = Bundle.main.loadNibNamed(XIB.Names.InvoiceView, owner: self, options: [:])?.first as? InvoiceView {
-            
+            self.viewAddressOuter.isHidden = true
             invoice.frame = CGRect(origin: CGPoint(x: 0, y: self.view.frame.height-invoice.frame.height), size: CGSize(width: self.view.frame.width, height: invoice.frame.height))
             invoiceView = invoice
             self.invoiceView?.set(request: request)
@@ -203,7 +208,7 @@ extension HomeViewController {
         guard self.ratingView == nil else { return }
         
         if let rating = Bundle.main.loadNibNamed(XIB.Names.RatingView, owner: self, options: [:])?.first as? RatingView {
-            
+            self.viewAddressOuter.isHidden = true
             rating.frame = CGRect(origin: CGPoint(x: 0, y: self.view.frame.height-rating.frame.height), size: CGSize(width: self.view.frame.width, height: rating.frame.height))
             ratingView = rating
             self.view.addSubview(ratingView!)
@@ -230,6 +235,8 @@ extension HomeViewController {
         
         self.ratingView?.dismissView(onCompletion: {
             self.ratingView = nil
+            self.viewAddressOuter.isHidden = false
+            self.clearMapview()
         })
         
     }
@@ -265,8 +272,6 @@ extension HomeViewController {
             singleView.frame = self.viewMapOuter.bounds
             self.requestLoaderView = singleView
             self.requestLoaderView?.onCancel = {
-                self.removeLoaderViewAndClearMapview()
-                self.requestLoaderView = nil
                 self.cancelCurrentRide()
             }
             self.viewMapOuter.addSubview(singleView)
@@ -280,10 +285,18 @@ extension HomeViewController {
     
     // MARK:- Remove Loader View
     
-    func removeLoaderViewAndClearMapview() {
+    func removeLoaderView() {
         
-        self.requestLoaderView?.endLoader()
-        self.viewAddressOuter.isHidden = false
+        self.requestLoaderView?.endLoader {
+            self.requestLoaderView = nil
+            self.viewAddressOuter.isHidden = false
+        }
+    }
+    
+    // MARK:- Clear Map View
+    
+    func clearMapview() {
+        
         self.mapViewHelper?.mapView?.clear()
         self.destinationLocationDetail = nil
     }
@@ -293,7 +306,19 @@ extension HomeViewController {
     func handle(request : Request) {
         
         guard let status = request.status, request.id != nil else { return }
-        self.currentRequestId = request.id!
+        
+        DispatchQueue.global(qos: .default).async {
+            
+            self.currentRequestId = request.id!
+            if let dAddress = request.d_address, let dLatitude = request.d_latitude, let dLongitude = request.d_longitude {
+                self.destinationLocationDetail = LocationDetail(dAddress, LocationCoordinate(latitude: dLatitude, longitude: dLongitude))
+                DispatchQueue.main.async {
+                    self.drawPolyline()
+                }
+            }
+            
+        }
+        
         switch status{
             
         case .searching:
@@ -321,7 +346,7 @@ extension HomeViewController {
     func removeUnnecessaryView(with status : RideStatus) {
         
         if ![RideStatus.searching].contains(status) {
-            self.removeLoaderViewAndClearMapview()
+            self.removeLoaderView()
             
         }
         if ![RideStatus.started, .accepted, .arrived, .pickedup].contains(status) {
@@ -371,11 +396,53 @@ extension HomeViewController {
     
     private func cancelCurrentRide() {
         
-        if self.currentRequestId>0 {
-            let request = Request()
-            request.request_id = self.currentRequestId
-            self.presenter?.post(api: .cancelRequest, data: request.toData())
+        let alert = PopupDialog(title: Constants.string.cancelRequest.localize(), message: Constants.string.cancelRequestDescription.localize())
+        let cancelButton =  PopupDialogButton(title: Constants.string.Cancel.localize(), action: {
+            alert.dismiss()
+        })
+        cancelButton.titleColor = .primary
+        let sureButton = PopupDialogButton(title: Constants.string.sure.localize()) {
+            
+            if self.currentRequestId>0 {
+                let request = Request()
+                request.request_id = self.currentRequestId
+                self.presenter?.post(api: .cancelRequest, data: request.toData())
+            }
+            self.removeLoaderView()
+            self.clearMapview()
         }
+        sureButton.titleColor = .red
+        alert.addButtons([cancelButton,sureButton])
+        UIApplication.topViewController()?.present(alert, animated: true, completion: nil)
+        
     }
+    
+    // MARK:- SOS Action
+    
+    @IBAction func buttonSOSAction() {
+        
+        showAlert(message: Constants.string.areYouSure.localize(), okHandler: {
+            Common.call(to: "\(sosNumber)")
+        }, cancelHandler: {
+            
+        }, fromView: self)
+        
+    }
+    
+    // MARK:- Provider Location Marker
+    
+    func moveProviderMarker(to location : LocationCoordinate) {
+        
+        if markerProviderLocation.map == nil {
+            markerProviderLocation.map = mapViewHelper?.mapView
+        }
+        
+        CATransaction.begin()
+        CATransaction.setAnimationDuration(2)
+        markerProviderLocation.position = location
+        CATransaction.commit()
+        
+    }
+    
     
 }

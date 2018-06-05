@@ -88,7 +88,7 @@ extension RideStatusView {
     func set(values : Request) {
         
         self.request = values
-        
+        self.currentStatus = values.status ?? .none
         self.labelTopTitle.text = {
             switch values.status! {
                 case .accepted, .started:
@@ -123,7 +123,7 @@ extension RideStatusView {
         self.labelServiceName.text = values.service?.name
         self.labelServiceNumber.text = values.provider_service?.service_number
         self.labelServiceDescription.text = values.provider_service?.service_model
-        self.labelOtp.text = Constants.string.otp.localize()+": "+String.removeNil(values.otp)
+        self.labelOtp.text = " \(Constants.string.otp.localize()+": "+String.removeNil(values.otp)) "
         
     }
     
@@ -131,11 +131,7 @@ extension RideStatusView {
     
     @IBAction private func callAction() {
         
-        if let providerNumber = request?.provider?.mobile, let url = URL(string: "tel://\(providerNumber)"), UIApplication.shared.canOpenURL(url) {
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
-        } else {
-            UIScreen.main.focusedView?.make(toast: Constants.string.cannotMakeCallAtThisMoment.localize())
-        }
+        Common.call(to: request?.provider?.mobile)
         
     }
     

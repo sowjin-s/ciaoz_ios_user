@@ -153,6 +153,12 @@ struct Constants {
     let changeLanguage = "Change Language"
     let noFavouritesFound = "No favourite address available"
     let cannotMakeCallAtThisMoment = "Cannot make call at this moment"
+    let offer = "Offer"
+    let amount = "Amount"
+    let creditedBy = "Credited By"
+    let CouponCode = "Coupon Code"
+    let OFF = "OFF"
+  
 }
 
 //Defaults Keys

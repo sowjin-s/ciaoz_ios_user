@@ -63,14 +63,13 @@ extension HelpViewController {
     
     @IBAction func Buttontapped(sender: UIButton){
         if sender.tag == 1{
-            guard let number = URL(string: "9962573948") else { return }
-            UIApplication.shared.open(number, options: [:], completionHandler: nil)
+            Common.call(to: supportNumber)
         }else if sender.tag == 2{
             self.sendEmail()
             
         }else if sender.tag == 3 {
             
-            guard let url = URL(string: "http://www.google.com") else {
+            guard let url = URL(string: baseUrl) else {
                 return //be safe
             }
             

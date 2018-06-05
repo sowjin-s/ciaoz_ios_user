@@ -93,12 +93,12 @@ class Request : JSONSerializable {
         request_id = try? values.decode(Int.self, forKey: .request_id)
         current_provider = try? values.decode(Int.self, forKey: .current_provider)
         if values.contains(.status) {
-           // status = try? values.decode(RideStatus.self, forKey: .status)
+            status = try? values.decode(RideStatus.self, forKey: .status)
         }
-       // provider_service = try? values.decode(Service.self, forKey: .provider_service)
-       // payment = try? values.decode(Payment.self, forKey: .payment)
+        provider_service = try? values.decode(Service.self, forKey: .provider_service)
+        payment = try? values.decode(Payment.self, forKey: .payment)
         travel_time = try? values.decode(String.self, forKey: .travel_time)
-        //payment_mode = try? values.decode(PaymentType.self, forKey: .payment_mode)
+        payment_mode = try? values.decode(PaymentType.self, forKey: .payment_mode)
         otp = try? values.decode(String.self, forKey: .otp)
         assigned_at = try? values.decode(String.self, forKey: .assigned_at)
         schedule_at = try? values.decode(String.self, forKey: .schedule_at)
