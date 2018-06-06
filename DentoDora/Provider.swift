@@ -16,7 +16,7 @@ struct Provider : JSONSerializable {
     var avatar : String?
     var first_name : String?
     var last_name : String?
-    var rating : Double?
+    var rating : String?
     var mobile : String?
 
 }

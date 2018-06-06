@@ -43,7 +43,7 @@ class GoogleMapsHelper : NSObject {
     
     var mapView : GMSMapView?
     var locationManager : CLLocationManager?
-    private var currentLocation : ((LocationCoordinate)->Void)?
+    private var currentLocation : ((CLLocation)->Void)?
    
     func getMapView(withDelegate delegate: GMSMapViewDelegate? = nil, in view : UIView, withPosition position :LocationCoordinate = defaultMapLocation, zoom : Float = 15) {
         
@@ -54,7 +54,7 @@ class GoogleMapsHelper : NSObject {
        view.addSubview(mapView!)
     }
     
-    func getCurrentLocation(onReceivingLocation : @escaping ((LocationCoordinate)->Void)){
+    func getCurrentLocation(onReceivingLocation : @escaping ((CLLocation)->Void)){
         
         locationManager = CLLocationManager()
         locationManager?.desiredAccuracy = kCLLocationAccuracyBest
@@ -136,7 +136,7 @@ extension GoogleMapsHelper: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
           print("Location: \(location)")
-          self.currentLocation?(location.coordinate)
+          self.currentLocation?(location)
         }
         
     }

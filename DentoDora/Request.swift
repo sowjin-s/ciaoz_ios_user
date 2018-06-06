@@ -79,22 +79,16 @@ class Request : JSONSerializable {
         d_latitude = try? values.decode(Double.self, forKey: .d_latitude)
         d_longitude = try? values.decode(Double.self, forKey: .d_longitude)
         use_wallet = try? values.decode(Int.self, forKey: .use_wallet)
-        if values.contains(.provider) {
-             provider = try? values.decode(Provider.self, forKey: .provider)
-        }
-        if values.contains(.distance) {
-            distance = try? values.decode(String.self, forKey: .distance)
-            distanceInt = try? values.decode(Int.self, forKey: .distance)
-        }
+        provider = try? values.decode(Provider.self, forKey: .provider)
+        distance = try? values.decode(String.self, forKey: .distance)
+        distanceInt = try? values.decode(Int.self, forKey: .distance)
         service = try? values.decode(Service.self, forKey: .service_type)
         service_type =  try? values.decode(Int.self, forKey: .service_type)
         schedule_date = try? values.decode(String.self, forKey: .schedule_date)
         schedule_time = try? values.decode(String.self, forKey: .schedule_time)
         request_id = try? values.decode(Int.self, forKey: .request_id)
         current_provider = try? values.decode(Int.self, forKey: .current_provider)
-        if values.contains(.status) {
-            status = try? values.decode(RideStatus.self, forKey: .status)
-        }
+        status = try? values.decode(RideStatus.self, forKey: .status)
         provider_service = try? values.decode(Service.self, forKey: .provider_service)
         payment = try? values.decode(Payment.self, forKey: .payment)
         travel_time = try? values.decode(String.self, forKey: .travel_time)

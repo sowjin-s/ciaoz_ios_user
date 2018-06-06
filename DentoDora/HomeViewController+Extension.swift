@@ -12,6 +12,7 @@ import Lottie
 import GoogleMaps
 import PopupDialog
 
+
 extension HomeViewController {
     
     // MARK:- Show Service View
@@ -89,11 +90,11 @@ extension HomeViewController {
         
         if self.rideSelectionView == nil {
             self.viewAddressOuter.isHidden = true
+            print("ViewAddressOuter ", #function)
             self.rideSelectionView = Bundle.main.loadNibNamed(XIB.Names.RequestSelectionView, owner: self, options: [:])?.first as? RequestSelectionView
             self.rideSelectionView?.frame = CGRect(x: 0, y: self.view.frame.height-self.rideSelectionView!.bounds.height, width: self.view.frame.width, height: self.rideSelectionView!.frame.height)
             self.rideSelectionView?.show(with: .bottom, completion: nil)
             self.rideSelectionView?.rideNowAction = { estimateFare in
-                self.removeRideNowView()
                 if estimateFare != nil {
                     self.createRequest(for: estimateFare!, isScheduled: false, scheduleDate: nil)
                 }
@@ -106,7 +107,6 @@ extension HomeViewController {
                     }
                 })
             }
-            self.viewAddressOuter.isHidden = true
             self.isOnBooking = true
             self.view.addSubview(self.rideSelectionView!)
         }
@@ -132,6 +132,7 @@ extension HomeViewController {
     func showRideStatusView(with request : Request) {
         
         self.viewAddressOuter.isHidden = true
+        print("ViewAddressOuter ", #function)
         if self.rideStatusView == nil, let rideStatus = Bundle.main.loadNibNamed(XIB.Names.RideStatusView, owner: self, options: [:])?.first as? RideStatusView {
             rideStatus.frame = CGRect(origin: CGPoint(x: 0, y: self.view.frame.height-rideStatus.frame.height), size: CGSize(width: self.view.frame.width, height: rideStatus.frame.height))
             rideStatusView = rideStatus
@@ -172,6 +173,7 @@ extension HomeViewController {
         
         if self.invoiceView == nil, let invoice = Bundle.main.loadNibNamed(XIB.Names.InvoiceView, owner: self, options: [:])?.first as? InvoiceView {
             self.viewAddressOuter.isHidden = true
+            print("ViewAddressOuter ", #function)
             invoice.frame = CGRect(origin: CGPoint(x: 0, y: self.view.frame.height-invoice.frame.height), size: CGSize(width: self.view.frame.width, height: invoice.frame.height))
             invoiceView = invoice
             self.invoiceView?.set(request: request)
@@ -209,6 +211,7 @@ extension HomeViewController {
         
         if let rating = Bundle.main.loadNibNamed(XIB.Names.RatingView, owner: self, options: [:])?.first as? RatingView {
             self.viewAddressOuter.isHidden = true
+            print("ViewAddressOuter ", #function)
             rating.frame = CGRect(origin: CGPoint(x: 0, y: self.view.frame.height-rating.frame.height), size: CGSize(width: self.view.frame.width, height: rating.frame.height))
             ratingView = rating
             self.view.addSubview(ratingView!)
@@ -236,6 +239,7 @@ extension HomeViewController {
         self.ratingView?.dismissView(onCompletion: {
             self.ratingView = nil
             self.viewAddressOuter.isHidden = false
+            print("ViewAddressOuter ", #function)
             self.clearMapview()
         })
         
@@ -278,6 +282,7 @@ extension HomeViewController {
             DispatchQueue.main.asyncAfter(deadline: .now()+0.5) { // Hiding Address View
                 UIView.animate(withDuration: 0.5, animations: {
                     self.viewAddressOuter.isHidden = true
+                    print("ViewAddressOuter ", #function)
                 })
             }
         }
@@ -290,6 +295,7 @@ extension HomeViewController {
         self.requestLoaderView?.endLoader {
             self.requestLoaderView = nil
             self.viewAddressOuter.isHidden = false
+            print("ViewAddressOuter ", #function)
         }
     }
     
@@ -351,7 +357,6 @@ extension HomeViewController {
         }
         if ![RideStatus.started, .accepted, .arrived, .pickedup].contains(status) {
             self.removeRideStatusView()
-            
         }
         if ![RideStatus.completed].contains(status) {
             self.removeRatingView()
@@ -436,12 +441,15 @@ extension HomeViewController {
         if markerProviderLocation.map == nil {
             markerProviderLocation.map = mapViewHelper?.mapView
         }
-        
+        let originCoordinate = CGPoint(x: providerLastLocation.latitude-location.latitude, y: providerLastLocation.longitude-location.longitude)
+        let tanDegree = atan2(originCoordinate.x, originCoordinate.y)
         CATransaction.begin()
         CATransaction.setAnimationDuration(2)
         markerProviderLocation.position = location
+        markerProviderLocation.rotation = CLLocationDegrees(tanDegree*CGFloat.pi/180)
+        markerProviderLocation.groundAnchor = CGPoint(x: 0.5, y: 0.5)
         CATransaction.commit()
-        
+        self.providerLastLocation = location
     }
     
     

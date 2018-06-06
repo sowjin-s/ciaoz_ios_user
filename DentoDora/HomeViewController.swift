@@ -29,10 +29,14 @@ class HomeViewController: UIViewController {
     @IBOutlet weak private var imageViewSideBar : UIImageView!
     @IBOutlet weak var buttonSOS : UIButton!
     
+    var providerLastLocation = LocationCoordinate()
     lazy var markerProviderLocation : GMSMarker = {  // Provider Location Marker
         
         let marker = GMSMarker()
-        marker.icon = #imageLiteral(resourceName: "map-vehicle-icon-black")
+        let imageView = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: 40, height: 40)))
+        imageView.contentMode =  .scaleAspectFit
+        imageView.image = #imageLiteral(resourceName: "map-vehicle-icon-black")
+        marker.iconView = imageView
         marker.map = self.mapViewHelper?.mapView
         return marker
         
@@ -131,8 +135,8 @@ class HomeViewController: UIViewController {
         self.viewLayouts()
     }
     
-    var tempLat = 13.05864944
-    var tempLong = 80.25398977
+//    var tempLat = 13.05864944
+//    var tempLong = 80.25398977
 
 }
 
@@ -171,13 +175,13 @@ extension HomeViewController {
         self.buttonSOS.addTarget(self, action: #selector(self.buttonSOSAction), for: .touchUpInside)
         
         
-        let timer =  Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) { (_) in
-            
-            self.tempLat -= 0.00002
-            self.tempLong -= 0.00002
-            self.moveProviderMarker(to: LocationCoordinate(latitude: self.tempLat, longitude: self.tempLong))
-        }
-        timer.fire()
+//        let timer =  Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) { (_) in
+//
+//            self.tempLat -= 0.00002
+//            self.tempLong -= 0.00002
+//            self.moveProviderMarker(to: LocationCoordinate(latitude: self.tempLat, longitude: self.tempLong))
+//        }
+//        timer.fire()
     }
     
     
@@ -215,12 +219,12 @@ extension HomeViewController {
         self.mapViewHelper?.getMapView(withDelegate: self, in: self.viewMapOuter)
         self.mapViewHelper?.getCurrentLocation(onReceivingLocation: { (location) in
             if self.sourceLocationDetail?.value == nil {
-                self.mapViewHelper?.getPlaceAddress(from: location, on: { (locationDetail) in
+                self.mapViewHelper?.getPlaceAddress(from: location.coordinate, on: { (locationDetail) in
                     self.sourceLocationDetail?.value = locationDetail
                    // self.getProviderInCurrentLocation()
                 })
             }
-            self.currentLocation.value = location
+            self.currentLocation.value = location.coordinate
         })
         
     }
@@ -350,6 +354,7 @@ extension HomeViewController {
         self.removeUnnecessaryView(with: .none)
         self.clearMapview()
         self.viewAddressOuter.isHidden = false
+        print("ViewAddressOuter ", #function)
     } else {
          self.drawerController?.openSide(.left)
     }
@@ -596,7 +601,8 @@ extension HomeViewController  {
     // Create Request
     
     func createRequest(for fare : EstimateFare, isScheduled : Bool, scheduleDate : Date?) {
-       
+      
+        self.removeRideNowView()
         self.showLoaderView()
         DispatchQueue.global(qos: .background).async {
             
@@ -626,6 +632,7 @@ extension HomeViewController  {
     }
 }
 
+// MARK:- PostViewProtocol
 
 extension HomeViewController : PostViewProtocol {
     
