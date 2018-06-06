@@ -305,6 +305,8 @@ extension HomeViewController {
         
         self.mapViewHelper?.mapView?.clear()
         self.destinationLocationDetail = nil
+        self.viewAddressOuter.isHidden = false
+
     }
     
     // MARK:- Handle Request Data

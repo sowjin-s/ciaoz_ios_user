@@ -147,7 +147,7 @@ struct Constants {
     let shareRide = "Share Ride"
     let wouldLikeToShare = "would like to share a ride with you at"
     let profileUpdated = "Profile updated successfully"
-    let otp = "Otp"
+    let otp = "OTP"
     let at = "at"
     let favourites = "Favourites"
     let changeLanguage = "Change Language"

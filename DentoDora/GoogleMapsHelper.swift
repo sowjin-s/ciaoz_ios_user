@@ -70,7 +70,7 @@ class GoogleMapsHelper : NSObject {
         CATransaction.begin()
         CATransaction.setAnimationDuration(2)
         CATransaction.setCompletionBlock {
-            self.mapView?.camera = GMSCameraPosition.camera(withTarget: location, zoom: 15)
+            self.mapView?.camera = GMSCameraPosition.camera(withTarget: location, zoom: 12)
             self.mapView?.center = center
         }
         CATransaction.commit()

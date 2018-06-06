@@ -33,10 +33,11 @@ class HomeViewController: UIViewController {
     lazy var markerProviderLocation : GMSMarker = {  // Provider Location Marker
         
         let marker = GMSMarker()
-        let imageView = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: 40, height: 40)))
+        let imageView = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
         imageView.contentMode =  .scaleAspectFit
         imageView.image = #imageLiteral(resourceName: "map-vehicle-icon-black")
         marker.iconView = imageView
+        marker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
         marker.map = self.mapViewHelper?.mapView
         return marker
         
@@ -83,7 +84,7 @@ class HomeViewController: UIViewController {
     var destinationLocationDetail : LocationDetail? {  // Destination Location Detail
         didSet{
             DispatchQueue.main.async {
-                self.textFieldDestinationLocation.text = (self.destinationLocationDetail?.address.isEmpty ?? true) ? nil : self.destinationLocationDetail?.address
+                self.textFieldDestinationLocation.text = (self.destinationLocationDetail?.address.removingWhitespaces().isEmpty ?? true) ? nil : self.destinationLocationDetail?.address
             }
         }
     }
@@ -117,6 +118,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initialLoads()
+        self.localize()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -288,7 +290,7 @@ extension HomeViewController {
         
         marker.position = coordinate
         marker.appearAnimation = .pop
-        marker.icon = marker == self.sourceMarker ? #imageLiteral(resourceName: "destinationPin").resizeImage(newWidth: 30) : #imageLiteral(resourceName: "sourcePin").resizeImage(newWidth: 30)
+        marker.icon = marker == self.sourceMarker ? #imageLiteral(resourceName: "sourcePin").resizeImage(newWidth: 30) : #imageLiteral(resourceName: "destinationPin").resizeImage(newWidth: 30)
         marker.map = self.mapViewHelper?.mapView
         marker.map?.center = viewMapOuter.center
         self.mapViewHelper?.mapView?.animate(toLocation: coordinate)
@@ -445,7 +447,7 @@ extension HomeViewController : GMSMapViewDelegate {
             if self.selectedLocationView == self.viewSourceLocation, self.sourceLocationDetail != nil {
                 
                 self.sourceMarker.map = nil
-                self.imageViewMarkerCenter.image = #imageLiteral(resourceName: "destinationPin")
+                self.imageViewMarkerCenter.image = #imageLiteral(resourceName: "sourcePin")
                 self.imageViewMarkerCenter.isHidden = false
                 if let location = mapViewHelper?.mapView?.projection.coordinate(for: viewMapOuter.center) {
                     self.sourceLocationDetail?.value?.coordinate = location
@@ -461,7 +463,7 @@ extension HomeViewController : GMSMapViewDelegate {
             } else if self.selectedLocationView == self.viewDestinationLocation, self.destinationLocationDetail != nil {
                 
                 self.destinationMarker.map = nil
-                self.imageViewMarkerCenter.image = #imageLiteral(resourceName: "sourcePin")
+                self.imageViewMarkerCenter.image = #imageLiteral(resourceName: "destinationPin")
                 self.imageViewMarkerCenter.isHidden = false
                 if let location = mapViewHelper?.mapView?.projection.coordinate(for: viewMapOuter.center) {
                     self.destinationLocationDetail?.coordinate = location
@@ -547,6 +549,7 @@ extension HomeViewController  {
                 self.riderStatus = request?.status ?? .none
                 self.handle(request: request!)
             } else {
+                self.clearMapview()
                 self.removeUnnecessaryView(with: .none)
             }
         })
