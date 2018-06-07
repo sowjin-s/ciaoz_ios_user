@@ -19,5 +19,7 @@ struct Service : JSONSerializable {
     var service_number : String?
     var service_model : String?
     var type : String?
+    var capacity : Int?
+    var pricing : EstimateFare?
 }
 

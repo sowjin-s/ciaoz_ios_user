@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 typealias ViewController = (UIViewController & PostViewProtocol)
 var presenterObject :PostPresenterInputProtocol?
@@ -83,8 +84,8 @@ struct Constants {
     let privacyPolicy = "Privacy Policy"
     let logout = "Logout"
     let profile = "Profile"
-    let first = "First"
-    let last = "Last"
+    let first = "First Name"
+    let last = "Last Name"
     let phoneNumber = "Phone Number"
     let tripType = "Trip Trip"
     let personal = "Personal"
@@ -158,6 +159,9 @@ struct Constants {
     let creditedBy = "Credited By"
     let CouponCode = "Coupon Code"
     let OFF = "OFF"
+    let couldnotOpenEmailAttheMoment = "Could not open Email at the moment."
+    let couldNotReachTheHost = "Could not reach th web"
+    let wouldyouLiketoMakeaSOSCall = "Would you like to make a SOS Call?"
   
 }
 

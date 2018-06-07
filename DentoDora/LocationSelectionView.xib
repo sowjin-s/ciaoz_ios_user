@@ -53,7 +53,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uzZ-eJ-qEi">
                                             <rect key="frame" x="0.0" y="0.0" width="303.5" height="37"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="19U-Ci-70f">
+                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="19U-Ci-70f">
                                                     <rect key="frame" x="271.5" y="3.5" width="28" height="30"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cancel" translatesAutoresizingMaskIntoConstraints="NO" id="gq2-HI-1hU">
@@ -69,8 +69,8 @@
                                                         <constraint firstItem="gq2-HI-1hU" firstAttribute="centerY" secondItem="19U-Ci-70f" secondAttribute="centerY" id="yOp-Iv-Oxv"/>
                                                     </constraints>
                                                 </view>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ucb-Ym-AIU">
-                                                    <rect key="frame" x="8" y="11" width="255.5" height="15"/>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="Ucb-Ym-AIU">
+                                                    <rect key="frame" x="8" y="9" width="291.5" height="19"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -85,6 +85,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="19U-Ci-70f" secondAttribute="trailing" constant="4" id="Skq-Cf-Vb4"/>
                                                 <constraint firstItem="19U-Ci-70f" firstAttribute="height" secondItem="uzZ-eJ-qEi" secondAttribute="height" multiplier="0.8" id="ix3-ka-ZNK"/>
                                                 <constraint firstItem="19U-Ci-70f" firstAttribute="leading" secondItem="Ucb-Ym-AIU" secondAttribute="trailing" constant="8" id="prI-hv-UiW"/>
+                                                <constraint firstAttribute="trailing" secondItem="Ucb-Ym-AIU" secondAttribute="trailing" constant="4" id="xcT-tU-QQq"/>
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="size" keyPath="offsetShadow">
@@ -103,6 +104,11 @@
                                                     <real key="value" value="2"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
+                                            <variation key="default">
+                                                <mask key="subviews">
+                                                    <exclude reference="19U-Ci-70f"/>
+                                                </mask>
+                                            </variation>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GM4-I2-3BQ">
                                             <rect key="frame" x="0.0" y="43" width="303.5" height="37"/>
@@ -123,8 +129,8 @@
                                                         <constraint firstItem="7nl-nx-OqF" firstAttribute="width" secondItem="bq8-H7-0m3" secondAttribute="width" multiplier="0.6" id="tjV-vi-aPd"/>
                                                     </constraints>
                                                 </view>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0M1-gH-DL4">
-                                                    <rect key="frame" x="8" y="11" width="255.5" height="15"/>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="0M1-gH-DL4">
+                                                    <rect key="frame" x="8" y="9" width="291.5" height="19"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -135,6 +141,7 @@
                                                 <constraint firstItem="bq8-H7-0m3" firstAttribute="centerY" secondItem="GM4-I2-3BQ" secondAttribute="centerY" id="BGL-Fp-hKq"/>
                                                 <constraint firstItem="bq8-H7-0m3" firstAttribute="height" secondItem="GM4-I2-3BQ" secondAttribute="height" multiplier="0.8" id="Gv9-ye-L7u"/>
                                                 <constraint firstItem="bq8-H7-0m3" firstAttribute="leading" secondItem="0M1-gH-DL4" secondAttribute="trailing" constant="8" id="WJO-71-6ua"/>
+                                                <constraint firstAttribute="trailing" secondItem="0M1-gH-DL4" secondAttribute="trailing" constant="4" id="dB0-Lb-ihc"/>
                                                 <constraint firstItem="0M1-gH-DL4" firstAttribute="centerY" secondItem="GM4-I2-3BQ" secondAttribute="centerY" id="hFp-O0-Mov"/>
                                                 <constraint firstAttribute="trailing" secondItem="bq8-H7-0m3" secondAttribute="trailing" constant="4" id="iaa-hA-IKK"/>
                                                 <constraint firstItem="0M1-gH-DL4" firstAttribute="leading" secondItem="GM4-I2-3BQ" secondAttribute="leading" constant="8" id="mh3-MR-syy"/>
@@ -156,6 +163,11 @@
                                                     <real key="value" value="2"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
+                                            <variation key="default">
+                                                <mask key="subviews">
+                                                    <exclude reference="bq8-H7-0m3"/>
+                                                </mask>
+                                            </variation>
                                         </view>
                                     </subviews>
                                 </stackView>
@@ -258,8 +270,6 @@
                 <outlet property="textFieldDestination" destination="0M1-gH-DL4" id="wr3-hO-oyx"/>
                 <outlet property="textFieldSource" destination="Ucb-Ym-AIU" id="M3F-A2-5Q2"/>
                 <outlet property="viewBack" destination="hva-40-Htf" id="99Y-bI-nDf"/>
-                <outlet property="viewDestinationCancel" destination="bq8-H7-0m3" id="0p2-hc-ED6"/>
-                <outlet property="viewSourceCancel" destination="19U-Ci-70f" id="gRO-tQ-D4Q"/>
                 <outlet property="viewTop" destination="0Y1-rn-1vt" id="nab-1V-zQp"/>
             </connections>
             <point key="canvasLocation" x="33.5" y="81.5"/>

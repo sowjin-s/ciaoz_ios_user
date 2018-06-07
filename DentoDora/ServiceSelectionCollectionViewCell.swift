@@ -22,7 +22,7 @@ class ServiceSelectionCollectionViewCell: UICollectionViewCell {
         didSet{
            // self.imageViewHeightConstant.constant = self.isSelected ? self.initialFrame.height/2 : 0
             //self.imageViewWidthConstant.constant = self.isSelected ? self.initialFrame.width/2 : 0
-            self.transform = isSelected ? .init(scaleX: 1.2, y: 1.2) : .identity
+            self.transform = isSelected ? .init(scaleX: 1.4, y: 1.4) : .identity
             self.buttonService.backgroundColor = !self.isSelected ? .clear : .secondary
             self.buttonService.setTitleColor(!self.isSelected ? .black : .white, for: .normal)
         }
@@ -54,7 +54,7 @@ private extension ServiceSelectionCollectionViewCell {
     
     private func initialLoads(){
         self.imageViewService.image = #imageLiteral(resourceName: "sedan-car-model")
-        
+        self.buttonService.setTitleColor(.black, for: .normal)
         //self.initialFrame = self.imageViewService.frame.size
     }
 }

@@ -65,49 +65,26 @@ extension HelpViewController {
         if sender.tag == 1{
             Common.call(to: supportNumber)
         }else if sender.tag == 2{
-            self.sendEmail()
+            Common.sendEmail(to: [supportEmail], from: self)
             
         }else if sender.tag == 3 {
             
             guard let url = URL(string: baseUrl) else {
-                return //be safe
+                UIScreen.main.focusedView?.make(toast: Constants.string.couldNotReachTheHost.localize())
+                return
             }
             
             let safariVC = SFSafariViewController(url: url)
-         //   safariVC.navigationController?.navigationBar.isHidden = true
             safariVC.delegate = self
             self.present(safariVC, animated: true, completion: nil)
-            
-//            if #available(iOS 10.0, *) {
-//                UIApplication.shared.open(url, options: [:], completionHandler: nil)
-//            } else {
-//                UIApplication.shared.openURL(url)
-//            }
-            
         }
         
     }
-    
-    
-    
-    
 }
 
+// MARK:- MFMailComposeViewControllerDelegate
+
 extension HelpViewController: MFMailComposeViewControllerDelegate {
-    
-    func sendEmail() {
-        if MFMailComposeViewController.canSendMail() {
-            let mail = MFMailComposeViewController()
-            mail.mailComposeDelegate = self
-            mail.setToRecipients(["paul@hackingwithswift.com"])
-            mail.setMessageBody("<p>You're so awesome!</p>", isHTML: true)
-            
-            present(mail, animated: true)
-        } else {
-            // show failure alert
-        }
-    }
-    
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true)

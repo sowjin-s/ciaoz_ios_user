@@ -62,17 +62,24 @@ class SignUpUserTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setNavigationcontroller()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         localize()
-       self.navigationController?.isNavigationBarHidden = false
+        self.nextImage.isHidden = false
+        self.navigationController?.isNavigationBarHidden = false
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        self.nextView.makeRoundedCorner()
+        self.changeNextButtonFrame()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.nextView.isHidden = true
+        super.viewWillDisappear(animated)
     }
     
 }
@@ -80,8 +87,8 @@ class SignUpUserTableViewController: UITableViewController {
 
 extension SignUpUserTableViewController {
     
-
     private func localize(){
+        
         self.firstNameText.placeholder = Constants.string.first.localize()
         self.lastNameText.placeholder = Constants.string.last.localize()
         self.emailtext.placeholder = Constants.string.emailPlaceHolder.localize()
@@ -113,7 +120,7 @@ extension SignUpUserTableViewController {
         self.passwordText.delegate = self
         self.confirmPwdText.delegate = self
         self.phoneNumber.delegate = self
-        
+        self.navigationController?.view.addSubview(nextView)
     }
     
     
@@ -145,7 +152,7 @@ extension SignUpUserTableViewController {
     
     @IBAction func nextBtnTapped(sender : UITapGestureRecognizer){
         
-        sender.view?.addPressAnimation()
+        //sender.view?.addPressAnimation()
         self.view.endEditingForce()
         guard let email = emailtext.text?.trimmingCharacters(in: .whitespaces), !email.isEmpty else {
             self.showToast(string: ErrorMessage.list.enterEmail.localize())
@@ -224,6 +231,18 @@ extension SignUpUserTableViewController {
          self.view.makeToast(string, point: CGPoint(x: UIScreen.main.bounds.width/2 , y: UIScreen.main.bounds.height/2), title: nil, image: nil, completion: nil)
         
     }
+    
+    
+    private func changeNextButtonFrame() {
+
+        let frameWidth : CGFloat = 50 * (UIScreen.main.bounds.width/375)
+        self.nextView.makeRoundedCorner()
+        self.nextView.frame = CGRect(x: UIScreen.main.bounds.width-(frameWidth+16), y: UIScreen.main.bounds.height-(frameWidth+16), width: frameWidth, height: frameWidth)
+        self.nextImage.frame = CGRect(x: self.nextView.frame.width/4, y: self.nextView.frame.height/4, width: self.nextView.frame.width/2, height: self.nextView.frame.height/2)
+       // self.nextImage.frame = CGRect(x: nextView.frame.midX, y: nextView.frame.midY, width: self.nextView.frame.width/2, height: self.nextView.frame.height/2)
+
+    }
+    
     
     
 }
@@ -321,3 +340,15 @@ extension SignUpUserTableViewController : UITextFieldDelegate {
 //    }
     
 }
+
+
+//extension SignUpUserTableViewController {
+//
+//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//
+//
+//    }
+//
+//}
+
+

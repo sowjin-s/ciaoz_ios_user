@@ -34,6 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          window?.rootViewController = navigationController
          window?.becomeKey()
          window?.makeKeyAndVisible()
+         CoreDataHelper().insert(data: ("",LocationCoordinate()), isWork: true)
          return true
     }
 }

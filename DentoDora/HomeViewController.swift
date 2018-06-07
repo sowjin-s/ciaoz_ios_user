@@ -28,6 +28,8 @@ class HomeViewController: UIViewController {
     @IBOutlet weak private var imageViewMarkerCenter : UIImageView!
     @IBOutlet weak private var imageViewSideBar : UIImageView!
     @IBOutlet weak var buttonSOS : UIButton!
+    @IBOutlet weak private var viewHomeLocation : UIView!
+    @IBOutlet weak private var viewWorkLocation : UIView!
     
     var providerLastLocation = LocationCoordinate()
     lazy var markerProviderLocation : GMSMarker = {  // Provider Location Marker
@@ -175,7 +177,7 @@ extension HomeViewController {
         self.checkForProviderStatus()
         self.buttonSOS.isHidden = true
         self.buttonSOS.addTarget(self, action: #selector(self.buttonSOSAction), for: .touchUpInside)
-        
+       // self.viewHomeLocation
         
 //        let timer =  Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) { (_) in
 //
@@ -193,6 +195,7 @@ extension HomeViewController {
         
         self.viewCurrentLocation.makeRoundedCorner()
         self.mapViewHelper?.mapView?.frame = viewMapOuter.bounds
+        self.viewSideMenu.makeRoundedCorner()
         
     }
     
@@ -299,7 +302,7 @@ extension HomeViewController {
     
     // MARK:- Show Location View
     
-    private func showLocationView() {
+   @IBAction private func showLocationView() {
         
         if let locationView = Bundle.main.loadNibNamed(XIB.Names.LocationSelectionView, owner: self, options: [:])?.first as? LocationSelectionView {
             locationView.frame = self.view.bounds
@@ -394,14 +397,18 @@ extension HomeViewController {
     func schedulePickerView(on completion : @escaping ((Date)->())){
         
         var dateComponents = DateComponents()
-        dateComponents.day = 60
+        dateComponents.day = 7
         let now = Date()
-        let calendar = Calendar.current.date(byAdding: dateComponents, to: now)
-        let datePicker = DateTimePicker.show(selected: nil, minimumDate: now, maximumDate: calendar, timeInterval: .default)
+        let maximumDate = Calendar.current.date(byAdding: dateComponents, to: now)
+        dateComponents.minute = 30
+        dateComponents.day = nil
+        let minimumDate = Calendar.current.date(byAdding: dateComponents, to: now)
+        let datePicker = DateTimePicker.show(selected: nil, minimumDate: minimumDate, maximumDate: maximumDate, timeInterval: .default)
         datePicker.includeMonth = true
         datePicker.is12HourFormat = true
         datePicker.dateFormat = DateFormat.list.hhmmddMMMyyyy
         datePicker.highlightColor = .primary
+        datePicker.doneBackgroundColor = .secondary
         datePicker.completionHandler = { date in
             completion(date)
             print(date)

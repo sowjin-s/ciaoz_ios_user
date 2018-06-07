@@ -89,7 +89,6 @@ extension HomeViewController {
     func showRideNowView(with fare : EstimateFare){
         
         if self.rideSelectionView == nil {
-            self.viewAddressOuter.isHidden = true
             print("ViewAddressOuter ", #function)
             self.rideSelectionView = Bundle.main.loadNibNamed(XIB.Names.RequestSelectionView, owner: self, options: [:])?.first as? RequestSelectionView
             self.rideSelectionView?.frame = CGRect(x: 0, y: self.view.frame.height-self.rideSelectionView!.bounds.height, width: self.view.frame.width, height: self.rideSelectionView!.frame.height)
@@ -428,7 +427,7 @@ extension HomeViewController {
     
     @IBAction func buttonSOSAction() {
         
-        showAlert(message: Constants.string.areYouSure.localize(), okHandler: {
+        showAlert(message: Constants.string.wouldyouLiketoMakeaSOSCall.localize(), okHandler: {
             Common.call(to: "\(sosNumber)")
         }, cancelHandler: {
             
@@ -449,7 +448,6 @@ extension HomeViewController {
         CATransaction.setAnimationDuration(2)
         markerProviderLocation.position = location
         markerProviderLocation.rotation = CLLocationDegrees(tanDegree*CGFloat.pi/180)
-        markerProviderLocation.groundAnchor = CGPoint(x: 0.5, y: 0.5)
         CATransaction.commit()
         self.providerLastLocation = location
     }

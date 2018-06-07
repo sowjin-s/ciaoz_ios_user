@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MessageUI
 
 class Common {
     
@@ -88,6 +89,19 @@ class Common {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         } else {
             UIScreen.main.focusedView?.make(toast: Constants.string.cannotMakeCallAtThisMoment.localize())
+        }
+        
+    }
+    
+    class func sendEmail(to mailId : [String], from view : UIViewController & MFMailComposeViewControllerDelegate) {
+        
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = view
+            mail.setToRecipients(mailId)
+            view.present(mail, animated: true)
+        } else {
+            UIScreen.main.focusedView?.make(toast: Constants.string.couldnotOpenEmailAttheMoment.localize())
         }
         
     }

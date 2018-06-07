@@ -15,6 +15,7 @@ class ServiceSelectionView: UIView {
     @IBOutlet var buttonService : UIButton!
     @IBOutlet var buttonMore : UIButton!
     @IBOutlet private weak var buttonChange : UIButton!
+    @IBOutlet private weak var labelCapacity : UILabel!
     @IBOutlet private weak var buttonGetPricing : UIButton!
     @IBOutlet weak var labelCardNumber : UILabel!
     @IBOutlet weak var imageViewCard : UIImageView!
@@ -60,24 +61,22 @@ extension ServiceSelectionView {
         
         self.buttonMore.setTitle(Constants.string.more.localize(), for: .normal)
         self.buttonService.setTitle(Constants.string.service.localize(), for: .normal)
-        self.buttonChange.setTitle(Constants.string.change.localize().uppercased(), for: .normal)
+        //self.buttonChange.setTitle(Constants.string.change.localize().uppercased(), for: .normal)
         self.buttonGetPricing.setTitle(Constants.string.getPricing.localize(), for: .normal)
         
     }
     
     private func changeCollectionData(){
-        
         DispatchQueue.main.async {
-            
             self.labelServiceTitle.text = (self.isServiceSelected ? Constants.string.selectService : Constants.string.more).localize()
             self.buttonService.isHidden = self.isServiceSelected
          //   self.buttonMore.isHidden = !self.isServiceSelected
             self.collectionViewService.reloadData()
         }
     }
+    
     //MARK:- Set Source 
     func set(source : [Service]) {
-        
         self.datasource = source
         self.collectionViewService.reloadData()
         self.collectionViewService.selectItem(at: IndexPath(item: 0, section: 0), animated: true, scrollPosition: .top)
@@ -111,6 +110,7 @@ extension ServiceSelectionView : UICollectionViewDelegate, UICollectionViewDataS
         
         if datasource.count>indexPath.row {
             self.selectedItem = self.datasource[indexPath.row]
+            self.labelCapacity.text = "1-\(Int.removeNil(self.selectedItem?.capacity))"
         }
         
     }

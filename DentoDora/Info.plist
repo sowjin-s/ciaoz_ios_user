@@ -4,14 +4,10 @@
 <dict>
 	<key>AccountKitClientToken</key>
 	<string>3f73b9bdd9f499561e32e834e7dcd1f8</string>
-	<key>FacebookDisplayName</key>
-	<string>Tranxit</string>
-	<key>FacebookAppID</key>
-	<string>227306957774573</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>DentoDora</string>
+	<string>Tranxit</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIcons</key>
@@ -41,6 +37,10 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>FacebookAppID</key>
+	<string>227306957774573</string>
+	<key>FacebookDisplayName</key>
+	<string>Tranxit</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -73,7 +73,7 @@
 		<string>voip</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
+	<string>Launch</string>
 	<key>UIMainStoryboardFile</key>
 	<string>User</string>
 	<key>UIRequiredDeviceCapabilities</key>

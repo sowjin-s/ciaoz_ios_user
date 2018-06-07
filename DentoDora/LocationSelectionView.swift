@@ -16,8 +16,8 @@ class LocationSelectionView: UIView {
     @IBOutlet private weak var viewBack : UIView!
     @IBOutlet private weak var textFieldSource : UITextField!
     @IBOutlet private weak var textFieldDestination : UITextField!
-    @IBOutlet private weak var viewSourceCancel : UIView!
-    @IBOutlet private weak var viewDestinationCancel : UIView!
+   // @IBOutlet private weak var viewSourceCancel : UIView!
+    //@IBOutlet private weak var viewDestinationCancel : UIView!
   
     typealias Address = (source : Bind<LocationDetail>?,destination : LocationDetail?)
    
@@ -103,23 +103,11 @@ extension LocationSelectionView {
         self.tableViewBottom.register(UINib(nibName: XIB.Names.LocationTableViewCell, bundle: nil), forCellReuseIdentifier:XIB.Names.LocationTableViewCell)
         self.tableViewBottom.register(UINib(nibName: XIB.Names.LocationHeaderTableViewCell, bundle: nil), forCellReuseIdentifier:XIB.Names.LocationHeaderTableViewCell)
         self.viewBack.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.backButtonAction)))
-        [self.viewSourceCancel, self.viewDestinationCancel].forEach({ $0?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.clearButtonAction(sender:))))})
+      //  [self.viewSourceCancel, self.viewDestinationCancel].forEach({ $0?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.clearButtonAction(sender:))))})
         self.textFieldDestination.becomeFirstResponder()
     }
     
-    // MARK:- OnTap Clear Button
-    @IBAction private func clearButtonAction(sender : UITapGestureRecognizer){
-        
-        guard let senderView = sender.view else { return }
-        
-        if senderView == viewSourceCancel {
-            textFieldSource.text = nil
-        } else {
-            textFieldDestination.text = nil
-        }
-        self.datasource = []
-    }
-    
+
     func setValues(address : Address, completion :@escaping (Address)->Void){
         
         self.address = address
@@ -301,6 +289,11 @@ extension LocationSelectionView : UITextFieldDelegate {
         
         self.datasource = []
         self.getPredications(from: textField.text)
+    }
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        self.datasource = []
+        return true
     }
     
     
