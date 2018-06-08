@@ -28,7 +28,7 @@ class SideBarTableViewController: UITableViewController {
         
     }()
     
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initialLoads()
@@ -45,11 +45,17 @@ class SideBarTableViewController: UITableViewController {
         self.localize()
         self.setValues()
         self.navigationController?.isNavigationBarHidden = true
+        UIApplication.shared.isStatusBarHidden = true
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         self.setDesigns()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        UIApplication.shared.isStatusBarHidden = false
     }
     
 }
