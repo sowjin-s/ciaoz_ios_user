@@ -16,4 +16,5 @@ struct  LoginRequest : JSONSerializable{
     var client_id : Int?
     var client_secret : String?
     var access_token : String?
+    var refresh_token : String?
 }

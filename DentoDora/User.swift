@@ -21,9 +21,9 @@ class User : NSObject, NSCoding, JSONSerializable {
     var email : String?
     var mobile : String?
     var currency : String?
+    var refreshToken : String?
     
-    
-    init(id : Int?, accessToken : String?, firstName : String?, lastName : String?, mobile : String?, email : String?, currency : String?, picture : String?){
+    init(id : Int?, accessToken : String?, firstName : String?, lastName : String?, mobile : String?, email : String?, currency : String?, picture : String?, refreshToken : String?){
                 
         self.id = id
         self.accessToken = accessToken
@@ -33,11 +33,12 @@ class User : NSObject, NSCoding, JSONSerializable {
         self.email = email
         self.currency = currency
         self.picture = picture
+        self.refreshToken = refreshToken
     }
     
     convenience
     override init(){
-        self.init(id: nil, accessToken: nil, firstName : nil, lastName : nil, mobile : nil, email : nil, currency : nil, picture : nil)
+        self.init(id: nil, accessToken: nil, firstName : nil, lastName : nil, mobile : nil, email : nil, currency : nil, picture : nil, refreshToken : nil)
     }
     
     
@@ -51,7 +52,9 @@ class User : NSObject, NSCoding, JSONSerializable {
         let email = aDecoder.decodeObject(forKey: Keys.list.email) as? String
         let currency = aDecoder.decodeObject(forKey: Keys.list.currency) as? String
         let picture = aDecoder.decodeObject(forKey: Keys.list.picture) as? String
-        self.init(id: id, accessToken : accessToken, firstName : firstName, lastName : lastName, mobile : mobile, email: email, currency : currency, picture : picture)
+        let refreshToken = aDecoder.decodeObject(forKey: Keys.list.refreshToken) as? String
+        
+        self.init(id: id, accessToken : accessToken, firstName : firstName, lastName : lastName, mobile : mobile, email: email, currency : currency, picture : picture, refreshToken : refreshToken)
         
     }
     
@@ -66,7 +69,7 @@ class User : NSObject, NSCoding, JSONSerializable {
         aCoder.encode(self.email, forKey: Keys.list.email)
         aCoder.encode(self.currency, forKey: Keys.list.currency)
         aCoder.encode(self.picture, forKey: Keys.list.picture)
-        
+        aCoder.encode(self.refreshToken, forKey: Keys.list.refreshToken)
     }
     
     

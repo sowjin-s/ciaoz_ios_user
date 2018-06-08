@@ -15,10 +15,10 @@ class SideBarTableViewController: UITableViewController {
     @IBOutlet private var labelEmail : UILabel!
     @IBOutlet private var viewShadow : UIView!
     @IBOutlet private weak var profileImageCenterContraint : NSLayoutConstraint!
-
-   // private let sideBarList = [Constants.string.payment,Constants.string.yourTrips,Constants.string.coupon,Constants.string.wallet,Constants.string.passbook,Constants.string.settings,Constants.string.help,Constants.string.share,Constants.string.inviteReferral,Constants.string.faqSupport,Constants.string.termsAndConditions,Constants.string.privacyPolicy,Constants.string.logout]
     
-       private let sideBarList = [Constants.string.payment,Constants.string.yourTrips,Constants.string.coupon,Constants.string.wallet,Constants.string.passbook,Constants.string.settings,Constants.string.help,Constants.string.share,Constants.string.logout]
+    // private let sideBarList = [Constants.string.payment,Constants.string.yourTrips,Constants.string.coupon,Constants.string.wallet,Constants.string.passbook,Constants.string.settings,Constants.string.help,Constants.string.share,Constants.string.inviteReferral,Constants.string.faqSupport,Constants.string.termsAndConditions,Constants.string.privacyPolicy,Constants.string.logout]
+    
+    private let sideBarList = [Constants.string.payment,Constants.string.yourTrips,Constants.string.coupon,Constants.string.wallet,Constants.string.passbook,Constants.string.settings,Constants.string.help,Constants.string.share,Constants.string.logout]
     
     private let cellId = "cellId"
     
@@ -28,12 +28,12 @@ class SideBarTableViewController: UITableViewController {
         
     }()
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initialLoads()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -51,7 +51,7 @@ class SideBarTableViewController: UITableViewController {
         super.viewWillLayoutSubviews()
         self.setDesigns()
     }
-   
+    
 }
 
 // MARK:- Methods
@@ -60,13 +60,13 @@ extension SideBarTableViewController {
     
     private func initialLoads() {
         
-       // self.drawerController?.fadeColor = UIColor
+        // self.drawerController?.fadeColor = UIColor
         self.drawerController?.shadowOpacity = 0.2
         let fadeWidth = self.view.frame.width*(0.2)
         self.profileImageCenterContraint.constant = 0//-(fadeWidth/3)
         self.drawerController?.drawerWidth = Float(self.view.frame.width - fadeWidth)
         self.viewShadow.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.imageViewAction)))
-       
+        
     }
     
     // MARK:- Set Designs
@@ -83,8 +83,8 @@ extension SideBarTableViewController {
     
     private func setValues(){
         
-        Cache.image(forUrl: baseUrl+"/storage/"+String.removeNil(User.main.picture)) { (image) in
-               DispatchQueue.main.async {
+        Cache.image(forUrl: Common.getImageUrl(for: User.main.picture)) { (image) in
+            DispatchQueue.main.async {
                 self.imageViewProfile.image = image == nil ? #imageLiteral(resourceName: "userPlaceholder") : image
             }
         }
@@ -98,7 +98,7 @@ extension SideBarTableViewController {
     private func localize(){
         
         self.tableView.reloadData()
-
+        
     }
     
     // MARK:- ImageView Action
@@ -136,7 +136,7 @@ extension SideBarTableViewController {
         case (0,6):
             self.push(to: Storyboard.Ids.HelpViewController)
         case (0,7):
-            break
+            (self.drawerController?.getViewController(for: .none) as? HomeViewController)?.share(items: [baseUrl])
         case (0,8):
             self.logout()
             
@@ -148,7 +148,7 @@ extension SideBarTableViewController {
     
     private func push(to identifier : String) {
         
-         self.drawerController?.getViewController(for: .none)?.push(id: identifier, animation: true)
+        self.drawerController?.getViewController(for: .none)?.push(id: identifier, animation: true)
         
     }
     
@@ -160,7 +160,7 @@ extension SideBarTableViewController {
         let alert = UIAlertController(title: nil, message: Constants.string.areYouSure.localize(), preferredStyle: .actionSheet)
         let logoutAction = UIAlertAction(title: Constants.string.logout.localize(), style: .destructive) { (_) in
             self.loader.isHidden = false
-            forceLogout()
+            self.presenter?.post(api: .logout, data: nil)
         }
         
         let cancelAction = UIAlertAction(title: Constants.string.Cancel.localize(), style: .cancel, handler: nil)
@@ -181,11 +181,11 @@ extension SideBarTableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-         let tableCell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
-         tableCell.textLabel?.textColor = .secondary
-         tableCell.textLabel?.font = UIFont(name: FontCustom.clanPro_Book.rawValue, size: 10)
-         tableCell.textLabel?.text = sideBarList[indexPath.row].localize()
-         return tableCell
+        let tableCell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
+        tableCell.textLabel?.textColor = .secondary
+        tableCell.textLabel?.font = UIFont(name: FontCustom.clanPro_Book.rawValue, size: 10)
+        tableCell.textLabel?.text = sideBarList[indexPath.row].localize()
+        return tableCell
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -197,7 +197,26 @@ extension SideBarTableViewController {
         self.drawerController?.closeSide()
     }
     
+}
+
+
+// MARK:- PostViewProtocol
+
+extension SideBarTableViewController : PostViewProtocol {
     
+    func onError(api: Base, message: String, statusCode code: Int) {
+        
+        DispatchQueue.main.async {
+            self.loader.isHidden = true
+            showAlert(message: message, okHandler: nil, fromView: self)
+        }
+    }
     
+    func success(api: Base, message: String?) {
+        DispatchQueue.main.async {
+            self.loader.isHidden = true
+            forceLogout()
+        }
+    }
 }
 

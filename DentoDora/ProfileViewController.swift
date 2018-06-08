@@ -95,7 +95,7 @@ extension ProfileViewController {
     
     private func setProfile(){
         
-        Cache.image(forUrl: baseUrl+"/storage/"+String.removeNil(User.main.picture)) { (image) in
+        Cache.image(forUrl: Common.getImageUrl(for: User.main.picture)) { (image) in
             DispatchQueue.main.async {
                 self.imageViewProfile.image = image == nil ? #imageLiteral(resourceName: "userPlaceholder") : image
             }
@@ -197,12 +197,10 @@ extension ProfileViewController {
         json.removeValue(forKey: "id")
         json.removeValue(forKey: "picture")
         json.removeValue(forKey: "access_token")
-        
+        json.removeValue(forKey: "currency  ")
         self.loader.isHidden = false
         self.presenter?.post(api: .updateProfile, imageData: data == nil ? nil : [WebConstants.string.picture : data!], parameters: json)
-        
-        
-        
+         
     }
   
     private func setLayout(){

@@ -31,6 +31,7 @@ extension HomeViewController {
             self.isOnBooking = true
             self.serviceSelectionView?.onClickPricing = { selectedItem in
                 if let id = selectedItem?.id {
+                    self.loader.isHidden = false
                     self.service = selectedItem
                     self.getEstimateFareFor(serviceId: id)
                 }
@@ -90,6 +91,7 @@ extension HomeViewController {
         
         if self.rideSelectionView == nil {
             print("ViewAddressOuter ", #function)
+             self.loader.isHidden = true
             self.rideSelectionView = Bundle.main.loadNibNamed(XIB.Names.RequestSelectionView, owner: self, options: [:])?.first as? RequestSelectionView
             self.rideSelectionView?.frame = CGRect(x: 0, y: self.view.frame.height-self.rideSelectionView!.bounds.height, width: self.view.frame.width, height: self.rideSelectionView!.frame.height)
             self.rideSelectionView?.show(with: .bottom, completion: nil)
@@ -122,6 +124,7 @@ extension HomeViewController {
         self.rideSelectionView?.dismissView(onCompletion: {
             self.rideSelectionView = nil
             self.isOnBooking = false
+            self.loader.isHidden = true
         })
     }
     
@@ -131,6 +134,7 @@ extension HomeViewController {
     func showRideStatusView(with request : Request) {
         
         self.viewAddressOuter.isHidden = true
+        self.loader.isHidden = true
         print("ViewAddressOuter ", #function)
         if self.rideStatusView == nil, let rideStatus = Bundle.main.loadNibNamed(XIB.Names.RideStatusView, owner: self, options: [:])?.first as? RideStatusView {
             rideStatus.frame = CGRect(origin: CGPoint(x: 0, y: self.view.frame.height-rideStatus.frame.height), size: CGSize(width: self.view.frame.width, height: rideStatus.frame.height))
@@ -384,7 +388,7 @@ extension HomeViewController {
             
             let format = "http://maps.google.com/maps?q=loc:\(currentLocation.latitude),\(currentLocation.longitude)"
             let  message = "\(AppName) :- \(String.removeNil(User.main.firstName)) \(String.removeNil(User.main.lastName)) \(Constants.string.wouldLikeToShare) \(format)"
-            self.share(items: [#imageLiteral(resourceName: "logo"), message])
+            self.share(items: [#imageLiteral(resourceName: "Splash_icon"), message])
         }
     }
     

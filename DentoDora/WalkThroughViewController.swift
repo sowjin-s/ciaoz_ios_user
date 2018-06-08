@@ -51,12 +51,10 @@ extension WalkThroughViewController {
         self.view.addSubview(pageControl)
     }
     
-    
 }
 
 
 extension WalkThroughViewController : UIPageViewControllerDataSource, UIPageViewControllerDelegate {
-    
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard let index = walkThroughControllers.index(of: viewController), index > 0 else {

@@ -193,12 +193,13 @@ extension PasswordViewController : PostViewProtocol {
     
     func getOath(api: Base, data: LoginRequest?) {
         
-        guard let accessToken = data?.access_token else {
+        guard let accessToken = data?.access_token, let refreshToken = data?.refresh_token else {
             self.onError(api: api, message: ErrorMessage.list.serverError.localize(), statusCode: 0)
             return
         }
            
             User.main.accessToken = accessToken
+            User.main.refreshToken = refreshToken
             self.presenter?.get(api: .getProfile, parameters: nil)
         
     }

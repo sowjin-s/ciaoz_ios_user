@@ -34,13 +34,13 @@
                             <rect key="frame" x="0.0" y="0.0" width="266" height="27.5"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="mHK-pv-VT6">
-                                    <rect key="frame" x="13.5" y="7.5" width="133" height="14"/>
+                                    <rect key="frame" x="13.5" y="0.0" width="133" height="27.5"/>
                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lCy-Mm-8WF">
-                                    <rect key="frame" x="169" y="7.5" width="89" height="14"/>
+                                    <rect key="frame" x="169" y="0.0" width="89" height="27.5"/>
                                     <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="14"/>
                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
@@ -53,7 +53,7 @@
                                 <constraint firstItem="mHK-pv-VT6" firstAttribute="width" secondItem="3Rt-tJ-Xrq" secondAttribute="width" multiplier="1:2" id="UTJ-G0-YdI"/>
                                 <constraint firstItem="mHK-pv-VT6" firstAttribute="centerY" secondItem="3Rt-tJ-Xrq" secondAttribute="centerY" id="XQi-i1-1og"/>
                                 <constraint firstItem="mHK-pv-VT6" firstAttribute="centerX" secondItem="3Rt-tJ-Xrq" secondAttribute="centerX" multiplier="0.6" id="Zip-xg-CAm"/>
-                                <constraint firstItem="mHK-pv-VT6" firstAttribute="height" secondItem="3Rt-tJ-Xrq" secondAttribute="height" multiplier="1:2" id="dhT-pM-1wd"/>
+                                <constraint firstItem="mHK-pv-VT6" firstAttribute="height" secondItem="3Rt-tJ-Xrq" secondAttribute="height" multiplier="1:1" id="dhT-pM-1wd"/>
                                 <constraint firstItem="lCy-Mm-8WF" firstAttribute="centerX" secondItem="3Rt-tJ-Xrq" secondAttribute="centerX" multiplier="1.6" id="lWt-oC-xiC"/>
                                 <constraint firstItem="lCy-Mm-8WF" firstAttribute="width" secondItem="mHK-pv-VT6" secondAttribute="width" multiplier="1:1.5" id="oin-On-COk"/>
                             </constraints>
@@ -62,13 +62,13 @@
                             <rect key="frame" x="0.0" y="27.5" width="266" height="27.5"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yi9-vH-sgU">
-                                    <rect key="frame" x="13.5" y="6.5" width="133" height="14"/>
+                                    <rect key="frame" x="13.5" y="0.0" width="133" height="27.5"/>
                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kKK-IK-Uea">
-                                    <rect key="frame" x="169" y="6.5" width="89" height="14"/>
+                                    <rect key="frame" x="169" y="0.0" width="89" height="27.5"/>
                                     <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="14"/>
                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
@@ -81,7 +81,7 @@
                                 <constraint firstItem="kKK-IK-Uea" firstAttribute="centerY" secondItem="Yi9-vH-sgU" secondAttribute="centerY" id="Vwo-i7-gDJ"/>
                                 <constraint firstItem="Yi9-vH-sgU" firstAttribute="width" secondItem="yo4-fW-qyO" secondAttribute="width" multiplier="1:2" id="ecm-h9-Rtc"/>
                                 <constraint firstItem="kKK-IK-Uea" firstAttribute="width" secondItem="Yi9-vH-sgU" secondAttribute="width" multiplier="1:1.5" id="fpl-fe-mZp"/>
-                                <constraint firstItem="Yi9-vH-sgU" firstAttribute="height" secondItem="yo4-fW-qyO" secondAttribute="height" multiplier="1:2" id="hHp-Ga-fxP"/>
+                                <constraint firstItem="Yi9-vH-sgU" firstAttribute="height" secondItem="yo4-fW-qyO" secondAttribute="height" multiplier="1:1" id="hHp-Ga-fxP"/>
                                 <constraint firstItem="kKK-IK-Uea" firstAttribute="height" secondItem="Yi9-vH-sgU" secondAttribute="height" id="s7e-8f-Piq"/>
                                 <constraint firstItem="kKK-IK-Uea" firstAttribute="centerX" secondItem="yo4-fW-qyO" secondAttribute="centerX" multiplier="1.6" id="v2n-EA-dqe"/>
                             </constraints>
@@ -90,13 +90,13 @@
                             <rect key="frame" x="0.0" y="55" width="266" height="27.5"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YAs-DG-vZE">
-                                    <rect key="frame" x="13.5" y="7.5" width="133" height="13.5"/>
+                                    <rect key="frame" x="13.5" y="0.5" width="133" height="27.5"/>
                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8tG-ok-Guz">
-                                    <rect key="frame" x="169" y="7.5" width="89" height="13.5"/>
+                                    <rect key="frame" x="169" y="0.5" width="89" height="27.5"/>
                                     <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="14"/>
                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
@@ -106,7 +106,7 @@
                             <constraints>
                                 <constraint firstItem="8tG-ok-Guz" firstAttribute="centerY" secondItem="YAs-DG-vZE" secondAttribute="centerY" id="6qw-dt-vds"/>
                                 <constraint firstItem="YAs-DG-vZE" firstAttribute="width" secondItem="ogG-Fm-hdh" secondAttribute="width" multiplier="1:2" id="A0n-ah-Ra1"/>
-                                <constraint firstItem="YAs-DG-vZE" firstAttribute="height" secondItem="ogG-Fm-hdh" secondAttribute="height" multiplier="1:2" id="Agt-aj-clb"/>
+                                <constraint firstItem="YAs-DG-vZE" firstAttribute="height" secondItem="ogG-Fm-hdh" secondAttribute="height" id="Agt-aj-clb"/>
                                 <constraint firstItem="YAs-DG-vZE" firstAttribute="centerX" secondItem="ogG-Fm-hdh" secondAttribute="centerX" multiplier="0.6" id="C1P-nR-N5V"/>
                                 <constraint firstItem="8tG-ok-Guz" firstAttribute="width" secondItem="YAs-DG-vZE" secondAttribute="width" multiplier="1:1.5" id="Fgg-T6-guN"/>
                                 <constraint firstItem="YAs-DG-vZE" firstAttribute="centerY" secondItem="ogG-Fm-hdh" secondAttribute="centerY" id="NaX-ln-eof"/>
@@ -118,13 +118,13 @@
                             <rect key="frame" x="0.0" y="82.5" width="266" height="27.5"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0QI-Qd-NOt">
-                                    <rect key="frame" x="13.5" y="7.5" width="133" height="14"/>
+                                    <rect key="frame" x="13.5" y="0.0" width="133" height="27.5"/>
                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jUT-I9-IcW">
-                                    <rect key="frame" x="169" y="7.5" width="89" height="14"/>
+                                    <rect key="frame" x="169" y="0.0" width="89" height="27.5"/>
                                     <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="14"/>
                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
@@ -133,7 +133,7 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="0QI-Qd-NOt" firstAttribute="centerX" secondItem="7lh-K1-iH0" secondAttribute="centerX" multiplier="0.6" id="LZQ-Tx-xKt"/>
-                                <constraint firstItem="0QI-Qd-NOt" firstAttribute="height" secondItem="7lh-K1-iH0" secondAttribute="height" multiplier="1:2" id="d3c-9B-L6F"/>
+                                <constraint firstItem="0QI-Qd-NOt" firstAttribute="height" secondItem="7lh-K1-iH0" secondAttribute="height" id="d3c-9B-L6F"/>
                                 <constraint firstItem="0QI-Qd-NOt" firstAttribute="width" secondItem="7lh-K1-iH0" secondAttribute="width" multiplier="1:2" id="elQ-ix-jSo"/>
                                 <constraint firstItem="0QI-Qd-NOt" firstAttribute="centerY" secondItem="7lh-K1-iH0" secondAttribute="centerY" id="h60-hW-wX8"/>
                                 <constraint firstItem="jUT-I9-IcW" firstAttribute="width" secondItem="0QI-Qd-NOt" secondAttribute="width" multiplier="1:1.5" id="hLW-0q-xoD"/>
@@ -146,13 +146,13 @@
                             <rect key="frame" x="0.0" y="110" width="266" height="27.5"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FJc-N4-n7D">
-                                    <rect key="frame" x="13.5" y="6.5" width="133" height="14.5"/>
+                                    <rect key="frame" x="13.5" y="0.0" width="133" height="27.5"/>
                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PL5-7z-C7L">
-                                    <rect key="frame" x="169" y="6.5" width="89" height="14.5"/>
+                                    <rect key="frame" x="169" y="0.0" width="89" height="27.5"/>
                                     <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="14"/>
                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
@@ -166,7 +166,7 @@
                                 <constraint firstItem="PL5-7z-C7L" firstAttribute="height" secondItem="FJc-N4-n7D" secondAttribute="height" id="ZqZ-kF-vMI"/>
                                 <constraint firstItem="PL5-7z-C7L" firstAttribute="centerY" secondItem="FJc-N4-n7D" secondAttribute="centerY" id="cco-NJ-Kfg"/>
                                 <constraint firstItem="FJc-N4-n7D" firstAttribute="centerY" secondItem="ROW-pf-HRD" secondAttribute="centerY" id="j3M-Yt-zB3"/>
-                                <constraint firstItem="FJc-N4-n7D" firstAttribute="height" secondItem="ROW-pf-HRD" secondAttribute="height" multiplier="1:2" id="rrF-Wa-5Oi"/>
+                                <constraint firstItem="FJc-N4-n7D" firstAttribute="height" secondItem="ROW-pf-HRD" secondAttribute="height" id="rrF-Wa-5Oi"/>
                                 <constraint firstItem="FJc-N4-n7D" firstAttribute="centerX" secondItem="ROW-pf-HRD" secondAttribute="centerX" multiplier="0.6" id="syM-x4-1L0"/>
                             </constraints>
                         </view>
@@ -174,13 +174,13 @@
                             <rect key="frame" x="0.0" y="137.5" width="266" height="27.5"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qyr-lB-7yj">
-                                    <rect key="frame" x="13.5" y="7" width="133" height="14"/>
+                                    <rect key="frame" x="13.5" y="0.5" width="133" height="27.5"/>
                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OJu-p4-pVt">
-                                    <rect key="frame" x="169" y="7" width="89" height="14"/>
+                                    <rect key="frame" x="169" y="0.5" width="89" height="27.5"/>
                                     <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="14"/>
                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
@@ -188,7 +188,7 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstItem="qyr-lB-7yj" firstAttribute="height" secondItem="Ndi-pl-Hzi" secondAttribute="height" multiplier="1:2" id="2u0-Pd-QNl"/>
+                                <constraint firstItem="qyr-lB-7yj" firstAttribute="height" secondItem="Ndi-pl-Hzi" secondAttribute="height" id="2u0-Pd-QNl"/>
                                 <constraint firstItem="OJu-p4-pVt" firstAttribute="centerY" secondItem="qyr-lB-7yj" secondAttribute="centerY" id="9mt-Ii-hPh"/>
                                 <constraint firstItem="qyr-lB-7yj" firstAttribute="centerX" secondItem="Ndi-pl-Hzi" secondAttribute="centerX" multiplier="0.6" id="D08-x8-XmH"/>
                                 <constraint firstItem="qyr-lB-7yj" firstAttribute="width" secondItem="Ndi-pl-Hzi" secondAttribute="width" multiplier="1:2" id="EZl-my-Xnd"/>

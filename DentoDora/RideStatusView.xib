@@ -70,7 +70,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GDp-Zj-2Cd">
                                     <rect key="frame" x="0.0" y="0.0" width="140" height="108"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="vyy-GX-Rsa">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="vyy-GX-Rsa">
                                             <rect key="frame" x="46.5" y="9" width="47" height="47"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ayw-68-fQL">
@@ -269,14 +269,15 @@
             <connections>
                 <outlet property="buttonCall" destination="UJR-o8-JZQ" id="dXF-85-Cj4"/>
                 <outlet property="buttonCancel" destination="Gee-J5-q4F" id="VLO-C3-Edt"/>
+                <outlet property="constraintSurge" destination="PWP-VF-u39" id="fYU-ib-m3w"/>
                 <outlet property="imageViewProvider" destination="vyy-GX-Rsa" id="TpY-8O-pJe"/>
                 <outlet property="imageViewService" destination="Oa0-6j-TA5" id="gKs-KS-lZK"/>
                 <outlet property="labelOtp" destination="fNm-Rj-eYl" id="MRI-gW-q9m"/>
-                <outlet property="labelPeakDescription" destination="qKb-np-ZOE" id="I31-Ex-bNn"/>
                 <outlet property="labelProviderName" destination="Ayw-68-fQL" id="Yaw-25-2Bf"/>
                 <outlet property="labelServiceDescription" destination="yVO-c7-9LI" id="ddc-jT-IrB"/>
                 <outlet property="labelServiceName" destination="OCt-8u-iJ1" id="d0r-71-1bU"/>
                 <outlet property="labelServiceNumber" destination="3wZ-lD-eVt" id="rIV-iG-tQj"/>
+                <outlet property="labelSurgeDescription" destination="qKb-np-ZOE" id="I31-Ex-bNn"/>
                 <outlet property="labelTopTitle" destination="aw5-Qu-5Ts" id="dm6-re-fmq"/>
                 <outlet property="viewRating" destination="5Tq-8s-WBM" id="IzS-j7-q9z"/>
             </connections>

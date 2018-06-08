@@ -149,7 +149,7 @@ extension SettingTableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return (indexPath.section == 0 ? 100 : 40 )*(UIScreen.main.bounds.height/568)
+        return (indexPath.section == 0 ? 80 : 40 )*(UIScreen.main.bounds.height/568)
     }
     
     

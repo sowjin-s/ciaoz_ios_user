@@ -12,7 +12,7 @@ import CoreData
 
 extension Work {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Work> {
+    @nonobjc public class func fetch() -> NSFetchRequest<Work> {
         return NSFetchRequest<Work>(entityName: "Work")
     }
 

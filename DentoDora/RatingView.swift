@@ -59,6 +59,13 @@ extension RatingView {
         
         self.labelRating.text = "\(Constants.string.rateyourtrip.localize()) \(String.removeNil(request.provider?.first_name)) \(String.removeNil(request.provider?.last_name))"
         
+        Cache.image(forUrl:Common.getImageUrl(for: request.provider?.avatar)) { (image) in
+            if image != nil {
+                DispatchQueue.main.async {
+                    self.imageViewProvider.image = image
+                }
+            }
+        }
     }
     
     

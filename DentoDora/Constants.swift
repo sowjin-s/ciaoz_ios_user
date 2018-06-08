@@ -39,7 +39,7 @@ struct Constants {
     let resetPassword = "Reset Password"
     let enterOtp = "Enter OTP"
     let otpIncorrect = "OTP incorrect"
-    let enterCurrentPassword = "Enter Current Password"
+    let enterCurrentPassword = "Current Password"
     let walkthroughDummy = """
       Lorem Ipsum is simply dummy text of the printing and typesetting industry.
     Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
@@ -162,6 +162,7 @@ struct Constants {
     let couldnotOpenEmailAttheMoment = "Could not open Email at the moment."
     let couldNotReachTheHost = "Could not reach th web"
     let wouldyouLiketoMakeaSOSCall = "Would you like to make a SOS Call?"
+    let mins = "mins"
   
 }
 
@@ -180,6 +181,7 @@ struct Keys {
     let mobile = "mobile"
     let currency = "currency"
     let language = "language"
+    let refreshToken = "refreshToken"
 }
 
 //ENUM TRIP TYPE

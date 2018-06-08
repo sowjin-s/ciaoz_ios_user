@@ -18,11 +18,11 @@ class RideStatusView: UIView {
     @IBOutlet private weak var labelServiceName : UILabel!
     @IBOutlet private weak var labelServiceDescription : UILabel!
     @IBOutlet private weak var labelServiceNumber : UILabel!
-    @IBOutlet private weak var labelPeakDescription : UILabel!
+    @IBOutlet private weak var labelSurgeDescription : UILabel!
     @IBOutlet private weak var buttonCall : UIButton!
     @IBOutlet private weak var buttonCancel : UIButton!
     @IBOutlet private weak var labelOtp : UILabel!
-
+    @IBOutlet private weak var constraintSurge : NSLayoutConstraint!
     
     private var currentStatus : RideStatus = .none {
         didSet{
@@ -35,6 +35,13 @@ class RideStatusView: UIView {
             }
         }
     }
+    
+    private var isOnSurge : Bool = false {
+        didSet {
+            self.constraintSurge.constant = isOnSurge ? 30 : 0
+        }
+    }
+    
     
     var onClickCancel : (()->Void)?
     var onClickShare : (()->Void)?
@@ -63,7 +70,7 @@ extension RideStatusView {
     
     // MARK:- Localization
     private func localize() {
-        self.labelPeakDescription.text = Constants.string.peakInfo.localize()
+        self.labelSurgeDescription.text = Constants.string.peakInfo.localize()
         self.buttonCall.setTitle(Constants.string.call.localize().uppercased()
             , for: .normal)
         self.buttonCancel.setTitle(Constants.string.Cancel.localize().uppercased(), for: .normal)
@@ -96,13 +103,14 @@ extension RideStatusView {
                 case .arrived:
                    return Constants.string.driverArrived.localize()
                 case .pickedup:
+                   self.labelOtp.isHidden = true
                    return Constants.string.youAreOnRide.localize()
                 default:
                   return .Empty
                }
             }()
         
-        Cache.image(forUrl: values.provider?.avatar) { (image) in
+        Cache.image(forUrl: Common.getImageUrl(for: values.provider?.avatar)) { (image) in
             if image != nil {
                 DispatchQueue.main.async {
                     self.imageViewProvider.image = image
@@ -124,7 +132,7 @@ extension RideStatusView {
         self.labelServiceNumber.text = values.provider_service?.service_number
         self.labelServiceDescription.text = values.provider_service?.service_model
         self.labelOtp.text = " \(Constants.string.otp.localize()+": "+String.removeNil(values.otp)) "
-        
+        self.isOnSurge = values.surge == 1
     }
     
     // MARK:- Call Provider

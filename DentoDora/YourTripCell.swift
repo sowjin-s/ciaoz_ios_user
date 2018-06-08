@@ -55,7 +55,10 @@ class YourTripCell: UITableViewCell {
                 self.upCommingCarImage.image = image
             }
         }
-        Cache.image(forUrl: values.static_map) { (image) in
+        
+        let mapImage = values.static_map?.replacingOccurrences(of: "%7C", with: "|").addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        
+        Cache.image(forUrl: mapImage) { (image) in
             if image != nil {
                 self.mapImageView.image = image
             }

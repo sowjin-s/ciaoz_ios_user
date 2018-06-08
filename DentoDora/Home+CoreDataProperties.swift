@@ -12,7 +12,7 @@ import CoreData
 
 extension Home {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Home> {
+    @nonobjc public class func fetch() -> NSFetchRequest<Home> {
         return NSFetchRequest<Home>(entityName: "Home")
     }
 

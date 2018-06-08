@@ -105,5 +105,11 @@ class Common {
         }
         
     }
+    
+    // MARK:- Bussiness Image Url
+    class func getImageUrl (for urlString : String?)->String {
+        
+        return baseUrl+"/storage/"+String.removeNil(urlString)
+    }
         
 }

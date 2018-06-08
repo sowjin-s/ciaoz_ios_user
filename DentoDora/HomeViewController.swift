@@ -45,7 +45,6 @@ class HomeViewController: UIViewController {
         
     }()
     
-    
     private var selectedLocationView = UIView() // View to change the location pinpoint
     {
         didSet{
@@ -201,6 +200,7 @@ extension HomeViewController {
     
     @IBAction private func getCurrentLocation(){
         
+        self.viewCurrentLocation.addPressAnimation()
         if currentLocation.value != nil {
             self.mapViewHelper?.moveTo(location: currentLocation.value!, with: self.viewMapOuter.center)
         }
@@ -362,6 +362,7 @@ extension HomeViewController {
         print("ViewAddressOuter ", #function)
     } else {
          self.drawerController?.openSide(.left)
+         self.viewSideMenu.addPressAnimation()
     }
     
        // self.serviceView()

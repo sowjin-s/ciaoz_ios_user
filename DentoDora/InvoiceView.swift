@@ -64,8 +64,8 @@ extension InvoiceView {
     func set(request : Request) {
         
         self.labelBooking.text = request.booking_id
-        self.labelDistanceTravelled.text = "\(Int.removeNil(request.payment?.distance)) \(distanceType)"
-        self.labelTimeTaken.text = request.travel_time
+        self.labelDistanceTravelled.text = "\(Int.removeNil(request.payment?.distance)) \(distanceType.localize())"
+        self.labelTimeTaken.text = "\(String.removeNil(request.travel_time)) \(Constants.string.mins.localize())"
         self.labelBaseFare.text = "\(String.removeNil(User.main.currency)) \(Int.removeNil(request.payment?.fixed))"
         self.labelDistanceFare.text = "\(String.removeNil(User.main.currency)) \(Int.removeNil(request.payment?.distance))"
         self.labelTax.text = "\(String.removeNil(User.main.currency)) \(Int.removeNil(request.payment?.tax))"
