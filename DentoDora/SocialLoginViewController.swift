@@ -131,5 +131,17 @@ class SocialLoginCell : UITableViewCell {
     @IBOutlet weak var imageViewTitle : UIImageView!
     @IBOutlet weak var labelTitle : UILabel!
     
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.setDesign()
+    }
+    
+    // MARK:- Set Designs
+    
+    private func setDesign() {
+        Common.setFont(to: self.labelTitle, isTitle: true)
+    }
+    
 }
 

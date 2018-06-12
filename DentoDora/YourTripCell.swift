@@ -43,6 +43,18 @@ class YourTripCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.setDesign()
+    }
+    
+    // MARK:- Set Font
+    
+    private func setDesign() {
+        
+        Common.setFont(to: upCommingDateLabel)
+        Common.setFont(to: upCommingBookingIDLlabel)
+        Common.setFont(to: upCommingCarName)
+        Common.setFont(to: labelModel)
+        Common.setFont(to: labelPrice)
         
     }
     

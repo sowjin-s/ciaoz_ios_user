@@ -22,5 +22,18 @@ class WalkThroughView : UIView {
         
     }
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.setDesign()
+    }
+    
+    // MARK:- Set Designs
+    
+    private func setDesign () {
+        
+        Common.setFont(to: labelTitle, isTitle: true)
+        Common.setFont(to: labelSubTitle)
+        
+    }
     
 }

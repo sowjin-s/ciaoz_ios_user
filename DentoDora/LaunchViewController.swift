@@ -59,9 +59,9 @@ extension LaunchViewController {
     
     //MARK:-Set Font Family
     private func setDesigns(){
-        
-       buttonSignIn.titleLabel?.font = UIFont(name: FontCustom.clanPro_Book.rawValue, size: 16)
-       buttonSignUp.titleLabel?.font = UIFont(name: FontCustom.clanPro_Book.rawValue, size: 20)
+       Common.setFont(to: self.buttonSignIn, isTitle: true)
+       Common.setFont(to: self.buttonSignUp, isTitle: true)
+       Common.setFont(to: self.buttonSocialLogin)
        buttonSignIn.setTitleColor(.white, for: .normal)
        buttonSignUp.setTitleColor(.white, for: .normal)
         

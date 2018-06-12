@@ -50,6 +50,13 @@ struct Constants {
     containing Lorem Ipsum passages, and more recently with desktop publishing
     software like Aldus PageMaker including versions of Lorem Ipsum
     """
+    
+    let walkthroughWelcome = "Introducing Tranxit Driver to take rides from the Tranxit app users."
+    let walkthroughDrive = "Be your own boss, set your own schedule. Get the latest driving features all in one spot."
+    let walkthroughEarn = "Get well paid to help out strangers get to where they need to go,withdraw your earnigs every week/monthly."
+    let welcome = "Welcome"
+    let drive = "Drive"
+    let earn = "Earn"
     let country = "Country"
     let timeZone = "Time Zone"
     let referalCode = "Referral Code"
@@ -163,6 +170,7 @@ struct Constants {
     let couldNotReachTheHost = "Could not reach th web"
     let wouldyouLiketoMakeaSOSCall = "Would you like to make a SOS Call?"
     let mins = "mins"
+    let invoice = "Invoice"
   
 }
 

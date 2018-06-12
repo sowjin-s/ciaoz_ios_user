@@ -66,7 +66,25 @@ extension RideStatusView {
         self.localize()
         self.buttonCall.addTarget(self, action: #selector(self.callAction), for: .touchUpInside)
         self.buttonCancel.addTarget(self, action: #selector(self.cancelShareAction), for: .touchUpInside)
+        self.setDesign()
     }
+    
+    // MARK:- Set Designs
+    
+    private func setDesign() {
+        
+        Common.setFont(to: labelOtp, isTitle: true)
+        Common.setFont(to: labelTopTitle)
+        Common.setFont(to: labelServiceName)
+        Common.setFont(to: labelProviderName)
+        Common.setFont(to: labelServiceNumber)
+        Common.setFont(to: labelSurgeDescription)
+        Common.setFont(to: labelServiceDescription)
+        Common.setFont(to: buttonCancel, isTitle: true)
+        Common.setFont(to: buttonCall, isTitle: true)
+        
+    }
+    
     
     // MARK:- Localization
     private func localize() {

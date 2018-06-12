@@ -34,6 +34,7 @@ class HelpViewController: UIViewController {
         super.viewDidLoad()
         self.initalLoads()
         buttonAction()
+        
     }
     
     override func viewWillLayoutSubviews() {
@@ -45,10 +46,20 @@ class HelpViewController: UIViewController {
 
 extension HelpViewController {
     
+    // MARK:- Set Design
+    
+    private func setDesign () {
+        
+        Common.setFont(to: supportLabel)
+        Common.setFont(to: HelpQuotesLabel)
+    }
+    
+    
     private func initalLoads() {
         self.navigationController?.isNavigationBarHidden = false
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.backButtonClick))
         self.navigationItem.title = Constants.string.help.localize()
+        self.setDesign()
     }
     
     private func buttonAction(){

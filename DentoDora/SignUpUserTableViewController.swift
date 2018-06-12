@@ -61,8 +61,8 @@ class SignUpUserTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setNavigationcontroller()
-
+        self.setNavigationcontroller()        
+        self.setDesign()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -86,6 +86,21 @@ class SignUpUserTableViewController: UITableViewController {
 
 
 extension SignUpUserTableViewController {
+    
+    
+    // MARK:- Designs
+    
+    private func setDesign() {
+        
+        Common.setFont(to: firstNameText)
+        Common.setFont(to: emailtext)
+        Common.setFont(to: lastNameText)
+        Common.setFont(to: passwordText)
+        Common.setFont(to: confirmPwdText)
+        Common.setFont(to: phoneNumber)
+        
+    }
+    
     
     private func localize(){
         
@@ -277,7 +292,11 @@ extension SignUpUserTableViewController : PostViewProtocol {
             
             User.main.accessToken = accessToken
             storeInUserDefaults()
-            self.present(id: Storyboard.Ids.DrawerController, animation: true)
+            let drawer = Router.main.instantiateViewController(withIdentifier: Storyboard.Ids.DrawerController)
+            self.present(drawer, animated: true, completion: {
+                self.navigationController?.viewControllers.removeAll()
+            })
+            
         }
         loader.isHideInMainThread(true)
         

@@ -36,7 +36,16 @@ extension PaymentViewController {
         self.navigationController?.isNavigationBarHidden = false
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.backButtonClick))
         self.navigationItem.title = Constants.string.payment.localize()
+        self.setDesign()
     }
+    
+    // MARK:- Set Design
+    
+    private func setDesign () {
+        
+        Common.setFont(to: buttonAddPayments)
+    }
+    
     
     private func localize() {
         buttonAddPayments.setTitle(Constants.string.addCardPayments.localize(), for: .normal)

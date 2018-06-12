@@ -55,11 +55,22 @@ class LocationSelectionView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.initialLoads()
+        self.setDesign()
     }
 }
 
 
 extension LocationSelectionView {
+    
+    
+    // MARK:- Set Designs
+    
+    private func setDesign() {
+        
+        Common.setFont(to: textFieldSource)
+        Common.setFont(to: textFieldDestination)
+        
+    }
     
     
     private func localize() {
@@ -147,6 +158,7 @@ extension LocationSelectionView : UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         return self.getCell(for: indexPath)
+        
     }
     
     
@@ -255,6 +267,8 @@ extension LocationSelectionView : UITableViewDataSource, UITableViewDelegate {
             
                 tableCell.textLabel?.text = favouriteLocations[indexPath.row].address.localize()
                 tableCell.detailTextLabel?.text = favouriteLocations[indexPath.row].location?.address ?? Constants.string.addLocation.localize()
+                Common.setFont(to: tableCell.textLabel!)
+                Common.setFont(to: tableCell.detailTextLabel!, size : 12)
                 return tableCell
             }
             
@@ -263,7 +277,7 @@ extension LocationSelectionView : UITableViewDataSource, UITableViewDelegate {
             if let tableCell = self.tableViewBottom.dequeueReusableCell(withIdentifier: XIB.Names.LocationTableViewCell, for: indexPath) as? LocationTableViewCell, datasource.count>indexPath.row{
                 
                 tableCell.textLabel?.attributedText = datasource[indexPath.row].attributedFullText
-                tableCell.textLabel?.font = UIFont(name: FontCustom.clanPro_Book.rawValue, size: 12) ?? UIFont.systemFont(ofSize: 12)
+                Common.setFont(to: tableCell.textLabel!)
                 return tableCell
             }
             
@@ -299,7 +313,7 @@ extension LocationSelectionView : UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool{
         
-        guard let text = textField.text, !text.isEmpty else {
+        guard let text = textField.text, !text.isEmpty, range.location>0 || range.length>1 else {
             self.datasource = []
             return true
         }
@@ -312,7 +326,7 @@ extension LocationSelectionView : UITextFieldDelegate {
         
         self.getPredications(from: searchText)
         
-        print(textField.text, "  ", string, "   ", range.location, "  ", range.length)
+        print(textField.text ?? "", "  ", string, "   ", range.location, "  ", range.length)
         
         return true
         

@@ -43,9 +43,18 @@ extension CouponViewController {
         self.navigationItem.title = Constants.string.coupon.localize()
         self.localize()
         self.view.dismissKeyBoardonTap()
+        self.setDesign()
     }
     
+    // MARK:- Set Designs
     
+    private func setDesign () {
+        
+        Common.setFont(to: labelMessage)
+        Common.setFont(to: labelAddCouponString)
+        Common.setFont(to: textFieldCouponCode)
+        
+    }
     
     private func localize() {
         self.textFieldCouponCode.placeholder = Constants.string.enterCouponCode.localize()

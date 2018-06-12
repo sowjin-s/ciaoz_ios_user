@@ -25,7 +25,6 @@ class RequestSelectionView: UIView {
     @IBOutlet private weak var buttonScheduleRide : UIButton!
     @IBOutlet private weak var buttonRideNow : UIButton!
     @IBOutlet private weak var viewUseWallet : UIView!
-    
     @IBOutlet private weak var labelDistanceString : UILabel!
     @IBOutlet private weak var labelDistance : UILabel!
     
@@ -67,6 +66,27 @@ extension RequestSelectionView {
         self.isHideSurge = false
         self.isWalletChecked = false
         self.localize()
+        self.setDesign()
+    }
+    
+    
+    // MARK:- Set Designs
+    
+    private func setDesign() {
+        
+        Common.setFont(to: labelSurge, isTitle: true, size: 20)
+        Common.setFont(to: buttonRideNow, isTitle: true)
+        Common.setFont(to: buttonScheduleRide, isTitle:  true)
+        Common.setFont(to: labelUseWalletString)
+        Common.setFont(to: labelSurgeDescription)
+        Common.setFont(to: labelETA)
+        Common.setFont(to: labelETAString)
+        Common.setFont(to: labelEstimation)
+        Common.setFont(to: labelModel)
+        Common.setFont(to: labelDistance)
+        Common.setFont(to: labelDistanceString)
+        Common.setFont(to: labelModelString)
+        Common.setFont(to: labelEstimationString)
     }
     
     

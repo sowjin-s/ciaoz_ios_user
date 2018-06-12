@@ -53,7 +53,23 @@ extension ServiceSelectionView {
         self.buttonGetPricing.addTarget(self, action: #selector(self.onClickGetPricing), for: .touchUpInside)
         self.imageViewCard.image = #imageLiteral(resourceName: "money_icon")
         self.labelCardNumber.text = Constants.string.cash.localize()
+        self.setDesign()
     }
+    
+    // MARK:- Set Designs
+    
+    private func setDesign() {
+        
+        Common.setFont(to: labelServiceTitle, isTitle: true)
+        Common.setFont(to: buttonMore)
+        Common.setFont(to: buttonService)
+       // Common.setFont(to: buttonChange)
+        Common.setFont(to: buttonChange, isTitle: true)
+        Common.setFont(to: labelCapacity)
+        Common.setFont(to: labelCardNumber)
+        
+    }
+    
     
     // MARK:- Localize
     

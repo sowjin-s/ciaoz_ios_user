@@ -110,8 +110,19 @@ class HomeViewController: UIViewController {
     
     //MARKERS
     
-    private var sourceMarker = GMSMarker()
-    private var destinationMarker = GMSMarker()
+    private var sourceMarker : GMSMarker = {
+        let marker = GMSMarker()
+        marker.appearAnimation = .pop
+        marker.icon =  #imageLiteral(resourceName: "sourcePin").resizeImage(newWidth: 30)
+        return marker
+    }()
+    
+    private var destinationMarker : GMSMarker = {
+        let marker = GMSMarker()
+        marker.appearAnimation = .pop
+        marker.icon =  #imageLiteral(resourceName: "destinationPin").resizeImage(newWidth: 30)
+        return marker
+    }()
     
     var service : Service?
     var homePageHelper : HomePageHelper?
@@ -148,7 +159,7 @@ class HomeViewController: UIViewController {
 extension HomeViewController {
     
     private func initialLoads(){
-        
+                
         self.addMapView()
         self.getFavouriteLocations()
         self.viewSideMenu.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sideMenuAction)))
@@ -164,9 +175,6 @@ extension HomeViewController {
             }
         })
         self.viewCurrentLocation.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.getCurrentLocation)))
-        
-        //self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.serviceView)))
-        
         self.sourceLocationDetail?.bind(listener: { (locationDetail) in
             DispatchQueue.main.async {
                 self.textFieldSourceLocation.text = locationDetail?.address
@@ -176,15 +184,7 @@ extension HomeViewController {
         self.checkForProviderStatus()
         self.buttonSOS.isHidden = true
         self.buttonSOS.addTarget(self, action: #selector(self.buttonSOSAction), for: .touchUpInside)
-       // self.viewHomeLocation
-        
-//        let timer =  Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) { (_) in
-//
-//            self.tempLat -= 0.00002
-//            self.tempLong -= 0.00002
-//            self.moveProviderMarker(to: LocationCoordinate(latitude: self.tempLat, longitude: self.tempLong))
-//        }
-//        timer.fire()
+        self.setDesign()
     }
     
     
@@ -214,6 +214,14 @@ extension HomeViewController {
         self.textFieldSourceLocation.placeholder = Constants.string.source.localize()
         self.textFieldDestinationLocation.placeholder = Constants.string.destination.localize()
         
+    }
+    
+    // MARK:- Set Design
+    
+    private func setDesign() {
+        
+        Common.setFont(to: textFieldSourceLocation)
+        Common.setFont(to: textFieldDestinationLocation)
     }
     
     // MARK:- Add Mapview
@@ -274,14 +282,16 @@ extension HomeViewController {
         if currentSelectionView == self.viewSourceLocation {
             
             if let coordinate = self.sourceLocationDetail?.value?.coordinate{
-                self.plotMarker(marker: sourceMarker, with: coordinate)
+                self.plotMarker(marker: &sourceMarker, with: coordinate)
+                print("Source Marker - ", coordinate.latitude, " ",coordinate.longitude)
             } else {
                 self.showLocationView()
             }
         } else if currentSelectionView == self.viewDestinationLocation {
             
             if let coordinate = self.destinationLocationDetail?.coordinate{
-                self.plotMarker(marker: destinationMarker, with: coordinate)
+                self.plotMarker( marker: &destinationMarker, with: coordinate)
+                print("Destination Marker - ", coordinate.latitude, " ",coordinate.longitude)
             } else {
                 self.showLocationView()
             }
@@ -289,13 +299,15 @@ extension HomeViewController {
         
     }
     
-    private func plotMarker(marker : GMSMarker, with coordinate : CLLocationCoordinate2D){
+    private func plotMarker(marker : inout GMSMarker, with coordinate : CLLocationCoordinate2D){
+        
+       //print("marker : \(marker == self.sourceMarker)")
         
         marker.position = coordinate
-        marker.appearAnimation = .pop
-        marker.icon = marker == self.sourceMarker ? #imageLiteral(resourceName: "sourcePin").resizeImage(newWidth: 30) : #imageLiteral(resourceName: "destinationPin").resizeImage(newWidth: 30)
+//        marker.appearAnimation = .pop
+//        marker.icon = isSource ? #imageLiteral(resourceName: "sourcePin").resizeImage(newWidth: 30) : #imageLiteral(resourceName: "destinationPin").resizeImage(newWidth: 30)
         marker.map = self.mapViewHelper?.mapView
-        marker.map?.center = viewMapOuter.center
+        //marker.map?.center = viewMapOuter.center
         self.mapViewHelper?.mapView?.animate(toLocation: coordinate)
     }
     
@@ -307,11 +319,13 @@ extension HomeViewController {
         if let locationView = Bundle.main.loadNibNamed(XIB.Names.LocationSelectionView, owner: self, options: [:])?.first as? LocationSelectionView {
             locationView.frame = self.view.bounds
             locationView.setValues(address: (sourceLocationDetail,destinationLocationDetail)) { (address) in
-                
+              
+                self.removeUnnecessaryView(with: .none) // Remove services or ride now if previously open 
                 self.sourceLocationDetail = address.source
                 self.destinationLocationDetail = address.destination
                 self.drawPolyline() // Draw polyline between source and destination
                 self.getServicesList() // get Services
+                
             }
             self.view.addSubview(locationView)
             
@@ -325,11 +339,16 @@ extension HomeViewController {
     
      func drawPolyline() {
         
+        self.imageViewMarkerCenter.isHidden = true
         if let sourceCoordinate = self.sourceLocationDetail?.value?.coordinate,
            let destinationCoordinate = self.destinationLocationDetail?.coordinate {  // Draw polyline from source to destination
             self.mapViewHelper?.mapView?.clear()
-            self.selectionViewAction(in: self.viewSourceLocation)
-            self.selectionViewAction(in: self.viewDestinationLocation)
+            self.sourceMarker.map = self.mapViewHelper?.mapView
+            self.destinationMarker.map = self.mapViewHelper?.mapView
+            self.sourceMarker.position = sourceCoordinate
+            self.destinationMarker.position = destinationCoordinate
+            //self.selectionViewAction(in: self.viewSourceLocation)
+            //self.selectionViewAction(in: self.viewDestinationLocation)
             self.mapViewHelper?.mapView?.drawPolygon(from: sourceCoordinate, to: destinationCoordinate)
             self.selectedLocationView = UIView()
         }
@@ -427,11 +446,31 @@ extension HomeViewController : GMSMapViewDelegate {
     func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
         
         if self.isUserInteractingWithMap {
-            self.isMapInteracted(false)
-            if [self.viewSourceLocation, self.viewDestinationLocation].contains(selectedLocationView) {
-                self.drawPolyline()
+            
+             if self.selectedLocationView == self.viewSourceLocation, self.sourceLocationDetail != nil {
+                
+                if let location = mapViewHelper?.mapView?.projection.coordinate(for: viewMapOuter.center) {
+                    self.sourceLocationDetail?.value?.coordinate = location
+                    self.drawPolyline()
+                    self.mapViewHelper?.getPlaceAddress(from: location, on: { (locationDetail) in
+                        //print(locationDetail)
+                        self.sourceLocationDetail?.value = locationDetail
+                    })
+                }
+             } else if self.selectedLocationView == self.viewDestinationLocation, self.destinationLocationDetail != nil {
+                
+                if let location = mapViewHelper?.mapView?.projection.coordinate(for: viewMapOuter.center) {
+                    self.destinationLocationDetail?.coordinate = location
+                    self.drawPolyline()
+                    self.mapViewHelper?.getPlaceAddress(from: location, on: { (locationDetail) in
+                        //print(locationDetail)
+                        self.destinationLocationDetail = locationDetail
+                    })
+                }
             }
         }
+        self.isMapInteracted(false)
+
     }
     
     func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
@@ -447,7 +486,6 @@ extension HomeViewController : GMSMapViewDelegate {
     
     func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
         
-        print(#function)
        // return
         
         if isUserInteractingWithMap {
@@ -455,39 +493,39 @@ extension HomeViewController : GMSMapViewDelegate {
             if self.selectedLocationView == self.viewSourceLocation, self.sourceLocationDetail != nil {
                 
                 self.sourceMarker.map = nil
-                self.imageViewMarkerCenter.image = #imageLiteral(resourceName: "sourcePin")
+                self.imageViewMarkerCenter.image = #imageLiteral(resourceName: "MoveMapMarker")
                 self.imageViewMarkerCenter.isHidden = false
-                if let location = mapViewHelper?.mapView?.projection.coordinate(for: viewMapOuter.center) {
-                    self.sourceLocationDetail?.value?.coordinate = location
-                    self.mapViewHelper?.getPlaceAddress(from: location, on: { (locationDetail) in
-                        print(locationDetail)
-                        self.sourceLocationDetail?.value = locationDetail
-//                        let sLocation = self.sourceLocationDetail
-//                        self.sourceLocationDetail = sLocation
-                    })
-                }
+//                if let location = mapViewHelper?.mapView?.projection.coordinate(for: viewMapOuter.center) {
+//                    self.sourceLocationDetail?.value?.coordinate = location
+//                    self.mapViewHelper?.getPlaceAddress(from: location, on: { (locationDetail) in
+//                        print(locationDetail)
+//                        self.sourceLocationDetail?.value = locationDetail
+////                        let sLocation = self.sourceLocationDetail
+////                        self.sourceLocationDetail = sLocation
+//                    })
+//                }
                 
                 
             } else if self.selectedLocationView == self.viewDestinationLocation, self.destinationLocationDetail != nil {
                 
                 self.destinationMarker.map = nil
-                self.imageViewMarkerCenter.image = #imageLiteral(resourceName: "destinationPin")
+                self.imageViewMarkerCenter.image = #imageLiteral(resourceName: "MoveMapMarker")
                 self.imageViewMarkerCenter.isHidden = false
-                if let location = mapViewHelper?.mapView?.projection.coordinate(for: viewMapOuter.center) {
-                    self.destinationLocationDetail?.coordinate = location
-                    self.mapViewHelper?.getPlaceAddress(from: location, on: { (locationDetail) in
-                        print(locationDetail)
-                        self.destinationLocationDetail = locationDetail
-                    })
-                }
+//                if let location = mapViewHelper?.mapView?.projection.coordinate(for: viewMapOuter.center) {
+//                    self.destinationLocationDetail?.coordinate = location
+//                    self.mapViewHelper?.getPlaceAddress(from: location, on: { (locationDetail) in
+//                        print(locationDetail)
+//                        self.destinationLocationDetail = locationDetail
+//                    })
+//                }
             }
             
         }
-        else {
-            self.destinationMarker.map = self.mapViewHelper?.mapView
-            self.sourceMarker.map = self.mapViewHelper?.mapView
-            self.imageViewMarkerCenter.isHidden = true
-        }
+//        else {
+//            self.destinationMarker.map = self.mapViewHelper?.mapView
+//            self.sourceMarker.map = self.mapViewHelper?.mapView
+//            self.imageViewMarkerCenter.isHidden = true
+//        }
         
     }
     

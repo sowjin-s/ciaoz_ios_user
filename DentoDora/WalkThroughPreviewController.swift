@@ -33,7 +33,7 @@ extension WalkThroughPreviewController {
         self.imageView.image = arrayData?.0
         self.labelTitle.text = arrayData?.1?.localize()
         self.labelSubTitle.text = arrayData?.2?.localize()
-        self.desgin()
+        self.design()
         
     }
     
@@ -44,11 +44,10 @@ extension WalkThroughPreviewController {
     }
     
     
-    private func desgin(){
+    private func design(){
         
-        self.labelTitle.font = UIFont(name: FontCustom.clanPro_NarrMedium.rawValue, size: 30)
-        self.labelSubTitle.font = UIFont(name: FontCustom.clanPro_News.rawValue, size: 12)
-        
+        Common.setFont(to: self.labelTitle, isTitle: true, size: 20)
+        Common.setFont(to: self.labelSubTitle)
     }
     
 }

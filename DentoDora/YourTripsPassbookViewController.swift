@@ -71,8 +71,17 @@ extension YourTripsPassbookViewController {
             self.presenter?.get(api: .walletPassbook, parameters: nil)
             self.presenter?.get(api: .couponPassbook, parameters: nil)
         }
-        
+        self.setDesign()
     }
+    
+    // MARK:- Set Design
+    
+    private func setDesign () {
+        
+        Common.setFont(to: pastBtn, isTitle: true)
+        Common.setFont(to: upCommingBtn, isTitle:  true)
+    }
+    
  
     private func localize(){
         

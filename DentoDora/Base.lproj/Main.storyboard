@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rY8-Cf-rB5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rY8-Cf-rB5">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -163,10 +163,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b4w-n3-RDh">
-                                <rect key="frame" x="259" y="13" width="45" height="45"/>
+                                <rect key="frame" x="250" y="8.5" width="54" height="54"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tracker" translatesAutoresizingMaskIntoConstraints="NO" id="DLG-TS-g5F">
-                                        <rect key="frame" x="0.5" y="0.5" width="45" height="45"/>
+                                        <rect key="frame" x="0.5" y="0.5" width="54" height="54"/>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </imageView>
                                 </subviews>
@@ -414,7 +414,7 @@
                             <constraint firstItem="sOi-HC-iqQ" firstAttribute="centerY" secondItem="WQy-tY-Vzu" secondAttribute="centerY" multiplier="0.4" id="OdB-Qy-S4b"/>
                             <constraint firstItem="sOi-HC-iqQ" firstAttribute="height" secondItem="J8q-FU-qaJ" secondAttribute="height" multiplier="100:667" id="Sdy-2E-wix"/>
                             <constraint firstItem="VUc-3z-HrO" firstAttribute="centerY" secondItem="WQy-tY-Vzu" secondAttribute="centerY" id="SgO-m1-sGT"/>
-                            <constraint firstItem="b4w-n3-RDh" firstAttribute="width" secondItem="Irs-SK-6CD" secondAttribute="width" multiplier="1.5" id="So6-MV-zuT"/>
+                            <constraint firstItem="b4w-n3-RDh" firstAttribute="width" secondItem="Irs-SK-6CD" secondAttribute="width" multiplier="1.8" id="So6-MV-zuT"/>
                             <constraint firstItem="eF8-Hp-TcZ" firstAttribute="centerX" secondItem="4Hr-ij-YKW" secondAttribute="centerX" id="Tc9-2a-4kv"/>
                             <constraint firstItem="WQy-tY-Vzu" firstAttribute="trailing" secondItem="b4w-n3-RDh" secondAttribute="trailing" constant="16" id="Vfe-oh-ky7"/>
                             <constraint firstItem="eF8-Hp-TcZ" firstAttribute="centerY" secondItem="4Hr-ij-YKW" secondAttribute="centerY" id="WWW-gR-xV9"/>
@@ -422,7 +422,7 @@
                             <constraint firstItem="4Hr-ij-YKW" firstAttribute="top" secondItem="J8q-FU-qaJ" secondAttribute="top" id="byO-sV-A3P"/>
                             <constraint firstItem="4Hr-ij-YKW" firstAttribute="trailing" secondItem="J8q-FU-qaJ" secondAttribute="trailing" id="d0N-cI-OaL"/>
                             <constraint firstItem="Irs-SK-6CD" firstAttribute="leading" secondItem="WQy-tY-Vzu" secondAttribute="leading" constant="16" id="eFz-YY-UvG"/>
-                            <constraint firstItem="b4w-n3-RDh" firstAttribute="height" secondItem="Irs-SK-6CD" secondAttribute="height" multiplier="1.5" id="fLY-W1-fBU"/>
+                            <constraint firstItem="b4w-n3-RDh" firstAttribute="height" secondItem="Irs-SK-6CD" secondAttribute="height" multiplier="1.8" id="fLY-W1-fBU"/>
                             <constraint firstItem="Irs-SK-6CD" firstAttribute="height" secondItem="J8q-FU-qaJ" secondAttribute="width" multiplier="30:320" id="h49-JP-iqQ"/>
                             <constraint firstItem="sOi-HC-iqQ" firstAttribute="width" secondItem="J8q-FU-qaJ" secondAttribute="width" multiplier="0.9" id="h4Q-g4-qgQ"/>
                             <constraint firstItem="Eb3-lV-VTA" firstAttribute="width" secondItem="J8q-FU-qaJ" secondAttribute="width" multiplier="0.6" id="hlW-Gm-vPj"/>

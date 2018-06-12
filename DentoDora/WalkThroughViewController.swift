@@ -15,7 +15,7 @@ class WalkThroughViewController: UIPageViewController {
     
     private var pageControl = UIPageControl()
     
-    private let walkThroughData = [(Constants.string.walkthrough, Constants.string.walkthroughDummy),(Constants.string.walkthrough, Constants.string.walkthroughDummy),(Constants.string.walkthrough, Constants.string.walkthroughDummy)]
+    private let walkThroughData = [(Constants.string.welcome, Constants.string.walkthroughWelcome),(Constants.string.drive, Constants.string.walkthroughDrive),(Constants.string.earn, Constants.string.walkthroughEarn)]
 
     override func viewDidLoad() {
         super.viewDidLoad()

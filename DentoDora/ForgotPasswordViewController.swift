@@ -26,6 +26,10 @@ class ForgotPasswordViewController: UIViewController {
         self.initialLoads()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
@@ -51,11 +55,11 @@ extension ForgotPasswordViewController {
         self.view.dismissKeyBoardonTap()
         self.viewNext.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.nextAction)))
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.backButtonClick))
-        if #available(iOS 11.0, *) {
-            self.navigationController?.navigationBar.prefersLargeTitles = true
-        }
         self.scrollView.addSubview(viewScroll)
         self.textFieldEmail.text = emailString
+        if #available(iOS 11.0, *) {
+            self.navigationItem.largeTitleDisplayMode = .never
+        }
     }
     
     
@@ -67,7 +71,7 @@ extension ForgotPasswordViewController {
         self.textFieldEmail.textColor = .black
         self.textFieldEmail.delegate = self
         self.textFieldEmail.font = UIFont(name: FontCustom.clanPro_Book.rawValue, size: 2)
-        
+        Common.setFont(to: textFieldEmail)
     }
     
     
@@ -153,3 +157,14 @@ extension ForgotPasswordViewController : PostViewProtocol {
     
 }
 
+//// MARK:- UIScrollViewDelegate
+//
+//extension ForgotPasswordViewController : UIScrollViewDelegate {
+//
+////    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+////        if #available(iOS 11.0, *) {
+////            let offset = scrollView.contentOffset
+////            self.scrollView.contentOffset = offset
+////        }
+////    }
+//}

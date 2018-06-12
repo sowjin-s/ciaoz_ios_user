@@ -28,7 +28,22 @@ class PassbookTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.setDesign()
     }
+    
+    // MARK:- Set Designs
+    
+    private func setDesign () {
+        
+        Common.setFont(to: labelDate)
+        Common.setFont(to: labelAmountString)
+        Common.setFont(to: labelOffer)
+        Common.setFont(to: labelCredit)
+        Common.setFont(to: labelPaymentType)
+        Common.setFont(to: labelCouponStatus)
+        
+    }
+    
     
     func set(values : CouponWallet) {
         

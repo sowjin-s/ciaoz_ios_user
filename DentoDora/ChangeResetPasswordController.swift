@@ -93,8 +93,10 @@ extension ChangeResetPasswordController {
         self.textFieldOtpOrCurrentPassword.delegate = self
         self.textFieldNewPassword.delegate = self
         self.textFieldConfirmPassword.delegate = self
-        // self.textFieldEmail.font = UIFont(name: FontCustom.clanPro_Book.rawValue, size: 2)
-        
+        Common.setFont(to: textFieldNewPassword)
+        Common.setFont(to: textFieldConfirmPassword)
+        Common.setFont(to: textFieldOtpOrCurrentPassword)
+        Common.setFont(to: labelDescription)
     }
     
     

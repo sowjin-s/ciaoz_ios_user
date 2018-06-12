@@ -52,9 +52,18 @@ class ServiceSelectionCollectionViewCell: UICollectionViewCell {
 
 private extension ServiceSelectionCollectionViewCell {
     
+    // MARK:- Set Designs
+    
+    private func setDesign() {
+        
+        Common.setFont(to: buttonService, size : 12)
+    }
+    
+    
     private func initialLoads(){
         self.imageViewService.image = #imageLiteral(resourceName: "sedan-car-model")
         self.buttonService.setTitleColor(.black, for: .normal)
+        self.setDesign()
         //self.initialFrame = self.imageViewService.frame.size
     }
 }

@@ -51,6 +51,7 @@ class ProfileViewController: UITableViewController {
         
         super.viewDidLoad()
         self.initialLoads()
+        
     }
 
     override func viewWillLayoutSubviews() {
@@ -123,6 +124,16 @@ extension ProfileViewController {
             $0?.borderActiveColor = nil
         })
         self.textFieldEmail.isEnabled = false
+        
+        Common.setFont(to: textFieldEmail)
+        Common.setFont(to: textFieldFirst)
+        Common.setFont(to: textFieldLast)
+        Common.setFont(to: textFieldPhone)
+        Common.setFont(to: buttonSave)
+        Common.setFont(to: buttonChangePassword)
+        Common.setFont(to: labelBusiness)
+        Common.setFont(to: labelPersonal)
+        Common.setFont(to: labelTripType)
     }
     
     // MARK:- Show Image

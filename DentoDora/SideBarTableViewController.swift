@@ -50,7 +50,7 @@ class SideBarTableViewController: UITableViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        self.setDesigns()
+        self.setLayers()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -72,16 +72,25 @@ extension SideBarTableViewController {
         self.profileImageCenterContraint.constant = 0//-(fadeWidth/3)
         self.drawerController?.drawerWidth = Float(self.view.frame.width - fadeWidth)
         self.viewShadow.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.imageViewAction)))
-        
+        self.setDesigns()
     }
     
     // MARK:- Set Designs
     
-    private func setDesigns(){
+    private func setLayers(){
         
         self.viewShadow.addShadow()
         self.imageViewProfile.makeRoundedCorner()
         
+    }
+    
+    
+    // MARK:- Set Designs
+    
+    private func setDesigns () {
+        
+        Common.setFont(to: labelName)
+        Common.setFont(to: labelEmail)
     }
     
     

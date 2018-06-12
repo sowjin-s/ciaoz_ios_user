@@ -21,6 +21,7 @@ class LoaderView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.initialLoads()
+        self.setDesign()
     }
    
 }
@@ -42,6 +43,14 @@ extension LoaderView {
         self.lottieView.centerXAnchor.constraint(equalTo: self.viewLoader.centerXAnchor).isActive = true
         self.lottieView.centerYAnchor.constraint(equalTo: self.viewLoader.centerYAnchor).isActive = true
         lottieView.play()
+    }
+    
+    // MARK:- Set Design
+    
+    private func setDesign() {
+        
+        Common.setFont(to: labelFindingDriver)
+        Common.setFont(to: buttonCancelRequest, isTitle: true)
     }
     
     

@@ -33,6 +33,16 @@ extension WalletViewController {
         self.navigationController?.isNavigationBarHidden = false
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.backButtonClick))
         self.navigationItem.title = Constants.string.wallet.localize()
+        self.setDesign()
+    }
+    
+    // MARK:- Set Designs
+    
+    private func setDesign() {
+        
+        Common.setFont(to: labelBalance)
+        Common.setFont(to: textFieldAmount)
+        
     }
     
     @IBAction private func buttonAmountAction(sender : UIButton) {

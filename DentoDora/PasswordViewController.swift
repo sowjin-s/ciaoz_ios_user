@@ -27,7 +27,7 @@ class PasswordViewController: UIViewController {
         
         super.viewDidLoad()
         self.initialLoads()
-        
+        self.setDesign()
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,6 +45,15 @@ class PasswordViewController: UIViewController {
 //MARK:- Methods
 
 extension PasswordViewController {
+    
+    // MARK:- Set Designs
+    
+    private func setDesign() {
+        
+        Common.setFont(to: textFieldPassword)
+        Common.setFont(to: buttonCreateAccount)
+        Common.setFont(to: buttonForgotPassword)
+    }
 
     private func initialLoads(){
         
@@ -201,7 +210,6 @@ extension PasswordViewController : PostViewProtocol {
             User.main.accessToken = accessToken
             User.main.refreshToken = refreshToken
             self.presenter?.get(api: .getProfile, parameters: nil)
-        
     }
     
     
