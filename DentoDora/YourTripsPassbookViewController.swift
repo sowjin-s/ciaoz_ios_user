@@ -45,12 +45,12 @@ class YourTripsPassbookViewController: UIViewController {
         self.initalLoads()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        switchViewAction()
-    }
-    
-    
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        switchViewAction()
+//    }
+//    
+//    
 }
 
 extension YourTripsPassbookViewController {
@@ -128,15 +128,32 @@ extension YourTripsPassbookViewController : UITableViewDelegate,UITableViewDataS
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return getCount()
+        return 2//getCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        return self.getCell(for: indexPath, in: tableView)
+        let cell = self.getCell(for: indexPath, in: tableView)
+        cell.selectionStyle = .none
+        return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return (isYourTripsSelected ? (200.0-(isFirstBlockSelected ? 20 : 0)) : 120)*(UIScreen.main.bounds.height/568)
+        return (isYourTripsSelected ? (215.0-(isFirstBlockSelected ? 20 : 0)) : 120)//*(UIScreen.main.bounds.height/568)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        UIView.animate(withDuration: 0.5) {
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
+        
+        guard isYourTripsSelected else { return }
+        
+        if let vc = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.Ids.YourTripsDetailViewController) as? YourTripsDetailViewController {
+            vc.isUpcomingTrips = !isFirstBlockSelected
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
     }
     
     private func getCell(for indexPath : IndexPath, in tableView : UITableView)->UITableViewCell {

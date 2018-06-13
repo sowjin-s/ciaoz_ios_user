@@ -70,6 +70,7 @@
 		083A59B120A4351D00D64574 /* LocationHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083A59AF20A4351D00D64574 /* LocationHeaderTableViewCell.swift */; };
 		083A59B220A4351D00D64574 /* LocationHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083A59B020A4351D00D64574 /* LocationHeaderTableViewCell.xib */; };
 		083A59B520A454F800D64574 /* GooglePlacesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083A59B420A454F800D64574 /* GooglePlacesHelper.swift */; };
+		083DA4B920D0FF5B00DD473E /* YourTripsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083DA4B820D0FF5B00DD473E /* YourTripsDetailViewController.swift */; };
 		084182B5200F508900527D0D /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084182B4200F508900527D0D /* TableView.swift */; };
 		084182B7200F689500527D0D /* PresenterProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084182B6200F689500527D0D /* PresenterProcessor.swift */; };
 		084577612073614300E890F5 /* AVPlayerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084577602073614300E890F5 /* AVPlayerHelper.swift */; };
@@ -258,6 +259,7 @@
 		083A59AF20A4351D00D64574 /* LocationHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		083A59B020A4351D00D64574 /* LocationHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationHeaderTableViewCell.xib; sourceTree = "<group>"; };
 		083A59B420A454F800D64574 /* GooglePlacesHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GooglePlacesHelper.swift; sourceTree = "<group>"; };
+		083DA4B820D0FF5B00DD473E /* YourTripsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YourTripsDetailViewController.swift; sourceTree = "<group>"; };
 		084182B4200F508900527D0D /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
 		084182B6200F689500527D0D /* PresenterProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenterProcessor.swift; sourceTree = "<group>"; };
 		084577602073614300E890F5 /* AVPlayerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVPlayerHelper.swift; sourceTree = "<group>"; };
@@ -765,6 +767,14 @@
 			name = LocationHeaderCell;
 			sourceTree = "<group>";
 		};
+		083DA4B520D0FD2100DD473E /* YourTrips Detail */ = {
+			isa = PBXGroup;
+			children = (
+				083DA4B820D0FF5B00DD473E /* YourTripsDetailViewController.swift */,
+			);
+			name = "YourTrips Detail";
+			sourceTree = "<group>";
+		};
 		084182BA200F6BE200527D0D /* Requests */ = {
 			isa = PBXGroup;
 			children = (
@@ -946,6 +956,7 @@
 		08B7DC70209A1487002CF17A /* Main StoryBoard */ = {
 			isa = PBXGroup;
 			children = (
+				083DA4B520D0FD2100DD473E /* YourTrips Detail */,
 				085361A720B85CAD001DD97C /* Setting */,
 				083617C720B711B0009C9658 /* Payment */,
 				083617C420B70FE3009C9658 /* Help */,
@@ -1692,6 +1703,7 @@
 				086BAF5C200777890087F15A /* Global.swift in Sources */,
 				889480211FECE717006AF5A9 /* Button.swift in Sources */,
 				08641D8F20A1B51C00AA0D1F /* CircularTransition.swift in Sources */,
+				083DA4B920D0FF5B00DD473E /* YourTripsDetailViewController.swift in Sources */,
 				08DDE6692093633B009FEBC6 /* WalkThroughPreviewController.swift in Sources */,
 				0809321A20A08E0200B88318 /* Profile.swift in Sources */,
 				08BAFC602094B495002292C0 /* ForgotPasswordViewController.swift in Sources */,

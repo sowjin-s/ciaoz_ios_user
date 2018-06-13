@@ -52,7 +52,7 @@ extension PasswordViewController {
         
         Common.setFont(to: textFieldPassword)
         Common.setFont(to: buttonCreateAccount)
-        Common.setFont(to: buttonForgotPassword)
+        Common.setFont(to: buttonForgotPassword)	
     }
 
     private func initialLoads(){

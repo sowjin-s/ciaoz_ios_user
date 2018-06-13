@@ -30,6 +30,7 @@ struct Storyboard {
     let HelpViewController = "HelpViewController"
     let SettingTableViewController = "SettingTableViewController"
     let ChangeResetPasswordController = "ChangeResetPasswordController"
+    let YourTripsDetailViewController = "YourTripsDetailViewController"
 }
 
 

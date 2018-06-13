@@ -64,7 +64,7 @@ extension Interactor : PostInteractorOutputProtocol {
         case .sendRequest:
             self.presenter?.sendRequest(api: api, data: response)
         
-        case .historyList, .upcomingList:
+        case .historyList, .upcomingList, .pastTripDetail, .upcomingTripDetail:
             self.presenter?.sendRequestArray(api: api, data: response)
             
         case .locationService:

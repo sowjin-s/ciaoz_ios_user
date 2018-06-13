@@ -44,6 +44,7 @@ class YourTripCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.setDesign()
+        self.upCommingCancelBtn.setTitle(Constants.string.cancelRide.localize(), for: .normal)
     }
     
     // MARK:- Set Font

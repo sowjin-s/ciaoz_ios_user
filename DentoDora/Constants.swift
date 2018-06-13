@@ -171,7 +171,14 @@ struct Constants {
     let wouldyouLiketoMakeaSOSCall = "Would you like to make a SOS Call?"
     let mins = "mins"
     let invoice = "Invoice"
-  
+    let viewRecipt = "View Recipt"
+    let payVia = "Pay via"
+    let comments = "Comments"
+    let pastTripDetails = "Past Trip Details"
+    let upcomingTripDetails = "Upcoming Trip Details"
+    let paymentMethod = "Payment Method"
+    let cancelRide = "Cancel Ride"
+    
 }
 
 //Defaults Keys
