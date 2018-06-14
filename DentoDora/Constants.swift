@@ -178,7 +178,16 @@ struct Constants {
     let upcomingTripDetails = "Upcoming Trip Details"
     let paymentMethod = "Payment Method"
     let cancelRide = "Cancel Ride"
-    
+    let noComments = "no Comments"
+    let noPastTrips = "No Past Trips"
+    let noUpcomingTrips = "No Upcoming Trips"
+    let noWalletHistory = "No Wallet Details"
+    let noCouponDetail = "No Coupon Details"
+    let fare = "Fare"
+    let fareType = "Fare Type"
+    let capacity = "Capacity"
+    let rateCard = "Rate Card"
+    let distance = "Distance"
 }
 
 //Defaults Keys
@@ -228,7 +237,7 @@ struct DateFormat {
     let hhmmddMMMyyyy = "hh:mm a - dd:MMM:yyyy"
     let ddMMyyyyhhmma = "dd-MM-yyyy hh:mma"
     let ddMMMyyyy = "dd MMM yyyy"
-    let hh_mm_a = "hh mm a"
+    let hh_mm_a = "hh : mm a"
 }
 
 

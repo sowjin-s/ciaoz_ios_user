@@ -25,4 +25,5 @@ struct WebConstants {
     let password = "password"
     let bearer = "Bearer "
     let picture = "picture"
+    let http = "http"
 }

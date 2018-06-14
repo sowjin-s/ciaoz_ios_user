@@ -14,7 +14,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ServiceSelectionView" customModule="User" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="369" height="230"/>
+            <rect key="frame" x="0.0" y="0.0" width="369" height="250"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xh1-Hm-3BK">
@@ -41,13 +41,13 @@
                     </state>
                 </button>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="WoW-e7-ces">
-                    <rect key="frame" x="27.5" y="148.5" width="314" height="73.5"/>
+                    <rect key="frame" x="27.5" y="162" width="314" height="80"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Kc-Pj-3ie">
-                            <rect key="frame" x="0.0" y="0.0" width="314" height="28.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="314" height="35"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="visa" translatesAutoresizingMaskIntoConstraints="NO" id="6wm-nv-MQx">
-                                    <rect key="frame" x="8" y="4.5" width="31.5" height="20"/>
+                                    <rect key="frame" x="8" y="5.5" width="31.5" height="25"/>
                                 </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6tt-Rg-9Lf">
                                     <rect key="frame" x="243" y="4" width="63" height="40"/>
@@ -55,13 +55,13 @@
                                     <state key="normal" title="Button"/>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pdW-j7-Egi">
-                                    <rect key="frame" x="43.5" y="7" width="195.5" height="14.5"/>
+                                    <rect key="frame" x="43.5" y="10.5" width="195.5" height="14.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1-0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AIP-gM-dru">
-                                    <rect key="frame" x="243" y="6.5" width="63" height="16.5"/>
+                                    <rect key="frame" x="243" y="10" width="63" height="16.5"/>
                                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="12"/>
                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
@@ -92,7 +92,7 @@
                             </variation>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S6j-lB-Emx">
-                            <rect key="frame" x="0.0" y="33.5" width="314" height="40"/>
+                            <rect key="frame" x="0.0" y="40" width="314" height="40"/>
                             <color key="backgroundColor" red="0.76095920138888884" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="RY0-TA-0na"/>
@@ -110,7 +110,7 @@
                     </subviews>
                 </stackView>
                 <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="KUn-ty-LaD">
-                    <rect key="frame" x="4" y="39" width="361" height="105.5"/>
+                    <rect key="frame" x="4" y="39" width="361" height="119"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="I0h-td-ADA">
                         <size key="itemSize" width="50" height="50"/>

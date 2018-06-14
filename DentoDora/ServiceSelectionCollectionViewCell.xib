@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -21,36 +21,51 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YAW-a7-FC3">
-                        <rect key="frame" x="15" y="9" width="171" height="130.5"/>
+                        <rect key="frame" x="15" y="9.5" width="171" height="93"/>
                     </imageView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hNq-dB-2rl">
-                        <rect key="frame" x="20" y="141" width="161" height="37"/>
-                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="10"/>
-                        <inset key="titleEdgeInsets" minX="4" minY="0.0" maxX="4" maxY="0.0"/>
-                        <state key="normal" title="Button"/>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <real key="value" value="5"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
-                    </button>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Ijp-C8-e9d">
+                        <rect key="frame" x="20" y="122" width="161" height="56"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hNq-dB-2rl">
+                                <rect key="frame" x="0.0" y="0.0" width="161" height="26"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="10"/>
+                                <inset key="titleEdgeInsets" minX="4" minY="0.0" maxX="4" maxY="0.0"/>
+                                <state key="normal" title="Button"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="qFr-yx-sGd">
+                                <rect key="frame" x="0.0" y="30" width="161" height="26"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </stackView>
                 </subviews>
             </view>
             <constraints>
+                <constraint firstItem="Ijp-C8-e9d" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="1Na-B1-kW5"/>
                 <constraint firstItem="YAW-a7-FC3" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="2QT-og-YSX"/>
-                <constraint firstItem="YAW-a7-FC3" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" multiplier="0.7" id="8xY-Vh-doj"/>
-                <constraint firstAttribute="bottom" secondItem="hNq-dB-2rl" secondAttribute="bottom" constant="8" id="Rnn-a8-FqC"/>
-                <constraint firstItem="YAW-a7-FC3" firstAttribute="centerY" secondItem="ZTg-uK-7eu" secondAttribute="centerY" multiplier="0.8" id="S9C-su-cYS"/>
+                <constraint firstItem="Ijp-C8-e9d" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" multiplier="0.8" id="6CZ-SK-gXR"/>
+                <constraint firstItem="YAW-a7-FC3" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" multiplier="0.5" id="8xY-Vh-doj"/>
+                <constraint firstItem="YAW-a7-FC3" firstAttribute="centerY" secondItem="ZTg-uK-7eu" secondAttribute="centerY" multiplier="0.6" id="S9C-su-cYS"/>
                 <constraint firstItem="YAW-a7-FC3" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" multiplier="0.85" id="dZl-Ew-VN1"/>
-                <constraint firstItem="hNq-dB-2rl" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" multiplier="0.8" id="eUl-e5-6WN"/>
-                <constraint firstItem="hNq-dB-2rl" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="yFE-vc-TYb"/>
-                <constraint firstItem="hNq-dB-2rl" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" multiplier="0.2" id="yFX-4z-dGd"/>
+                <constraint firstAttribute="bottom" secondItem="Ijp-C8-e9d" secondAttribute="bottom" constant="8" id="djf-TR-mny"/>
+                <constraint firstItem="Ijp-C8-e9d" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" multiplier="0.3" id="t6f-jh-vGd"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="201" height="186"/>
             <connections>
                 <outlet property="buttonService" destination="hNq-dB-2rl" id="qJ0-r8-Lxi"/>
                 <outlet property="imageViewService" destination="YAW-a7-FC3" id="bjc-c4-fwA"/>
+                <outlet property="labelPricing" destination="qFr-yx-sGd" id="tBj-sc-sI2"/>
             </connections>
             <point key="canvasLocation" x="6.5" y="41"/>
         </collectionViewCell>

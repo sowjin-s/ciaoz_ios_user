@@ -29,6 +29,9 @@ extension HomeViewController {
             self.serviceSelectionView?.show(with: .bottom, completion: nil)
             self.view.addSubview(self.serviceSelectionView!)
             self.isOnBooking = true
+            if let source = self.sourceLocationDetail?.value?.coordinate, let destination = self.destinationLocationDetail?.coordinate {
+                self.serviceSelectionView?.setAddress(source: source, destination: destination)
+            }
             self.serviceSelectionView?.onClickPricing = { selectedItem in
                 if let id = selectedItem?.id {
                     self.loader.isHidden = false
@@ -37,6 +40,7 @@ extension HomeViewController {
                 }
                 self.removeServiceView()
             }
+            self.serviceSelectionView?.clipsToBounds = false
         }
         
         self.serviceSelectionView?.set(source: source)
@@ -256,14 +260,14 @@ extension HomeViewController {
         
         for locationData in data where locationData.longitude != nil && locationData.latitude != nil {
             
-            let lottieView = LottieView(name: "suv")
-            lottieView.frame = CGRect(origin: .zero, size: CGSize(width: 50, height: 50))
-            lottieView.loopAnimation = true;
-            lottieView.play()
+//            let lottieView = LottieView(name: "suv")
+//            lottieView.frame = CGRect(origin: .zero, size: CGSize(width: 50, height: 50))
+//            lottieView.loopAnimation = true;
+//            lottieView.play()
             
             let marker = GMSMarker(position: CLLocationCoordinate2DMake(locationData.latitude!, locationData.longitude!))
-            marker.iconView = lottieView
-            marker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
+            marker.icon = #imageLiteral(resourceName: "map-vehicle-icon-black").resizeImage(newWidth: 40)
+            marker.groundAnchor = CGPoint(x: 0.5, y: 1)
             marker.map = mapViewHelper?.mapView
             
             
@@ -413,11 +417,7 @@ extension HomeViewController {
         cancelButton.titleColor = .primary
         let sureButton = PopupDialogButton(title: Constants.string.sure.localize()) {
             
-            if self.currentRequestId>0 {
-                let request = Request()
-                request.request_id = self.currentRequestId
-                self.presenter?.post(api: .cancelRequest, data: request.toData())
-            }
+            self.cancelRequest()
             self.removeLoaderView()
             self.clearMapview()
         }

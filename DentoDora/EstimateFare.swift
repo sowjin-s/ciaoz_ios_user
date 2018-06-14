@@ -18,6 +18,7 @@ struct EstimateFare : JSONSerializable {
     var surge :Int?
     var wallet_balance : Int?
     var useWallet : Int?
+    var base_price : Int?
 }
 
 

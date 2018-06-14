@@ -80,7 +80,7 @@ class HomeViewController: UIViewController {
     }
     
     
-    private var sourceLocationDetail : Bind<LocationDetail>? = Bind<LocationDetail>(nil)
+    var sourceLocationDetail : Bind<LocationDetail>? = Bind<LocationDetail>(nil)
     
     var destinationLocationDetail : LocationDetail? {  // Destination Location Detail
         didSet{
@@ -234,7 +234,7 @@ extension HomeViewController {
             if self.sourceLocationDetail?.value == nil {
                 self.mapViewHelper?.getPlaceAddress(from: location.coordinate, on: { (locationDetail) in
                     self.sourceLocationDetail?.value = locationDetail
-                   // self.getProviderInCurrentLocation()
+                    self.getProviderInCurrentLocation()
                 })
             }
             self.currentLocation.value = location.coordinate
@@ -647,6 +647,18 @@ extension HomeViewController  {
         
     }
     
+    // Cancel Request
+    
+    func cancelRequest() {
+        
+        if self.currentRequestId>0 {
+            let request = Request()
+            request.request_id = self.currentRequestId
+            self.presenter?.post(api: .cancelRequest, data: request.toData())
+        }
+    }
+    
+    
     // Create Request
     
     func createRequest(for fare : EstimateFare, isScheduled : Bool, scheduleDate : Date?) {
@@ -691,6 +703,9 @@ extension HomeViewController : PostViewProtocol {
              self.loader.isHidden = true
              //self.removeLoaderViewAndClearMapview()
              showAlert(message: message, okHandler: nil, fromView: self)
+            if api == .sendRequest {
+                self.removeLoaderView()
+            }
         }
     }
     
@@ -698,7 +713,7 @@ extension HomeViewController : PostViewProtocol {
         
         if api == .getProviders {  // Show Providers in Current Location
             DispatchQueue.main.async {
-               // self.showProviderInCurrentLocation(with: data)
+               self.showProviderInCurrentLocation(with: data)
                 //TODO:- Map Load to be fixed
             }
             return

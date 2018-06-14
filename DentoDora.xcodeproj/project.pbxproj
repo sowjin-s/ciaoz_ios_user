@@ -116,6 +116,7 @@
 		08BF24BE20BD80AE003A4B96 /* UserBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BF24BD20BD80AE003A4B96 /* UserBase.swift */; };
 		08BF24C020BD864C003A4B96 /* Default.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BF24BF20BD864C003A4B96 /* Default.swift */; };
 		08C8F2272004A60A0065CE24 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C8F2262004A60A0065CE24 /* Image.swift */; };
+		08C9E90E20D244F7002928EA /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C9E90D20D244F7002928EA /* Rating.swift */; };
 		08CEA1AB2073B47F00553DE2 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CEA1AA2073B47F00553DE2 /* Application.swift */; };
 		08DDE667209361F2009FEBC6 /* WalkThroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DDE666209361F2009FEBC6 /* WalkThroughViewController.swift */; };
 		08DDE6692093633B009FEBC6 /* WalkThroughPreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DDE6682093633B009FEBC6 /* WalkThroughPreviewController.swift */; };
@@ -127,6 +128,8 @@
 		08E2B22520C9584C002E689B /* Home+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E2B22120C9584C002E689B /* Home+CoreDataClass.swift */; };
 		08E2B22620C9584C002E689B /* Home+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E2B22220C9584C002E689B /* Home+CoreDataProperties.swift */; };
 		08E2B22720C9584C002E689B /* Work+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E2B22320C9584C002E689B /* Work+CoreDataClass.swift */; };
+		08E9675B20D2C19A0077DB4F /* RateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E9675A20D2C19A0077DB4F /* RateView.swift */; };
+		08E9675E20D2C1B80077DB4F /* RateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08E9675D20D2C1B80077DB4F /* RateView.xib */; };
 		08ECB216200DD0220008BF27 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08ECB215200DD0220008BF27 /* NavigationBar.swift */; };
 		08ED0E4E206CF12F0016732B /* PushKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08ED0E4D206CF12F0016732B /* PushKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		08F2B6B920123D2000CAB24E /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F2B6B820123D2000CAB24E /* Cache.swift */; };
@@ -305,6 +308,7 @@
 		08BF24BD20BD80AE003A4B96 /* UserBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBase.swift; sourceTree = "<group>"; };
 		08BF24BF20BD864C003A4B96 /* Default.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Default.swift; sourceTree = "<group>"; };
 		08C8F2262004A60A0065CE24 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		08C9E90D20D244F7002928EA /* Rating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
 		08CEA1AA2073B47F00553DE2 /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		08DDE666209361F2009FEBC6 /* WalkThroughViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkThroughViewController.swift; sourceTree = "<group>"; };
 		08DDE6682093633B009FEBC6 /* WalkThroughPreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkThroughPreviewController.swift; sourceTree = "<group>"; };
@@ -316,6 +320,8 @@
 		08E2B22120C9584C002E689B /* Home+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Home+CoreDataClass.swift"; path = "/Users/css/Documents/Jeff Space/Appoets/Projects/DentoDora/DentoDora/Home+CoreDataClass.swift"; sourceTree = "<absolute>"; };
 		08E2B22220C9584C002E689B /* Home+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Home+CoreDataProperties.swift"; path = "/Users/css/Documents/Jeff Space/Appoets/Projects/DentoDora/DentoDora/Home+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
 		08E2B22320C9584C002E689B /* Work+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Work+CoreDataClass.swift"; path = "/Users/css/Documents/Jeff Space/Appoets/Projects/DentoDora/DentoDora/Work+CoreDataClass.swift"; sourceTree = "<absolute>"; };
+		08E9675A20D2C19A0077DB4F /* RateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateView.swift; sourceTree = "<group>"; };
+		08E9675D20D2C1B80077DB4F /* RateView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RateView.xib; sourceTree = "<group>"; };
 		08ECB215200DD0220008BF27 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		08ED0E49206CC0500016732B /* User.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = User.entitlements; sourceTree = "<group>"; };
 		08ED0E4D206CF12F0016732B /* PushKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PushKit.framework; path = System/Library/Frameworks/PushKit.framework; sourceTree = SDKROOT; };
@@ -468,6 +474,7 @@
 				083A599F20A4317C00D64574 /* Location Selection */,
 				082F77CE20A5A14900D6474B /* ServiceSelectionView */,
 				08A39D9D20B5BB5900314935 /* Request Selection */,
+				08E9675C20D2C19F0077DB4F /* Rate View */,
 			);
 			name = HomePage;
 			sourceTree = "<group>";
@@ -1018,6 +1025,15 @@
 			name = CoreData;
 			sourceTree = "<group>";
 		};
+		08E9675C20D2C19F0077DB4F /* Rate View */ = {
+			isa = PBXGroup;
+			children = (
+				08E9675A20D2C19A0077DB4F /* RateView.swift */,
+				08E9675D20D2C1B80077DB4F /* RateView.xib */,
+			);
+			name = "Rate View";
+			sourceTree = "<group>";
+		};
 		08ED0E4A206CE1120016732B /* Media */ = {
 			isa = PBXGroup;
 			children = (
@@ -1308,6 +1324,7 @@
 				082745E720C2A06B00C6F8F3 /* YourTripModelResponse.swift */,
 				08A8821220C512760088BC5A /* LocationService.swift */,
 				08A8821420C572510088BC5A /* Coupons.swift */,
+				08C9E90D20D244F7002928EA /* Rating.swift */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -1515,6 +1532,7 @@
 				081E9CFD20BFFE57004C6884 /* suv.json in Resources */,
 				0823428A20AD775A0055DDF8 /* LoaderView.xib in Resources */,
 				082F77CD20A5A13900D6474B /* ServiceSelectionView.xib in Resources */,
+				08E9675E20D2C1B80077DB4F /* RateView.xib in Resources */,
 				083617BD20B6C756009C9658 /* RatingView.xib in Resources */,
 				08E2B21720C9148D002E689B /* Launch.storyboard in Resources */,
 				083A59B220A4351D00D64574 /* LocationHeaderTableViewCell.xib in Resources */,
@@ -1699,6 +1717,7 @@
 				08F3CBC02024720A00F5EEDF /* Formatter.swift in Sources */,
 				087DCFAE2077920A0040BDBB /* Sequence.swift in Sources */,
 				084182B5200F508900527D0D /* TableView.swift in Sources */,
+				08C9E90E20D244F7002928EA /* Rating.swift in Sources */,
 				084BB94B2094401D00EFD493 /* EmailViewController.swift in Sources */,
 				086BAF5C200777890087F15A /* Global.swift in Sources */,
 				889480211FECE717006AF5A9 /* Button.swift in Sources */,
@@ -1761,6 +1780,7 @@
 				089B4F7920C1144F00DDEAF3 /* Provider.swift in Sources */,
 				0802718B20A2FF1600EAE8C8 /* GoogleMapsHelper.swift in Sources */,
 				082F77CB20A5A12100D6474B /* ServiceSelectionView.swift in Sources */,
+				08E9675B20D2C19A0077DB4F /* RateView.swift in Sources */,
 				0805BDBE209C41AF00ACDC38 /* LocationSelectionViewController.swift in Sources */,
 				082D14D520BAB7AC00536E1B /* Colors.swift in Sources */,
 				08BF24BB20BD71F3003A4B96 /* ChangeResetPasswordController.swift in Sources */,

@@ -29,6 +29,7 @@ class YourTripsDetailViewController: UITableViewController {
     @IBOutlet private weak var labelSourceLocation : UILabel!
     @IBOutlet private weak var labelDestinationLocation : UILabel!
     @IBOutlet private weak var viewComments : UIView!
+    @IBOutlet private weak var stackViewButtons : UIStackView!
     
     var isUpcomingTrips = false  // Boolean to handle Past and Upcoming Trips
     
@@ -38,16 +39,21 @@ class YourTripsDetailViewController: UITableViewController {
     
     private var heightArray : [CGFloat] = [62,75,70,145]
     private var dataSource : Request?
-
+    private var viewRecipt : InvoiceView?
+    private var blurView : UIView?
+    private var requestId : Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initialLoads()
         self.localize()
         self.setDesign()
-        let height = (self.buttonViewReciptAndCall.convert(self.buttonViewReciptAndCall.frame, to: UIApplication.shared.keyWindow ?? self.tableView).origin.y+self.buttonViewReciptAndCall.frame.height) 
-        let footerHeight = UIScreen.main.bounds.height-height
-        self.tableView.tableFooterView?.frame.size.height = footerHeight/2-(self.buttonViewReciptAndCall.frame.height)
         
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        self.setLayouts()
     }
 
     override func didReceiveMemoryWarning() {
@@ -62,6 +68,11 @@ class YourTripsDetailViewController: UITableViewController {
             self.viewLocation.removeFromSuperview()
         }
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.hideRecipt()
+    }
 
 }
 
@@ -74,6 +85,24 @@ extension YourTripsDetailViewController {
         
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.backButtonClick))
         self.buttonCancelRide.isHidden = !isUpcomingTrips
+        self.buttonCancelRide.addTarget(self, action: #selector(self.buttonCancelRideAction(sender:)), for: .touchUpInside)
+        self.buttonViewReciptAndCall.addTarget(self, action: #selector(self.buttonCallAndReciptAction(sender:)), for: .touchUpInside)
+        self.loader.isHidden = false
+        let api : Base = self.isUpcomingTrips ? .upcomingTripDetail : .pastTripDetail
+//        let request = Request()
+//        request.request_id = self.requestId
+        self.presenter?.get(api: api, parameters: ["request_id":self.requestId!])
+        
+        self.viewRating.minRating = 1
+        self.viewRating.maxRating = 5
+        self.viewRating.emptyImage = #imageLiteral(resourceName: "StarEmpty")
+        self.viewRating.fullImage = #imageLiteral(resourceName: "StarFull")
+        //UIApplication.shared.keyWindow?.addSubview(self.stackViewButtons)
+    }
+    
+    
+    func setId(id : Int) {
+        self.requestId = id
     }
     
     // MARK:- Localize
@@ -97,8 +126,8 @@ extension YourTripsDetailViewController {
         
        Common.setFont(to: self.labelCommentsString, isTitle: true)
        Common.setFont(to: self.labelPayViaString, isTitle:  true)
-       Common.setFont(to: self.labelDate)
-       Common.setFont(to: self.labelTime)
+        Common.setFont(to: self.labelDate, size : 12)
+       Common.setFont(to: self.labelTime, size : 12)
        Common.setFont(to: self.labelBookingId)
        Common.setFont(to: self.labelPrice)
        Common.setFont(to: self.labelProviderName)
@@ -111,21 +140,124 @@ extension YourTripsDetailViewController {
        }
     }
     
+    // MARK:- Layouts
+    
+    private func setLayouts() {
+        
+        let height = tableView.tableFooterView?.frame.origin.y ?? 0//(self.buttonViewReciptAndCall.convert(self.buttonViewReciptAndCall.frame, to: UIApplication.shared.keyWindow ?? self.tableView).origin.y+self.buttonViewReciptAndCall.frame.height)
+        guard height < UIScreen.main.bounds.height else { return }
+        let footerHeight = UIScreen.main.bounds.height-height
+        self.tableView.tableFooterView?.frame.size.height = (footerHeight-(self.buttonViewReciptAndCall.frame.height*2)-(self.navigationController?.navigationBar.frame.height ?? 0))
+    }
+    
     
     // MARK:- Set values
     
     private func setValues() {
       
         let mapImage = self.dataSource?.static_map?.replacingOccurrences(of: "%7C", with: "|").addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-        Cache.image(forUrl: Common.getImageUrl(for: mapImage)) { (image) in
+        Cache.image(forUrl: mapImage) { (image) in
             if image != nil {
-                self.imageViewMap.image = image
+                DispatchQueue.main.async {
+                    self.imageViewMap.image = image
+                }
             }
+        }
+        
+        self.labelProviderName.text = String.removeNil(self.dataSource?.provider?.first_name) + " " + String.removeNil(self.dataSource?.provider?.last_name)
+        let imageUrl = String.removeNil(self.dataSource?.provider?.avatar).contains(WebConstants.string.http) ? self.dataSource?.provider?.avatar : Common.getImageUrl(for: self.dataSource?.provider?.avatar)
+        Cache.image(forUrl: imageUrl) { (image) in
+            if image != nil {
+                DispatchQueue.main.async {
+                    self.imageViewProvider.image = image
+                }
+            }
+        }
+        
+        self.viewRating.rating = Float(self.dataSource?.rating?.user_rating ?? 0)
+        self.textViewComments.text = self.dataSource?.rating?.user_comment ?? Constants.string.noComments.localize()
+        self.labelSourceLocation.text = self.dataSource?.s_address
+        self.labelDestinationLocation.text = self.dataSource?.d_address
+        self.labelPayVia.text = self.dataSource?.payment_mode?.rawValue.localize()
+        self.imageViewPayVia.image = self.dataSource?.payment_mode == .CASH ? #imageLiteral(resourceName: "money_icon") : #imageLiteral(resourceName: "visa")
+        self.labelBookingId.text = self.dataSource?.booking_id
+        
+        if let dateObject = Formatter.shared.getDate(from: self.dataSource?.assigned_at, format: DateFormat.list.yyyy_mm_dd_HH_MM_ss) {
+            self.labelDate.text = Formatter.shared.getString(from: dateObject, format: DateFormat.list.ddMMMyyyy)
+            self.labelTime.text = Formatter.shared.getString(from: dateObject, format: DateFormat.list.hh_mm_a)
+        }
+        self.labelPrice.text = String.removeNil(User.main.currency)+" \(self.dataSource?.payment?.total ?? 0)"
+        
+    }
+    
+    // MARK:- Cancel Ride
+    
+    @IBAction private func buttonCancelRideAction(sender : UIButton) {
+        
+        if isUpcomingTrips, self.dataSource?.id != nil {
             
+            self.loader.isHidden = false
+            // Cancel Request
+            let request = Request()
+            request.request_id = self.dataSource?.id
+            self.presenter?.post(api: .cancelRequest, data: request.toData())
         }
         
     }
     
+    // MARK:- Call and View Recipt
+    
+    @IBAction private func buttonCallAndReciptAction(sender : UIButton) {
+        
+        if isUpcomingTrips {
+            if let number = self.dataSource?.provider?.mobile {
+                Common.call(to: number)
+            }
+        } else {
+            self.showRecipt()
+        }
+        
+    }
+    
+    // MARK:- Show Recipt
+    private func showRecipt() {
+        
+        if let viewReciptView = Bundle.main.loadNibNamed(XIB.Names.InvoiceView, owner: self, options: [:])?.first as? InvoiceView, self.dataSource != nil {
+            viewReciptView.set(request: self.dataSource!)
+            viewReciptView.frame = CGRect(origin: CGPoint(x: 0, y: (UIApplication.shared.keyWindow?.frame.height)!-viewReciptView.frame.height), size: CGSize(width: self.view.frame.width, height: viewReciptView.frame.height))
+            self.viewRecipt = viewReciptView
+            UIApplication.shared.keyWindow?.addSubview(viewReciptView)
+            viewReciptView.show(with: .bottom) {
+                self.addBlurView()
+            }
+        }
+        
+    }
+    
+    
+    private func addBlurView() {
+        
+        self.blurView = UIView(frame: UIScreen.main.bounds)
+        self.blurView?.alpha = 0
+        self.blurView?.backgroundColor = .black
+        self.blurView?.isUserInteractionEnabled = true
+        self.view.addSubview(self.blurView!)
+        self.blurView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.hideRecipt)))
+        UIView.animate(withDuration: 0.2, animations: {
+            self.blurView?.alpha = 0.6
+        })
+        
+    }
+    
+    // MARK:- Remove Recipt
+   @IBAction private func hideRecipt() {
+        
+        self.viewRecipt?.dismissView(onCompletion: {
+            self.viewRecipt = nil
+            self.blurView?.removeFromSuperview()
+        })
+        
+    }
     
 }
 
@@ -142,14 +274,17 @@ extension YourTripsDetailViewController: PostViewProtocol {
     
     
     func getRequestArray(api: Base, data: [Request]) {
-        
-        DispatchQueue.main.async {
-            self.loader.isHidden = true
-        }
-        
+       
         if data.count>0 {
             self.dataSource = data.first
         }
+        
+        DispatchQueue.main.async {
+            self.loader.isHidden = true
+            self.setValues()
+        }
+        
+        
     }
     
     

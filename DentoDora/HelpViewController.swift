@@ -50,7 +50,7 @@ extension HelpViewController {
     
     private func setDesign () {
         
-        Common.setFont(to: supportLabel)
+        Common.setFont(to: supportLabel, isTitle: true)
         Common.setFont(to: HelpQuotesLabel)
     }
     

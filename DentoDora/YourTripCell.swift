@@ -73,7 +73,9 @@ class YourTripCell: UITableViewCell {
         
         Cache.image(forUrl: mapImage) { (image) in
             if image != nil {
-                self.mapImageView.image = image
+                DispatchQueue.main.async {
+                    self.mapImageView.image = image
+                }
             }
         }
         

@@ -39,6 +39,7 @@ class Request : JSONSerializable {
     var schedule_at : String?
     var static_map : String?
     var surge : Int?
+    var rating : Rating?
     
   /*
     enum CodingKeys: String, CodingKey {
@@ -99,7 +100,7 @@ class Request : JSONSerializable {
         schedule_at = try? values.decode(String.self, forKey: .schedule_at)
         static_map = try? values.decode(String.self, forKey: .static_map)
         surge = try? values.decode(Int.self, forKey: .surge)
-        
+        rating = try? values.decode(Rating.self, forKey: .rating)
     }
  
     init() {   }

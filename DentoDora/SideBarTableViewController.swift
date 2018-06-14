@@ -198,8 +198,8 @@ extension SideBarTableViewController {
         
         let tableCell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
         tableCell.textLabel?.textColor = .secondary
-        tableCell.textLabel?.font = UIFont(name: FontCustom.clanPro_Book.rawValue, size: 10)
         tableCell.textLabel?.text = sideBarList[indexPath.row].localize()
+        Common.setFont(to: tableCell.textLabel!, isTitle: true)
         return tableCell
     }
     

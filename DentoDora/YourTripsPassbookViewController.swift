@@ -30,7 +30,7 @@ class YourTripsPassbookViewController: UIViewController {
     }
     
     lazy var loader  : UIView = {
-        return createActivityIndicator(UIScreen.main.focusedView ?? self.view)
+        return createActivityIndicator(UIApplication.shared.keyWindow ?? self.view)
     }()
     
     
@@ -98,6 +98,39 @@ extension YourTripsPassbookViewController {
     }
     
     
+    // MARK:- Empty View
+    
+    private func checkEmptyView() {
+        
+        self.tableViewList.backgroundView = {
+           
+            if self.getData().count == 0 {
+                let label = Label(frame: UIScreen.main.bounds)
+                label.numberOfLines = 0
+                Common.setFont(to: label, isTitle: true)
+                label.center = UIApplication.shared.keyWindow?.center ?? .zero
+                label.backgroundColor = .clear
+                label.textColorId = 2
+                label.textAlignment = .center
+                label.text = {
+                    
+                    if isYourTripsSelected {
+                        return (isFirstBlockSelected ? Constants.string.noPastTrips : Constants.string.noUpcomingTrips).localize()
+                    } else {
+                        return (isFirstBlockSelected ? Constants.string.noWalletHistory : Constants.string.noCouponDetail).localize()
+                    }
+                }()
+                return label
+            } else {
+                return nil
+            }
+            
+        }()
+        
+    }
+    
+    
+    
     private func switchViewAction(){
        // self.pastUnderLineView.isHidden = false
         self.isFirstBlockSelected = true
@@ -110,12 +143,13 @@ extension YourTripsPassbookViewController {
     @IBAction func ButtonTapped(sender: UIButton){
         
         self.isFirstBlockSelected = sender.tag == 1
-        tableViewList.reloadData()
+        self.reloadTable()
     }
     
     private func reloadTable() {
         DispatchQueue.main.async {
             self.loader.isHidden = true
+            self.checkEmptyView()
             self.tableViewList.reloadData()
         }
     }
@@ -128,7 +162,7 @@ extension YourTripsPassbookViewController : UITableViewDelegate,UITableViewDataS
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2//getCount()
+        return getData().count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -149,8 +183,9 @@ extension YourTripsPassbookViewController : UITableViewDelegate,UITableViewDataS
         
         guard isYourTripsSelected else { return }
         
-        if let vc = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.Ids.YourTripsDetailViewController) as? YourTripsDetailViewController {
+        if let vc = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.Ids.YourTripsDetailViewController) as? YourTripsDetailViewController, self.getData().count>indexPath.row, let idValue = self.getData()[indexPath.row].id {
             vc.isUpcomingTrips = !isFirstBlockSelected
+            vc.setId(id: idValue)
             self.navigationController?.pushViewController(vc, animated: true)
         }
         
@@ -179,12 +214,12 @@ extension YourTripsPassbookViewController : UITableViewDelegate,UITableViewDataS
         
     }
     
-    private func getCount()->Int {
+    private func getData()->[Request] {
         
         if isYourTripsSelected {
-            return (isFirstBlockSelected ? self.datasourceYourTripsPast : self.datasourceYourTripsUpcoming).count
+            return (isFirstBlockSelected ? self.datasourceYourTripsPast : self.datasourceYourTripsUpcoming)
         } else {
-            return (isFirstBlockSelected ? self.datasourceYourTripsPast : self.datasourceYourTripsUpcoming).count
+            return (isFirstBlockSelected ? self.datasourceYourTripsPast : self.datasourceYourTripsUpcoming)
         }
         
     }

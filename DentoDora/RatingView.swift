@@ -41,6 +41,8 @@ extension RatingView {
         self.viewRating.minRating = 1
         self.viewRating.maxRating = 5
         self.viewRating.rating = 1
+        self.viewRating.emptyImage = #imageLiteral(resourceName: "StarEmpty")
+        self.viewRating.fullImage = #imageLiteral(resourceName: "StarFull")
         self.setDesign()
     }
     
