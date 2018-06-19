@@ -51,7 +51,7 @@ class ProfileViewController: UITableViewController {
         
         super.viewDidLoad()
         self.initialLoads()
-        
+        self.navigationController?.isNavigationBarHidden = false
     }
 
     override func viewWillLayoutSubviews() {

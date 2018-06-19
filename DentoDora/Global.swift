@@ -26,12 +26,14 @@ func storeFavouriteLocations(from locationService : LocationService?) {
     
     // Append Favourite Locations to Service
     if let location = locationService?.home?.first, let address = location.address, let latiude = location.latitude, let longitude = location.longitude {
+        CoreDataHelper().insert(data: LocationDetail(address, LocationCoordinate(latitude: latiude, longitude: longitude)), entityName: .home)
         favouriteLocations.append((Constants.string.home.localize(), LocationDetail(address, LocationCoordinate(latitude: latiude, longitude: longitude))))
     } else {
         favouriteLocations.append((Constants.string.home.localize(), nil))
     }
     
     if let location = locationService?.work?.first, let address = location.address, let latiude = location.latitude, let longitude = location.longitude {
+        CoreDataHelper().insert(data: LocationDetail(address, LocationCoordinate(latitude: latiude, longitude: longitude)), entityName: .work)
         favouriteLocations.append((Constants.string.work.localize(), LocationDetail(address, LocationCoordinate(latitude: latiude, longitude: longitude))))
     } else {
         favouriteLocations.append((Constants.string.work.localize(), nil))
@@ -183,8 +185,9 @@ internal func clearUserDefaults(){
     
 }
 
+// MARK:- Force Logout
 
-internal func forceLogout(with message : String? = nil) {
+func forceLogout(with message : String? = nil) {
     
     clearUserDefaults()
     UIApplication.shared.windows.last?.rootViewController?.popOrDismiss(animation: true)
@@ -196,8 +199,8 @@ internal func forceLogout(with message : String? = nil) {
     if message != nil {
         UIApplication.shared.windows.last?.rootViewController?.view.makeToast(message, duration: 2, position: .center, title: nil, image: nil, style: ToastStyle(), completion: nil)
     }
-    
 }
+
 
 // Initialize User
 

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class HomePageHelper {
     
@@ -30,10 +31,11 @@ class HomePageHelper {
     //MARK:- Stop Listening
     func stopListening() {
         // DispatchQueue.main.async {
-            self.timer?.invalidate()
-            self.timer = nil
-       // }
+        self.timer?.invalidate()
+        self.timer = nil
+        // }
     }
+    
     
     //MARK:- Get Request Data From Service
     
@@ -41,12 +43,18 @@ class HomePageHelper {
         
         Webservice().retrieve(api: .checkRequest, url: nil, data: nil, imageData: nil, paramters: nil, type: .GET) { (error, data) in
             
-            guard let data = data,
-                let request = data.getDecodedObject(from: RequestModal.self)?.data
-                else {
+            guard error == nil else {
                 completion(error, nil)
                 DispatchQueue.main.async { self.stopListening() }
                 return
+            }
+            
+            guard let data = data,
+                let request = data.getDecodedObject(from: RequestModal.self)?.data
+                else {
+                    completion(error, nil)
+                    DispatchQueue.main.async { self.stopListening() }
+                    return
             }
             
             guard let requestFirst = request.first else {
@@ -55,9 +63,19 @@ class HomePageHelper {
                 return
             }
             completion(nil, requestFirst)
-           
+            
         }
     }
+    
+//    deinit {
+//
+//        DispatchQueue.main.async {
+//            self.timer?.invalidate()
+//            self.reachability?.stopNotifier()
+//        }
+//
+//    }
+    
     
 }
 

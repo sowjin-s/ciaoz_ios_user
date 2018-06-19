@@ -12,13 +12,16 @@ import UIKit
 import UserNotifications
 import GoogleMaps
 import GooglePlaces
-import IQKeyboardManager
+import IQKeyboardManagerSwift
+import CoreData
+import Intents
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    private var reachability : Reachability?
+    static let shared = AppDelegate()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
        
@@ -26,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setLocalization(language: .english)
         self.google()
         self.IQKeyboard()
+        self.siri()
       //  return true
        
         
@@ -34,8 +38,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          window?.rootViewController = navigationController
          window?.becomeKey()
          window?.makeKeyAndVisible()
+         DispatchQueue.global(qos: .background).async {
+            self.startReachabilityChecking()
+         }
          return true
     }
+    
+    // MARK:- Core Data
+    
+    lazy var persistentContainer : NSPersistentContainer = {
+        
+        let container = NSPersistentContainer(name: "Model")
+        container.loadPersistentStores(completionHandler: { (descriptionString, error) in
+            
+            print("Error in Context  ",error ?? "")
+            
+        })
+        return container
+    }()
 }
 
 extension AppDelegate {
@@ -47,9 +67,9 @@ extension AppDelegate {
         UINavigationBar.appearance().tintColor = .darkGray
         var attributes = [NSAttributedStringKey : Any]()
         attributes.updateValue(UIColor.black, forKey: .foregroundColor)
-        attributes.updateValue(UIFont(name: "Avenir-Medium", size: 14.0)!, forKey : NSAttributedStringKey.font)
+        attributes.updateValue(UIFont(name: FontCustom.avenier_Medium.rawValue, size: 14.0)!, forKey : NSAttributedStringKey.font)
         UINavigationBar.appearance().titleTextAttributes = attributes
-        attributes.updateValue(UIFont(name: "Avenir-Medium", size: 18.0)!, forKey : NSAttributedStringKey.font)
+        attributes.updateValue(UIFont(name:FontCustom.avenier_Medium.rawValue, size: 18.0)!, forKey : NSAttributedStringKey.font)
         if #available(iOS 11.0, *) {
             UINavigationBar.appearance().largeTitleTextAttributes = attributes
         }
@@ -102,11 +122,59 @@ extension AppDelegate {
     
     private func IQKeyboard() {
         
-        IQKeyboardManager.shared().isEnabled = true
+        IQKeyboardManager.shared.enable = true
+    }
+    
+    private func siri() {
+        
+        if INPreferences.siriAuthorizationStatus() != .authorized {
+            INPreferences.requestSiriAuthorization { (status) in
+                print("Is Siri Authorized  -",status == .authorized)
+            }
+        }
+    }
+}
+
+// MARK:- Reachability
+
+extension AppDelegate {
+    
+    // MARK:- Offline Booking on No Internet Connection
+    
+    func startReachabilityChecking() {
+        
+        self.reachability = Reachability()
+        NotificationCenter.default.addObserver(self, selector: #selector(self.reachabilityAction), name: NSNotification.Name.reachabilityChanged, object: nil)
+      //  self.reachability?.startNotifier()
+        do {
+            try self.reachability?.startNotifier()
+        } catch let err {
+            print("Error in Reachability", err.localizedDescription)
+        }
+    }
+    
+
+    func stopReachability() {
+        // MARK:- Stop Reachability
+        self.reachability?.stopNotifier()
+    }
+    
+    // MARK:- Reachability Action
+    
+    @IBAction private func reachabilityAction() {
+        
+        print("Reachability \(self.reachability?.connection.description ?? .Empty)", #function)
+        guard self.reachability != nil else { return }
+        if self.reachability!.connection == .none {
+            if let rootView = UIApplication.shared.keyWindow?.rootViewController?.childViewControllers.last, !(rootView is OfflineBookingViewController) {
+                rootView.present(id: Storyboard.Ids.OfflineBookingViewController, animation: true)
+            }
+            
+        } else {
+            (UIApplication.topViewController() as? OfflineBookingViewController)?.dismiss(animated: true, completion: nil)
+        }
     }
     
 }
-    
-
 
 

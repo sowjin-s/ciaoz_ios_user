@@ -223,8 +223,6 @@ extension PasswordViewController : PostViewProtocol {
         self.present(drawer, animated: true, completion: {
             self.navigationController?.viewControllers.removeAll()
         })
-        
-        
     }
     
     

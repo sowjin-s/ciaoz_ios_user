@@ -79,6 +79,7 @@ extension HomeViewController {
             
             self.serviceSelectionView?.alpha = isHide ? 0 : 1
             self.viewAddressOuter.alpha = isHide ? 0 : 1
+            self.viewLocationButtons.alpha = isHide ? 0 : 1
             self.rideSelectionView?.alpha = isHide ? 0 : 1
             self.rideStatusView?.alpha = isHide ? 0 : 1
             self.invoiceView?.alpha = isHide ? 0 : 1
@@ -138,6 +139,7 @@ extension HomeViewController {
     func showRideStatusView(with request : Request) {
         
         self.viewAddressOuter.isHidden = true
+        self.viewLocationButtons.isHidden = true
         self.loader.isHidden = true
         print("ViewAddressOuter ", #function)
         if self.rideStatusView == nil, let rideStatus = Bundle.main.loadNibNamed(XIB.Names.RideStatusView, owner: self, options: [:])?.first as? RideStatusView {
@@ -180,6 +182,7 @@ extension HomeViewController {
         
         if self.invoiceView == nil, let invoice = Bundle.main.loadNibNamed(XIB.Names.InvoiceView, owner: self, options: [:])?.first as? InvoiceView {
             self.viewAddressOuter.isHidden = true
+            self.viewLocationButtons.isHidden = true
             print("ViewAddressOuter ", #function)
             invoice.frame = CGRect(origin: CGPoint(x: 0, y: self.view.frame.height-invoice.frame.height), size: CGSize(width: self.view.frame.width, height: invoice.frame.height))
             invoiceView = invoice
@@ -218,6 +221,7 @@ extension HomeViewController {
         
         if let rating = Bundle.main.loadNibNamed(XIB.Names.RatingView, owner: self, options: [:])?.first as? RatingView {
             self.viewAddressOuter.isHidden = true
+            self.viewLocationButtons.isHidden = true
             print("ViewAddressOuter ", #function)
             rating.frame = CGRect(origin: CGPoint(x: 0, y: self.view.frame.height-rating.frame.height), size: CGSize(width: self.view.frame.width, height: rating.frame.height))
             ratingView = rating
@@ -246,6 +250,7 @@ extension HomeViewController {
         self.ratingView?.dismissView(onCompletion: {
             self.ratingView = nil
             self.viewAddressOuter.isHidden = false
+            self.viewLocationButtons.isHidden = false
             print("ViewAddressOuter ", #function)
             self.clearMapview()
         })
@@ -285,10 +290,11 @@ extension HomeViewController {
             self.requestLoaderView?.onCancel = {
                 self.cancelCurrentRide()
             }
-            self.viewMapOuter.addSubview(singleView)
+            self.view.addSubview(singleView)
             DispatchQueue.main.asyncAfter(deadline: .now()+0.5) { // Hiding Address View
                 UIView.animate(withDuration: 0.5, animations: {
                     self.viewAddressOuter.isHidden = true
+                    self.viewLocationButtons.isHidden = true
                     print("ViewAddressOuter ", #function)
                 })
             }
@@ -302,6 +308,7 @@ extension HomeViewController {
         self.requestLoaderView?.endLoader {
             self.requestLoaderView = nil
             self.viewAddressOuter.isHidden = false
+            self.viewLocationButtons.isHidden = false
             print("ViewAddressOuter ", #function)
         }
     }
@@ -313,7 +320,7 @@ extension HomeViewController {
         self.mapViewHelper?.mapView?.clear()
         self.destinationLocationDetail = nil
         self.viewAddressOuter.isHidden = false
-
+        self.viewLocationButtons.isHidden = false
     }
     
     // MARK:- Handle Request Data

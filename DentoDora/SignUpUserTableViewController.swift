@@ -68,12 +68,17 @@ class SignUpUserTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         localize()
-        self.nextImage.isHidden = false
         self.navigationController?.isNavigationBarHidden = false
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
+        self.changeNextButtonFrame()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.nextView.isHidden = false
         self.changeNextButtonFrame()
     }
     
@@ -268,6 +273,7 @@ extension SignUpUserTableViewController : PostViewProtocol {
     func onError(api: Base, message: String, statusCode code: Int) {
     
         DispatchQueue.main.async {
+            self.loader.isHidden = true
             self.showToast(string: message)
         }
         
@@ -287,18 +293,21 @@ extension SignUpUserTableViewController : PostViewProtocol {
     }
     
     func getOath(api: Base, data: LoginRequest?) {
-        
+     
+        loader.isHideInMainThread(true)
         if api == .login, let accessToken = data?.access_token {
             
             User.main.accessToken = accessToken
             storeInUserDefaults()
-            let drawer = Router.main.instantiateViewController(withIdentifier: Storyboard.Ids.DrawerController)
-            self.present(drawer, animated: true, completion: {
-                self.navigationController?.viewControllers.removeAll()
-            })
+            //let drawer = Router.main.instantiateViewController(withIdentifier: Storyboard.Ids.DrawerController)
+            self.present(id: Storyboard.Ids.DrawerController, animation: true)
+//            let window = UIWindow(frame: UIScreen.main.bounds)
+//            UIApplication.shared.windows.last?.rootViewController?.popOrDismiss(animation: true)
+//            let navigationController = Router.main.instantiateViewController(withIdentifier: Storyboard.Ids.DrawerController)
+//            window.rootViewController = navigationController
+//            window.makeKeyAndVisible()
             
         }
-        loader.isHideInMainThread(true)
         
     }
     
@@ -332,6 +341,19 @@ extension SignUpUserTableViewController : UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return textField.resignFirstResponder()
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        guard textField == emailtext else {return}
+        textField.placeholder = Constants.string.email.localize()
+        
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard textField == emailtext else {return}
+        if textField.text?.count == 0 {
+            textField.placeholder = Constants.string.emailPlaceHolder.localize()
+        }
     }
     
 //    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

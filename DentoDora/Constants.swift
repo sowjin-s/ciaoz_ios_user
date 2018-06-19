@@ -99,11 +99,12 @@ struct Constants {
     let save = "save"
     let lookingToChangePassword = "Looking to change password?"
     let areYouSure = "Are you sure?"
+    let areYouSureWantToLogout = "Are you want to logout?"
     let sure = "Sure"
     let source = "Source"
     let destination = "Destination"
-    let home = "Home"
-    let work = "Work"
+    let home = "home"
+    let work = "work"
     let addLocation = "Add Location"
     let selectService = "Select Service"
     let service = "Service"
@@ -188,6 +189,15 @@ struct Constants {
     let capacity = "Capacity"
     let rateCard = "Rate Card"
     let distance = "Distance"
+    let sendMyLocation = "Send my Location"
+    let noInternet = "No Internet?"
+    let bookNowOffline = "Book Now using SMS"
+    let tapForCurrentLocation = "Tap the button below to send your current location by SMS."
+    let standardChargesApply = "Standard charges may apply"
+    let noThanks = "No thanks, I'll try later"
+    let iNeedCab = "I need a cab @"
+    let donotEditMessage = "(Please donot edit this SMS. Standard SMS charges of Rs.3 per SMS may apply)"
+    
 }
 
 //Defaults Keys
@@ -254,8 +264,8 @@ enum DeviceType : String, Codable {
 //Lanugage
 
 enum Language : String {
-    case english = "en"
-    case spanish = "es"
+    case english = "English"
+    case spanish = "Spanish"
     static var count: Int{ return 2 }
 }
 

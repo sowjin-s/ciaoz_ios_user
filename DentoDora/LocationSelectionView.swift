@@ -14,8 +14,8 @@ class LocationSelectionView: UIView {
     @IBOutlet private weak var viewTop : UIView!
     @IBOutlet private weak var tableViewBottom : UITableView!
     @IBOutlet private weak var viewBack : UIView!
-    @IBOutlet private weak var textFieldSource : UITextField!
-    @IBOutlet private weak var textFieldDestination : UITextField!
+    @IBOutlet  weak var textFieldSource : UITextField!
+    @IBOutlet  weak var textFieldDestination : UITextField!
    // @IBOutlet private weak var viewSourceCancel : UIView!
     //@IBOutlet private weak var viewDestinationCancel : UIView!
   
@@ -82,31 +82,16 @@ extension LocationSelectionView {
 
     
     private func initialLoads() {
-        
-    /*    self.viewTop.alpha = 0
-        self.viewBottom.isHidden = true
-        UIView.animate(withDuration: 0.5, animations: {
-            self.viewTop.alpha = 1
-        }) { (_) in
-            self.viewBottom.isHidden = false
-            self.viewBottom.show(with: .bottom, duration: 0.7, completion: nil)
-        }  */
         self.localize()
         self.googlePlacesHelper = GooglePlacesHelper()
         self.tableViewBottom.isHidden = true
         self.viewTop.alpha = 0
-      /*  self.viewTop.show(with: .top) {
-            self.tableViewBottom.isHidden = false
-            self.tableViewBottom.show(with: .bottom, duration: 0.2, completion: nil)
-        }*/
-        
         UIView.animate(withDuration: 0.2, animations: {
             self.viewTop.alpha = 1
         }) { _ in
             self.tableViewBottom.isHidden = false
             self.tableViewBottom.show(with: .bottom, duration: 0.3, completion: nil)
         }
-        
         self.tableViewBottom.delegate = self
         self.tableViewBottom.dataSource = self
         self.textFieldSource.delegate = self
@@ -114,7 +99,6 @@ extension LocationSelectionView {
         self.tableViewBottom.register(UINib(nibName: XIB.Names.LocationTableViewCell, bundle: nil), forCellReuseIdentifier:XIB.Names.LocationTableViewCell)
         self.tableViewBottom.register(UINib(nibName: XIB.Names.LocationHeaderTableViewCell, bundle: nil), forCellReuseIdentifier:XIB.Names.LocationHeaderTableViewCell)
         self.viewBack.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.backButtonAction)))
-      //  [self.viewSourceCancel, self.viewDestinationCancel].forEach({ $0?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.clearButtonAction(sender:))))})
         self.textFieldDestination.becomeFirstResponder()
     }
     
@@ -207,7 +191,9 @@ extension LocationSelectionView : UITableViewDataSource, UITableViewDelegate {
                     service.address = place.formattedAddress
                     service.latitude = place.coordinate.latitude
                     service.longitude = place.coordinate.longitude
-                    service.type = indexPath.row == 0 ? Constants.string.home : Constants.string.work
+                    let type : CoreDataEntity = indexPath.row == 0 ? .home : .work
+                    service.type = type.rawValue.lowercased()
+                    CoreDataHelper().insert(data: (String.removeNil(place.formattedAddress), LocationCoordinate(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)), entityName: type) // Inserting into Local Storage
                     self.presenter?.post(api: Base.locationServicePostDelete, data: service.toData())
                     
                     DispatchQueue.main.async {

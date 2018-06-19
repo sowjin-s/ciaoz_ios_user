@@ -2,8 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>$(PRODUCT_DISPLAY_NAME) would like to access library to save the Image</string>
+	<key>NSSiriUsageDescription</key>
+	<string>$(PRODUCT_DISPLAY_NAME) would like to access siri for voice booking.</string>
 	<key>AccountKitClientToken</key>
 	<string>3f73b9bdd9f499561e32e834e7dcd1f8</string>
 	<key>CFBundleDevelopmentRegion</key>
@@ -62,6 +62,8 @@
 	<string>$(PRODUCT_DISPLAY_NAME) would like to access your location to get perfect driver around you.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>$(PRODUCT_DISPLAY_NAME) would like to access microphone.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>$(PRODUCT_DISPLAY_NAME) would like to access library to save the Image</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>$(PRODUCT_DISPLAY_NAME) would like to access gallery for profile Image </string>
 	<key>UIAppFonts</key>

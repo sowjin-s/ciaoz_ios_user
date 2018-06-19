@@ -9,7 +9,6 @@
 import Foundation
 import Alamofire
 
-
 class Webservice : PostWebServiceProtocol {
     
     var interactor: PostInteractorOutputProtocol?
@@ -42,8 +41,11 @@ class Webservice : PostWebServiceProtocol {
         
         setCrashLog(base: api) // Setting crash log
         
-        guard Reachability(hostname: baseUrl)?.connection != .none else {  // Internet not available
-            interactor?.on(api: api, error: CustomError(description: ErrorMessage.list.notReachable, code : StatusCode.notreachable.rawValue))
+        let reach = Reachability.init(hostname: baseUrl)
+       
+        guard reach?.connection == .wifi || reach?.connection == .cellular else {  // Internet not available
+            self.interactor?.on(api: api, error: CustomError(description: ErrorMessage.list.notReachable, code : StatusCode.notreachable.rawValue))
+            self.completion?(CustomError(description: ErrorMessage.list.notReachable, code : StatusCode.notreachable.rawValue), nil)
             return
         }
         
@@ -88,7 +90,7 @@ class Webservice : PostWebServiceProtocol {
              
                 message = error.error
             }
-            
+            self.completion?(CustomError(description: ErrorMessage.list.serverError, code: (response.response?.statusCode) ?? StatusCode.unAuthorized.rawValue), nil)
             forceLogout(with: message) // Force Logout user by clearing all cache
             
             
@@ -287,9 +289,9 @@ class Webservice : PostWebServiceProtocol {
             switch response.result{
 
             case .failure(let err):
-                print("At Webservice Response  at ",api,"   ",err)
+                print("At Webservice Response  at ",api,"   ",err, response.response?.statusCode ?? 0)
             case .success(let val):
-                print("At Webservice Response ",api,"   ",val)
+                print("At Webservice Response ",api,"   ",val, response.response?.statusCode ?? 0)
             }
 
             self.send(response)

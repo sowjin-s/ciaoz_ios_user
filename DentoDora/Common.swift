@@ -83,6 +83,7 @@ class Common {
         User.main.picture = profile?.picture
     }
     
+    // MARK:- Make Call
     class func call(to number : String?) {
         
         if let providerNumber = number, let url = URL(string: "tel://\(providerNumber)"), UIApplication.shared.canOpenURL(url) {
@@ -93,6 +94,7 @@ class Common {
         
     }
     
+    // MARK:- Send Email
     class func sendEmail(to mailId : [String], from view : UIViewController & MFMailComposeViewControllerDelegate) {
         
         if MFMailComposeViewController.canSendMail() {
@@ -106,12 +108,27 @@ class Common {
         
     }
     
+    // MARK:- Send Message
+    
+    class func sendMessage(to numbers : [String], text : String, from view : UIViewController & MFMessageComposeViewControllerDelegate) {
+        
+        if (MFMessageComposeViewController.canSendText()) {
+            let controller = MFMessageComposeViewController()
+            controller.body = text
+            controller.recipients = numbers
+            controller.messageComposeDelegate = view
+            view.present(controller, animated: true, completion: nil)
+        }
+    }
+    
     // MARK:- Bussiness Image Url
     class func getImageUrl (for urlString : String?)->String {
         
         return baseUrl+"/storage/"+String.removeNil(urlString)
     }
     
+    
+    // MARK:- Set Font
     
     class func setFont(to field :Any, isTitle : Bool = false, size : CGFloat = 0) {
     

@@ -21,6 +21,7 @@ class ServiceSelectionView: UIView {
     @IBOutlet weak var imageViewCard : UIImageView!
   
     private var rateView : RateView?
+    private var isPresented = false
     
     var isServiceSelected = true {
         didSet{
@@ -43,6 +44,7 @@ class ServiceSelectionView: UIView {
         super.awakeFromNib()
         self.initialLoads()
         self.localize()
+        self.setDesign()
     }
 
 }
@@ -60,7 +62,8 @@ extension ServiceSelectionView {
         self.buttonGetPricing.addTarget(self, action: #selector(self.onClickGetPricing), for: .touchUpInside)
         self.imageViewCard.image = #imageLiteral(resourceName: "money_icon")
         self.labelCardNumber.text = Constants.string.cash.localize()
-        self.setDesign()
+        
+        self.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(self.panAction(sender:))))
     }
     
     // MARK:- Set Designs
@@ -109,10 +112,11 @@ extension ServiceSelectionView {
     //MARK:- Set Source 
     func set(source : [Service]) {
         
+        self.selectedRow = -1
         self.datasource = source
+        self.selectedItem = source.first
         self.collectionViewService.reloadData()
         //self.collectionViewService.selectItem(at: IndexPath(item: 0, section: 0), animated: true, scrollPosition: .top)
-        self.selectedItem = source.first
 //        self.collectionViewService.cellForItem(at: IndexPath(item: 0, section: 0))?.isSelected = true
 //        if let id = source.first?.id {
 //            self.getEstimateFareFor(serviceId: id)
@@ -133,9 +137,7 @@ extension ServiceSelectionView {
             self.rateView = Bundle.main.loadNibNamed(XIB.Names.RateView, owner: self, options: [:])?.first as? RateView
             self.rateView?.frame = CGRect(origin: CGPoint(x: 0, y: self.frame.height-self.rateView!.frame.height), size: CGSize(width: self.frame.width, height: self.rateView!.frame.height))
             self.rateView?.onCancel = {
-                self.rateView?.dismissView(onCompletion: {
-                    self.rateView = nil
-                })
+                self.removeRateView()
             }
             self.addSubview(self.rateView!)
             self.rateView?.show(with: .bottom, completion: nil)
@@ -144,6 +146,41 @@ extension ServiceSelectionView {
         self.rateView?.set(values: self.selectedItem)
         
     }
+    
+    @IBAction private func panAction(sender : UIPanGestureRecognizer) {
+        
+        guard !isPresented else {
+            return
+        }
+        if sender.state == .began {
+            
+            self.addRateView()
+            self.setTransform(transform: CGAffineTransform(scaleX: 0, y: 0), alpha: 0)
+            
+        }else if sender.state == .changed {
+            let point = sender.translation(in: UIApplication.shared.keyWindow ?? self)
+            print("point  ",point)
+            let value = (abs(point.y)/self.frame.height)*1.5
+            UIView.animate(withDuration: 0.3) {
+                self.setTransform(transform: CGAffineTransform(scaleX: value, y: value), alpha: value)
+            }
+            if value>0.3 {
+                self.isPresented = true
+                UIView.animate(withDuration: 0.3) {
+                    self.setTransform(transform: .identity, alpha: 1)
+                }
+            }
+            
+        } else {
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn, animations: {
+                self.setTransform(transform: CGAffineTransform(scaleX: 0, y: 0), alpha: 0)
+            }, completion: { _ in
+                self.removeRateView()
+            })
+        }
+        
+    }
+    
     
     // Get Estimate Fare
     
@@ -161,6 +198,45 @@ extension ServiceSelectionView {
             
         }
     }
+    
+    private func addRateView() {
+            
+            if self.rateView == nil {
+                self.rateView = Bundle.main.loadNibNamed(XIB.Names.RateView, owner: self, options: [:])?.first as? RateView
+                self.rateView?.frame = CGRect(origin: CGPoint(x: 0, y: self.frame.height-self.rateView!.frame.height), size: CGSize(width: self.frame.width, height: self.rateView!.frame.height))
+                self.rateView?.onCancel = {
+                    self.removeRateView()
+                }
+                self.addSubview(self.rateView!)
+            }
+            
+            self.rateView?.set(values: self.selectedItem)
+        
+    }
+    
+    
+    private func setTransform(transform : CGAffineTransform, alpha : CGFloat) {
+        
+        self.rateView?.alpha = alpha
+        self.rateView?.transform = transform
+        self.rateView?.center = CGPoint(x: self.rateView!.frame.width/2, y: self.frame.height-(self.rateView!.frame.height/2))
+        
+    }
+    
+    
+    // MARK:- Remove Rate View
+    
+    private func removeRateView() {
+       
+        self.isPresented = false
+        self.rateView?.dismissView(onCompletion: {
+            self.rateView = nil
+        })
+        
+        
+    }
+    
+    
     
 }
 
@@ -183,7 +259,7 @@ extension ServiceSelectionView : UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         if datasource.count>indexPath.row {
-            
+            self.collectionViewService.cellForItem(at: IndexPath(item: self.selectedRow, section: 0))?.isSelected = false
             if selectedRow == indexPath.row {
                 showRateView()
             }

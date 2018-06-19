@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -55,35 +56,58 @@
                                     <state key="normal" title="Button"/>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pdW-j7-Egi">
-                                    <rect key="frame" x="43.5" y="10.5" width="195.5" height="14.5"/>
+                                    <rect key="frame" x="43.5" y="10.5" width="180" height="14.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1-0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AIP-gM-dru">
-                                    <rect key="frame" x="243" y="10" width="63" height="16.5"/>
-                                    <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="12"/>
-                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mJb-cd-hcU">
+                                    <rect key="frame" x="227.5" y="0.0" width="78.5" height="35"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="capacity" translatesAutoresizingMaskIntoConstraints="NO" id="m0E-mC-Wdu">
+                                            <rect key="frame" x="22.5" y="9.5" width="17.5" height="17.5"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0-0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="piP-pz-1Tj">
+                                            <rect key="frame" x="46" y="8" width="28.5" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="piP-pz-1Tj" firstAttribute="centerY" secondItem="mJb-cd-hcU" secondAttribute="centerY" id="2pt-xc-Wju"/>
+                                        <constraint firstAttribute="trailing" secondItem="piP-pz-1Tj" secondAttribute="trailing" constant="4" id="MMf-qg-5F0"/>
+                                        <constraint firstItem="m0E-mC-Wdu" firstAttribute="width" secondItem="mJb-cd-hcU" secondAttribute="height" multiplier="1:2" id="NsG-U3-VV4"/>
+                                        <constraint firstItem="m0E-mC-Wdu" firstAttribute="centerX" secondItem="mJb-cd-hcU" secondAttribute="centerX" id="Oqk-4f-z8J"/>
+                                        <constraint firstItem="m0E-mC-Wdu" firstAttribute="height" secondItem="mJb-cd-hcU" secondAttribute="height" multiplier="1:2" id="RZO-Nx-tyt"/>
+                                        <constraint firstItem="m0E-mC-Wdu" firstAttribute="centerY" secondItem="mJb-cd-hcU" secondAttribute="centerY" id="YN3-nN-l7U"/>
+                                        <constraint firstItem="piP-pz-1Tj" firstAttribute="leading" secondItem="m0E-mC-Wdu" secondAttribute="trailing" constant="6" id="cRQ-V4-2Uh"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="Oqk-4f-z8J"/>
+                                        </mask>
+                                    </variation>
+                                </view>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="6wm-nv-MQx" firstAttribute="centerY" secondItem="5Kc-Pj-3ie" secondAttribute="centerY" id="0Zo-uD-7CC"/>
                                 <constraint firstItem="pdW-j7-Egi" firstAttribute="centerY" secondItem="6wm-nv-MQx" secondAttribute="centerY" id="5lX-Dp-oXZ"/>
-                                <constraint firstAttribute="trailing" secondItem="AIP-gM-dru" secondAttribute="trailing" constant="8" id="9pI-tc-Elj"/>
                                 <constraint firstItem="6wm-nv-MQx" firstAttribute="height" secondItem="5Kc-Pj-3ie" secondAttribute="height" multiplier="0.7" id="ANo-t6-XjS"/>
-                                <constraint firstItem="AIP-gM-dru" firstAttribute="width" secondItem="5Kc-Pj-3ie" secondAttribute="width" multiplier="0.2" id="AeL-kI-mky"/>
+                                <constraint firstItem="mJb-cd-hcU" firstAttribute="centerY" secondItem="5Kc-Pj-3ie" secondAttribute="centerY" id="AdD-fc-dbK"/>
                                 <constraint firstItem="6wm-nv-MQx" firstAttribute="leading" secondItem="5Kc-Pj-3ie" secondAttribute="leading" constant="8" id="Cpu-tf-mwG"/>
                                 <constraint firstItem="6tt-Rg-9Lf" firstAttribute="top" secondItem="5Kc-Pj-3ie" secondAttribute="top" constant="4" id="FK6-3C-VrK"/>
+                                <constraint firstItem="mJb-cd-hcU" firstAttribute="height" secondItem="5Kc-Pj-3ie" secondAttribute="height" id="GCE-NZ-Pff"/>
                                 <constraint firstAttribute="trailing" secondItem="6tt-Rg-9Lf" secondAttribute="trailing" constant="8" id="I90-lF-9xs"/>
-                                <constraint firstItem="AIP-gM-dru" firstAttribute="leading" secondItem="pdW-j7-Egi" secondAttribute="trailing" constant="4" id="RTd-CK-AiA"/>
                                 <constraint firstItem="pdW-j7-Egi" firstAttribute="leading" secondItem="6wm-nv-MQx" secondAttribute="trailing" constant="4" id="Y1Q-rH-RWx"/>
+                                <constraint firstItem="mJb-cd-hcU" firstAttribute="width" secondItem="5Kc-Pj-3ie" secondAttribute="width" multiplier="0.25" id="Yd8-Zg-1Ey"/>
                                 <constraint firstItem="6wm-nv-MQx" firstAttribute="width" secondItem="5Kc-Pj-3ie" secondAttribute="width" multiplier="0.1" id="bKK-8y-x5r"/>
                                 <constraint firstItem="6tt-Rg-9Lf" firstAttribute="leading" secondItem="pdW-j7-Egi" secondAttribute="trailing" constant="8" id="bpX-7y-Lu7"/>
-                                <constraint firstItem="AIP-gM-dru" firstAttribute="centerY" secondItem="5Kc-Pj-3ie" secondAttribute="centerY" id="fAA-H6-fRa"/>
+                                <constraint firstItem="mJb-cd-hcU" firstAttribute="leading" secondItem="pdW-j7-Egi" secondAttribute="trailing" constant="4" id="dgr-i7-Fwe"/>
                                 <constraint firstAttribute="bottom" secondItem="6tt-Rg-9Lf" secondAttribute="bottom" constant="4" id="oQk-bN-hOe"/>
                                 <constraint firstItem="6tt-Rg-9Lf" firstAttribute="width" secondItem="5Kc-Pj-3ie" secondAttribute="width" multiplier="0.2" id="x0n-pm-X8T"/>
+                                <constraint firstAttribute="trailing" secondItem="mJb-cd-hcU" secondAttribute="trailing" constant="8" id="zYK-za-lc2"/>
                             </constraints>
                             <variation key="default">
                                 <mask key="subviews">
@@ -164,7 +188,7 @@
                 <outlet property="buttonService" destination="g9M-re-cBN" id="2v8-SD-2gC"/>
                 <outlet property="collectionViewService" destination="KUn-ty-LaD" id="6gt-jh-7rC"/>
                 <outlet property="imageViewCard" destination="6wm-nv-MQx" id="3Lp-pF-6HV"/>
-                <outlet property="labelCapacity" destination="AIP-gM-dru" id="GQz-wn-CaO"/>
+                <outlet property="labelCapacity" destination="piP-pz-1Tj" id="npH-nF-xjR"/>
                 <outlet property="labelCardNumber" destination="pdW-j7-Egi" id="6Gz-DH-7WK"/>
                 <outlet property="labelServiceTitle" destination="Xh1-Hm-3BK" id="Xk7-ME-y3V"/>
             </connections>
@@ -172,6 +196,7 @@
         </view>
     </objects>
     <resources>
+        <image name="capacity" width="32" height="32"/>
         <image name="visa" width="64" height="64"/>
     </resources>
 </document>

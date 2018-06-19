@@ -26,20 +26,20 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hva-40-Htf">
-                            <rect key="frame" x="8" y="16" width="50" height="50"/>
+                            <rect key="frame" x="8" y="16" width="100" height="60"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="back-icon" translatesAutoresizingMaskIntoConstraints="NO" id="k0e-Je-2Gp">
-                                    <rect key="frame" x="10" y="10" width="30" height="30"/>
+                                    <rect key="frame" x="-5" y="27" width="60" height="36"/>
                                 </imageView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstItem="k0e-Je-2Gp" firstAttribute="centerY" secondItem="hva-40-Htf" secondAttribute="centerY" id="8f8-H1-Jnm"/>
-                                <constraint firstAttribute="height" constant="50" id="BNg-WA-RmK"/>
-                                <constraint firstItem="k0e-Je-2Gp" firstAttribute="centerX" secondItem="hva-40-Htf" secondAttribute="centerX" id="Hma-dE-v19"/>
+                                <constraint firstItem="k0e-Je-2Gp" firstAttribute="centerY" secondItem="hva-40-Htf" secondAttribute="centerY" multiplier="1.5" id="8f8-H1-Jnm"/>
+                                <constraint firstAttribute="height" constant="60" id="BNg-WA-RmK"/>
+                                <constraint firstItem="k0e-Je-2Gp" firstAttribute="centerX" secondItem="hva-40-Htf" secondAttribute="centerX" multiplier="0.5" id="Hma-dE-v19"/>
                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="jFl-pG-mNT"/>
                                 <constraint firstItem="k0e-Je-2Gp" firstAttribute="height" secondItem="hva-40-Htf" secondAttribute="height" multiplier="0.6" id="pUA-Ey-EWL"/>
-                                <constraint firstAttribute="width" constant="50" id="tTO-if-dIG"/>
+                                <constraint firstAttribute="width" constant="100" id="tTO-if-dIG"/>
                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="xSQ-y4-OgF"/>
                                 <constraint firstItem="k0e-Je-2Gp" firstAttribute="width" secondItem="hva-40-Htf" secondAttribute="width" multiplier="0.6" id="ytX-Wf-k9h"/>
                             </constraints>

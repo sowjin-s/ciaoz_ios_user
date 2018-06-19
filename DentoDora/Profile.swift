@@ -28,10 +28,10 @@ class Profile : JSONSerializable {
         first_name = try? values.decode(String.self, forKey: .first_name)
         last_name = try? values.decode(String.self, forKey: .last_name)
         email = try? values.decode(String.self, forKey: .email)
-        picture = try? values.decode(String.self, forKey: .id)
-        device_token = try? values.decode(String.self, forKey: .id)
-        access_token = try? values.decode(String.self, forKey: .id)
-        currency = try? values.decode(String.self, forKey: .id)
+        picture = try? values.decode(String.self, forKey: .picture)
+        device_token = try? values.decode(String.self, forKey: .device_token)
+        access_token = try? values.decode(String.self, forKey: .access_token)
+        currency = try? values.decode(String.self, forKey: .currency)
         
         if let mobileInt = try? values.decode(Int.self, forKey: .mobile) {
          mobile = "\(mobileInt)"

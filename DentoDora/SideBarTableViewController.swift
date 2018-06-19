@@ -172,7 +172,7 @@ extension SideBarTableViewController {
     
     private func logout() {
         
-        let alert = UIAlertController(title: nil, message: Constants.string.areYouSure.localize(), preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: nil, message: Constants.string.areYouSureWantToLogout.localize(), preferredStyle: .actionSheet)
         let logoutAction = UIAlertAction(title: Constants.string.logout.localize(), style: .destructive) { (_) in
             self.loader.isHidden = false
             self.presenter?.post(api: .logout, data: nil)
