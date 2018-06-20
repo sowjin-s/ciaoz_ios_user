@@ -287,6 +287,9 @@ extension SignUpUserTableViewController : PostViewProtocol {
             self.presenter?.post(api: .login, data: MakeJson.login(withUser: userInfo?.email,password:userInfo?.password))
             return
             
+        }else if api == .getProfile {
+            Common.storeUserData(from: data)
+            self.navigationController?.present(id: Storyboard.Ids.DrawerController, animation: true)
         } else {
             loader.isHideInMainThread(true)
         }
@@ -299,8 +302,8 @@ extension SignUpUserTableViewController : PostViewProtocol {
             
             User.main.accessToken = accessToken
             storeInUserDefaults()
+            self.presenter?.get(api: .getProfile, parameters: nil)
             //let drawer = Router.main.instantiateViewController(withIdentifier: Storyboard.Ids.DrawerController)
-            self.present(id: Storyboard.Ids.DrawerController, animation: true)
 //            let window = UIWindow(frame: UIScreen.main.bounds)
 //            UIApplication.shared.windows.last?.rootViewController?.popOrDismiss(animation: true)
 //            let navigationController = Router.main.instantiateViewController(withIdentifier: Storyboard.Ids.DrawerController)

@@ -13,5 +13,5 @@ struct LocationService : JSONSerializable {
     var home : [Service]?
     var recent : [Service]?
     var work : [Service]?
-    
+    var others : [Service]?
 }

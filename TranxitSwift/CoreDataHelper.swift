@@ -13,6 +13,7 @@ enum CoreDataEntity : String {
     
     case work = "Work"
     case home = "Home"
+    case other = "Others"
     
 }
 
@@ -45,6 +46,7 @@ class CoreDataHelper : NSObject {
                 entityValue?.address = data.address
                 entityValue?.latitude = data.coordinate.latitude
                 entityValue?.longitude = data.coordinate.longitude
+            default : break
         }
         self.save()
     }

@@ -20,6 +20,8 @@
         @IBOutlet weak var viewMapOuter : UIView!
         @IBOutlet weak private var viewFavouriteSource : UIView!
         @IBOutlet weak private var viewFavouriteDestination : UIView!
+        @IBOutlet weak private var imageViewFavouriteSource : ImageView!
+        @IBOutlet weak private var imageViewFavouriteDestination : ImageView!
         @IBOutlet weak private var viewSourceLocation : UIView!
         @IBOutlet weak private var viewDestinationLocation : UIView!
         @IBOutlet weak private var viewAddress : UIView!
@@ -66,18 +68,18 @@
         private var riderStatus : RideStatus = .none // Provider Current Status
         // private let transition = CircularTransition()  // Translation to for location Tap
         var mapViewHelper : GoogleMapsHelper?
-        private var favouriteViewSource : LottieView?
-        private var favouriteViewDestination : LottieView?
+//        private var favouriteViewSource : LottieView?
+//        private var favouriteViewDestination : LottieView?
         
         private var isSourceFavourited = false {  // Boolean to handle favourite source location
             didSet{
-                self.isAddLottie(view: &favouriteViewSource, in: viewFavouriteSource, isAdd: !isSourceFavourited)
+                self.isAddFavouriteLocation(in: self.viewFavouriteSource, isAdd: isSourceFavourited)
             }
         }
         
         private var isDestinationFavourited = false { // Boolean to handle favourite destination location
             didSet{
-                self.isAddLottie(view: &favouriteViewDestination, in: viewFavouriteDestination, isAdd: !isDestinationFavourited)
+                self.isAddFavouriteLocation(in: self.viewFavouriteDestination, isAdd: isDestinationFavourited)
             }
         }
         
@@ -87,6 +89,9 @@
         var destinationLocationDetail : LocationDetail? {  // Destination Location Detail
             didSet{
                 DispatchQueue.main.async {
+                    if self.destinationLocationDetail == nil {
+                        self.isDestinationFavourited = false
+                    }
                     self.textFieldDestinationLocation.text = (self.destinationLocationDetail?.address.removingWhitespaces().isEmpty ?? true) ? nil : self.destinationLocationDetail?.address
                 }
             }
@@ -186,6 +191,9 @@
             })
             self.viewCurrentLocation.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.getCurrentLocation)))
             self.sourceLocationDetail?.bind(listener: { (locationDetail) in
+                if locationDetail == nil {
+                    self.isSourceFavourited = false
+                }
                 DispatchQueue.main.async {
                     if self.sourceLocationDetail?.value != nil, self.destinationLocationDetail != nil { // Get Services only if location Available
                         self.getServicesList()
@@ -318,12 +326,25 @@
         @IBAction private func favouriteLocationAction(sender : UITapGestureRecognizer) {
             
             guard let senderView = sender.view else { return }
-            
-            if senderView == viewFavouriteDestination {
-                self.isSourceFavourited = !self.isSourceFavourited
-            } else {
-                self.isDestinationFavourited = !self.isDestinationFavourited
+            senderView.addPressAnimation()
+            if senderView == viewFavouriteSource {
+                self.isSourceFavourited = self.sourceLocationDetail?.value != nil ? !self.isSourceFavourited : false
+            } else if senderView == viewFavouriteDestination {
+                self.isDestinationFavourited = self.destinationLocationDetail != nil ? !self.isDestinationFavourited : false
             }
+        }
+        
+        // MARK:- Favourite Location Action
+        
+        private func isAddFavouriteLocation(in viewFavourite : UIView, isAdd : Bool) {
+            
+            if viewFavourite == viewFavouriteSource {
+                self.imageViewFavouriteSource.image = (isAdd ? #imageLiteral(resourceName: "like") : #imageLiteral(resourceName: "unlike")).withRenderingMode(.alwaysTemplate)
+            } else {
+                self.imageViewFavouriteDestination.image = (isAdd ? #imageLiteral(resourceName: "like") : #imageLiteral(resourceName: "unlike")).withRenderingMode(.alwaysTemplate)
+            }
+            self.favouriteLocationApi(in: viewFavourite, isAdd: isAdd) // Send to Api Call
+
         }
         
         // MARK:- Favourite Location Action
@@ -466,25 +487,26 @@
             
         }
         
-        // MARK:- Add or remove lottie View
-        
-        private func isAddLottie(view lottieView : inout LottieView?,in viewToBeAdded : UIView, isAdd : Bool){
-            
-            if isAdd {
-                let frame =  view.bounds//CGRect(x: viewToBeAdded.frame.maxX/2, y: viewToBeAdded.frame.maxY/2, width: viewToBeAdded.frame.width/2, height: viewToBeAdded.frame.height/2)
-                lottieView = LottieHelper().addLottie(with: frame)
-                view.addSubview(lottieView!)
-                lottieView?.play()
-            } else {
-                let lottie = lottieView // inout parameter cannot be captured by escaping key
-                UIView.animate(withDuration: 0.2, animations: {
-                    lottie?.alpha = 0
-                }) { (_) in
-                    lottie?.removeFromSuperview()
-                }
-            }
-            
-        }
+//        // MARK:- Add or remove lottie View
+//
+//        private func isAddLottie(view lottieView : inout LottieView?,in viewToBeAdded : UIView, isAdd : Bool){
+//
+//            if isAdd {
+//                let frame =  view.bounds//CGRect(x: viewToBeAdded.frame.maxX/2, y: viewToBeAdded.frame.maxY/2, width: viewToBeAdded.frame.width/2, height: viewToBeAdded.frame.height/2)
+//                lottieView = LottieHelper().addLottie(with: frame)
+//                lottieView =
+//                viewToBeAdded.addSubview(lottieView!)
+//                lottieView?.play()
+//            } else {
+//                let lottie = lottieView // inout parameter cannot be captured by escaping key
+//                UIView.animate(withDuration: 0.2, animations: {
+//                    lottie?.alpha = 0
+//                }) { (_) in
+//                    lottie?.removeFromSuperview()
+//                }
+//            }
+//
+//        }
         
         // MARK:- Show DateTimePicker
         
@@ -769,6 +791,27 @@
                 
             }
         }
+        
+        // MARK:- Favourite Location on Other Category
+        func favouriteLocationApi(in view : UIView, isAdd : Bool) {
+            
+            guard isAdd else { return }
+            
+            var service = Service() // Save Favourite location in Server
+            service.type = CoreDataEntity.other.rawValue.lowercased()
+            if view == self.viewFavouriteSource, let address = self.sourceLocationDetail?.value {
+                service.address = address.address
+                service.latitude = address.coordinate.latitude
+                service.longitude = address.coordinate.longitude
+            } else if view == self.viewFavouriteDestination, self.destinationLocationDetail != nil {
+                service.address = self.destinationLocationDetail!.address
+                service.latitude = self.destinationLocationDetail!.coordinate.latitude
+                service.longitude = self.destinationLocationDetail!.coordinate.longitude
+            } else { return }
+            
+            self.presenter?.post(api: .locationServicePostDelete, data: service.toData())
+            
+        }
     }
     
     // MARK:- PostViewProtocol
@@ -839,6 +882,7 @@
             storeFavouriteLocations(from: data)
             
         }
+        
         
     }
     

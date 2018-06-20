@@ -189,9 +189,24 @@
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="atX-X9-rIG">
                                                         <rect key="frame" x="227.5" y="4" width="28" height="26.5"/>
+                                                        <subviews>
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unlike" translatesAutoresizingMaskIntoConstraints="NO" id="Uzq-BP-cnD" customClass="ImageView" customModule="User" customModuleProvider="target">
+                                                                <rect key="frame" x="7" y="6.5" width="14" height="13"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="tintColorId">
+                                                                        <integer key="value" value="2"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isImageTintColor" value="YES"/>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </imageView>
+                                                        </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
+                                                            <constraint firstItem="Uzq-BP-cnD" firstAttribute="height" secondItem="atX-X9-rIG" secondAttribute="height" multiplier="0.5" id="4aS-d6-0fk"/>
+                                                            <constraint firstItem="Uzq-BP-cnD" firstAttribute="width" secondItem="atX-X9-rIG" secondAttribute="width" multiplier="0.5" id="NnG-1h-31a"/>
                                                             <constraint firstAttribute="width" constant="28" id="QDu-th-RfF"/>
+                                                            <constraint firstItem="Uzq-BP-cnD" firstAttribute="centerY" secondItem="atX-X9-rIG" secondAttribute="centerY" id="nyb-ez-HcR"/>
+                                                            <constraint firstItem="Uzq-BP-cnD" firstAttribute="centerX" secondItem="atX-X9-rIG" secondAttribute="centerX" id="slf-Ts-yOU"/>
                                                         </constraints>
                                                     </view>
                                                     <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IKL-XO-jhY">
@@ -234,9 +249,24 @@
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="So4-kH-PyU">
                                                         <rect key="frame" x="227.5" y="3" width="28" height="27"/>
+                                                        <subviews>
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unlike" translatesAutoresizingMaskIntoConstraints="NO" id="UYh-Mn-F8z" customClass="ImageView" customModule="User" customModuleProvider="target">
+                                                                <rect key="frame" x="7" y="7" width="14" height="13"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="tintColorId">
+                                                                        <integer key="value" value="2"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isImageTintColor" value="YES"/>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </imageView>
+                                                        </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="28" id="Crr-fp-Rd9"/>
+                                                            <constraint firstItem="UYh-Mn-F8z" firstAttribute="height" secondItem="So4-kH-PyU" secondAttribute="height" multiplier="0.5" id="HOq-Kt-EQ3"/>
+                                                            <constraint firstItem="UYh-Mn-F8z" firstAttribute="centerX" secondItem="So4-kH-PyU" secondAttribute="centerX" id="LSm-7H-oHN"/>
+                                                            <constraint firstItem="UYh-Mn-F8z" firstAttribute="width" secondItem="So4-kH-PyU" secondAttribute="width" multiplier="0.5" id="etM-dl-h9J"/>
+                                                            <constraint firstItem="UYh-Mn-F8z" firstAttribute="centerY" secondItem="So4-kH-PyU" secondAttribute="centerY" id="xcO-QF-1Sc"/>
                                                         </constraints>
                                                     </view>
                                                     <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="N5R-Mr-wMu">
@@ -439,6 +469,8 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="buttonSOS" destination="VUc-3z-HrO" id="vpg-fS-eSD"/>
+                        <outlet property="imageViewFavouriteDestination" destination="UYh-Mn-F8z" id="BJP-j0-fCG"/>
+                        <outlet property="imageViewFavouriteSource" destination="Uzq-BP-cnD" id="zx3-3w-2fw"/>
                         <outlet property="imageViewMarkerCenter" destination="eF8-Hp-TcZ" id="sc8-0r-kyX"/>
                         <outlet property="imageViewSideBar" destination="1Mn-hj-Dkq" id="8E0-WB-ivZ"/>
                         <outlet property="textFieldDestinationLocation" destination="N5R-Mr-wMu" id="vMG-JI-Plc"/>
@@ -2103,6 +2135,7 @@
         <image name="noInternet" width="128" height="128"/>
         <image name="sos" width="268" height="268"/>
         <image name="tracker" width="300" height="300"/>
+        <image name="unlike" width="128" height="128"/>
         <image name="userPlaceholder" width="128" height="128"/>
         <image name="walkthrough0" width="1162" height="1162"/>
         <image name="walletImage" width="256" height="256"/>

@@ -49,8 +49,12 @@ class YourTripsPassbookViewController: UIViewController {
 //        super.viewWillAppear(animated)
 //        switchViewAction()
 //    }
-//    
-//    
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.isNavigationBarHidden = true
+    }
+    
 }
 
 extension YourTripsPassbookViewController {

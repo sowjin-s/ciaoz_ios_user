@@ -22,7 +22,6 @@ class HelpViewController: UIViewController {
     
     @IBOutlet var viewButtons: [UIView]!
     
-    
     @IBOutlet var callButton: UIButton!
     
     @IBOutlet var messageButton: UIButton!
@@ -40,6 +39,11 @@ class HelpViewController: UIViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         viewButtons.forEach({ $0.makeRoundedCorner() })
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.isNavigationBarHidden = true
     }
     
 }

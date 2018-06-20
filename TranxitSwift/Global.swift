@@ -46,6 +46,13 @@ func storeFavouriteLocations(from locationService : LocationService?) {
         }
     }
     
+    if let others = locationService?.others {
+        
+        for other in others where other.address != nil && other.latitude != nil && other.longitude != nil{
+            favouriteLocations.append((other.address!, LocationDetail(other.address!, LocationCoordinate(latitude: other.latitude!, longitude: other.longitude!))))
+        }
+    }
+    
 }
 
 

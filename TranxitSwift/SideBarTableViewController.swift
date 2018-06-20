@@ -151,7 +151,7 @@ extension SideBarTableViewController {
         case (0,6):
             self.push(to: Storyboard.Ids.HelpViewController)
         case (0,7):
-            (self.drawerController?.getViewController(for: .none) as? HomeViewController)?.share(items: [baseUrl])
+            (self.drawerController?.getViewController(for: .none)?.childViewControllers.first as? HomeViewController)?.share(items: [baseUrl])
         case (0,8):
             self.logout()
             
@@ -162,8 +162,8 @@ extension SideBarTableViewController {
     }
     
     private func push(to identifier : String) {
-        
-        self.drawerController?.getViewController(for: .none)?.push(id: identifier, animation: true)
+        let viewController = self.storyboard!.instantiateViewController(withIdentifier: identifier)
+        (self.drawerController?.getViewController(for: .none) as? UINavigationController)?.pushViewController(viewController, animated: true)
         
     }
     
