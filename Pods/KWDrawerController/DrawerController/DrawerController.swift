@@ -32,6 +32,10 @@ public protocol DrawerControllerDelegate {
     @objc optional func drawerWillCancelAnimation(drawerController: DrawerController, side: DrawerSide)
     @objc optional func drawerDidFinishAnimation(drawerController: DrawerController, side: DrawerSide)
     @objc optional func drawerDidCancelAnimation(drawerController: DrawerController, side: DrawerSide)
+    @objc optional func drawerWillOpenSide(drawerController: DrawerController, side: DrawerSide)
+    @objc optional func drawerWillCloseSide(drawerController: DrawerController, side: DrawerSide)
+    @objc optional func drawerDidOpenSide(drawerController: DrawerController, side: DrawerSide)
+    @objc optional func drawerDidCloseSide(drawerController: DrawerController, side: DrawerSide)
 }
 
 open class DrawerController: UIViewController, UIGestureRecognizerDelegate {
@@ -225,10 +229,18 @@ open class DrawerController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     /// Actions
+    @IBAction func openLeftSide(_ sender: Any) {
+        openSide(.left)
+    }
+    
+    @IBAction func openRightSide(_ sender: Any) {
+        openSide(.right)
+    }
+    
     public func openSide(_ side: DrawerSide, completion: (()->())? = nil) {
         /// Golden-Path
-        guard isEnable() else { return }
-        guard !isAnimating else { return }
+        guard isEnable(), !isAnimating else { return }
+        delegate?.drawerWillOpenSide?(drawerController: self, side: side)
         
         if drawerSide != .none && side != drawerSide {
             closeSide { [weak self] in
@@ -252,6 +264,7 @@ open class DrawerController: UIViewController, UIGestureRecognizerDelegate {
             didFinishAnimate(side: side, percent: 1.0)
             
             isAnimating = false
+            delegate?.drawerDidOpenSide?(drawerController: self, side: side)
             completion?()
             return
         }
@@ -279,6 +292,7 @@ open class DrawerController: UIViewController, UIGestureRecognizerDelegate {
                     ss.didFinishAnimate(side: side, percent: 1.0)
                     
                     ss.isAnimating = false
+                    ss.delegate?.drawerDidOpenSide?(drawerController: ss, side: side)
                     completion?()
                 }
             )
@@ -295,6 +309,7 @@ open class DrawerController: UIViewController, UIGestureRecognizerDelegate {
                     ss.didFinishAnimate(side: side, percent: 1.0)
                     
                     ss.isAnimating = false
+                    ss.delegate?.drawerDidOpenSide?(drawerController: ss, side: side)
                     completion?()
                 }
             )
@@ -303,9 +318,11 @@ open class DrawerController: UIViewController, UIGestureRecognizerDelegate {
     
     public func closeSide(completion: (()->())? = nil) {
         /// Golden-Path
-        guard isEnable() else { return }
-        guard !isAnimating else { return }
+        guard isEnable(), !isAnimating else { return }
+
+        delegate?.drawerWillCloseSide?(drawerController: self, side: drawerSide)
         
+        let oldSide = drawerSide
         isAnimating = true
         
         willBeginAnimate(side: .none)
@@ -321,6 +338,7 @@ open class DrawerController: UIViewController, UIGestureRecognizerDelegate {
             didFinishAnimate(side: .none, percent: 0.0)
             
             isAnimating = false
+            delegate?.drawerDidCloseSide?(drawerController: self, side: oldSide)
             completion?()
             return
         }
@@ -346,6 +364,7 @@ open class DrawerController: UIViewController, UIGestureRecognizerDelegate {
                     ss.didFinishAnimate(side: .none, percent: 0.0)
                     
                     ss.isAnimating = false
+                    ss.delegate?.drawerDidCloseSide?(drawerController: ss, side: oldSide)
                     completion?()
                 }
             )
@@ -361,6 +380,7 @@ open class DrawerController: UIViewController, UIGestureRecognizerDelegate {
                     ss.didFinishAnimate(side: .none, percent: 0.0)
                     
                     ss.isAnimating = false
+                    ss.delegate?.drawerDidCloseSide?(drawerController: ss, side: oldSide)
                     completion?()
                 }
             )
@@ -454,6 +474,9 @@ open class DrawerController: UIViewController, UIGestureRecognizerDelegate {
             newContent.addDrawerView(drawerController: ss)
             newContent.drawerWidth = ss.drawerWidth
             ss.contentMap[side] = newContent
+            if side == .none {
+                newContent.setVisible(true)
+            }
             
             newContent.startTransition(side: .none)
             newContent.transition(
@@ -480,8 +503,7 @@ open class DrawerController: UIViewController, UIGestureRecognizerDelegate {
     }
     private func removeSide(_ side: DrawerSide) {
         /// Golden-Path
-        guard !isAnimating else { return }
-        guard let content = contentMap[side] else { return }
+        guard !isAnimating, let content = contentMap[side] else { return }
         
         /// Closure
         let unsetContent: ((DrawerContent) -> Void) = { [weak self] content in
@@ -542,14 +564,8 @@ open class DrawerController: UIViewController, UIGestureRecognizerDelegate {
         internalFromSide = side
         
         /// View Controller Events
-        if side == .none {
-            if let sideContent = contentMap[drawerSide] {
-                sideContent.viewController.viewWillDisappear(isAnimation(content: sideContent))
-            }
-        } else {
-            if let sideContent = contentMap[side] {
-                sideContent.viewController.viewWillAppear(isAnimation(content: sideContent))
-            }
+        if side != .none, let sideContent = contentMap[side] {
+            sideContent.setVisible(true)
         }
         
         /// User Interaction
@@ -603,11 +619,6 @@ open class DrawerController: UIViewController, UIGestureRecognizerDelegate {
             view.bringSubview(toFront: sideContent.contentView)
         } else {
             view.bringSubview(toFront: mainContent.contentView)
-        }
-        
-        /// View Controller Events
-        if side != .none {
-            sideContent.viewController.viewDidAppear(isAnimation(content: sideContent))
         }
     }
     private func willAnimate(side: DrawerSide, percent: Float) {}
@@ -682,10 +693,8 @@ open class DrawerController: UIViewController, UIGestureRecognizerDelegate {
             }
             
             content.endTransition(side: side)
-            
-            /// View Controller Events
-            if side == .none {
-                content.viewController.viewDidDisappear(isAnimation(content: content))
+            if moveSide != .none, side == .none {
+                content.setVisible(false)
             }
         } else {
             fadeView.layer.opacity = percent
@@ -832,9 +841,7 @@ open class DrawerController: UIViewController, UIGestureRecognizerDelegate {
     @objc
     private func handleTapGestureRecognizer(gesture: UITapGestureRecognizer) {
         /// Golden-Path
-        guard isEnable() else { return }
-        guard isGesture() else { return }
-        guard !isAnimating else { return }
+        guard isEnable(), isGesture(), !isAnimating else { return }
         
         closeSide { [weak self] in
             self?.gestureLastPercentage = -1.0
@@ -844,9 +851,7 @@ open class DrawerController: UIViewController, UIGestureRecognizerDelegate {
     @objc
     private func handlePanGestureRecognizer(gesture: UIPanGestureRecognizer) {
         /// Golden-Path
-        guard isEnable() else { return }
-        guard isGesture() else { return }
-        guard !isAnimating else { return }
+        guard isEnable(), isGesture(), !isAnimating else { return }
         
         let location = gesture.location(in: view)
         
@@ -1174,8 +1179,7 @@ open class DrawerController: UIViewController, UIGestureRecognizerDelegate {
         }
         
         let newOrientation = UIDevice.current.orientation
-        guard newOrientation != .unknown else { return }
-        guard newOrientation != currentOrientation else { return }
+        guard newOrientation != .unknown, newOrientation != currentOrientation else { return }
         currentOrientation = newOrientation
         
         updateLayout()

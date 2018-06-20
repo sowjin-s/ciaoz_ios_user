@@ -6,7 +6,7 @@ target 'User' do
   use_frameworks!
 
     pod 'Alamofire'
-    pod 'KWDrawerController', '~> 4.1.2'
+    pod 'KWDrawerController', '~> 4.1.6'
     #pod 'SwiftLint'
     pod 'GoogleMaps'
     pod 'GooglePlaces'
@@ -14,7 +14,11 @@ target 'User' do
     pod 'DateTimePicker'
     pod 'PopupDialog', '~> 0.7'
     #pod 'FloatRatingView', '~> 2.0.0'
-    pod 'IQKeyboardManager'
+    #pod 'IQKeyboardManager'
+    pod 'IQKeyboardManagerSwift', '~> 6.0.0'
+    pod 'Fabric', '~> 1.7.7'
+    pod 'Crashlytics', '~> 3.10.2'
+    pod 'Firebase/Core'
     
   target 'UserTests' do
     inherit! :search_paths

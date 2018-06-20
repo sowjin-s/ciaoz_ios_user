@@ -4,15 +4,15 @@ KWDrawerController
 [![Pod Version](http://img.shields.io/cocoapods/v/KWDrawerController.svg?style=flat)](http://cocoadocs.org/docsets/KWDrawerController)
 [![Pod Platform](http://img.shields.io/cocoapods/p/KWDrawerController.svg?style=flat)](http://cocoadocs.org/docsets/KWDrawerController)
 [![Pod License](http://img.shields.io/cocoapods/l/KWDrawerController.svg?style=flat)](https://github.com/kawoou/KWDrawerController/blob/master/LICENSE)
-![Swift](https://img.shields.io/badge/Swift-4.0-orange.svg)
+![Swift](https://img.shields.io/badge/Swift-4.1-orange.svg)
 
-Drawer view controller that easy to use!
+Drawer view controller that is easy to use!
 
 
 Installation
 ------------
 
-### CocoaPods (For iOS 8+ projects)
+### CocoaPods (iOS 8+ projects)
 
 KWDrawerController is available on [CocoaPods](https://github.com/cocoapods/cocoapods). Add the following to your Podfile:
 
@@ -21,14 +21,14 @@ KWDrawerController is available on [CocoaPods](https://github.com/cocoapods/coco
 pod 'KWDrawerController', '~> 3.7'
 
 # Swift 4
-pod 'KWDrawerController', '~> 4.1.3'
+pod 'KWDrawerController', '~> 4.1.6'
 pod 'KWDrawerController/RxSwift'        # with RxSwift extension
 ```
 
 
 ### Manually
 
-You can either simply drag and drop the `DrawerController` folder into your existing project.
+Simply drag and drop the `DrawerController` folder into your existing project.
 
 
 Usage
@@ -72,15 +72,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 ### Storyboard
 
-![Storyboard](https://github.com/kawoou/KWDrawerController/raw/develop/Preview/storyboard.jpg)
+![Storyboard](https://github.com/kawoou/KWDrawerController/raw/preview/Preview/storyboard.jpg)
 
- 1. Set the KWDrawerController to Custom Class of Initial ViewController.
+ 1. Set `DrawerController` as the Custom Class of the Initial ViewController.
 
- 2. Connects the `DrawerEmbedLeftControllerSegue` or `DrawerEmbedRightControllerSegue` to UIViewController from `KWDrawerController`
+ 2. Connect the `DrawerEmbedLeftControllerSegue` and/or the `DrawerEmbedRightControllerSegue` from `DrawerController` to your left/right controllers.
 
- 3. Connects the `DrawerEmbedMainControllerSegue` to UIViewController from `KWDrawerController`
+ 3. Connect the `DrawerEmbedMainControllerSegue` from `DrawerController` to your main controller.
 
- 4. Set the SegueIdentifiers to inspector of `KWDrawerController`.
+ 4. Set the segue identifiers of both the inspector of `DrawerController` and the segues themselves.
 
 
 ### Open / Close
@@ -245,7 +245,18 @@ Changelog
   - Implement `getViewController` method.
   - Reduce cloning size.
 + 4.1.3
-  - [#12] Fix crashed on load.
+  - Fix crashed on load. (#12)
++ 4.1.4
+  - Add state methods to delegate. (#16)
+  - Fix access control issues. (#18)
+  - Fixed DrawerFloatTransition bug. (#20)
+  - DrawerController incorrectly manages lifecycles of child controllers. (#21 #22)
++ 4.1.5
+  - Code and performance improvements and bug fixes. (#24 @rivera-ernesto)
++ 4.1.6
+  - Fix transition bugs.
+  - Fix gesture not working bugs.
+  - Fix right drawer placement on iPads (#28 @rivera-ernesto)
 
 ⚠️ Requirements
 --------------

@@ -34,11 +34,41 @@ class RideRequestHandler: NSObject, INRequestRideIntentHandling {
             return
         }
         
+        guard let dropOffLocation = intent.dropOffLocation?.location else {
+            code = .failureRequiringAppLaunch
+            completion(INRequestRideIntentResponse(code: code, userActivity: .none))
+            return
+        }
+        
+        
+       /* let request = Request()
+        request.d_address =  self.destinationLocationDetail?.address
+        request.d_latitude = self.destinationLocationDetail?.coordinate.latitude
+        request.d_longitude = self.destinationLocationDetail?.coordinate.longitude
+        request.s_address = self.sourceLocationDetail?.value?.address
+        request.s_latitude = self.sourceLocationDetail?.value?.coordinate.latitude
+        request.s_longitude = self.sourceLocationDetail?.value?.coordinate.longitude
+        request.service_type = self.service?.id
+        request.payment_mode = .CASH
+        request.distance = "\(fare.distance ?? 0)"
+        request.use_wallet = fare.useWallet
+        
+        if isScheduled {
+            if let dateString = Formatter.shared.getString(from: scheduleDate, format: DateFormat.list.ddMMyyyyhhmma) {
+                
+                let dateArray = dateString.components(separatedBy: "")
+                request.schedule_date = dateArray.first
+                request.schedule_time = dateArray.last
+            }
+        } */
+        
+        
+        
         //let dropOff = intent.dropOffLocation?.location ?? pickUpLocation
         
         let status = INRideStatus()
         status.rideIdentifier = "Ide"
-        status.driver = INRideDriver(phoneNumber: "9585290750", nameComponents: nil, displayName: "Jeff", image: #imageLiteral(resourceName: "men_black").inImage, rating: "2")
+        status.driver = INRideDriver(phoneNumber: "9585290750", nameComponents: nil, displayName: "Jeff", image:  #imageLiteral(resourceName: "userPlaceholder").inImage, rating: "2")
         status.pickupLocation = intent.pickupLocation
         status.dropOffLocation = intent.dropOffLocation
         status.phase = .confirmed
@@ -54,7 +84,7 @@ class RideRequestHandler: NSObject, INRequestRideIntentHandling {
         
         let responseCode : INRequestRideIntentResponseCode
         
-        if let location = intent.pickupLocation?.location {
+        if (intent.pickupLocation?.location) != nil {
             responseCode = .ready
         } else {
             responseCode = .failureRequiringAppLaunchNoServiceInArea
@@ -83,8 +113,8 @@ class RideRequestHandler: NSObject, INRequestRideIntentHandling {
     }
 
     func resolveScheduledPickupTime(for intent: INRequestRideIntent, with completion: @escaping (INDateComponentsRangeResolutionResult) -> Void) {
-        
-        if let date = intent.scheduledPickupTime, let dateObject = date.startDateComponents?.date, Date()<=dateObject {
+        let dateNow = Date(timeInterval: -30, since: Date())
+        if let date = intent.scheduledPickupTime, let dateObject = date.startDateComponents?.date, dateNow<=dateObject {
             completion(.success(with: date))
         } else {
             completion(.needsValue())
@@ -93,4 +123,9 @@ class RideRequestHandler: NSObject, INRequestRideIntentHandling {
     }
     
 
+}
+
+
+extension RideRequestHandler {
+ 
 }

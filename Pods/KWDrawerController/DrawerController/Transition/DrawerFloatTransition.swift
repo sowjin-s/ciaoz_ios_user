@@ -24,30 +24,30 @@ SOFTWARE.
 
 import UIKit
 
-public class DrawerFloatTransition: DrawerTransition {
+open class DrawerFloatTransition: DrawerTransition {
 
     // MARK: - Property
     
-    public var floatFactor: Float
+    open var floatFactor: Float
     
     
     // MARK: - Public
     
-    public override func initTransition(content: DrawerContent) {
+    open override func initTransition(content: DrawerContent) {
         super.initTransition(content: content)
         
         content.isBringToFront = false
     }
     
-    public override func startTransition(content: DrawerContent, side: DrawerSide) {
+    open override func startTransition(content: DrawerContent, side: DrawerSide) {
         super.startTransition(content: content, side: side)
     }
     
-    public override func endTransition(content: DrawerContent, side: DrawerSide) {
+    open override func endTransition(content: DrawerContent, side: DrawerSide) {
         super.endTransition(content: content, side: side)
     }
     
-    public override func transition(content: DrawerContent, side: DrawerSide, percentage: CGFloat, viewRect: CGRect) {
+    open override func transition(content: DrawerContent, side: DrawerSide, percentage: CGFloat, viewRect: CGRect) {
         
         switch content.drawerSide {
         case .left:
@@ -67,13 +67,24 @@ public class DrawerFloatTransition: DrawerTransition {
                 height: content.contentView.frame.height
             )
         case .none:
+            let scale = CGFloat(1.0 - Float(fabs(percentage)) * floatFactor)
             content.contentView.transform = CGAffineTransform(
-                scaleX: CGFloat(1.0 - Float(fabs(percentage)) * floatFactor),
-                y: CGFloat(1.0 - Float(fabs(percentage)) * floatFactor)
-            ).translatedBy(
-                x: viewRect.size.width * percentage,
-                y: 0
+                scaleX: scale,
+                y: scale
             )
+            
+            switch side {
+            case .right:
+                content.contentView.frame.origin = CGPoint(
+                    x: viewRect.width * percentage * scale,
+                    y: (viewRect.height - content.contentView.frame.size.height) * 0.5
+                )
+            default:
+                content.contentView.frame.origin = CGPoint(
+                    x: viewRect.width * percentage,
+                    y: (viewRect.height - content.contentView.frame.size.height) * 0.5
+                )
+            }
         }
         
     }
