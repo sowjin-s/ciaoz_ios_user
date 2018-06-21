@@ -11,7 +11,6 @@
     import GoogleMaps
     import GooglePlaces
     import DateTimePicker
-    import IQKeyboardManagerSwift
     
     class HomeViewController: UIViewController {
         
@@ -144,7 +143,6 @@
             super.viewWillAppear(animated)
             self.navigationController?.isNavigationBarHidden = true
             self.navigationController?.navigationBar.isHidden = true
-            IQKeyboardManager.shared.enable = false
             self.localize()
         }
         
@@ -158,10 +156,6 @@
             self.viewLayouts()
         }
         
-        override func viewWillDisappear(_ animated: Bool) {
-            super.viewWillDisappear(animated)
-            IQKeyboardManager.shared.enable = true
-        }
         
         //    var tempLat = 13.05864944
         //    var tempLong = 80.25398977
