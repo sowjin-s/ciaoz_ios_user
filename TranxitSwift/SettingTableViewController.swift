@@ -42,10 +42,10 @@ class SettingTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.navigationController?.isNavigationBarHidden = true
-    }
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+//        self.navigationController?.isNavigationBarHidden = true
+//    }
 
 }
 
@@ -97,7 +97,8 @@ extension SettingTableViewController {
         } else if indexPath.section == 1, let tableCell = tableView.dequeueReusableCell(withIdentifier: languageCellId, for: indexPath) as? LanguageSelection {
             
             tableCell.labelTitle.text = self.languages[indexPath.row].rawValue.localize()
-            tableCell.imageViewIcon.image = self.selectedLanguage == self.languages[indexPath.row] ? #imageLiteral(resourceName: "check") : #imageLiteral(resourceName: "check-box-empty")
+            tableCell.imageViewIcon.tintColorId = 2
+            tableCell.imageViewIcon.image = (self.selectedLanguage == self.languages[indexPath.row] ? #imageLiteral(resourceName: "check") : #imageLiteral(resourceName: "check-box-empty")).withRenderingMode(.alwaysTemplate)
             tableCell.selectionStyle = .none
             return tableCell
         }

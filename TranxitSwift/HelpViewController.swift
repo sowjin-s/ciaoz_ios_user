@@ -41,11 +41,11 @@ class HelpViewController: UIViewController {
         viewButtons.forEach({ $0.makeRoundedCorner() })
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.navigationController?.isNavigationBarHidden = true
-    }
-    
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+//        self.navigationController?.isNavigationBarHidden = true
+//    }
+//
 }
 
 extension HelpViewController {
