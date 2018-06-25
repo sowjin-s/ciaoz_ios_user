@@ -99,15 +99,18 @@ extension LocationSelectionView {
         self.tableViewBottom.register(UINib(nibName: XIB.Names.LocationTableViewCell, bundle: nil), forCellReuseIdentifier:XIB.Names.LocationTableViewCell)
         self.tableViewBottom.register(UINib(nibName: XIB.Names.LocationHeaderTableViewCell, bundle: nil), forCellReuseIdentifier:XIB.Names.LocationHeaderTableViewCell)
         self.viewBack.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.backButtonAction)))
-        self.textFieldDestination.becomeFirstResponder()
     }
     
 
     func setValues(address : Address, completion :@escaping (Address)->Void){
-        
+        //self.endEditingForce()
         self.address = address
         self.completion = completion
-        
+        if self.address?.source == nil {
+            self.textFieldSource.becomeFirstResponder()
+        } else {
+            self.textFieldDestination.becomeFirstResponder()
+        }
     }
     
     
@@ -286,7 +289,6 @@ extension LocationSelectionView : UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        
         self.datasource = []
         self.getPredications(from: textField.text)
     }
@@ -306,9 +308,9 @@ extension LocationSelectionView : UITextFieldDelegate {
         
         let searchText = text+string
         
-        guard searchText.count<50 else {
-            return false
-        }
+//        guard searchText.count else {
+//            return false
+//        }
         
         self.getPredications(from: searchText)
         

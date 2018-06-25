@@ -349,7 +349,7 @@ extension SignUpUserTableViewController : UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         guard textField == emailtext else {return}
         textField.placeholder = Constants.string.email.localize()
-        
+        (textField as? HoshiTextField)?.borderActiveColor = .primary
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -357,6 +357,7 @@ extension SignUpUserTableViewController : UITextFieldDelegate {
         if textField.text?.count == 0 {
             textField.placeholder = Constants.string.emailPlaceHolder.localize()
         }
+        (textField as? HoshiTextField)?.borderActiveColor = .lightGray
     }
     
 //    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

@@ -9,7 +9,7 @@
 import UIKit
 
 class YourTripCell: UITableViewCell {
-
+    
     //MARK:- view outlets
     @IBOutlet var mainView: UIView!
     //@IBOutlet var pastView: UIView!
@@ -18,15 +18,15 @@ class YourTripCell: UITableViewCell {
     //MARK:- UIimageView outLets
     @IBOutlet var upCommingCarImage: UIImageView!
     @IBOutlet var mapImageView: UIImageView!
-
+    
     
     //MARK:- label outlets
     @IBOutlet var upCommingDateLabel: UILabel!
     @IBOutlet var upCommingBookingIDLlabel: UILabel!
     @IBOutlet var upCommingCarName: UILabel!
     /*@IBOutlet var bookingIdLabel: UILabel!
-    @IBOutlet var nameLabel: UILabel!
-    @IBOutlet var dateLabel: UILabel! */
+     @IBOutlet var nameLabel: UILabel!
+     @IBOutlet var dateLabel: UILabel! */
     
     //MARK:- button outlets
     @IBOutlet var upCommingCancelBtn: UIButton!
@@ -65,7 +65,9 @@ class YourTripCell: UITableViewCell {
         print(isPastButton)
         Cache.image(forUrl: values.service?.image) { (image) in
             if image != nil {
-                self.upCommingCarImage.image = image
+                DispatchQueue.main.async {
+                    self.upCommingCarImage.image = image
+                }
             }
         }
         
@@ -99,21 +101,21 @@ class YourTripCell: UITableViewCell {
     
     
     
-//    private func setCommonFont(){
-//        
-//        setFont(TextField: nil, label: upCommingBookingIDLlabel, Button: nil, size: nil)
-//        setFont(TextField: nil, label: upCommingDateLabel, Button: upCommingCancelBtn, size: nil)
-//        setFont(TextField: nil, label: upCommingCarName, Button: nil, size: nil)
-//        setFont(TextField: nil, label: bookingIdLabel, Button: nil, size: nil )
-//        setFont(TextField: nil, label:nameLabel , Button: nil, size: nil)
-//        setFont(TextField: nil, label: dateLabel , Button: nil, size: nil)
-//        
-//        
-//    }
-
+    //    private func setCommonFont(){
+    //        
+    //        setFont(TextField: nil, label: upCommingBookingIDLlabel, Button: nil, size: nil)
+    //        setFont(TextField: nil, label: upCommingDateLabel, Button: upCommingCancelBtn, size: nil)
+    //        setFont(TextField: nil, label: upCommingCarName, Button: nil, size: nil)
+    //        setFont(TextField: nil, label: bookingIdLabel, Button: nil, size: nil )
+    //        setFont(TextField: nil, label:nameLabel , Button: nil, size: nil)
+    //        setFont(TextField: nil, label: dateLabel , Button: nil, size: nil)
+    //        
+    //        
+    //    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
     

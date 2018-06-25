@@ -227,7 +227,7 @@
                         self.sourceLocationDetail?.value = locationDetail
                     }
                 })
-                self.mapViewHelper?.moveTo(location: currentLocation.value!, with: self.viewMapOuter.center)
+                self.mapViewHelper?.moveTo(location: self.currentLocation.value!, with: self.viewMapOuter.center)
             }
         }
         

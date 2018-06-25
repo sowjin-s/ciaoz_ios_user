@@ -520,7 +520,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <view key="tableHeaderView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" id="RfN-H0-r1w">
+                        <view key="tableHeaderView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" preservesSuperviewLayoutMargins="YES" id="RfN-H0-r1w">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
@@ -551,6 +551,7 @@
                                 <constraint firstItem="qOk-jC-cwR" firstAttribute="centerY" secondItem="RfN-H0-r1w" secondAttribute="centerY" id="hwz-pO-atZ"/>
                                 <constraint firstItem="Uzz-kC-7K4" firstAttribute="centerY" secondItem="qOk-jC-cwR" secondAttribute="centerY" multiplier="1.3" id="iiY-vu-80y"/>
                             </constraints>
+                            <viewLayoutGuide key="safeArea" id="wyA-MI-8eD"/>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="hwg-Oh-QPw">
                             <rect key="frame" x="0.0" y="441" width="414" height="131"/>

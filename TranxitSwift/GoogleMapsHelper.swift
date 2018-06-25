@@ -69,12 +69,13 @@ class GoogleMapsHelper : NSObject {
     func moveTo(location : LocationCoordinate = defaultMapLocation, with center : CGPoint) {
         
         CATransaction.begin()
-        CATransaction.setAnimationDuration(2)
+        CATransaction.setValue(2, forKey: kCATransactionAnimationDuration)
         CATransaction.setCompletionBlock {
-            self.mapView?.camera = GMSCameraPosition.camera(withTarget: location, zoom: 15)
-            self.mapView?.center = center
+            self.mapView?.animate(to: GMSCameraPosition.camera(withTarget: location, zoom: 15))
         }
         CATransaction.commit()
+        self.mapView?.center = center
+
     }
     // Setting Map Style
     private func setMapStyle(to mapView: GMSMapView?){

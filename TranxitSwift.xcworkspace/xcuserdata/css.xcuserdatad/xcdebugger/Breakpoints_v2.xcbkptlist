@@ -90,7 +90,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TranxitSwift/HomeViewController.swift"
-            timestampString = "551201240.834119"
+            timestampString = "551605677.235479"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "798"
@@ -122,43 +122,75 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TranxitSwift/HomeViewController.swift"
-            timestampString = "551201240.834483"
+            timestampString = "551605677.235557"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "806"
             endingLineNumber = "806"
             landmarkName = "favouriteLocationApi(in:isAdd:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TranxitSwift/HomeViewController.swift"
+            timestampString = "551605677.2356009"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "221"
+            endingLineNumber = "221"
+            landmarkName = "getCurrentLocation()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TranxitSwift/LocationSelectionView.swift"
+            timestampString = "551626841.881319"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
+            landmarkName = "getPredications(from:)"
+            landmarkType = "7">
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "User.HomeViewController.favouriteLocationApi(in: __ObjC.UIView, isAdd: Swift.Bool) -&gt; ()"
+                  symbolName = "User.LocationSelectionView.(getPredications in _0BB84B28C75D34B2391486672943BB7F)(from: Swift.Optional&lt;Swift.String&gt;) -&gt; ()"
                   moduleName = "User"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/css/Documents/Jeff%20Space/Appoets/Projects/TranxitBase/TranxitSwift/HomeViewController.swift"
-                  timestampString = "551201100.833744"
+                  urlString = "file:///Users/css/Documents/Jeff%20Space/Appoets/Projects/TranxitBase/TranxitSwift/LocationSelectionView.swift"
+                  timestampString = "551625332.963544"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "805"
-                  endingLineNumber = "805"
-                  offsetFromSymbolStart = "1769">
+                  startingLineNumber = "132"
+                  endingLineNumber = "132"
+                  offsetFromSymbolStart = "42">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "User.HomeViewController.favouriteLocationApi(in: __ObjC.UIView, isAdd: Swift.Bool) -&gt; ()"
+                  symbolName = "closure #1 (Swift.Array&lt;__ObjC.GMSAutocompletePrediction&gt;) -&gt; () in User.LocationSelectionView.(getPredications in _0BB84B28C75D34B2391486672943BB7F)(from: Swift.Optional&lt;Swift.String&gt;) -&gt; ()"
                   moduleName = "User"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/css/Documents/Jeff%20Space/Appoets/Projects/TranxitBase/TranxitSwift/HomeViewController.swift"
-                  timestampString = "551201100.835677"
+                  urlString = "file:///Users/css/Documents/Jeff%20Space/Appoets/Projects/TranxitBase/TranxitSwift/LocationSelectionView.swift"
+                  timestampString = "551625332.9655271"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "805"
-                  endingLineNumber = "805"
-                  offsetFromSymbolStart = "1850">
+                  startingLineNumber = "133"
+                  endingLineNumber = "133"
+                  offsetFromSymbolStart = "18">
                </Location>
             </Locations>
          </BreakpointContent>

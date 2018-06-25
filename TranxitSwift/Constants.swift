@@ -73,7 +73,7 @@ struct Constants {
     let newPassword = "New Password"
     let iForgotPassword = "I forgot my password"
     let enterYourMailIdForrecovery = "Enter your mail ID for recovery"
-    let registerDetails = "Enter the details you used to register"
+    let registerDetails = "Enter the details to register"
     let chooseAnAccount = "Choose an account"
     let facebook = "Facebook"
     let google = "Google"

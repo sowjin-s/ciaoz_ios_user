@@ -17,11 +17,6 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wNy-76-DRH">
-                    <rect key="frame" x="0.0" y="196" width="375" height="471"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <inset key="scrollIndicatorInsets" minX="0.0" minY="30" maxX="0.0" maxY="0.0"/>
-                </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Y1-rn-1vt">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                     <subviews>
@@ -69,8 +64,8 @@
                                                         <constraint firstItem="gq2-HI-1hU" firstAttribute="centerY" secondItem="19U-Ci-70f" secondAttribute="centerY" id="yOp-Iv-Oxv"/>
                                                     </constraints>
                                                 </view>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Ucb-Ym-AIU">
-                                                    <rect key="frame" x="8" y="9" width="291.5" height="19"/>
+                                                <textField opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Ucb-Ym-AIU">
+                                                    <rect key="frame" x="8" y="0.0" width="291.5" height="37"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -86,6 +81,7 @@
                                                 <constraint firstItem="19U-Ci-70f" firstAttribute="height" secondItem="uzZ-eJ-qEi" secondAttribute="height" multiplier="0.8" id="ix3-ka-ZNK"/>
                                                 <constraint firstItem="19U-Ci-70f" firstAttribute="leading" secondItem="Ucb-Ym-AIU" secondAttribute="trailing" constant="8" id="prI-hv-UiW"/>
                                                 <constraint firstAttribute="trailing" secondItem="Ucb-Ym-AIU" secondAttribute="trailing" constant="4" id="xcT-tU-QQq"/>
+                                                <constraint firstItem="Ucb-Ym-AIU" firstAttribute="height" secondItem="uzZ-eJ-qEi" secondAttribute="height" id="z2a-sO-vdd"/>
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="size" keyPath="offsetShadow">
@@ -129,8 +125,8 @@
                                                         <constraint firstItem="7nl-nx-OqF" firstAttribute="width" secondItem="bq8-H7-0m3" secondAttribute="width" multiplier="0.6" id="tjV-vi-aPd"/>
                                                     </constraints>
                                                 </view>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="0M1-gH-DL4">
-                                                    <rect key="frame" x="8" y="9" width="291.5" height="19"/>
+                                                <textField opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="0M1-gH-DL4">
+                                                    <rect key="frame" x="8" y="0.0" width="291.5" height="37"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -145,6 +141,7 @@
                                                 <constraint firstItem="0M1-gH-DL4" firstAttribute="centerY" secondItem="GM4-I2-3BQ" secondAttribute="centerY" id="hFp-O0-Mov"/>
                                                 <constraint firstAttribute="trailing" secondItem="bq8-H7-0m3" secondAttribute="trailing" constant="4" id="iaa-hA-IKK"/>
                                                 <constraint firstItem="0M1-gH-DL4" firstAttribute="leading" secondItem="GM4-I2-3BQ" secondAttribute="leading" constant="8" id="mh3-MR-syy"/>
+                                                <constraint firstItem="0M1-gH-DL4" firstAttribute="height" secondItem="GM4-I2-3BQ" secondAttribute="height" id="paV-s4-gmJ"/>
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="size" keyPath="offsetShadow">
@@ -252,6 +249,11 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wNy-76-DRH">
+                    <rect key="frame" x="0.0" y="196" width="375" height="471"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <inset key="scrollIndicatorInsets" minX="0.0" minY="30" maxX="0.0" maxY="0.0"/>
+                </tableView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>

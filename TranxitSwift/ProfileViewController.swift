@@ -89,7 +89,7 @@ extension ProfileViewController {
         self.setProfile()
         self.view.dismissKeyBoardonTap()
         self.presenter?.get(api: .getProfile, parameters: nil)
-        
+        self.tableView.tableHeaderView?.bounds.size = CGSize(width: self.tableView.bounds.width, height: 200)
     }
     
     // MARK:- Set Profile Details

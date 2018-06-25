@@ -22,6 +22,8 @@ class ServiceSelectionCollectionViewCell: UICollectionViewCell {
     override var isSelected: Bool {
         
         didSet{
+            
+            
             // self.imageViewHeightConstant.constant = self.isSelected ? self.initialFrame.height/2 : 0
             //self.imageViewWidthConstant.constant = self.isSelected ? self.initialFrame.width/2 : 0
            // self.viewImageView.cornerRadius = isSelected ? (self.viewImageView.frame.width/2) : 0
