@@ -76,5 +76,22 @@ extension UIColor {
         return UIColor(red: 40/255, green: 25/255, blue: 255/255, alpha: 1)
     }
     
-    
+    func UInt()->UInt32{
+        
+        var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
+        if self.getRed(&red, green: &green, blue: &blue, alpha: &alpha) {
+            
+            var colorAsUInt : UInt32 = 0
+            
+            colorAsUInt += UInt32(red * 255.0) << 16 +
+                UInt32(green * 255.0) << 8 +
+                UInt32(blue * 255.0)
+            return colorAsUInt
+            
+            // colorAsUInt == 0xCC6699 // true
+            
+        }
+        
+        return 0xCC6699
+    }
 }

@@ -19,9 +19,13 @@ class ServiceSelectionView: UIView {
     @IBOutlet private weak var buttonGetPricing : UIButton!
     @IBOutlet weak var labelCardNumber : UILabel!
     @IBOutlet weak var imageViewCard : UIImageView!
+    @IBOutlet weak var progressView : UIProgressView!
   
     private var rateView : RateView?
     private var isPresented = false
+    private var timer : Timer?
+    private let timerSchedule : TimeInterval = 30
+    private var timerValue : TimeInterval = 0
     
     var isServiceSelected = true {
         didSet{
@@ -62,8 +66,40 @@ extension ServiceSelectionView {
         self.buttonGetPricing.addTarget(self, action: #selector(self.onClickGetPricing), for: .touchUpInside)
         self.imageViewCard.image = #imageLiteral(resourceName: "money_icon")
         self.labelCardNumber.text = Constants.string.cash.localize()
-        
+        self.setProgressView()
         self.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(self.panAction(sender:))))
+    }
+    // MARK:- Set Progress View
+    private func setProgressView() {
+        
+        self.progressView.progressTintColor = .primary
+        self.resetProgressView()
+        self.progressView.progressViewStyle = .bar
+    
+    }
+    
+    // MARK:- Reset Progress view
+    private func resetProgressView() {
+        DispatchQueue.main.async {
+            self.progressView.progress = 0
+            self.timer?.invalidate()
+            self.timer = nil
+        }
+    }
+    
+    private func startProgressing() {
+        timerValue = 0
+        timer = Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: #selector(self.timerAction), userInfo: nil, repeats: true)
+        timer?.fire()
+        
+    }
+    
+    
+   @IBAction private func timerAction() {
+        self.timerValue  += 1
+        UIView.animate(withDuration: 0.5, animations: {
+            self.progressView.progress = Float(self.timerValue/self.timerSchedule)
+        })
     }
     
     // MARK:- Set Designs
@@ -187,7 +223,6 @@ extension ServiceSelectionView {
     func getEstimateFareFor(serviceId : Int) {
         
         DispatchQueue.global(qos: .userInteractive).async {
-            
             var estimateFare = EstimateFareRequest()
             estimateFare.s_latitude = self.sourceCoordinate.latitude
             estimateFare.s_longitude = self.sourceCoordinate.longitude
@@ -195,8 +230,10 @@ extension ServiceSelectionView {
             estimateFare.d_longitude = self.destinationCoordinate.longitude
             estimateFare.service_type = serviceId
             self.presenter?.get(api: .estimateFare, parameters: estimateFare.JSONRepresentation)
-            
         }
+        self.resetProgressView()
+        self.startProgressing()
+        
     }
     
     private func addRateView() {
@@ -300,9 +337,9 @@ extension ServiceSelectionView : PostViewProtocol {
     
     
     func onError(api: Base, message: String, statusCode code: Int) {
-        
         DispatchQueue.main.async {
-            self.make(toast: message)
+             self.resetProgressView()
+             self.make(toast: message)
         }
     }
     
@@ -312,7 +349,8 @@ extension ServiceSelectionView : PostViewProtocol {
         if self.datasource.count > selectedRow {
             self.datasource[selectedRow].pricing = data
             DispatchQueue.main.async {
-                self.collectionViewService.reloadItems(at: [IndexPath(item: self.selectedRow, section: 0)])
+                 self.resetProgressView()
+                 self.collectionViewService.reloadItems(at: [IndexPath(item: self.selectedRow, section: 0)])
             }
         }
         

@@ -143,6 +143,12 @@
                         <inset key="sectionInset" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                 </collectionView>
+                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="dNJ-w8-g33">
+                    <rect key="frame" x="0.0" y="0.5" width="369" height="2.5"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="2" id="7Kh-iF-NF4"/>
+                    </constraints>
+                </progressView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -151,6 +157,7 @@
                 <constraint firstItem="KUn-ty-LaD" firstAttribute="top" secondItem="Xh1-Hm-3BK" secondAttribute="bottom" constant="4" id="8Vu-Bz-3JA"/>
                 <constraint firstItem="P2Q-qP-fpr" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="DUQ-vD-hxn"/>
                 <constraint firstItem="WoW-e7-ces" firstAttribute="top" secondItem="KUn-ty-LaD" secondAttribute="bottom" constant="4" id="IxN-tP-Sb4"/>
+                <constraint firstItem="dNJ-w8-g33" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Ozy-NR-07q"/>
                 <constraint firstItem="Xh1-Hm-3BK" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="1:2" id="PZP-oD-odV"/>
                 <constraint firstItem="WoW-e7-ces" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.85" id="SBT-Iz-zTd"/>
                 <constraint firstItem="WoW-e7-ces" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="Stc-fi-hyv"/>
@@ -159,6 +166,8 @@
                 <constraint firstItem="Xh1-Hm-3BK" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="aHg-9o-tNN"/>
                 <constraint firstItem="WoW-e7-ces" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="80:250" id="ctt-SA-xdp"/>
                 <constraint firstItem="g9M-re-cBN" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="eN5-nG-bhG"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="dNJ-w8-g33" secondAttribute="trailing" id="g7r-yF-7tL"/>
+                <constraint firstItem="dNJ-w8-g33" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="iDU-Y1-scf"/>
                 <constraint firstItem="KUn-ty-LaD" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="4" id="jN1-3A-CNh"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="WoW-e7-ces" secondAttribute="bottom" constant="8" id="nVg-Ay-q23"/>
                 <constraint firstItem="g9M-re-cBN" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="q9q-Qj-8QG"/>
@@ -191,6 +200,7 @@
                 <outlet property="labelCapacity" destination="piP-pz-1Tj" id="npH-nF-xjR"/>
                 <outlet property="labelCardNumber" destination="pdW-j7-Egi" id="6Gz-DH-7WK"/>
                 <outlet property="labelServiceTitle" destination="Xh1-Hm-3BK" id="Xk7-ME-y3V"/>
+                <outlet property="progressView" destination="dNJ-w8-g33" id="OJL-or-vtS"/>
             </connections>
             <point key="canvasLocation" x="-141.5" y="233"/>
         </view>

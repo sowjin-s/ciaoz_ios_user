@@ -79,7 +79,7 @@ extension SideBarTableViewController {
     
     private func setLayers(){
         
-        self.viewShadow.addShadow()
+        //self.viewShadow.addShadow()
         self.imageViewProfile.makeRoundedCorner()
         
     }

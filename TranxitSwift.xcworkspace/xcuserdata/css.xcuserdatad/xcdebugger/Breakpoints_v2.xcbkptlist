@@ -38,22 +38,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TranxitSwift/SideBarTableViewController.swift"
-            timestampString = "551201240.833951"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
-            landmarkName = "push(to:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -153,46 +137,62 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TranxitSwift/LocationSelectionView.swift"
-            timestampString = "551626841.881319"
+            filePath = "TranxitSwift/ServiceSelectionView.swift"
+            timestampString = "551717552.805239"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "132"
-            endingLineNumber = "132"
-            landmarkName = "getPredications(from:)"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
+            landmarkName = "timerAction()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "User.LocationSelectionView.(getPredications in _0BB84B28C75D34B2391486672943BB7F)(from: Swift.Optional&lt;Swift.String&gt;) -&gt; ()"
-                  moduleName = "User"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/css/Documents/Jeff%20Space/Appoets/Projects/TranxitBase/TranxitSwift/LocationSelectionView.swift"
-                  timestampString = "551625332.963544"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "132"
-                  endingLineNumber = "132"
-                  offsetFromSymbolStart = "42">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Array&lt;__ObjC.GMSAutocompletePrediction&gt;) -&gt; () in User.LocationSelectionView.(getPredications in _0BB84B28C75D34B2391486672943BB7F)(from: Swift.Optional&lt;Swift.String&gt;) -&gt; ()"
-                  moduleName = "User"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/css/Documents/Jeff%20Space/Appoets/Projects/TranxitBase/TranxitSwift/LocationSelectionView.swift"
-                  timestampString = "551625332.9655271"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "133"
-                  endingLineNumber = "133"
-                  offsetFromSymbolStart = "18">
-               </Location>
-            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TranxitSwift/ServiceSelectionView.swift"
+            timestampString = "551717552.8056459"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
+            landmarkName = "resetProgressView()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TranxitSwift/ServiceSelectionView.swift"
+            timestampString = "551717552.805855"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
+            landmarkName = "startProgressing()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TranxitSwift/CouponViewController.swift"
+            timestampString = "551717916.9360631"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "buttonCouponAction(sender:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

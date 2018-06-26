@@ -284,11 +284,13 @@ extension SignUpUserTableViewController : PostViewProtocol {
         if api == .signUp, data != nil {
             
             Common.storeUserData(from: data)
+            storeInUserDefaults()
             self.presenter?.post(api: .login, data: MakeJson.login(withUser: userInfo?.email,password:userInfo?.password))
             return
             
         }else if api == .getProfile {
             Common.storeUserData(from: data)
+            storeInUserDefaults()
             self.navigationController?.present(id: Storyboard.Ids.DrawerController, animation: true)
         } else {
             loader.isHideInMainThread(true)
@@ -347,17 +349,16 @@ extension SignUpUserTableViewController : UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        guard textField == emailtext else {return}
-        textField.placeholder = Constants.string.email.localize()
         (textField as? HoshiTextField)?.borderActiveColor = .primary
+        if textField == emailtext {
+        textField.placeholder = Constants.string.email.localize() }
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        guard textField == emailtext else {return}
-        if textField.text?.count == 0 {
+        (textField as? HoshiTextField)?.borderActiveColor = .lightGray
+        if textField == emailtext, textField.text?.count == 0 {
             textField.placeholder = Constants.string.emailPlaceHolder.localize()
         }
-        (textField as? HoshiTextField)?.borderActiveColor = .lightGray
     }
     
 //    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

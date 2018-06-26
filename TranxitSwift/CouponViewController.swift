@@ -67,7 +67,7 @@ extension CouponViewController {
     
     @IBAction private func buttonCouponAction(sender : UIButton) {
         self.view.endEditingForce()
-        guard let promo = textFieldCouponCode.text, promo.isEmpty else {
+        guard let promo = textFieldCouponCode.text, !promo.isEmpty else {
             self.view.make(toast: Constants.string.enterCouponCode.localize())
             return
         }

@@ -59,7 +59,7 @@ class ServiceSelectionCollectionViewCell: UICollectionViewCell {
     func setLabelPricing() {
         self.labelPricing.text =  isSelected ? {
             if let price = self.service?.pricing?.base_price, let distance = self.service?.pricing?.estimated_fare {
-                return "\(String.removeNil(User.main.currency))\(price)/\(distance) \(distanceType.localize())"
+                return "\(String.removeNil(User.main.currency))\(price)-\(distance) \(distanceType.localize())"
             }
             return nil
             }() : nil

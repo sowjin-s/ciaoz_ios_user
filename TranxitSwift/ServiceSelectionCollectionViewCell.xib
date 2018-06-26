@@ -22,7 +22,7 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="me8-70-bOc">
-                        <rect key="frame" x="54" y="9.5" width="93" height="93"/>
+                        <rect key="frame" x="54" y="28" width="93" height="93"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YAW-a7-FC3">
                                 <rect key="frame" x="14" y="14" width="65" height="65"/>
@@ -37,10 +37,10 @@
                         </constraints>
                     </view>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Ijp-C8-e9d">
-                        <rect key="frame" x="20" y="141" width="161" height="37"/>
+                        <rect key="frame" x="20" y="150" width="161" height="28"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hNq-dB-2rl" customClass="Button" customModule="User" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="161" height="37"/>
+                                <rect key="frame" x="0.0" y="0.0" width="161" height="28"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="10"/>
                                 <inset key="titleEdgeInsets" minX="4" minY="0.0" maxX="4" maxY="0.0"/>
@@ -55,7 +55,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </stackView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="qFr-yx-sGd">
-                        <rect key="frame" x="20" y="139" width="161" height="0.0"/>
+                        <rect key="frame" x="20" y="148" width="161" height="0.0"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
@@ -65,13 +65,13 @@
             </view>
             <constraints>
                 <constraint firstItem="Ijp-C8-e9d" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="1Na-B1-kW5"/>
-                <constraint firstItem="me8-70-bOc" firstAttribute="centerY" secondItem="ZTg-uK-7eu" secondAttribute="centerY" multiplier="0.6" id="3sW-fO-utd"/>
+                <constraint firstItem="me8-70-bOc" firstAttribute="centerY" secondItem="ZTg-uK-7eu" secondAttribute="centerY" multiplier="0.8" id="3sW-fO-utd"/>
                 <constraint firstItem="Ijp-C8-e9d" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" multiplier="0.8" id="6CZ-SK-gXR"/>
                 <constraint firstItem="qFr-yx-sGd" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="EHN-vT-aft"/>
                 <constraint firstItem="Ijp-C8-e9d" firstAttribute="top" secondItem="qFr-yx-sGd" secondAttribute="bottom" constant="2" id="XRj-aM-xa1"/>
                 <constraint firstItem="qFr-yx-sGd" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" multiplier="0.8" id="ZHE-VW-lYt"/>
                 <constraint firstAttribute="bottom" secondItem="Ijp-C8-e9d" secondAttribute="bottom" constant="8" id="djf-TR-mny"/>
-                <constraint firstItem="Ijp-C8-e9d" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" multiplier="0.2" id="t6f-jh-vGd"/>
+                <constraint firstItem="Ijp-C8-e9d" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" multiplier="0.15" id="t6f-jh-vGd"/>
                 <constraint firstItem="me8-70-bOc" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="height" multiplier="0.5" id="voa-Qj-oZh"/>
                 <constraint firstItem="me8-70-bOc" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="vw0-bj-TKu"/>
                 <constraint firstItem="me8-70-bOc" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" multiplier="0.5" id="zJN-fu-tLt"/>
@@ -84,7 +84,7 @@
                 <outlet property="labelPricing" destination="qFr-yx-sGd" id="tBj-sc-sI2"/>
                 <outlet property="viewImageView" destination="me8-70-bOc" id="NP7-0H-FId"/>
             </connections>
-            <point key="canvasLocation" x="6.5" y="41"/>
+            <point key="canvasLocation" x="-51" y="63"/>
         </collectionViewCell>
     </objects>
 </document>
