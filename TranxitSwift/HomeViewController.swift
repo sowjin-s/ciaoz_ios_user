@@ -757,7 +757,6 @@
         
         func createRequest(for fare : EstimateFare, isScheduled : Bool, scheduleDate : Date?) {
             
-            self.removeRideNowView()
             self.showLoaderView()
             DispatchQueue.global(qos: .background).async {
                 
@@ -816,7 +815,6 @@
             
             DispatchQueue.main.async {
                 self.loader.isHidden = true
-                //self.removeLoaderViewAndClearMapview()
                 showAlert(message: message, okHandler: nil, fromView: self)
                 if api == .sendRequest {
                     self.removeLoaderView()

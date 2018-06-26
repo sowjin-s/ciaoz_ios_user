@@ -38,7 +38,6 @@ extension HomeViewController {
                     self.service = selectedItem
                     self.getEstimateFareFor(serviceId: id)
                 }
-                self.removeServiceView()
             }
             self.serviceSelectionView?.clipsToBounds = false
         }
@@ -58,9 +57,9 @@ extension HomeViewController {
     
     func removeServiceView() {
         
+        self.isOnBooking = false
         self.serviceSelectionView?.dismissView(onCompletion: {
             self.serviceSelectionView = nil
-            self.isOnBooking = false
         })
         
     }
@@ -94,6 +93,7 @@ extension HomeViewController {
     
     func showRideNowView(with fare : EstimateFare){
         
+        self.removeServiceView()
         if self.rideSelectionView == nil {
             print("ViewAddressOuter ", #function)
              self.loader.isHidden = true
@@ -137,7 +137,8 @@ extension HomeViewController {
     // MARK:- Show RideStatus View
     
     func showRideStatusView(with request : Request) {
-        
+       
+        self.removeRideNowView()
         self.viewAddressOuter.isHidden = true
         self.viewLocationButtons.isHidden = true
         self.loader.isHidden = true
