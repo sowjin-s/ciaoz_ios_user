@@ -64,7 +64,7 @@ struct XIB {
 //MARK:- Notification
 
 extension Notification.Name {
-   //public static let reachabilityChanged = Notification.Name("reachabilityChanged")
+   public static let providers = Notification.Name("providers")
 }
 
 

@@ -21,5 +21,5 @@ let distanceType = "miles"
 let requestCheckInterval : TimeInterval = 5
 var sosNumber = 911
 var supportNumber = "919585290750"
-var supportEmail = "demo@demo.com"
+var supportEmail = "support@tranxit.com"
 var offlineNumber = "57777"

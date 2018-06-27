@@ -61,13 +61,21 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ft7-i4-NRn">
+                        <rect key="frame" x="101" y="28" width="0.0" height="0.0"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
             </view>
             <constraints>
                 <constraint firstItem="Ijp-C8-e9d" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="1Na-B1-kW5"/>
                 <constraint firstItem="me8-70-bOc" firstAttribute="centerY" secondItem="ZTg-uK-7eu" secondAttribute="centerY" multiplier="0.8" id="3sW-fO-utd"/>
                 <constraint firstItem="Ijp-C8-e9d" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" multiplier="0.8" id="6CZ-SK-gXR"/>
+                <constraint firstItem="ft7-i4-NRn" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="7fF-ys-pJL"/>
                 <constraint firstItem="qFr-yx-sGd" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="EHN-vT-aft"/>
+                <constraint firstItem="me8-70-bOc" firstAttribute="top" secondItem="ft7-i4-NRn" secondAttribute="bottom" id="KVW-3G-fab"/>
                 <constraint firstItem="Ijp-C8-e9d" firstAttribute="top" secondItem="qFr-yx-sGd" secondAttribute="bottom" constant="2" id="XRj-aM-xa1"/>
                 <constraint firstItem="qFr-yx-sGd" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" multiplier="0.8" id="ZHE-VW-lYt"/>
                 <constraint firstAttribute="bottom" secondItem="Ijp-C8-e9d" secondAttribute="bottom" constant="8" id="djf-TR-mny"/>
@@ -81,10 +89,11 @@
             <connections>
                 <outlet property="buttonService" destination="hNq-dB-2rl" id="tz1-3l-2ls"/>
                 <outlet property="imageViewService" destination="YAW-a7-FC3" id="bjc-c4-fwA"/>
+                <outlet property="labelETA" destination="ft7-i4-NRn" id="R4h-6w-3mA"/>
                 <outlet property="labelPricing" destination="qFr-yx-sGd" id="tBj-sc-sI2"/>
                 <outlet property="viewImageView" destination="me8-70-bOc" id="NP7-0H-FId"/>
             </connections>
-            <point key="canvasLocation" x="-51" y="63"/>
+            <point key="canvasLocation" x="-51.5" y="63"/>
         </collectionViewCell>
     </objects>
 </document>

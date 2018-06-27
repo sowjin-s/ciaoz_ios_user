@@ -145,6 +145,8 @@
 		08F595E82076466300369048 /* ParallaxHeaderMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F595E52076466300369048 /* ParallaxHeaderMode.swift */; };
 		08F595E92076466300369048 /* UIScrollView+ParallaxHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F595E62076466300369048 /* UIScrollView+ParallaxHeader.swift */; };
 		08F595EA2076466300369048 /* ParallaxHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F595E72076466300369048 /* ParallaxHeader.swift */; };
+		08FA708320E3C96F009B060A /* RideNowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08FA708220E3C96F009B060A /* RideNowView.xib */; };
+		08FA708520E3C9A0009B060A /* RideNowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FA708420E3C9A0009B060A /* RideNowView.swift */; };
 		38492B362000F65E001830AD /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38492B352000F65E001830AD /* View.swift */; };
 		38492B382000F6A8001830AD /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38492B372000F6A8001830AD /* String.swift */; };
 		38492B3A2000F741001830AD /* JsonSerializing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38492B392000F741001830AD /* JsonSerializing.swift */; };
@@ -363,6 +365,8 @@
 		08F595E52076466300369048 /* ParallaxHeaderMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParallaxHeaderMode.swift; sourceTree = "<group>"; };
 		08F595E62076466300369048 /* UIScrollView+ParallaxHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+ParallaxHeader.swift"; sourceTree = "<group>"; };
 		08F595E72076466300369048 /* ParallaxHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParallaxHeader.swift; sourceTree = "<group>"; };
+		08FA708220E3C96F009B060A /* RideNowView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RideNowView.xib; sourceTree = "<group>"; };
+		08FA708420E3C9A0009B060A /* RideNowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideNowView.swift; sourceTree = "<group>"; };
 		12A5860A967AABF8D0D61024 /* Pods-UserUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UserUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-UserUITests/Pods-UserUITests.release.xcconfig"; sourceTree = "<group>"; };
 		38492B352000F65E001830AD /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		38492B372000F6A8001830AD /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -527,6 +531,7 @@
 				082F77CE20A5A14900D6474B /* ServiceSelectionView */,
 				08A39D9D20B5BB5900314935 /* Request Selection */,
 				08E9675C20D2C19F0077DB4F /* Rate View */,
+				08FA708620E3C9B3009B060A /* RideNow */,
 			);
 			name = HomePage;
 			sourceTree = "<group>";
@@ -1149,6 +1154,15 @@
 			name = Parallalex;
 			sourceTree = "<group>";
 		};
+		08FA708620E3C9B3009B060A /* RideNow */ = {
+			isa = PBXGroup;
+			children = (
+				08FA708220E3C96F009B060A /* RideNowView.xib */,
+				08FA708420E3C9A0009B060A /* RideNowView.swift */,
+			);
+			name = RideNow;
+			sourceTree = "<group>";
+		};
 		5F3758D020AEF4C96CC2AB25 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1630,6 +1644,7 @@
 				8894E22B1FE7D7980097B4B3 /* Assets.xcassets in Resources */,
 				083A59AB20A434E000D64574 /* LocationTableViewCell.xib in Resources */,
 				081E9CFD20BFFE57004C6884 /* suv.json in Resources */,
+				08FA708320E3C96F009B060A /* RideNowView.xib in Resources */,
 				0823428A20AD775A0055DDF8 /* LoaderView.xib in Resources */,
 				082F77CD20A5A13900D6474B /* ServiceSelectionView.xib in Resources */,
 				08E9675E20D2C1B80077DB4F /* RateView.xib in Resources */,
@@ -1823,6 +1838,7 @@
 				0855521520039E91002B01BC /* TextField.swift in Sources */,
 				082745E820C2A06B00C6F8F3 /* YourTripModelResponse.swift in Sources */,
 				082D1B9620933C890000B7C8 /* WalkThroughView.swift in Sources */,
+				08FA708520E3C9A0009B060A /* RideNowView.swift in Sources */,
 				083617C620B70FF9009C9658 /* HelpViewController.swift in Sources */,
 				08BF24C020BD864C003A4B96 /* Default.swift in Sources */,
 				08BE879F20DA429800876C93 /* Work+CoreDataClass.swift in Sources */,

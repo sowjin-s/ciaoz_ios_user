@@ -319,8 +319,9 @@ extension ServiceSelectionView : UICollectionViewDelegate, UICollectionViewDataS
     private func getCellFor(itemAt indexPath : IndexPath)->UICollectionViewCell{
         
         if let collectionCell = self.collectionViewService.dequeueReusableCell(withReuseIdentifier: XIB.Names.ServiceSelectionCollectionViewCell, for: indexPath) as? ServiceSelectionCollectionViewCell {
-            if datasource.count > indexPath.row {
+            if datasource.count > indexPath.row, let id = datasource[indexPath.row].id {
                 collectionCell.set(value: datasource[indexPath.row])
+                NotificationCenter.default.post(name: .providers, object: nil, userInfo: [Notification.Name.providers.rawValue: id])
             }
             collectionCell.isSelected = indexPath.row == selectedRow
             return collectionCell

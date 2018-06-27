@@ -130,6 +130,8 @@
             return marker
         }()
         
+        var markersProvider = [GMSMarker]()
+        
         var service : Service?
         var homePageHelper : HomePageHelper?
         
@@ -200,6 +202,7 @@
             self.buttonSOS.isHidden = true
             self.buttonSOS.addTarget(self, action: #selector(self.buttonSOSAction), for: .touchUpInside)
             self.setDesign()
+            NotificationCenter.default.addObserver(self, selector: #selector(self.observer(notification:)), name: .providers, object: nil)
             
       }
         
@@ -259,13 +262,23 @@
                 if self.sourceLocationDetail?.value == nil {
                     self.mapViewHelper?.getPlaceAddress(from: location.coordinate, on: { (locationDetail) in
                         self.sourceLocationDetail?.value = locationDetail
-                        self.getProviderInCurrentLocation()
                     })
                 }
                 self.currentLocation.value = location.coordinate
             })
             
         }
+        
+        // MARK:- Observer
+        
+       @objc private func observer(notification : Notification) {
+            
+            if notification.name == .providers, let serviceId = notification.userInfo?[Notification.Name.providers.rawValue] as? Int {
+                self.getProviders(by: serviceId)
+            }
+            
+        }
+        
         
         // MARK:- Get Favourite Location From Local
         
@@ -727,13 +740,13 @@
         
         // Get Providers In Current Location
         
-        private func getProviderInCurrentLocation(){
+        private func getProviders(by serviceId : Int){
             
             DispatchQueue.global(qos: .background).async {
                 
                 guard let currentLoc = self.currentLocation.value  else { return }
                 
-                let json = [Constants.string.latitude : currentLoc.latitude, Constants.string.longitude : currentLoc.longitude]
+                let json = [Constants.string.latitude : currentLoc.latitude, Constants.string.longitude : currentLoc.longitude, Constants.string.service : serviceId] as [String : Any]
                 
                 self.presenter?.get(api: .getProviders, parameters: json)
                 

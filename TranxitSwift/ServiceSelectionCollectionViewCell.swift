@@ -16,6 +16,7 @@ class ServiceSelectionCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var buttonService : UIButton!
     @IBOutlet private weak var labelPricing : UILabel!
     @IBOutlet private weak var viewImageView : UIView!
+    @IBOutlet private weak var labelETA : UILabel!
    // private var initialFrame = CGSize.init()
     private var service : Service?
     
@@ -31,6 +32,8 @@ class ServiceSelectionCollectionViewCell: UICollectionViewCell {
             self.transform = isSelected ? .init(scaleX: 1.4, y: 1.4) : .identity
             self.buttonService.setTitleColor(!self.isSelected ? .black : .secondary, for: .normal)
             self.viewImageView.borderLineWidth = isSelected ? 2 : 0
+            self.labelETA.text = self.isSelected ? service?.pricing?.time : nil
+
 //            if let image = self.service?.image {
 //                Cache.image(forUrl: image) { (image) in
 //                    let image = image == nil ? #imageLiteral(resourceName: "CarplaceHolder") : image!
@@ -54,6 +57,7 @@ class ServiceSelectionCollectionViewCell: UICollectionViewCell {
             }
         }
         self.setLabelPricing()
+
     }
     
     func setLabelPricing() {
@@ -88,6 +92,7 @@ private extension ServiceSelectionCollectionViewCell {
         
         Common.setFont(to: buttonService, size : 12)
         Common.setFont(to: labelPricing, size : 8)
+        Common.setFont(to: labelETA, size : 10)
     }
     
     
