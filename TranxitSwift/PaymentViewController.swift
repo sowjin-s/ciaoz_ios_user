@@ -15,6 +15,8 @@ class PaymentViewController: UITableViewController {
     private let tableCellId = "tableCellId"
     
     private let headers = [Constants.string.paymentMethods, Constants.string.yourCards]
+    
+    var isChangingPayment = false
    
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,10 +36,21 @@ extension PaymentViewController {
     
     private func initalLoads() {
         self.navigationController?.isNavigationBarHidden = false
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.backButtonClick))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: (self.isChangingPayment ? #imageLiteral(resourceName: "close-1") : #imageLiteral(resourceName: "back-icon")).withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.backButtonAction))
         self.navigationItem.title = Constants.string.payment.localize()
         self.setDesign()
     }
+    
+    @IBAction private func backButtonAction() {
+        
+        if isChangingPayment {
+            self.navigationController?.popOrDismiss(animation: true)
+        } else {
+            self.popOrDismiss(animation: true)
+        }
+        
+    }
+    
     
     // MARK:- Set Design
     

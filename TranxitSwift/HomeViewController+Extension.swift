@@ -15,7 +15,60 @@ import PopupDialog
 
 extension HomeViewController {
     
-    // MARK:- Show Service View
+    
+    // MARK:- Show Ride Now View
+    
+    func showRideNowView(with source : [Service]) {
+        
+        guard let sourceLocation = self.sourceLocationDetail?.value, let destinationLocation = self.destinationLocationDetail else { return }
+        
+        if self.rideNowView == nil {
+            
+            self.rideNowView = Bundle.main.loadNibNamed(XIB.Names.RideNowView, owner: self, options: [:])?.first as? RideNowView
+            self.rideNowView?.frame = CGRect(origin: CGPoint(x: 0, y: self.view.frame.height-self.rideNowView!.frame.height), size: CGSize(width: self.view.frame.width, height: self.rideNowView!.frame.height))
+            self.rideNowView?.clipsToBounds = false
+            self.rideNowView?.show(with: .bottom, completion: nil)
+            self.view.addSubview(self.rideNowView!)
+            self.isOnBooking = true
+            
+            self.rideNowView?.onClickRideNow = { service in
+                if service != nil {
+                    self.createRequest(for: service!, isScheduled: false, scheduleDate: nil)
+                }
+            }
+            self.rideNowView?.onClickSchedule = { service in
+                self.schedulePickerView(on: { (date) in
+                    if service != nil {
+                        self.createRequest(for: service!, isScheduled: true, scheduleDate: date)
+                    }
+                })
+            }
+            self.rideNowView?.onClickChangePayment = {
+                if let vc = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.Ids.PaymentViewController) as? PaymentViewController{
+                    vc.isChangingPayment = true
+                    let navigation = UINavigationController(rootViewController: vc)
+                    self.present(navigation, animated: true, completion: nil)
+                }
+            }
+            
+        }
+        self.rideNowView?.set(source: source)
+        self.rideNowView?.setAddress(source: sourceLocation.coordinate, destination: destinationLocation.coordinate)
+    }
+    
+    // MARK:- Remove RideNowView
+    
+    func removeRideNow() {
+        
+        self.isOnBooking = false
+        self.rideNowView?.dismissView(onCompletion: {
+            self.rideNowView = nil
+        })
+        
+    }
+    
+    
+ /*   // MARK:- Show Service View
     
     func showServiceSelectionView(with source : [Service]) {
         
@@ -62,7 +115,7 @@ extension HomeViewController {
             self.serviceSelectionView = nil
         })
         
-    }
+    } */
     
     // MARK:- Temporarily Hide Service View
     
@@ -70,26 +123,28 @@ extension HomeViewController {
         
         UIView.animate(withDuration: 0.2) {
             
-            self.serviceSelectionView?.frame.origin.y = (self.view.frame.height-(isHide ? 0 : self.serviceSelectionView?.frame.height ?? 0))
-            self.rideSelectionView?.frame.origin.y = (self.view.frame.height-(isHide ? 0 : self.rideSelectionView?.frame.height ?? 0))
+           /*self.serviceSelectionView?.frame.origin.y = (self.view.frame.height-(isHide ? 0 : self.serviceSelectionView?.frame.height ?? 0))
+            self.rideSelectionView?.frame.origin.y = (self.view.frame.height-(isHide ? 0 : self.rideSelectionView?.frame.height ?? 0)) */
             self.rideStatusView?.frame.origin.y = (self.view.frame.height-(isHide ? 0 : self.rideStatusView?.frame.height ?? 0))
             self.invoiceView?.frame.origin.y = (self.view.frame.height-(isHide ? 0 : self.invoiceView?.frame.height ?? 0))
             self.ratingView?.frame.origin.y = (self.view.frame.height-(isHide ? 0 : self.ratingView?.frame.height ?? 0))
+            self.rideNowView?.frame.origin.y = (self.view.frame.height-(isHide ? 0 : self.rideNowView?.frame.height ?? 0))
+
             
-            self.serviceSelectionView?.alpha = isHide ? 0 : 1
+           // self.serviceSelectionView?.alpha = isHide ? 0 : 1
             self.viewAddressOuter.alpha = isHide ? 0 : 1
             self.viewLocationButtons.alpha = isHide ? 0 : 1
-            self.rideSelectionView?.alpha = isHide ? 0 : 1
+           // self.rideSelectionView?.alpha = isHide ? 0 : 1
             self.rideStatusView?.alpha = isHide ? 0 : 1
             self.invoiceView?.alpha = isHide ? 0 : 1
             self.ratingView?.alpha = isHide ? 0 : 1
-            
+            self.rideNowView?.alpha = isHide ? 0 : 1
         }
         
     }
     
     
-    // MARK:- Show Ride Now view
+ /*   // MARK:- Show Ride Now view
     
     func showRideNowView(with fare : EstimateFare){
         
@@ -131,14 +186,14 @@ extension HomeViewController {
             self.isOnBooking = false
             self.loader.isHidden = true
         })
-    }
+    } */
     
     
     // MARK:- Show RideStatus View
     
     func showRideStatusView(with request : Request) {
        
-        self.removeRideNowView()
+        self.removeRideNow()
         self.viewAddressOuter.isHidden = true
         self.viewLocationButtons.isHidden = true
         self.loader.isHidden = true
@@ -372,26 +427,22 @@ extension HomeViewController {
         
         if ![RideStatus.searching].contains(status) {
             self.removeLoaderView()
-            
         }
         if ![RideStatus.started, .accepted, .arrived, .pickedup].contains(status) {
             self.removeRideStatusView()
         }
         if ![RideStatus.completed].contains(status) {
             self.removeRatingView()
-            
         }
         if ![RideStatus.dropped].contains(status) {
             self.removeInvoiceView()
-            
         }
         if [RideStatus.none, .cancelled].contains(status) {
             self.currentRequestId = 0 // Remove Current Request
             
         }
         
-        self.removeServiceView()
-        self.removeRideNowView()
+        self.removeRideNow()
         
     }
 
@@ -430,6 +481,8 @@ extension HomeViewController {
             self.cancelRequest()
             self.removeLoaderView()
             self.clearMapview()
+            self.removeRideNow()
+            self.isOnBooking = false
         }
         sureButton.titleColor = .red
         alert.addButtons([cancelButton,sureButton])

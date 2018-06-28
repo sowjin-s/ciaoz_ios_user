@@ -100,13 +100,13 @@
         
         var currentLocation = Bind<LocationCoordinate>(defaultMapLocation)
         
-        var serviceSelectionView : ServiceSelectionView?
-        var rideSelectionView : RequestSelectionView?
+        //var serviceSelectionView : ServiceSelectionView?
+        // var rideSelectionView : RequestSelectionView?
         var requestLoaderView : LoaderView?
         var rideStatusView : RideStatusView?
         var invoiceView : InvoiceView?
         var ratingView : RatingView?
-        
+        var rideNowView : RideNowView?
         
         lazy var loader  : UIView = {
             return createActivityIndicator(self.view)
@@ -132,7 +132,6 @@
         
         var markersProvider = [GMSMarker]()
         
-        var service : Service?
         var homePageHelper : HomePageHelper?
         
         override func viewDidLoad() {
@@ -273,8 +272,9 @@
         
        @objc private func observer(notification : Notification) {
             
-            if notification.name == .providers, let serviceId = notification.userInfo?[Notification.Name.providers.rawValue] as? Int {
-                self.getProviders(by: serviceId)
+            if notification.name == .providers, let serviceArray = notification.userInfo?[Notification.Name.providers.rawValue] as? [Service] {
+                showProviderInCurrentLocation(with: serviceArray)
+                
             }
             
         }
@@ -738,21 +738,7 @@
             }
         }
         
-        // Get Providers In Current Location
-        
-        private func getProviders(by serviceId : Int){
-            
-            DispatchQueue.global(qos: .background).async {
-                
-                guard let currentLoc = self.currentLocation.value  else { return }
-                
-                let json = [Constants.string.latitude : currentLoc.latitude, Constants.string.longitude : currentLoc.longitude, Constants.string.service : serviceId] as [String : Any]
-                
-                self.presenter?.get(api: .getProviders, parameters: json)
-                
-            }
-            
-        }
+      
         
         // Cancel Request
         
@@ -768,7 +754,7 @@
         
         // Create Request
         
-        func createRequest(for fare : EstimateFare, isScheduled : Bool, scheduleDate : Date?) {
+        func createRequest(for service : Service, isScheduled : Bool, scheduleDate : Date?) {
             
             self.showLoaderView()
             DispatchQueue.global(qos: .background).async {
@@ -780,10 +766,10 @@
                 request.s_address = self.sourceLocationDetail?.value?.address
                 request.s_latitude = self.sourceLocationDetail?.value?.coordinate.latitude
                 request.s_longitude = self.sourceLocationDetail?.value?.coordinate.longitude
-                request.service_type = self.service?.id
+                request.service_type = service.id
                 request.payment_mode = .CASH
-                request.distance = "\(fare.distance ?? 0)"
-                request.use_wallet = fare.useWallet
+                request.distance = "\(service.pricing?.distance ?? 0)"
+                request.use_wallet = service.pricing?.useWallet
                 
                 if isScheduled {
                     if let dateString = Formatter.shared.getString(from: scheduleDate, format: DateFormat.list.ddMMyyyyhhmma) {
@@ -803,7 +789,7 @@
             
             guard isAdd else { return }
             
-            var service = Service() // Save Favourite location in Server
+            let service = Service() // Save Favourite location in Server
             service.type = CoreDataEntity.other.rawValue.lowercased()
             if view == self.viewFavouriteSource, let address = self.sourceLocationDetail?.value {
                 service.address = address.address
@@ -837,29 +823,29 @@
         
         func getServiceList(api: Base, data: [Service]) {
             
-            if api == .getProviders {  // Show Providers in Current Location
-                DispatchQueue.main.async {
-                    self.showProviderInCurrentLocation(with: data)
-                    //TODO:- Map Load to be fixed
-                }
-                return
-            }
+//            if api == .getProviders {  // Show Providers in Current Location
+//                DispatchQueue.main.async {
+//                    self.showProviderInCurrentLocation(with: data)
+//                }
+//                return
+//            }
             DispatchQueue.main.async {  // Show Services
-                self.showServiceSelectionView(with: data)
+               // self.showServiceSelectionView(with: data)
+                self.showRideNowView(with: data)
             }
             
         }
         
-        func getEstimateFare(api: Base, data: EstimateFare?) {
-            
-            if data != nil {
-                DispatchQueue.main.async {
-                    var estimateFare = data
-                    estimateFare?.model = self.service?.name
-                    self.showRideNowView(with: estimateFare!)
-                }
-            }
-        }
+//        func getEstimateFare(api: Base, data: EstimateFare?) {
+//
+//            if data != nil {
+//                DispatchQueue.main.async {
+//                    var estimateFare = data
+//                    estimateFare?.model = self.service?.name
+//                    //self.showRideNowView(with: estimateFare!)
+//                }
+//            }
+//        }
         
         func getRequest(api: Base, data: Request?) {
             

@@ -197,7 +197,7 @@ struct Constants {
     let noThanks = "No thanks, I'll try later"
     let iNeedCab = "I need a cab @"
     let donotEditMessage = "(Please donot edit this SMS. Standard SMS charges of Rs.3 per SMS may apply)"
-    
+    let pleaseTryAgain = "Please try again"
 }
 
 //Defaults Keys
@@ -216,6 +216,7 @@ struct Keys {
     let currency = "currency"
     let language = "language"
     let refreshToken = "refreshToken"
+    let wallet = "wallet"
 }
 
 //ENUM TRIP TYPE

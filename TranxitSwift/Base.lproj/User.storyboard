@@ -117,7 +117,7 @@
                                 <rect key="frame" x="328.66666666666669" y="650.66666666666663" width="55.333333333333314" height="55.333333333333371"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="forward" translatesAutoresizingMaskIntoConstraints="NO" id="jRi-9Y-bIN">
-                                        <rect key="frame" x="13.666666666666629" y="13.666666666666742" width="28" height="28"/>
+                                        <rect key="frame" x="14.000000000000002" y="14.000000000000002" width="27.666666666666671" height="27.666666666666671"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -298,7 +298,7 @@
                                 <rect key="frame" x="328.66666666666669" y="650.66666666666663" width="55.333333333333314" height="55.333333333333371"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="forward" translatesAutoresizingMaskIntoConstraints="NO" id="hch-Uo-I4m">
-                                        <rect key="frame" x="13.666666666666629" y="13.666666666666742" width="28" height="28"/>
+                                        <rect key="frame" x="14.000000000000002" y="14.000000000000002" width="27.666666666666671" height="27.666666666666671"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -386,7 +386,7 @@
                                 <rect key="frame" x="328.66666666666669" y="650.66666666666663" width="55.333333333333314" height="55.333333333333371"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="forward" translatesAutoresizingMaskIntoConstraints="NO" id="1qg-HG-2T2">
-                                        <rect key="frame" x="13.666666666666629" y="13.666666666666742" width="28" height="28"/>
+                                        <rect key="frame" x="14.000000000000002" y="14.000000000000002" width="27.666666666666671" height="27.666666666666671"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1164,7 +1164,7 @@
                                                     <rect key="frame" x="32" y="34" width="352" height="61"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yXq-5E-CWV">
-                                                            <rect key="frame" x="0.0" y="0.0" width="101.66666666666667" height="61"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="101.33333333333333" height="61"/>
                                                             <subviews>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle-shape-outline" translatesAutoresizingMaskIntoConstraints="NO" id="fZ1-if-7MY">
                                                                     <rect key="frame" x="3" y="18" width="24" height="24"/>
@@ -1174,7 +1174,7 @@
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Business" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CDE-08-LWI">
-                                                                    <rect key="frame" x="31.999999999999996" y="20" width="61.666666666666657" height="21"/>
+                                                                    <rect key="frame" x="32" y="20" width="61.333333333333343" height="21"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="21" id="KmG-5Q-j0W"/>
                                                                     </constraints>
@@ -1193,7 +1193,7 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uf7-D9-pne">
-                                                            <rect key="frame" x="101.66666666666664" y="0.0" width="250.33333333333337" height="61"/>
+                                                            <rect key="frame" x="101.33333333333336" y="0.0" width="250.66666666666663" height="61"/>
                                                             <subviews>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle-shape-outline" translatesAutoresizingMaskIntoConstraints="NO" id="bUc-9b-k3Y">
                                                                     <rect key="frame" x="3" y="18" width="24" height="24"/>
@@ -1320,7 +1320,7 @@
                                 <rect key="frame" x="328.66666666666669" y="650.66666666666663" width="55.333333333333314" height="55.333333333333371"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="forward" translatesAutoresizingMaskIntoConstraints="NO" id="Y0T-Qn-kn5">
-                                        <rect key="frame" x="13.666666666666629" y="13.666666666666742" width="28" height="28"/>
+                                        <rect key="frame" x="14.000000000000002" y="14.000000000000002" width="27.666666666666671" height="27.666666666666671"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

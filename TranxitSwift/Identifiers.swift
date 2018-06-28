@@ -56,6 +56,7 @@ struct XIB {
     let YourTripCell = "YourTripCell"
     let PassbookTableViewCell = "PassbookTableViewCell"
     let RateView = "RateView"
+    let RideNowView = "RideNowView"
 }
 
 

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Service : JSONSerializable {
+class Service : JSONSerializable {
     
     var id : Int?
     var name : String?

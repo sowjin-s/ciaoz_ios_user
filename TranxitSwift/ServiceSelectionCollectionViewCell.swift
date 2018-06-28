@@ -24,26 +24,13 @@ class ServiceSelectionCollectionViewCell: UICollectionViewCell {
         
         didSet{
             
-            
-            // self.imageViewHeightConstant.constant = self.isSelected ? self.initialFrame.height/2 : 0
-            //self.imageViewWidthConstant.constant = self.isSelected ? self.initialFrame.width/2 : 0
-           // self.viewImageView.cornerRadius = isSelected ? (self.viewImageView.frame.width/2) : 0
             self.imageViewService.layer.masksToBounds = self.isSelected
-            self.transform = isSelected ? .init(scaleX: 1.4, y: 1.4) : .identity
+            self.transform = isSelected ? .init(scaleX: 1.2, y: 1.2) : .identity
             self.buttonService.setTitleColor(!self.isSelected ? .black : .secondary, for: .normal)
             self.viewImageView.borderLineWidth = isSelected ? 2 : 0
             self.labelETA.text = self.isSelected ? service?.pricing?.time : nil
-
-//            if let image = self.service?.image {
-//                Cache.image(forUrl: image) { (image) in
-//                    let image = image == nil ? #imageLiteral(resourceName: "CarplaceHolder") : image!
-//                        DispatchQueue.main.async {
-//                            self.imageViewService.image = image.imageWithInsets(insetDimen: self.isSelected ? 30 : 0)
-//                    }
-//                }
-//            }
+            self.viewImageView.backgroundColor = self.isSelected ? UIColor.secondary : .clear
             self.setLabelPricing()
-            
         }
     }
     
@@ -91,7 +78,7 @@ private extension ServiceSelectionCollectionViewCell {
     private func setDesign() {
         
         Common.setFont(to: buttonService, size : 12)
-        Common.setFont(to: labelPricing, size : 8)
+        Common.setFont(to: labelPricing, size : 10)
         Common.setFont(to: labelETA, size : 10)
     }
     

@@ -52,7 +52,7 @@ extension RateView {
     private func setDesign() {
         
         Common.setFont(to: labelTitle, isTitle: true)
-        Common.setFont(to: labelServiceName)
+        Common.setFont(to: labelServiceName, isTitle: true)
         Common.setFont(to: labelBaseFare)
         Common.setFont(to: labelBaseFareString)
         Common.setFont(to: labelFare)
@@ -92,8 +92,8 @@ extension RateView {
         self.labelBaseFare.text = String.removeNil(User.main.currency)+"\(values?.pricing?.base_price ?? 0)"
         self.labelFare.text = String.removeNil(User.main.currency)+"\(values?.pricing?.estimated_fare ?? 0)"
         self.labelFareType.text = Constants.string.distance.localize()
-        self.labelCapacity.text = "\(values?.capacity ?? 0)"
-        
+        self.labelCapacity.text = "1 - \(values?.capacity ?? 0)"
+        self.labelServiceName.text = values?.name?.uppercased()
         
     }
     

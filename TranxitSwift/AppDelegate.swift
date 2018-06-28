@@ -72,7 +72,7 @@ extension AppDelegate {
         UINavigationBar.appearance().tintColor = .darkGray
         var attributes = [NSAttributedStringKey : Any]()
         attributes.updateValue(UIColor.black, forKey: .foregroundColor)
-        attributes.updateValue(UIFont(name: FontCustom.avenier_Medium.rawValue, size: 14.0)!, forKey : NSAttributedStringKey.font)
+        attributes.updateValue(UIFont(name: FontCustom.avenier_Heavy.rawValue, size: 16.0)!, forKey : NSAttributedStringKey.font)
         UINavigationBar.appearance().titleTextAttributes = attributes
         attributes.updateValue(UIFont(name:FontCustom.avenier_Medium.rawValue, size: 18.0)!, forKey : NSAttributedStringKey.font)
         if #available(iOS 11.0, *) {

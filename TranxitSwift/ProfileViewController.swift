@@ -300,7 +300,7 @@ extension ProfileViewController : PostViewProtocol {
         DispatchQueue.main.async {
             self.loader.isHidden = true
             self.setProfile()
-            if api == .getProfile {
+            if api == .updateProfile {
                 UIApplication.shared.keyWindow?.make(toast: Constants.string.profileUpdated.localize())
             }
         }

@@ -233,7 +233,6 @@ extension ServiceSelectionView {
         }
         self.resetProgressView()
         self.startProgressing()
-        
     }
     
     private func addRateView() {

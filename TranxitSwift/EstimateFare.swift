@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct EstimateFare : JSONSerializable {
+class EstimateFare : JSONSerializable {
     
     var estimated_fare : Float?
     var distance : Float?
@@ -19,6 +19,7 @@ struct EstimateFare : JSONSerializable {
     var wallet_balance : Int?
     var useWallet : Int?
     var base_price : Int?
+    var service_type : Int?
 }
 
 

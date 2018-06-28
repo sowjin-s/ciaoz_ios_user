@@ -22,8 +22,9 @@ class User : NSObject, NSCoding, JSONSerializable {
     var mobile : String?
     var currency : String?
     var refreshToken : String?
+    var wallet_balance : Int?
     
-    init(id : Int?, accessToken : String?, firstName : String?, lastName : String?, mobile : String?, email : String?, currency : String?, picture : String?, refreshToken : String?){
+    init(id : Int?, accessToken : String?, firstName : String?, lastName : String?, mobile : String?, email : String?, currency : String?, picture : String?, refreshToken : String?, walletBalance : Int?){
                 
         self.id = id
         self.accessToken = accessToken
@@ -34,11 +35,12 @@ class User : NSObject, NSCoding, JSONSerializable {
         self.currency = currency
         self.picture = picture
         self.refreshToken = refreshToken
+        self.wallet_balance = walletBalance
     }
     
     convenience
     override init(){
-        self.init(id: nil, accessToken: nil, firstName : nil, lastName : nil, mobile : nil, email : nil, currency : nil, picture : nil, refreshToken : nil)
+        self.init(id: nil, accessToken: nil, firstName : nil, lastName : nil, mobile : nil, email : nil, currency : nil, picture : nil, refreshToken : nil, walletBalance : nil)
     }
     
     
@@ -53,8 +55,8 @@ class User : NSObject, NSCoding, JSONSerializable {
         let currency = aDecoder.decodeObject(forKey: Keys.list.currency) as? String
         let picture = aDecoder.decodeObject(forKey: Keys.list.picture) as? String
         let refreshToken = aDecoder.decodeObject(forKey: Keys.list.refreshToken) as? String
-        
-        self.init(id: id, accessToken : accessToken, firstName : firstName, lastName : lastName, mobile : mobile, email: email, currency : currency, picture : picture, refreshToken : refreshToken)
+        let walletBalance = aDecoder.decodeObject(forKey: Keys.list.wallet) as? Int
+        self.init(id: id, accessToken : accessToken, firstName : firstName, lastName : lastName, mobile : mobile, email: email, currency : currency, picture : picture, refreshToken : refreshToken, walletBalance : walletBalance)
         
     }
     
@@ -70,6 +72,8 @@ class User : NSObject, NSCoding, JSONSerializable {
         aCoder.encode(self.currency, forKey: Keys.list.currency)
         aCoder.encode(self.picture, forKey: Keys.list.picture)
         aCoder.encode(self.refreshToken, forKey: Keys.list.refreshToken)
+        aCoder.encode(self.wallet_balance, forKey: Keys.list.wallet)
+
     }
     
     

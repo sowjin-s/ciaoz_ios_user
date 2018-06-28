@@ -81,6 +81,7 @@ class Common {
         User.main.mobile = profile?.mobile
         User.main.currency = profile?.currency
         User.main.picture = profile?.picture
+        User.main.wallet_balance = profile?.wallet_balance
     }
     
     // MARK:- Make Call

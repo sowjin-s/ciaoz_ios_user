@@ -19,6 +19,7 @@ class Profile : JSONSerializable {
     var device_token : String?
     var access_token : String?
     var currency : String?
+    var wallet_balance : Int?
     
     
     required init(from decoder: Decoder) throws {
