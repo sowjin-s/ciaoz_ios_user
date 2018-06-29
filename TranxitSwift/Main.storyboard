@@ -469,6 +469,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="buttonSOS" destination="VUc-3z-HrO" id="vpg-fS-eSD"/>
+                        <outlet property="constraint" destination="1VX-WP-XOw" id="l8p-Pq-txf"/>
                         <outlet property="imageViewFavouriteDestination" destination="UYh-Mn-F8z" id="BJP-j0-fCG"/>
                         <outlet property="imageViewFavouriteSource" destination="Uzq-BP-cnD" id="zx3-3w-2fw"/>
                         <outlet property="imageViewMarkerCenter" destination="eF8-Hp-TcZ" id="sc8-0r-kyX"/>

@@ -37,8 +37,7 @@ enum Transition {
 extension UIView {
     
     
-    func show(with transition : Transition, duration : CFTimeInterval = 0.5, completion : (()->())?){
-        
+    func show(with transition : Transition, duration : CFTimeInterval = 0.5, completion : (()->())?) {
         
         let animation = CATransition()
         animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)

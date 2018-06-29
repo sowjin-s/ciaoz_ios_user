@@ -50,7 +50,6 @@ extension HomeViewController {
                     self.present(navigation, animated: true, completion: nil)
                 }
             }
-            
         }
         self.rideNowView?.set(source: source)
         self.rideNowView?.setAddress(source: sourceLocation.coordinate, destination: destinationLocation.coordinate)
@@ -68,54 +67,54 @@ extension HomeViewController {
     }
     
     
- /*   // MARK:- Show Service View
-    
-    func showServiceSelectionView(with source : [Service]) {
-        
-        
-        if self.serviceSelectionView == nil {
-            
-            self.serviceSelectionView = Bundle.main.loadNibNamed(XIB.Names.ServiceSelectionView, owner: self, options: [:])?.first as? ServiceSelectionView
-            self.serviceSelectionView?.frame = CGRect(origin: CGPoint(x: 0, y: self.view.frame.height-self.serviceSelectionView!.frame.height), size: CGSize(width: self.view.frame.width, height: self.serviceSelectionView!.frame.height))
-            self.serviceSelectionView?.buttonMore.addTarget(self, action: #selector(self.buttonMoreServiceAction(sender:)), for: .touchUpInside)
-            self.serviceSelectionView?.buttonService.addTarget(self, action: #selector(self.buttonMoreServiceAction(sender:)), for: .touchUpInside)
-            self.serviceSelectionView?.show(with: .bottom, completion: nil)
-            self.view.addSubview(self.serviceSelectionView!)
-            self.isOnBooking = true
-            if let source = self.sourceLocationDetail?.value?.coordinate, let destination = self.destinationLocationDetail?.coordinate {
-                self.serviceSelectionView?.setAddress(source: source, destination: destination)
-            }
-            self.serviceSelectionView?.onClickPricing = { selectedItem in
-                if let id = selectedItem?.id {
-                    self.loader.isHidden = false
-                    self.service = selectedItem
-                    self.getEstimateFareFor(serviceId: id)
-                }
-            }
-            self.serviceSelectionView?.clipsToBounds = false
-        }
-        
-        self.serviceSelectionView?.set(source: source)
-    }
-    
-    // MARK:- Service View Button More and Service Action
-    
-    @IBAction private func buttonMoreServiceAction(sender : UIButton) {
-        
-        self.serviceSelectionView?.isServiceSelected = sender == self.serviceSelectionView?.buttonService
-        
-    }
-    
-    // MARK:- Remove Service View  
-    
-    func removeServiceView() {
-        
-        self.isOnBooking = false
-        self.serviceSelectionView?.dismissView(onCompletion: {
-            self.serviceSelectionView = nil
-        })
-        
-    } */
+    /*   // MARK:- Show Service View
+     
+     func showServiceSelectionView(with source : [Service]) {
+     
+     
+     if self.serviceSelectionView == nil {
+     
+     self.serviceSelectionView = Bundle.main.loadNibNamed(XIB.Names.ServiceSelectionView, owner: self, options: [:])?.first as? ServiceSelectionView
+     self.serviceSelectionView?.frame = CGRect(origin: CGPoint(x: 0, y: self.view.frame.height-self.serviceSelectionView!.frame.height), size: CGSize(width: self.view.frame.width, height: self.serviceSelectionView!.frame.height))
+     self.serviceSelectionView?.buttonMore.addTarget(self, action: #selector(self.buttonMoreServiceAction(sender:)), for: .touchUpInside)
+     self.serviceSelectionView?.buttonService.addTarget(self, action: #selector(self.buttonMoreServiceAction(sender:)), for: .touchUpInside)
+     self.serviceSelectionView?.show(with: .bottom, completion: nil)
+     self.view.addSubview(self.serviceSelectionView!)
+     self.isOnBooking = true
+     if let source = self.sourceLocationDetail?.value?.coordinate, let destination = self.destinationLocationDetail?.coordinate {
+     self.serviceSelectionView?.setAddress(source: source, destination: destination)
+     }
+     self.serviceSelectionView?.onClickPricing = { selectedItem in
+     if let id = selectedItem?.id {
+     self.loader.isHidden = false
+     self.service = selectedItem
+     self.getEstimateFareFor(serviceId: id)
+     }
+     }
+     self.serviceSelectionView?.clipsToBounds = false
+     }
+     
+     self.serviceSelectionView?.set(source: source)
+     }
+     
+     // MARK:- Service View Button More and Service Action
+     
+     @IBAction private func buttonMoreServiceAction(sender : UIButton) {
+     
+     self.serviceSelectionView?.isServiceSelected = sender == self.serviceSelectionView?.buttonService
+     
+     }
+     
+     // MARK:- Remove Service View
+     
+     func removeServiceView() {
+     
+     self.isOnBooking = false
+     self.serviceSelectionView?.dismissView(onCompletion: {
+     self.serviceSelectionView = nil
+     })
+     
+     } */
     
     // MARK:- Temporarily Hide Service View
     
@@ -123,18 +122,17 @@ extension HomeViewController {
         
         UIView.animate(withDuration: 0.2) {
             
-           /*self.serviceSelectionView?.frame.origin.y = (self.view.frame.height-(isHide ? 0 : self.serviceSelectionView?.frame.height ?? 0))
-            self.rideSelectionView?.frame.origin.y = (self.view.frame.height-(isHide ? 0 : self.rideSelectionView?.frame.height ?? 0)) */
+            
             self.rideStatusView?.frame.origin.y = (self.view.frame.height-(isHide ? 0 : self.rideStatusView?.frame.height ?? 0))
             self.invoiceView?.frame.origin.y = (self.view.frame.height-(isHide ? 0 : self.invoiceView?.frame.height ?? 0))
-            self.ratingView?.frame.origin.y = (self.view.frame.height-(isHide ? 0 : self.ratingView?.frame.height ?? 0))
+            //self.ratingView?.frame.origin.y = (self.view.frame.height-(isHide ? 0 : self.ratingView?.frame.height ?? 0))
             self.rideNowView?.frame.origin.y = (self.view.frame.height-(isHide ? 0 : self.rideNowView?.frame.height ?? 0))
-
             
-           // self.serviceSelectionView?.alpha = isHide ? 0 : 1
+            
+            // self.serviceSelectionView?.alpha = isHide ? 0 : 1
             self.viewAddressOuter.alpha = isHide ? 0 : 1
             self.viewLocationButtons.alpha = isHide ? 0 : 1
-           // self.rideSelectionView?.alpha = isHide ? 0 : 1
+            // self.rideSelectionView?.alpha = isHide ? 0 : 1
             self.rideStatusView?.alpha = isHide ? 0 : 1
             self.invoiceView?.alpha = isHide ? 0 : 1
             self.ratingView?.alpha = isHide ? 0 : 1
@@ -144,55 +142,55 @@ extension HomeViewController {
     }
     
     
- /*   // MARK:- Show Ride Now view
-    
-    func showRideNowView(with fare : EstimateFare){
-        
-        self.removeServiceView()
-        if self.rideSelectionView == nil {
-            print("ViewAddressOuter ", #function)
-             self.loader.isHidden = true
-            self.rideSelectionView = Bundle.main.loadNibNamed(XIB.Names.RequestSelectionView, owner: self, options: [:])?.first as? RequestSelectionView
-            self.rideSelectionView?.frame = CGRect(x: 0, y: self.view.frame.height-self.rideSelectionView!.bounds.height, width: self.view.frame.width, height: self.rideSelectionView!.frame.height)
-            self.rideSelectionView?.show(with: .bottom, completion: nil)
-            self.rideSelectionView?.rideNowAction = { estimateFare in
-                if estimateFare != nil {
-                    self.createRequest(for: estimateFare!, isScheduled: false, scheduleDate: nil)
-                }
-            }
-            self.rideSelectionView?.scheduleAction = { estimateFare in
-                self.schedulePickerView(on: { (date) in
-                    print(date)
-                    if estimateFare != nil {
-                        self.createRequest(for: estimateFare!, isScheduled: true, scheduleDate: date)
-                    }
-                })
-            }
-            self.isOnBooking = true
-            self.view.addSubview(self.rideSelectionView!)
-        }
-        
-        self.rideSelectionView?.setValues(values: fare)
-        
-    }
-    
-    
-    // MARK:- Remove RideNow View
-    
-    func removeRideNowView(){
-        
-        self.rideSelectionView?.dismissView(onCompletion: {
-            self.rideSelectionView = nil
-            self.isOnBooking = false
-            self.loader.isHidden = true
-        })
-    } */
+    /*   // MARK:- Show Ride Now view
+     s
+     func showRideNowView(with fare : EstimateFare){
+     
+     self.removeServiceView()
+     if self.rideSelectionView == nil {
+     print("ViewAddressOuter ", #function)
+     self.loader.isHidden = true
+     self.rideSelectionView = Bundle.main.loadNibNamed(XIB.Names.RequestSelectionView, owner: self, options: [:])?.first as? RequestSelectionView
+     self.rideSelectionView?.frame = CGRect(x: 0, y: self.view.frame.height-self.rideSelectionView!.bounds.height, width: self.view.frame.width, height: self.rideSelectionView!.frame.height)
+     self.rideSelectionView?.show(with: .bottom, completion: nil)
+     self.rideSelectionView?.rideNowAction = { estimateFare in
+     if estimateFare != nil {
+     self.createRequest(for: estimateFare!, isScheduled: false, scheduleDate: nil)
+     }
+     }
+     self.rideSelectionView?.scheduleAction = { estimateFare in
+     self.schedulePickerView(on: { (date) in
+     print(date)
+     if estimateFare != nil {
+     self.createRequest(for: estimateFare!, isScheduled: true, scheduleDate: date)
+     }
+     })
+     }
+     self.isOnBooking = true
+     self.view.addSubview(self.rideSelectionView!)
+     }
+     
+     self.rideSelectionView?.setValues(values: fare)
+     
+     }
+     
+     
+     // MARK:- Remove RideNow View
+     
+     func removeRideNowView(){
+     
+     self.rideSelectionView?.dismissView(onCompletion: {
+     self.rideSelectionView = nil
+     self.isOnBooking = false
+     self.loader.isHidden = true
+     })
+     } */
     
     
     // MARK:- Show RideStatus View
     
     func showRideStatusView(with request : Request) {
-       
+        
         self.removeRideNow()
         self.viewAddressOuter.isHidden = true
         self.viewLocationButtons.isHidden = true
@@ -217,7 +215,7 @@ extension HomeViewController {
         rideStatusView?.onClickShare = {
             self.shareRide()
         }
-
+        
     }
     
     
@@ -276,9 +274,10 @@ extension HomeViewController {
         guard self.ratingView == nil else { return }
         
         if let rating = Bundle.main.loadNibNamed(XIB.Names.RatingView, owner: self, options: [:])?.first as? RatingView {
+            NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShowRateView(info:)), name: .UIKeyboardWillShow, object: rating)
+            NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHideRateView(info:)), name: .UIKeyboardWillHide, object: rating)
             self.viewAddressOuter.isHidden = true
             self.viewLocationButtons.isHidden = true
-            print("ViewAddressOuter ", #function)
             rating.frame = CGRect(origin: CGPoint(x: 0, y: self.view.frame.height-rating.frame.height), size: CGSize(width: self.view.frame.width, height: rating.frame.height))
             ratingView = rating
             self.view.addSubview(ratingView!)
@@ -307,9 +306,31 @@ extension HomeViewController {
             self.ratingView = nil
             self.viewAddressOuter.isHidden = false
             self.viewLocationButtons.isHidden = false
-            print("ViewAddressOuter ", #function)
             self.clearMapview()
+            NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
+            NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
         })
+    }
+    
+    //MARK:- Keyboard will show
+    
+    @IBAction func keyboardWillShowRateView(info : NSNotification){
+        
+        guard let keyboard = (info.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else{
+            return
+        }
+       self.ratingView?.frame.origin.y =  keyboard.origin.y-(self.ratingView?.frame.height ?? 0 )
+    }
+    
+    
+    //MARK:- Keyboard will hide
+    
+    @IBAction func keyboardWillHideRateView(info : NSNotification){
+        
+        guard let keyboard = (info.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else{
+            return
+        }
+         self.ratingView?.frame.origin.y += keyboard.size.height
         
     }
     
@@ -323,10 +344,10 @@ extension HomeViewController {
         
         for locationData in data where locationData.longitude != nil && locationData.latitude != nil {
             
-//            let lottieView = LottieView(name: "suv")
-//            lottieView.frame = CGRect(origin: .zero, size: CGSize(width: 50, height: 50))
-//            lottieView.loopAnimation = true;
-//            lottieView.play()
+            //            let lottieView = LottieView(name: "suv")
+            //            lottieView.frame = CGRect(origin: .zero, size: CGSize(width: 50, height: 50))
+            //            lottieView.loopAnimation = true;
+            //            lottieView.play()
             
             let marker = GMSMarker(position: CLLocationCoordinate2DMake(locationData.latitude!, locationData.longitude!))
             marker.icon = #imageLiteral(resourceName: "map-vehicle-icon-black").resizeImage(newWidth: 40)
@@ -343,6 +364,7 @@ extension HomeViewController {
     func showLoaderView() {
         
         if self.requestLoaderView == nil, let singleView = Bundle.main.loadNibNamed(XIB.Names.LoaderView, owner: self, options: [:])?.first as? LoaderView {
+            self.isOnBooking = true
             singleView.frame = self.viewMapOuter.bounds
             self.requestLoaderView = singleView
             self.requestLoaderView?.onCancel = {
@@ -402,14 +424,14 @@ extension HomeViewController {
         switch status{
             
         case .searching:
-             self.showLoaderView()
+            self.showLoaderView()
             
         case .accepted, .arrived, .started, .pickedup:
             self.showRideStatusView(with: request)
             
         case .dropped:
             self.showInvoiceView(with: request)
-        
+            
         case .completed:
             self.showRatingView(with: request)
             
@@ -427,6 +449,7 @@ extension HomeViewController {
         
         if ![RideStatus.searching].contains(status) {
             self.removeLoaderView()
+            self.removeRideNow()
         }
         if ![RideStatus.started, .accepted, .arrived, .pickedup].contains(status) {
             self.removeRideStatusView()
@@ -442,10 +465,8 @@ extension HomeViewController {
             
         }
         
-        self.removeRideNow()
-        
     }
-
+    
     
     // MARK:- Share Ride
     func shareRide() {
@@ -472,11 +493,11 @@ extension HomeViewController {
     private func cancelCurrentRide() {
         
         let alert = PopupDialog(title: Constants.string.cancelRequest.localize(), message: Constants.string.cancelRequestDescription.localize())
-        let cancelButton =  PopupDialogButton(title: Constants.string.Cancel.localize(), action: {
+        let cancelButton =  PopupDialogButton(title: Constants.string.no.localize(), action: {
             alert.dismiss()
         })
         cancelButton.titleColor = .primary
-        let sureButton = PopupDialogButton(title: Constants.string.sure.localize()) {
+        let sureButton = PopupDialogButton(title: Constants.string.yes.localize()) {
             
             self.cancelRequest()
             self.removeLoaderView()
@@ -495,7 +516,7 @@ extension HomeViewController {
     @IBAction func buttonSOSAction() {
         
         showAlert(message: Constants.string.wouldyouLiketoMakeaSOSCall.localize(), okHandler: {
-            Common.call(to: "\(sosNumber)")
+            Common.call(to: "\(User.main.sos ?? "911")")
         }, cancelHandler: {
             
         }, fromView: self)

@@ -94,7 +94,7 @@ class YourTripCell: UITableViewCell {
         }
         if self.isPastButton {
             self.labelModel.text = values.service?.name
-            self.labelPrice.text = "\(String.removeNil(User.main.currency)) \(Int.removeNil(values.payment?.total))"
+            self.labelPrice.text = "\(String.removeNil(User.main.currency)) \(Float.removeNil(values.payment?.total))"
         }
         
     }

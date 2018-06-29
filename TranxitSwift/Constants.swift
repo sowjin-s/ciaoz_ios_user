@@ -16,7 +16,8 @@ var presenterObject :PostPresenterInputProtocol?
 
 struct Constants {
     static let string = Constants()
-    
+    let yes = "Yes"
+    let no = "No"
     let Done = "Done"
     let Back = "Back"
     let delete = "Delete"
@@ -217,6 +218,7 @@ struct Keys {
     let language = "language"
     let refreshToken = "refreshToken"
     let wallet = "wallet"
+    let sos = "sos"
 }
 
 //ENUM TRIP TYPE

@@ -11,8 +11,8 @@ import GooglePlaces
 
 class LocationSelectionView: UIView {
 
-    @IBOutlet private weak var viewTop : UIView!
-    @IBOutlet private weak var tableViewBottom : UITableView!
+    @IBOutlet weak var viewTop : UIView!
+    @IBOutlet weak var tableViewBottom : UITableView!
     @IBOutlet private weak var viewBack : UIView!
     @IBOutlet  weak var textFieldSource : UITextField!
     @IBOutlet  weak var textFieldDestination : UITextField!
@@ -190,7 +190,7 @@ extension LocationSelectionView : UITableViewDataSource, UITableViewDelegate {
                     
                     favouriteLocations[indexPath.row].location = (place.formattedAddress ?? .Empty, place.coordinate)
                     
-                    var service = Service() // Save Favourite location in Server 
+                    let service = Service() // Save Favourite location in Server
                     service.address = place.formattedAddress
                     service.latitude = place.coordinate.latitude
                     service.longitude = place.coordinate.longitude
@@ -279,6 +279,7 @@ extension LocationSelectionView : UITableViewDataSource, UITableViewDelegate {
     
 }
 
+// MARK:- UITextFieldDelegate
 
 extension LocationSelectionView : UITextFieldDelegate {
     

@@ -14,7 +14,7 @@ class PaymentViewController: UITableViewController {
     
     private let tableCellId = "tableCellId"
     
-    private let headers = [Constants.string.paymentMethods, Constants.string.yourCards]
+    private let headers = [Constants.string.paymentMethods] //Constants.string.yourCards
     
     var isChangingPayment = false
    

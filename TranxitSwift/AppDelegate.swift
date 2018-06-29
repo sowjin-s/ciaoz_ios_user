@@ -18,6 +18,7 @@ import Intents
 import Crashlytics
 import Fabric
 import Firebase
+import Google
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -28,13 +29,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
        
+        FirebaseApp.configure()
         self.appearence()
         setLocalization(language: .english)
         self.google()
         self.IQKeyboard()
         self.siri()
         self.registerPush(forApp: application)
-        FirebaseApp.configure()
       //  return true
        
         
@@ -123,12 +124,14 @@ extension AppDelegate {
         
         GMSServices.provideAPIKey(googleMapKey)
         GMSPlacesClient.provideAPIKey(googleMapKey)
-        
+        var error : NSError?
+        GGLContext.sharedInstance().configureWithError(&error)
+        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
     }
     
     private func IQKeyboard() {
         
-       // IQKeyboardManager.shared().isEnabled = true
+        IQKeyboardManager.shared.enable = true
     }
     
     private func siri() {

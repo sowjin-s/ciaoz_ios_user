@@ -91,12 +91,12 @@ extension InvoiceView {
     func set(request : Request) {
         
         self.labelBooking.text = request.booking_id
-        self.labelDistanceTravelled.text = "\(Int.removeNil(request.payment?.distance)) \(distanceType.localize())"
+        self.labelDistanceTravelled.text = "\(Float.removeNil(request.payment?.distance)) \(distanceType.localize())"
         self.labelTimeTaken.text = "\(String.removeNil(request.travel_time)) \(Constants.string.mins.localize())"
-        self.labelBaseFare.text = "\(String.removeNil(User.main.currency)) \(Int.removeNil(request.payment?.fixed))"
-        self.labelDistanceFare.text = "\(String.removeNil(User.main.currency)) \(Int.removeNil(request.payment?.distance))"
-        self.labelTax.text = "\(String.removeNil(User.main.currency)) \(Int.removeNil(request.payment?.tax))"
-        self.labelTotal.text = "\(String.removeNil(User.main.currency)) \(Int.removeNil(request.payment?.total))"
+        self.labelBaseFare.text = "\(String.removeNil(User.main.currency)) \(Float.removeNil(request.payment?.fixed))"
+        self.labelDistanceFare.text = "\(String.removeNil(User.main.currency)) \(Float.removeNil(request.payment?.distance))"
+        self.labelTax.text = "\(String.removeNil(User.main.currency)) \(Float.removeNil(request.payment?.tax))"
+        self.labelTotal.text = "\(String.removeNil(User.main.currency)) \(Float.removeNil(request.payment?.total))"
         self.labelPaymentType.text = request.payment_mode?.rawValue
         self.imageViewPaymentType.image = request.payment_mode == .CASH ? #imageLiteral(resourceName: "money_icon") : #imageLiteral(resourceName: "visa")
         self.buttonPayNow.isHidden = request.payment_mode == .CASH

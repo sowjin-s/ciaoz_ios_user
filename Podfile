@@ -15,6 +15,8 @@ target 'User' do
     pod 'PopupDialog', '~> 0.7'
     #pod 'FloatRatingView', '~> 2.0.0'
     #pod 'IQKeyboardManager'
+    pod 'Google/SignIn'
+    pod 'FBSDKLoginKit'
     pod 'IQKeyboardManagerSwift', '~> 6.0.0'
     pod 'Fabric', '~> 1.7.7'
     pod 'Crashlytics', '~> 3.10.2'

@@ -73,8 +73,6 @@ class RideNowView: UIView {
         self.localize()
         self.setDesign()
     }
-    
-    
 }
 
 extension RideNowView {
@@ -157,6 +155,7 @@ extension RideNowView {
     // Getting service array from  Homeviewcontroller
     func set(source : [Service]) {
         
+        self.selectedRow = -1
         self.datasource = source
         self.collectionViewService.reloadData()
         self.collectionView(collectionViewService, didSelectItemAt: IndexPath(item: 0, section: 0))
@@ -184,7 +183,6 @@ extension RideNowView {
             self.addSubview(self.rateView!)
             self.rateView?.alpha = 0
         }
-        
         // self.rateView?.set(values: self.selectedItem)
         
     }
@@ -312,15 +310,15 @@ extension RideNowView {
     private func startProgressing() {
         DispatchQueue.main.async {
             self.timerValue = 0
-            self.timer = Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: #selector(self.timerAction), userInfo: nil, repeats: true)
+            self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timerAction), userInfo: nil, repeats: true)
             self.timer?.fire()
         }
     }
     
     
     @IBAction private func timerAction() {
-        self.timerValue  += 2
-        UIView.animate(withDuration: 0.2, animations: {
+        self.timerValue  += 5
+        UIView.animate(withDuration: 2, animations: {
             self.progressView.progress = Float(self.timerValue/self.timerSchedule)
         })
     }

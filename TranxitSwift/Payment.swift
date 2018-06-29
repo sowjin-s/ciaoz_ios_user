@@ -15,16 +15,18 @@ struct Payment : JSONSerializable {
     let promocode_id : String?
     let payment_id : String?
     let payment_mode : String?
-    let fixed : Int?
-    let distance : Int?
-    let commision : Int?
-    let discount : Int?
-    let tax : Int?
-    let wallet : Int?
-    let surge : Int?
-    let total : Int?
-    let payable : Int?
-    let provider_commission : Int?
-    let provider_pay : Int?
+    let fixed : Float?
+    let distance : Float?
+    let commision : Float?
+    let discount : Float?
+    let tax : Float?
+    let wallet : Float?
+    let surge : Float?
+    let total : Float?
+    let payable : Float?
+    let provider_commission : Float?
+    let provider_pay : Float?
     
 }
+
+

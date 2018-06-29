@@ -41,6 +41,8 @@ class HomePageHelper {
     
     private func getData(on completion : @escaping ((CustomError?,Request?)->Void)) {
         
+        
+        
         Webservice().retrieve(api: .checkRequest, url: nil, data: nil, imageData: nil, paramters: nil, type: .GET) { (error, data) in
             
             guard error == nil else {

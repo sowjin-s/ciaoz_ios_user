@@ -331,7 +331,6 @@ extension SignUpUserTableViewController : AKFViewControllerDelegate {
     }
     
     func viewController(_ viewController: (UIViewController & AKFViewController)!, didCompleteLoginWith accessToken: AKFAccessToken!, state: String!) {
-        
         viewController.dismiss(animated: true) {
               self.loader.isHidden = false
               self.presenter?.post(api: .signUp, data: self.userInfo?.toData())

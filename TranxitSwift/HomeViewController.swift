@@ -11,6 +11,7 @@
     import GoogleMaps
     import GooglePlaces
     import DateTimePicker
+    import IQKeyboardManagerSwift
     
     class HomeViewController: UIViewController {
         
@@ -33,6 +34,8 @@
         @IBOutlet weak private var viewHomeLocation : UIView!
         @IBOutlet weak private var viewWorkLocation : UIView!
         @IBOutlet weak var viewLocationButtons : UIStackView!
+        
+        @IBOutlet var constraint : NSLayoutConstraint!
         
         var providerLastLocation = LocationCoordinate()
         lazy var markerProviderLocation : GMSMarker = {  // Provider Location Marker
@@ -88,6 +91,7 @@
         var destinationLocationDetail : LocationDetail? {  // Destination Location Detail
             didSet{
                 DispatchQueue.main.async {
+                    self.isDestinationFavourited = false // reset favourite location on change
                     if self.destinationLocationDetail == nil {
                         self.isDestinationFavourited = false
                     }
@@ -102,6 +106,7 @@
         
         //var serviceSelectionView : ServiceSelectionView?
         // var rideSelectionView : RequestSelectionView?
+        var locationSelectionView : LocationSelectionView?
         var requestLoaderView : LoaderView?
         var rideStatusView : RideStatusView?
         var invoiceView : InvoiceView?
@@ -145,6 +150,7 @@
             self.navigationController?.isNavigationBarHidden = true
             self.navigationController?.navigationBar.isHidden = true
             self.localize()
+            IQKeyboardManager.shared.enable = false
         }
         
         override func didReceiveMemoryWarning() {
@@ -155,6 +161,11 @@
         override func viewWillLayoutSubviews() {
             super.viewWillLayoutSubviews()
             self.viewLayouts()
+        }
+        
+        override func viewWillDisappear(_ animated: Bool) {
+            super.viewWillDisappear(animated)
+            IQKeyboardManager.shared.enable = true
         }
         
         
@@ -190,6 +201,7 @@
                     self.isSourceFavourited = false
                 }
                 DispatchQueue.main.async {
+                    self.isSourceFavourited = false // reset favourite location on change
                     if self.sourceLocationDetail?.value != nil, self.destinationLocationDetail != nil { // Get Services only if location Available
                         self.getServicesList()
                     }
@@ -202,8 +214,8 @@
             self.buttonSOS.addTarget(self, action: #selector(self.buttonSOSAction), for: .touchUpInside)
             self.setDesign()
             NotificationCenter.default.addObserver(self, selector: #selector(self.observer(notification:)), name: .providers, object: nil)
-            
-      }
+            NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShowRateView(info:)), name: .UIKeyboardWillShow, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHideRateView(info:)), name: .UIKeyboardWillHide, object: nil)      }
         
         
         // MARK:- View Will Layouts
@@ -223,10 +235,10 @@
             self.viewCurrentLocation.addPressAnimation()
             if currentLocation.value != nil {
                 self.mapViewHelper?.getPlaceAddress(from: currentLocation.value!, on: { (locationDetail) in  // On Tapping current location, set
-                    if self.selectedLocationView == self.viewDestinationLocation {
-                        self.destinationLocationDetail = locationDetail
-                    } else if self.selectedLocationView == self.viewSourceLocation {
+                    if self.selectedLocationView == self.viewSourceLocation {
                         self.sourceLocationDetail?.value = locationDetail
+                    } else if self.selectedLocationView == self.viewDestinationLocation {
+                        self.destinationLocationDetail = locationDetail
                     }
                 })
                 self.mapViewHelper?.moveTo(location: self.currentLocation.value!, with: self.viewMapOuter.center)
@@ -432,9 +444,26 @@
                 }
                 self.selectedLocationView.transform = .identity
                 self.selectedLocationView = UIView()
+                self.locationSelectionView = locationView
             }
             
         }
+        
+        // MARK:- Remove Location VIew
+        
+        func removeLocationView() {
+            
+            UIView.animate(withDuration: 0.3, animations: {
+                self.locationSelectionView?.tableViewBottom.frame.origin.y = (self.locationSelectionView?.tableViewBottom.frame.height) ?? 0
+                self.locationSelectionView?.viewTop.frame.origin.y = -(self.locationSelectionView?.viewTop.frame.height ?? 0)
+            }) { (_) in
+                self.locationSelectionView?.isHidden = true
+                self.locationSelectionView?.removeFromSuperview()
+                self.locationSelectionView = nil
+            }
+            
+        }
+        
         
         //MARK:- Draw Polyline
         
@@ -599,7 +628,8 @@
                 if self.selectedLocationView == self.viewSourceLocation, self.sourceLocationDetail != nil {
                     
                     self.sourceMarker.map = nil
-                    self.imageViewMarkerCenter.image = #imageLiteral(resourceName: "MoveMapMarker")
+                    self.imageViewMarkerCenter.tintColor = .secondary
+                    self.imageViewMarkerCenter.image = #imageLiteral(resourceName: "sourcePin").withRenderingMode(.alwaysTemplate)
                     self.imageViewMarkerCenter.isHidden = false
                     //                if let location = mapViewHelper?.mapView?.projection.coordinate(for: viewMapOuter.center) {
                     //                    self.sourceLocationDetail?.value?.coordinate = location
@@ -615,7 +645,8 @@
                 } else if self.selectedLocationView == self.viewDestinationLocation, self.destinationLocationDetail != nil {
                     
                     self.destinationMarker.map = nil
-                    self.imageViewMarkerCenter.image = #imageLiteral(resourceName: "MoveMapMarker")
+                    self.imageViewMarkerCenter.tintColor = .primary
+                    self.imageViewMarkerCenter.image = #imageLiteral(resourceName: "destinationPin").withRenderingMode(.alwaysTemplate)
                     self.imageViewMarkerCenter.isHidden = false
                     //                if let location = mapViewHelper?.mapView?.projection.coordinate(for: viewMapOuter.center) {
                     //                    self.destinationLocationDetail?.coordinate = location
@@ -760,12 +791,12 @@
             DispatchQueue.global(qos: .background).async {
                 
                 let request = Request()
-                request.d_address = self.destinationLocationDetail?.address
-                request.d_latitude = self.destinationLocationDetail?.coordinate.latitude
-                request.d_longitude = self.destinationLocationDetail?.coordinate.longitude
                 request.s_address = self.sourceLocationDetail?.value?.address
                 request.s_latitude = self.sourceLocationDetail?.value?.coordinate.latitude
                 request.s_longitude = self.sourceLocationDetail?.value?.coordinate.longitude
+                request.d_address = self.destinationLocationDetail?.address
+                request.d_latitude = self.destinationLocationDetail?.coordinate.latitude
+                request.d_longitude = self.destinationLocationDetail?.coordinate.longitude
                 request.service_type = service.id
                 request.payment_mode = .CASH
                 request.distance = "\(service.pricing?.distance ?? 0)"

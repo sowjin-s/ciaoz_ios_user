@@ -13,7 +13,7 @@ class ServiceSelectionCollectionViewCell: UICollectionViewCell {
     // @IBOutlet private var imageViewHeightConstant : NSLayoutConstraint!
     // @IBOutlet private var imageViewWidthConstant : NSLayoutConstraint!
     @IBOutlet private weak var imageViewService : UIImageView!
-    @IBOutlet private weak var buttonService : UIButton!
+    @IBOutlet private weak var labelService : UILabel!
     @IBOutlet private weak var labelPricing : UILabel!
     @IBOutlet private weak var viewImageView : UIView!
     @IBOutlet private weak var labelETA : UILabel!
@@ -26,7 +26,7 @@ class ServiceSelectionCollectionViewCell: UICollectionViewCell {
             
             self.imageViewService.layer.masksToBounds = self.isSelected
             self.transform = isSelected ? .init(scaleX: 1.2, y: 1.2) : .identity
-            self.buttonService.setTitleColor(!self.isSelected ? .black : .secondary, for: .normal)
+            self.labelService.textColor = !self.isSelected ? .black : .secondary
             self.viewImageView.borderLineWidth = isSelected ? 2 : 0
             self.labelETA.text = self.isSelected ? service?.pricing?.time : nil
             self.viewImageView.backgroundColor = self.isSelected ? UIColor.secondary : .clear
@@ -37,7 +37,7 @@ class ServiceSelectionCollectionViewCell: UICollectionViewCell {
     func set(value : Service) {
         
         self.service = value
-        buttonService.setTitle(value.name, for: .normal)
+        labelService.text = value.name
         Cache.image(forUrl: value.image) { (image) in
             DispatchQueue.main.async {
                 self.imageViewService.image = image == nil ? #imageLiteral(resourceName: "sedan-car-model") : image
@@ -77,7 +77,7 @@ private extension ServiceSelectionCollectionViewCell {
     
     private func setDesign() {
         
-        Common.setFont(to: buttonService, size : 12)
+        Common.setFont(to: labelService, size : 12)
         Common.setFont(to: labelPricing, size : 10)
         Common.setFont(to: labelETA, size : 10)
     }
@@ -85,7 +85,7 @@ private extension ServiceSelectionCollectionViewCell {
     
     private func initialLoads(){
         self.imageViewService.image = #imageLiteral(resourceName: "sedan-car-model")
-        self.buttonService.setTitleColor(.black, for: .normal)
+        self.labelService.textColor = .black
         self.viewImageView.borderColor = .secondary
         self.setDesign()
        // self.initialFrame = self.imageViewService.frame.size

@@ -11,7 +11,6 @@ import UIKit
 //MARK:- Designable class UIButton
 
 
-@IBDesignable
 class Button : UIButton {
  
     

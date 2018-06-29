@@ -48,6 +48,7 @@ extension CouponViewController {
         self.localize()
         self.view.dismissKeyBoardonTap()
         self.setDesign()
+        self.textFieldCouponCode.delegate = self
     }
     
     // MARK:- Set Designs
@@ -77,6 +78,17 @@ extension CouponViewController {
         promocode.promocode = promo
         self.presenter?.post(api: .addPromocode, data: promocode.toData())
         
+    }
+}
+
+// MARK:- UITextFieldDelegate
+
+extension CouponViewController : UITextFieldDelegate {
+    
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        return textField.resignFirstResponder()
     }
 }
 

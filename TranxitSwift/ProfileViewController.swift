@@ -301,7 +301,7 @@ extension ProfileViewController : PostViewProtocol {
             self.loader.isHidden = true
             self.setProfile()
             if api == .updateProfile {
-                UIApplication.shared.keyWindow?.make(toast: Constants.string.profileUpdated.localize())
+                UIApplication.shared.keyWindow?.makeToast(Constants.string.profileUpdated.localize(), point: self.view.center, title: nil, image: nil, completion: nil)
             }
         }
         

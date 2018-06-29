@@ -7,11 +7,17 @@
 //
 
 import UIKit
+import Google
 
 class SocialLoginViewController: UITableViewController {
     
     
+    
     private let tableCellId = "SocialLoginCell"
+    
+    private lazy var loader : UIView = {
+        return createActivityIndicator(UIScreen.main.focusedView ?? self.view)
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,7 +80,11 @@ extension SocialLoginViewController {
     
     private func googleLogin(){
         
-        print("Google")
+        self.loader.isHidden = false
+        GIDSignIn.sharedInstance().delegate = self
+        GIDSignIn.sharedInstance().uiDelegate = self
+        GIDSignIn.sharedInstance().signOut()
+        GIDSignIn.sharedInstance().signIn()
         
     }
     
@@ -83,7 +93,8 @@ extension SocialLoginViewController {
     
     private func facebookLogin() {
         
-        print("Facebook")
+       
+        
         
     }
     
@@ -124,6 +135,45 @@ extension SocialLoginViewController {
     }
     
 }
+
+//MARK:- Google Implementation
+
+
+extension SocialLoginViewController : GIDSignInDelegate, GIDSignInUIDelegate{
+    
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        
+        self.loader.isHidden = true
+        
+        guard user != nil else {
+            return
+        }
+        
+        print(user.profile, error)
+        
+        //  UserData.main.set(name: String.removeNil(user.profile.name), email: String.removeNil(user.profile.email),image: String.removeNil(user.profile.imageURL(withDimension: 50).absoluteString))
+        
+    }
+    
+    func sign(inWillDispatch signIn: GIDSignIn!, error: Error!) {
+        self.loader.isHidden = true
+    }
+    
+    func sign(_ signIn: GIDSignIn!, present viewController: UIViewController!) {
+        
+        present( viewController, animated: true, completion: nil)
+    }
+    
+    func sign(_ signIn: GIDSignIn!, dismiss viewController: UIViewController!) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+}
+
+
+
+
 
 
 class SocialLoginCell : UITableViewCell {

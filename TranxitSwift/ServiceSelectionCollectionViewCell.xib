@@ -40,7 +40,8 @@
                         <rect key="frame" x="20" y="150" width="161" height="28"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hNq-dB-2rl" customClass="Button" customModule="User" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="161" height="28"/>
+                                <rect key="frame" x="0.0" y="0.0" width="161" height="12"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="10"/>
                                 <inset key="titleEdgeInsets" minX="4" minY="0.0" maxX="4" maxY="0.0"/>
@@ -51,8 +52,19 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ndG-s7-RcG">
+                                <rect key="frame" x="0.0" y="0.0" width="161" height="28"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="hNq-dB-2rl"/>
+                            </mask>
+                        </variation>
                     </stackView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="qFr-yx-sGd">
                         <rect key="frame" x="20" y="150" width="161" height="0.0"/>
@@ -87,10 +99,10 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="201" height="186"/>
             <connections>
-                <outlet property="buttonService" destination="hNq-dB-2rl" id="tz1-3l-2ls"/>
                 <outlet property="imageViewService" destination="YAW-a7-FC3" id="bjc-c4-fwA"/>
                 <outlet property="labelETA" destination="ft7-i4-NRn" id="R4h-6w-3mA"/>
                 <outlet property="labelPricing" destination="qFr-yx-sGd" id="tBj-sc-sI2"/>
+                <outlet property="labelService" destination="ndG-s7-RcG" id="5Za-iR-LuP"/>
                 <outlet property="viewImageView" destination="me8-70-bOc" id="NP7-0H-FId"/>
             </connections>
             <point key="canvasLocation" x="-51.5" y="63"/>

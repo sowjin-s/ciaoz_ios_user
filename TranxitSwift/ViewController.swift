@@ -100,7 +100,7 @@ extension UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(info:)), name: .UIKeyboardWillHide, object: nil)
         
-         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(info:)), name: .UIKeyboardWillChangeFrame, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(info:)), name: .UIKeyboardWillChangeFrame, object: nil)
       
         
     }

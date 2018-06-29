@@ -175,11 +175,11 @@ extension SettingTableViewController {
             self.loader.isHidden = true
             self.placesHelper?.getGoogleAutoComplete { (place) in
                 self.mapHelper?.getPlaceAddress(from: place.coordinate, on: { (locationDetail) in
-                    var service = Service() // Save Favourite location in Server
+                    let service = Service() // Save Favourite location in Server
                     service.address = place.formattedAddress
                     service.latitude = place.coordinate.latitude
                     service.longitude = place.coordinate.longitude
-                    service.type = indexPath.row == 0 ? Constants.string.home : Constants.string.work
+                    service.type = (indexPath.row == 0 ? CoreDataEntity.home.rawValue : CoreDataEntity.work.rawValue).lowercased()
                     self.presenter?.post(api: Base.locationServicePostDelete, data: service.toData())
                 })
             }
