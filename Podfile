@@ -21,6 +21,10 @@ target 'User' do
     pod 'Fabric', '~> 1.7.7'
     pod 'Crashlytics', '~> 3.10.2'
     pod 'Firebase/Core'
+    pod 'Firebase/Database'
+    pod 'Firebase/Storage'
+    pod 'ImagePicker'
+    pod 'Lightbox'
     
   target 'UserTests' do
     inherit! :search_paths

@@ -45,6 +45,7 @@ class Webservice : PostWebServiceProtocol {
         let reach = Reachability.init(hostname: baseUrl)
        
         guard reach?.connection == .wifi || reach?.connection == .cellular else {  // Internet not available
+            NotificationCenter.default.post(name: .reachabilityChanged, object: nil)
             self.interactor?.on(api: api, error: CustomError(description: ErrorMessage.list.notReachable, code : StatusCode.notreachable.rawValue))
             self.completion?(CustomError(description: ErrorMessage.list.notReachable, code : StatusCode.notreachable.rawValue), nil)
             return

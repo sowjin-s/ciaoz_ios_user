@@ -67,6 +67,7 @@ extension RideStatusView {
         self.buttonCall.addTarget(self, action: #selector(self.callAction), for: .touchUpInside)
         self.buttonCancel.addTarget(self, action: #selector(self.cancelShareAction), for: .touchUpInside)
         self.setDesign()
+        
     }
     
     // MARK:- Set Designs
@@ -84,7 +85,6 @@ extension RideStatusView {
         Common.setFont(to: buttonCall, isTitle: true)
         
     }
-    
     
     // MARK:- Localization
     private func localize() {
@@ -161,6 +161,12 @@ extension RideStatusView {
         
     }
     
+    // MARK:- Chat Provider
+    
+    @IBAction private func chatWithProvider() {
+        
+        print("Chat")
+    }
     
     // MARK:- Cancel Share Action
     
@@ -174,4 +180,13 @@ extension RideStatusView {
         
     }
     
+}
+
+
+extension RideStatusView : FloatyDelegate {
+    
+     func floatyWillOpen(_ floaty: Floaty) {
+        print("Clocked")
+    }
+
 }

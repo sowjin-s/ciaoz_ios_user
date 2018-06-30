@@ -18,6 +18,13 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
+		<key>Cache.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>16</integer>
+		</dict>
 		<key>DateTimePicker.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -53,12 +60,40 @@
 			<key>orderHint</key>
 			<integer>6</integer>
 		</dict>
+		<key>FirebaseDatabase.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>17</integer>
+		</dict>
+		<key>FirebaseStorage.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>18</integer>
+		</dict>
+		<key>GTMSessionFetcher.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>19</integer>
+		</dict>
 		<key>GoogleToolboxForMac.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>7</integer>
+		</dict>
+		<key>Hue.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>20</integer>
 		</dict>
 		<key>IQKeyboardManagerSwift.xcscheme</key>
 		<dict>
@@ -67,12 +102,40 @@
 			<key>orderHint</key>
 			<integer>8</integer>
 		</dict>
+		<key>ImagePicker-ImagePicker.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>22</integer>
+		</dict>
+		<key>ImagePicker.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>21</integer>
+		</dict>
+		<key>Imaginary.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>23</integer>
+		</dict>
 		<key>KWDrawerController.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>9</integer>
+		</dict>
+		<key>Lightbox.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>25</integer>
 		</dict>
 		<key>Pods-User.xcscheme</key>
 		<dict>
@@ -101,6 +164,13 @@
 			<false/>
 			<key>orderHint</key>
 			<integer>15</integer>
+		</dict>
+		<key>leveldb-library.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>24</integer>
 		</dict>
 		<key>lottie-ios.xcscheme</key>
 		<dict>

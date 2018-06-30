@@ -2126,7 +2126,7 @@
     </scenes>
     <resources>
         <image name="back-icon" width="25" height="25"/>
-        <image name="call" width="512" height="512"/>
+        <image name="call" width="128" height="128"/>
         <image name="close" width="32" height="32"/>
         <image name="coupon-page_BG" width="471" height="471"/>
         <image name="help" width="334" height="334"/>

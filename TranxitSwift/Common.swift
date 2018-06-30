@@ -150,7 +150,15 @@ class Common {
         }
     }
     
+    // MARK:- Get Chat Id
     
+    class func  getChatId(with providerId : Int?) -> String? {
+    
+        guard let userId = User.main.id, let providerId = providerId else { return nil }
+    
+        return userId <= providerId ? "u\(userId)_p\(providerId)" : "p\(providerId)_u\(userId)s"
+    
+    }
     
     
 }

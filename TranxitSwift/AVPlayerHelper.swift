@@ -15,7 +15,7 @@ class AVPlayerHelper {
     
     //MARK:- Play audio
     
-    func play(file name : String? = "outgoing.aiff"){
+    func play(file name : String? = "outgoing.aiff", isLooped : Bool = true){
         
         if let path = Bundle.main.path(forResource: name, ofType: nil){
             
@@ -24,7 +24,7 @@ class AVPlayerHelper {
             do {
                 
                 self.player = try AVAudioPlayer(contentsOf: url)
-                self.player?.numberOfLoops = Int.max
+                self.player?.numberOfLoops = isLooped ? Int.max : 0
                 self.player?.play()
                 
             } catch let err {

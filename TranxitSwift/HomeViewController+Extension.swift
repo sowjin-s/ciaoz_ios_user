@@ -200,6 +200,7 @@ extension HomeViewController {
             rideStatus.frame = CGRect(origin: CGPoint(x: 0, y: self.view.frame.height-rideStatus.frame.height), size: CGSize(width: self.view.frame.width, height: rideStatus.frame.height))
             rideStatusView = rideStatus
             self.view.addSubview(rideStatus)
+            self.addFloatingButton(with: rideStatus.frame.height, number: request.provider?.mobile, chatId: "")
             rideStatus.show(with: .bottom, completion: nil)
         }
         // Change Provider Location 
@@ -538,6 +539,28 @@ extension HomeViewController {
         markerProviderLocation.rotation = CLLocationDegrees(tanDegree*CGFloat.pi/180)
         CATransaction.commit()
         self.providerLastLocation = location
+    }
+    
+    // MARK:- Add Floating Button
+    
+    private func addFloatingButton(with padding : CGFloat, number : String?, chatId : String) {
+        
+        let floaty = Floaty()
+        floaty.plusColor = .primary
+        floaty.hasShadow = false
+        floaty.autoCloseOnTap = true
+        floaty.buttonColor = .white
+        floaty.buttonImage = #imageLiteral(resourceName: "phoneCall").withRenderingMode(.alwaysTemplate).resizeImage(newWidth: 25)
+        floaty.paddingY = padding
+        floaty.itemImageColor = .secondary
+        floaty.addItem(icon: #imageLiteral(resourceName: "call").resizeImage(newWidth: 25)) { (_) in
+            Common.call(to: number)
+        }
+        floaty.addItem(icon: #imageLiteral(resourceName: "chatIcon").resizeImage(newWidth: 25)) { (_) in
+            print("Chat ")
+        }
+        self.viewMapOuter.addSubview(floaty)
+        
     }
     
     
