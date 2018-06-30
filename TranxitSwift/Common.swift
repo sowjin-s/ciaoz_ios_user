@@ -156,7 +156,7 @@ class Common {
     
         guard let userId = User.main.id, let providerId = providerId else { return nil }
     
-        return userId <= providerId ? "u\(userId)_p\(providerId)" : "p\(providerId)_u\(userId)s"
+        return userId <= providerId ? "u\(userId)_p\(providerId)" : "p\(providerId)_u\(userId)"
     
     }
     

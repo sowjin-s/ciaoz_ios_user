@@ -16,6 +16,8 @@ var presenterObject :PostPresenterInputProtocol?
 
 struct Constants {
     static let string = Constants()
+    let writeSomething = "Write Something"
+    let noChatHistory = "No Chat History Found"
     let yes = "Yes"
     let no = "No"
     let Done = "Done"

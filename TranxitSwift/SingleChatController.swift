@@ -162,46 +162,40 @@ extension SingleChatController {
         self.navigationTapgesture = UITapGestureRecognizer(target: self, action: #selector(self.navigationBarTapped))
         self.navigationController?.navigationBar.addGestureRecognizer(self.navigationTapgesture)
         self.navigationItem.title = String.removeNil(currentUser.first_name)+" "+String.removeNil(currentUser.last_name)
-        Cache.image(forUrl: currentUser.avatar) { (image) in
+        Cache.image(forUrl: Common.getImageUrl(for: currentUser.avatar)) { (image) in
             if image != nil {
                 DispatchQueue.main.async {
-                    self.imageButtonView?.image = image?.resizeImage(newWidth: 40)?.withRenderingMode(.alwaysOriginal)
+                    self.imageButtonView?.image = image?.resizeImage(newWidth: 30)?.withRenderingMode(.alwaysOriginal)
                 }
             }
         }
-        
     }
     
-    
-
     //MARK:- Initial Loads
     
     private func initialLoads(){
         
         if traitCollection.forceTouchCapability == .available {  // Set Peek and pop for Image Preview
-            
             self.registerForPreviewing(with: self, sourceView: self.tableView)  // Setting image preview for tableview cells
-            
         }
-        
         if #available(iOS 11.0, *) {
             self.navigationItem.largeTitleDisplayMode = .never
         } 
         let backButtonArrow = UIBarButtonItem(image: #imageLiteral(resourceName: "close-1"), style: .plain, target: self, action: #selector(self.backAction))
         let fixedSpace = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: self, action: nil)
-        let imageButton = UIBarButtonItem(image: #imageLiteral(resourceName: "userPlaceholder"), style: .plain, target: self, action: #selector(self.navigationBarTapped))
-        
-        Cache.image(forUrl: currentUser.avatar) { (image) in
+        let imageButton = UIBarButtonItem(image: #imageLiteral(resourceName: "userPlaceholder").resizeImage(newWidth: 30)?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.navigationBarTapped))
+        Cache.image(forUrl: Common.getImageUrl(for: currentUser.avatar)) { (image) in
             if image != nil {
                 DispatchQueue.main.async {
                     
-                    let imageView = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: 40, height: 40)))
+                    let imageView = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
                     imageView.makeRoundedCorner()
-                    imageView.image = image?.resizeImage(newWidth: 40)?.withRenderingMode(.alwaysOriginal)
+                    imageView.image = image?.resizeImage(newWidth: 30)?.withRenderingMode(.alwaysOriginal)
+                    imageView.contentMode = .scaleAspectFill
                     imageButton.customView = imageView
                     imageButton.customView?.isUserInteractionEnabled = true
-                    imageButton.image = #imageLiteral(resourceName: "account").resizeImage(newWidth: 40)?.withRenderingMode(.alwaysOriginal)
-                    imageButton.customView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.navigationBarTapped)))
+                   // imageButton.image = #imageLiteral(resourceName: "account").resizeImage(newWidth: 40)?.withRenderingMode(.alwaysOriginal)
+                   // imageButton.customView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.navigationBarTapped)))
                     self.imageButtonView = imageView
                 }
             }
@@ -209,17 +203,16 @@ extension SingleChatController {
         
         self.navigationItem.leftBarButtonItems = [backButtonArrow,fixedSpace,imageButton]
         
-        if chatType == .single {  // Media call only allowed to single chat
-            
-            let callButton = UIBarButtonItem(image: #imageLiteral(resourceName: "call_icon"), style: .plain, target: self, action: #selector(self.callButtonAction))
-            let videoButton = UIBarButtonItem(image: #imageLiteral(resourceName: "video_icon"), style: .plain, target: self, action: #selector(self.videoButtonAction))
-            
-            self.navigationItem.rightBarButtonItems?.append(contentsOf: [videoButton,callButton])
-        }
+//        if chatType == .single {  // Media call only allowed to single chat
+//
+//            let callButton = UIBarButtonItem(image: #imageLiteral(resourceName: "call_icon"), style: .plain, target: self, action: #selector(self.callButtonAction))
+//            let videoButton = UIBarButtonItem(image: #imageLiteral(resourceName: "video_icon"), style: .plain, target: self, action: #selector(self.videoButtonAction))
+//
+//            self.navigationItem.rightBarButtonItems?.append(contentsOf: [videoButton,callButton])
+//        }
         
         self.addKeyBoardObserver(with: bottomConstraint)
-        
-        
+        self.textViewSingleChat.delegate = self
         self.tableView.register(UINib(nibName: chatSenderNib, bundle: .main), forCellReuseIdentifier: senderCellTextId)
         self.tableView.register(UINib(nibName: chatRecieverNib, bundle: .main), forCellReuseIdentifier: recieverCellTextId)
         self.tableView.register(UINib(nibName: imageCellSenderNib, bundle: .main), forCellReuseIdentifier: senderMediaId)
@@ -362,23 +355,23 @@ extension SingleChatController {
         
         SelectImageView.main.show(imagePickerIn: self) { (images) in
             
-            if let image = images.first, let imageData = image.resizeImage(newWidth: 400), let data = UIImagePNGRepresentation(imageData){
+            if let image = images.first, let imageData = image.resizeImage(newWidth: 400), let data = UIImagePNGRepresentation(imageData), let currentId = self.currentUser.id {
                 
                 self.progressViewImage.isHidden = false
                 
-                let task = FirebaseHelper.shared.write(to: self.currentUser.id, with: data, mime: .image, type : self.chatType, completion: { (isCompleted) in
+                let task = FirebaseHelper.shared.write(to: currentId, with: data, mime: .image, type : self.chatType, completion: { (isCompleted) in
                     
                     DispatchQueue.main.async {
                         self.progressViewImage.isHidden = true
                     }
                     
-                    // Send FCM Push
-
-                    if isCompleted {
-                        
-                        self.sendPush(with: Constants.string.image)
-                    }
-                    
+//                    // Send FCM Push
+//
+//                    if isCompleted {
+//
+//                        self.sendPush(with: Constants.string.image)
+//                    }
+//
                     print("isCompleted  -- ",isCompleted)
                     
                 })
@@ -409,105 +402,105 @@ extension SingleChatController {
     
     @IBAction private func sendOnclick(){
         
-        self.validatedIfBlocked {
-            
-            FirebaseHelper.shared.write(to: self.currentUser.id, with: self.textViewSingleChat.text, type : self.chatType)
-            self.sendPush(with: self.textViewSingleChat.text)
-            self.initimateServerAboutChat()
+//        self.validatedIfBlocked {
+        
+            FirebaseHelper.shared.write(to: self.currentUserId, with: self.textViewSingleChat.text, type : self.chatType)
+           // self.sendPush(with: self.textViewSingleChat.text)
+           // self.initimateServerAboutChat()
             self.textViewSingleChat.text = .Empty
             self.textViewDidEndEditing(self.textViewSingleChat)
-            
-            if let currentUserData = RealmHelper.main.getObject(of: RealmContact.self, with: self.currentUserId) {
-                RealmHelper.main.modify {
-                    RealmHelper.main.write(modal: currentUserData, completion: { (isCompleted) in
-                        print("Chat History added ", currentUserData.name ?? .Empty)
-                    })
-                }
-            }
-        }
+//
+//            if let currentUserData = RealmHelper.main.getObject(of: RealmContact.self, with: self.currentUserId) {
+//                RealmHelper.main.modify {
+//                    RealmHelper.main.write(modal: currentUserData, completion: { (isCompleted) in
+//                        print("Chat History added ", currentUserData.name ?? .Empty)
+//                    })
+//                }
+//            }
+      //  }
         
         
     }
     
     
-    //MARK:- Send Push with Message
+//    //MARK:- Send Push with Message
+//
+//    private func sendPush(with message : String?){
+//
+//        var tokens = [String]()
+//
+//        if self.chatType == .single {
+//
+//            guard let userData = RealmHelper.main.getObject(of: RealmContact.self, with: currentUserId) else { return }
+//
+//            tokens.append(userData.deviceToken ?? .Empty)
+//
+//        } else if self.chatType == .group {
+//
+//            guard let userData = RealmHelper.main.getObject(of: RealmGroup.self, with: currentUserId)?.contact.filter({ $0.id != User.main.id }) else { return }
+//
+//            tokens.append(contentsOf: userData.map({ $0.deviceToken ?? .Empty }))
+//
+//        }
+//
+//        self.setPresenter()
+//        self.presenter?.post(api: .fcmPush, data: MakeJson.sendPush(tokens: tokens, title: User.main.name, body: message))
+//
+//    }
+//
+//    //MARK:- Intimate Server about messaging User
+//
+//    private func initimateServerAboutChat(){
+//
+//        if self.viewJustAppeared {  // Hitting api only on first view appeared
+//
+//            self.setPresenter()
+//            let endUser = BlockModal()
+//            endUser.user_id = User.main.id
+//            endUser.receiver_id = self.currentUser.id
+//            self.presenter?.post(api: .postChatHistory, data: endUser.toData())
+//
+//
+//
+//        }
+//
+//    }
     
-    private func sendPush(with message : String?){
-     
-        var tokens = [String]()
-        
-        if self.chatType == .single {
-            
-            guard let userData = RealmHelper.main.getObject(of: RealmContact.self, with: currentUserId) else { return }
-            
-            tokens.append(userData.deviceToken ?? .Empty)
-            
-        } else if self.chatType == .group {
-            
-            guard let userData = RealmHelper.main.getObject(of: RealmGroup.self, with: currentUserId)?.contact.filter({ $0.id != User.main.id }) else { return }
-            
-            tokens.append(contentsOf: userData.map({ $0.deviceToken ?? .Empty }))
-            
-        }
-        
-        self.setPresenter()
-        self.presenter?.post(api: .fcmPush, data: MakeJson.sendPush(tokens: tokens, title: User.main.name, body: message))
-        
-    }
-    
-    //MARK:- Intimate Server about messaging User
-    
-    private func initimateServerAboutChat(){
-     
-        if self.viewJustAppeared {  // Hitting api only on first view appeared
-            
-            self.setPresenter()
-            let endUser = BlockModal()
-            endUser.user_id = User.main.id
-            endUser.receiver_id = self.currentUser.id
-            self.presenter?.post(api: .postChatHistory, data: endUser.toData())
-            
-            
-            
-        }
-        
-    }
-    
-    //MARK:- Validate If Blocked
-    
-    private func validatedIfBlocked(onSuccess completion : @escaping (()->Void)){
-     // Validating whether the user is blocked
-        guard let chatUser = RealmHelper.main.getObject(of: RealmContact.self, with: currentUser.id), chatUser.isBlocked else {
-            completion()
-            return
-        }
-        
-        let alert = UIAlertController(title: Constants.string.unBlockInfo , message: nil, preferredStyle: .alert)
-        
-        let unblockAction = UIAlertAction(title: Constants.string.unBlock, style: .default) { (Void) in
-            
-            let block = BlockModal()
-            block.user_id = User.main.id
-            block.contact_user_id = self.currentUser.id
-            block.is_blocked = "\((!chatUser.isBlocked).hashValue)"
-            
-            self.loader.isHidden = false
-            
-            self.setPresenter()
-            self.presenter?.post(api: .blockUser, data: block.toData())
-            
-        }
-        
-        let cancelAction = UIAlertAction(title: Constants.string.Cancel, style: .cancel, handler: nil)
-        
-        alert.view.tintColor = .primary
-        alert.addAction(cancelAction)
-        alert.addAction(unblockAction)
-        
-        self.present(alert, animated: true, completion: nil)
-        
-        
-    }
+//    //MARK:- Validate If Blocked
+//
+//    private func validatedIfBlocked(onSuccess completion : @escaping (()->Void)){
+//     // Validating whether the user is blocked
+//        guard let chatUser = RealmHelper.main.getObject(of: RealmContact.self, with: currentUser.id), chatUser.isBlocked else {
+//            completion()
+//            return
+//        }
+//
+//        let alert = UIAlertController(title: Constants.string.unBlockInfo , message: nil, preferredStyle: .alert)
+//
+//        let unblockAction = UIAlertAction(title: Constants.string.unBlock, style: .default) { (Void) in
+//
+//            let block = BlockModal()
+//            block.user_id = User.main.id
+//            block.contact_user_id = self.currentUser.id
+//            block.is_blocked = "\((!chatUser.isBlocked).hashValue)"
+//
+//            self.loader.isHidden = false
+//
+//            self.setPresenter()
+//            self.presenter?.post(api: .blockUser, data: block.toData())
+//
+//        }
+//
+//        let cancelAction = UIAlertAction(title: Constants.string.Cancel, style: .cancel, handler: nil)
+//
+//        alert.view.tintColor = .primary
+//        alert.addAction(cancelAction)
+//        alert.addAction(unblockAction)
+//
+//        self.present(alert, animated: true, completion: nil)
+//
+//
+//    }
     
     
     //MARK:- Back Button Action
@@ -547,7 +540,7 @@ extension SingleChatController {
                 let label = UILabel(frame: self.tableView.bounds)
                 label.textAlignment = .center
                 label.text = Constants.string.noChatHistory
-                label.font = UIFont(name: "Avenir-Medium", size: 18)
+                Common.setFont(to: label, isTitle: true)
                 return label
                 
                 }() : nil
@@ -566,9 +559,10 @@ extension SingleChatController {
             
             let lightBox = LightboxController(images: [image], startIndex: 0)
             lightBox.dynamicBackground = true
-            LightboxConfig.CloseButton.image = #imageLiteral(resourceName: "close")
+            LightboxConfig.CloseButton.image = #imageLiteral(resourceName: "close-1")
             LightboxConfig.CloseButton.text = .Empty
             LightboxConfig.CloseButton.size = CGSize(width: 25, height: 25)
+            LightboxConfig.PageIndicator.enabled = false
             return lightBox
         }
         
@@ -754,7 +748,7 @@ extension SingleChatController : UIViewControllerPreviewingDelegate {
     // pop
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController){
        
-        self.show(viewControllerToCommit, sender: self)
+        self.present(viewControllerToCommit, animated: true, completion: nil)
         
     }
 }
@@ -765,56 +759,15 @@ extension SingleChatController : UIViewControllerPreviewingDelegate {
 extension SingleChatController : PostViewProtocol {
   
     func onError(api: Base, message: String, statusCode code: Int) {
-        
-        if api != .fcmPush && api != .postChatHistory {
-            
+    
             DispatchQueue.main.async {
                 self.view.make(toast: message)
             }
-            
-        }
-        
         print("Error in ",api,"  ", message)
         
     }
     
-    func getBlock(api: Base, response: BlockModal?) {
-        
-        self.loader.isHideInMainThread(true)
-        
-        if api == .blockUser {
-            
-            RealmHelper.main.modify {
-                
-                guard let chatUser = RealmHelper.main.getObject(of: RealmContact.self, with: currentUser.id) else { return }
-                
-                chatUser.isBlocked = response?.is_blocked == "\(true.hashValue)"
-                
-            }
-        } else if api == .postChatHistory {
-            
-            /*, response?.receiver_id != nil, let currentUserData = RealmHelper.main.getObject(of: RealmChatHistory.self, with: Int.val(val: response?.receiver_id))
-            
-            RealmHelper.main.modify {
-                
-                RealmHelper.main.write(modal: currentUserData, completion: { (isCompleted) in
-                    print("Chat History added ", currentUserData.name ?? .Empty)
-                })
-                
-            }*/
-            
-            self.viewJustAppeared = false
-            
-        }
-        
-    }
-    
-    func onSuccess(api: Base, message: String) {
-        
-        
-        
-    }
-    
+  
 }
 
 //MARK:- LightboxControllerDismissalDelegate
@@ -823,7 +776,7 @@ extension SingleChatController : LightboxControllerDismissalDelegate {
   
     func lightboxControllerWillDismiss(_ controller: LightboxController) {
         
-        controller.popOrDismiss(animation: true)
+        controller.navigationController?.popViewController(animated: true)
         
     }
     

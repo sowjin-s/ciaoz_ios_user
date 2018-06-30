@@ -32,6 +32,7 @@ struct Storyboard {
     let ChangeResetPasswordController = "ChangeResetPasswordController"
     let YourTripsDetailViewController = "YourTripsDetailViewController"
     let OfflineBookingViewController = "OfflineBookingViewController"
+    let SingleChatController = "SingleChatController"
 }
 
 

@@ -62,13 +62,13 @@ class ChatCell: UITableViewCell {
         self.set(values: values.response, isRecieved: true)
         self.imageViewStatus.isHidden = true // hiding message status for reciever
         
-        if chatType == .group, let id = values.response?.sender {
-            
-            if let value = RealmHelper.main.getObject(of: RealmContact.self, with: id) {
-                self.labelSenderName?.text = value.name
-            } else {
-                self.labelSenderName?.text = values.response?.number
-            }
+        if chatType == .group, let _ = values.response?.sender {
+            self.labelSenderName?.text = values.response?.number
+
+//            if let value = RealmHelper.main.getObject(of: RealmContact.self, with: id) {
+//                self.labelSenderName?.text = value.name
+//            } else {
+//            }
             
         }
         
@@ -86,7 +86,7 @@ class ChatCell: UITableViewCell {
                     if image != nil {
                         self.imageViewAttachment?.image = image
                     }else {
-                        self.imageViewAttachment?.image = #imageLiteral(resourceName: "errorImage")
+                        self.imageViewAttachment?.image = #imageLiteral(resourceName: "backgroundImage")
                     }
                 }
                 

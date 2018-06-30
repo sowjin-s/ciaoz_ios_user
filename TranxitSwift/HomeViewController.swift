@@ -108,10 +108,17 @@
         // var rideSelectionView : RequestSelectionView?
         var locationSelectionView : LocationSelectionView?
         var requestLoaderView : LoaderView?
-        var rideStatusView : RideStatusView?
+        var rideStatusView : RideStatusView? {
+            didSet {
+                if self.rideStatusView == nil {
+                    self.floatyButton?.removeFromSuperview()
+                }
+            }
+        }
         var invoiceView : InvoiceView?
         var ratingView : RatingView?
         var rideNowView : RideNowView?
+        var floatyButton : Floaty?
         
         lazy var loader  : UIView = {
             return createActivityIndicator(self.view)

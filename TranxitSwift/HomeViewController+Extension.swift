@@ -137,6 +137,7 @@ extension HomeViewController {
             self.invoiceView?.alpha = isHide ? 0 : 1
             self.ratingView?.alpha = isHide ? 0 : 1
             self.rideNowView?.alpha = isHide ? 0 : 1
+            self.floatyButton?.alpha = isHide ? 0 : 1
         }
         
     }
@@ -200,7 +201,7 @@ extension HomeViewController {
             rideStatus.frame = CGRect(origin: CGPoint(x: 0, y: self.view.frame.height-rideStatus.frame.height), size: CGSize(width: self.view.frame.width, height: rideStatus.frame.height))
             rideStatusView = rideStatus
             self.view.addSubview(rideStatus)
-            self.addFloatingButton(with: rideStatus.frame.height, number: request.provider?.mobile, chatId: "")
+            self.addFloatingButton(with: rideStatus.frame.height, to: request.provider)
             rideStatus.show(with: .bottom, completion: nil)
         }
         // Change Provider Location 
@@ -543,24 +544,31 @@ extension HomeViewController {
     
     // MARK:- Add Floating Button
     
-    private func addFloatingButton(with padding : CGFloat, number : String?, chatId : String) {
+    private func addFloatingButton(with padding : CGFloat, to provider : Provider?) {
         
-        let floaty = Floaty()
-        floaty.plusColor = .primary
-        floaty.hasShadow = false
-        floaty.autoCloseOnTap = true
-        floaty.buttonColor = .white
-        floaty.buttonImage = #imageLiteral(resourceName: "phoneCall").withRenderingMode(.alwaysTemplate).resizeImage(newWidth: 25)
-        floaty.paddingY = padding
-        floaty.itemImageColor = .secondary
-        floaty.addItem(icon: #imageLiteral(resourceName: "call").resizeImage(newWidth: 25)) { (_) in
-            Common.call(to: number)
+        if provider != nil {
+            let floaty = Floaty()
+            floaty.plusColor = .primary
+            floaty.hasShadow = false
+            floaty.autoCloseOnTap = true
+            floaty.buttonColor = .white
+            floaty.buttonImage = #imageLiteral(resourceName: "phoneCall").withRenderingMode(.alwaysTemplate).resizeImage(newWidth: 25)
+            floaty.paddingY = padding
+            floaty.itemImageColor = .secondary
+            floaty.addItem(icon: #imageLiteral(resourceName: "call").resizeImage(newWidth: 25)) { (_) in
+                Common.call(to: provider!.mobile)
+            }
+            floaty.addItem(icon: #imageLiteral(resourceName: "chatIcon").resizeImage(newWidth: 25)) { (_) in
+                print("Chat ")
+                if let vc = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.Ids.SingleChatController) as? SingleChatController {
+                    vc.set(user: provider!)
+                    let navigation = UINavigationController(rootViewController: vc)
+                    self.present(navigation, animated: true, completion: nil)
+                }
+            }
+            self.floatyButton = floaty
+            self.viewMapOuter.addSubview(floaty)
         }
-        floaty.addItem(icon: #imageLiteral(resourceName: "chatIcon").resizeImage(newWidth: 25)) { (_) in
-            print("Chat ")
-        }
-        self.viewMapOuter.addSubview(floaty)
-        
     }
     
     
