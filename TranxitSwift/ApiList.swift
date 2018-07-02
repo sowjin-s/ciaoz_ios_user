@@ -39,6 +39,8 @@ enum Base : String{
   
     case signUp = "/api/user/signup"
     case login = "/oauth/token"
+    case googleLogin = "/api/user/auth/google"
+    case facebookLogin = "/api/user/auth/facebook"
     case getProfile = "/api/user/details"
     case updateProfile = "/api/user/update/profile"
     case resetPassword = "/api/user/reset/password"

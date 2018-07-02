@@ -201,8 +201,8 @@
                   symbolName = "User.HomeViewController.getServiceList(api: User.Base, data: Swift.Array&lt;User.Service&gt;) -&gt; ()"
                   moduleName = "User"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/css/Documents/Jeff%20Space/Appoets/Projects/TranxitBase/TranxitSwift/HomeViewController.swift"
-                  timestampString = "552061158.609189"
+                  urlString = "file:///Users/css/Documents/Jeff%20Space/Appoets/Projects/Tranxit_Rollbacked%20/tranxitswiftbase_ios_user/TranxitSwift/HomeViewController.swift"
+                  timestampString = "552240205.934782"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "870"
@@ -216,8 +216,8 @@
                   symbolName = "closure #1 () -&gt; () in User.HomeViewController.getServiceList(api: User.Base, data: Swift.Array&lt;User.Service&gt;) -&gt; ()"
                   moduleName = "User"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/css/Documents/Jeff%20Space/Appoets/Projects/TranxitBase/TranxitSwift/HomeViewController.swift"
-                  timestampString = "552061158.611571"
+                  urlString = "file:///Users/css/Documents/Jeff%20Space/Appoets/Projects/Tranxit_Rollbacked%20/tranxitswiftbase_ios_user/TranxitSwift/HomeViewController.swift"
+                  timestampString = "552240205.9365669"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "872"
@@ -304,6 +304,38 @@
             startingLineNumber = "177"
             endingLineNumber = "177"
             landmarkName = "upload(data:forUser:mime:type:metadata:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TranxitSwift/SocialLoginViewController.swift"
+            timestampString = "552240205.25667"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "236"
+            endingLineNumber = "236"
+            landmarkName = "sign(_:didSignInFor:withError:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TranxitSwift/SocialLoginViewController.swift"
+            timestampString = "552240208.440358"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "258"
+            endingLineNumber = "258"
+            landmarkName = "sign(_:dismiss:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -17,11 +17,11 @@ typealias EventType = DataEventType
 
 class FirebaseHelper{
     
-   private var ref: DatabaseReference?
+    private var ref: DatabaseReference?
     
     private var storage : Storage?
- 
-   static var shared = FirebaseHelper()
+    
+    static var shared = FirebaseHelper()
     
     // Write Text Message
     
@@ -46,7 +46,7 @@ class FirebaseHelper{
                 return
             }
             
-            self.storeData(to: userId, with: url?.absoluteString, mime: type, type: chatType)
+            self.storeData(to: userId, with: url, mime: type, type: chatType)
             
         })
         
@@ -67,7 +67,7 @@ class FirebaseHelper{
                 return
             }
             
-            self.storeData(to: userId, with: url?.absoluteString, mime: type, type: chatType)
+            self.storeData(to: userId, with: url, mime: type, type: chatType)
             
         })
         
@@ -77,8 +77,8 @@ class FirebaseHelper{
     // Update Message in Specific Path
     
     func update(chat: ChatEntity, key : String, toUser user : Int, type chatType : ChatType = .single){
-       
-        let chatPath = chatType == .group ? getGroupChat(with: user) : getRoom(forUser: user)
+        
+        let chatPath = Common.getChatId(with: user) ?? .Empty
         
         self.update(chat: chat, key: key, inRoom: chatPath)
         
@@ -98,9 +98,9 @@ extension FirebaseHelper {
     private func initializeDB(){
         
         if ref == nil {
-           let db = Database.database()
-           db.isPersistenceEnabled = true
-           self.ref = db.reference()
+            let db = Database.database()
+            db.isPersistenceEnabled = true
+            self.ref = db.reference()
         }
         
     }
@@ -120,28 +120,27 @@ extension FirebaseHelper {
         return metadata
     }
     
-
+    
     // Update Values in specific path
     
     private func update(chat : ChatEntity, key : String, inRoom room : String){
-       
+        
         self.ref?.child(room).child(key).updateChildValues(chat.JSONRepresentation)
         
     }
     
     
-   
+    
     // Common Function to Store Data
     
     private func storeData(to userId : Int, with string : String?, mime type : Mime, type chatType : ChatType){
-    
+        
         let chat = ChatEntity()
-    
         chat.read = MessageStatus.sent.rawValue
         chat.reciever = userId
         chat.sender = User.main.id
-        chat.number = .removeNil(User.main.country_code) +  .removeNil(User.main.mobile)
-    
+        chat.number = String.removeNil(User.main.mobile)
+        
         chat.timeStamp = Formatter.shared.removeDecimal(from: Date().timeIntervalSince1970)
         chat.type = type.rawValue
         
@@ -160,7 +159,7 @@ extension FirebaseHelper {
         }
         
         self.initializeDB()
-        let chatPath = chatType == .group ? getGroupChat(with: userId) : getRoom(forUser: userId)
+        let chatPath = Common.getChatId(with: userId) ?? .Empty
         self.ref?.child(chatPath).child(ref!.childByAutoId().key).setValue(chat.JSONRepresentation)
         
     }
@@ -169,11 +168,11 @@ extension FirebaseHelper {
     
     //MARK:- Upload Data to Storage Bucket
     
-   private func upload(data : Data,forUser user : Int, mime : Mime, type chatType : ChatType, metadata : StorageMetadata, completion : @escaping (_  downloadUrl : URL?) -> ())->UploadTask{
-       
-        let chatPath = chatType == .group ? getGroupChat(with: user) : getRoom(forUser: user)
-    
-        let uploadTask = self.storage?.reference(withPath: chatPath).child(ProcessInfo().globallyUniqueString+mime.ext).putData(data, metadata: metadata, completion: { (metaData, error) in
+    private func upload(data : Data,forUser user : Int, mime : Mime, type chatType : ChatType, metadata : StorageMetadata, completion : @escaping (_  downloadUrl : String?) -> ())->UploadTask{
+        
+        let chatPath = Common.getChatId(with: user) ?? .Empty//chatType == .group ? getGroupChat(with: user) : getRoom(forUser: user)
+        let ref = self.storage?.reference(withPath: chatPath).child(ProcessInfo().globallyUniqueString+mime.ext)
+        let uploadTask = ref?.putData(data, metadata: metadata, completion: { (metaData, error) in
             
             if error != nil ||  metaData == nil {
                 
@@ -181,15 +180,16 @@ extension FirebaseHelper {
                 
             } else {
                 
-                if let image = UIImage(data: data), let url = metadata.downloadURL()?.absoluteString {  // Store the uploaded image in Cache  
+                if let image = UIImage(data: data) {  // Store the uploaded image in Cache
+                    ref?.downloadURL(completion: { (url, error) in
+                        completion(url?.absoluteString)
+                        if let urlObject = url?.absoluteString {
+                            Cache.shared.setObject(image, forKey: urlObject as AnyObject)
+                        }
+                    })
                     
-                    Cache.shared.setObject(image, forKey: url as AnyObject)
                 }
-                
-                completion(metaData?.downloadURL())
-                
             }
-            
         })
         
         return uploadTask!
@@ -199,11 +199,11 @@ extension FirebaseHelper {
     
     //MARK:- Upload File to Storage Bucket
     
-    private func upload(file url : URL,forUser user : Int, mime : Mime, type chatType : ChatType, metadata : StorageMetadata, completion : @escaping (_  downloadUrl : URL?) -> ())->UploadTask{
-    
-        let chatPath = chatType == .group ? getGroupChat(with: user) : getRoom(forUser: user)
+    private func upload(file url : URL,forUser user : Int, mime : Mime, type chatType : ChatType, metadata : StorageMetadata, completion : @escaping (_  downloadUrl : String?) -> ())->UploadTask{
         
-        let uploadTask = self.storage?.reference(withPath: chatPath).child(ProcessInfo().globallyUniqueString+mime.ext).putFile(from: url, metadata: metadata, completion: { (metaData, error) in
+        let chatPath = Common.getChatId(with: user) ?? .Empty//chatType == .group ? getGroupChat(with: user) : getRoom(forUser: user)
+        let ref = self.storage?.reference(withPath: chatPath).child(ProcessInfo().globallyUniqueString+mime.ext)
+        let uploadTask = ref?.putFile(from: url, metadata: metadata, completion: { (metaData, error) in
             
             if error != nil || metaData == nil {
                 
@@ -212,8 +212,9 @@ extension FirebaseHelper {
                 
             } else {
                 
-                completion(metaData?.downloadURL())
-                
+                ref?.downloadURL(completion: { (url, error) in
+                    completion(url?.absoluteString)
+                })
             }
             
             
@@ -238,7 +239,7 @@ extension FirebaseHelper {
         
         self.initializeDB()
         
-       return self.ref!.child(path).queryOrdered(byChild: "timeStamp").observe(with, with: { (snapShot) in
+        return self.ref!.child(path).queryOrdered(byChild: "timeStamp").observe(with, with: { (snapShot) in
             
             value(self.getModal(from: snapShot))
             
@@ -249,7 +250,6 @@ extension FirebaseHelper {
     }
     
     // Remove Firebase Observers
-    
     func remove(observers : [UInt]){
         
         self.initializeDB()
@@ -270,7 +270,7 @@ extension FirebaseHelper {
         
         self.initializeDB()
         
-       return self.ref!.child(path).queryLimited(toLast: 1).observe(with, with: { (snapShot) in
+        return self.ref!.child(path).queryLimited(toLast: 1).observe(with, with: { (snapShot) in
             
             value(self.getModal(from: snapShot))
             
@@ -289,10 +289,10 @@ extension FirebaseHelper {
         
         if let snaps = snapShot.valueInExportFormat() as? [String : NSDictionary] {
             
-           for snap in snaps {
-            
-                 self.getChatEntity(with: &response, chat: &chat, snap: snap)
-                 chatArray.append(response!)
+            for snap in snaps {
+                
+                self.getChatEntity(with: &response, chat: &chat, snap: snap)
+                chatArray.append(response!)
                 
             }
             
@@ -304,7 +304,7 @@ extension FirebaseHelper {
         
         
         return chatArray.sorted(by: { (obj1, obj2) -> Bool in
-            return Int.val(val: obj1.response?.timeStamp)<Int.val(val: obj2.response?.timeStamp)
+            return Int.removeNil(obj1.response?.timeStamp)<Int.removeNil(obj2.response?.timeStamp)
         })
     }
     
@@ -333,5 +333,3 @@ extension FirebaseHelper {
     
     
 }
-
-

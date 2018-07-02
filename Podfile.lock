@@ -12,6 +12,14 @@ PODS:
   - DateTimePicker (1.2.1)
   - DynamicBlurView (2.0.2)
   - Fabric (1.7.7)
+  - FacebookCore (0.3.1):
+    - Bolts (~> 1.8)
+    - FBSDKCoreKit (~> 4.33)
+  - FacebookLogin (0.3.1):
+    - Bolts (~> 1.8)
+    - FacebookCore (~> 0.3.1)
+    - FBSDKCoreKit (~> 4.33)
+    - FBSDKLoginKit (~> 4.33)
   - FBSDKCoreKit (4.34.0):
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.34.0):
@@ -104,6 +112,8 @@ DEPENDENCIES:
   - Crashlytics (~> 3.10.2)
   - DateTimePicker
   - Fabric (~> 1.7.7)
+  - FacebookCore
+  - FacebookLogin
   - FBSDKLoginKit
   - Firebase/Core
   - Firebase/Database
@@ -119,7 +129,7 @@ DEPENDENCIES:
   - PopupDialog (~> 0.7)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - Alamofire
     - Bolts
     - Cache
@@ -127,6 +137,8 @@ SPEC REPOS:
     - DateTimePicker
     - DynamicBlurView
     - Fabric
+    - FacebookCore
+    - FacebookLogin
     - FBSDKCoreKit
     - FBSDKLoginKit
     - Firebase
@@ -166,6 +178,8 @@ SPEC CHECKSUMS:
   DateTimePicker: c7b10f7dfe6eb06014c88df964a0a994f246b791
   DynamicBlurView: aa6db4defc6e537eb86fc5e58dd3991666178399
   Fabric: bda89e242bce1b7b8ab264248cf3407774ce0095
+  FacebookCore: 33078ef1d7d76b73f7e8c990dca7d3ea6db8d22f
+  FacebookLogin: 6f15bf4fefd7a8865abbfa8fcd7f3dfd87aa275f
   FBSDKCoreKit: 0ff57f093b85c8c9d5aba697d3edf68a8960ce78
   FBSDKLoginKit: 8c78f57a145afb756e4755e69195ebe08a42466e
   Firebase: 25ed0412036d7d008568d1fb4d2e9d81ea8a0a2c
@@ -197,6 +211,6 @@ SPEC CHECKSUMS:
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   PopupDialog: 39598b7d41719f5c025b4b70e62728bae7734fef
 
-PODFILE CHECKSUM: 9c12472d1699728aa52dab65964df6c4d243c289
+PODFILE CHECKSUM: 9d89f1bc1489e188703b78f6b411e3de108256b7
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.3

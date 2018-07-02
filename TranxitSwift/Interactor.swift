@@ -43,7 +43,7 @@ extension Interactor : PostInteractorOutputProtocol {
         
         switch api {
             
-         case .login :
+         case .login, .facebookLogin, .googleLogin :
             self.presenter?.sendOath(api: api, data: response)
             
          case .getProfile, .updateProfile, .signUp:
@@ -61,8 +61,8 @@ extension Interactor : PostInteractorOutputProtocol {
         case .estimateFare:
             self.presenter?.sendEstimateFare(api: api, data: response)
         
-        case .sendRequest:
-            self.presenter?.sendRequest(api: api, data: response)
+//        case .sendRequest:
+//            self.presenter?.sendRequest(api: api, data: response)
         
         case .historyList, .upcomingList, .pastTripDetail, .upcomingTripDetail:
             self.presenter?.sendRequestArray(api: api, data: response)

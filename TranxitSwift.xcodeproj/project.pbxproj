@@ -33,8 +33,6 @@
 		0811B17820E7B2AD00B78323 /* ChatSender.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0811B17320E7B2AB00B78323 /* ChatSender.xib */; };
 		0811B17920E7B2AD00B78323 /* ChatReciever.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0811B17420E7B2AC00B78323 /* ChatReciever.xib */; };
 		0811B17A20E7B2AD00B78323 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0811B17520E7B2AD00B78323 /* ChatCell.swift */; };
-		0811B18020E7B53000B78323 /* FirebaseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0811B17E20E7B52F00B78323 /* FirebaseConstants.swift */; };
-		0811B18120E7B53000B78323 /* FirebaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0811B17F20E7B52F00B78323 /* FirebaseHelper.swift */; };
 		0811B18320E7B55100B78323 /* SelectImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0811B18220E7B55100B78323 /* SelectImageView.swift */; };
 		08147B7F208A1A9700C5CFD3 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08147B7E208A1A9600C5CFD3 /* SafariServices.framework */; };
 		08147B81208A23F600C5CFD3 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08147B80208A23F600C5CFD3 /* Bundle.swift */; };
@@ -108,12 +106,6 @@
 		086BAF6220078A200087F15A /* ErrorMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BAF6120078A200087F15A /* ErrorMessages.swift */; };
 		086BAF6420078E220087F15A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BAF6320078E220087F15A /* ViewController.swift */; };
 		086C90132099F34A002CD9B1 /* SocialLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086C90122099F34A002CD9B1 /* SocialLoginViewController.swift */; };
-		086C901A209A05EA002CD9B1 /* ClanPro-NarrNews.otf in Resources */ = {isa = PBXBuildFile; fileRef = 086C9014209A05E6002CD9B1 /* ClanPro-NarrNews.otf */; };
-		086C901B209A05EA002CD9B1 /* ClanPro-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = 086C9015209A05E7002CD9B1 /* ClanPro-Book.otf */; };
-		086C901C209A05EA002CD9B1 /* ClanPro-NarrBook.otf in Resources */ = {isa = PBXBuildFile; fileRef = 086C9016209A05E8002CD9B1 /* ClanPro-NarrBook.otf */; };
-		086C901D209A05EA002CD9B1 /* ClanPro-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 086C9017209A05E8002CD9B1 /* ClanPro-Medium.otf */; };
-		086C901E209A05EA002CD9B1 /* ClanPro-NarrMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 086C9018209A05E9002CD9B1 /* ClanPro-NarrMedium.otf */; };
-		086C901F209A05EA002CD9B1 /* ClanPro-News.otf in Resources */ = {isa = PBXBuildFile; fileRef = 086C9019209A05EA002CD9B1 /* ClanPro-News.otf */; };
 		0875010320D7D4EC00CFA858 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875010220D7D4EC00CFA858 /* IntentHandler.swift */; };
 		0875010720D7D4EC00CFA858 /* SiriIntent.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0875010020D7D4EC00CFA858 /* SiriIntent.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0875011020D7F22F00CFA858 /* OfflineBookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875010F20D7F22F00CFA858 /* OfflineBookingViewController.swift */; };
@@ -167,6 +159,8 @@
 		08FA708A20E3CAA3009B060A /* User.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08FA708C20E3CAA3009B060A /* User.storyboard */; };
 		08FA70A120E3CC1F009B060A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08FA70A320E3CC1F009B060A /* Localizable.strings */; };
 		08FA70AC20E3E695009B060A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08FA70AB20E3E695009B060A /* Main.storyboard */; };
+		08FA91A120EA7C6700723B26 /* FirebaseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FA919F20EA7C6700723B26 /* FirebaseConstants.swift */; };
+		08FA91A220EA7C6700723B26 /* FirebaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FA91A020EA7C6700723B26 /* FirebaseHelper.swift */; };
 		38492B362000F65E001830AD /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38492B352000F65E001830AD /* View.swift */; };
 		38492B382000F6A8001830AD /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38492B372000F6A8001830AD /* String.swift */; };
 		38492B3A2000F741001830AD /* JsonSerializing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38492B392000F741001830AD /* JsonSerializing.swift */; };
@@ -269,8 +263,6 @@
 		0811B17320E7B2AB00B78323 /* ChatSender.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatSender.xib; sourceTree = "<group>"; };
 		0811B17420E7B2AC00B78323 /* ChatReciever.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatReciever.xib; sourceTree = "<group>"; };
 		0811B17520E7B2AD00B78323 /* ChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
-		0811B17E20E7B52F00B78323 /* FirebaseConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FirebaseConstants.swift; path = ../../SMSCountry/WhatsAppClone/FirebaseConstants.swift; sourceTree = "<group>"; };
-		0811B17F20E7B52F00B78323 /* FirebaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FirebaseHelper.swift; path = ../../SMSCountry/WhatsAppClone/FirebaseHelper.swift; sourceTree = "<group>"; };
 		0811B18220E7B55100B78323 /* SelectImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectImageView.swift; sourceTree = "<group>"; };
 		08147B7E208A1A9600C5CFD3 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		08147B80208A23F600C5CFD3 /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
@@ -409,6 +401,8 @@
 		08FA70A920E3E61C009B060A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08FA70AB20E3E695009B060A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		08FA70AE20E3E6D6009B060A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Launch.strings; sourceTree = "<group>"; };
+		08FA919F20EA7C6700723B26 /* FirebaseConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseConstants.swift; sourceTree = "<group>"; };
+		08FA91A020EA7C6700723B26 /* FirebaseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseHelper.swift; sourceTree = "<group>"; };
 		12A5860A967AABF8D0D61024 /* Pods-UserUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UserUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-UserUITests/Pods-UserUITests.release.xcconfig"; sourceTree = "<group>"; };
 		38492B352000F65E001830AD /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		38492B372000F6A8001830AD /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -545,8 +539,8 @@
 		0811B17B20E7B52100B78323 /* Firebase */ = {
 			isa = PBXGroup;
 			children = (
-				0811B17E20E7B52F00B78323 /* FirebaseConstants.swift */,
-				0811B17F20E7B52F00B78323 /* FirebaseHelper.swift */,
+				08FA919F20EA7C6700723B26 /* FirebaseConstants.swift */,
+				08FA91A020EA7C6700723B26 /* FirebaseHelper.swift */,
 				0811B16620E7AF6400B78323 /* ChatEntity.swift */,
 				0811B16520E7AF6300B78323 /* ChatResponse.swift */,
 			);
@@ -1734,12 +1728,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				086C901B209A05EA002CD9B1 /* ClanPro-Book.otf in Resources */,
 				08FA708A20E3CAA3009B060A /* User.storyboard in Resources */,
 				080FB9D920BC452B008C23F5 /* AccountKitStrings.bundle in Resources */,
 				08001A0C203C241E0076D324 /* countryCodes.json in Resources */,
 				08BE879720DA421B00876C93 /* Map_style.json in Resources */,
-				086C901F209A05EA002CD9B1 /* ClanPro-News.otf in Resources */,
 				0811B16F20E7B12A00B78323 /* mesageTone.wav in Resources */,
 				8894E22B1FE7D7980097B4B3 /* Assets.xcassets in Resources */,
 				083A59AB20A434E000D64574 /* LocationTableViewCell.xib in Resources */,
@@ -1756,20 +1748,16 @@
 				08FA708720E3CA99009B060A /* Launch.storyboard in Resources */,
 				083A59B220A4351D00D64574 /* LocationHeaderTableViewCell.xib in Resources */,
 				085361A620B8308A001DD97C /* PassbookTableViewCell.xib in Resources */,
-				086C901E209A05EA002CD9B1 /* ClanPro-NarrMedium.otf in Resources */,
 				0823428C20AD7AB80055DDF8 /* bouncy_mapmaker.json in Resources */,
 				08FA70AC20E3E695009B060A /* Main.storyboard in Resources */,
-				086C901D209A05EA002CD9B1 /* ClanPro-Medium.otf in Resources */,
 				082D1B9920933D300000B7C8 /* WalkThroughView.xib in Resources */,
 				088185C320A4688200F07AFF /* GoogleService-Info.plist in Resources */,
 				083617B620B6AE3A009C9658 /* InvoiceView.xib in Resources */,
 				08001A0D203C241E0076D324 /* CountryPicker.bundle in Resources */,
 				0826C13620B011C80005D0D8 /* RequestSelectionView.xib in Resources */,
-				086C901A209A05EA002CD9B1 /* ClanPro-NarrNews.otf in Resources */,
 				0811B17920E7B2AD00B78323 /* ChatReciever.xib in Resources */,
 				0802718920A2DC0100EAE8C8 /* LocationSelectionView.xib in Resources */,
 				082F77D220A5AA2200D6474B /* ServiceSelectionCollectionViewCell.xib in Resources */,
-				086C901C209A05EA002CD9B1 /* ClanPro-NarrBook.otf in Resources */,
 				083617CD20B714CE009C9658 /* YourTripCell.xib in Resources */,
 				08A39DA020B5BB8100314935 /* RideStatusView.xib in Resources */,
 				081548FC20A1DEA2004D0F7D /* heart.json in Resources */,
@@ -1820,6 +1808,8 @@
 				"${BUILT_PRODUCTS_DIR}/DynamicBlurView/DynamicBlurView.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FacebookCore/FacebookCore.framework",
+				"${BUILT_PRODUCTS_DIR}/FacebookLogin/FacebookLogin.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/Hue/Hue.framework",
@@ -1842,6 +1832,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DynamicBlurView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookLogin.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hue.framework",
@@ -1975,8 +1967,6 @@
 				08F595EA2076466300369048 /* ParallaxHeader.swift in Sources */,
 				08F3CBC02024720A00F5EEDF /* Formatter.swift in Sources */,
 				087DCFAE2077920A0040BDBB /* Sequence.swift in Sources */,
-				0811B18020E7B53000B78323 /* FirebaseConstants.swift in Sources */,
-				0811B18120E7B53000B78323 /* FirebaseHelper.swift in Sources */,
 				08BE879C20DA429800876C93 /* Home+CoreDataProperties.swift in Sources */,
 				084182B5200F508900527D0D /* TableView.swift in Sources */,
 				08C9E90E20D244F7002928EA /* Rating.swift in Sources */,
@@ -2021,6 +2011,7 @@
 				8871FBD51FE7DC8E002335D5 /* Protocol.swift in Sources */,
 				083A59AA20A434E000D64574 /* LocationTableViewCell.swift in Sources */,
 				082C441E20E7913A00A7C892 /* FloatyWindow.swift in Sources */,
+				08FA91A220EA7C6700723B26 /* FirebaseHelper.swift in Sources */,
 				0826C13820B011DC0005D0D8 /* RequestSelectionView.swift in Sources */,
 				08F595E32076462A00369048 /* UIAplication+RLT.swift in Sources */,
 				089B4F7720C10FD600DDEAF3 /* HomePageHelper.swift in Sources */,
@@ -2048,6 +2039,7 @@
 				085361A920B85CBF001DD97C /* SettingTableViewController.swift in Sources */,
 				089B4F7920C1144F00DDEAF3 /* Provider.swift in Sources */,
 				0802718B20A2FF1600EAE8C8 /* GoogleMapsHelper.swift in Sources */,
+				08FA91A120EA7C6700723B26 /* FirebaseConstants.swift in Sources */,
 				082F77CB20A5A12100D6474B /* ServiceSelectionView.swift in Sources */,
 				08E9675B20D2C19A0077DB4F /* RateView.swift in Sources */,
 				0805BDBE209C41AF00ACDC38 /* LocationSelectionViewController.swift in Sources */,

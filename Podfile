@@ -25,6 +25,8 @@ target 'User' do
     pod 'Firebase/Storage'
     pod 'ImagePicker'
     pod 'Lightbox'
+    pod 'FacebookCore'
+    pod 'FacebookLogin'
     
   target 'UserTests' do
     inherit! :search_paths

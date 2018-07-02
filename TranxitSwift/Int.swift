@@ -16,6 +16,7 @@ extension Int {
     
 }
 
+
 extension Float {
     
     static func removeNil(_ val : Float?)->Float{

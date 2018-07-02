@@ -12,7 +12,7 @@
 		<key>SiriIntent.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>27</integer>
+			<integer>29</integer>
 		</dict>
 		<key>SiriIntentUI.xcscheme</key>
 		<dict>
@@ -22,7 +22,7 @@
 		<key>User.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>26</integer>
+			<integer>28</integer>
 		</dict>
 	</dict>
 </dict>

@@ -15,7 +15,8 @@ class UserData : UserBase {
     var last_name : String?
     var email : String?
     var mobile : Int?
-    
+    var accessToken : String?
+
     var device_type : DeviceType?
     var device_token : String?
     var login_by : LoginType?
