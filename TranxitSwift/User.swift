@@ -24,8 +24,9 @@ class User : NSObject, NSCoding, JSONSerializable {
     var refreshToken : String?
     var wallet_balance : Int?
     var sos : String?
+    var loginType : String?
     
-    init(id : Int?, accessToken : String?, firstName : String?, lastName : String?, mobile : String?, email : String?, currency : String?, picture : String?, refreshToken : String?, walletBalance : Int?, sos : String?){
+    init(id : Int?, accessToken : String?, firstName : String?, lastName : String?, mobile : String?, email : String?, currency : String?, picture : String?, refreshToken : String?, walletBalance : Int?, sos : String?, loginType : String?){
                 
         self.id = id
         self.accessToken = accessToken
@@ -38,11 +39,12 @@ class User : NSObject, NSCoding, JSONSerializable {
         self.refreshToken = refreshToken
         self.wallet_balance = walletBalance
         self.sos = sos
+        self.loginType = loginType
     }
     
     convenience
     override init(){
-        self.init(id: nil, accessToken: nil, firstName : nil, lastName : nil, mobile : nil, email : nil, currency : nil, picture : nil, refreshToken : nil, walletBalance : nil, sos : nil)
+        self.init(id: nil, accessToken: nil, firstName : nil, lastName : nil, mobile : nil, email : nil, currency : nil, picture : nil, refreshToken : nil, walletBalance : nil, sos : nil, loginType : nil)
     }
     
     
@@ -59,7 +61,8 @@ class User : NSObject, NSCoding, JSONSerializable {
         let refreshToken = aDecoder.decodeObject(forKey: Keys.list.refreshToken) as? String
         let walletBalance = aDecoder.decodeObject(forKey: Keys.list.wallet) as? Int
         let sos = aDecoder.decodeObject(forKey: Keys.list.sos) as? String
-        self.init(id: id, accessToken : accessToken, firstName : firstName, lastName : lastName, mobile : mobile, email: email, currency : currency, picture : picture, refreshToken : refreshToken, walletBalance : walletBalance, sos : sos)
+        let loginType = aDecoder.decodeObject(forKey: Keys.list.loginType) as? String
+        self.init(id: id, accessToken : accessToken, firstName : firstName, lastName : lastName, mobile : mobile, email: email, currency : currency, picture : picture, refreshToken : refreshToken, walletBalance : walletBalance, sos : sos,loginType : loginType)
         
     }
     
@@ -77,6 +80,7 @@ class User : NSObject, NSCoding, JSONSerializable {
         aCoder.encode(self.refreshToken, forKey: Keys.list.refreshToken)
         aCoder.encode(self.wallet_balance, forKey: Keys.list.wallet)
         aCoder.encode(self.sos, forKey: Keys.list.sos)
+        aCoder.encode(self.loginType, forKey: Keys.list.loginType)
     }
     
     

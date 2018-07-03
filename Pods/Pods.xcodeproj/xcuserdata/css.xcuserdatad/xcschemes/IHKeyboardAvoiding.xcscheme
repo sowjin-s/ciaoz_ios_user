@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BCDF9888D8B2FD961C06378BADD5C442"
-               BuildableName = "Stripe.framework"
-               BlueprintName = "Stripe"
+               BlueprintIdentifier = "033B2F5EFC98402794E5FA4A2E42BD9F"
+               BuildableName = "IHKeyboardAvoiding.framework"
+               BlueprintName = "IHKeyboardAvoiding"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BCDF9888D8B2FD961C06378BADD5C442"
-            BuildableName = "Stripe.framework"
-            BlueprintName = "Stripe"
+            BlueprintIdentifier = "033B2F5EFC98402794E5FA4A2E42BD9F"
+            BuildableName = "IHKeyboardAvoiding.framework"
+            BlueprintName = "IHKeyboardAvoiding"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

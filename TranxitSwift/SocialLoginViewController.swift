@@ -73,8 +73,11 @@ extension SocialLoginViewController {
         switch (indexPath.section,indexPath.row) {
         case (0,0):
             self.facebookLogin()
+            User.main.loginType = LoginType.facebook.rawValue
         case (0,1):
             self.googleLogin()
+            User.main.loginType = LoginType.google.rawValue
+
         default:
             break
         }

@@ -145,6 +145,7 @@ extension YourTripsDetailViewController {
     
     private func setLayouts() {
         
+        self.imageViewProvider.makeRoundedCorner()
         let height = tableView.tableFooterView?.frame.origin.y ?? 0//(self.buttonViewReciptAndCall.convert(self.buttonViewReciptAndCall.frame, to: UIApplication.shared.keyWindow ?? self.tableView).origin.y+self.buttonViewReciptAndCall.frame.height)
         guard height < UIScreen.main.bounds.height else { return }
         let footerHeight = UIScreen.main.bounds.height-height

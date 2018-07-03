@@ -221,6 +221,7 @@ struct Keys {
     let refreshToken = "refreshToken"
     let wallet = "wallet"
     let sos = "sos"
+    let loginType = "LoginType"
 }
 
 //ENUM TRIP TYPE

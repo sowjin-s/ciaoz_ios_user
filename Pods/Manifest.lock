@@ -87,10 +87,11 @@ PODS:
     - GoogleSymbolUtilities (~> 1.1)
   - GTMSessionFetcher/Core (1.1.15)
   - Hue (3.0.1)
+  - IHKeyboardAvoiding (4.2)
   - ImagePicker (3.0.0)
   - Imaginary (3.0.3):
     - Cache (~> 4.0)
-  - IQKeyboardManagerSwift (6.0.4)
+  - IQKeyboardManagerSwift (5.0.8)
   - KWDrawerController (4.1.6):
     - KWDrawerController/Core (= 4.1.6)
   - KWDrawerController/Core (4.1.6)
@@ -122,8 +123,9 @@ DEPENDENCIES:
   - Google/SignIn
   - GoogleMaps
   - GooglePlaces
+  - IHKeyboardAvoiding
   - ImagePicker
-  - IQKeyboardManagerSwift (~> 6.0.0)
+  - IQKeyboardManagerSwift (~> 5.0.0)
   - KWDrawerController (~> 4.1.6)
   - Lightbox
   - lottie-ios
@@ -162,6 +164,7 @@ SPEC REPOS:
     - GoogleUtilities
     - GTMSessionFetcher
     - Hue
+    - IHKeyboardAvoiding
     - ImagePicker
     - Imaginary
     - IQKeyboardManagerSwift
@@ -204,9 +207,10 @@ SPEC CHECKSUMS:
   GoogleUtilities: 8bbc733218aad26306f9d4a253823986110e3358
   GTMSessionFetcher: 5fa5b80fd20e439ef5f545fb2cb3ca6c6714caa2
   Hue: 93e852fa6211ab35922ad8c293f51c43d6c79eb2
+  IHKeyboardAvoiding: 9fbf816b7c3c84911964802ff110d12caf40ebef
   ImagePicker: 973953c25960fe04729a7082a56194321c6762d2
   Imaginary: 9b45836a5af881f452a86e0a1215772ae4712d00
-  IQKeyboardManagerSwift: 36dbe324b4f9793f5f41ba5227f3e7c76dfefd50
+  IQKeyboardManagerSwift: 2e7dc7f98c111458c1ea2b373f893e8cf95e2b97
   KWDrawerController: bf8fc10ddc596ddbfdabda401357a99dba04a1c8
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   Lightbox: 2dc267df8be2285bc7724cb11cbbf4aaaf59dced
@@ -215,6 +219,6 @@ SPEC CHECKSUMS:
   PopupDialog: 39598b7d41719f5c025b4b70e62728bae7734fef
   Stripe: 76c203e21555089b708e6cbe972a3e3baf1ab4d8
 
-PODFILE CHECKSUM: 1eec6e41b2fb460acb8f5d43756ccfe0a56c7655
+PODFILE CHECKSUM: 10180ea0eb019e2fdabdb9e16b380d3ca4449bb3
 
 COCOAPODS: 1.5.3

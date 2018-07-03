@@ -216,7 +216,7 @@ extension PasswordViewController : PostViewProtocol {
     func getProfile(api: Base, data: Profile?) {
         
         guard data != nil  else { return  }
-        
+        User.main.loginType = LoginType.manual.rawValue
         Common.storeUserData(from: data)
         storeInUserDefaults()
         let drawer = Router.main.instantiateViewController(withIdentifier: Storyboard.Ids.DrawerController)

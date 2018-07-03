@@ -8,7 +8,7 @@
 
 import UIKit
 import Stripe
-import IQKeyboardManagerSwift
+//import IQKeyboardManagerSwift
 
 class PaymentViewController: UITableViewController {
     
@@ -20,7 +20,7 @@ class PaymentViewController: UITableViewController {
     
     var isChangingPayment = false
    
-    //var isEnabled = false
+    var isEnabled = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,17 +31,17 @@ class PaymentViewController: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-//
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        self.isEnabled = IQKeyboardManager.shared.enable
-//        IQKeyboardManager.shared.enable = false
-//    }
-//
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewDidDisappear(animated)
-//        IQKeyboardManager.shared.enable = self.isEnabled
-//    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        //self.isEnabled = IQKeyboardManager.shared.enable
+        //IQKeyboardManager.shared.enable = false
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        //IQKeyboardManager.shared.enable = self.isEnabled
+    }
 }
 
 //MARK:- Methods

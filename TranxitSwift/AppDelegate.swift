@@ -41,9 +41,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       //  return true
        
         
-         let navigationController = UINavigationController(rootViewController: Router.setWireFrame())
-         navigationController.isNavigationBarHidden = true
-         window?.rootViewController = navigationController
+        
+         window?.rootViewController = Router.setWireFrame()
          window?.becomeKey()
          window?.makeKeyAndVisible()
          DispatchQueue.global(qos: .background).async {
@@ -140,7 +139,7 @@ extension AppDelegate {
     
     private func IQKeyboard() {
         
-        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.sharedManager().enable = false
     }
     
     private func siri() {

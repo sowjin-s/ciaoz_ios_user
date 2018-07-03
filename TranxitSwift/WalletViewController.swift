@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import IHKeyboardAvoiding
 
 class WalletViewController: UIViewController {
     
     @IBOutlet private weak var labelBalance : Label!
     @IBOutlet private weak var textFieldAmount : UITextField!
-    
+    @IBOutlet private weak var viewWallet : UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,11 +23,17 @@ class WalletViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-//    
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(animated)
-//        self.navigationController?.isNavigationBarHidden = true
-//    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        KeyboardAvoiding.avoidingView = self.viewWallet
+      //  IQKeyboardManager.sharedManager().enable = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+       // IQKeyboardManager.sharedManager().enable = false
+    }
     
 }
 
@@ -40,6 +47,8 @@ extension WalletViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.backButtonClick))
         self.navigationItem.title = Constants.string.wallet.localize()
         self.setDesign()
+        self.labelBalance.text = String.removeNil(User.main.currency)+" "+"\(User.main.wallet_balance ?? 0)"
+        self.textFieldAmount.delegate = self
     }
     
     // MARK:- Set Designs
@@ -63,4 +72,16 @@ extension WalletViewController {
         print("Clicked")
     }
     
+}
+
+
+extension WalletViewController : UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return textField.resignFirstResponder()
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+     //   print(IQKeyboardManager.sharedManager().keyboardDistanceFromTextField)
+    }
 }

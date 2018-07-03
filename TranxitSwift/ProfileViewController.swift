@@ -90,6 +90,7 @@ extension ProfileViewController {
         self.view.dismissKeyBoardonTap()
         self.presenter?.get(api: .getProfile, parameters: nil)
         self.tableView.tableHeaderView?.bounds.size = CGSize(width: self.tableView.bounds.width, height: 200)
+        self.buttonChangePassword.isHidden = (User.main.loginType != LoginType.manual.rawValue)
     }
     
     // MARK:- Set Profile Details

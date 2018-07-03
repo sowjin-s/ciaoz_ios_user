@@ -7,22 +7,26 @@
 //
 
 import UIKit
+//import IQKeyboardManagerSwift
+import IHKeyboardAvoiding
 
 class CouponViewController: UIViewController {
 
     @IBOutlet private weak var labelMessage : UILabel!
     @IBOutlet private var textFieldCouponCode : TextField!
     @IBOutlet private weak var labelAddCouponString : UILabel!
+    @IBOutlet private weak var viewCoupon : UIView!
     
     lazy var loader  : UIView = {
         return createActivityIndicator(self.view)
     }()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initalLoads()
-        
+//        //IQKeyboardManager.shared.enableDebugging = true
+//        //IQKeyboardManager.shared.enable = false
+        KeyboardAvoiding.avoidingView = self.viewCoupon
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,10 +34,6 @@ class CouponViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(animated)
-//        self.navigationController?.isNavigationBarHidden = true
-//    }
     
 }
 
@@ -85,10 +85,14 @@ extension CouponViewController {
 
 extension CouponViewController : UITextFieldDelegate {
     
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         return textField.resignFirstResponder()
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+      //  print("begin", IQKeyboardManager.sharedManager().keyboardDistanceFromTextField)
+        
     }
 }
 
