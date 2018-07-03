@@ -94,7 +94,7 @@ extension PaymentViewController {
         let cardController = STPAddCardViewController(configuration: config, theme: theme)
         cardController.delegate = self
         cardController.navigationItem.title = cardController.navigationItem.title?.localize()
-        self.present(cardController, animated: true, completion: nil)
+        self.navigationController?.pushViewController(cardController, animated: true)
     }
     
 }
