@@ -1681,7 +1681,7 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
-								enabled = 0;
+								enabled = 1;
 							};
 							com.apple.Siri = {
 								enabled = 1;
