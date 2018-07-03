@@ -27,7 +27,8 @@ target 'User' do
     pod 'Lightbox'
     pod 'FacebookCore'
     pod 'FacebookLogin'
-    
+    pod 'Stripe'
+
   target 'UserTests' do
     inherit! :search_paths
     # Pods for testing

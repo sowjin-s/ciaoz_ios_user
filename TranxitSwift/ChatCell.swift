@@ -99,7 +99,7 @@ class ChatCell: UITableViewCell {
         }
         
         self.labelCell?.textColor = isRecieved ? .black : .white
-        self.viewCell.backgroundColor = isRecieved ? .white : .lightBlue
+        self.viewCell.backgroundColor = isRecieved ? .white : UIColor.lightGray
         self.labelTime.text = Formatter.shared.relativePast(for: Date(timeIntervalSince1970: TimeInterval(values?.timeStamp ?? 0)))
         self.layoutIfNeeded()
  

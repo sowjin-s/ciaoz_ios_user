@@ -11,6 +11,7 @@ import Foundation
 import PopupDialog
 
 var currentBundle : Bundle!
+var selectedShortCutItem : CoreDataEntity?
 
 // Store Favourite Locations
 

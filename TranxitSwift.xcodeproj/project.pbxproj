@@ -969,6 +969,7 @@
 		0846135F20627389002616EF /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				08E8D79720EB6DEA00DA34AF /* Stripe */,
 				0811B18420E7B55500B78323 /* ImagePicker */,
 				0811B17B20E7B52100B78323 /* Firebase */,
 				08E2B21F20C9583D002E689B /* CoreData */,
@@ -1189,6 +1190,13 @@
 				08E2B21920C94F49002E689B /* Model.xcdatamodeld */,
 			);
 			name = CoreData;
+			sourceTree = "<group>";
+		};
+		08E8D79720EB6DEA00DA34AF /* Stripe */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Stripe;
 			sourceTree = "<group>";
 		};
 		08E9675C20D2C19F0077DB4F /* Rate View */ = {
@@ -1819,6 +1827,7 @@
 				"${BUILT_PRODUCTS_DIR}/KWDrawerController/KWDrawerController.framework",
 				"${BUILT_PRODUCTS_DIR}/Lightbox/Lightbox.framework",
 				"${BUILT_PRODUCTS_DIR}/PopupDialog/PopupDialog.framework",
+				"${BUILT_PRODUCTS_DIR}/Stripe/Stripe.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -1843,6 +1852,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KWDrawerController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lightbox.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PopupDialog.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Stripe.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",

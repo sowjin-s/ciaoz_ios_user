@@ -106,6 +106,7 @@ PODS:
   - nanopb/encode (0.3.8)
   - PopupDialog (0.7.1):
     - DynamicBlurView (~> 2.0)
+  - Stripe (13.0.3)
 
 DEPENDENCIES:
   - Alamofire
@@ -127,6 +128,7 @@ DEPENDENCIES:
   - Lightbox
   - lottie-ios
   - PopupDialog (~> 0.7)
+  - Stripe
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -169,6 +171,7 @@ SPEC REPOS:
     - lottie-ios
     - nanopb
     - PopupDialog
+    - Stripe
 
 SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
@@ -210,7 +213,8 @@ SPEC CHECKSUMS:
   lottie-ios: d699fdee68d7b63e721d949388b015fef1aaa4ac
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   PopupDialog: 39598b7d41719f5c025b4b70e62728bae7734fef
+  Stripe: 76c203e21555089b708e6cbe972a3e3baf1ab4d8
 
-PODFILE CHECKSUM: 9d89f1bc1489e188703b78f6b411e3de108256b7
+PODFILE CHECKSUM: 1eec6e41b2fb460acb8f5d43756ccfe0a56c7655
 
 COCOAPODS: 1.5.3

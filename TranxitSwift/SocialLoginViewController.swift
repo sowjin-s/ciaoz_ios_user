@@ -18,8 +18,7 @@ class SocialLoginViewController: UITableViewController {
     private let tableCellId = "SocialLoginCell"
     private var isfaceBook = false
     
-    private var idToken : String?
-    private var faceBookAccessToken : String?
+    private var accessToken : String?
     
     private lazy var loader : UIView = {
         return createActivityIndicator(UIScreen.main.focusedView ?? self.view)
@@ -69,9 +68,9 @@ extension SocialLoginViewController {
     // MARK:- Socail Login
     
     private func didSelect(at indexPath : IndexPath) {
-        
+       
+        accessToken = nil // reset access token
         switch (indexPath.section,indexPath.row) {
-            
         case (0,0):
             self.facebookLogin()
         case (0,1):
@@ -113,7 +112,7 @@ extension SocialLoginViewController {
                 break
             case .success(_ , _, let accessToken):
                 print(accessToken)
-                self.faceBookAccessToken = accessToken.authenticationToken
+                self.accessToken = accessToken.authenticationToken
                 self.accountKit()
                 break
             }
@@ -176,13 +175,8 @@ extension SocialLoginViewController : AKFViewControllerDelegate {
                     return
                 }
                 
-                if self.isfaceBook {
-                    self.loadAPI(accessToken: self.faceBookAccessToken, phoneNumber: numberInt, loginBy: .facebook)
-                    
-                }else {
-                    
-                    self.loadAPI(accessToken: self.idToken, phoneNumber: numberInt, loginBy: .google)
-                }
+                let loginBy : LoginType = self.isfaceBook ? .facebook : .google
+                self.loadAPI(accessToken: self.accessToken, phoneNumber: numberInt, loginBy: loginBy)
                 
             })
             
@@ -238,9 +232,9 @@ extension SocialLoginViewController : GIDSignInDelegate, GIDSignInUIDelegate{
         guard user != nil else {
             return
         }
-        self.idToken = user.authentication.accessToken
+        self.accessToken = user.authentication.accessToken
         print(user.profile, error)
-        
+        accountKit()
         //  UserData.main.set(name: String.removeNil(user.profile.name), email: String.removeNil(user.profile.email),image: String.removeNil(user.profile.imageURL(withDimension: 50).absoluteString))
         
     }
@@ -282,15 +276,12 @@ extension SocialLoginViewController : PostViewProtocol {
     }
     
     func getOath(api: Base, data: LoginRequest?) {
-        if api == .facebookLogin, let accessToken = data?.access_token {
-            User.main.accessToken = accessToken
-            storeInUserDefaults()
+        if api == .facebookLogin, let accessTokenString = data?.access_token {
+            User.main.accessToken = accessTokenString
+            User.main.refreshToken =  data?.refresh_token
             self.presenter?.get(api: .getProfile, parameters: nil)
         }
-        
     }
-    
-    
 }
 
 

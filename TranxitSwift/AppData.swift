@@ -23,3 +23,4 @@ let requestCheckInterval : TimeInterval = 5
 var supportNumber = "919585290750"
 var supportEmail = "support@tranxit.com"
 var offlineNumber = "57777"
+let stripePublishableKey = "pk_test_gflXWZIfG8Ver9ddjkpxd5bq"

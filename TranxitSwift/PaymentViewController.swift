@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Stripe
+import IQKeyboardManagerSwift
 
 class PaymentViewController: UITableViewController {
     
@@ -18,6 +20,8 @@ class PaymentViewController: UITableViewController {
     
     var isChangingPayment = false
    
+    //var isEnabled = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initalLoads()
@@ -27,8 +31,17 @@ class PaymentViewController: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
-
+//
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        self.isEnabled = IQKeyboardManager.shared.enable
+//        IQKeyboardManager.shared.enable = false
+//    }
+//
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewDidDisappear(animated)
+//        IQKeyboardManager.shared.enable = self.isEnabled
+//    }
 }
 
 //MARK:- Methods
@@ -39,6 +52,8 @@ extension PaymentViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: (self.isChangingPayment ? #imageLiteral(resourceName: "close-1") : #imageLiteral(resourceName: "back-icon")).withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.backButtonAction))
         self.navigationItem.title = Constants.string.payment.localize()
         self.setDesign()
+        self.buttonAddPayments.addTarget(self, action: #selector(self.buttonPaymentAction), for: .touchUpInside)
+        
     }
     
     @IBAction private func backButtonAction() {
@@ -61,8 +76,25 @@ extension PaymentViewController {
     
     
     private func localize() {
+      
         buttonAddPayments.setTitle(Constants.string.addCardPayments.localize(), for: .normal)
         
+    }
+    
+    // Payment Button Action
+    
+    @IBAction private func buttonPaymentAction() {
+        
+        let theme = STPTheme.default()
+        theme.primaryForegroundColor = .primary
+        
+        let config = STPPaymentConfiguration()
+        config.requiredBillingAddressFields = .none
+        
+        let cardController = STPAddCardViewController(configuration: config, theme: theme)
+        cardController.delegate = self
+        cardController.navigationItem.title = cardController.navigationItem.title?.localize()
+        self.present(cardController, animated: true, completion: nil)
     }
     
 }
@@ -104,6 +136,31 @@ extension PaymentViewController {
     }
     
 }
+
+// MARK:- STPAddCardViewControllerDelegate
+
+extension PaymentViewController : STPAddCardViewControllerDelegate {
+    
+    func addCardViewController(_ addCardViewController: STPAddCardViewController, didCreateToken token: STPToken, completion: @escaping STPErrorBlock) {
+        
+        print("Stripe Token :: -> ",token);
+        addCardViewController.popOrDismiss(animation: true)
+        
+    }
+    
+    
+    func addCardViewControllerDidCancel(_ addCardViewController: STPAddCardViewController) {
+        
+        DispatchQueue.main.async {
+            
+           addCardViewController.popOrDismiss(animation: true)
+            
+        }
+        
+    }
+}
+
+
 
 
 class PaymentCell : UITableViewCell {

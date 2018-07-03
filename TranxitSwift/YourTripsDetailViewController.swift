@@ -97,6 +97,7 @@ extension YourTripsDetailViewController {
         self.viewRating.maxRating = 5
         self.viewRating.emptyImage = #imageLiteral(resourceName: "StarEmpty")
         self.viewRating.fullImage = #imageLiteral(resourceName: "StarFull")
+        self.imageViewMap.image = #imageLiteral(resourceName: "rd-map")
         //UIApplication.shared.keyWindow?.addSubview(self.stackViewButtons)
     }
     

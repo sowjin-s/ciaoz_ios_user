@@ -19,6 +19,7 @@ import Crashlytics
 import Fabric
 import Firebase
 import Google
+import Stripe
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -36,6 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.IQKeyboard()
         self.siri()
         self.registerPush(forApp: application)
+        self.stripe()
       //  return true
        
         
@@ -129,6 +131,13 @@ extension AppDelegate {
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
     }
     
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        return GIDSignIn.sharedInstance().handle(url as URL?,
+                                                 sourceApplication: options[.sourceApplication] as? String,
+                                                 annotation: options[.annotation])
+    }
+    
     private func IQKeyboard() {
         
         IQKeyboardManager.shared.enable = true
@@ -141,6 +150,14 @@ extension AppDelegate {
                 print("Is Siri Authorized  -",status == .authorized)
             }
         }
+    }
+    
+    //MARK:- Stripe
+    
+    private func stripe(){
+        
+        STPPaymentConfiguration.shared().publishableKey = stripePublishableKey
+        
     }
 }
 
