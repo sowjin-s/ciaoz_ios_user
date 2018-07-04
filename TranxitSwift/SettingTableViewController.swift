@@ -15,19 +15,23 @@ class SettingTableViewController: UITableViewController {
     private let languageCellId = "LanguageSelection"
     private var numberOfRows = 2
     
-    private let header = [Constants.string.favourites, Constants.string.changeLanguage]
+    private let header = [Constants.string.changeLanguage, Constants.string.favourites, .Empty]
     private let languages = [Language.english, .spanish]
     
+    private let favouriteLocation = 1
+    private let changeLanguage = 0
+    private let otherLocations = 2
+    
     lazy var loader  : UIView = {
-        return createActivityIndicator(self.view)
+        return createActivityIndicator(UIApplication.shared.keyWindow ?? self.view)
     }()
     
     private var selectedLanguage : Language = .english
     
     private var locationService : LocationService?
-    
     private var mapHelper : GoogleMapsHelper?
     private var placesHelper : GooglePlacesHelper?
+    private var serviceObject : Service?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +61,38 @@ extension SettingTableViewController {
         self.navigationController?.isNavigationBarHidden = false
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.backButtonClick))
         self.navigationItem.title = Constants.string.settings.localize()
+        self.loader.isHidden = false
         self.presenter?.get(api: .locationService, parameters: nil)
+        
+    }
+    
+    private func initMaps() {
+        
+        if self.mapHelper == nil {
+            self.mapHelper = GoogleMapsHelper()
+        }
+        if self.placesHelper == nil {
+            self.placesHelper = GooglePlacesHelper()
+        }
+        
+    }
+    
+    private func delete(at indexPath : IndexPath, completion : (()->Void)) {
+        
+        var idValue : Int?
+        
+        if indexPath.section == self.favouriteLocation {
+            idValue = indexPath.row == 0 ? self.locationService?.home?.first?.id : self.locationService?.work?.first?.id
+        } else if indexPath.section == self.otherLocations, Int.removeNil(self.locationService?.others?.count) > indexPath.row {
+            idValue = self.locationService?.others?[indexPath.row].id
+        }
+        
+        guard idValue != nil else
+        { completion()
+            return }
+        
+        self.loader.isHideInMainThread(false)
+        self.presenter?.delete(api: .locationServicePostDelete, url: Base.locationServicePostDelete.rawValue+"/\(idValue!)", data: nil)
         
     }
     
@@ -79,7 +114,92 @@ extension SettingTableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.section == 0, let tableCell = tableView.dequeueReusableCell(withIdentifier: tableCellId, for: indexPath) as? SettingTableCell {
+        return self.getCell(for:tableView,at:indexPath)
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return section == self.favouriteLocation ? numberOfRows : (section == self.changeLanguage ? Language.count : Int.removeNil(self.locationService?.others?.count))
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            
+            let popDialog = PopupDialog(title: Constants.string.areYouSure.localize(), message: nil)
+            let cancelButton =  PopupDialogButton(title: Constants.string.Cancel.localize(), action: {
+                popDialog.dismiss()
+            })
+            cancelButton.titleColor = .primary
+            let sureButton = PopupDialogButton(title: Constants.string.delete.localize()) {
+                self.delete(at: indexPath, completion: { })
+            }
+            sureButton.titleColor = .red
+            popDialog.addButtons([sureButton,cancelButton])
+            self.present(popDialog, animated: true, completion: nil)
+            
+        }
+        
+    }
+    
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        
+        if indexPath.section == self.favouriteLocation  || indexPath.section == self.otherLocations{
+            if (indexPath.row == 0 && (locationService?.home?.first?.address) != nil) || (indexPath.row == 1 && (locationService?.work?.first?.address) != nil) || indexPath.section == self.otherLocations {
+                return .delete
+            }
+        }
+        return .none
+    }
+    
+    
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        return (indexPath.section == self.favouriteLocation ? 80 : indexPath.section == self.changeLanguage ? 40 : 60)*(UIScreen.main.bounds.height/568)
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        self.didSelect(at: indexPath)
+    }
+    
+    
+    private func didSelect(at indexPath : IndexPath) {
+        
+        if indexPath.section == self.changeLanguage {
+            self.selectedLanguage = languages[indexPath.row]
+            UserDefaults.standard.set(self.selectedLanguage.rawValue, forKey: Keys.list.language)
+            self.tableView.reloadRows(at: [IndexPath(row: 0, section: self.changeLanguage),IndexPath(row: 1, section: self.changeLanguage)], with: .automatic)
+        } else if indexPath.section ==  self.favouriteLocation {
+            self.loader.isHidden = false
+            self.initMaps()
+            self.loader.isHidden = true
+            self.placesHelper?.getGoogleAutoComplete { (place) in
+                self.mapHelper?.getPlaceAddress(from: place.coordinate, on: { (locationDetail) in
+                    let service = Service() // Save Favourite location in Server
+                    service.address = place.formattedAddress
+                    service.latitude = place.coordinate.latitude
+                    service.longitude = place.coordinate.longitude
+                    service.type = (indexPath.row == 0 ? CoreDataEntity.home.rawValue : CoreDataEntity.work.rawValue).lowercased()
+                    self.serviceObject = service
+                    self.delete(at: indexPath, completion: {
+                        self.presenter?.post(api: .locationServicePostDelete, data: self.serviceObject?.toData())
+                        self.serviceObject = nil
+                    })
+                })
+            }
+        }
+        
+    }
+    
+    
+    // Get Cell
+    
+    private func getCell(for tableView : UITableView,at indexPath : IndexPath) -> UITableViewCell {
+        
+        if indexPath.section == self.favouriteLocation, let tableCell = tableView.dequeueReusableCell(withIdentifier: tableCellId, for: indexPath) as? SettingTableCell {
             
             tableCell.imageViewIcon?.image = indexPath.row == 0 ? #imageLiteral(resourceName: "home") : #imageLiteral(resourceName: "work")
             tableCell.labelTitle.text = (indexPath.row == 0 ? Constants.string.home : Constants.string.work).localize()
@@ -94,96 +214,23 @@ extension SettingTableViewController {
             }()
             tableCell.selectionStyle = .none
             return tableCell
-        } else if indexPath.section == 1, let tableCell = tableView.dequeueReusableCell(withIdentifier: languageCellId, for: indexPath) as? LanguageSelection {
+        } else if indexPath.section == self.changeLanguage, let tableCell = tableView.dequeueReusableCell(withIdentifier: languageCellId, for: indexPath) as? LanguageSelection {
             
             tableCell.labelTitle.text = self.languages[indexPath.row].rawValue.localize()
             tableCell.imageViewIcon.tintColorId = 2
             tableCell.imageViewIcon.image = (self.selectedLanguage == self.languages[indexPath.row] ? #imageLiteral(resourceName: "check") : #imageLiteral(resourceName: "check-box-empty")).withRenderingMode(.alwaysTemplate)
             tableCell.selectionStyle = .none
             return tableCell
+        } else if indexPath.section == self.otherLocations, Int.removeNil(self.locationService?.others?.count) > indexPath.row{
+            let tableCell = UITableViewCell(style: .default, reuseIdentifier: nil)
+            Common.setFont(to: tableCell.textLabel!)
+            tableCell.textLabel?.numberOfLines = 0
+            tableCell.textLabel?.text = self.locationService?.others?[indexPath.row].address
+            tableCell.selectionStyle = .none
+            return tableCell
         }
         
         return UITableViewCell()
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return section == 0 ? numberOfRows : Language.count
-    }
-    
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        
-        if editingStyle == .delete {
-            
-            let popDialog = PopupDialog(title: Constants.string.areYouSure.localize(), message: nil)
-            let cancelButton =  PopupDialogButton(title: Constants.string.Cancel.localize(), action: {
-                popDialog.dismiss()
-            })
-            cancelButton.titleColor = .primary
-            let sureButton = PopupDialogButton(title: Constants.string.delete.localize()) {
-                
-                guard let idValue = indexPath.row == 0 ? self.locationService?.home?.first?.id : self.locationService?.work?.first?.id else { return }
-                
-                self.loader.isHidden = false
-                self.presenter?.delete(api: .locationServicePostDelete, url: Base.locationServicePostDelete.rawValue+"/\(idValue)", data: nil)
-                
-            }
-            sureButton.titleColor = .red
-            popDialog.addButtons([sureButton,cancelButton])
-            self.present(popDialog, animated: true, completion: nil)
-            
-        }
-        
-    }
-    
-    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-        
-        if indexPath.section == 0 {
-            if indexPath.row == 0 && (locationService?.home?.first?.address) != nil {
-                return .delete
-            }
-            if indexPath.row == 1 && (locationService?.work?.first?.address) != nil {
-                return .delete
-            }
-        }
-        
-        return .none
-    }
-    
-    
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        return (indexPath.section == 0 ? 80 : 40 )*(UIScreen.main.bounds.height/568)
-    }
-    
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if indexPath.section == 1 {
-            self.selectedLanguage = languages[indexPath.row]
-            UserDefaults.standard.set(self.selectedLanguage.rawValue, forKey: Keys.list.language)
-            self.tableView.reloadRows(at: [IndexPath(row: 0, section: 1),IndexPath(row: 1, section: 1)], with: .automatic)
-        } else if indexPath.section ==  0{
-            self.loader.isHidden = false
-            if self.mapHelper == nil {
-                self.mapHelper = GoogleMapsHelper()
-            }
-            if self.placesHelper == nil {
-                self.placesHelper = GooglePlacesHelper()
-            }
-            self.loader.isHidden = true
-            self.placesHelper?.getGoogleAutoComplete { (place) in
-                self.mapHelper?.getPlaceAddress(from: place.coordinate, on: { (locationDetail) in
-                    let service = Service() // Save Favourite location in Server
-                    service.address = place.formattedAddress
-                    service.latitude = place.coordinate.latitude
-                    service.longitude = place.coordinate.longitude
-                    service.type = (indexPath.row == 0 ? CoreDataEntity.home.rawValue : CoreDataEntity.work.rawValue).lowercased()
-                    self.presenter?.post(api: Base.locationServicePostDelete, data: service.toData())
-                })
-            }
-        }
     }
     
 }
@@ -200,19 +247,7 @@ extension SettingTableViewController : PostViewProtocol {
     }
     
     func getLocationService(api: Base, data: LocationService?) {
-//
-//        if data != nil {
-//            numberOfRows = 0
-//            if let _ = data?.home?.first {
-//              numberOfRows += 1
-//            }
-//
-//            if let _ = data?.work?.first {
-//                numberOfRows += 1
-//            }
-//        }
-//
-        
+    
         storeFavouriteLocations(from: data)
         self.locationService = data
         DispatchQueue.main.async {
@@ -225,7 +260,12 @@ extension SettingTableViewController : PostViewProtocol {
     func success(api: Base, message: String?) {
         
         if api == .locationServicePostDelete {
-            self.presenter?.get(api: .locationService, parameters: nil)
+            if serviceObject != nil {
+                self.presenter?.post(api: .locationServicePostDelete, data: serviceObject?.toData())
+            } else {
+                self.presenter?.get(api: .locationService, parameters: nil)
+            }
+            self.serviceObject = nil
         }
     }
     

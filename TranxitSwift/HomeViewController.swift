@@ -142,7 +142,7 @@
             return marker
         }()
         
-        var markersProvider = [GMSMarker]()
+        var markersProviders = [GMSMarker]()
         
         var homePageHelper : HomePageHelper?
         
@@ -209,9 +209,9 @@
                 }
                 DispatchQueue.main.async {
                     self.isSourceFavourited = false // reset favourite location on change
-                    if self.sourceLocationDetail?.value != nil, self.destinationLocationDetail != nil { // Get Services only if location Available
-                        self.getServicesList()
-                    }
+//                    if self.sourceLocationDetail?.value != nil, self.destinationLocationDetail != nil { // Get Services only if location Available
+//                        self.getServicesList()
+//                    }
                     self.textFieldSourceLocation.text = locationDetail?.address
                 }
             })
@@ -221,9 +221,9 @@
             self.buttonSOS.addTarget(self, action: #selector(self.buttonSOSAction), for: .touchUpInside)
             self.setDesign()
             NotificationCenter.default.addObserver(self, selector: #selector(self.observer(notification:)), name: .providers, object: nil)
-            NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShowRateView(info:)), name: .UIKeyboardWillShow, object: nil)
-            NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHideRateView(info:)), name: .UIKeyboardWillHide, object: nil)      }
-        
+//            NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShowRateView(info:)), name: .UIKeyboardWillShow, object: nil)
+//            NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHideRateView(info:)), name: .UIKeyboardWillHide, object: nil)      }
+        }
         
         // MARK:- View Will Layouts
         
@@ -861,15 +861,10 @@
         
         func getServiceList(api: Base, data: [Service]) {
             
-//            if api == .getProviders {  // Show Providers in Current Location
-//                DispatchQueue.main.async {
-//                    self.showProviderInCurrentLocation(with: data)
-//                }
-//                return
-//            }
-            DispatchQueue.main.async {  // Show Services
-               // self.showServiceSelectionView(with: data)
-                self.showRideNowView(with: data)
+            if api == .servicesList {
+                DispatchQueue.main.async {  // Show Services
+                    self.showRideNowView(with: data)
+                }
             }
             
         }
@@ -895,19 +890,20 @@
         
         func success(api: Base, message: String?) {
             
+            self.loader.isHidden = true
             if api == .locationServicePostDelete {
                 self.presenter?.get(api: .locationService, parameters: nil)
             } else if api == .sendRequest {
                 self.checkForProviderStatus()
             }
             DispatchQueue.main.async {
-                self.loader.isHidden = true
                 self.view.makeToast(message)
             }
         }
         
         func getLocationService(api: Base, data: LocationService?) {
             
+            self.loader.isHideInMainThread(true)
             storeFavouriteLocations(from: data)
             
         }

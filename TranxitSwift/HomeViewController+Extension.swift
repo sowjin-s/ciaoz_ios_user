@@ -341,8 +341,8 @@ extension HomeViewController {
     
     func showProviderInCurrentLocation(with data : [Service]) {
         
-        self.markersProvider.forEach({ $0.map = nil })
-        self.markersProvider.removeAll()
+        self.markersProviders.forEach({ $0.map = nil })
+        self.markersProviders.removeAll()
         
         for locationData in data where locationData.longitude != nil && locationData.latitude != nil {
             
@@ -355,7 +355,7 @@ extension HomeViewController {
             marker.icon = #imageLiteral(resourceName: "map-vehicle-icon-black").resizeImage(newWidth: 40)
             marker.groundAnchor = CGPoint(x: 0.5, y: 1)
             marker.map = mapViewHelper?.mapView
-            self.markersProvider.append(marker)
+            self.markersProviders.append(marker)
             
         }
         

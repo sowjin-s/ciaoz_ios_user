@@ -175,8 +175,6 @@ extension AppDelegate {
                 }
             }
         }
-        
-        
     }
     
     // MARK:- Offline Booking on No Internet Connection

@@ -24,19 +24,21 @@ var favouriteLocations = [FavouriteLocation]()
 func storeFavouriteLocations(from locationService : LocationService?) {
     
     favouriteLocations.removeAll()
-    
+    let coreData = CoreDataHelper()
     // Append Favourite Locations to Service
     if let location = locationService?.home?.first, let address = location.address, let latiude = location.latitude, let longitude = location.longitude {
-        CoreDataHelper().insert(data: LocationDetail(address, LocationCoordinate(latitude: latiude, longitude: longitude)), entityName: .home)
+        coreData.insert(data: LocationDetail(address, LocationCoordinate(latitude: latiude, longitude: longitude)), entityName: .home)
         favouriteLocations.append((Constants.string.home.localize(), LocationDetail(address, LocationCoordinate(latitude: latiude, longitude: longitude))))
     } else {
+        coreData.deleteData(from: CoreDataEntity.home.rawValue)
         favouriteLocations.append((Constants.string.home.localize(), nil))
     }
     
     if let location = locationService?.work?.first, let address = location.address, let latiude = location.latitude, let longitude = location.longitude {
-        CoreDataHelper().insert(data: LocationDetail(address, LocationCoordinate(latitude: latiude, longitude: longitude)), entityName: .work)
+        coreData.insert(data: LocationDetail(address, LocationCoordinate(latitude: latiude, longitude: longitude)), entityName: .work)
         favouriteLocations.append((Constants.string.work.localize(), LocationDetail(address, LocationCoordinate(latitude: latiude, longitude: longitude))))
     } else {
+        coreData.deleteData(from: CoreDataEntity.work.rawValue)
         favouriteLocations.append((Constants.string.work.localize(), nil))
     }
     
