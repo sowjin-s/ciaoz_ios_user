@@ -883,8 +883,16 @@
         func getRequest(api: Base, data: Request?) {
             
             print(data?.request_id ?? 0)
-            self.currentRequestId = data?.request_id ?? 0
-            self.checkForProviderStatus()
+            if api == .sendRequest {
+                self.success(api: api, message: data?.message)
+                self.currentRequestId = data?.request_id ?? 0
+                self.checkForProviderStatus()
+                DispatchQueue.main.async {
+                    self.showLoaderView(with: self.currentRequestId)
+                }
+            }
+//            self.currentRequestId = data?.request_id ?? 0
+//            self.checkForProviderStatus()
             
         }
         
@@ -893,8 +901,6 @@
             self.loader.isHidden = true
             if api == .locationServicePostDelete {
                 self.presenter?.get(api: .locationService, parameters: nil)
-            } else if api == .sendRequest {
-                self.checkForProviderStatus()
             }
             DispatchQueue.main.async {
                 self.view.makeToast(message)

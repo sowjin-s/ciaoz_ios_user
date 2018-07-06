@@ -18,6 +18,15 @@ class LoaderView: UIView {
     var onCancel : (()->Void)?
     private var lottieView : LottieView!
     
+    var isCancelButtonEnabled = false { // Enable Cancel Button If only request Id available 
+        didSet {
+            UIView.animate(withDuration: 0.2) {
+                Common.setFont(to: self.labelFindingDriver, isTitle: !self.teisCancelButtonEnabled)
+            }
+            self.buttonCancelRequest.isHidden = !self.isCancelButtonEnabled
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.initialLoads()
@@ -29,7 +38,7 @@ class LoaderView: UIView {
 extension LoaderView {
     
     private func initialLoads() {
-        
+        self.buttonCancelRequest.isHidden = true // Hide Cancel Button Initially
         self.buttonCancelRequest.setTitle(Constants.string.cancelRequest.localize().uppercased(), for: .normal)
         self.labelFindingDriver.text = Constants.string.findingDriver.localize()
         self.buttonCancelRequest.addTarget(self, action: #selector(cancelButtonClick), for: .touchUpInside)

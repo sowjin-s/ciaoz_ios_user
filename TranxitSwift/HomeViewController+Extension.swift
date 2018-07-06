@@ -363,7 +363,7 @@ extension HomeViewController {
     
     // MARK:- Show Loader View
     
-    func showLoaderView() {
+    func showLoaderView(with requestId : Int? = nil) {
         
         if self.requestLoaderView == nil, let singleView = Bundle.main.loadNibNamed(XIB.Names.LoaderView, owner: self, options: [:])?.first as? LoaderView {
             self.isOnBooking = true
@@ -381,6 +381,7 @@ extension HomeViewController {
                 })
             }
         }
+        self.requestLoaderView?.isCancelButtonEnabled = requestId != nil
     }
     
     // MARK:- Remove Loader View
@@ -426,7 +427,7 @@ extension HomeViewController {
         switch status{
             
         case .searching:
-            self.showLoaderView()
+            self.showLoaderView(with: self.currentRequestId)
             
         case .accepted, .arrived, .started, .pickedup:
             self.showRideStatusView(with: request)

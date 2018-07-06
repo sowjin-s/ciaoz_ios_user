@@ -24,36 +24,35 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="few-O4-HbC">
                     <rect key="frame" x="0.0" y="526" width="375" height="141"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X6i-du-k9Y">
-                            <rect key="frame" x="37.5" y="77" width="300" height="40"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="40" id="Uwt-uL-nCt"/>
-                            </constraints>
-                            <state key="normal" title="Button">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </state>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="backgroundColorId">
-                                    <integer key="value" value="1"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                        </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BgN-LL-B9K">
-                            <rect key="frame" x="16" y="32.5" width="343" height="19.5"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <nil key="highlightedColor"/>
-                        </label>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="l8d-44-tvb">
+                            <rect key="frame" x="37.5" y="28.5" width="300" height="84.5"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BgN-LL-B9K">
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="42.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X6i-du-k9Y">
+                                    <rect key="frame" x="0.0" y="42.5" width="300" height="42"/>
+                                    <state key="normal" title="Button">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="backgroundColorId">
+                                            <integer key="value" value="1"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </button>
+                            </subviews>
+                        </stackView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="X6i-du-k9Y" firstAttribute="centerX" secondItem="few-O4-HbC" secondAttribute="centerX" id="14x-pi-5t5"/>
-                        <constraint firstItem="X6i-du-k9Y" firstAttribute="width" secondItem="few-O4-HbC" secondAttribute="width" multiplier="0.8" id="3B4-R5-OqL"/>
-                        <constraint firstItem="BgN-LL-B9K" firstAttribute="leading" secondItem="few-O4-HbC" secondAttribute="leading" constant="16" id="5uK-wH-CEh"/>
-                        <constraint firstAttribute="trailing" secondItem="BgN-LL-B9K" secondAttribute="trailing" constant="16" id="Ds1-QD-9Rj"/>
-                        <constraint firstItem="BgN-LL-B9K" firstAttribute="centerY" secondItem="few-O4-HbC" secondAttribute="centerY" multiplier="0.6" id="Duq-dq-0L2"/>
-                        <constraint firstItem="BgN-LL-B9K" firstAttribute="centerX" secondItem="few-O4-HbC" secondAttribute="centerX" id="PnX-Xi-iRS"/>
-                        <constraint firstAttribute="bottom" secondItem="X6i-du-k9Y" secondAttribute="bottom" constant="24" id="kvC-9y-ezS"/>
+                        <constraint firstItem="l8d-44-tvb" firstAttribute="height" secondItem="few-O4-HbC" secondAttribute="height" multiplier="0.6" id="4uh-XM-gOA"/>
+                        <constraint firstItem="l8d-44-tvb" firstAttribute="centerX" secondItem="few-O4-HbC" secondAttribute="centerX" id="bOF-1Q-jTs"/>
+                        <constraint firstItem="l8d-44-tvb" firstAttribute="width" secondItem="few-O4-HbC" secondAttribute="width" multiplier="0.8" id="dDW-va-p3Y"/>
+                        <constraint firstItem="l8d-44-tvb" firstAttribute="centerY" secondItem="few-O4-HbC" secondAttribute="centerY" id="zZH-5h-bbc"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="size" keyPath="offsetShadow">

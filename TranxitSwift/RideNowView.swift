@@ -318,9 +318,12 @@ extension RideNowView {
     
     @IBAction private func timerAction() {
         self.timerValue  += 5
-        UIView.animate(withDuration: 2, animations: {
-            self.progressView.progress = Float(self.timerValue/self.timerSchedule)
-        })
+        CATransaction.begin()
+        CATransaction.setAnimationDuration(2)
+        CATransaction.setCompletionBlock {
+             self.progressView.progress = Float(self.timerValue/self.timerSchedule)
+        }
+        CATransaction.commit()
     }
     
     // MARK:- Set Surge View

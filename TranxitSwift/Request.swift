@@ -40,6 +40,7 @@ class Request : JSONSerializable {
     var static_map : String?
     var surge : Int?
     var rating : Rating?
+    var message : String?
     
   /*
     enum CodingKeys: String, CodingKey {
@@ -101,6 +102,8 @@ class Request : JSONSerializable {
         static_map = try? values.decode(String.self, forKey: .static_map)
         surge = try? values.decode(Int.self, forKey: .surge)
         rating = try? values.decode(Rating.self, forKey: .rating)
+        message = try? values.decode(String.self, forKey: .message)
+
     }
  
     init() {   }
