@@ -16,9 +16,9 @@ class EstimateFare : JSONSerializable {
     var surge_value : String?
     var model :String?
     var surge :Int?
-    var wallet_balance : Int?
+    var wallet_balance : Float?
     var useWallet : Int?
-    var base_price : Int?
+    var base_price : Float?
     var service_type : Int?
 }
 
