@@ -21,7 +21,7 @@ class LoaderView: UIView {
     var isCancelButtonEnabled = false { // Enable Cancel Button If only request Id available 
         didSet {
             UIView.animate(withDuration: 0.2) {
-                Common.setFont(to: self.labelFindingDriver, isTitle: !self.teisCancelButtonEnabled)
+                Common.setFont(to: self.labelFindingDriver, isTitle: !self.isCancelButtonEnabled)
             }
             self.buttonCancelRequest.isHidden = !self.isCancelButtonEnabled
         }
