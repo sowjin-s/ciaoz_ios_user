@@ -134,17 +134,17 @@ class Common {
     
     class func setFont(to field :Any, isTitle : Bool = false, size : CGFloat = 0) {
     
-        let customSize = size > 0 ? size : (isTitle ? 16 : 14)
-        
+        let customSize = size > 0 ? size : (isTitle ? 18 : 16)
+        let font = UIFont(name: isTitle ? FontCustom.Bold.rawValue : FontCustom.Medium.rawValue, size: customSize)
         switch (field.self) {
         case is UITextField:
-            (field as? UITextField)?.font = UIFont(name: isTitle ? FontCustom.avenier_Heavy.rawValue : FontCustom.avenier_Medium.rawValue, size: customSize)
+            (field as? UITextField)?.font = font
         case is UILabel:
-            (field as? UILabel)?.font = UIFont(name: isTitle ? FontCustom.avenier_Heavy.rawValue : FontCustom.avenier_Medium.rawValue, size: customSize)
+            (field as? UILabel)?.font = font//UIFont(name: isTitle ? FontCustom.avenier_Heavy.rawValue : FontCustom.avenier_Medium.rawValue, size: customSize)
         case is UIButton:
-            (field as? UIButton)?.titleLabel?.font = UIFont(name: isTitle ? FontCustom.avenier_Heavy.rawValue : FontCustom.avenier_Medium.rawValue, size: customSize)
+            (field as? UIButton)?.titleLabel?.font = font//UIFont(name: isTitle ? FontCustom.avenier_Heavy.rawValue : FontCustom.avenier_Medium.rawValue, size: customSize)
         case is UITextView:
-            (field as? UITextView)?.font = UIFont(name: isTitle ? FontCustom.avenier_Heavy.rawValue : FontCustom.avenier_Medium.rawValue, size: customSize)
+            (field as? UITextView)?.font = font//UIFont(name: isTitle ? FontCustom.avenier_Heavy.rawValue : FontCustom.avenier_Medium.rawValue, size: customSize)
         default:
             break
         }

@@ -17,7 +17,7 @@ enum FontCustom : String {
     case clanPro_NarrNews = "ClanPro-NarrNews"
     case clanPro_News = "ClanPro-News"
     case avenier = "Avenir"
-    case avenier_Medium = "Avenir-Medium"
-    case avenier_Heavy = "Avenir-Heavy"
+    case Medium = "Avenir-Medium"
+    case Bold = "Avenir-Heavy"
     
 }

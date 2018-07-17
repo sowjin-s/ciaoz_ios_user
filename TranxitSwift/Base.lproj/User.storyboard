@@ -524,34 +524,48 @@
                             <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="qOk-jC-cwR">
+                                <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="qOk-jC-cwR">
                                     <rect key="frame" x="157" y="50" width="100" height="100"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </imageView>
+                                <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Tf-xK-VhM">
+                                    <rect key="frame" x="157" y="116.66666666666667" width="100" height="33.333333333333329"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </view>
+                                <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="editImage" translatesAutoresizingMaskIntoConstraints="NO" id="3Ig-4F-UiS">
+                                    <rect key="frame" x="216" y="118.99999999999999" width="23.333333333333343" height="23.333333333333329"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </imageView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uzz-kC-7K4">
                                     <rect key="frame" x="223.33333333333334" y="105" width="50.000000000000028" height="50"/>
-                                    <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="editImage" translatesAutoresizingMaskIntoConstraints="NO" id="3Ig-4F-UiS">
-                                            <rect key="frame" x="8" y="8" width="30" height="29"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </imageView>
-                                    </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="qOk-jC-cwR" firstAttribute="width" secondItem="RfN-H0-r1w" secondAttribute="height" multiplier="100:200" id="B5B-FR-S1t"/>
+                                <constraint firstItem="3Ig-4F-UiS" firstAttribute="centerX" secondItem="6Tf-xK-VhM" secondAttribute="centerX" multiplier="1.1" id="DMl-hM-ZUb"/>
+                                <constraint firstItem="6Tf-xK-VhM" firstAttribute="bottom" secondItem="qOk-jC-cwR" secondAttribute="bottom" id="FhK-M5-stm"/>
+                                <constraint firstItem="6Tf-xK-VhM" firstAttribute="leading" secondItem="qOk-jC-cwR" secondAttribute="leading" id="G2O-pG-BvP"/>
+                                <constraint firstItem="6Tf-xK-VhM" firstAttribute="height" secondItem="qOk-jC-cwR" secondAttribute="height" multiplier="1:3" id="NMp-GY-erL"/>
+                                <constraint firstItem="3Ig-4F-UiS" firstAttribute="width" secondItem="6Tf-xK-VhM" secondAttribute="height" multiplier="0.7" id="OPc-o8-c9a"/>
                                 <constraint firstItem="Uzz-kC-7K4" firstAttribute="height" secondItem="qOk-jC-cwR" secondAttribute="height" multiplier="1:2" id="PIp-22-YFa"/>
+                                <constraint firstItem="3Ig-4F-UiS" firstAttribute="height" secondItem="6Tf-xK-VhM" secondAttribute="height" multiplier="0.7" id="PeT-lV-Kno"/>
+                                <constraint firstItem="6Tf-xK-VhM" firstAttribute="trailing" secondItem="qOk-jC-cwR" secondAttribute="trailing" id="RHO-TW-FY1"/>
                                 <constraint firstItem="qOk-jC-cwR" firstAttribute="height" secondItem="RfN-H0-r1w" secondAttribute="height" multiplier="100 : 200" id="Vjs-N6-DDe"/>
                                 <constraint firstItem="Uzz-kC-7K4" firstAttribute="width" secondItem="qOk-jC-cwR" secondAttribute="width" multiplier="1:2" id="ZIp-mK-L8r"/>
                                 <constraint firstItem="Uzz-kC-7K4" firstAttribute="centerX" secondItem="qOk-jC-cwR" secondAttribute="centerX" multiplier="1.2" id="amn-ip-rpF"/>
                                 <constraint firstItem="qOk-jC-cwR" firstAttribute="centerX" secondItem="RfN-H0-r1w" secondAttribute="centerX" id="cMr-ly-jMR"/>
                                 <constraint firstItem="qOk-jC-cwR" firstAttribute="centerY" secondItem="RfN-H0-r1w" secondAttribute="centerY" id="hwz-pO-atZ"/>
                                 <constraint firstItem="Uzz-kC-7K4" firstAttribute="centerY" secondItem="qOk-jC-cwR" secondAttribute="centerY" multiplier="1.3" id="iiY-vu-80y"/>
+                                <constraint firstItem="3Ig-4F-UiS" firstAttribute="centerY" secondItem="6Tf-xK-VhM" secondAttribute="centerY" multiplier="0.98" id="wnB-za-qhO"/>
                             </constraints>
                             <viewLayoutGuide key="safeArea" id="wyA-MI-8eD"/>
+                            <variation key="default">
+                                <mask key="subviews">
+                                    <exclude reference="Uzz-kC-7K4"/>
+                                </mask>
+                            </variation>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="hwg-Oh-QPw">
                             <rect key="frame" x="0.0" y="441" width="414" height="131"/>
@@ -886,6 +900,7 @@
                         <outlet property="buttonChangePassword" destination="ENL-XW-BgV" id="mnz-Ev-tI7"/>
                         <outlet property="buttonSave" destination="HLi-bv-tQq" id="70w-RM-4bU"/>
                         <outlet property="imageViewBusiness" destination="Qmv-S9-oxd" id="yWO-Mj-sAl"/>
+                        <outlet property="imageViewEdit" destination="3Ig-4F-UiS" id="cRW-Rr-qDz"/>
                         <outlet property="imageViewPersonal" destination="ffi-pN-52A" id="6tF-NX-kxg"/>
                         <outlet property="imageViewProfile" destination="qOk-jC-cwR" id="tfP-hB-yvN"/>
                         <outlet property="labelBusiness" destination="lVH-HM-B85" id="QRS-fO-DmW"/>
@@ -896,7 +911,7 @@
                         <outlet property="textFieldLast" destination="ftQ-hE-Z1g" id="Ki5-aV-DLd"/>
                         <outlet property="textFieldPhone" destination="B2S-4Z-xsA" id="NFn-Ce-Xqx"/>
                         <outlet property="viewBusiness" destination="Occ-2I-6iZ" id="tSh-4a-El3"/>
-                        <outlet property="viewImageChange" destination="Uzz-kC-7K4" id="dRA-Da-6io"/>
+                        <outlet property="viewImageChange" destination="6Tf-xK-VhM" id="YLi-aL-b6M"/>
                         <outlet property="viewPersonal" destination="9fe-PR-SgE" id="4M9-yS-50n"/>
                     </connections>
                 </tableViewController>

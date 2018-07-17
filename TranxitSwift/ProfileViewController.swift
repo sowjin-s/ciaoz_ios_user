@@ -10,6 +10,7 @@ import UIKit
 
 class ProfileViewController: UITableViewController {
     
+    @IBOutlet private weak var imageViewEdit : UIImageView!
     @IBOutlet private weak var viewImageChange : UIView!
     @IBOutlet private weak var imageViewProfile : UIImageView!
     @IBOutlet private weak var textFieldFirst : HoshiTextField!
@@ -79,7 +80,8 @@ extension ProfileViewController {
         
         self.viewPersonal.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.setTripTypeAction(sender:))))
         self.viewBusiness.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.setTripTypeAction(sender:))))
-        self.viewImageChange.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.changeImage)))
+        self.imageViewProfile.isUserInteractionEnabled = true
+        self.imageViewProfile.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.changeImage)))
         self.buttonSave.addTarget(self, action: #selector(self.buttonSaveAction), for: .touchUpInside)
         self.buttonChangePassword.addTarget(self, action: #selector(self.changePasswordAction), for: .touchUpInside)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.backButtonClick))
@@ -96,22 +98,16 @@ extension ProfileViewController {
     // MARK:- Set Profile Details
     
     private func setProfile(){
-        
         Cache.image(forUrl: Common.getImageUrl(for: User.main.picture)) { (image) in
             DispatchQueue.main.async {
                 self.imageViewProfile.image = image == nil ? #imageLiteral(resourceName: "userPlaceholder") : image
             }
         }
-    
         self.textFieldFirst.text = User.main.firstName
         self.textFieldLast.text = User.main.lastName
         self.textFieldEmail.text = User.main.email
         self.textFieldPhone.text = User.main.mobile
-        
-        
     }
-    
-    
     
     //MARK:- Set Designs
     
@@ -218,7 +214,8 @@ extension ProfileViewController {
     private func setLayout(){
         
         self.imageViewProfile.makeRoundedCorner()
-        
+        self.viewImageChange.frame.origin.y = self.imageViewProfile.frame.origin.y + ((self.imageViewProfile.frame.height/3)*2)
+        self.imageViewEdit.frame.origin.y = self.viewImageChange.frame.origin.y+(self.viewImageChange.frame.height/6)
     }
     
     // MARK:- Localize
@@ -268,15 +265,16 @@ extension ProfileViewController : UITextFieldDelegate {
 extension ProfileViewController {
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
+
         guard scrollView.contentOffset.y<0 else { return }
-        
+
         print(scrollView.contentOffset)
-        
+
         let inset = abs(scrollView.contentOffset.y/imageViewProfile.frame.height)
-        
+
         self.imageViewProfile.transform = CGAffineTransform(scaleX: 1+inset, y: 1+inset)
-        
+        self.viewImageChange.transform = CGAffineTransform(scaleX: 1+inset, y: 1+inset)
+        self.imageViewEdit.transform = CGAffineTransform(scaleX: 1+inset, y: 1+inset)
     }
     
 }
