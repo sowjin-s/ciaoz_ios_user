@@ -58,6 +58,11 @@ extension WalletViewController {
         Common.setFont(to: labelBalance)
         Common.setFont(to: textFieldAmount)
         
+        
+        labelAddMny.text = Constants.string.addAmount.localize()
+        labelWallet.text = Constants.string.yourWalletAmnt.localize()
+        btnAddAmnt.setTitle(Constants.string.ADDAMT, for: .normal)
+        
     }
     
     @IBAction private func buttonAmountAction(sender : UIButton) {

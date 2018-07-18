@@ -56,6 +56,10 @@ extension HelpViewController {
         
         Common.setFont(to: supportLabel, isTitle: true)
         Common.setFont(to: HelpQuotesLabel)
+        
+        supportLabel.text = Constants.string.Support.localize()
+        HelpQuotesLabel.text = Constants.string.helpQuotes.localize()
+        
     }
     
     

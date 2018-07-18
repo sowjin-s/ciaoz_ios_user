@@ -279,7 +279,7 @@ extension SocialLoginViewController : PostViewProtocol {
     }
     
     func getOath(api: Base, data: LoginRequest?) {
-        if api == .facebookLogin, let accessTokenString = data?.access_token {
+        if api == .facebookLogin || api == .googleLogin, let accessTokenString = data?.access_token {
             User.main.accessToken = accessTokenString
             User.main.refreshToken =  data?.refresh_token
             self.presenter?.get(api: .getProfile, parameters: nil)

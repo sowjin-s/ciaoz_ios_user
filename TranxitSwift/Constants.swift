@@ -201,6 +201,13 @@ struct Constants {
     let iNeedCab = "I need a cab @"
     let donotEditMessage = "(Please donot edit this SMS. Standard SMS charges of Rs.3 per SMS may apply)"
     let pleaseTryAgain = "Please try again"
+    
+    let ADDCOUPON = "ADD COUPON"
+    let addAmount = "Add Money"
+    let ADDAMT = "ADD AMOUNT"
+    let yourWalletAmnt = "Your wallet amount is"
+    let Support = "Support"
+    let helpQuotes = "Our team persons will contact you soon!"
 }
 
 //Defaults Keys

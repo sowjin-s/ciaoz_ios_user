@@ -58,7 +58,8 @@ extension CouponViewController {
         Common.setFont(to: labelMessage)
         Common.setFont(to: labelAddCouponString)
         Common.setFont(to: textFieldCouponCode)
-        
+        btnAddCoupon.setTitle(Constants.string.ADDCOUPON.localize(), for: .normal)
+
     }
     
     private func localize() {

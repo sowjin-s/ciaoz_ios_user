@@ -18,7 +18,15 @@ class SideBarTableViewController: UITableViewController {
     
     // private let sideBarList = [Constants.string.payment,Constants.string.yourTrips,Constants.string.coupon,Constants.string.wallet,Constants.string.passbook,Constants.string.settings,Constants.string.help,Constants.string.share,Constants.string.inviteReferral,Constants.string.faqSupport,Constants.string.termsAndConditions,Constants.string.privacyPolicy,Constants.string.logout]
     
-    private let sideBarList = [Constants.string.payment,Constants.string.yourTrips,Constants.string.coupon,Constants.string.wallet,Constants.string.passbook,Constants.string.settings,Constants.string.help,Constants.string.share,Constants.string.logout]
+    private let sideBarList = [Constants.string.payment.localize(),
+                               Constants.string.yourTrips.localize(),
+                               Constants.string.coupon.localize(),
+                               Constants.string.wallet.localize(),
+                               Constants.string.passbook.localize(),
+                               Constants.string.settings.localize(),
+                               Constants.string.help.localize(),
+                               Constants.string.share.localize(),
+                               Constants.string.logout.localize()]
     
     private let cellId = "cellId"
     
