@@ -16,6 +16,8 @@ class CouponViewController: UIViewController {
     @IBOutlet private var textFieldCouponCode : TextField!
     @IBOutlet private weak var labelAddCouponString : UILabel!
     @IBOutlet private weak var viewCoupon : UIView!
+    @IBOutlet private weak var buttonAddCoupon : UIButton!
+
     
     lazy var loader  : UIView = {
         return createActivityIndicator(self.view)
@@ -58,7 +60,7 @@ extension CouponViewController {
         Common.setFont(to: labelMessage)
         Common.setFont(to: labelAddCouponString)
         Common.setFont(to: textFieldCouponCode)
-        btnAddCoupon.setTitle(Constants.string.ADDCOUPON.localize(), for: .normal)
+        buttonAddCoupon.setTitle(Constants.string.ADDCOUPON.localize(), for: .normal)
 
     }
     

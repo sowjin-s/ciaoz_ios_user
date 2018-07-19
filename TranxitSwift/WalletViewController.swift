@@ -14,6 +14,8 @@ class WalletViewController: UIViewController {
     @IBOutlet private weak var labelBalance : Label!
     @IBOutlet private weak var textFieldAmount : UITextField!
     @IBOutlet private weak var viewWallet : UIView!
+    @IBOutlet private weak var buttonAddAmount : UIButton!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,7 +63,7 @@ extension WalletViewController {
         
         labelAddMny.text = Constants.string.addAmount.localize()
         labelWallet.text = Constants.string.yourWalletAmnt.localize()
-        btnAddAmnt.setTitle(Constants.string.ADDAMT, for: .normal)
+        buttonAddAmount.setTitle(Constants.string.ADDAMT, for: .normal)
         
     }
     

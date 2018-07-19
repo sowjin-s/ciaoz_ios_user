@@ -893,6 +893,7 @@
                         <viewLayoutGuide key="safeArea" id="Zhh-h7-1xU"/>
                     </view>
                     <connections>
+                        <outlet property="buttonAddAmount" destination="bvL-R9-eNI" id="HJB-m2-QVm"/>
                         <outlet property="labelBalance" destination="Ttf-Fv-7of" id="QKJ-h8-bWv"/>
                         <outlet property="textFieldAmount" destination="Olf-rv-tgI" id="IZp-m7-Ug6"/>
                         <outlet property="viewWallet" destination="fWR-9M-Oac" id="9m2-aL-bXc"/>
@@ -1016,6 +1017,7 @@
                         <viewLayoutGuide key="safeArea" id="CRn-Dy-ans"/>
                     </view>
                     <connections>
+                        <outlet property="buttonAddCoupon" destination="2hD-Df-IwY" id="9WV-N9-bCV"/>
                         <outlet property="labelAddCouponString" destination="jJC-iD-nng" id="e8F-PH-qmy"/>
                         <outlet property="labelMessage" destination="bZ3-WF-D7e" id="gN3-sD-ceO"/>
                         <outlet property="textFieldCouponCode" destination="vYd-TQ-18s" id="0AR-5W-ROz"/>
