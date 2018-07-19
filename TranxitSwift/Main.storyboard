@@ -894,7 +894,9 @@
                     </view>
                     <connections>
                         <outlet property="buttonAddAmount" destination="bvL-R9-eNI" id="HJB-m2-QVm"/>
+                        <outlet property="labelAddMoney" destination="g4A-K7-LvU" id="a37-6w-agK"/>
                         <outlet property="labelBalance" destination="Ttf-Fv-7of" id="QKJ-h8-bWv"/>
+                        <outlet property="labelWallet" destination="5hN-iD-CKU" id="iW3-0L-zCG"/>
                         <outlet property="textFieldAmount" destination="Olf-rv-tgI" id="IZp-m7-Ug6"/>
                         <outlet property="viewWallet" destination="fWR-9M-Oac" id="9m2-aL-bXc"/>
                     </connections>

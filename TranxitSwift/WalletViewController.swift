@@ -14,7 +14,11 @@ class WalletViewController: UIViewController {
     @IBOutlet private weak var labelBalance : Label!
     @IBOutlet private weak var textFieldAmount : UITextField!
     @IBOutlet private weak var viewWallet : UIView!
+    
     @IBOutlet private weak var buttonAddAmount : UIButton!
+    @IBOutlet var labelWallet: UILabel!
+    @IBOutlet var labelAddMoney: UILabel!
+    
 
     
     override func viewDidLoad() {
@@ -61,7 +65,7 @@ extension WalletViewController {
         Common.setFont(to: textFieldAmount)
         
         
-        labelAddMny.text = Constants.string.addAmount.localize()
+        labelAddMoney.text = Constants.string.addAmount.localize()
         labelWallet.text = Constants.string.yourWalletAmnt.localize()
         buttonAddAmount.setTitle(Constants.string.ADDAMT, for: .normal)
         
