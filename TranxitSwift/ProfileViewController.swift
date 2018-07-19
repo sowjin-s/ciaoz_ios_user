@@ -81,7 +81,7 @@ extension ProfileViewController {
         self.viewPersonal.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.setTripTypeAction(sender:))))
         self.viewBusiness.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.setTripTypeAction(sender:))))
         self.imageViewProfile.isUserInteractionEnabled = true
-        self.imageViewProfile.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.changeImage)))
+        [self.imageViewProfile, self.viewImageChange].forEach({$0?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.changeImage)))}) 
         self.buttonSave.addTarget(self, action: #selector(self.buttonSaveAction), for: .touchUpInside)
         self.buttonChangePassword.addTarget(self, action: #selector(self.changePasswordAction), for: .touchUpInside)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.backButtonClick))
@@ -187,12 +187,7 @@ extension ProfileViewController {
 //            return
 //        }
         
-        var data : Data?
-        
-        if self.changedImage != nil, let dataImg = UIImagePNGRepresentation(self.changedImage!) {
-            data = dataImg
-        }
-        
+        self.loader.isHidden = false
         
         let profile = Profile()
         profile.device_token = deviceTokenString
@@ -200,15 +195,20 @@ extension ProfileViewController {
         profile.first_name = firstName
         profile.last_name = lastName
         profile.mobile = mobile
-    
+        
         var json = profile.JSONRepresentation
         json.removeValue(forKey: "id")
         json.removeValue(forKey: "picture")
         json.removeValue(forKey: "access_token")
-        json.removeValue(forKey: "currency  ")
-        self.loader.isHidden = false
-        self.presenter?.post(api: .updateProfile, imageData: data == nil ? nil : [WebConstants.string.picture : data!], parameters: json)
-         
+        json.removeValue(forKey: "currency")
+        json.removeValue(forKey: "wallet_balance")
+        json.removeValue(forKey: "sos")
+
+        if self.changedImage != nil, let dataImg = UIImagePNGRepresentation(self.changedImage!) {
+            self.presenter?.post(api: .updateProfile, imageData: [WebConstants.string.picture : dataImg], parameters: json)
+        } else {
+            self.presenter?.post(api: .updateProfile, data: profile.toData())
+        }
     }
   
     private func setLayout(){
@@ -287,7 +287,7 @@ extension ProfileViewController : PostViewProtocol {
     func onError(api: Base, message: String, statusCode code: Int) {
         
         DispatchQueue.main.async {
-            self.view.make(toast: message)
+           UIApplication.shared.keyWindow?.make(toast: message)
             self.loader.isHidden = true
         }
         
@@ -300,7 +300,7 @@ extension ProfileViewController : PostViewProtocol {
             self.loader.isHidden = true
             self.setProfile()
             if api == .updateProfile {
-                UIApplication.shared.keyWindow?.makeToast(Constants.string.profileUpdated.localize(), point: self.view.center, title: nil, image: nil, completion: nil)
+                UIApplication.shared.keyWindow?.make(toast: Constants.string.profileUpdated.localize())
             }
         }
         

@@ -812,7 +812,7 @@
                 if isScheduled {
                     if let dateString = Formatter.shared.getString(from: scheduleDate, format: DateFormat.list.ddMMyyyyhhmma) {
                         
-                        let dateArray = dateString.components(separatedBy: "")
+                        let dateArray = dateString.components(separatedBy: " ")
                         request.schedule_date = dateArray.first
                         request.schedule_time = dateArray.last
                     }

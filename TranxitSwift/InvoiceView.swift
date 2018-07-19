@@ -96,7 +96,7 @@ extension InvoiceView {
         self.labelBaseFare.text = "\(String.removeNil(User.main.currency)) \(Float.removeNil(request.payment?.fixed))"
         self.labelDistanceFare.text = "\(String.removeNil(User.main.currency)) \(Float.removeNil(request.payment?.distance))"
         self.labelTax.text = "\(String.removeNil(User.main.currency)) \(Float.removeNil(request.payment?.tax))"
-        self.labelTotal.text = "\(String.removeNil(User.main.currency)) \(Float.removeNil(request.payment?.total))"
+        self.labelTotal.text = "\(String.removeNil(User.main.currency)) \(Float.removeNil(request.payment?.payable))"
         self.labelPaymentType.text = request.payment_mode?.rawValue
         self.imageViewPaymentType.image = request.payment_mode == .CASH ? #imageLiteral(resourceName: "money_icon") : #imageLiteral(resourceName: "visa")
         self.buttonPayNow.isHidden = request.payment_mode == .CASH
