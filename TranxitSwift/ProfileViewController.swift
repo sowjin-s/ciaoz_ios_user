@@ -63,11 +63,13 @@ class ProfileViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = false
+        //self.isEnabled = IQKeyboardManager.shared.enable
+        //IQKeyboardManager.shared.enable = false
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-       // self.navigationController?.isNavigationBarHidden = true
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.navigationController?.isNavigationBarHidden = false
     }
     
 }
@@ -93,6 +95,8 @@ extension ProfileViewController {
         self.presenter?.get(api: .getProfile, parameters: nil)
         self.tableView.tableHeaderView?.bounds.size = CGSize(width: self.tableView.bounds.width, height: 200)
         self.buttonChangePassword.isHidden = (User.main.loginType != LoginType.manual.rawValue)
+        self.navigationController?.isNavigationBarHidden = false
+
     }
     
     // MARK:- Set Profile Details

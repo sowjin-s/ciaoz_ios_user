@@ -277,9 +277,9 @@ enum DeviceType : String, Codable {
 //Lanugage
 
 enum Language : String {
-    case english = "English"
-    case spanish = "Spanish"
-    static var count: Int{ return 2 }
+    case english = "en"
+   // case spanish = "Spanish"
+    static var count: Int{ return 1 }
 }
 
 

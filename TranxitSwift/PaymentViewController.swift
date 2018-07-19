@@ -34,13 +34,14 @@ class PaymentViewController: UITableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = false
         //self.isEnabled = IQKeyboardManager.shared.enable
         //IQKeyboardManager.shared.enable = false
     }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        //IQKeyboardManager.shared.enable = self.isEnabled
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.navigationController?.isNavigationBarHidden = false
     }
 }
 

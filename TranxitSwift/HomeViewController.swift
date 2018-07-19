@@ -169,10 +169,10 @@
             self.viewLayouts()
         }
         
-        override func viewWillDisappear(_ animated: Bool) {
-            super.viewWillDisappear(animated)
-            //IQKeyboardManager.shared.enable = false
-        }
+//        override func viewWillDisappear(_ animated: Bool) {
+//            super.viewWillDisappear(animated)
+//            //IQKeyboardManager.shared.enable = false
+//        }
         
         
         //    var tempLat = 13.05864944
@@ -231,9 +231,7 @@
             self.viewCurrentLocation.makeRoundedCorner()
             self.mapViewHelper?.mapView?.frame = viewMapOuter.bounds
             self.viewSideMenu.makeRoundedCorner()
-            self.navigationController?.isNavigationBarHidden = true
-            self.navigationController?.navigationBar.isHidden = true
-            
+            self.navigationController?.isNavigationBarHidden = true            
         }
         
         @IBAction private func getCurrentLocation(){

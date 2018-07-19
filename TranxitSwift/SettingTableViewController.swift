@@ -16,7 +16,7 @@ class SettingTableViewController: UITableViewController {
     private var numberOfRows = 2
     
     private let header = [Constants.string.changeLanguage, Constants.string.favourites, .Empty]
-    private let languages = [Language.english, .spanish]
+    private let languages = [Language.english]
     
     private let favouriteLocation = 1
     private let changeLanguage = 0
@@ -171,7 +171,7 @@ extension SettingTableViewController {
         if indexPath.section == self.changeLanguage {
             self.selectedLanguage = languages[indexPath.row]
             UserDefaults.standard.set(self.selectedLanguage.rawValue, forKey: Keys.list.language)
-            self.tableView.reloadRows(at: [IndexPath(row: 0, section: self.changeLanguage),IndexPath(row: 1, section: self.changeLanguage)], with: .automatic)
+            self.tableView.reloadRows(at: self.languages.map({ IndexPath(row: $0.hashValue, section: self.changeLanguage) }) , with: .automatic)
         } else if indexPath.section ==  self.favouriteLocation {
             self.loader.isHidden = false
             self.initMaps()

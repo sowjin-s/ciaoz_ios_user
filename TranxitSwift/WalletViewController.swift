@@ -32,6 +32,7 @@ class WalletViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = false
         KeyboardAvoiding.avoidingView = self.viewWallet
       //  IQKeyboardManager.sharedManager().enable = true
     }
@@ -49,7 +50,6 @@ extension WalletViewController {
     private func initalLoads() {
         
         self.view.dismissKeyBoardonTap()
-        self.navigationController?.isNavigationBarHidden = false
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.backButtonClick))
         self.navigationItem.title = Constants.string.wallet.localize()
         self.setDesign()
