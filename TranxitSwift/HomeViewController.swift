@@ -155,7 +155,6 @@
         override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
             self.navigationController?.isNavigationBarHidden = true
-            self.navigationController?.navigationBar.isHidden = true
             self.localize()
             //IQKeyboardManager.shared.enable = true
         }
