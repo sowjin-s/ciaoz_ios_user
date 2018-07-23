@@ -117,7 +117,9 @@ extension PaymentViewController {
                 self.presenter?.post(api: .deleteCard, data: cardEntity.toData())
                 bool(true)
             }))
-            alert.addAction(UIAlertAction(title: Constants.string.Cancel.localize(), style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: Constants.string.Cancel.localize(), style: .cancel, handler: { _ in
+                bool(true)
+            }))
             alert.view.tintColor = .primary
             self.present(alert, animated: true, completion: nil)
         }

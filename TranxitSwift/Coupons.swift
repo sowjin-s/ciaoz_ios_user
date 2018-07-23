@@ -26,7 +26,7 @@ struct CouponWallet : JSONSerializable {
 struct PromoCode : JSONSerializable {
     
     var discount_type : String?
-    var discount : String?
+    var discount : Float?
     var promo_code : String?
     var status : String?
     

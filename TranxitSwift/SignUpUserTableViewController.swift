@@ -174,14 +174,8 @@ extension SignUpUserTableViewController {
         
         //sender.view?.addPressAnimation()
         self.view.endEditingForce()
-        guard let email = emailtext.text?.trimmingCharacters(in: .whitespaces), !email.isEmpty else {
-            self.showToast(string: ErrorMessage.list.enterEmail.localize())
-            return
-        }
-        guard Common.isValid(email: email) else {
-            self.showToast(string: ErrorMessage.list.enterValidEmail.localize())
-            return
-        }
+        guard let email = self.validateEmail() else { return }
+        
         guard let firstName = self.firstNameText.text, !firstName.isEmpty else {
             self.showToast(string: ErrorMessage.list.enterFirstName.localize())
             return
@@ -234,6 +228,20 @@ extension SignUpUserTableViewController {
         
     }
     
+    private func validateEmail()->String? {
+        guard let email = emailtext.text?.trimmingCharacters(in: .whitespaces), !email.isEmpty else {
+            self.showToast(string: ErrorMessage.list.enterEmail.localize())
+            emailtext.becomeFirstResponder()
+            return nil
+        }
+        guard Common.isValid(email: email) else {
+            self.showToast(string: ErrorMessage.list.enterValidEmail.localize())
+            emailtext.becomeFirstResponder()
+            return nil
+        }
+        return email
+    }
+    
 
     private func prepareLogin(viewcontroller : UIViewController&AKFViewController) {
         
@@ -272,6 +280,13 @@ extension SignUpUserTableViewController : PostViewProtocol {
     
     func onError(api: Base, message: String, statusCode code: Int) {
     
+        if api == .userVerify {
+            self.emailtext.shake()
+            vibrate()
+            DispatchQueue.main.async {
+                self.emailtext.becomeFirstResponder()
+            }
+        }
         DispatchQueue.main.async {
             self.loader.isHidden = true
             self.showToast(string: message)
@@ -355,8 +370,15 @@ extension SignUpUserTableViewController : UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         (textField as? HoshiTextField)?.borderActiveColor = .lightGray
-        if textField == emailtext, textField.text?.count == 0 {
-            textField.placeholder = Constants.string.emailPlaceHolder.localize()
+        if textField == emailtext {
+            if textField.text?.count == 0 {
+                textField.placeholder = Constants.string.emailPlaceHolder.localize()
+            } else if let email = validateEmail(){
+                textField.resignFirstResponder()
+                let user = User()
+                user.email = email
+                presenter?.post(api: .userVerify, data: user.toData())
+            }
         }
     }
     

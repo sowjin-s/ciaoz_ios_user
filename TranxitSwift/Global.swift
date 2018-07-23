@@ -9,6 +9,7 @@
 import UIKit
 import Foundation
 import PopupDialog
+import AudioUnit
 
 var currentBundle : Bundle!
 var selectedShortCutItem : CoreDataEntity?
@@ -211,6 +212,11 @@ func forceLogout(with message : String? = nil) {
     }
 }
 
+// MARK:- Add Vibration
+
+func vibrate() {
+    AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+}
 
 // Initialize User
 

@@ -71,6 +71,7 @@ extension AddCardViewController {
     // MARK:- Done Button Click
     
     @IBAction private func doneButtonClick() {
+        self.view.endEditingForce() 
         self.loader.isHidden = false
         STPAPIClient.shared().createToken(withCard: paymentTextField.cardParams) { (stpToken, error) in
             

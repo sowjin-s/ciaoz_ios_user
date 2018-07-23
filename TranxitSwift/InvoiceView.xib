@@ -325,13 +325,13 @@
                 <outlet property="labelBaseFareString" destination="0QI-Qd-NOt" id="i6Z-X2-h51"/>
                 <outlet property="labelBooking" destination="lCy-Mm-8WF" id="Qpx-39-EpR"/>
                 <outlet property="labelBookingString" destination="mHK-pv-VT6" id="eVS-p5-dTP"/>
+                <outlet property="labelDiscount" destination="OJu-p4-pVt" id="htx-3X-j8G"/>
+                <outlet property="labelDiscountString" destination="qyr-lB-7yj" id="HwL-if-xnH"/>
                 <outlet property="labelDistanceFare" destination="PL5-7z-C7L" id="Ds9-0O-m1j"/>
                 <outlet property="labelDistanceFareString" destination="FJc-N4-n7D" id="tDi-lh-iZu"/>
                 <outlet property="labelDistanceTravelled" destination="kKK-IK-Uea" id="sPk-jf-rec"/>
                 <outlet property="labelDistanceTravelledString" destination="Yi9-vH-sgU" id="tc9-aM-F7I"/>
                 <outlet property="labelPaymentType" destination="MQ7-76-XIQ" id="6sb-jH-9dm"/>
-                <outlet property="labelTax" destination="OJu-p4-pVt" id="htx-3X-j8G"/>
-                <outlet property="labelTaxString" destination="qyr-lB-7yj" id="HwL-if-xnH"/>
                 <outlet property="labelTimeTaken" destination="8tG-ok-Guz" id="pe8-ob-kUS"/>
                 <outlet property="labelTimeTakenString" destination="YAs-DG-vZE" id="wsB-hr-sji"/>
                 <outlet property="labelTitle" destination="62P-tv-LwB" id="KuT-xN-6TU"/>

@@ -108,7 +108,7 @@ extension YourTripsPassbookViewController {
         
         self.tableViewList.backgroundView = {
            
-            if self.getData().count == 0 {
+            if (self.isYourTripsSelected ? getData().trips.count : getData().wallet.count) == 0 {
                 let label = Label(frame: UIScreen.main.bounds)
                 label.numberOfLines = 0
                 Common.setFont(to: label, isTitle: true)
@@ -128,12 +128,8 @@ extension YourTripsPassbookViewController {
             } else {
                 return nil
             }
-            
         }()
-        
     }
-    
-    
     
     private func switchViewAction(){
        // self.pastUnderLineView.isHidden = false
@@ -166,7 +162,7 @@ extension YourTripsPassbookViewController : UITableViewDelegate,UITableViewDataS
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return getData().count
+        return isYourTripsSelected ? getData().trips.count : getData().wallet.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -187,7 +183,7 @@ extension YourTripsPassbookViewController : UITableViewDelegate,UITableViewDataS
         
         guard isYourTripsSelected else { return }
         
-        if let vc = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.Ids.YourTripsDetailViewController) as? YourTripsDetailViewController, self.getData().count>indexPath.row, let idValue = self.getData()[indexPath.row].id {
+        if let vc = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.Ids.YourTripsDetailViewController) as? YourTripsDetailViewController, self.getData().trips.count>indexPath.row, let idValue = self.getData().trips[indexPath.row].id {
             vc.isUpcomingTrips = !isFirstBlockSelected
             vc.setId(id: idValue)
             self.navigationController?.pushViewController(vc, animated: true)
@@ -218,12 +214,12 @@ extension YourTripsPassbookViewController : UITableViewDelegate,UITableViewDataS
         
     }
     
-    private func getData()->[Request] {
+    private func getData()->(trips :[Request],wallet : [CouponWallet]) {
         
         if isYourTripsSelected {
-            return (isFirstBlockSelected ? self.datasourceYourTripsPast : self.datasourceYourTripsUpcoming)
+            return ((isFirstBlockSelected ? self.datasourceYourTripsPast : self.datasourceYourTripsUpcoming),[])
         } else {
-            return (isFirstBlockSelected ? self.datasourceYourTripsPast : self.datasourceYourTripsUpcoming)
+            return ([],(isFirstBlockSelected ? self.datasourceWallet : self.datasourceCoupon))
         }
         
     }

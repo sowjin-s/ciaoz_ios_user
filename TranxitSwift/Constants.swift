@@ -209,6 +209,9 @@ struct Constants {
     let helpQuotes = "Our team persons will contact you soon!"
     let areYouSureCard = "Are you sure want to delete this card?"
     let remove = "Remove"
+    let discount = "Discount"
+    let planChanged = "Plan Changed"
+    let bookedAnotherCab = "Booked another cab"
 }
 
 //Defaults Keys

@@ -20,8 +20,8 @@ class InvoiceView: UIView {
     @IBOutlet private weak var labelBaseFare : UILabel!
     @IBOutlet private weak var labelDistanceFareString : UILabel!
     @IBOutlet private weak var labelDistanceFare : UILabel!
-    @IBOutlet private weak var labelTaxString : UILabel!
-    @IBOutlet private weak var labelTax : UILabel!
+    @IBOutlet private weak var labelDiscountString : UILabel!
+    @IBOutlet private weak var labelDiscount : UILabel!
     @IBOutlet private weak var labelTotalString : UILabel!
     @IBOutlet private weak var labelTotal : UILabel!
     @IBOutlet private weak var imageViewPaymentType : UIImageView!
@@ -57,8 +57,8 @@ extension InvoiceView {
         Common.setFont(to: labelPaymentType, isTitle: true)
         Common.setFont(to: labelTotal, isTitle: true, size: 18)
         Common.setFont(to: labelTotalString, isTitle: true)
-        Common.setFont(to: labelTax)
-        Common.setFont(to: labelTaxString)
+        Common.setFont(to: labelDiscount)
+        Common.setFont(to: labelDiscountString)
         Common.setFont(to: labelBooking)
         Common.setFont(to: labelBookingString)
         Common.setFont(to: labelBaseFare)
@@ -83,7 +83,7 @@ extension InvoiceView {
         self.labelTimeTakenString.text = Constants.string.timeTaken.localize()
         self.labelBaseFareString.text = Constants.string.baseFare.localize()
         self.labelDistanceFareString.text = Constants.string.distanceFare.localize()
-        self.labelTaxString.text = Constants.string.tax.localize()
+        self.labelDiscountString.text = Constants.string.discount.localize()
         self.buttonPayNow.setTitle(Constants.string.paynow.localize(), for: .normal)
         self.labelTitle.text = Constants.string.invoice.localize()
     }
@@ -95,7 +95,7 @@ extension InvoiceView {
         self.labelTimeTaken.text = "\(String.removeNil(request.travel_time)) \(Constants.string.mins.localize())"
         self.labelBaseFare.text = "\(String.removeNil(User.main.currency)) \(Float.removeNil(request.payment?.fixed))"
         self.labelDistanceFare.text = "\(String.removeNil(User.main.currency)) \(Float.removeNil(request.payment?.distance))"
-        self.labelTax.text = "\(String.removeNil(User.main.currency)) \(Float.removeNil(request.payment?.tax))"
+        self.labelDiscount.text = "\(String.removeNil(User.main.currency)) \(Float.removeNil(request.payment?.discount))"
         self.labelTotal.text = "\(String.removeNil(User.main.currency)) \(Float.removeNil(request.payment?.payable))"
         self.labelPaymentType.text = request.payment_mode?.rawValue
         self.imageViewPaymentType.image = request.payment_mode == .CASH ? #imageLiteral(resourceName: "money_icon") : #imageLiteral(resourceName: "visa")
