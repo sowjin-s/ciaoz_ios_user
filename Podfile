@@ -29,6 +29,7 @@ target 'User' do
     pod 'FacebookCore'
     pod 'FacebookLogin'
     pod 'Stripe'
+    pod 'CreditCardForm'
 
   target 'UserTests' do
     inherit! :search_paths

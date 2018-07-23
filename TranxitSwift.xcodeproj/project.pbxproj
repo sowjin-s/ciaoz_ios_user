@@ -137,6 +137,8 @@
 		08C9E90E20D244F7002928EA /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C9E90D20D244F7002928EA /* Rating.swift */; };
 		08CA2F7C20D927DC00F99FCA /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA2F7B20D927DC00F99FCA /* Reachability.swift */; };
 		08CEA1AB2073B47F00553DE2 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CEA1AA2073B47F00553DE2 /* Application.swift */; };
+		08CEB1352105A1B000AC217A /* CardEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CEB1342105A1B000AC217A /* CardEntity.swift */; };
+		08CEB1372105AF2F00AC217A /* AddCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CEB1362105AF2F00AC217A /* AddCardViewController.swift */; };
 		08DDE667209361F2009FEBC6 /* WalkThroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DDE666209361F2009FEBC6 /* WalkThroughViewController.swift */; };
 		08DDE6692093633B009FEBC6 /* WalkThroughPreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DDE6682093633B009FEBC6 /* WalkThroughPreviewController.swift */; };
 		08DF19C82006221B00B83AE3 /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF19C72006221B00B83AE3 /* AppData.swift */; };
@@ -377,6 +379,8 @@
 		08C9E90D20D244F7002928EA /* Rating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
 		08CA2F7B20D927DC00F99FCA /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		08CEA1AA2073B47F00553DE2 /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
+		08CEB1342105A1B000AC217A /* CardEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardEntity.swift; sourceTree = "<group>"; };
+		08CEB1362105AF2F00AC217A /* AddCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardViewController.swift; sourceTree = "<group>"; };
 		08DDE666209361F2009FEBC6 /* WalkThroughViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkThroughViewController.swift; sourceTree = "<group>"; };
 		08DDE6682093633B009FEBC6 /* WalkThroughPreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkThroughPreviewController.swift; sourceTree = "<group>"; };
 		08DF19C72006221B00B83AE3 /* AppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
@@ -877,6 +881,7 @@
 			isa = PBXGroup;
 			children = (
 				083617C820B711BF009C9658 /* PaymentViewController.swift */,
+				08CEB1362105AF2F00AC217A /* AddCardViewController.swift */,
 			);
 			name = Payment;
 			sourceTree = "<group>";
@@ -1499,6 +1504,7 @@
 				08A8821220C512760088BC5A /* LocationService.swift */,
 				08A8821420C572510088BC5A /* Coupons.swift */,
 				08C9E90D20D244F7002928EA /* Rating.swift */,
+				08CEB1342105A1B000AC217A /* CardEntity.swift */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -1812,6 +1818,7 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/Cache/Cache.framework",
+				"${BUILT_PRODUCTS_DIR}/CreditCardForm/CreditCardForm.framework",
 				"${BUILT_PRODUCTS_DIR}/DateTimePicker/DateTimePicker.framework",
 				"${BUILT_PRODUCTS_DIR}/DynamicBlurView/DynamicBlurView.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
@@ -1838,6 +1845,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cache.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CreditCardForm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DateTimePicker.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DynamicBlurView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
@@ -2019,6 +2027,7 @@
 				0809321820A067EF00B88318 /* LoginRequest.swift in Sources */,
 				08B73D0420947C5C00B60F74 /* PasswordViewController.swift in Sources */,
 				081E9CF520BFCC0E004C6884 /* Service.swift in Sources */,
+				08CEB1372105AF2F00AC217A /* AddCardViewController.swift in Sources */,
 				0811B16A20E7AF6600B78323 /* ChatResponse.swift in Sources */,
 				8871FBD51FE7DC8E002335D5 /* Protocol.swift in Sources */,
 				083A59AA20A434E000D64574 /* LocationTableViewCell.swift in Sources */,
@@ -2072,6 +2081,7 @@
 				082D1B8520931B3D0000B7C8 /* Country.swift in Sources */,
 				883389571FE8F10F006B6C05 /* Error.swift in Sources */,
 				0805BDC1209C504900ACDC38 /* SignUpUserTableViewController.swift in Sources */,
+				08CEB1352105A1B000AC217A /* CardEntity.swift in Sources */,
 				08F595E82076466300369048 /* ParallaxHeaderMode.swift in Sources */,
 				0811B18320E7B55100B78323 /* SelectImageView.swift in Sources */,
 				082C442220E7913A00A7C892 /* FloatyViewController.swift in Sources */,

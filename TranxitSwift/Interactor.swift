@@ -49,7 +49,7 @@ extension Interactor : PostInteractorOutputProtocol {
          case .getProfile, .updateProfile, .signUp:
             self.presenter?.sendProfile(api: api, data: response)
             
-        case .changePassword, .resetPassword, .cancelRequest, .payNow, .locationServicePostDelete, .addPromocode, .logout:
+        case .changePassword, .resetPassword, .cancelRequest, .payNow, .locationServicePostDelete, .addPromocode, .logout, .postCards, .deleteCard:
             self.presenter?.sendSuccess(api: api, data: response)
             
         case .forgotPassword:
@@ -72,6 +72,9 @@ extension Interactor : PostInteractorOutputProtocol {
         
         case .walletPassbook, .couponPassbook:
             self.presenter?.sendCouponWallet(api: api, data: response)
+        
+        case .getCards:
+            self.presenter?.sendCardEntityList(api: api, data: response)
             
         default :
             break

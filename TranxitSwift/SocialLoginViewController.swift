@@ -21,7 +21,7 @@ class SocialLoginViewController: UITableViewController {
     private var accessToken : String?
     
     private lazy var loader : UIView = {
-        return createActivityIndicator(UIScreen.main.focusedView ?? self.view)
+        return createActivityIndicator(UIApplication.shared.keyWindow ?? self.view)
     }()
     
     override func viewDidLoad() {

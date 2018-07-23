@@ -107,6 +107,10 @@ extension Presenter : PostPresenterOutputProtocol {
     func sendCouponWallet(api: Base, data: Data) {
         controller?.getCouponWallet(api: api, data: PresenterProcessor.shared.couponWallet(data: data))
     }
+    
+    func sendCardEntityList(api: Base, data: Data) {
+        controller?.getCardEnities(api: api, data: PresenterProcessor.shared.getCards(data: data))
+    }
 }
 
 

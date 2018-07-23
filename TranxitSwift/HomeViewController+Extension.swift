@@ -21,7 +21,7 @@ extension HomeViewController {
     func showRideNowView(with source : [Service]) {
         
         guard let sourceLocation = self.sourceLocationDetail?.value, let destinationLocation = self.destinationLocationDetail else { return }
-        
+        var selectedPaymentDetail : CardEntity?
         if self.rideNowView == nil {
             
             self.rideNowView = Bundle.main.loadNibNamed(XIB.Names.RideNowView, owner: self, options: [:])?.first as? RideNowView
@@ -33,19 +33,24 @@ extension HomeViewController {
             
             self.rideNowView?.onClickRideNow = { service in
                 if service != nil {
-                    self.createRequest(for: service!, isScheduled: false, scheduleDate: nil)
+                    self.createRequest(for: service!, isScheduled: false, scheduleDate: nil, cardEntity: selectedPaymentDetail)
                 }
             }
             self.rideNowView?.onClickSchedule = { service in
                 self.schedulePickerView(on: { (date) in
                     if service != nil {
-                        self.createRequest(for: service!, isScheduled: true, scheduleDate: date)
+                        self.createRequest(for: service!, isScheduled: true, scheduleDate: date,cardEntity: selectedPaymentDetail)
                     }
                 })
             }
             self.rideNowView?.onClickChangePayment = {
                 if let vc = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.Ids.PaymentViewController) as? PaymentViewController{
                     vc.isChangingPayment = true
+                    vc.onclickPayment = { cardEntity in
+                        selectedPaymentDetail = cardEntity
+                        self.rideNowView?.imageViewCard.image = cardEntity == nil ? #imageLiteral(resourceName: "money_icon") : #imageLiteral(resourceName: "visa")
+                        self.rideNowView?.labelCardNumber.text = cardEntity == nil ? Constants.string.cash.localize() : "XXXX-XXXX-XXXX-"+String.removeNil(cardEntity?.last_four)
+                    }
                     let navigation = UINavigationController(rootViewController: vc)
                     self.present(navigation, animated: true, completion: nil)
                 }
@@ -274,7 +279,7 @@ extension HomeViewController {
     func showRatingView(with request : Request) {
         
         guard self.ratingView == nil else { return }
-        
+        self.removeInvoiceView()
         if let rating = Bundle.main.loadNibNamed(XIB.Names.RatingView, owner: self, options: [:])?.first as? RatingView {
             NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShowRateView(info:)), name: .UIKeyboardWillShow, object: nil)
             NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHideRateView(info:)), name: .UIKeyboardWillHide, object: nil)
@@ -436,8 +441,11 @@ extension HomeViewController {
             self.showInvoiceView(with: request)
             
         case .completed:
-            self.showRatingView(with: request)
-            
+            if request.paid == true.hashValue {
+                self.showRatingView(with: request)
+            } else {
+                self.showInvoiceView(with: request)
+            }
         default:
             break
         }
@@ -460,7 +468,7 @@ extension HomeViewController {
         if ![RideStatus.completed].contains(status) {
             self.removeRatingView()
         }
-        if ![RideStatus.dropped].contains(status) {
+        if ![RideStatus.dropped, .completed].contains(status) {
             self.removeInvoiceView()
         }
         if [RideStatus.none, .cancelled].contains(status) {

@@ -70,6 +70,12 @@ class PresenterProcessor {
         return data.getDecodedObject(from: [CouponWallet].self) ?? []
     }
     
+    // MARK:- Get Card
+    
+    func getCards(data : Data)->[CardEntity] {
+        return data.getDecodedObject(from: [CardEntity].self) ?? []
+    }
+    
     
 }
 

@@ -33,7 +33,9 @@ struct Storyboard {
     let YourTripsDetailViewController = "YourTripsDetailViewController"
     let OfflineBookingViewController = "OfflineBookingViewController"
     let SingleChatController = "SingleChatController"
+    let AddCardViewController = "AddCardViewController"
 }
+
 
 
 

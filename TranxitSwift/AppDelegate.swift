@@ -203,11 +203,11 @@ extension AppDelegate {
         
         print("Reachability \(self.reachability?.connection.description ?? .Empty)", #function)
         guard self.reachability != nil else { return }
-        if self.reachability!.connection == .none {
+        if self.reachability!.connection == .none && riderStatus == .none {
             if let rootView = UIApplication.shared.keyWindow?.rootViewController?.childViewControllers.last, !(rootView is OfflineBookingViewController) {
                 rootView.present(id: Storyboard.Ids.OfflineBookingViewController, animation: true)
             }
-            
+
         } else {
             (UIApplication.topViewController() as? OfflineBookingViewController)?.dismiss(animated: true, completion: nil)
         }

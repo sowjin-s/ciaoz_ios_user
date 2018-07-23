@@ -53,7 +53,6 @@ struct Constants {
     containing Lorem Ipsum passages, and more recently with desktop publishing
     software like Aldus PageMaker including versions of Lorem Ipsum
     """
-    
     let walkthroughWelcome = "Introducing Tranxit Driver to take rides from the Tranxit app users."
     let walkthroughDrive = "Be your own boss, set your own schedule. Get the latest driving features all in one spot."
     let walkthroughEarn = "Get well paid to help out strangers get to where they need to go,withdraw your earnigs every week/monthly."
@@ -208,6 +207,8 @@ struct Constants {
     let yourWalletAmnt = "Your wallet amount is"
     let Support = "Support"
     let helpQuotes = "Our team persons will contact you soon!"
+    let areYouSureCard = "Are you sure want to delete this card?"
+    let remove = "Remove"
 }
 
 //Defaults Keys

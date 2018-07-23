@@ -9,6 +9,7 @@ PODS:
   - Cache (4.2.0)
   - Crashlytics (3.10.2):
     - Fabric (~> 1.7.7)
+  - CreditCardForm (0.1.7)
   - DateTimePicker (1.2.1)
   - DynamicBlurView (2.0.2)
   - Fabric (1.7.7)
@@ -112,6 +113,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - Crashlytics (~> 3.10.2)
+  - CreditCardForm
   - DateTimePicker
   - Fabric (~> 1.7.7)
   - FacebookCore
@@ -138,6 +140,7 @@ SPEC REPOS:
     - Bolts
     - Cache
     - Crashlytics
+    - CreditCardForm
     - DateTimePicker
     - DynamicBlurView
     - Fabric
@@ -181,6 +184,7 @@ SPEC CHECKSUMS:
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   Cache: f28f8dd64b632155aabf9b3906b036a659048251
   Crashlytics: 0360624eea1c978a743feddb2fb1ef8b37fb7a0d
+  CreditCardForm: 66f0ce5a12182000a457d56f5630049efd3432df
   DateTimePicker: c7b10f7dfe6eb06014c88df964a0a994f246b791
   DynamicBlurView: aa6db4defc6e537eb86fc5e58dd3991666178399
   Fabric: bda89e242bce1b7b8ab264248cf3407774ce0095
@@ -219,6 +223,6 @@ SPEC CHECKSUMS:
   PopupDialog: 39598b7d41719f5c025b4b70e62728bae7734fef
   Stripe: 76c203e21555089b708e6cbe972a3e3baf1ab4d8
 
-PODFILE CHECKSUM: 10180ea0eb019e2fdabdb9e16b380d3ca4449bb3
+PODFILE CHECKSUM: 6c64b902d98f83bd2347238365a839f68afc01d7
 
 COCOAPODS: 1.5.3

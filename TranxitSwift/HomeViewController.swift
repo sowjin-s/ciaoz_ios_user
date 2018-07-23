@@ -13,6 +13,8 @@
     import DateTimePicker
     //import IQKeyboardManagerSwift
     
+    var riderStatus : RideStatus = .none // Provider Current Status
+    
     class HomeViewController: UIViewController {
         
         @IBOutlet private var viewSideMenu : UIView!
@@ -67,7 +69,6 @@
         }
         
         private var isUserInteractingWithMap = false // Boolean to handle Mapview User interaction
-        private var riderStatus : RideStatus = .none // Provider Current Status
         // private let transition = CircularTransition()  // Translation to for location Tap
         var mapViewHelper : GoogleMapsHelper?
 //        private var favouriteViewSource : LottieView?
@@ -731,10 +732,10 @@
                         }
                     }
                     
-                    guard self.riderStatus != request?.status else {
+                    guard riderStatus != request?.status else {
                         return
                     }
-                    self.riderStatus = request?.status ?? .none
+                    riderStatus = request?.status ?? .none
                     self.handle(request: request!)
                 } else {
                     self.clearMapview()
@@ -789,7 +790,7 @@
         
         // Create Request
         
-        func createRequest(for service : Service, isScheduled : Bool, scheduleDate : Date?) {
+        func createRequest(for service : Service, isScheduled : Bool, scheduleDate : Date?, cardEntity entity : CardEntity?) {
             
             self.showLoaderView()
             DispatchQueue.global(qos: .background).async {
@@ -802,9 +803,10 @@
                 request.d_latitude = self.destinationLocationDetail?.coordinate.latitude
                 request.d_longitude = self.destinationLocationDetail?.coordinate.longitude
                 request.service_type = service.id
-                request.payment_mode = .CASH
+                request.payment_mode = entity == nil ? .CASH : .CARD
                 request.distance = "\(service.pricing?.distance ?? 0)"
                 request.use_wallet = service.pricing?.useWallet
+                request.card_id = entity?.card_id
                 
                 if isScheduled {
                     if let dateString = Formatter.shared.getString(from: scheduleDate, format: DateFormat.list.ddMMyyyyhhmma) {
@@ -898,9 +900,16 @@
             self.loader.isHidden = true
             if api == .locationServicePostDelete {
                 self.presenter?.get(api: .locationService, parameters: nil)
-            }
-            DispatchQueue.main.async {
-                self.view.makeToast(message)
+            } 
+            if api != .sendRequest && api != .payNow {
+                DispatchQueue.main.async {
+                    self.view.makeToast(message)
+                }
+            } else {
+                riderStatus = .none // Make Ride Status to Default
+                if api == .payNow { // Remove PayNow if Card Payment is Success
+                    self.removeInvoiceView()
+                }
             }
         }
         
