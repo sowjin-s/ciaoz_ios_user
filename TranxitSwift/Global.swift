@@ -23,7 +23,6 @@ var favouriteLocations = [FavouriteLocation]()
 // MARK:- Store Favourite Locations
 
 func storeFavouriteLocations(from locationService : LocationService?) {
-    
     favouriteLocations.removeAll()
     let coreData = CoreDataHelper()
     // Append Favourite Locations to Service

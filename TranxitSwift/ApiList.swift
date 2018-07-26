@@ -53,6 +53,7 @@ enum Base : String{
     case sendRequest = "/api/user/send/request"
     case cancelRequest = "/api/user/cancel/request"
     case checkRequest = "/api/user/request/check"
+    case updateRequest = "/api/user/update/request"
     case payNow = "/api/user/payment"
     case rateProvider = "/api/user/rate/provider"
     case historyList = "/api/user/trips"

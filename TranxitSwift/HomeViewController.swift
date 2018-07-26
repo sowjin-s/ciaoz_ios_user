@@ -120,6 +120,7 @@
         var ratingView : RatingView?
         var rideNowView : RideNowView?
         var floatyButton : Floaty?
+        var reasonView : ReasonView?
         
         lazy var loader  : UIView = {
             return createActivityIndicator(self.view)
@@ -170,20 +171,12 @@
             self.viewLayouts()
         }
         
-//        override func viewWillDisappear(_ animated: Bool) {
-//            super.viewWillDisappear(animated)
-//            //IQKeyboardManager.shared.enable = false
-//        }
-        
-        
-        //    var tempLat = 13.05864944
-        //    var tempLong = 80.25398977
         
     }
     
     // MARK:- Methods
     
-    extension HomeViewController {
+extension HomeViewController {
         
         private func initialLoads(){
             
@@ -209,9 +202,6 @@
                 }
                 DispatchQueue.main.async {
                     self.isSourceFavourited = false // reset favourite location on change
-//                    if self.sourceLocationDetail?.value != nil, self.destinationLocationDetail != nil { // Get Services only if location Available
-//                        self.getServicesList()
-//                    }
                     self.textFieldSourceLocation.text = locationDetail?.address
                 }
             })
@@ -375,7 +365,10 @@
         
         @IBAction private func locationTapAction(sender : UITapGestureRecognizer) {
             
-            guard let senderView = sender.view else { return }
+            guard let senderView = sender.view  else { return }
+            if riderStatus != .none, senderView == viewSourceLocation { // Ignore if user is onRide and trying to change source location 
+                return
+            }
             self.selectedLocationView.transform = CGAffineTransform.identity
             
             if self.selectedLocationView == senderView {
@@ -415,14 +408,9 @@
         }
         
         private func plotMarker(marker : inout GMSMarker, with coordinate : CLLocationCoordinate2D){
-            
-            //print("marker : \(marker == self.sourceMarker)")
-            
+           
             marker.position = coordinate
-            //        marker.appearAnimation = .pop
-            //        marker.icon = isSource ? #imageLiteral(resourceName: "sourcePin").resizeImage(newWidth: 30) : #imageLiteral(resourceName: "destinationPin").resizeImage(newWidth: 30)
             marker.map = self.mapViewHelper?.mapView
-            //marker.map?.center = viewMapOuter.center
             self.mapViewHelper?.mapView?.animate(toLocation: coordinate)
         }
         
@@ -434,12 +422,17 @@
             if let locationView = Bundle.main.loadNibNamed(XIB.Names.LocationSelectionView, owner: self, options: [:])?.first as? LocationSelectionView {
                 locationView.frame = self.view.bounds
                 locationView.setValues(address: (sourceLocationDetail,destinationLocationDetail)) { (address) in
-                    
-                    self.removeUnnecessaryView(with: .none) // Remove services or ride now if previously open
                     self.sourceLocationDetail = address.source
                     self.destinationLocationDetail = address.destination
                     self.drawPolyline() // Draw polyline between source and destination
-                    self.getServicesList() // get Services
+                    if [RideStatus.accepted, .arrived, .pickedup, .started].contains(riderStatus) {
+                        if let dAddress = address.destination?.address, let coordinate = address.destination?.coordinate {
+                              self.updateLocation(with: (dAddress,coordinate))
+                        }
+                    } else {
+                        self.removeUnnecessaryView(with: .none) // Remove services or ride now if previously open
+                        self.getServicesList() // get Services
+                    }
                 }
                 self.view.addSubview(locationView)
                 if selectedLocationView == self.viewSourceLocation {
@@ -508,7 +501,7 @@
         @IBAction private func sideMenuAction(){
             
             
-            if self.isOnBooking {
+            if self.isOnBooking { // If User is on Ride Selection remove all view and make it to default
                 self.removeLoaderView()
                 self.removeUnnecessaryView(with: .none)
                 self.clearMapview()
@@ -520,35 +513,8 @@
                 self.viewSideMenu.addPressAnimation()
             }
             
-            // self.serviceView()
-            // self.showRideNowView()
-            // self.showRideStatusView()
-            // self.showInvoiceView()
-            //  self.showRatingView()
-            
         }
-        
-//        // MARK:- Add or remove lottie View
-//
-//        private func isAddLottie(view lottieView : inout LottieView?,in viewToBeAdded : UIView, isAdd : Bool){
-//
-//            if isAdd {
-//                let frame =  view.bounds//CGRect(x: viewToBeAdded.frame.maxX/2, y: viewToBeAdded.frame.maxY/2, width: viewToBeAdded.frame.width/2, height: viewToBeAdded.frame.height/2)
-//                lottieView = LottieHelper().addLottie(with: frame)
-//                lottieView =
-//                viewToBeAdded.addSubview(lottieView!)
-//                lottieView?.play()
-//            } else {
-//                let lottie = lottieView // inout parameter cannot be captured by escaping key
-//                UIView.animate(withDuration: 0.2, animations: {
-//                    lottie?.alpha = 0
-//                }) { (_) in
-//                    lottie?.removeFromSuperview()
-//                }
-//            }
-//
-//        }
-        
+
         // MARK:- Show DateTimePicker
         
         func schedulePickerView(on completion : @escaping ((Date)->())){
@@ -584,32 +550,37 @@
             
             if self.isUserInteractingWithMap {
                 
+                func getUpdate(on location : CLLocationCoordinate2D, completion :@escaping ((LocationDetail)->Void)) {
+                    self.drawPolyline()
+                    self.getServicesList()
+                    self.mapViewHelper?.getPlaceAddress(from: location, on: { (locationDetail) in
+                        completion(locationDetail)
+                    })
+                }
+                
                 if self.selectedLocationView == self.viewSourceLocation, self.sourceLocationDetail != nil {
-                    
+    
                     if let location = mapViewHelper?.mapView?.projection.coordinate(for: viewMapOuter.center) {
                         self.sourceLocationDetail?.value?.coordinate = location
-                        self.drawPolyline()
-                        self.getServicesList()
-                        self.mapViewHelper?.getPlaceAddress(from: location, on: { (locationDetail) in
-                            //print(locationDetail)
+                        getUpdate(on: location) { (locationDetail) in
                             self.sourceLocationDetail?.value = locationDetail
-                        })
+                        }
                     }
                 } else if self.selectedLocationView == self.viewDestinationLocation, self.destinationLocationDetail != nil {
                     
                     if let location = mapViewHelper?.mapView?.projection.coordinate(for: viewMapOuter.center) {
                         self.destinationLocationDetail?.coordinate = location
-                        self.drawPolyline()
-                        self.getServicesList()
-                        self.mapViewHelper?.getPlaceAddress(from: location, on: { (locationDetail) in
-                            //print(locationDetail)
+                        getUpdate(on: location) { (locationDetail) in
                             self.destinationLocationDetail = locationDetail
-                        })
+                            self.updateLocation(with: locationDetail) // Update Request Destination Location
+                        }
                     }
                 }
                 
             }
             self.isMapInteracted(false)
+            
+          
             
         }
         
@@ -748,7 +719,7 @@
         // Get Services provided by Provider
         
         private func getServicesList() {
-            if self.sourceLocationDetail?.value != nil, self.destinationLocationDetail != nil { // Get Services only if location Available
+            if self.sourceLocationDetail?.value != nil, self.destinationLocationDetail != nil, riderStatus == .none { // Get Services only if location Available
                 self.presenter?.get(api: .servicesList, parameters: nil)
             }
         }
@@ -760,7 +731,7 @@
             DispatchQueue.global(qos: .userInteractive).async {
                 
                 var estimateFare = EstimateFareRequest()
-                guard let sourceLocation = self.sourceLocationDetail?.value?.coordinate, let destinationLocation = self.destinationLocationDetail?.coordinate else {
+                guard let sourceLocation = self.sourceLocationDetail?.value?.coordinate, let destinationLocation = self.destinationLocationDetail?.coordinate, sourceLocation.latitude>0, sourceLocation.longitude>0, destinationLocation.latitude>0, destinationLocation.longitude>0 else {
                     return
                 }
                 estimateFare.s_latitude = sourceLocation.latitude
@@ -778,11 +749,12 @@
         
         // Cancel Request
         
-        func cancelRequest() {
+        func cancelRequest(reason : String? = nil) {
             
             if self.currentRequestId>0 {
                 let request = Request()
                 request.request_id = self.currentRequestId
+                request.cancel_reason = reason
                 self.presenter?.post(api: .cancelRequest, data: request.toData())
             }
         }
@@ -819,6 +791,21 @@
                 self.presenter?.post(api: .sendRequest, data: request.toData())
                 
             }
+        }
+        
+        // MARK:- Update Location for Existing Request
+        
+        func updateLocation(with detail : LocationDetail) {
+            
+            guard [RideStatus.accepted, .arrived, .pickedup, .started].contains(riderStatus) else { return } // Update Location only if status falls under certain category
+            
+            let request = Request()
+            request.request_id = self.currentRequestId
+            request.address = detail.address
+            request.latitude = detail.coordinate.latitude
+            request.longitude = detail.coordinate.longitude
+            self.presenter?.post(api: .updateRequest, data: request.toData())
+            
         }
         
         // MARK:- Favourite Location on Other Category

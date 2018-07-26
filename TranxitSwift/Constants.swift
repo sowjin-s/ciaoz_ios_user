@@ -212,6 +212,11 @@ struct Constants {
     let discount = "Discount"
     let planChanged = "Plan Changed"
     let bookedAnotherCab = "Booked another cab"
+    let driverDelayed = "Driver Delayed"
+    let lostWallet = "Lost Wallet"
+    let othersIfAny = "Others If Any"
+    let reasonForCancellation = "Reason For Cancellation"
+    
 }
 
 //Defaults Keys

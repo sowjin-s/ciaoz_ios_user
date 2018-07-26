@@ -143,6 +143,7 @@ extension HomeViewController {
             self.ratingView?.alpha = isHide ? 0 : 1
             self.rideNowView?.alpha = isHide ? 0 : 1
             self.floatyButton?.alpha = isHide ? 0 : 1
+            self.reasonView?.alpha = isHide ? 0 : 1
         }
         
     }
@@ -198,7 +199,7 @@ extension HomeViewController {
     func showRideStatusView(with request : Request) {
         
         self.removeRideNow()
-        self.viewAddressOuter.isHidden = true
+        self.viewAddressOuter.isHidden = false
         self.viewLocationButtons.isHidden = true
         self.loader.isHidden = true
         print("ViewAddressOuter ", #function)
@@ -216,8 +217,7 @@ extension HomeViewController {
         self.buttonSOS.isHidden = !(request.status == .pickedup)
         rideStatusView?.set(values: request)
         rideStatusView?.onClickCancel = {
-            self.loader.isHidden = false
-            self.cancelCurrentRide()
+            self.cancelCurrentRide(isSendReason: true)
         }
         rideStatusView?.onClickShare = {
             self.shareRide()
@@ -270,7 +270,6 @@ extension HomeViewController {
         self.invoiceView?.dismissView(onCompletion: {
             self.invoiceView = nil
         })
-        
     }
     
     
@@ -380,7 +379,7 @@ extension HomeViewController {
             self.view.addSubview(singleView)
             DispatchQueue.main.asyncAfter(deadline: .now()+0.5) { // Hiding Address View
                 UIView.animate(withDuration: 0.5, animations: {
-                    self.viewAddressOuter.isHidden = true
+                    self.viewAddressOuter.isHidden = false
                     self.viewLocationButtons.isHidden = true
                     print("ViewAddressOuter ", #function)
                 })
@@ -400,6 +399,57 @@ extension HomeViewController {
             print("ViewAddressOuter ", #function)
         }
     }
+    
+    // MARK:- Show Cancel Reason View
+    
+    private func showCancelReasonView(completion : @escaping ((String)->Void)) {
+        
+        if self.reasonView == nil, let reasonView = Bundle.main.loadNibNamed(XIB.Names.ReasonView, owner: self, options: [:])?.first as? ReasonView {
+            reasonView.frame = CGRect(x: 16, y: 50, width: self.view.frame.width-32, height: reasonView.frame.height)
+            self.reasonView = reasonView
+            self.reasonView?.didSelectReason = { cancelReason in
+               completion(cancelReason)
+            }
+            self.view.addSubview(reasonView)
+            self.reasonView?.transform = CGAffineTransform(scaleX: 0.3, y: 0.3)
+            UIView.animate(withDuration: 1.0,
+                           delay: 0,
+                           usingSpringWithDamping: CGFloat(0.2),
+                           initialSpringVelocity: CGFloat(2.0),
+                           options: .allowUserInteraction,
+                           animations: {
+                           self.reasonView?.transform = .identity },
+                           completion: { Void in()  })
+        }
+        
+    }
+    
+    // MARK:- Remove Cancel View
+    
+    private func removeCancelView() {
+        UIView.animate(withDuration: 0.3,
+                       animations: {
+                        self.reasonView?.transform = CGAffineTransform(scaleX: 0.0000001, y: 0000001)
+                       }) { (_) in
+                        self.reasonView?.removeFromSuperview()
+                        self.reasonView = nil
+                       }
+        
+        /*(withDuration: 1.0,
+                       delay: 0,
+                       usingSpringWithDamping: CGFloat(0.2),
+                       initialSpringVelocity: CGFloat(2.0),
+                       options: .allowUserInteraction,
+                       animations: {
+                        self.reasonView?.transform = CGAffineTransform(scaleX: 0.001, y: 0.001)
+                        },
+                       completion: { Void in()
+                        self.reasonView?.removeFromSuperview()
+                        self.reasonView = nil
+                       }) */
+    }
+    
+    
     
     // MARK:- Clear Map View
     
@@ -501,7 +551,7 @@ extension HomeViewController {
     
     // MARK:- Cancel Current Ride
     
-    private func cancelCurrentRide() {
+    private func cancelCurrentRide(isSendReason : Bool = false) {
         
         let alert = PopupDialog(title: Constants.string.cancelRequest.localize(), message: Constants.string.cancelRequestDescription.localize())
         let cancelButton =  PopupDialogButton(title: Constants.string.no.localize(), action: {
@@ -509,16 +559,28 @@ extension HomeViewController {
         })
         cancelButton.titleColor = .primary
         let sureButton = PopupDialogButton(title: Constants.string.yes.localize()) {
-            
-            self.cancelRequest()
+            if isSendReason {
+                self.showCancelReasonView(completion: { (reason) in  // Getting Cancellation Reason After Providing Accepting Ride
+                    cancelRide(reason: reason)
+                    self.removeCancelView()
+                })
+            } else {
+                 cancelRide()
+            }
+        }
+        sureButton.titleColor = .red
+        alert.addButtons([cancelButton,sureButton])
+        UIApplication.topViewController()?.present(alert, animated: true, completion: nil)
+        
+        func cancelRide(reason : String? = nil) { // Cancel Ride
+            self.loader.isHidden = false
+            self.cancelRequest(reason: reason)
             self.removeLoaderView()
             self.clearMapview()
             self.removeRideNow()
             self.isOnBooking = false
         }
-        sureButton.titleColor = .red
-        alert.addButtons([cancelButton,sureButton])
-        UIApplication.topViewController()?.present(alert, animated: true, completion: nil)
+        
         
     }
     

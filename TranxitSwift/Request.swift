@@ -42,6 +42,11 @@ class Request : JSONSerializable {
     var rating : Rating?
     var message : String?
     var paid : Int?
+    var cancel_reason : String?
+    var latitude : Double?
+    var longitude : Double?
+    var address : String?
+    
   /*
     enum CodingKeys: String, CodingKey {
         

@@ -99,6 +99,7 @@ extension LocationSelectionView {
         self.tableViewBottom.register(UINib(nibName: XIB.Names.LocationTableViewCell, bundle: nil), forCellReuseIdentifier:XIB.Names.LocationTableViewCell)
         self.tableViewBottom.register(UINib(nibName: XIB.Names.LocationHeaderTableViewCell, bundle: nil), forCellReuseIdentifier:XIB.Names.LocationHeaderTableViewCell)
         self.viewBack.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.backButtonAction)))
+        self.textFieldSource.isEnabled = ![RideStatus.accepted, .arrived, .pickedup, .started].contains(riderStatus)
     }
     
 

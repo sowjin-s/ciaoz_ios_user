@@ -161,12 +161,12 @@ extension RideStatusView {
         
     }
     
-    // MARK:- Chat Provider
-    
-    @IBAction private func chatWithProvider() {
-        
-        print("Chat")
-    }
+//    // MARK:- Chat Provider
+//    
+//    @IBAction private func chatWithProvider() {
+//        
+//        print("Chat")
+//    }
     
     // MARK:- Cancel Share Action
     
