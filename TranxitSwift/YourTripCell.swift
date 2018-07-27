@@ -61,7 +61,7 @@ class YourTripCell: UITableViewCell {
     // MARK:- Set Values
     
     func set(values : Request) {
-        print(isPastButton)
+        self.requestId = values.id
         Cache.image(forUrl: values.service?.image) { (image) in
             if image != nil {
                 DispatchQueue.main.async {

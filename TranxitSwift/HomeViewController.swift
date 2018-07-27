@@ -730,10 +730,11 @@ extension HomeViewController {
             
             DispatchQueue.global(qos: .userInteractive).async {
                 
-                var estimateFare = EstimateFareRequest()
+                
                 guard let sourceLocation = self.sourceLocationDetail?.value?.coordinate, let destinationLocation = self.destinationLocationDetail?.coordinate, sourceLocation.latitude>0, sourceLocation.longitude>0, destinationLocation.latitude>0, destinationLocation.longitude>0 else {
                     return
                 }
+                var estimateFare = EstimateFareRequest()
                 estimateFare.s_latitude = sourceLocation.latitude
                 estimateFare.s_longitude = sourceLocation.longitude
                 estimateFare.d_latitude = destinationLocation.latitude
@@ -888,7 +889,7 @@ extension HomeViewController {
             if api == .locationServicePostDelete {
                 self.presenter?.get(api: .locationService, parameters: nil)
             } 
-            if api != .sendRequest && api != .payNow {
+            if api != .payNow {
                 DispatchQueue.main.async {
                     self.view.makeToast(message)
                 }

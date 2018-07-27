@@ -240,7 +240,7 @@ extension HomeViewController {
     // MARK:- Show Invoice View
     
     func showInvoiceView(with request : Request) {
-        
+        self.buttonSOS.isHidden = false
         if self.invoiceView == nil, let invoice = Bundle.main.loadNibNamed(XIB.Names.InvoiceView, owner: self, options: [:])?.first as? InvoiceView {
             self.viewAddressOuter.isHidden = true
             self.viewLocationButtons.isHidden = true
@@ -266,9 +266,10 @@ extension HomeViewController {
     // MARK:- Remove RideStatus View
     
     func removeInvoiceView() {
-        
+        self.buttonSOS.isHidden = true
         self.invoiceView?.dismissView(onCompletion: {
             self.invoiceView = nil
+            riderStatus = .none
         })
     }
     

@@ -114,25 +114,37 @@
                                                     </label>
                                                 </subviews>
                                             </stackView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="cYe-sH-tPB">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FPl-yR-A3A">
                                                 <rect key="frame" x="52.5" y="0.0" width="52.5" height="55"/>
-                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
-                                                <inset key="titleEdgeInsets" minX="2" minY="2" maxX="2" maxY="2"/>
-                                                <state key="normal">
-                                                    <color key="titleColor" red="0.75716483160000003" green="0.75716483160000003" blue="0.75716483160000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                        <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderLineWidth">
-                                                        <real key="value" value="1"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <real key="value" value="5"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </button>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="cYe-sH-tPB">
+                                                        <rect key="frame" x="1.5" y="8.5" width="49.5" height="38.5"/>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                                                        <inset key="titleEdgeInsets" minX="2" minY="2" maxX="2" maxY="2"/>
+                                                        <state key="normal">
+                                                            <color key="titleColor" red="0.75716483160000003" green="0.75716483160000003" blue="0.75716483160000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderLineWidth">
+                                                                <real key="value" value="1"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="5"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="cYe-sH-tPB" firstAttribute="height" secondItem="FPl-yR-A3A" secondAttribute="height" multiplier="0.7" id="Ek9-yl-jfk"/>
+                                                    <constraint firstItem="cYe-sH-tPB" firstAttribute="width" secondItem="FPl-yR-A3A" secondAttribute="width" multiplier="0.95" id="Kn9-ei-R5D"/>
+                                                    <constraint firstItem="cYe-sH-tPB" firstAttribute="centerX" secondItem="FPl-yR-A3A" secondAttribute="centerX" id="W02-JI-1UZ"/>
+                                                    <constraint firstItem="cYe-sH-tPB" firstAttribute="centerY" secondItem="FPl-yR-A3A" secondAttribute="centerY" id="izU-hQ-z7I"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -217,7 +229,7 @@
                 <outlet property="stackViewPrice" destination="vXw-ap-kko" id="OFn-pb-r7Q"/>
                 <outlet property="upComingView" destination="q4B-g4-2CY" id="xpw-5W-3Xv"/>
                 <outlet property="upCommingBookingIDLlabel" destination="iP1-zm-HlH" id="c4F-9q-vlq"/>
-                <outlet property="upCommingCancelBtn" destination="cYe-sH-tPB" id="jBu-HB-Mhf"/>
+                <outlet property="upCommingCancelBtn" destination="cYe-sH-tPB" id="3R4-Gq-PWt"/>
                 <outlet property="upCommingCarImage" destination="4rD-Nc-drh" id="WtV-mo-cN6"/>
                 <outlet property="upCommingCarName" destination="dSu-0w-YV4" id="3rp-aB-ZEM"/>
                 <outlet property="upCommingDateLabel" destination="Zzg-UN-rq4" id="gdy-0R-Uej"/>
