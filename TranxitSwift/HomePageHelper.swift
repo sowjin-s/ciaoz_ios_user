@@ -61,6 +61,7 @@ class HomePageHelper {
             
             guard let requestFirst = request.first else {
                 completion(nil, nil)
+                riderStatus = .none
                 DispatchQueue.main.async { self.stopListening() }
                 return
             }

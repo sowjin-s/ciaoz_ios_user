@@ -12,27 +12,25 @@ class YourTripCell: UITableViewCell {
     
     //MARK:- view outlets
     @IBOutlet var mainView: UIView!
-    //@IBOutlet var pastView: UIView!
     @IBOutlet var upComingView: UIView!
     
     //MARK:- UIimageView outLets
     @IBOutlet var upCommingCarImage: UIImageView!
     @IBOutlet var mapImageView: UIImageView!
     
-    
     //MARK:- label outlets
     @IBOutlet var upCommingDateLabel: UILabel!
     @IBOutlet var upCommingBookingIDLlabel: UILabel!
     @IBOutlet var upCommingCarName: UILabel!
-    /*@IBOutlet var bookingIdLabel: UILabel!
-     @IBOutlet var nameLabel: UILabel!
-     @IBOutlet var dateLabel: UILabel! */
-    
+
     //MARK:- button outlets
     @IBOutlet var upCommingCancelBtn: UIButton!
     @IBOutlet private var labelPrice : UILabel!
     @IBOutlet private var labelModel : UILabel!
     @IBOutlet private var stackViewPrice : UIStackView!
+    
+    private var requestId : Int?
+    var onClickCancel : ((Int)->Void)?
     
     var isPastButton = false {
         didSet {
@@ -45,6 +43,7 @@ class YourTripCell: UITableViewCell {
         super.awakeFromNib()
         self.setDesign()
         self.upCommingCancelBtn.setTitle(Constants.string.cancelRide.localize(), for: .normal)
+        self.upCommingCancelBtn.addTarget(self, action: #selector(self.buttonCancelAction), for: .touchUpInside)
     }
     
     // MARK:- Set Font
@@ -96,27 +95,17 @@ class YourTripCell: UITableViewCell {
             self.labelModel.text = values.service?.name
             self.labelPrice.text = "\(String.removeNil(User.main.currency)) \(Float.removeNil(values.payment?.total))"
         }
-        
     }
     
     
-    
-    //    private func setCommonFont(){
-    //        
-    //        setFont(TextField: nil, label: upCommingBookingIDLlabel, Button: nil, size: nil)
-    //        setFont(TextField: nil, label: upCommingDateLabel, Button: upCommingCancelBtn, size: nil)
-    //        setFont(TextField: nil, label: upCommingCarName, Button: nil, size: nil)
-    //        setFont(TextField: nil, label: bookingIdLabel, Button: nil, size: nil )
-    //        setFont(TextField: nil, label:nameLabel , Button: nil, size: nil)
-    //        setFont(TextField: nil, label: dateLabel , Button: nil, size: nil)
-    //        
-    //        
-    //    }
-    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
+    }
+    
+    @IBAction private func buttonCancelAction() {
+        if self.requestId != nil {
+            self.onClickCancel?(self.requestId!)
+        }
     }
     
 }

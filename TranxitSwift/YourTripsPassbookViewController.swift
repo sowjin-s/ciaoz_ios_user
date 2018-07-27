@@ -7,16 +7,12 @@
 //
 
 import UIKit
+import PopupDialog
 
 class YourTripsPassbookViewController: UIViewController {
     
     @IBOutlet var pastBtn: UIButton!
-    
-    //@IBOutlet var pastUnderLineView: UIView!
     @IBOutlet var upCommingBtn: UIButton!
-    
-    //@IBOutlet var upCommingUnderLineView: UIView!
-    //@IBOutlet var tripTabelView: UITableView!
     @IBOutlet private var underLineView: UIView!
     @IBOutlet private var tableViewList : UITableView!
     
@@ -66,8 +62,14 @@ extension YourTripsPassbookViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.backButtonClick))
         self.navigationItem.title = (isYourTripsSelected ? Constants.string.yourTrips : Constants.string.passbook).localize()
         self.localize()
-        self.loader.isHidden = false
-       
+        self.getFromApi()
+        self.setDesign()
+    }
+    
+    // MARK:- Get Data From Api
+    
+    private func getFromApi() {
+        self.loader.isHideInMainThread(false)
         if isYourTripsSelected {
             self.presenter?.get(api: .upcomingList, parameters: nil)
             self.presenter?.get(api: .historyList, parameters: nil)
@@ -75,7 +77,6 @@ extension YourTripsPassbookViewController {
             self.presenter?.get(api: .walletPassbook, parameters: nil)
             self.presenter?.get(api: .couponPassbook, parameters: nil)
         }
-        self.setDesign()
     }
     
     // MARK:- Set Design
@@ -154,6 +155,27 @@ extension YourTripsPassbookViewController {
         }
     }
     
+    // MARK:- Cancel Request
+    
+    private func cancelRequest(with requestId : Int) {
+        
+        let alert = PopupDialog(title: Constants.string.cancelRequest.localize(), message: Constants.string.cancelRequestDescription.localize())
+        let cancelButton =  PopupDialogButton(title: Constants.string.no.localize(), action: {
+            alert.dismiss()
+        })
+        cancelButton.titleColor = .primary
+        let sureButton = PopupDialogButton(title: Constants.string.yes.localize()) {
+           self.loader.isHidden = false
+           let request = Request()
+           request.request_id = requestId
+           self.presenter?.post(api: .cancelRequest, data: request.toData())
+        }
+        sureButton.titleColor = .red
+        alert.addButtons([cancelButton,sureButton])
+        self.present(alert, animated: true, completion: nil)
+        
+    }
+    
 }
 
 // MARK:- UITableViewDelegate
@@ -166,7 +188,6 @@ extension YourTripsPassbookViewController : UITableViewDelegate,UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = self.getCell(for: indexPath, in: tableView)
         cell.selectionStyle = .none
         return cell
@@ -199,6 +220,9 @@ extension YourTripsPassbookViewController : UITableViewDelegate,UITableViewDataS
                 let datasource = (self.isFirstBlockSelected ? self.datasourceYourTripsPast : self.datasourceYourTripsUpcoming)
                 if datasource.count>indexPath.row{
                     cell.set(values: datasource[indexPath.row])
+                }
+                cell.onClickCancel = { requestId in
+                    self.cancelRequest(with: requestId)
                 }
                 return cell
             }
@@ -260,6 +284,13 @@ extension YourTripsPassbookViewController : PostViewProtocol  {
         reloadTable()
     }
     
+    func success(api: Base, message: String?) {
+        DispatchQueue.main.async {
+            UIApplication.shared.keyWindow?.makeToast(message)
+        }
+        self.getFromApi()
+
+    }
     
     
 }

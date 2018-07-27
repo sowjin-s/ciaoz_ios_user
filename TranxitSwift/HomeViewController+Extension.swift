@@ -489,8 +489,9 @@ extension HomeViewController {
             
         case .dropped:
             self.showInvoiceView(with: request)
-            
+            riderStatus = .none
         case .completed:
+            riderStatus = .none
             if request.paid == true.hashValue {
                 self.showRatingView(with: request)
             } else {
@@ -523,7 +524,6 @@ extension HomeViewController {
         }
         if [RideStatus.none, .cancelled].contains(status) {
             self.currentRequestId = 0 // Remove Current Request
-            
         }
         
     }

@@ -691,6 +691,7 @@ extension HomeViewController {
             self.homePageHelper?.startListening(on: { (error, request) in
                 
                 if error != nil {
+                    riderStatus = .none
                     DispatchQueue.main.async {
                         showAlert(message: error?.localizedDescription, okHandler: nil, fromView: self)
                     }
@@ -702,7 +703,6 @@ extension HomeViewController {
                             self.moveProviderMarker(to: LocationCoordinate(latitude: pLatitude, longitude: pLongitude))
                         }
                     }
-                    
                     guard riderStatus != request?.status else {
                         return
                     }
@@ -719,7 +719,7 @@ extension HomeViewController {
         // Get Services provided by Provider
         
         private func getServicesList() {
-            if self.sourceLocationDetail?.value != nil, self.destinationLocationDetail != nil, riderStatus == .none { // Get Services only if location Available
+            if self.sourceLocationDetail?.value != nil, self.destinationLocationDetail != nil, riderStatus == .none || riderStatus == .searching { // Get Services only if location Available
                 self.presenter?.get(api: .servicesList, parameters: nil)
             }
         }

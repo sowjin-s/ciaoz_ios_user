@@ -89,8 +89,6 @@ extension YourTripsDetailViewController {
         self.buttonViewReciptAndCall.addTarget(self, action: #selector(self.buttonCallAndReciptAction(sender:)), for: .touchUpInside)
         self.loader.isHidden = false
         let api : Base = self.isUpcomingTrips ? .upcomingTripDetail : .pastTripDetail
-//        let request = Request()
-//        request.request_id = self.requestId
         self.presenter?.get(api: api, parameters: ["request_id":self.requestId!])
         
         self.viewRating.minRating = 1
