@@ -26,7 +26,7 @@ class InvoiceView: UIView {
     @IBOutlet private weak var labelTotal : UILabel!
     @IBOutlet private weak var imageViewPaymentType : UIImageView!
     @IBOutlet private weak var labelPaymentType : UILabel!
-    @IBOutlet private weak var buttonPayNow : UIButton!
+    @IBOutlet weak var buttonPayNow : UIButton!
     @IBOutlet private weak var labelTitle : UILabel!
     
     var onClickPaynow : (()->Void)?
@@ -54,7 +54,7 @@ extension InvoiceView {
         
         Common.setFont(to: labelTitle, isTitle: true)
         Common.setFont(to: buttonPayNow, isTitle: true)
-        Common.setFont(to: labelPaymentType, isTitle: true)
+        Common.setFont(to: labelPaymentType, isTitle: false, size: 12)
         Common.setFont(to: labelTotal, isTitle: true, size: 18)
         Common.setFont(to: labelTotalString, isTitle: true)
         Common.setFont(to: labelDiscount)
@@ -69,7 +69,6 @@ extension InvoiceView {
         Common.setFont(to: labelTimeTakenString)
         Common.setFont(to: labelDistanceTravelled)
         Common.setFont(to: labelDistanceTravelledString)
-        
     }
     
     
@@ -100,7 +99,6 @@ extension InvoiceView {
         self.labelPaymentType.text = request.payment_mode?.rawValue
         self.imageViewPaymentType.image = request.payment_mode == .CASH ? #imageLiteral(resourceName: "money_icon") : #imageLiteral(resourceName: "visa")
         self.buttonPayNow.isHidden = request.payment_mode == .CASH
-        
     }
     
     @IBAction private func buttonPaynowAction() {

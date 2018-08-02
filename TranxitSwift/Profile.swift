@@ -35,7 +35,7 @@ class Profile : JSONSerializable {
         access_token = try? values.decode(String.self, forKey: .access_token)
         currency = try? values.decode(String.self, forKey: .currency)
         sos = try? values.decode(String.self, forKey: .sos)
-        
+        wallet_balance = try? values.decode(Int.self, forKey: .wallet_balance)
         if let mobileInt = try? values.decode(Int.self, forKey: .mobile) {
          mobile = "\(mobileInt)"
         } else {

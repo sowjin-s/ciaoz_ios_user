@@ -75,3 +75,20 @@ class Cache {
     
     
 }
+
+extension UIImageView {
+    
+    func setImage(with url : String?) {
+        guard url != nil, let imageUrl = URL(string: url!) else {
+            return
+        }
+        URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
+            guard let data = data else {return}
+            DispatchQueue.main.async {
+                self.image = UIImage(data: data)
+            }
+            }.resume()
+        
+    }
+    
+}

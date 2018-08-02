@@ -28,13 +28,13 @@ class RideRequestHandler: NSObject, INRequestRideIntentHandling {
         
         let code : INRequestRideIntentResponseCode
         
-        guard let pickUpLocation = intent.pickupLocation?.location else {
+        guard let _ = intent.pickupLocation?.location else {
             code = .failureRequiringAppLaunch
             completion(INRequestRideIntentResponse(code: code, userActivity: .none))
             return
         }
         
-        guard let dropOffLocation = intent.dropOffLocation?.location else {
+        guard let _ = intent.dropOffLocation?.location else {
             code = .failureRequiringAppLaunch
             completion(INRequestRideIntentResponse(code: code, userActivity: .none))
             return

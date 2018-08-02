@@ -15,4 +15,6 @@ struct CardEntity : JSONSerializable {
     var is_default : Int?
     var stripe_token : String?
     var _method : String?
+    var strCardID : String?
+    var amount : String?
 }

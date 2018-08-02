@@ -163,7 +163,6 @@ extension YourTripsDetailViewController {
                 }
             }
         }
-        
         self.labelProviderName.text = String.removeNil(self.dataSource?.provider?.first_name) + " " + String.removeNil(self.dataSource?.provider?.last_name)
         let imageUrl = String.removeNil(self.dataSource?.provider?.avatar).contains(WebConstants.string.http) ? self.dataSource?.provider?.avatar : Common.getImageUrl(for: self.dataSource?.provider?.avatar)
         Cache.image(forUrl: imageUrl) { (image) in
@@ -224,6 +223,7 @@ extension YourTripsDetailViewController {
         
         if let viewReciptView = Bundle.main.loadNibNamed(XIB.Names.InvoiceView, owner: self, options: [:])?.first as? InvoiceView, self.dataSource != nil {
             viewReciptView.set(request: self.dataSource!)
+            viewReciptView.buttonPayNow.isHidden = true
             viewReciptView.frame = CGRect(origin: CGPoint(x: 0, y: (UIApplication.shared.keyWindow?.frame.height)!-viewReciptView.frame.height), size: CGSize(width: self.view.frame.width, height: viewReciptView.frame.height))
             self.viewRecipt = viewReciptView
             UIApplication.shared.keyWindow?.addSubview(viewReciptView)

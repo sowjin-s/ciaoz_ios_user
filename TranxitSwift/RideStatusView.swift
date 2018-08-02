@@ -27,7 +27,7 @@ class RideStatusView: UIView {
     private var currentStatus : RideStatus = .none {
         didSet{
             DispatchQueue.main.async {
-                if [RideStatus.started, .accepted].contains(self.currentStatus) {
+                if [RideStatus.started, .accepted, .arrived].contains(self.currentStatus) {
                     self.buttonCancel.setTitle(Constants.string.Cancel.localize().uppercased(), for: .normal)
                 } else {
                     self.buttonCancel.setTitle(Constants.string.shareRide.localize().uppercased(), for: .normal)
@@ -172,7 +172,7 @@ extension RideStatusView {
     
     @IBAction private func cancelShareAction() {
         
-        if let status = request?.status,[RideStatus.accepted, .started].contains(status) {
+        if let status = request?.status,[RideStatus.accepted, .started, .arrived].contains(status) {
             self.onClickCancel?()
         } else {
             self.onClickShare?()

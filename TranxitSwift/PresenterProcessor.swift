@@ -76,6 +76,12 @@ class PresenterProcessor {
         return data.getDecodedObject(from: [CardEntity].self) ?? []
     }
     
+    // MARK:- Send Wallet Entity
+    
+    func getWalletEntity(data : Data)->WalletEntity? {
+        return data.getDecodedObject(from: WalletEntity.self)
+    }
+    
     
 }
 

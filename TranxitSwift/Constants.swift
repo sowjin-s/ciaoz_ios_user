@@ -216,7 +216,8 @@ struct Constants {
     let lostWallet = "Lost Wallet"
     let othersIfAny = "Others If Any"
     let reasonForCancellation = "Reason For Cancellation"
-    
+    let addCard = "Add Card to continue with wallet"
+    let enterValidAmount = "Enter Valid Amount"
 }
 
 //Defaults Keys

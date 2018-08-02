@@ -18,6 +18,7 @@ class PaymentViewController: UITableViewController {
     
     private let headers = [Constants.string.paymentMethods] //Constants.string.yourCards
     
+    var isShowCash = true
     var isChangingPayment = false
     var onclickPayment : ((CardEntity?)->Void)? // Change payment Mode from Request
     private var cardsList = [CardEntity]()
@@ -157,7 +158,7 @@ extension PaymentViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 1 : cardsList.count
+        return section == 0 ? isShowCash.hashValue : cardsList.count
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -172,6 +173,7 @@ extension PaymentViewController {
         UIView.animate(withDuration: 0.5) {
             tableView.deselectRow(at: indexPath, animated: true)
         }
+        guard self.isChangingPayment else { return }
         self.dismiss(animated: true) {
             if indexPath.section == 1, self.cardsList.count > indexPath.row {
                 self.onclickPayment?(self.cardsList[indexPath.row])

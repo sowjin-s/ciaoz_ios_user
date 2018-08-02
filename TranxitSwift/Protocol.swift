@@ -141,6 +141,7 @@ protocol PostPresenterOutputProtocol : class {
     func sendLocationService(api : Base, data : Data)
     func sendCouponWallet(api : Base, data : Data)
     func sendCardEntityList(api : Base, data : Data)
+    func sendWalletEntity(api : Base, data: Data)
 }
 
 
@@ -162,6 +163,7 @@ protocol PostViewProtocol : class {
     func getLocationService(api : Base, data : LocationService?)
     func getCouponWallet(api : Base, data : [CouponWallet])
     func getCardEnities(api : Base, data : [CardEntity])
+    func getWalletEntity(api : Base, data : WalletEntity?)
 }
 
 
@@ -189,6 +191,7 @@ extension PostViewProtocol {
     func getLocationService(api : Base, data : LocationService?) { return }
     func getCouponWallet(api : Base, data : [CouponWallet]) { return }
     func getCardEnities(api : Base, data : [CardEntity]) {return}
+    func getWalletEntity(api : Base, data : WalletEntity?) {return}
     
 }
 

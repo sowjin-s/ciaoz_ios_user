@@ -523,7 +523,7 @@ extension HomeViewController {
             dateComponents.day = 7
             let now = Date()
             let maximumDate = Calendar.current.date(byAdding: dateComponents, to: now)
-            dateComponents.minute = 30
+            dateComponents.minute = 5
             dateComponents.day = nil
             let minimumDate = Calendar.current.date(byAdding: dateComponents, to: now)
             let datePicker = DateTimePicker.show(selected: nil, minimumDate: minimumDate, maximumDate: maximumDate, timeInterval: .default)
@@ -839,7 +839,11 @@ extension HomeViewController {
             
             DispatchQueue.main.async {
                 self.loader.isHidden = true
-                showAlert(message: message, okHandler: nil, fromView: self)
+                if api == .locationServicePostDelete {
+                    UIApplication.shared.keyWindow?.make(toast: message)
+                } else {
+                    showAlert(message: message, okHandler: nil, fromView: self)
+                }
                 if api == .sendRequest {
                     self.removeLoaderView()
                 }

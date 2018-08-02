@@ -74,7 +74,7 @@ class GoogleMapsHelper : NSObject {
             self.mapView?.animate(to: GMSCameraPosition.camera(withTarget: location, zoom: 15))
         }
         CATransaction.commit()
-        self.mapView?.center = center
+        self.mapView?.center = center  //  Getting current location marker to center point
 
     }
     // Setting Map Style
