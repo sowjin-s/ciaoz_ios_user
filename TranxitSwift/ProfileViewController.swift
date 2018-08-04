@@ -96,7 +96,7 @@ extension ProfileViewController {
         self.tableView.tableHeaderView?.bounds.size = CGSize(width: self.tableView.bounds.width, height: 200)
         self.buttonChangePassword.isHidden = (User.main.loginType != LoginType.manual.rawValue)
         self.navigationController?.isNavigationBarHidden = false
-
+        self.textFieldPhone.isEnabled = false
     }
     
     // MARK:- Set Profile Details
