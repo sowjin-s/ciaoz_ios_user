@@ -44,7 +44,7 @@ extension LoaderView {
         self.buttonCancelRequest.addTarget(self, action: #selector(cancelButtonClick), for: .touchUpInside)
         
         lottieView = LottieHelper().addLottie(file: "bouncy_mapmaker", with: CGRect(origin: .zero, size: CGSize(width: self.viewLoader.frame.width/3, height: self.viewLoader.frame.width/3)))
-        lottieView.center = CGPoint(x: viewLoader.frame.width/2, y: viewLoader.frame.height/2)
+        lottieView.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2)
         lottieView.backgroundColor = .clear
         lottieView.loopAnimation = true
         lottieView.autoReverseAnimation = true

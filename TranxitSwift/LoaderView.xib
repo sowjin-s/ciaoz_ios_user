@@ -18,7 +18,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L75-35-THM">
-                    <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="few-O4-HbC">
@@ -88,7 +88,7 @@
                 <constraint firstItem="few-O4-HbC" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="120:567" id="l7m-MT-mqp"/>
                 <constraint firstItem="few-O4-HbC" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="ovX-ZZ-yYQ"/>
                 <constraint firstItem="few-O4-HbC" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="pPH-WG-yNv"/>
-                <constraint firstItem="L75-35-THM" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="zfX-TV-ryl"/>
+                <constraint firstItem="L75-35-THM" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="zfX-TV-ryl"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>

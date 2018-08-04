@@ -12,4 +12,5 @@ struct Rating : JSONSerializable {
     var id : Int?
     var user_comment : String?
     var user_rating : Int?
+    var provider_comment : String?
 }

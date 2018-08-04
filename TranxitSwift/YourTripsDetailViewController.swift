@@ -63,10 +63,10 @@ class YourTripsDetailViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if isUpcomingTrips {
-        } else {
-            self.viewLocation.removeFromSuperview()
-        }
+//        if isUpcomingTrips {
+//        } else {
+//            self.viewLocation.removeFromSuperview()
+//        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -174,7 +174,7 @@ extension YourTripsDetailViewController {
         }
         
         self.viewRating.rating = Float(self.dataSource?.rating?.user_rating ?? 0)
-        self.textViewComments.text = self.dataSource?.rating?.user_comment ?? Constants.string.noComments.localize()
+        self.textViewComments.text = self.dataSource?.rating?.provider_comment ?? Constants.string.noComments.localize()
         self.labelSourceLocation.text = self.dataSource?.s_address
         self.labelDestinationLocation.text = self.dataSource?.d_address
         self.labelPayVia.text = self.dataSource?.payment_mode?.rawValue.localize()
@@ -310,7 +310,7 @@ extension YourTripsDetailViewController {
     
    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     
-    if isUpcomingTrips && indexPath.row == 3 || !isUpcomingTrips && indexPath.row == 1 {
+    if isUpcomingTrips && indexPath.row == 3 {
         return 0
     } else  {
          return heightArray[indexPath.row]

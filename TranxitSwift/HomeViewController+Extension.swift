@@ -49,7 +49,7 @@ extension HomeViewController {
                     vc.onclickPayment = { cardEntity in
                         selectedPaymentDetail = cardEntity
                         self.rideNowView?.imageViewCard.image = cardEntity == nil ? #imageLiteral(resourceName: "money_icon") : #imageLiteral(resourceName: "visa")
-                        self.rideNowView?.labelCardNumber.text = cardEntity == nil ? Constants.string.cash.localize() : "XXXX-XXXX-XXXX-"+String.removeNil(cardEntity?.last_four)
+                        self.rideNowView?.labelCardNumber.text = cardEntity == nil ? Constants.string.cash.localize() : String.removeNil(cardEntity?.last_four)
                     }
                     let navigation = UINavigationController(rootViewController: vc)
                     self.present(navigation, animated: true, completion: nil)
@@ -416,7 +416,7 @@ extension HomeViewController {
             UIView.animate(withDuration: 1.0,
                            delay: 0,
                            usingSpringWithDamping: CGFloat(0.2),
-                           initialSpringVelocity: CGFloat(2.0),
+                           initialSpringVelocity: CGFloat(1.0),
                            options: .allowUserInteraction,
                            animations: {
                            self.reasonView?.transform = .identity },

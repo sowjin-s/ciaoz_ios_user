@@ -44,7 +44,6 @@
 		081E9CFD20BFFE57004C6884 /* suv.json in Resources */ = {isa = PBXBuildFile; fileRef = 081E9CFC20BFFE57004C6884 /* suv.json */; };
 		0823428820AD774C0055DDF8 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0823428720AD774C0055DDF8 /* LoaderView.swift */; };
 		0823428A20AD775A0055DDF8 /* LoaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0823428920AD775A0055DDF8 /* LoaderView.xib */; };
-		0823428C20AD7AB80055DDF8 /* bouncy_mapmaker.json in Resources */ = {isa = PBXBuildFile; fileRef = 0823428B20AD7AB70055DDF8 /* bouncy_mapmaker.json */; };
 		0826325E20AC6DA900EBC529 /* HomeViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826325D20AC6DA900EBC529 /* HomeViewController+Extension.swift */; };
 		0826C13620B011C80005D0D8 /* RequestSelectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0826C13520B011C80005D0D8 /* RequestSelectionView.xib */; };
 		0826C13820B011DC0005D0D8 /* RequestSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826C13720B011DC0005D0D8 /* RequestSelectionView.swift */; };
@@ -96,6 +95,7 @@
 		085361A620B8308A001DD97C /* PassbookTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 085361A420B8308A001DD97C /* PassbookTableViewCell.xib */; };
 		085361A920B85CBF001DD97C /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085361A820B85CBF001DD97C /* SettingTableViewController.swift */; };
 		0855521520039E91002B01BC /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0855521420039E91002B01BC /* TextField.swift */; };
+		08585F4B2115E94B009DE743 /* ripple.json in Resources */ = {isa = PBXBuildFile; fileRef = 08585F4A2115E94B009DE743 /* ripple.json */; };
 		085AC38B21134AD7003AA0AE /* WalletEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085AC38A21134AD7003AA0AE /* WalletEntity.swift */; };
 		085C6FF420C194B000C13A74 /* Rate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085C6FF320C194B000C13A74 /* Rate.swift */; };
 		08641D8F20A1B51C00AA0D1F /* CircularTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08641D8E20A1B51C00AA0D1F /* CircularTransition.swift */; };
@@ -129,6 +129,7 @@
 		08B73D0420947C5C00B60F74 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B73D0320947C5C00B60F74 /* PasswordViewController.swift */; };
 		08B7DC72209A14A1002CF17A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B7DC71209A14A1002CF17A /* HomeViewController.swift */; };
 		08B7DC75209A14E0002CF17A /* SideBarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B7DC74209A14E0002CF17A /* SideBarTableViewController.swift */; };
+		08B8F43B2115EBCF0055FB82 /* bouncy_mapmaker.json in Resources */ = {isa = PBXBuildFile; fileRef = 08B8F43A2115EBCF0055FB82 /* bouncy_mapmaker.json */; };
 		08BAFC602094B495002292C0 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BAFC5F2094B495002292C0 /* ForgotPasswordViewController.swift */; };
 		08BE879720DA421B00876C93 /* Map_style.json in Resources */ = {isa = PBXBuildFile; fileRef = 08BE879620DA421B00876C93 /* Map_style.json */; };
 		08BE879C20DA429800876C93 /* Home+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BE879820DA429700876C93 /* Home+CoreDataProperties.swift */; };
@@ -281,7 +282,6 @@
 		081E9CFC20BFFE57004C6884 /* suv.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = suv.json; sourceTree = "<group>"; };
 		0823428720AD774C0055DDF8 /* LoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
 		0823428920AD775A0055DDF8 /* LoaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoaderView.xib; sourceTree = "<group>"; };
-		0823428B20AD7AB70055DDF8 /* bouncy_mapmaker.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bouncy_mapmaker.json; sourceTree = "<group>"; };
 		0826325D20AC6DA900EBC529 /* HomeViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewController+Extension.swift"; sourceTree = "<group>"; };
 		0826C13520B011C80005D0D8 /* RequestSelectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RequestSelectionView.xib; sourceTree = "<group>"; };
 		0826C13720B011DC0005D0D8 /* RequestSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestSelectionView.swift; sourceTree = "<group>"; };
@@ -334,6 +334,7 @@
 		085361A420B8308A001DD97C /* PassbookTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PassbookTableViewCell.xib; sourceTree = "<group>"; };
 		085361A820B85CBF001DD97C /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
 		0855521420039E91002B01BC /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		08585F4A2115E94B009DE743 /* ripple.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ripple.json; sourceTree = "<group>"; };
 		085AC38A21134AD7003AA0AE /* WalletEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletEntity.swift; sourceTree = "<group>"; };
 		085C6FF320C194B000C13A74 /* Rate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rate.swift; sourceTree = "<group>"; };
 		08641D8E20A1B51C00AA0D1F /* CircularTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularTransition.swift; sourceTree = "<group>"; };
@@ -376,6 +377,7 @@
 		08B73D0320947C5C00B60F74 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		08B7DC71209A14A1002CF17A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		08B7DC74209A14E0002CF17A /* SideBarTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarTableViewController.swift; sourceTree = "<group>"; };
+		08B8F43A2115EBCF0055FB82 /* bouncy_mapmaker.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bouncy_mapmaker.json; sourceTree = "<group>"; };
 		08BAFC5F2094B495002292C0 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		08BE879620DA421B00876C93 /* Map_style.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Map_style.json; sourceTree = "<group>"; };
 		08BE879820DA429700876C93 /* Home+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Home+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -572,11 +574,12 @@
 		081548FA20A1DE67004D0F7D /* Animation */ = {
 			isa = PBXGroup;
 			children = (
+				08B8F43A2115EBCF0055FB82 /* bouncy_mapmaker.json */,
 				082C441620E7911700A7C892 /* FloatingButton */,
 				08BE879620DA421B00876C93 /* Map_style.json */,
+				08585F4A2115E94B009DE743 /* ripple.json */,
 				081E9CFC20BFFE57004C6884 /* suv.json */,
 				081548FB20A1DEA2004D0F7D /* heart.json */,
-				0823428B20AD7AB70055DDF8 /* bouncy_mapmaker.json */,
 				08641D8D20A1B2AD00AA0D1F /* Circular Transition */,
 				083617B220B6943A009C9658 /* FloatRatingView.swift */,
 			);
@@ -1770,12 +1773,14 @@
 				08001A0C203C241E0076D324 /* countryCodes.json in Resources */,
 				08BE879720DA421B00876C93 /* Map_style.json in Resources */,
 				08A50C442109B6CF00CCDDA8 /* ReasonView.xib in Resources */,
+				08B8F43B2115EBCF0055FB82 /* bouncy_mapmaker.json in Resources */,
 				0811B16F20E7B12A00B78323 /* mesageTone.wav in Resources */,
 				8894E22B1FE7D7980097B4B3 /* Assets.xcassets in Resources */,
 				083A59AB20A434E000D64574 /* LocationTableViewCell.xib in Resources */,
 				081E9CFD20BFFE57004C6884 /* suv.json in Resources */,
 				0811B17820E7B2AD00B78323 /* ChatSender.xib in Resources */,
 				08FA708320E3C96F009B060A /* RideNowView.xib in Resources */,
+				08585F4B2115E94B009DE743 /* ripple.json in Resources */,
 				08FA70A120E3CC1F009B060A /* Localizable.strings in Resources */,
 				0811B17620E7B2AD00B78323 /* ImageCellSender.xib in Resources */,
 				0823428A20AD775A0055DDF8 /* LoaderView.xib in Resources */,
@@ -1786,7 +1791,6 @@
 				08FA708720E3CA99009B060A /* Launch.storyboard in Resources */,
 				083A59B220A4351D00D64574 /* LocationHeaderTableViewCell.xib in Resources */,
 				085361A620B8308A001DD97C /* PassbookTableViewCell.xib in Resources */,
-				0823428C20AD7AB80055DDF8 /* bouncy_mapmaker.json in Resources */,
 				08FA70AC20E3E695009B060A /* Main.storyboard in Resources */,
 				082D1B9920933D300000B7C8 /* WalkThroughView.xib in Resources */,
 				088185C320A4688200F07AFF /* GoogleService-Info.plist in Resources */,

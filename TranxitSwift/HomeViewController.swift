@@ -892,8 +892,14 @@ extension HomeViewController {
             self.loader.isHidden = true
             if api == .locationServicePostDelete {
                 self.presenter?.get(api: .locationService, parameters: nil)
-            } 
-            if api != .payNow {
+            }else if api == .rateProvider  {
+                riderStatus = .none
+                return
+            }
+            if api != .payNow || api == .cancelRequest{
+                if api == .cancelRequest {
+                    riderStatus = .none
+                }
                 DispatchQueue.main.async {
                     self.view.makeToast(message)
                 }

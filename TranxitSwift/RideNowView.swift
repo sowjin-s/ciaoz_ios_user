@@ -261,6 +261,9 @@ extension RideNowView {
     func getEstimateFareFor(serviceId : Int) {
         
         DispatchQueue.global(qos: .userInteractive).async {
+            guard self.sourceCoordinate.latitude>0, self.sourceCoordinate.longitude>0, self.destinationCoordinate.latitude>0, self.destinationCoordinate.longitude>0 else {
+                return
+            }
             var estimateFare = EstimateFareRequest()
             estimateFare.s_latitude = self.sourceCoordinate.latitude
             estimateFare.s_longitude = self.sourceCoordinate.longitude
