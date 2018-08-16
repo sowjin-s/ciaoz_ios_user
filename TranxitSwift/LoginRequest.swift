@@ -9,7 +9,7 @@
 import Foundation
 
 struct  LoginRequest : JSONSerializable{
-    
+
     var grant_type : String?
     var username : String?
     var password : String?
@@ -18,3 +18,13 @@ struct  LoginRequest : JSONSerializable{
     var access_token : String?
     var refresh_token : String?
 }
+
+//struct LoginRequest<T1,T2,T3,T4,T5,T6,T7>{
+//    var grant_type : T1
+//    var username : T2
+//    var password : T3
+//    var client_id : T4
+//    var client_secret : T5
+//    var access_token : T6
+//    var refresh_token : T7
+//}

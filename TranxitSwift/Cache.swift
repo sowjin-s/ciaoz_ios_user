@@ -5,7 +5,15 @@
 //  Created by Developer on 08/08/17.
 //  Copyright © 2017 Developer. All rights reserved.
 //
+//
+//  Cache.swift
+//
+//
+//  Created by Developer on 08/08/17.
+//  Copyright © 2017 Developer. All rights reserved.
+//
 import UIKit
+import Cache
 
 class Cache {
     
@@ -17,64 +25,55 @@ class Cache {
     }()
     
     
-    
-    class func image(forUrl : String?, completion : @escaping (UIImage?)-> ()){
+    class func image(forUrl urlString : String?, completion : @escaping (UIImage?)-> ()){
         
-        let queue = OperationQueue.init()
-        queue.qualityOfService = .background
-        queue.name = ProcessInfo().globallyUniqueString
-        queue.addOperation {
-            
-            let completion = completion
-            
+        DispatchQueue(label: ProcessInfo().globallyUniqueString, qos: .background, attributes: DispatchQueue.Attributes.concurrent, autoreleaseFrequency: DispatchQueue.AutoreleaseFrequency.workItem, target: nil) .async {
             var image : UIImage? = nil
-            
-            guard  let url = forUrl else {
+            guard  let url = urlString else {
                 completion(image)
                 return
             }
-            
-            
             image = Cache.shared.object(forKey: url as AnyObject) // Retrieve Image From cache If available
-            
             if image == nil, !url.isEmpty, let _url = URL(string: url) {  // If Image is not available, then download
-                
-                do {
-                    
-                    let data = try Data(contentsOf: _url)
-                    
-                    guard let imageData = UIImage(data: data) else {
-                        completion(image)
+                URLSession.shared.dataTask(with: _url, completionHandler: { (data, response, error) in
+                    guard data != nil, let imageData = UIImage(data: data!), let responseUrl = response?.url?.absoluteString else {
+                        completion(nil)
                         return
                     }
-                    
-                    Cache.shared.setObject(imageData, forKey: url as AnyObject)
+                    Cache.shared.setObject(imageData, forKey: responseUrl as AnyObject)
                     completion(imageData) // return Image
-                    return
-                    
-                }catch let error {
-                    print("Image Cache Error : ",error.localizedDescription)
-                    completion(image) // If error return nil
+                }).resume()
+            }
+            completion(image)
+        }
+    }
+}
+
+
+extension UIImageView {
+    
+    func setImage(with urlString : String?,placeHolder placeHolderImage : UIImage?) {
+        guard urlString != nil, let imageUrl = URL(string: urlString!) else {
+            self.image = placeHolderImage
+            return
+        }
+        if let image = Cache.shared.object(forKey: urlString! as AnyObject) {
+            self.image = image
+        } else {
+            URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
+                guard data != nil, let imagePic = UIImage(data: data!), let responseUrl = response?.url?.absoluteString else {
+                    self.image = placeHolderImage
                     return
                 }
-                
-                
-            }
-            
-            completion(image) 
-            
+                self.image = imagePic
+                Cache.shared.setObject(imagePic, forKey: responseUrl as AnyObject)
+                }.resume()
         }
-        
-//        DispatchQueue.global(qos: .background).async {  // Retrieve the image in Background
-//
-//
-//
-//
-//        }
     }
-    
-    
 }
+
+
+/*
 
 extension UIImageView {
     
@@ -87,8 +86,8 @@ extension UIImageView {
             DispatchQueue.main.async {
                 self.image = UIImage(data: data)
             }
-            }.resume()
+        }.resume()
         
     }
     
-}
+} */

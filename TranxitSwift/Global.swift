@@ -213,7 +213,7 @@ func forceLogout(with message : String? = nil) {
 
 // MARK:- Add Vibration
 
-func vibrate() {
+func vibrate(with vibration : Vibration) {
     AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
 }
 

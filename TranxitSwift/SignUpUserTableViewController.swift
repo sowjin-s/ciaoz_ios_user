@@ -282,7 +282,7 @@ extension SignUpUserTableViewController : PostViewProtocol {
     
         if api == .userVerify {
             self.emailtext.shake()
-            vibrate()
+            vibrate(with: .weak)
             DispatchQueue.main.async {
                 self.emailtext.becomeFirstResponder()
             }

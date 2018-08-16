@@ -19,7 +19,6 @@ extension HomeViewController {
     // MARK:- Show Ride Now View
     
     func showRideNowView(with source : [Service]) {
-        
         guard let sourceLocation = self.sourceLocationDetail?.value, let destinationLocation = self.destinationLocationDetail else { return }
         var selectedPaymentDetail : CardEntity?
         if self.rideNowView == nil {
@@ -308,7 +307,7 @@ extension HomeViewController {
     // MARK:- Remove RideStatus View
     
     func removeRatingView() {
-        
+        Store.review() // Getting Appstore review from user
         self.ratingView?.dismissView(onCompletion: {
             self.ratingView = nil
             self.viewAddressOuter.isHidden = false

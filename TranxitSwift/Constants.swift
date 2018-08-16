@@ -321,3 +321,9 @@ enum RideStatus : String, Codable {
     
 }
 
+enum Vibration : UInt {
+    case weak = 1519
+    case threeBooms = 1107
+}
+
+

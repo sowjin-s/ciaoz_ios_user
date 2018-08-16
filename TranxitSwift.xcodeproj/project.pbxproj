@@ -95,6 +95,7 @@
 		085361A620B8308A001DD97C /* PassbookTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 085361A420B8308A001DD97C /* PassbookTableViewCell.xib */; };
 		085361A920B85CBF001DD97C /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085361A820B85CBF001DD97C /* SettingTableViewController.swift */; };
 		0855521520039E91002B01BC /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0855521420039E91002B01BC /* TextField.swift */; };
+		08583BF6211C17DF00B5ABC0 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08583BF5211C17DF00B5ABC0 /* Store.swift */; };
 		08585F4B2115E94B009DE743 /* ripple.json in Resources */ = {isa = PBXBuildFile; fileRef = 08585F4A2115E94B009DE743 /* ripple.json */; };
 		085AC38B21134AD7003AA0AE /* WalletEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085AC38A21134AD7003AA0AE /* WalletEntity.swift */; };
 		085C6FF420C194B000C13A74 /* Rate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085C6FF320C194B000C13A74 /* Rate.swift */; };
@@ -334,6 +335,7 @@
 		085361A420B8308A001DD97C /* PassbookTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PassbookTableViewCell.xib; sourceTree = "<group>"; };
 		085361A820B85CBF001DD97C /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
 		0855521420039E91002B01BC /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		08583BF5211C17DF00B5ABC0 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		08585F4A2115E94B009DE743 /* ripple.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ripple.json; sourceTree = "<group>"; };
 		085AC38A21134AD7003AA0AE /* WalletEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletEntity.swift; sourceTree = "<group>"; };
 		085C6FF320C194B000C13A74 /* Rate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rate.swift; sourceTree = "<group>"; };
@@ -1599,6 +1601,7 @@
 				8871FBDE1FE7EB24002335D5 /* Appdelegate */,
 				8871FBDF1FE7EB48002335D5 /* Plist Files */,
 				08F3CBBC202471CB00F5EEDF /* Global */,
+				08583BF5211C17DF00B5ABC0 /* Store.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -2023,6 +2026,7 @@
 				084BB94B2094401D00EFD493 /* EmailViewController.swift in Sources */,
 				086BAF5C200777890087F15A /* Global.swift in Sources */,
 				889480211FECE717006AF5A9 /* Button.swift in Sources */,
+				08583BF6211C17DF00B5ABC0 /* Store.swift in Sources */,
 				08641D8F20A1B51C00AA0D1F /* CircularTransition.swift in Sources */,
 				083DA4B920D0FF5B00DD473E /* YourTripsDetailViewController.swift in Sources */,
 				08DDE6692093633B009FEBC6 /* WalkThroughPreviewController.swift in Sources */,
