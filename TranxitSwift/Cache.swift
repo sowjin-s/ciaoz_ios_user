@@ -53,8 +53,8 @@ class Cache {
 extension UIImageView {
     
     func setImage(with urlString : String?,placeHolder placeHolderImage : UIImage?) {
+        self.image = placeHolderImage
         guard urlString != nil, let imageUrl = URL(string: urlString!) else {
-            self.image = placeHolderImage
             return
         }
         if let image = Cache.shared.object(forKey: urlString! as AnyObject) {
@@ -62,10 +62,11 @@ extension UIImageView {
         } else {
             URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
                 guard data != nil, let imagePic = UIImage(data: data!), let responseUrl = response?.url?.absoluteString else {
-                    self.image = placeHolderImage
                     return
                 }
-                self.image = imagePic
+                DispatchQueue.main.async {
+                     self.image = imagePic
+                }
                 Cache.shared.setObject(imagePic, forKey: responseUrl as AnyObject)
                 }.resume()
         }

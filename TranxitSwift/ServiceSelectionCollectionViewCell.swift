@@ -38,8 +38,8 @@ class ServiceSelectionCollectionViewCell: UICollectionViewCell {
         
         self.service = value
         labelService.text = value.name
-        self.imageViewService.image = #imageLiteral(resourceName: "sedan-car-model")
-        self.imageViewService.setImage(with: value.image)
+        //self.imageViewService.image = #imageLiteral(resourceName: "sedan-car-model")
+        self.imageViewService.setImage(with: value.image, placeHolder: #imageLiteral(resourceName: "sedan-car-model"))
 //        Cache.image(forUrl: value.image) { (image) in
 //            DispatchQueue.main.async {
 //                self.imageViewService.image = image == nil ? #imageLiteral(resourceName: "sedan-car-model") : image
