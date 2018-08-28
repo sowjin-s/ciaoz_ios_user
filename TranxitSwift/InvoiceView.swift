@@ -26,16 +26,16 @@ class InvoiceView: UIView {
     @IBOutlet private weak var labelTotal : UILabel!
     @IBOutlet private weak var imageViewPaymentType : UIImageView!
     @IBOutlet private weak var labelPaymentType : UILabel!
-    @IBOutlet weak var buttonPayNow : UIButton!
+    @IBOutlet private weak var buttonPayNow : UIButton!
     @IBOutlet private weak var labelTitle : UILabel!
     
     var onClickPaynow : (()->Void)?
+    var isShowingRecipt = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.intialLoads()
     }
-    
 }
 
 // MARK:- Methods
@@ -98,7 +98,7 @@ extension InvoiceView {
         self.labelTotal.text = "\(String.removeNil(User.main.currency)) \(Float.removeNil(request.payment?.payable))"
         self.labelPaymentType.text = request.payment_mode?.rawValue
         self.imageViewPaymentType.image = request.payment_mode == .CASH ? #imageLiteral(resourceName: "money_icon") : #imageLiteral(resourceName: "visa")
-        self.buttonPayNow.isHidden = request.payment_mode == .CASH
+        self.buttonPayNow.isHidden = (request.payment_mode == .CASH || isShowingRecipt)
     }
     
     @IBAction private func buttonPaynowAction() {

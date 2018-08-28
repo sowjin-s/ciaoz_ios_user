@@ -230,6 +230,10 @@ extension YourTripsPassbookViewController : UITableViewDelegate,UITableViewDataS
             
             if let cell = tableView.dequeueReusableCell(withIdentifier: XIB.Names.PassbookTableViewCell, for: indexPath) as? PassbookTableViewCell {
                 cell.isWalletSelected = isFirstBlockSelected
+                let datasource = (self.isFirstBlockSelected ? self.datasourceWallet : self.datasourceCoupon)
+                if datasource.count>indexPath.row{
+                    cell.set(values: datasource[indexPath.row])
+                }
                 return cell
             }
             

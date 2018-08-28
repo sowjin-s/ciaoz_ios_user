@@ -53,7 +53,7 @@ extension LaunchViewController {
         self.buttonSignIn.addTarget(self, action: #selector(self.buttonSignInAction), for: .touchUpInside)
         self.buttonSignUp.addTarget(self, action: #selector(self.buttonSignUpAction), for: .touchUpInside)
         self.buttonSocialLogin.addTarget(self, action: #selector(self.buttonSocialLoginAction), for: .touchUpInside)
-        
+        User.main.loginType = LoginType.manual.rawValue // Set default login as manual
     }
     
     

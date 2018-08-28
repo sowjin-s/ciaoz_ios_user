@@ -222,8 +222,8 @@ extension YourTripsDetailViewController {
     private func showRecipt() {
         
         if let viewReciptView = Bundle.main.loadNibNamed(XIB.Names.InvoiceView, owner: self, options: [:])?.first as? InvoiceView, self.dataSource != nil {
+            viewReciptView.isShowingRecipt = true
             viewReciptView.set(request: self.dataSource!)
-            viewReciptView.buttonPayNow.isHidden = true
             viewReciptView.frame = CGRect(origin: CGPoint(x: 0, y: (UIApplication.shared.keyWindow?.frame.height)!-viewReciptView.frame.height), size: CGSize(width: self.view.frame.width, height: viewReciptView.frame.height))
             self.viewRecipt = viewReciptView
             UIApplication.shared.keyWindow?.addSubview(viewReciptView)
