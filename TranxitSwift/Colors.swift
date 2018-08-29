@@ -45,12 +45,12 @@ extension UIColor {
     
     // Primary Color
     static var primary : UIColor {
-        return UIColor(red: 149/255, green: 117/255, blue: 205/255, alpha: 1)
+        return #colorLiteral(red: 0.5843137255, green: 0.4588235294, blue: 0.8039215686, alpha: 1) //UIColor(red: 149/255, green: 117/255, blue: 205/255, alpha: 1)
     }
     
     // Secondary Color
     static var secondary : UIColor {
-        return UIColor(red: 238/255, green: 98/255, blue: 145/255, alpha: 1)
+        return #colorLiteral(red: 0.9411764706, green: 0.3843137255, blue: 0.5725490196, alpha: 1) //UIColor(red: 238/255, green: 98/255, blue: 145/255, alpha: 1)
     }
     
     // Secondary Color

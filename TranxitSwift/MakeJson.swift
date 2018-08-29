@@ -49,7 +49,9 @@ class MakeJson {
         loginData.grant_type = WebConstants.string.password
         loginData.password = password
         loginData.username = userName
-        
+        loginData.device_id = UUID().uuidString
+        loginData.device_type = .ios
+        loginData.device_token = deviceTokenString
         return loginData.toData()
     }
    

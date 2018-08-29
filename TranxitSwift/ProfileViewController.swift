@@ -49,7 +49,6 @@ class ProfileViewController: UITableViewController {
     
 
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         self.initialLoads()
         self.navigationController?.isNavigationBarHidden = false
@@ -117,7 +116,7 @@ extension ProfileViewController {
     
     private func setDesign() {
         
-        var attributes : [ NSAttributedStringKey : Any ] = [.font : UIFont(name: FontCustom.clanPro_NarrMedium.rawValue, size: 18) ?? UIFont.systemFont(ofSize: 18, weight: .bold)]
+        var attributes : [ NSAttributedStringKey : Any ] = [.font : UIFont.systemFont(ofSize: 18, weight: .bold)]
         attributes.updateValue(UIColor.white, forKey: NSAttributedStringKey.foregroundColor)
         self.buttonSave.setAttributedTitle(NSAttributedString(string: Constants.string.save.uppercased().localize(), attributes: attributes), for: .normal)
         [textFieldFirst, textFieldLast, textFieldEmail, textFieldPhone].forEach({

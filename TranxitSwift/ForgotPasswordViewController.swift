@@ -70,7 +70,6 @@ extension ForgotPasswordViewController {
         self.textFieldEmail.placeholderColor = .gray
         self.textFieldEmail.textColor = .black
         self.textFieldEmail.delegate = self
-        self.textFieldEmail.font = UIFont(name: FontCustom.clanPro_Book.rawValue, size: 2)
         Common.setFont(to: textFieldEmail)
     }
     

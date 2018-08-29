@@ -17,6 +17,9 @@ struct  LoginRequest : JSONSerializable{
     var client_secret : String?
     var access_token : String?
     var refresh_token : String?
+    var device_token : String?
+    var device_id : String?
+    var device_type : DeviceType?
 }
 
 //struct LoginRequest<T1,T2,T3,T4,T5,T6,T7>{

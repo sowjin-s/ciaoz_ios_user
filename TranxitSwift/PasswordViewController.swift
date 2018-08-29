@@ -87,16 +87,18 @@ extension PasswordViewController {
         self.textFieldPassword.placeholderColor = .gray
         self.textFieldPassword.textColor = .black
         self.textFieldPassword.delegate = self
-        self.textFieldPassword.font = UIFont(name: FontCustom.clanPro_Book.rawValue, size: 2)
+        Common.setFont(to: textFieldPassword)
         
     }
     
     private func localize() {
         
         self.textFieldPassword.placeholder = Constants.string.enterPassword.localize()
-        self.buttonCreateAccount.setAttributedTitle(NSAttributedString(string: Constants.string.iNeedTocreateAnAccount.localize(), attributes: [.font : UIFont(name: FontCustom.clanPro_NarrMedium.rawValue, size: 14) ?? UIFont.systemFont(ofSize: 14)]), for: .normal)
-        self.buttonForgotPassword.setAttributedTitle(NSAttributedString(string: Constants.string.iForgotPassword.localize(), attributes: [.font : UIFont(name: FontCustom.clanPro_NarrMedium.rawValue, size: 14) ?? UIFont.systemFont(ofSize: 14)]), for: .normal)
+        self.buttonCreateAccount.setAttributedTitle(NSAttributedString(string: Constants.string.iNeedTocreateAnAccount.localize(), attributes: [.font : UIFont.systemFont(ofSize: 14)]), for: .normal)
+        self.buttonForgotPassword.setAttributedTitle(NSAttributedString(string: Constants.string.iForgotPassword.localize(), attributes: [.font : UIFont.systemFont(ofSize: 14)]), for: .normal)
         self.navigationItem.title = Constants.string.welcomeBackPassword.localize()
+        Common.setFont(to: buttonCreateAccount)
+        Common.setFont(to: buttonForgotPassword)
     }
     
     
