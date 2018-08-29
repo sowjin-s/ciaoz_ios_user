@@ -412,9 +412,9 @@ extension HomeViewController {
             }
             self.view.addSubview(reasonView)
             self.reasonView?.transform = CGAffineTransform(scaleX: 0.3, y: 0.3)
-            UIView.animate(withDuration: 1.0,
+            UIView.animate(withDuration: 0.5,
                            delay: 0,
-                           usingSpringWithDamping: CGFloat(0.2),
+                           usingSpringWithDamping: CGFloat(0.5),
                            initialSpringVelocity: CGFloat(1.0),
                            options: .allowUserInteraction,
                            animations: {
@@ -630,7 +630,6 @@ extension HomeViewController {
                 Common.call(to: provider!.mobile)
             }
             floaty.addItem(icon: #imageLiteral(resourceName: "chatIcon").resizeImage(newWidth: 25)) { (_) in
-                print("Chat ")
                 if let vc = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.Ids.SingleChatController) as? SingleChatController {
                     vc.set(user: provider!)
                     let navigation = UINavigationController(rootViewController: vc)
@@ -638,7 +637,7 @@ extension HomeViewController {
                 }
             }
             self.floatyButton = floaty
-            self.viewMapOuter.addSubview(floaty)
+            self.view.addSubview(floaty)
         }
     }
     

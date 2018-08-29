@@ -43,22 +43,12 @@ struct Constants {
     let enterOtp = "Enter OTP"
     let otpIncorrect = "OTP incorrect"
     let enterCurrentPassword = "Current Password"
-    let walkthroughDummy = """
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-     when an unknown printer took a galley of type and scrambled it to make a
-    type specimen book. It has survived not only five centuries, but also the leap
-    into electronic typesetting, remaining essentially unchanged.It
-    was popularised in the 1960s with the release of Letraset sheets
-    containing Lorem Ipsum passages, and more recently with desktop publishing
-    software like Aldus PageMaker including versions of Lorem Ipsum
-    """
-    let walkthroughWelcome = "Introducing Tranxit Driver to take rides from the Tranxit app users."
-    let walkthroughDrive = "Be your own boss, set your own schedule. Get the latest driving features all in one spot."
-    let walkthroughEarn = "Get well paid to help out strangers get to where they need to go,withdraw your earnigs every week/monthly."
+    let walkthroughWelcome = "Services to transport you where you need to go. A lot can happen, on our ride."
+    let walkthroughDrive = "Take a ride whenever and wherever you want. Plan and Schedule for us to pick you up."
+    let walkthroughEarn = "We have the most friendly drivers who will go the extra mile for you."
     let welcome = "Welcome"
-    let drive = "Drive"
-    let earn = "Earn"
+    let schedule = "Schedule"
+    let drivers = "Drivers"
     let country = "Country"
     let timeZone = "Time Zone"
     let referalCode = "Referral Code"

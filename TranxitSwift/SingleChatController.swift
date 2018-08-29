@@ -59,7 +59,7 @@ class SingleChatController: UIViewController {
         
         didSet {
             
-            self.viewCamera.isHidden = isSendShown
+            self.viewCamera.isHidden = true //isSendShown
             self.viewSend.isHidden = !isSendShown
             self.viewRecord.isHidden = true
             

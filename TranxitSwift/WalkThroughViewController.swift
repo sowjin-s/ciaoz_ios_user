@@ -13,9 +13,7 @@ class WalkThroughViewController: UIPageViewController {
     
     private var walkThroughControllers = [UIViewController]()
     
-    private var pageControl = UIPageControl()
-    
-    private let walkThroughData = [(Constants.string.welcome, Constants.string.walkthroughWelcome),(Constants.string.drive, Constants.string.walkthroughDrive),(Constants.string.earn, Constants.string.walkthroughEarn)]
+    private let walkThroughData = [(Constants.string.welcome, Constants.string.walkthroughWelcome),(Constants.string.schedule, Constants.string.walkthroughDrive),(Constants.string.drivers, Constants.string.walkthroughEarn)]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,16 +37,21 @@ extension WalkThroughViewController {
 
         }
         self.setViewControllers([walkThroughControllers[0]], direction: .forward, animated: true, completion: nil)
-        let height : CGFloat = 20
-        self.pageControl.frame = CGRect(x: 0, y: self.view.frame.height-height*2, width: self.view.frame.width, height: height)
-        self.pageControl.numberOfPages = self.walkThroughControllers.count
-        self.pageControl.currentPage = 0
-        self.pageControl.tintColor = UIColor.black
-        self.pageControl.backgroundColor = .black
-        self.pageControl.pageIndicatorTintColor = UIColor.gray
-        self.pageControl.currentPageIndicatorTintColor = UIColor.black
-        self.pageControl.numberOfPages = walkThroughControllers.count
-        self.view.addSubview(pageControl)
+//        self.pageControl.currentPage = 1
+//        self.pageControl.tintColor = UIColor.black
+//        self.pageControl.backgroundColor = .black
+//        self.pageControl.pageIndicatorTintColor = UIColor.gray
+//        self.pageControl.currentPageIndicatorTintColor = UIColor.black
+//        self.pageControl.numberOfPages = walkThroughControllers.count
+//        self.pageControl.backgroundColor = .white
+//        self.view.addSubview(pageControl)
+//        vieww.backgroundColor = .clear
+//        self.view.addSubview(vieww)
+//        self.vieww.translatesAutoresizingMaskIntoConstraints = false
+//        self.vieww.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
+//        self.vieww.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
+//        self.vieww.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
+//        self.vieww.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
     
 }

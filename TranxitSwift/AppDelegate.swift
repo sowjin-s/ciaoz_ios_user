@@ -80,6 +80,11 @@ extension AppDelegate {
         if #available(iOS 11.0, *) {
             UINavigationBar.appearance().largeTitleTextAttributes = attributes
         }
+        
+        UIPageControl.appearance().pageIndicatorTintColor = .lightGray
+        UIPageControl.appearance().currentPageIndicatorTintColor = .primary
+        UIPageControl.appearance().backgroundColor = .clear
+        
     }
     
     
