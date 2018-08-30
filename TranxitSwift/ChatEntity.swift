@@ -10,16 +10,15 @@ import Foundation
 
 class ChatEntity : JSONSerializable {
     
+    var user : Int?
     var sender : Int?
-    var reciever : Int?
     var text : String?
     var url : String?
-    var timeStamp : Int?
+    var timestamp : Int?
     var type : String?
     var read : Int?
     var number : String?
     var groupId : Int?
+    var readedMembers : [Int]?
+    var senderType : String?
 }
-
-
-

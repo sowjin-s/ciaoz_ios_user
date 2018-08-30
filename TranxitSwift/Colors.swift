@@ -60,7 +60,7 @@ extension UIColor {
     
     // Secondary Color
     static var lightBlue : UIColor {
-        return UIColor(red: 38/255, green: 118/255, blue: 188/255, alpha: 1)
+        return #colorLiteral(red: 0.1490196078, green: 0.462745098, blue: 0.737254902, alpha: 1) //UIColor(red: 38/255, green: 118/255, blue: 188/255, alpha: 1)
     }
     
     //Gradient Start Color

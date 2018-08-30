@@ -201,7 +201,7 @@ extension HomeViewController {
         self.viewAddressOuter.isHidden = false
         self.viewLocationButtons.isHidden = true
         self.loader.isHidden = true
-        print("ViewAddressOuter ", #function)
+        print("ViewAddressOuter ", #function, !(request.status == .pickedup))
         if self.rideStatusView == nil, let rideStatus = Bundle.main.loadNibNamed(XIB.Names.RideStatusView, owner: self, options: [:])?.first as? RideStatusView {
             rideStatus.frame = CGRect(origin: CGPoint(x: 0, y: self.view.frame.height-rideStatus.frame.height), size: CGSize(width: self.view.frame.width, height: rideStatus.frame.height))
             rideStatusView = rideStatus
@@ -228,7 +228,7 @@ extension HomeViewController {
     // MARK:- Remove RideStatus View
     
     func removeRideStatusView() {
-        self.buttonSOS.isHidden = true
+        self.buttonSOS.isHidden = !(riderStatus == .pickedup)
         self.rideStatusView?.dismissView(onCompletion: {
             self.rideStatusView = nil
         })
@@ -239,7 +239,7 @@ extension HomeViewController {
     // MARK:- Show Invoice View
     
     func showInvoiceView(with request : Request) {
-        self.buttonSOS.isHidden = false
+        self.buttonSOS.isHidden = !(riderStatus == .pickedup)
         if self.invoiceView == nil, let invoice = Bundle.main.loadNibNamed(XIB.Names.InvoiceView, owner: self, options: [:])?.first as? InvoiceView {
             self.viewAddressOuter.isHidden = true
             self.viewLocationButtons.isHidden = true
@@ -265,7 +265,7 @@ extension HomeViewController {
     // MARK:- Remove RideStatus View
     
     func removeInvoiceView() {
-        self.buttonSOS.isHidden = true
+        self.buttonSOS.isHidden = !(riderStatus == .pickedup)
         self.invoiceView?.dismissView(onCompletion: {
             self.invoiceView = nil
             riderStatus = .none

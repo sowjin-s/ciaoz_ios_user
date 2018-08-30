@@ -92,10 +92,10 @@ extension InvoiceView {
         self.labelBooking.text = request.booking_id
         self.labelDistanceTravelled.text = "\(Float.removeNil(request.payment?.distance)) \(distanceType.localize())"
         self.labelTimeTaken.text = "\(String.removeNil(request.travel_time)) \(Constants.string.mins.localize())"
-        self.labelBaseFare.text = "\(String.removeNil(User.main.currency)) \(Float.removeNil(request.payment?.fixed))"
-        self.labelDistanceFare.text = "\(String.removeNil(User.main.currency)) \(Float.removeNil(request.payment?.distance))"
-        self.labelDiscount.text = "\(String.removeNil(User.main.currency)) \(Float.removeNil(request.payment?.discount))"
-        self.labelTotal.text = "\(String.removeNil(User.main.currency)) \(Float.removeNil(request.payment?.payable))"
+        self.labelBaseFare.text = "\(String.removeNil(User.main.currency)) \(Formatter.shared.limit(string: "\(Float.removeNil(request.payment?.fixed))", maximumDecimal: 2) ?? "0")"
+        self.labelDistanceFare.text = "\(String.removeNil(User.main.currency)) \(Formatter.shared.limit(string: "\(Float.removeNil(request.payment?.distance))", maximumDecimal: 2) ?? "0")"
+        self.labelDiscount.text = "\(String.removeNil(User.main.currency)) \(Formatter.shared.limit(string: "\(Float.removeNil(request.payment?.discount))", maximumDecimal: 2) ?? "0")" 
+        self.labelTotal.text = "\(String.removeNil(User.main.currency)) \(Formatter.shared.limit(string: "\(Float.removeNil(request.payment?.payable))", maximumDecimal: 2) ?? "0")"
         self.labelPaymentType.text = request.payment_mode?.rawValue
         self.imageViewPaymentType.image = request.payment_mode == .CASH ? #imageLiteral(resourceName: "money_icon") : #imageLiteral(resourceName: "visa")
         self.buttonPayNow.isHidden = (request.payment_mode == .CASH || isShowingRecipt)

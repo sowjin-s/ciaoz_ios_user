@@ -12,9 +12,7 @@ class ChatResponse : JSONSerializable {
     
     var key : String?
     var response : ChatEntity?
-    
-     
-    
+    var progress : Float?
 }
 
 
@@ -29,16 +27,16 @@ class Response : JSONSerializable {
         
         print(container)
         
-      //  self.key = try container.decode(String.self, forKey: Key.init(stringValue: "Key")!)
-      //  self.response = try container.decode(ChatEntity.self, forKey: Key.init(stringValue: "response")!)
-
+        //  self.key = try container.decode(String.self, forKey: Key.init(stringValue: "Key")!)
+        //  self.response = try container.decode(ChatEntity.self, forKey: Key.init(stringValue: "response")!)
+        
     }
     
 }
 
 
 class Key : CodingKey, JSONSerializable {
- 
+    
     var stringValue: String
     
     required init?(stringValue: String) {
@@ -52,3 +50,4 @@ class Key : CodingKey, JSONSerializable {
     }
     
 }
+

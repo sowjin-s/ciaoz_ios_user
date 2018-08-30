@@ -221,7 +221,7 @@ extension SingleChatController {
         self.viewSend.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendOnclick)))
         self.viewRecord.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.recordOnclick)))
         self.viewCamera.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.cameraOnclick)))
-        
+        self.isSendShown = false
         self.startObservers()
         
     }
@@ -243,7 +243,7 @@ extension SingleChatController {
     
     private func startObservers(){
         
-        guard let chatPath = Common.getChatId(with: currentUser.id) else { return }
+        let chatPath = Common.getChatId(with: currentUser.id)
         
         let childObserver = FirebaseHelper.shared.observe(path : chatPath, with: .childAdded) { (childValue) in
             
@@ -586,7 +586,7 @@ extension SingleChatController : UITableViewDataSource, UITableViewDelegate {
         
         if let chat = datasource[indexPath.row].response, let tableCell = tableView.dequeueReusableCell(withIdentifier: getCellId(from: chat), for: indexPath) as? ChatCell {
             
-            if chat.sender == User.main.id {
+            if chat.user == User.main.id {
                 
                 tableCell.setSender(values: datasource[indexPath.row])
                 
@@ -663,14 +663,10 @@ extension SingleChatController : UITableViewDataSource, UITableViewDelegate {
     
     private func getCellId(from entity : ChatEntity)->String {
         
-        if entity.sender == User.main.id {
-            
+        if entity.senderType == UserType.user.rawValue {
             return entity.type == Mime.text.rawValue ? senderCellTextId : senderMediaId
-            
         } else {
-            
             return entity.type == Mime.text.rawValue ? recieverCellTextId : reciverMediaId
-            
         }
         
     }

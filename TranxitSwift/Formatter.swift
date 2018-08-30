@@ -67,13 +67,11 @@ class Formatter {
     
     func limit(string number : String?, maximumDecimal limit : Int)->String?{
         
-        initializeNumberFormatter()
+        //initializeNumberFormatter()
         guard let float = Float(number ?? .Empty) else {
             return nil
-
         }
-        numberFormatter?.maximumFractionDigits = limit
-        return numberFormatter?.string(for: NSNumber(value: float))
+        return String(format: "%.\(limit)f", float)//numberFormatter?.string(for: NSNumber(value: float))
         
     }
     

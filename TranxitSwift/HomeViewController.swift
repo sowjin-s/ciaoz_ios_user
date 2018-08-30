@@ -281,7 +281,6 @@ extension HomeViewController {
             
             if notification.name == .providers, let serviceArray = notification.userInfo?[Notification.Name.providers.rawValue] as? [Service] {
                 showProviderInCurrentLocation(with: serviceArray)
-                
             }
             
         }
