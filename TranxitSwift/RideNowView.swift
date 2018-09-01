@@ -65,14 +65,14 @@ class RideNowView: UIView {
         
     }
     
-    
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.initialLoads()
         self.localize()
         self.setDesign()
+        //self.setViews()
     }
+    
 }
 
 extension RideNowView {
@@ -96,6 +96,20 @@ extension RideNowView {
         self.isShowWallet = false
         self.initializeRateView()
         self.setProgressView()
+    }
+    
+    // MARK:-
+    
+    private func setViews() {
+        let imageViewCash = UIImageView(image: #imageLiteral(resourceName: "paymentChange").withRenderingMode(.alwaysTemplate))
+        imageViewCash.tintColor = .black
+        imageViewCash.contentMode = .scaleAspectFit
+        imageViewCash.translatesAutoresizingMaskIntoConstraints = false
+        self.viewPayment.addSubview(imageViewCash)
+        imageViewCash.topAnchor.constraint(equalTo: viewPayment.topAnchor, constant: 4).isActive = true
+        imageViewCash.trailingAnchor.constraint(equalTo: viewPayment.trailingAnchor, constant: 4).isActive = true
+        imageViewCash.heightAnchor.constraint(equalTo: self.viewPayment.heightAnchor, multiplier: 0.5).isActive = true
+        imageViewCash.widthAnchor.constraint(equalTo: self.viewPayment.heightAnchor, multiplier: 0.5).isActive = true
     }
     
     // MARK:- Set Designs
@@ -337,7 +351,7 @@ extension RideNowView {
             self.labelSurge.text = self.datasource[selectedRow].pricing?.surge_value
             self.isSurge = self.datasource[selectedRow].pricing?.surge == true.hashValue
             self.isShowWallet = !(self.datasource[selectedRow].pricing?.wallet_balance == 0)
-            self.labelWalletAmount.text = " \(String.removeNil(User.main.currency)) \(self.datasource[selectedRow].pricing?.wallet_balance ?? 0)"
+            self.labelWalletAmount.text = " \(String.removeNil(User.main.currency)) \(Formatter.shared.limit(string: "\(self.datasource[selectedRow].pricing?.wallet_balance ?? 0)", maximumDecimal: 2) ?? "0.00")" 
         }
         
     }
@@ -398,7 +412,7 @@ extension RideNowView : UICollectionViewDelegate, UICollectionViewDataSource, UI
                 return
             }
             self.selectedItem = self.datasource[indexPath.row]
-            self.labelCapacity.text = "1-\(Int.removeNil(self.selectedItem?.capacity))"
+            self.labelCapacity.text = "\(Int.removeNil(self.selectedItem?.capacity))"
             self.selectedRow = indexPath.row
             self.setSurgeViewAndWallet()
             self.getProviders(by: id)

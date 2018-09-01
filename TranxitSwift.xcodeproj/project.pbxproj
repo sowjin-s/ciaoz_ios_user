@@ -149,6 +149,7 @@
 		08CEA1AB2073B47F00553DE2 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CEA1AA2073B47F00553DE2 /* Application.swift */; };
 		08CEB1352105A1B000AC217A /* CardEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CEB1342105A1B000AC217A /* CardEntity.swift */; };
 		08CEB1372105AF2F00AC217A /* AddCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CEB1362105AF2F00AC217A /* AddCardViewController.swift */; };
+		08D7CCBD213976DD0055C95D /* ChatPush.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D7CCBC213976DC0055C95D /* ChatPush.swift */; };
 		08DDE667209361F2009FEBC6 /* WalkThroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DDE666209361F2009FEBC6 /* WalkThroughViewController.swift */; };
 		08DDE6692093633B009FEBC6 /* WalkThroughPreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DDE6682093633B009FEBC6 /* WalkThroughPreviewController.swift */; };
 		08DF19C82006221B00B83AE3 /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF19C72006221B00B83AE3 /* AppData.swift */; };
@@ -395,6 +396,7 @@
 		08CEA1AA2073B47F00553DE2 /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		08CEB1342105A1B000AC217A /* CardEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardEntity.swift; sourceTree = "<group>"; };
 		08CEB1362105AF2F00AC217A /* AddCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardViewController.swift; sourceTree = "<group>"; };
+		08D7CCBC213976DC0055C95D /* ChatPush.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatPush.swift; sourceTree = "<group>"; };
 		08DDE666209361F2009FEBC6 /* WalkThroughViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkThroughViewController.swift; sourceTree = "<group>"; };
 		08DDE6682093633B009FEBC6 /* WalkThroughPreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkThroughPreviewController.swift; sourceTree = "<group>"; };
 		08DF19C72006221B00B83AE3 /* AppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
@@ -1530,6 +1532,7 @@
 				08C9E90D20D244F7002928EA /* Rating.swift */,
 				08CEB1342105A1B000AC217A /* CardEntity.swift */,
 				085AC38A21134AD7003AA0AE /* WalletEntity.swift */,
+				08D7CCBC213976DC0055C95D /* ChatPush.swift */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -2028,6 +2031,7 @@
 				889480211FECE717006AF5A9 /* Button.swift in Sources */,
 				08583BF6211C17DF00B5ABC0 /* Store.swift in Sources */,
 				08641D8F20A1B51C00AA0D1F /* CircularTransition.swift in Sources */,
+				08D7CCBD213976DD0055C95D /* ChatPush.swift in Sources */,
 				083DA4B920D0FF5B00DD473E /* YourTripsDetailViewController.swift in Sources */,
 				08DDE6692093633B009FEBC6 /* WalkThroughPreviewController.swift in Sources */,
 				0809321A20A08E0200B88318 /* Profile.swift in Sources */,

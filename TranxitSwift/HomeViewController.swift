@@ -177,8 +177,8 @@
     // MARK:- Methods
     
 extension HomeViewController {
-        
-        private func initialLoads(){
+   
+    private func initialLoads() {
             
             self.addMapView()
             self.getFavouriteLocationsFromLocal()
@@ -197,9 +197,9 @@ extension HomeViewController {
             })
             self.viewCurrentLocation.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.getCurrentLocation)))
             self.sourceLocationDetail?.bind(listener: { (locationDetail) in
-                if locationDetail == nil {
-                    self.isSourceFavourited = false
-                }
+//                if locationDetail == nil {
+//                    self.isSourceFavourited = false
+//                }
                 DispatchQueue.main.async {
                     self.isSourceFavourited = false // reset favourite location on change
                     self.textFieldSourceLocation.text = locationDetail?.address
@@ -211,6 +211,8 @@ extension HomeViewController {
             self.buttonSOS.addTarget(self, action: #selector(self.buttonSOSAction), for: .touchUpInside)
             self.setDesign()
             NotificationCenter.default.addObserver(self, selector: #selector(self.observer(notification:)), name: .providers, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(self.networkChanged(notification:)), name: NSNotification.Name.reachabilityChanged, object: nil)
+
 //            NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShowRateView(info:)), name: .UIKeyboardWillShow, object: nil)
 //            NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHideRateView(info:)), name: .UIKeyboardWillHide, object: nil)      }
         }
@@ -239,8 +241,7 @@ extension HomeViewController {
                 self.mapViewHelper?.moveTo(location: self.currentLocation.value!, with: self.viewMapOuter.center)
             }
         }
-        
-        
+    
         // MARK:- Localize
         
         private func localize(){
@@ -261,19 +262,22 @@ extension HomeViewController {
         // MARK:- Add Mapview
         
         private func addMapView(){
-            
+           
             self.mapViewHelper = GoogleMapsHelper()
             self.mapViewHelper?.getMapView(withDelegate: self, in: self.viewMapOuter)
-            self.mapViewHelper?.getCurrentLocation(onReceivingLocation: { (location) in
-                if self.sourceLocationDetail?.value == nil {
-                    self.mapViewHelper?.getPlaceAddress(from: location.coordinate, on: { (locationDetail) in
-                        self.sourceLocationDetail?.value = locationDetail
-                    })
-                }
-                self.currentLocation.value = location.coordinate
-            })
-            
+            self.getCurrentLocationDetails()
         }
+    //Getting current location detail
+    private func getCurrentLocationDetails() {
+        self.mapViewHelper?.getCurrentLocation(onReceivingLocation: { (location) in
+            if self.sourceLocationDetail?.value == nil {
+                self.mapViewHelper?.getPlaceAddress(from: location.coordinate, on: { (locationDetail) in
+                    self.sourceLocationDetail?.value = locationDetail
+                })
+            }
+            self.currentLocation.value = location.coordinate
+        })
+    }
         
         // MARK:- Observer
         
@@ -534,12 +538,18 @@ extension HomeViewController {
             datePicker.completionHandler = { date in
                 completion(date)
                 print(date)
-                
             }
         }
-        
-    }
     
+    
+    // MARK:- Observe Network Changes
+    @objc private func networkChanged(notification : Notification) {
+        if let reachability = notification.object as? Reachability, ([Reachability.Connection.cellular, .wifi].contains(reachability.connection)) {
+            self.getCurrentLocationDetails()
+        }
+    }
+
+    }
     
     // MARK:- MapView
     
@@ -642,38 +652,6 @@ extension HomeViewController {
         }
         
     }
-    
-    /*// MARK:-  UIViewControllerTransitioningDelegate
-     
-     extension HomeViewController : UIViewControllerTransitioningDelegate {
-     
-     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-     
-     if type(of: presented) == LocationSelectionViewController.self {
-     
-     transition.transitionMode = .present
-     transition.startingPoint = viewSourceLocation.center
-     transition.circleColor = .clear
-     return transition
-     }
-     return nil
-     
-     }
-     
-     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-     
-     if type(of: dismissed) == LocationSelectionViewController.self {
-     
-     transition.transitionMode = .dismiss
-     transition.startingPoint = viewSourceLocation.center
-     transition.circleColor = .clear
-     return transition
-     }
-     return nil
-     }
-     
-     } */
-    
     
     // MARK:- Service Calls
     
@@ -841,7 +819,9 @@ extension HomeViewController {
                 if api == .locationServicePostDelete {
                     UIApplication.shared.keyWindow?.make(toast: message)
                 } else {
-                    showAlert(message: message, okHandler: nil, fromView: self)
+                    if code != StatusCode.notreachable.rawValue {
+                        showAlert(message: message, okHandler: nil, fromView: self)
+                    }
                 }
                 if api == .sendRequest {
                     self.removeLoaderView()

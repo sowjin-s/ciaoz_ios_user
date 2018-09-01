@@ -33,8 +33,6 @@ class SingleChatController: UIViewController {
     
     @IBOutlet private weak var progressViewImage : UIProgressView!
     
-    var presenter: PostPresenterInputProtocol?  // PostviewProtocol  variable
-    
     private var navigationTapgesture : UITapGestureRecognizer!
     private var imageButtonView : UIImageView? // used to modify profile image after changes
     
@@ -407,8 +405,13 @@ extension SingleChatController {
             FirebaseHelper.shared.write(to: self.currentUserId, with: self.textViewSingleChat.text, type : self.chatType)
            // self.sendPush(with: self.textViewSingleChat.text)
            // self.initimateServerAboutChat()
-            self.textViewSingleChat.text = .Empty
-            self.textViewDidEndEditing(self.textViewSingleChat)
+        
+        DispatchQueue.global(qos: .background).async {
+            let message = "\(User.main.firstName ?? .Empty) : \(self.textViewSingleChat.text ?? .Empty)"
+            self.presenter?.post(api: .chatPush, data: ChatPush(sender : .provider, user_id: self.currentUserId, message: message).toData())
+        }
+        self.textViewSingleChat.text = .Empty
+        self.textViewDidEndEditing(self.textViewSingleChat)
 //
 //            if let currentUserData = RealmHelper.main.getObject(of: RealmContact.self, with: self.currentUserId) {
 //                RealmHelper.main.modify {
@@ -656,11 +659,6 @@ extension SingleChatController : UITableViewDataSource, UITableViewDelegate {
         
     }
 
-
-
-
-    
-    
     private func getCellId(from entity : ChatEntity)->String {
         
         if entity.senderType == UserType.user.rawValue {

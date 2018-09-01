@@ -38,10 +38,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.siri()
         self.registerPush(forApp: application)
         self.stripe()
-      //  return true
-       
-        
-        
          window?.rootViewController = Router.setWireFrame()
          window?.becomeKey()
          window?.makeKeyAndVisible()
@@ -108,7 +104,6 @@ extension AppDelegate {
                      didReceiveRemoteNotification notification: [AnyHashable : Any],
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         print("Notification  :  ", notification)
-
         completionHandler(.newData)
         
     }
@@ -204,15 +199,14 @@ extension AppDelegate {
     
     // MARK:- Reachability Action
     
-    @IBAction private func reachabilityAction() {
+    @objc private func reachabilityAction(notification : Notification) {
         
         print("Reachability \(self.reachability?.connection.description ?? .Empty)", #function)
         guard self.reachability != nil else { return }
         if self.reachability!.connection == .none && riderStatus == .none {
-            if let rootView = UIApplication.shared.keyWindow?.rootViewController?.childViewControllers.last, !(rootView is OfflineBookingViewController) {
+            if let rootView = UIApplication.shared.keyWindow?.rootViewController?.childViewControllers.last, (rootView is HomeViewController), retrieveUserData() {
                 rootView.present(id: Storyboard.Ids.OfflineBookingViewController, animation: true)
             }
-
         } else {
             (UIApplication.topViewController() as? OfflineBookingViewController)?.dismiss(animated: true, completion: nil)
         }

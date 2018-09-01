@@ -12,6 +12,6 @@ struct Rate : JSONSerializable {
     
     var request_id : Int?
     var rating : Int?
-    var comments : String?
+    var comment : String?
     
 }

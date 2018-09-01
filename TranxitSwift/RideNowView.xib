@@ -334,23 +334,24 @@
                                                     <rect key="frame" x="316" y="0.0" width="81" height="33.5"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="capacity" translatesAutoresizingMaskIntoConstraints="NO" id="UHI-c8-Mod">
-                                                            <rect key="frame" x="19.5" y="6.5" width="23" height="22"/>
+                                                            <rect key="frame" x="62" y="4" width="15" height="22"/>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0-0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jhK-3Q-4Rs">
-                                                            <rect key="frame" x="48.5" y="6.5" width="28.5" height="20.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jhK-3Q-4Rs">
+                                                            <rect key="frame" x="4" y="6.5" width="54" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstItem="UHI-c8-Mod" firstAttribute="width" secondItem="Aao-kd-0b2" secondAttribute="height" multiplier="1:1.5" id="BNG-h8-VMe"/>
-                                                        <constraint firstAttribute="trailing" secondItem="jhK-3Q-4Rs" secondAttribute="trailing" constant="4" id="Wwh-Ua-1Vz"/>
+                                                        <constraint firstItem="UHI-c8-Mod" firstAttribute="width" secondItem="Aao-kd-0b2" secondAttribute="height" multiplier="1:2.2" id="BNG-h8-VMe"/>
+                                                        <constraint firstItem="UHI-c8-Mod" firstAttribute="leading" secondItem="jhK-3Q-4Rs" secondAttribute="trailing" constant="4" id="Wwh-Ua-1Vz"/>
+                                                        <constraint firstAttribute="trailing" secondItem="UHI-c8-Mod" secondAttribute="trailing" constant="4" id="X9D-Wf-G1j"/>
                                                         <constraint firstItem="jhK-3Q-4Rs" firstAttribute="centerY" secondItem="Aao-kd-0b2" secondAttribute="centerY" id="YnI-Yz-cIg"/>
                                                         <constraint firstItem="UHI-c8-Mod" firstAttribute="centerX" secondItem="Aao-kd-0b2" secondAttribute="centerX" id="nzG-FO-Khe"/>
-                                                        <constraint firstItem="jhK-3Q-4Rs" firstAttribute="leading" secondItem="UHI-c8-Mod" secondAttribute="trailing" constant="6" id="ri4-r4-3Ah"/>
+                                                        <constraint firstItem="jhK-3Q-4Rs" firstAttribute="leading" secondItem="Aao-kd-0b2" secondAttribute="leading" constant="4" id="ri4-r4-3Ah"/>
                                                         <constraint firstItem="UHI-c8-Mod" firstAttribute="height" secondItem="Aao-kd-0b2" secondAttribute="height" multiplier="1:1.5" id="v4i-1U-Jr7"/>
-                                                        <constraint firstItem="UHI-c8-Mod" firstAttribute="centerY" secondItem="Aao-kd-0b2" secondAttribute="centerY" id="vzU-El-BWY"/>
+                                                        <constraint firstItem="UHI-c8-Mod" firstAttribute="centerY" secondItem="Aao-kd-0b2" secondAttribute="centerY" constant="-2" id="vzU-El-BWY"/>
                                                     </constraints>
                                                     <variation key="default">
                                                         <mask key="constraints">

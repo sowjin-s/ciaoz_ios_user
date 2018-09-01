@@ -88,7 +88,6 @@ extension RateView {
                 }
             }
         }
-        
         self.labelBaseFare.text = String.removeNil(User.main.currency)+"\(Formatter.shared.limit(string: "\(values?.pricing?.base_price ?? 0)", maximumDecimal: 2) ?? "0")"
         self.labelFare.text = String.removeNil(User.main.currency)+"\(Formatter.shared.limit(string: "\(values?.pricing?.estimated_fare ?? 0)", maximumDecimal: 2) ?? "0")" //"\(values?.pricing?.estimated_fare ?? 0)"
         self.labelFareType.text = values?.calculator ?? "-"

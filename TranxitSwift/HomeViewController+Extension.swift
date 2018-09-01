@@ -295,12 +295,11 @@ extension HomeViewController {
                 var rate = Rate()
                 rate.request_id = self.currentRequestId
                 rate.rating = rating
-                rate.comments = comments
+                rate.comment = comments
                 self.presenter?.post(api: .rateProvider, data: rate.toData())
             }
             self.removeRatingView()
         }
-        
     }
     
     
@@ -640,6 +639,8 @@ extension HomeViewController {
             self.view.addSubview(floaty)
         }
     }
+    
+    
     
     
 }
