@@ -11,6 +11,9 @@ import UIKit
 
 class RideRequestHandler: NSObject, INRequestRideIntentHandling {
     
+    //var urlSession : URLSession?
+    
+    
     func resolvePartySize(for intent: INRequestRideIntent, with completion: @escaping (INIntegerResolutionResult) -> Void) {
       
         switch intent.partySize {
@@ -82,11 +85,20 @@ class RideRequestHandler: NSObject, INRequestRideIntentHandling {
     
     func confirm(intent: INRequestRideIntent, completion: @escaping (INRequestRideIntentResponse) -> Void) {
         
+//        urlSession = URLSession.shared
+//
+//        let data = UserDefaults(suiteName: Keys.list.appGroup)?.bool(forKey: Keys.list.isLoggedIn)
+//        let val = "\(data == nil ? "failed" : "\(data!)")"
+//        urlSession?.dataTask(with: URL(string: "http://schedule.deliveryventure.com/api/user/checkapi?test="+val)!, completionHandler: { (_, _, _) in
+//
+//        }).resume()
+//
         let responseCode : INRequestRideIntentResponseCode
-        
-        if (intent.pickupLocation?.location) != nil {
+        if !(UserDefaults(suiteName: Keys.list.appGroup)?.bool(forKey: Keys.list.isLoggedIn) ?? false) {
+            responseCode = .failureRequiringAppLaunchMustVerifyCredentials
+        }else if (intent.pickupLocation?.location) != nil {
             responseCode = .ready
-        } else {
+        }else {
             responseCode = .failureRequiringAppLaunchNoServiceInArea
         }
         completion(INRequestRideIntentResponse(code: responseCode, userActivity: nil))
@@ -98,7 +110,6 @@ class RideRequestHandler: NSObject, INRequestRideIntentHandling {
         
         if let pickUp = intent.pickupLocation {
             completion(.success(with: pickUp))
-            print(pickUp)
         } else {
             completion(.needsValue())
         }
@@ -119,7 +130,6 @@ class RideRequestHandler: NSObject, INRequestRideIntentHandling {
         } else {
             completion(.needsValue())
         }
-        
     }
     
 

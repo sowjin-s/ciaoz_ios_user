@@ -13,8 +13,6 @@ class IntentHandler: INExtension {
     
     override func handler(for intent: INIntent) -> Any? {
         
-        print(intent)
-        
         if intent is INRequestRideIntent {
             return RideRequestHandler()
         }

@@ -164,8 +164,10 @@ internal func storeInUserDefaults(){
     
     let data = NSKeyedArchiver.archivedData(withRootObject: User.main)
     UserDefaults.standard.set(data, forKey: Keys.list.userData)
+    let groupDefaults = UserDefaults(suiteName: Keys.list.appGroup)
+    groupDefaults?.set(true, forKey: Keys.list.isLoggedIn)
     UserDefaults.standard.synchronize()
-    
+    groupDefaults?.synchronize()
     print("Store in UserDefaults--", UserDefaults.standard.value(forKey: Keys.list.userData) ?? "Failed")
 }
 
@@ -173,13 +175,9 @@ internal func storeInUserDefaults(){
 internal func retrieveUserData()->Bool{
     
     if let data = UserDefaults.standard.object(forKey: Keys.list.userData) as? Data, let userData = NSKeyedUnarchiver.unarchiveObject(with: data) as? User {
-        
         User.main = userData
-        
-        return true
     }
-    
-    return false
+    return User.main.id != nil
     
 }
 
@@ -188,9 +186,11 @@ internal func clearUserDefaults(){
     
     User.main = initializeUserData()  // Clear local User Data
     UserDefaults.standard.set(nil, forKey: Keys.list.userData)
+    let groupDefaults = UserDefaults(suiteName: Keys.list.appGroup)
+    groupDefaults?.set(false, forKey: Keys.list.isLoggedIn)
     UserDefaults.standard.removeVolatileDomain(forName: Bundle.main.bundleIdentifier!)
     UserDefaults.standard.synchronize()
-    
+    groupDefaults?.synchronize()
     print("Clear UserDefaults--", UserDefaults.standard.value(forKey: Keys.list.userData) ?? "Success")
     
 }

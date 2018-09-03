@@ -296,23 +296,27 @@ extension SignUpUserTableViewController : PostViewProtocol {
     
     func getProfile(api: Base, data: Profile?) {
         
-        if api == .signUp, data != nil {
-            
+        loader.isHideInMainThread(true)
+        
+        if api == .signUp, data != nil, data?.access_token != nil {
             Common.storeUserData(from: data)
             storeInUserDefaults()
-            self.presenter?.post(api: .login, data: MakeJson.login(withUser: userInfo?.email,password:userInfo?.password))
+            self.navigationController?.present(id: Storyboard.Ids.DrawerController, animation: true)
+            //self.presenter?.get(api: .getProfile, parameters: nil)
+            //self.presenter?.post(api: .login, data: MakeJson.login(withUser: userInfo?.email,password:userInfo?.password))
             return
             
-        }else if api == .getProfile {
+        }
+        /*else if api == .getProfile {
             Common.storeUserData(from: data)
             storeInUserDefaults()
             self.navigationController?.present(id: Storyboard.Ids.DrawerController, animation: true)
         } else {
             loader.isHideInMainThread(true)
-        }
+        } */
     }
     
-    func getOath(api: Base, data: LoginRequest?) {
+   /* func getOath(api: Base, data: LoginRequest?) {
      
         loader.isHideInMainThread(true)
         if api == .login, let accessToken = data?.access_token {
@@ -329,7 +333,7 @@ extension SignUpUserTableViewController : PostViewProtocol {
             
         }
         
-    }
+    } */
     
 }
 

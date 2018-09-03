@@ -22,7 +22,6 @@ class Profile : JSONSerializable {
     var wallet_balance : Int?
     var sos : String?
     
-    
     required init(from decoder: Decoder) throws {
         
         let values = try decoder.container(keyedBy: CodingKeys.self)
@@ -36,6 +35,7 @@ class Profile : JSONSerializable {
         currency = try? values.decode(String.self, forKey: .currency)
         sos = try? values.decode(String.self, forKey: .sos)
         wallet_balance = try? values.decode(Int.self, forKey: .wallet_balance)
+        
         if let mobileInt = try? values.decode(Int.self, forKey: .mobile) {
          mobile = "\(mobileInt)"
         } else {

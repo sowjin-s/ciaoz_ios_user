@@ -91,7 +91,7 @@ struct Constants {
     let save = "save"
     let lookingToChangePassword = "Looking to change password?"
     let areYouSure = "Are you sure?"
-    let areYouSureWantToLogout = "Are you want to logout?"
+    let areYouSureWantToLogout = "Are you sure want to logout?"
     let sure = "Sure"
     let source = "Source"
     let destination = "Destination"
@@ -210,26 +210,6 @@ struct Constants {
     let enterValidAmount = "Enter Valid Amount"
 }
 
-//Defaults Keys
-
-struct Keys {
-    
-    static let list = Keys()
-    let userData = "userData"
-    let idKey = "id"
-    let accessToken = "accesstoken"
-    let firstName = "firstName"
-    let lastName = "lastName"
-    let picture = "picture"
-    let email = "email"
-    let mobile = "mobile"
-    let currency = "currency"
-    let language = "language"
-    let refreshToken = "refreshToken"
-    let wallet = "wallet"
-    let sos = "sos"
-    let loginType = "LoginType"
-}
 
 //ENUM TRIP TYPE
 

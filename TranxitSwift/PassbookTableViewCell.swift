@@ -53,7 +53,7 @@ class PassbookTableViewCell: UITableViewCell {
         self.labelCouponStatus.text = values.promocode?.status?.localize()
         self.labelPaymentType.text = isWalletSelected ? values.via : values.promocode?.promo_code
         let discountValue = values.promocode?.discount_type == Constants.string.amount.lowercased() ? "\(User.main.currency ?? .Empty) \(values.promocode?.discount ?? 0)" : "\(values.promocode?.discount ?? 0) % \(Constants.string.OFF.localize())"
-        self.labelOffer.text = isWalletSelected ? "\(User.main.currency ?? .Empty) \(values.amount ?? "0")" : "\(discountValue)"
+        self.labelOffer.text = isWalletSelected ? "\(User.main.currency ?? .Empty) \(values.amount ?? 0)" : "\(discountValue)"
         
     }
     

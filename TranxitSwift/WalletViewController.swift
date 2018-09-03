@@ -48,8 +48,7 @@ class WalletViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = false
-        KeyboardAvoiding.avoidingView = self.viewWallet
-        self.presenter?.get(api: .getCards, parameters: nil)
+     //   KeyboardAvoiding.paddingForCurrentAvoidingView = 50
       //  IQKeyboardManager.sharedManager().enable = true
     }
     
@@ -79,6 +78,8 @@ extension WalletViewController {
         }
         self.buttonChange.addTarget(self, action: #selector(self.buttonChangeCardAction), for: .touchUpInside)
         self.isWalletAvailable = false
+        KeyboardAvoiding.avoidingView = self.view
+        self.presenter?.get(api: .getCards, parameters: nil)
     }
     
     // MARK:- Set Designs

@@ -81,7 +81,7 @@
 "save"                                                           ="save";
 "Looking to change password?"                                    ="Looking to change password?";
 "Are you sure?"                                                  ="Are you sure?";
-"Are you want to logout?"                                        ="Are you want to logout?";
+"Are you sure want to logout?"                                   ="Are you sure want to logout?";
 "Sure"                                                           ="Sure";
 "Source"                                                         ="Source";
 "Destination"                                                    ="Destination";
