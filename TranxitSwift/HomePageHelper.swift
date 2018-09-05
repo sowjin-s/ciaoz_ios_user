@@ -12,7 +12,7 @@ import UIKit
 class HomePageHelper {
     
     private var timer : Timer?
-    
+    static var shared = HomePageHelper
     // MARK:- Start Listening for Provider Status Changes
     func startListening(on completion : @escaping ((CustomError?,Request?)->Void)) {
         
@@ -47,7 +47,7 @@ class HomePageHelper {
             
             guard error == nil else {
                 completion(error, nil)
-                DispatchQueue.main.async { self.stopListening() }
+               // DispatchQueue.main.async { self.stopListening() }
                 return
             }
             
@@ -55,14 +55,14 @@ class HomePageHelper {
                 let request = data.getDecodedObject(from: RequestModal.self)?.data
                 else {
                     completion(error, nil)
-                    DispatchQueue.main.async { self.stopListening() }
+                   // DispatchQueue.main.async { self.stopListening() }
                     return
             }
             
             guard let requestFirst = request.first else {
                 completion(nil, nil)
                 riderStatus = .none
-                DispatchQueue.main.async { self.stopListening() }
+               // DispatchQueue.main.async { self.stopListening() }
                 return
             }
             completion(nil, requestFirst)

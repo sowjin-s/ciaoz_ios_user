@@ -83,7 +83,6 @@ class Common {
         User.main.picture = profile?.picture
         User.main.wallet_balance = profile?.wallet_balance
         User.main.sos = profile?.sos
-        User.main.accessToken = profile?.access_token
     }
     
     // MARK:- Make Call

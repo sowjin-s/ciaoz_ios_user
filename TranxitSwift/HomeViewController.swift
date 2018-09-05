@@ -146,8 +146,6 @@
         
         var markersProviders = [GMSMarker]()
         
-        var homePageHelper : HomePageHelper?
-        
         override func viewDidLoad() {
             super.viewDidLoad()
             self.initialLoads()
@@ -660,12 +658,8 @@ extension HomeViewController {
         // Check For Service Status
         
         private func checkForProviderStatus() {
-            
-            if self.homePageHelper == nil {
-                self.homePageHelper = HomePageHelper()
-            }
-            
-            self.homePageHelper?.startListening(on: { (error, request) in
+          
+            HomePageHelper.shared.startListening(on: { (error, request) in
                 
                 if error != nil {
                     riderStatus = .none

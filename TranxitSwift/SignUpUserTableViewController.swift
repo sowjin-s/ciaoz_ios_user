@@ -299,6 +299,7 @@ extension SignUpUserTableViewController : PostViewProtocol {
         loader.isHideInMainThread(true)
         
         if api == .signUp, data != nil, data?.access_token != nil {
+            User.main.accessToken = data?.access_token
             Common.storeUserData(from: data)
             storeInUserDefaults()
             self.navigationController?.present(id: Storyboard.Ids.DrawerController, animation: true)
