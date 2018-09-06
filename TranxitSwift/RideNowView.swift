@@ -64,6 +64,17 @@ class RideNowView: UIView {
         }
         
     }
+    // boolean to disable or enable the ride buttons
+    private var isRideEnabled = true {
+        didSet {
+            self.buttonRideNow.isEnabled = isRideEnabled
+            self.buttonSchedule.isEnabled = isRideEnabled
+            self.buttonSchedule.alpha = isRideEnabled ? 1 : 0.7
+            self.buttonRideNow.alpha = isRideEnabled ? 1 : 0.7
+        }
+    }
+    
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -96,6 +107,7 @@ extension RideNowView {
         self.isShowWallet = false
         self.initializeRateView()
         self.setProgressView()
+        self.isRideEnabled = false
     }
     
     // MARK:-
@@ -172,6 +184,7 @@ extension RideNowView {
         self.selectedRow = -1
         self.datasource = source
         self.collectionViewService.reloadData()
+        self.isRideEnabled = false
         self.collectionView(collectionViewService, didSelectItemAt: IndexPath(item: 0, section: 0))
         
     }
@@ -275,7 +288,7 @@ extension RideNowView {
     func getEstimateFareFor(serviceId : Int) {
         
         DispatchQueue.global(qos: .userInteractive).async {
-            guard self.sourceCoordinate.latitude>0, self.sourceCoordinate.longitude>0, self.destinationCoordinate.latitude>0, self.destinationCoordinate.longitude>0 else {
+            guard self.sourceCoordinate.latitude != 0, self.sourceCoordinate.longitude != 0, self.destinationCoordinate.latitude != 0, self.destinationCoordinate.longitude != 0 else {
                 return
             }
             var estimateFare = EstimateFareRequest()
@@ -404,7 +417,8 @@ extension RideNowView : UICollectionViewDelegate, UICollectionViewDataSource, UI
     
     private func select(at indexPath : IndexPath) {
         
-        if datasource.count>indexPath.row, let id = datasource[indexPath.row].id {
+        if datasource.count>indexPath.row {
+            //let id = datasource[indexPath.row].id
             self.isSurge = false // Hide surge till api loaded
             self.collectionViewService.cellForItem(at: IndexPath(item: self.selectedRow, section: 0))?.isSelected = false
             if self.selectedRow == indexPath.row {
@@ -415,7 +429,7 @@ extension RideNowView : UICollectionViewDelegate, UICollectionViewDataSource, UI
             self.labelCapacity.text = "\(Int.removeNil(self.selectedItem?.capacity))"
             self.selectedRow = indexPath.row
             self.setSurgeViewAndWallet()
-            self.getProviders(by: id)
+            //self.getProviders(by: id)
         }
         
         if selectedItem?.pricing == nil, let id = self.selectedItem?.id {
@@ -430,15 +444,19 @@ extension RideNowView : PostViewProtocol {
     
     func onError(api: Base, message: String, statusCode code: Int) {
         DispatchQueue.main.async {
-            self.make(toast: message)
+            print("\nController --- ",message,code)
+            UIApplication.shared.keyWindow?.makeToast(message)
             self.resetProgressView()
+            self.isRideEnabled = false
         }
     }
     
     func getEstimateFare(api: Base, data: EstimateFare?) {
-        if let index = self.datasource.index(where: { $0.id == data?.service_type }) {
+        if let serviceTypeId = data?.service_type, let index = self.datasource.index(where: { $0.id == serviceTypeId }) {
+            self.getProviders(by: serviceTypeId)
             self.datasource[index].pricing = data
             DispatchQueue.main.async {
+                self.isRideEnabled = true
                 self.resetProgressView()
                 self.setSurgeViewAndWallet()
                 self.collectionViewService.reloadItems(at: [IndexPath(item: index, section: 0)])

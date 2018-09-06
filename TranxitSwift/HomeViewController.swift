@@ -431,7 +431,7 @@ extension HomeViewController {
                               self.updateLocation(with: (dAddress,coordinate))
                         }
                     } else {
-                        self.removeUnnecessaryView(with: .none) // Remove services or ride now if previously open
+                        self.removeUnnecessaryView(with: .cancelled) // Remove services or ride now if previously open
                         self.getServicesList() // get Services
                     }
                 }
@@ -504,7 +504,7 @@ extension HomeViewController {
             
             if self.isOnBooking { // If User is on Ride Selection remove all view and make it to default
                 self.removeLoaderView()
-                self.removeUnnecessaryView(with: .none)
+                self.removeUnnecessaryView(with: .cancelled)
                 self.clearMapview()
                 self.viewAddressOuter.isHidden = false
                 self.viewLocationButtons.isHidden = false
@@ -680,7 +680,10 @@ extension HomeViewController {
                     riderStatus = request?.status ?? .none
                     self.handle(request: request!)
                 } else {
-                    self.clearMapview()
+                    riderStatus = request?.status ?? .none
+                    if riderStatus != .none {
+                         self.clearMapview()
+                    }
                     self.removeUnnecessaryView(with: .none)
                 }
             })

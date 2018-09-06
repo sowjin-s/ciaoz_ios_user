@@ -171,6 +171,7 @@ extension PostViewProtocol {
     
     var presenter: PostPresenterInputProtocol? {
         get {
+            print("Controller  --  ",self)
             presenterObject?.controller = self
             self.presenter = presenterObject
             return presenterObject

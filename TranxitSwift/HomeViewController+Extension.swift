@@ -508,7 +508,7 @@ extension HomeViewController {
     
     func removeUnnecessaryView(with status : RideStatus) {
         
-        if ![RideStatus.searching].contains(status) {
+        if ![RideStatus.searching].contains(status) && status != .none {
             self.removeLoaderView()
             self.removeRideNow()
         }

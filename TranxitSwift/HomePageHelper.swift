@@ -12,7 +12,7 @@ import UIKit
 class HomePageHelper {
     
     private var timer : Timer?
-    static var shared = HomePageHelper
+    static var shared = HomePageHelper()
     // MARK:- Start Listening for Provider Status Changes
     func startListening(on completion : @escaping ((CustomError?,Request?)->Void)) {
         
