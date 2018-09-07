@@ -208,6 +208,7 @@ struct Constants {
     let reasonForCancellation = "Reason For Cancellation"
     let addCard = "Add Card to continue with wallet"
     let enterValidAmount = "Enter Valid Amount"
+    let allPaymentMethodsBlocked = "All payment methods has been blocked"
 }
 
 

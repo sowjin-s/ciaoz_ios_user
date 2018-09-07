@@ -663,12 +663,11 @@ extension HomeViewController {
                 
                 if error != nil {
                     riderStatus = .none
-                    DispatchQueue.main.async {
-                        showAlert(message: error?.localizedDescription, okHandler: nil, fromView: self)
-                    }
+    //                    DispatchQueue.main.async {
+    //                        showAlert(message: error?.localizedDescription, okHandler: nil, fromView: self)
+    //                    }
                 } else if request != nil {
-                    print(request!)
-                    
+                   
                     if let pLatitude = request?.provider?.latitude, let pLongitude = request?.provider?.longitude {
                         DispatchQueue.main.async {
                             self.moveProviderMarker(to: LocationCoordinate(latitude: pLatitude, longitude: pLongitude))

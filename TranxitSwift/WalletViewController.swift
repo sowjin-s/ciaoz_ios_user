@@ -24,11 +24,19 @@ class WalletViewController: UIViewController {
     
     private var selectedCardEntity : CardEntity?
     
-    private var isWalletAvailable : Bool = false {
+    private var isWalletEnabled : Bool = false {
         didSet{
-            self.buttonAddAmount.isEnabled = isWalletAvailable
-            self.buttonAddAmount.backgroundColor = isWalletAvailable ? .primary : .lightGray
-            self.viewCard.isHidden = !isWalletAvailable
+            self.buttonAddAmount.isEnabled = isWalletEnabled
+            self.buttonAddAmount.backgroundColor = isWalletEnabled ? .primary : .lightGray
+            self.viewCard.isHidden = !isWalletEnabled
+        }
+    }
+    
+    private var isWalletAvailable : Bool = false {
+        didSet {
+            self.buttonAddAmount.isHidden = !isWalletAvailable
+            self.viewCard.alpha = CGFloat(isWalletAvailable.hashValue)
+            self.viewWallet.alpha = CGFloat(isWalletAvailable.hashValue)
         }
     }
     
@@ -48,8 +56,7 @@ class WalletViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = false
-     //   KeyboardAvoiding.paddingForCurrentAvoidingView = 50
-      //  IQKeyboardManager.sharedManager().enable = true
+        self.isWalletAvailable = User.main.isCardAllowed
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -77,7 +84,7 @@ extension WalletViewController {
             button.setTitle(String.removeNil(String.removeNil(User.main.currency)+" \(button.tag)"), for: .normal)
         }
         self.buttonChange.addTarget(self, action: #selector(self.buttonChangeCardAction), for: .touchUpInside)
-        self.isWalletAvailable = false
+        self.isWalletEnabled = false
         KeyboardAvoiding.avoidingView = self.view
         self.presenter?.get(api: .getCards, parameters: nil)
     }
@@ -86,7 +93,7 @@ extension WalletViewController {
     
     private func setDesign() {
         
-        Common.setFont(to: labelBalance)
+        Common.setFont(to: labelBalance, isTitle: true)
         Common.setFont(to: textFieldAmount)
         Common.setFont(to: labelCard)
         Common.setFont(to: buttonChange)
@@ -186,8 +193,8 @@ extension WalletViewController : PostViewProtocol {
         self.selectedCardEntity = data.first
         DispatchQueue.main.async {
             self.setCardDetails()
-            self.isWalletAvailable = !data.isEmpty
-            if data.isEmpty {
+            self.isWalletEnabled = !data.isEmpty
+            if data.isEmpty && User.main.isCardAllowed {
                 showAlert(message: Constants.string.addCard.localize(), okHandler: {
                    self.push(id: Storyboard.Ids.AddCardViewController, animation: true)
                 }, cancelHandler: nil, fromView: self)

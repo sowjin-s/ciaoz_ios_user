@@ -25,8 +25,11 @@ class User : NSObject, NSCoding, JSONSerializable {
     var wallet_balance : Int?
     var sos : String?
     var loginType : String?
+    var dispatcherNumber : String?
+    var isCashAllowed : Bool
+    var isCardAllowed : Bool
     
-    init(id : Int?, accessToken : String?, firstName : String?, lastName : String?, mobile : String?, email : String?, currency : String?, picture : String?, refreshToken : String?, walletBalance : Int?, sos : String?, loginType : String?){
+    init(id : Int?, accessToken : String?, firstName : String?, lastName : String?, mobile : String?, email : String?, currency : String?, picture : String?, refreshToken : String?, walletBalance : Int?, sos : String?, loginType : String?, dispatcherNumber : String?, isCardAllowed : Bool, isCashAllowed : Bool){
                 
         self.id = id
         self.accessToken = accessToken
@@ -40,11 +43,14 @@ class User : NSObject, NSCoding, JSONSerializable {
         self.wallet_balance = walletBalance
         self.sos = sos
         self.loginType = loginType
+        self.dispatcherNumber = dispatcherNumber
+        self.isCardAllowed = isCardAllowed
+        self.isCashAllowed = isCashAllowed
     }
     
     convenience
     override init(){
-        self.init(id: nil, accessToken: nil, firstName : nil, lastName : nil, mobile : nil, email : nil, currency : nil, picture : nil, refreshToken : nil, walletBalance : nil, sos : nil, loginType : nil)
+        self.init(id: nil, accessToken: nil, firstName : nil, lastName : nil, mobile : nil, email : nil, currency : nil, picture : nil, refreshToken : nil, walletBalance : nil, sos : nil, loginType : nil,dispatcherNumber : nil, isCardAllowed: false, isCashAllowed : true)
     }
     
     
@@ -62,7 +68,11 @@ class User : NSObject, NSCoding, JSONSerializable {
         let walletBalance = aDecoder.decodeObject(forKey: Keys.list.wallet) as? Int
         let sos = aDecoder.decodeObject(forKey: Keys.list.sos) as? String
         let loginType = aDecoder.decodeObject(forKey: Keys.list.loginType) as? String
-        self.init(id: id, accessToken : accessToken, firstName : firstName, lastName : lastName, mobile : mobile, email: email, currency : currency, picture : picture, refreshToken : refreshToken, walletBalance : walletBalance, sos : sos,loginType : loginType)
+        let dispatcherNumber = aDecoder.decodeObject(forKey: Keys.list.dispacher) as? String
+        let isCardAllowed = aDecoder.decodeBool(forKey: Keys.list.card)
+        let isCashAllowed = aDecoder.decodeBool(forKey: Keys.list.cash)
+        
+        self.init(id: id, accessToken : accessToken, firstName : firstName, lastName : lastName, mobile : mobile, email: email, currency : currency, picture : picture, refreshToken : refreshToken, walletBalance : walletBalance, sos : sos,loginType : loginType, dispatcherNumber : dispatcherNumber, isCardAllowed : isCardAllowed, isCashAllowed : isCashAllowed)
         
     }
     
@@ -81,6 +91,9 @@ class User : NSObject, NSCoding, JSONSerializable {
         aCoder.encode(self.wallet_balance, forKey: Keys.list.wallet)
         aCoder.encode(self.sos, forKey: Keys.list.sos)
         aCoder.encode(self.loginType, forKey: Keys.list.loginType)
+        aCoder.encode(self.dispatcherNumber, forKey: Keys.list.dispacher)
+        aCoder.encode(self.isCashAllowed, forKey: Keys.list.cash)
+        aCoder.encode(self.isCardAllowed, forKey: Keys.list.card)
     }
     
     

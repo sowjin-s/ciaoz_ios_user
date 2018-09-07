@@ -18,15 +18,14 @@ class SideBarTableViewController: UITableViewController {
     
     // private let sideBarList = [Constants.string.payment,Constants.string.yourTrips,Constants.string.coupon,Constants.string.wallet,Constants.string.passbook,Constants.string.settings,Constants.string.help,Constants.string.share,Constants.string.inviteReferral,Constants.string.faqSupport,Constants.string.termsAndConditions,Constants.string.privacyPolicy,Constants.string.logout]
     
-    private let sideBarList = [Constants.string.payment.localize(),
-                               Constants.string.yourTrips.localize(),
-                               Constants.string.coupon.localize(),
-                               Constants.string.wallet.localize(),
-                               Constants.string.passbook.localize(),
-                               Constants.string.settings.localize(),
-                               Constants.string.help.localize(),
-                               Constants.string.share.localize(),
-                               Constants.string.logout.localize()]
+    private let sideBarList = [Constants.string.payment,
+                               Constants.string.yourTrips,
+                               Constants.string.wallet,
+                               Constants.string.passbook,
+                               Constants.string.settings,
+                               Constants.string.help,
+                               Constants.string.share,
+                               Constants.string.logout]
     
     private let cellId = "cellId"
     
@@ -151,16 +150,14 @@ extension SideBarTableViewController {
                 (self.drawerController?.getViewController(for: .none) as? UINavigationController)?.pushViewController(vc, animated: true)
             }
         case (0,2):
-            self.push(to: Storyboard.Ids.CouponViewController)
-        case (0,3):
             self.push(to: Storyboard.Ids.WalletViewController)
-        case (0,5):
+        case (0,4):
             self.push(to: Storyboard.Ids.SettingTableViewController)
-        case (0,6):
+        case (0,5):
             self.push(to: Storyboard.Ids.HelpViewController)
-        case (0,7):
+        case (0,6):
             (self.drawerController?.getViewController(for: .none)?.childViewControllers.first as? HomeViewController)?.share(items: [baseUrl])
-        case (0,8):
+        case (0,7):
             self.logout()
             
         default:

@@ -16,8 +16,10 @@ class PaymentViewController: UITableViewController {
     
     private let tableCellId = "tableCellId"
     
-    private let headers = [Constants.string.paymentMethods] //Constants.string.yourCards
-    
+    private var headers = [Constants.string.paymentMethods] //Constants.string.yourCards
+    private var totalCount = [Int:Int]()
+   
+    // Boolean for Card selection whether to show or not
     var isShowCash = true
     var isChangingPayment = false
     var onclickPayment : ((CardEntity?)->Void)? // Change payment Mode from Request
@@ -39,7 +41,7 @@ class PaymentViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = false
-        self.presenter?.get(api: .getCards, parameters: nil)
+        self.validatePaymentModes()
         //self.isEnabled = IQKeyboardManager.shared.enable
         //IQKeyboardManager.shared.enable = false
     }
@@ -70,6 +72,26 @@ extension PaymentViewController {
         }
         
     }
+    
+    // MARK:- Validate Payment Types
+    private func validatePaymentModes() {
+        
+        if User.main.isCardAllowed {
+            self.presenter?.get(api: .getCards, parameters: nil)
+        }
+        self.buttonAddPayments.isHidden = !User.main.isCardAllowed
+        self.isShowCash = User.main.isCashAllowed
+        if !User.main.isCardAllowed && !User.main.isCashAllowed {
+            self.headers = [Constants.string.allPaymentMethodsBlocked]
+        }
+        let isShowCashRow = (!User.main.isCashAllowed || !isShowCash) ? 0 : 1
+        totalCount.updateValue(isShowCashRow, forKey: 0) // Cash rows
+        totalCount.updateValue(User.main.isCardAllowed.hashValue, forKey: 1) // Card Row
+        
+    }
+    
+    
+    
     
     // MARK:- Set Design
     
@@ -137,14 +159,14 @@ extension PaymentViewController {
 extension PaymentViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return totalCount.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if let tableCell = tableView.dequeueReusableCell(withIdentifier: self.tableCellId, for: indexPath) as? PaymentCell {
             
-            if indexPath.section == 0 {
+            if indexPath.section == 0  {
                 tableCell.imageViewPayment.image =  #imageLiteral(resourceName: "money_icon")
                 tableCell.labelPayment.text = Constants.string.cash.localize()
             } else if self.cardsList.count > indexPath.row {
@@ -158,7 +180,7 @@ extension PaymentViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? isShowCash.hashValue : cardsList.count
+        return self.totalCount[section] ?? 0
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

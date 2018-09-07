@@ -158,6 +158,7 @@
 		08DF19C82006221B00B83AE3 /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF19C72006221B00B83AE3 /* AppData.swift */; };
 		08E2B21B20C94F49002E689B /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 08E2B21920C94F49002E689B /* Model.xcdatamodeld */; };
 		08E2B21E20C950FD002E689B /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E2B21D20C950FD002E689B /* CoreDataHelper.swift */; };
+		08E49CEB2142686800FCD042 /* RequestModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E49CEA2142686800FCD042 /* RequestModal.swift */; };
 		08E9675B20D2C19A0077DB4F /* RateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E9675A20D2C19A0077DB4F /* RateView.swift */; };
 		08E9675E20D2C1B80077DB4F /* RateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08E9675D20D2C1B80077DB4F /* RateView.xib */; };
 		08ECB216200DD0220008BF27 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08ECB215200DD0220008BF27 /* NavigationBar.swift */; };
@@ -408,6 +409,7 @@
 		08DF19C72006221B00B83AE3 /* AppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
 		08E2B21A20C94F49002E689B /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		08E2B21D20C950FD002E689B /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
+		08E49CEA2142686800FCD042 /* RequestModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestModal.swift; sourceTree = "<group>"; };
 		08E9675A20D2C19A0077DB4F /* RateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateView.swift; sourceTree = "<group>"; };
 		08E9675D20D2C1B80077DB4F /* RateView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RateView.xib; sourceTree = "<group>"; };
 		08ECB215200DD0220008BF27 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
@@ -1550,6 +1552,7 @@
 				08CEB1342105A1B000AC217A /* CardEntity.swift */,
 				085AC38A21134AD7003AA0AE /* WalletEntity.swift */,
 				08D7CCBC213976DC0055C95D /* ChatPush.swift */,
+				08E49CEA2142686800FCD042 /* RequestModal.swift */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -2057,6 +2060,7 @@
 				889480211FECE717006AF5A9 /* Button.swift in Sources */,
 				08583BF6211C17DF00B5ABC0 /* Store.swift in Sources */,
 				08641D8F20A1B51C00AA0D1F /* CircularTransition.swift in Sources */,
+				08E49CEB2142686800FCD042 /* RequestModal.swift in Sources */,
 				08D7CCBD213976DD0055C95D /* ChatPush.swift in Sources */,
 				083DA4B920D0FF5B00DD473E /* YourTripsDetailViewController.swift in Sources */,
 				08DDE6692093633B009FEBC6 /* WalkThroughPreviewController.swift in Sources */,

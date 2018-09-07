@@ -28,4 +28,7 @@ struct Keys {
     let loginType = "LoginType"
     let appGroup = "group.tranxit.user"
     let isLoggedIn = "isLoggedIn"
+    let dispacher = "dispacher"
+    let cash = "cash"
+    let card = "card"
 }

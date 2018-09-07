@@ -12,7 +12,7 @@ struct Payment : JSONSerializable {
     
     let id : Int?
     let request_id : Int?
-    let promocode_id : String?
+    let promocode_id : Int?
     let payment_id : String?
     let payment_mode : String?
     let fixed : Float?
