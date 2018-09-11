@@ -22,11 +22,14 @@ class PaymentViewController: UITableViewController {
     // Boolean for Card selection whether to show or not
     var isShowCash = true
     var isChangingPayment = false
-    var onclickPayment : ((CardEntity?)->Void)? // Change payment Mode from Request
+    var onclickPayment : ((PaymentType ,CardEntity?)->Void)? // Change payment Mode from Request
     private var cardsList = [CardEntity]()
     private lazy var loader  : UIView = {
         return createActivityIndicator(self.view)
     }()
+    
+    private let cashSection = 0
+    private let cardSection = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,13 +83,13 @@ extension PaymentViewController {
             self.presenter?.get(api: .getCards, parameters: nil)
         }
         self.buttonAddPayments.isHidden = !User.main.isCardAllowed
-        self.isShowCash = User.main.isCashAllowed
+        self.isShowCash = (User.main.isCashAllowed && isShowCash)
         if !User.main.isCardAllowed && !User.main.isCashAllowed {
             self.headers = [Constants.string.allPaymentMethodsBlocked]
         }
         let isShowCashRow = (!User.main.isCashAllowed || !isShowCash) ? 0 : 1
-        totalCount.updateValue(isShowCashRow, forKey: 0) // Cash rows
-        totalCount.updateValue(User.main.isCardAllowed.hashValue, forKey: 1) // Card Row
+        totalCount.updateValue(isShowCashRow, forKey: cashSection) // Cash rows
+        totalCount.updateValue(0, forKey: cardSection) // Card Row
         
     }
     
@@ -198,9 +201,9 @@ extension PaymentViewController {
         guard self.isChangingPayment else { return }
         self.dismiss(animated: true) {
             if indexPath.section == 1, self.cardsList.count > indexPath.row {
-                self.onclickPayment?(self.cardsList[indexPath.row])
+                self.onclickPayment?(.CARD ,self.cardsList[indexPath.row])
             } else {
-                self.onclickPayment?(nil)
+                self.onclickPayment?(.CASH, nil)
             }
         }
     }
@@ -223,6 +226,9 @@ extension PaymentViewController : PostViewProtocol {
     func getCardEnities(api: Base, data: [CardEntity]) {
         
         self.cardsList = data
+        if User.main.isCardAllowed {
+            self.totalCount.updateValue(self.cardsList.count, forKey: cardSection)
+        }
         self.loader.isHideInMainThread(true)
         self.tableView.reloadInMainThread()
         

@@ -736,7 +736,12 @@ extension HomeViewController {
         
         // Create Request
         
-        func createRequest(for service : Service, isScheduled : Bool, scheduleDate : Date?, cardEntity entity : CardEntity?) {
+        func createRequest(for service : Service, isScheduled : Bool, scheduleDate : Date?, cardEntity entity : CardEntity?, paymentType : PaymentType) {
+            // Validate whether the card entity has valid data
+            if paymentType == .CARD && entity != nil {
+                UIApplication.shared.keyWindow?.make(toast: Constants.string.selectCardToContinue.localize())
+                return
+            }
             
             self.showLoaderView()
             DispatchQueue.global(qos: .background).async {
@@ -749,7 +754,7 @@ extension HomeViewController {
                 request.d_latitude = self.destinationLocationDetail?.coordinate.latitude
                 request.d_longitude = self.destinationLocationDetail?.coordinate.longitude
                 request.service_type = service.id
-                request.payment_mode = entity == nil ? .CASH : .CARD
+                request.payment_mode = paymentType
                 request.distance = "\(service.pricing?.distance ?? 0)"
                 request.use_wallet = service.pricing?.useWallet
                 request.card_id = entity?.card_id
@@ -778,6 +783,18 @@ extension HomeViewController {
             request.address = detail.address
             request.latitude = detail.coordinate.latitude
             request.longitude = detail.coordinate.longitude
+            self.presenter?.post(api: .updateRequest, data: request.toData())
+            
+        }
+        
+        // MARK:- Change Payment Type For existing Request
+        func updatePaymentType(with cardDetail : CardEntity) {
+            
+            let request = Request()
+            request.request_id = self.currentRequestId
+            request.payment_mode = .CARD
+            request.card_id = cardDetail.card_id
+            self.loader.isHideInMainThread(false)
             self.presenter?.post(api: .updateRequest, data: request.toData())
             
         }
@@ -857,6 +874,7 @@ extension HomeViewController {
                     self.showLoaderView(with: self.currentRequestId)
                 }
             }
+            
 //            self.currentRequestId = data?.request_id ?? 0
 //            self.checkForProviderStatus()
             
@@ -864,7 +882,12 @@ extension HomeViewController {
         
         func success(api: Base, message: String?) {
             
-            self.loader.isHidden = true
+            self.loader.isHideInMainThread(true)
+            if api == .updateRequest {
+                riderStatus = .none
+                return
+            }
+            
             if api == .locationServicePostDelete {
                 self.presenter?.get(api: .locationService, parameters: nil)
             }else if api == .rateProvider  {

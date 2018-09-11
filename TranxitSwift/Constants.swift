@@ -209,6 +209,12 @@ struct Constants {
     let addCard = "Add Card to continue with wallet"
     let enterValidAmount = "Enter Valid Amount"
     let allPaymentMethodsBlocked = "All payment methods has been blocked"
+    let selectCardToContinue = "select card to continue"
+    let timeFare = "Time Fare"
+    let tips = "Tips"
+    let walletDeduction = "Wallet Deduction"
+    let toPay = "To Pay"
+    let addTips = "Add Tips"
 }
 
 
@@ -227,7 +233,20 @@ enum  PaymentType : String, Codable {
     
     case CASH = "CASH"
     case CARD = "CARD"
+    case NONE = "NONE"
     
+    var image : UIImage? {
+        var name = "ic_error"
+        switch self {
+        case .CARD:
+            name = "visa"
+        case .CASH:
+            name = "money_icon"
+        case .NONE :
+            name = "ic_error"
+        }
+      return UIImage(named: name)
+   }
 }
 
 
@@ -292,9 +311,18 @@ enum RideStatus : String, Codable {
     
 }
 
+// MARK:- Service Calclulator
+
+enum ServiceCalculator : String, Codable {
+    case MIN
+    case HOUR
+    case DISTANCE
+    case DISTANCEMIN
+    case DISTANCEHOUR
+    case NONE
+}
+
 enum Vibration : UInt {
     case weak = 1519
     case threeBooms = 1107
 }
-
-

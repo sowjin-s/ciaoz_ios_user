@@ -21,6 +21,7 @@ extension HomeViewController {
     func showRideNowView(with source : [Service]) {
         guard let sourceLocation = self.sourceLocationDetail?.value, let destinationLocation = self.destinationLocationDetail else { return }
         var selectedPaymentDetail : CardEntity?
+        var paymentType : PaymentType = (User.main.isCashAllowed ? .CASH : User.main.isCardAllowed ? .CARD : .NONE)
         if self.rideNowView == nil {
             
             self.rideNowView = Bundle.main.loadNibNamed(XIB.Names.RideNowView, owner: self, options: [:])?.first as? RideNowView
@@ -29,25 +30,26 @@ extension HomeViewController {
             self.rideNowView?.show(with: .bottom, completion: nil)
             self.view.addSubview(self.rideNowView!)
             self.isOnBooking = true
-            
+            self.rideNowView?.imageViewCard.image = paymentType.image
             self.rideNowView?.onClickRideNow = { service in
                 if service != nil {
-                    self.createRequest(for: service!, isScheduled: false, scheduleDate: nil, cardEntity: selectedPaymentDetail)
+                    self.createRequest(for: service!, isScheduled: false, scheduleDate: nil, cardEntity: selectedPaymentDetail, paymentType: paymentType)
                 }
             }
             self.rideNowView?.onClickSchedule = { service in
                 self.schedulePickerView(on: { (date) in
                     if service != nil {
-                        self.createRequest(for: service!, isScheduled: true, scheduleDate: date,cardEntity: selectedPaymentDetail)
+                        self.createRequest(for: service!, isScheduled: true, scheduleDate: date,cardEntity: selectedPaymentDetail, paymentType: paymentType)
                     }
                 })
             }
             self.rideNowView?.onClickChangePayment = {
                 if let vc = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.Ids.PaymentViewController) as? PaymentViewController{
                     vc.isChangingPayment = true
-                    vc.onclickPayment = { cardEntity in
+                    vc.onclickPayment = { (paymentTypeEntity , cardEntity) in
                         selectedPaymentDetail = cardEntity
-                        self.rideNowView?.imageViewCard.image = cardEntity == nil ? #imageLiteral(resourceName: "money_icon") : #imageLiteral(resourceName: "visa")
+                        paymentType = paymentTypeEntity
+                        self.rideNowView?.imageViewCard.image = paymentType.image
                         self.rideNowView?.labelCardNumber.text = cardEntity == nil ? Constants.string.cash.localize() : String.removeNil(cardEntity?.last_four)
                     }
                     let navigation = UINavigationController(rootViewController: vc)
@@ -239,25 +241,43 @@ extension HomeViewController {
     // MARK:- Show Invoice View
     
     func showInvoiceView(with request : Request) {
+        
         self.buttonSOS.isHidden = !(riderStatus == .pickedup)
         if self.invoiceView == nil, let invoice = Bundle.main.loadNibNamed(XIB.Names.InvoiceView, owner: self, options: [:])?.first as? InvoiceView {
             self.viewAddressOuter.isHidden = true
             self.viewLocationButtons.isHidden = true
             print("ViewAddressOuter ", #function)
-            invoice.frame = CGRect(origin: CGPoint(x: 0, y: self.view.frame.height-invoice.frame.height), size: CGSize(width: self.view.frame.width, height: invoice.frame.height))
+            invoice.frame = CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: self.view.frame.width, height: self.view.frame.height))
             invoiceView = invoice
-            self.invoiceView?.set(request: request)
             self.view.addSubview(invoiceView!)
             invoiceView?.show(with: .bottom, completion: nil)
-        }
-        self.invoiceView?.onClickPaynow = {
-            print("Called",#function)
-            self.loader.isHidden = false
-            let requestObj = Request()
-            requestObj.request_id = request.id
-            self.presenter?.post(api: .payNow, data: requestObj.toData())
             
+            self.invoiceView?.onClickPaynow = { tipsAmount in
+                print("Called",#function)
+                self.loader.isHidden = false
+                let requestObj = Request()
+                requestObj.request_id = request.id
+                if tipsAmount>0 {
+                 requestObj.tips = ((tipsAmount*100).rounded()/100)
+                }
+                self.presenter?.post(api: .payNow, data: requestObj.toData())
+            }
+            self.invoiceView?.onClickChangePayment = {
+                print("Called",#function)
+                if let vc = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.Ids.PaymentViewController) as? PaymentViewController{
+                    vc.isChangingPayment = true
+                    vc.isShowCash = false
+                    vc.onclickPayment = { (paymentTypeEntity , cardEntity) in
+                        if paymentTypeEntity == .CARD, cardEntity != nil {
+                            self.updatePaymentType(with: cardEntity!)
+                        }
+                    }
+                    let navigation = UINavigationController(rootViewController: vc)
+                    self.present(navigation, animated: true, completion: nil)
+                }
+            }
         }
+        self.invoiceView?.set(request: request)
         
     }
     

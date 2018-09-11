@@ -20,17 +20,81 @@ class InvoiceView: UIView {
     @IBOutlet private weak var labelBaseFare : UILabel!
     @IBOutlet private weak var labelDistanceFareString : UILabel!
     @IBOutlet private weak var labelDistanceFare : UILabel!
-    @IBOutlet private weak var labelDiscountString : UILabel!
-    @IBOutlet private weak var labelDiscount : UILabel!
+    @IBOutlet private weak var labelTimeFareString : UILabel!
+    @IBOutlet private weak var labelTimeFare : UILabel!
+    @IBOutlet private weak var labelTax : UILabel!
+    @IBOutlet private weak var labelTaxString : UILabel!
+    @IBOutlet private weak var labelTipsString : UILabel!
+    @IBOutlet private weak var buttonTips : UIButton!
     @IBOutlet private weak var labelTotalString : UILabel!
     @IBOutlet private weak var labelTotal : UILabel!
-    @IBOutlet private weak var imageViewPaymentType : UIImageView!
-    @IBOutlet private weak var labelPaymentType : UILabel!
+    @IBOutlet private weak var labelWalletString : UILabel!
+    @IBOutlet private weak var labelWallet : UILabel!
+    @IBOutlet private weak var labelDiscountString : UILabel!
+    @IBOutlet private weak var labelDiscount : UILabel!
+    @IBOutlet private weak var labelToPayString : UILabel!
+    @IBOutlet private weak var labelToPay : UILabel!
+    @IBOutlet private weak var labelPaymentType : Label!
+    @IBOutlet private weak var buttonChangePayment : UIButton!
     @IBOutlet private weak var buttonPayNow : UIButton!
     @IBOutlet private weak var labelTitle : UILabel!
     
-    var onClickPaynow : (()->Void)?
+    @IBOutlet private weak var viewDistanceFare : UIView!
+    @IBOutlet private weak var viewTimeFare : UIView!
+    @IBOutlet private weak var viewTax : UIView!
+    @IBOutlet private weak var viewWallet : UIView!
+    @IBOutlet private weak var viewDiscount : UIView!
+   // @IBOutlet private weak var viewToPay: UIView!
+    @IBOutlet private weak var viewTips : UIView!
+    
+    private var viewTipsXib : ViewTips?
+    private var paymentType : PaymentType = .NONE { // Check Payment Type
+        didSet {
+            if paymentType != oldValue {
+                let text = "\(Constants.string.payment.localize()):\(paymentType.rawValue.localize())"
+                self.labelPaymentType.text = text
+                self.labelPaymentType.attributeColor = .secondary
+                self.labelPaymentType.startLocation = ((text.count)-(paymentType.rawValue.localize().count))
+                self.labelPaymentType.length = paymentType.rawValue.localize().count
+                self.buttonChangePayment.isHidden = (isShowingRecipt)
+                self.viewTips.isHidden = !(self.paymentType == .CARD || isShowingRecipt)
+                self.viewTips.isUserInteractionEnabled = !isShowingRecipt // Disable userInteraction to Tips if from Past trips
+            }
+        }
+    }
+    
+    private var serviceCalculator : ServiceCalculator = .NONE {  // Hide Distance Fare and Time fare based on Service Calculator
+        didSet {
+            if self.serviceCalculator != oldValue {
+                self.viewDistanceFare.isHidden = ![ServiceCalculator.DISTANCE, .DISTANCEHOUR, .DISTANCEMIN].contains(serviceCalculator)
+                self.viewTimeFare.isHidden = [ServiceCalculator.MIN, .HOUR,.DISTANCEHOUR, .DISTANCEMIN].contains(serviceCalculator)
+            }
+        }
+    }
+    
+    private var isUsingWallet = false {
+        didSet {
+             self.viewWallet.isHidden = !isUsingWallet
+        }
+    }
+    
+    private var isDiscountApplied = false {
+        didSet {
+           self.viewDiscount.isHidden = !self.isDiscountApplied
+        }
+    }
+    
+    private var tipsAmount : Float = 0 {
+        didSet {
+            self.buttonTips.setTitle(tipsAmount>0 ? "\(String.removeNil(User.main.currency)) \(Formatter.shared.limit(string: "\(tipsAmount)", maximumDecimal: 2) ?? "0.00")" : Constants.string.addTips.localize(), for: .normal)
+        }
+    }
+    
+    var onClickPaynow : ((Float)->Void)?
+    var onClickChangePayment : (()->Void)?
     var isShowingRecipt = false
+    private var requestId = 0
+    private var total : Float = 0
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -44,6 +108,9 @@ extension InvoiceView {
     
     func intialLoads() {
         self.buttonPayNow.addTarget(self, action: #selector(self.buttonPaynowAction), for: .touchUpInside)
+        self.buttonChangePayment.addTarget(self, action: #selector(self.buttonChangePaymentAction), for: .touchUpInside)
+        self.buttonTips.addTarget(self, action: #selector(self.buttonTipsAction(sender:)), for: .touchUpInside)
+        self.tipsAmount = 0
         self.localize()
         self.setDesign()
     }
@@ -54,9 +121,10 @@ extension InvoiceView {
         
         Common.setFont(to: labelTitle, isTitle: true)
         Common.setFont(to: buttonPayNow, isTitle: true)
-        Common.setFont(to: labelPaymentType, isTitle: false, size: 12)
-        Common.setFont(to: labelTotal, isTitle: true, size: 18)
-        Common.setFont(to: labelTotalString, isTitle: true)
+        Common.setFont(to: labelTotal, isTitle: true, size: 20)
+        Common.setFont(to: labelTotalString, isTitle: true, size: 20)
+        Common.setFont(to: labelToPay, isTitle: true, size: 20)
+        Common.setFont(to: labelToPayString, isTitle: true, size: 20)
         Common.setFont(to: labelDiscount)
         Common.setFont(to: labelDiscountString)
         Common.setFont(to: labelBooking)
@@ -65,10 +133,19 @@ extension InvoiceView {
         Common.setFont(to: labelBaseFareString)
         Common.setFont(to: labelDistanceFare)
         Common.setFont(to: labelDistanceFareString)
+        Common.setFont(to: labelTimeFare)
+        Common.setFont(to: labelTimeFareString)
         Common.setFont(to: labelTimeTaken)
         Common.setFont(to: labelTimeTakenString)
         Common.setFont(to: labelDistanceTravelled)
         Common.setFont(to: labelDistanceTravelledString)
+        Common.setFont(to: labelTax)
+        Common.setFont(to: labelTaxString)
+        Common.setFont(to: labelTipsString)
+        Common.setFont(to: labelWallet)
+        Common.setFont(to: labelWalletString)
+        Common.setFont(to: labelPaymentType)
+        Common.setFont(to: buttonChangePayment)
     }
     
     
@@ -82,9 +159,17 @@ extension InvoiceView {
         self.labelTimeTakenString.text = Constants.string.timeTaken.localize()
         self.labelBaseFareString.text = Constants.string.baseFare.localize()
         self.labelDistanceFareString.text = Constants.string.distanceFare.localize()
+        self.labelTimeFareString.text = Constants.string.timeFare.localize()
+        self.labelTaxString.text = Constants.string.tax.localize()
+        self.labelTipsString.text = Constants.string.tips.localize()
+        self.buttonTips.setTitle(Constants.string.addTips.localize(), for: .normal)
+        self.labelTotalString.text = Constants.string.total.localize()
+        self.labelWalletString.text = Constants.string.walletDeduction.localize()
+        self.labelToPayString.text = Constants.string.toPay.localize()
         self.labelDiscountString.text = Constants.string.discount.localize()
         self.buttonPayNow.setTitle(Constants.string.paynow.localize(), for: .normal)
         self.labelTitle.text = Constants.string.invoice.localize()
+        
     }
     
     func set(request : Request) {
@@ -92,18 +177,99 @@ extension InvoiceView {
         self.labelBooking.text = request.booking_id
         self.labelDistanceTravelled.text = "\(Float.removeNil(request.payment?.distance)) \(distanceType.localize())"
         self.labelTimeTaken.text = "\(String.removeNil(request.travel_time)) \(Constants.string.mins.localize())"
-        self.labelBaseFare.text = "\(String.removeNil(User.main.currency)) \(Formatter.shared.limit(string: "\(Float.removeNil(request.payment?.fixed))", maximumDecimal: 2) ?? "0")"
-        self.labelDistanceFare.text = "\(String.removeNil(User.main.currency)) \(Formatter.shared.limit(string: "\(Float.removeNil(request.payment?.distance))", maximumDecimal: 2) ?? "0")"
-        self.labelDiscount.text = "\(String.removeNil(User.main.currency)) \(Formatter.shared.limit(string: "\(Float.removeNil(request.payment?.discount))", maximumDecimal: 2) ?? "0")" 
-        self.labelTotal.text = "\(String.removeNil(User.main.currency)) \(Formatter.shared.limit(string: "\(Float.removeNil(request.payment?.payable))", maximumDecimal: 2) ?? "0")"
-        self.labelPaymentType.text = request.payment_mode?.rawValue
-        self.imageViewPaymentType.image = request.payment_mode == .CASH ? #imageLiteral(resourceName: "money_icon") : #imageLiteral(resourceName: "visa")
+        self.paymentType = request.payment_mode ?? .NONE
+        self.serviceCalculator = request.service?.calculator ?? .NONE
+        self.isUsingWallet = (request.payment?.wallet ?? 0)>0
+        self.isDiscountApplied = (request.payment?.discount ?? 0)>0
+        // Set Amount to Label
+        func setAmount(to label : UILabel, with amount : Float?) {
+            label.text = "\(String.removeNil(User.main.currency)) \(Formatter.shared.limit(string: "\(Float.removeNil(amount))", maximumDecimal: 2) ?? "0.00")"
+        }
+        setAmount(to: self.labelBaseFare, with: request.payment?.fixed)
+        //self.labelBaseFare.text = "\(String.removeNil(User.main.currency)) \(Formatter.shared.limit(string: "\(Float.removeNil(request.payment?.fixed))", maximumDecimal: 2) ?? "0")"
+        
+        let distanceFare : Float = {
+            if[ServiceCalculator.DISTANCE, .DISTANCEMIN, .DISTANCEHOUR].contains(self.serviceCalculator) {
+                return request.payment?.distance ?? 0
+            }
+            return 0
+        }()
+        
+        let timeFare : Float = {
+            if [ServiceCalculator.MIN, .DISTANCEMIN].contains(self.serviceCalculator) {
+                return request.payment?.minute ?? 0
+            } else if [ServiceCalculator.HOUR, .DISTANCEHOUR].contains(self.serviceCalculator) {
+                return request.payment?.minute ?? 0
+            }
+            return 0
+        }()
+        setAmount(to: self.labelDistanceFare, with: distanceFare)
+        setAmount(to: self.labelTimeFare, with: timeFare)
+        setAmount(to: self.labelTax, with: request.payment?.tax)
+        setAmount(to: self.labelTotal, with: request.payment?.total)
+        setAmount(to: self.labelWallet, with: request.payment?.wallet)
+        setAmount(to: self.labelDiscount, with: request.payment?.discount)
+        setAmount(to: self.labelToPay, with: request.payment?.payable)
+        self.total = request.payment?.total ?? 0
+        
+        if Float.removeNil(request.payment?.tips) > 0 {
+            self.tipsAmount = Float.removeNil(request.payment?.tips)
+        }
+        
+        //self.labelDistanceFare.text = "\(String.removeNil(User.main.currency)) \(Formatter.shared.limit(string: "\(distanceFare)", maximumDecimal: 2) ?? "0.00")"
+        //self.labelTimeFare.text = "\(String.removeNil(User.main.currency)) \(Formatter.shared.limit(string: "\(Float.removeNil(timeFare))", maximumDecimal: 2) ?? "0.00")"
+       // self.labelTax.text = "\(String.removeNil(User.main.currency)) \(Formatter.shared.limit(string: "\(request.payment?.tax ?? 0)", maximumDecimal: 2) ?? "0.00")"
+//        let tipsAmount = "\(String.removeNil(User.main.currency)) \(Formatter.shared.limit(string: "\(0)", maximumDecimal: 2) ?? "0.00")"
+//        self.buttonTips.setTitle(tipsAmount, for: .normal)
+       // self.labelTotal.text = "\(String.removeNil(User.main.currency)) \(Formatter.shared.limit(string: "\(Float.removeNil(request.payment?.total))", maximumDecimal: 2) ?? "0.00")"
+       // self.labelWallet.text = "\(String.removeNil(User.main.currency)) \(Formatter.shared.limit(string: "\(Float.removeNil(request.payment?.wallet))", maximumDecimal: 2) ?? "0.00")"
+      //  self.labelDiscount.text = "\(String.removeNil(User.main.currency)) \(Formatter.shared.limit(string: "\(Float.removeNil(request.payment?.discount))", maximumDecimal: 2) ?? "0.00")"
         self.buttonPayNow.isHidden = (request.payment_mode == .CASH || isShowingRecipt)
     }
     
     @IBAction private func buttonPaynowAction() {
+        self.onClickPaynow?(self.tipsAmount)
+    }
+    
+    // MARK:- Change Payment Type
+    @IBAction private func buttonChangePaymentAction() {
+        self.onClickChangePayment?()
+    }
+    
+    
+    @IBAction private func buttonTipsAction(sender : UIButton){
         
-        self.onClickPaynow?()
+        if self.viewTipsXib == nil {
+            self.viewTipsXib = ViewTips(frame: .zero)
+            self.viewTipsXib?.alpha = 0
+            self.viewTipsXib?.backgroundColor = .white
+            self.viewTipsXib?.addBackgroundView(in: self, gesture: UITapGestureRecognizer(target: self, action: #selector(self.dismissTipsView)))
+            self.addSubview(self.viewTipsXib!)
+            UIView.animate(withDuration: 0.5) {
+                self.viewTipsXib?.alpha = 1
+            }
+            self.viewTipsXib?.translatesAutoresizingMaskIntoConstraints = false
+            self.viewTipsXib?.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0 ).isActive = true
+            self.viewTipsXib?.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0 ).isActive = true
+            self.viewTipsXib?.heightAnchor.constraint(equalToConstant: 150).isActive = true
+            self.viewTipsXib?.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8).isActive = true
+            self.viewTipsXib?.tipsAmount = tipsAmount
+            self.viewTipsXib?.onClickSubmit = { value in
+                self.tipsAmount = value
+                self.dismissTipsView()
+            }
+        }
+        self.viewTipsXib?.total = self.total
+    }
+    
+    @IBAction private func dismissTipsView() {
+        self.removeBackgroundView()
+        UIView.animate(withDuration: 0.5, animations: {
+            self.viewTipsXib?.alpha = 0
+        }) { (_) in
+            self.viewTipsXib?.removeFromSuperview()
+            self.viewTipsXib = nil
+        }
     }
     
 }

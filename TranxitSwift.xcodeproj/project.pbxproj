@@ -161,6 +161,8 @@
 		08E49CEB2142686800FCD042 /* RequestModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E49CEA2142686800FCD042 /* RequestModal.swift */; };
 		08E9675B20D2C19A0077DB4F /* RateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E9675A20D2C19A0077DB4F /* RateView.swift */; };
 		08E9675E20D2C1B80077DB4F /* RateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08E9675D20D2C1B80077DB4F /* RateView.xib */; };
+		08EA70CD2147D18E00079908 /* TipsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08EA70CC2147D18E00079908 /* TipsView.xib */; };
+		08EA70CF2147D1A200079908 /* ViewTips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EA70CE2147D1A200079908 /* ViewTips.swift */; };
 		08ECB216200DD0220008BF27 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08ECB215200DD0220008BF27 /* NavigationBar.swift */; };
 		08ED0E4E206CF12F0016732B /* PushKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08ED0E4D206CF12F0016732B /* PushKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		08F2B6B920123D2000CAB24E /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F2B6B820123D2000CAB24E /* Cache.swift */; };
@@ -412,6 +414,8 @@
 		08E49CEA2142686800FCD042 /* RequestModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestModal.swift; sourceTree = "<group>"; };
 		08E9675A20D2C19A0077DB4F /* RateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateView.swift; sourceTree = "<group>"; };
 		08E9675D20D2C1B80077DB4F /* RateView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RateView.xib; sourceTree = "<group>"; };
+		08EA70CC2147D18E00079908 /* TipsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TipsView.xib; sourceTree = "<group>"; };
+		08EA70CE2147D1A200079908 /* ViewTips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTips.swift; sourceTree = "<group>"; };
 		08ECB215200DD0220008BF27 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		08ED0E4D206CF12F0016732B /* PushKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PushKit.framework; path = System/Library/Frameworks/PushKit.framework; sourceTree = SDKROOT; };
 		08F2B6B820123D2000CAB24E /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
@@ -865,6 +869,7 @@
 		083617B420B6AE19009C9658 /* Invoice */ = {
 			isa = PBXGroup;
 			children = (
+				08EA70CB2147D17500079908 /* Tips */,
 				083617B520B6AE3A009C9658 /* InvoiceView.xib */,
 				083617B720B6AE49009C9658 /* InvoiceView.swift */,
 			);
@@ -1258,6 +1263,15 @@
 				08E9675D20D2C1B80077DB4F /* RateView.xib */,
 			);
 			name = "Rate View";
+			sourceTree = "<group>";
+		};
+		08EA70CB2147D17500079908 /* Tips */ = {
+			isa = PBXGroup;
+			children = (
+				08EA70CC2147D18E00079908 /* TipsView.xib */,
+				08EA70CE2147D1A200079908 /* ViewTips.swift */,
+			);
+			name = Tips;
 			sourceTree = "<group>";
 		};
 		08ED0E4A206CE1120016732B /* Media */ = {
@@ -1799,6 +1813,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08EA70CD2147D18E00079908 /* TipsView.xib in Resources */,
 				08FA708A20E3CAA3009B060A /* User.storyboard in Resources */,
 				080FB9D920BC452B008C23F5 /* AccountKitStrings.bundle in Resources */,
 				08001A0C203C241E0076D324 /* countryCodes.json in Resources */,
@@ -2160,6 +2175,7 @@
 				08A8821520C572510088BC5A /* Coupons.swift in Sources */,
 				082D1B7E2093159A0000B7C8 /* TextFieldEffects.swift in Sources */,
 				8833895D1FE8FC22006B6C05 /* Identifiers.swift in Sources */,
+				08EA70CF2147D1A200079908 /* ViewTips.swift in Sources */,
 				08BE879E20DA429800876C93 /* Home+CoreDataClass.swift in Sources */,
 				0809321620A0642700B88318 /* UserData.swift in Sources */,
 				081548FE20A1DF66004D0F7D /* LottieHelper.swift in Sources */,

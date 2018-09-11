@@ -139,7 +139,7 @@ extension WalletViewController {
         if let vc = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.Ids.PaymentViewController) as? PaymentViewController{
             vc.isChangingPayment = true
             vc.isShowCash = false
-            vc.onclickPayment = { cardEntity in
+            vc.onclickPayment = { type, cardEntity in
                 self.selectedCardEntity = cardEntity
                 self.setCardDetails()
                 vc.navigationController?.dismiss(animated: true, completion: nil)

@@ -21,6 +21,6 @@ class Service : JSONSerializable {
     var type : String?
     var capacity : Int?
     var pricing : EstimateFare?
-    var calculator : String?
+    var calculator : ServiceCalculator?
 }
 

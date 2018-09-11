@@ -26,7 +26,9 @@ struct Payment : JSONSerializable {
     let payable : Float?
     let provider_commission : Float?
     let provider_pay : Float?
-    
+    let minute : Float?
+    let hour : Float?
+    let tips : Float?
 }
 
 

@@ -34,6 +34,8 @@ enum Transition {
     
 }
 
+fileprivate var viewBackground : UIView? // Background view object
+
 extension UIView {
     
     
@@ -368,5 +370,31 @@ extension UIView {
         animation.toValue = NSValue(cgPoint: CGPoint(x: self.center.x + 10, y: self.center.y))
         self.layer.add(animation, forKey: "position")
     }
+    
+    // Add Background View for Nib files
+    func addBackgroundView(in bgView : UIView, gesture : UITapGestureRecognizer){
+        
+        let viewSubject = UIView(frame: UIScreen.main.bounds)
+        viewSubject.alpha = 0.0
+        viewSubject.backgroundColor = .black
+        bgView.addSubview(viewSubject)
+        UIView.animate(withDuration: 1) {
+            viewSubject.alpha = 0.4
+        }
+        viewBackground = viewSubject
+        viewBackground?.addGestureRecognizer(gesture)
+    }
+    
+    // Remove background View
+    
+    func removeBackgroundView() {
+        UIView.animate(withDuration: 0.5, animations: {
+            viewBackground?.alpha = 0
+        }) { (_) in
+            viewBackground?.removeFromSuperview()
+        }
+    }
+    
+    
     
 }

@@ -456,7 +456,7 @@ extension RideNowView : PostViewProtocol {
             self.getProviders(by: serviceTypeId)
             self.datasource[index].pricing = data
             DispatchQueue.main.async {
-                self.isRideEnabled = true
+                self.isRideEnabled = (User.main.isCardAllowed || User.main.isCashAllowed) // Allow only if any payment gateway is enabled
                 self.resetProgressView()
                 self.setSurgeViewAndWallet()
                 self.collectionViewService.reloadItems(at: [IndexPath(item: index, section: 0)])
