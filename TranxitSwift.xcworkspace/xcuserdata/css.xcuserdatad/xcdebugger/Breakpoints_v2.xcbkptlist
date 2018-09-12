@@ -86,8 +86,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "216"
             endingLineNumber = "216"
-            landmarkName = "showRideStatusView(with:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -257,28 +257,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TranxitSwift/ViewTips.swift"
-            timestampString = "558373809.724218"
+            timestampString = "558441250.881361"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "155"
             endingLineNumber = "155"
             landmarkName = "buttonSubmitAction(sender:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TranxitSwift/HomeViewController+Extension.swift"
-            timestampString = "558373809.724279"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "257"
-            endingLineNumber = "257"
-            landmarkName = "showInvoiceView(with:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
