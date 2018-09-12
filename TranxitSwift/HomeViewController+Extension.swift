@@ -30,32 +30,35 @@ extension HomeViewController {
             self.rideNowView?.show(with: .bottom, completion: nil)
             self.view.addSubview(self.rideNowView!)
             self.isOnBooking = true
-            self.rideNowView?.imageViewCard.image = paymentType.image
-            self.rideNowView?.onClickRideNow = { service in
-                if service != nil {
-                    self.createRequest(for: service!, isScheduled: false, scheduleDate: nil, cardEntity: selectedPaymentDetail, paymentType: paymentType)
-                }
+            self.rideNowView?.onClickProceed = { service in 
+                
             }
-            self.rideNowView?.onClickSchedule = { service in
-                self.schedulePickerView(on: { (date) in
-                    if service != nil {
-                        self.createRequest(for: service!, isScheduled: true, scheduleDate: date,cardEntity: selectedPaymentDetail, paymentType: paymentType)
-                    }
-                })
-            }
-            self.rideNowView?.onClickChangePayment = {
-                if let vc = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.Ids.PaymentViewController) as? PaymentViewController{
-                    vc.isChangingPayment = true
-                    vc.onclickPayment = { (paymentTypeEntity , cardEntity) in
-                        selectedPaymentDetail = cardEntity
-                        paymentType = paymentTypeEntity
-                        self.rideNowView?.imageViewCard.image = paymentType.image
-                        self.rideNowView?.labelCardNumber.text = cardEntity == nil ? Constants.string.cash.localize() : String.removeNil(cardEntity?.last_four)
-                    }
-                    let navigation = UINavigationController(rootViewController: vc)
-                    self.present(navigation, animated: true, completion: nil)
-                }
-            }
+            //self.rideNowView?.imageViewCard.image = paymentType.image
+//            self.rideNowView?.onClickRideNow = { service in
+//                if service != nil {
+//                    self.createRequest(for: service!, isScheduled: false, scheduleDate: nil, cardEntity: selectedPaymentDetail, paymentType: paymentType)
+//                }
+//            }
+//            self.rideNowView?.onClickSchedule = { service in
+//                self.schedulePickerView(on: { (date) in
+//                    if service != nil {
+//                        self.createRequest(for: service!, isScheduled: true, scheduleDate: date,cardEntity: selectedPaymentDetail, paymentType: paymentType)
+//                    }
+//                })
+//            }
+//            self.rideNowView?.onClickChangePayment = {
+//                if let vc = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.Ids.PaymentViewController) as? PaymentViewController{
+//                    vc.isChangingPayment = true
+//                    vc.onclickPayment = { (paymentTypeEntity , cardEntity) in
+//                        selectedPaymentDetail = cardEntity
+//                        paymentType = paymentTypeEntity
+//                        self.rideNowView?.imageViewCard.image = paymentType.image
+//                        self.rideNowView?.labelCardNumber.text = cardEntity == nil ? Constants.string.cash.localize() : String.removeNil(cardEntity?.last_four)
+//                    }
+//                    let navigation = UINavigationController(rootViewController: vc)
+//                    self.present(navigation, animated: true, completion: nil)
+//                }
+//            }
         }
         self.rideNowView?.set(source: source)
         self.rideNowView?.setAddress(source: sourceLocation.coordinate, destination: destinationLocation.coordinate)

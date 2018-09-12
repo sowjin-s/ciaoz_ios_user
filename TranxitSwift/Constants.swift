@@ -215,6 +215,7 @@ struct Constants {
     let walletDeduction = "Wallet Deduction"
     let toPay = "To Pay"
     let addTips = "Add Tips"
+    let proceed = "Proceed"
 }
 
 

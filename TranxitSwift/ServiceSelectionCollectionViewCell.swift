@@ -16,6 +16,7 @@ class ServiceSelectionCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var labelService : UILabel!
     @IBOutlet private weak var labelPricing : UILabel!
     @IBOutlet private weak var viewImageView : UIView!
+    @IBOutlet private weak var viewBackground : UIView!
     @IBOutlet private weak var labelETA : UILabel!
    // private var initialFrame = CGSize.init()
     private var service : Service?
@@ -23,13 +24,11 @@ class ServiceSelectionCollectionViewCell: UICollectionViewCell {
     override var isSelected: Bool {
         
         didSet{
-            
+            self.viewBackground.layer.masksToBounds = self.isSelected
             self.imageViewService.layer.masksToBounds = self.isSelected
             self.transform = isSelected ? .init(scaleX: 1.2, y: 1.2) : .identity
             self.labelService.textColor = !self.isSelected ? .black : .secondary
-            self.viewImageView.borderLineWidth = isSelected ? 2 : 0
-            self.labelETA.text = self.isSelected ? service?.pricing?.time : nil
-            self.viewImageView.backgroundColor = self.isSelected ? UIColor.secondary : .clear
+            self.viewBackground.borderLineWidth = self.isSelected ? 2 : 0
             self.setLabelPricing()
         }
     }
@@ -51,8 +50,14 @@ class ServiceSelectionCollectionViewCell: UICollectionViewCell {
     
     func setLabelPricing() {
         self.labelPricing.text =  isSelected ? {
-            if let estimateFare = self.service?.pricing?.estimated_fare, let distance = self.service?.pricing?.distance {
-                return "\(String.removeNil(User.main.currency))\(estimateFare)-\(distance) \(distanceType.localize())"
+            if let distance = self.service?.pricing?.distance {
+                return "\(distance) \(distanceType.localize())"
+            }
+            return nil
+            }() : nil
+        self.labelETA.text =  isSelected ? {
+            if let fare = self.service?.pricing?.estimated_fare {
+                return "\(String.removeNil(User.main.currency))\(fare)"
             }
             return nil
             }() : nil
@@ -68,6 +73,7 @@ class ServiceSelectionCollectionViewCell: UICollectionViewCell {
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         self.viewImageView.cornerRadius = self.viewImageView.frame.width/2
+        self.viewBackground.cornerRadius = self.viewBackground.frame.width/2
     }
     
 }
@@ -89,6 +95,7 @@ private extension ServiceSelectionCollectionViewCell {
         self.imageViewService.image = #imageLiteral(resourceName: "sedan-car-model")
         self.labelService.textColor = .black
         self.viewImageView.borderColor = .secondary
+        self.viewBackground.borderColor = .secondary
         self.setDesign()
        // self.initialFrame = self.imageViewService.frame.size
     }
