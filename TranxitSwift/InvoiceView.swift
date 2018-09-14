@@ -63,6 +63,12 @@ class InvoiceView: UIView {
         }
     }
     
+    private var couponId : String? = nil {
+        didSet {
+            
+        }
+    }
+    
     private var serviceCalculator : ServiceCalculator = .NONE {  // Hide Distance Fare and Time fare based on Service Calculator
         didSet {
             if self.serviceCalculator != oldValue {

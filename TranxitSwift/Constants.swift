@@ -190,7 +190,6 @@ struct Constants {
     let iNeedCab = "I need a cab @"
     let donotEditMessage = "(Please donot edit this SMS. Standard SMS charges of Rs.3 per SMS may apply)"
     let pleaseTryAgain = "Please try again"
-    
     let ADDCOUPON = "ADD COUPON"
     let addAmount = "Add Money"
     let ADDAMT = "ADD AMOUNT"
@@ -216,6 +215,7 @@ struct Constants {
     let toPay = "To Pay"
     let addTips = "Add Tips"
     let proceed = "Proceed"
+    let extimationFareNotAvailable = "Estimation fare not available"
 }
 
 

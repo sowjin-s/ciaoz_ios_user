@@ -66,7 +66,7 @@ class Label : UILabel {
     
     private func updateAttributedText(){
         
-        let mutableString = NSMutableAttributedString(string: String.removeNil(self.text), attributes: [NSAttributedStringKey.font: self.font ?? (UIFont(name: "Lato-Regular", size: 14.0))!])
+        let mutableString = NSMutableAttributedString(string: String.removeNil(self.text), attributes: [NSAttributedStringKey.font: self.font ?? (UIFont(name: "Lato-Regular", size: 16.0))!])
         
         var attributes = [NSAttributedStringKey : Any]()
         

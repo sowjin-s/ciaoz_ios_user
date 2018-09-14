@@ -31,7 +31,7 @@ class RideNowView: UIView {
     private var datasource = [Service]()
    // var onClickChangePayment : (()->Void)? // Onclick Change Pricing
   //  var onClickSchedule : ((Service?)->Void)? // Onclick schedule
-    var onClickProceed : ((Service?)->Void)? // Onlclick Ride Now
+    var onClickProceed : ((Service)->Void)? // Onlclick Ride Now
     private var rateView : RateView?
     private var selectedItem : Service?
     private var timer : Timer?
@@ -154,11 +154,10 @@ extension RideNowView {
     @IBAction private func buttonActions(sender : UIButton) {
         
         guard self.selectedItem?.pricing != nil else {
-            UIApplication.shared.keyWindow?.makeToast(Constants.string.pleaseTryAgain.localize())
+            UIApplication.shared.keyWindow?.makeToast(Constants.string.extimationFareNotAvailable.localize())
             return
         }
-       // self.selectedItem?.pricing?.useWallet = self.isWalletChecked.hashValue // send wallet status
-        self.onClickProceed?(self.selectedItem)
+        self.onClickProceed?(self.selectedItem!)
     }
     
 //    // MARK:- View Wallet

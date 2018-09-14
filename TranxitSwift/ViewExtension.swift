@@ -340,8 +340,6 @@ extension UIView {
             self.bringSubview(toFront: view)
             print(direction.type)
             pushTransition(CFTimeInterval(duration), view: view, withDirection: direction)
-            
-            
         }
         else {
             self.sendSubview(toBack: view)
