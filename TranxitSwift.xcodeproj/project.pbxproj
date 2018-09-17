@@ -91,6 +91,11 @@
 		084182B7200F689500527D0D /* PresenterProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084182B6200F689500527D0D /* PresenterProcessor.swift */; };
 		084577612073614300E890F5 /* AVPlayerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084577602073614300E890F5 /* AVPlayerHelper.swift */; };
 		084BB94B2094401D00EFD493 /* EmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084BB94A2094401D00EFD493 /* EmailViewController.swift */; };
+		085161CA214FA31B00EF474E /* CouponView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085161C9214FA31B00EF474E /* CouponView.swift */; };
+		085161CC214FA32A00EF474E /* CouponView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 085161CB214FA32A00EF474E /* CouponView.xib */; };
+		085161D2214FB32900EF474E /* CouponCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085161D0214FB32900EF474E /* CouponCollectionViewCell.swift */; };
+		085161D3214FB32900EF474E /* CouponCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 085161D1214FB32900EF474E /* CouponCollectionViewCell.xib */; };
+		085161D5214FE30E00EF474E /* PromocodeEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085161D4214FE30E00EF474E /* PromocodeEntity.swift */; };
 		085361A520B8308A001DD97C /* PassbookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085361A320B8308A001DD97C /* PassbookTableViewCell.swift */; };
 		085361A620B8308A001DD97C /* PassbookTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 085361A420B8308A001DD97C /* PassbookTableViewCell.xib */; };
 		085361A920B85CBF001DD97C /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085361A820B85CBF001DD97C /* SettingTableViewController.swift */; };
@@ -341,6 +346,11 @@
 		084182B6200F689500527D0D /* PresenterProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenterProcessor.swift; sourceTree = "<group>"; };
 		084577602073614300E890F5 /* AVPlayerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVPlayerHelper.swift; sourceTree = "<group>"; };
 		084BB94A2094401D00EFD493 /* EmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailViewController.swift; sourceTree = "<group>"; };
+		085161C9214FA31B00EF474E /* CouponView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponView.swift; sourceTree = "<group>"; };
+		085161CB214FA32A00EF474E /* CouponView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CouponView.xib; sourceTree = "<group>"; };
+		085161D0214FB32900EF474E /* CouponCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponCollectionViewCell.swift; sourceTree = "<group>"; };
+		085161D1214FB32900EF474E /* CouponCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CouponCollectionViewCell.xib; sourceTree = "<group>"; };
+		085161D4214FE30E00EF474E /* PromocodeEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromocodeEntity.swift; sourceTree = "<group>"; };
 		085361A320B8308A001DD97C /* PassbookTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassbookTableViewCell.swift; sourceTree = "<group>"; };
 		085361A420B8308A001DD97C /* PassbookTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PassbookTableViewCell.xib; sourceTree = "<group>"; };
 		085361A820B85CBF001DD97C /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
@@ -631,6 +641,7 @@
 				08A39D9D20B5BB5900314935 /* Request Selection */,
 				08E9675C20D2C19F0077DB4F /* Rate View */,
 				08FA708620E3C9B3009B060A /* RideNow */,
+				085161CD214FA32F00EF474E /* Coupon */,
 			);
 			name = HomePage;
 			sourceTree = "<group>";
@@ -1029,6 +1040,17 @@
 				084BB94A2094401D00EFD493 /* EmailViewController.swift */,
 			);
 			name = Email;
+			sourceTree = "<group>";
+		};
+		085161CD214FA32F00EF474E /* Coupon */ = {
+			isa = PBXGroup;
+			children = (
+				085161C9214FA31B00EF474E /* CouponView.swift */,
+				085161CB214FA32A00EF474E /* CouponView.xib */,
+				085161D0214FB32900EF474E /* CouponCollectionViewCell.swift */,
+				085161D1214FB32900EF474E /* CouponCollectionViewCell.xib */,
+			);
+			name = Coupon;
 			sourceTree = "<group>";
 		};
 		0853619420B7D579001DD97C /* Coupon */ = {
@@ -1567,6 +1589,7 @@
 				085AC38A21134AD7003AA0AE /* WalletEntity.swift */,
 				08D7CCBC213976DC0055C95D /* ChatPush.swift */,
 				08E49CEA2142686800FCD042 /* RequestModal.swift */,
+				085161D4214FE30E00EF474E /* PromocodeEntity.swift */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -1680,7 +1703,7 @@
 				08224B542099CCB200EA1CB4 /* ShellScript */,
 				087500E420D7D27700CFA858 /* Embed App Extensions */,
 				625F8E2AB3F10D84E4EE757F /* [CP] Embed Pods Frameworks */,
-				80188BBDD20EEE53CC4DA11E /* [CP] Copy Pods Resources */,
+				60E75DF435EBF302A198A58A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1829,7 +1852,9 @@
 				08FA708320E3C96F009B060A /* RideNowView.xib in Resources */,
 				08585F4B2115E94B009DE743 /* ripple.json in Resources */,
 				08FA70A120E3CC1F009B060A /* Localizable.strings in Resources */,
+				085161D3214FB32900EF474E /* CouponCollectionViewCell.xib in Resources */,
 				0811B17620E7B2AD00B78323 /* ImageCellSender.xib in Resources */,
+				085161CC214FA32A00EF474E /* CouponView.xib in Resources */,
 				0823428A20AD775A0055DDF8 /* LoaderView.xib in Resources */,
 				0811B17720E7B2AD00B78323 /* ImageCellReciever.xib in Resources */,
 				082F77CD20A5A13900D6474B /* ServiceSelectionView.xib in Resources */,
@@ -1885,6 +1910,30 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "";
+		};
+		60E75DF435EBF302A198A58A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-User/Pods-User-resources.sh",
+				"${PODS_ROOT}/GoogleAuthUtilities/Frameworks/frameworks/GoogleAuthUtilities.framework/Resources/GTMOAuth2ViewTouch.xib",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GTMOAuth2ViewTouch.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-User/Pods-User-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		625F8E2AB3F10D84E4EE757F /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1966,30 +2015,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		80188BBDD20EEE53CC4DA11E /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-User/Pods-User-resources.sh",
-				"${PODS_ROOT}/GoogleAuthUtilities/Frameworks/frameworks/GoogleAuthUtilities.framework/Resources/GTMOAuth2ViewTouch.xib",
-				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
-				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
-				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GTMOAuth2ViewTouch.nib",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-User/Pods-User-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BC89230580C9BB45E06816C5 /* [CP] Check Pods Manifest.lock */ = {
@@ -2108,6 +2133,7 @@
 				089B4F7B20C116D600DDEAF3 /* Payment.swift in Sources */,
 				0809321820A067EF00B88318 /* LoginRequest.swift in Sources */,
 				08B73D0420947C5C00B60F74 /* PasswordViewController.swift in Sources */,
+				085161D2214FB32900EF474E /* CouponCollectionViewCell.swift in Sources */,
 				081E9CF520BFCC0E004C6884 /* Service.swift in Sources */,
 				08CEB1372105AF2F00AC217A /* AddCardViewController.swift in Sources */,
 				0811B16A20E7AF6600B78323 /* ChatResponse.swift in Sources */,
@@ -2122,6 +2148,7 @@
 				8894801F1FECE2CA006AF5A9 /* Label.swift in Sources */,
 				082C441F20E7913A00A7C892 /* FloatyItem.swift in Sources */,
 				082F77D120A5AA2200D6474B /* ServiceSelectionCollectionViewCell.swift in Sources */,
+				085161D5214FE30E00EF474E /* PromocodeEntity.swift in Sources */,
 				08A8823620C6DEBE0088BC5A /* KeyboardHelper.swift in Sources */,
 				0811B17A20E7B2AD00B78323 /* ChatCell.swift in Sources */,
 				083A59B120A4351D00D64574 /* LocationHeaderTableViewCell.swift in Sources */,
@@ -2184,6 +2211,7 @@
 				085C6FF420C194B000C13A74 /* Rate.swift in Sources */,
 				08DF19C82006221B00B83AE3 /* AppData.swift in Sources */,
 				0805BDC3209C54F900ACDC38 /* ProfileViewController.swift in Sources */,
+				085161CA214FA31B00EF474E /* CouponView.swift in Sources */,
 				0823428820AD774C0055DDF8 /* LoaderView.swift in Sources */,
 				08B7DC75209A14E0002CF17A /* SideBarTableViewController.swift in Sources */,
 				082C442120E7913A00A7C892 /* Floaty.swift in Sources */,

@@ -62,6 +62,8 @@ struct XIB {
     let RideNowView = "RideNowView"
     let CancelListTableViewCell = "CancelListTableViewCell"
     let ReasonView = "ReasonView"
+    let CouponCollectionViewCell = "CouponCollectionViewCell"
+    let CouponView = "CouponView"
 }
 
 

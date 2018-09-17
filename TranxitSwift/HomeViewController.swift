@@ -106,7 +106,8 @@
         var currentLocation = Bind<LocationCoordinate>(defaultMapLocation)
         
         //var serviceSelectionView : ServiceSelectionView?
-        // var rideSelectionView : RequestSelectionView?
+        var estimationFareView : RequestSelectionView?
+        var couponView : CouponView?
         var locationSelectionView : LocationSelectionView?
         var requestLoaderView : LoaderView?
         var rideStatusView : RideStatusView? {
@@ -527,7 +528,7 @@ extension HomeViewController {
             dateComponents.minute = 5
             dateComponents.day = nil
             let minimumDate = Calendar.current.date(byAdding: dateComponents, to: now)
-            let datePicker = DateTimePicker.show(selected: nil, minimumDate: minimumDate, maximumDate: maximumDate, timeInterval: .default)
+            let datePicker = DateTimePicker.create(minimumDate: minimumDate, maximumDate: maximumDate)
             datePicker.includeMonth = true
             datePicker.is12HourFormat = true
             datePicker.dateFormat = DateFormat.list.hhmmddMMMyyyy
@@ -537,6 +538,7 @@ extension HomeViewController {
                 completion(date)
                 print(date)
             }
+            datePicker.show()
         }
     
     
@@ -738,14 +740,13 @@ extension HomeViewController {
         
         func createRequest(for service : Service, isScheduled : Bool, scheduleDate : Date?, cardEntity entity : CardEntity?, paymentType : PaymentType) {
             // Validate whether the card entity has valid data
-            if paymentType == .CARD && entity != nil {
+            if paymentType == .CARD && entity == nil {
                 UIApplication.shared.keyWindow?.make(toast: Constants.string.selectCardToContinue.localize())
                 return
             }
             
             self.showLoaderView()
             DispatchQueue.global(qos: .background).async {
-                
                 let request = Request()
                 request.s_address = self.sourceLocationDetail?.value?.address
                 request.s_latitude = self.sourceLocationDetail?.value?.coordinate.latitude
@@ -758,14 +759,15 @@ extension HomeViewController {
                 request.distance = "\(service.pricing?.distance ?? 0)"
                 request.use_wallet = service.pricing?.useWallet
                 request.card_id = entity?.card_id
-                
                 if isScheduled {
                     if let dateString = Formatter.shared.getString(from: scheduleDate, format: DateFormat.list.ddMMyyyyhhmma) {
-                        
                         let dateArray = dateString.components(separatedBy: " ")
                         request.schedule_date = dateArray.first
                         request.schedule_time = dateArray.last
                     }
+                }
+                if let couponId = service.promocode?.id {
+                    request.promocode_id = couponId
                 }
                 self.presenter?.post(api: .sendRequest, data: request.toData())
                 

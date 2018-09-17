@@ -20,8 +20,8 @@ extension HomeViewController {
     
     func showRideNowView(with source : [Service]) {
         guard let sourceLocation = self.sourceLocationDetail?.value, let destinationLocation = self.destinationLocationDetail else { return }
-        var selectedPaymentDetail : CardEntity?
-        var paymentType : PaymentType = (User.main.isCashAllowed ? .CASH : User.main.isCardAllowed ? .CARD : .NONE)
+//        var selectedPaymentDetail : CardEntity?
+//        var paymentType : PaymentType = (User.main.isCashAllowed ? .CASH : User.main.isCardAllowed ? .CARD : .NONE)
         if self.rideNowView == nil {
             
             self.rideNowView = Bundle.main.loadNibNamed(XIB.Names.RideNowView, owner: self, options: [:])?.first as? RideNowView
@@ -31,7 +31,7 @@ extension HomeViewController {
             self.view.addSubview(self.rideNowView!)
             self.isOnBooking = true
             self.rideNowView?.onClickProceed = { service in 
-                
+                self.showEstimationView(with: service)
             }
             //self.rideNowView?.imageViewCard.image = paymentType.image
 //            self.rideNowView?.onClickRideNow = { service in
@@ -136,12 +136,13 @@ extension HomeViewController {
             self.invoiceView?.frame.origin.y = (self.view.frame.height-(isHide ? 0 : self.invoiceView?.frame.height ?? 0))
             //self.ratingView?.frame.origin.y = (self.view.frame.height-(isHide ? 0 : self.ratingView?.frame.height ?? 0))
             self.rideNowView?.frame.origin.y = (self.view.frame.height-(isHide ? 0 : self.rideNowView?.frame.height ?? 0))
+            self.estimationFareView?.frame.origin.y = (self.view.frame.height-(isHide ? 0 : self.estimationFareView?.frame.height ?? 0))
+            self.couponView?.frame.origin.y = (self.view.frame.height-(isHide ? 0 : self.couponView?.frame.height ?? 0))
             
-            
-            // self.serviceSelectionView?.alpha = isHide ? 0 : 1
+            self.couponView?.alpha = isHide ? 0 : 1
             self.viewAddressOuter.alpha = isHide ? 0 : 1
             self.viewLocationButtons.alpha = isHide ? 0 : 1
-            // self.rideSelectionView?.alpha = isHide ? 0 : 1
+            self.estimationFareView?.alpha = isHide ? 0 : 1
             self.rideStatusView?.alpha = isHide ? 0 : 1
             self.invoiceView?.alpha = isHide ? 0 : 1
             self.ratingView?.alpha = isHide ? 0 : 1
@@ -153,49 +154,92 @@ extension HomeViewController {
     }
     
     
-    /*   // MARK:- Show Ride Now view
-     s
-     func showRideNowView(with fare : EstimateFare){
+      // MARK:- Show Ride Now view
      
-     self.removeServiceView()
-     if self.rideSelectionView == nil {
-     print("ViewAddressOuter ", #function)
-     self.loader.isHidden = true
-     self.rideSelectionView = Bundle.main.loadNibNamed(XIB.Names.RequestSelectionView, owner: self, options: [:])?.first as? RequestSelectionView
-     self.rideSelectionView?.frame = CGRect(x: 0, y: self.view.frame.height-self.rideSelectionView!.bounds.height, width: self.view.frame.width, height: self.rideSelectionView!.frame.height)
-     self.rideSelectionView?.show(with: .bottom, completion: nil)
-     self.rideSelectionView?.rideNowAction = { estimateFare in
-     if estimateFare != nil {
-     self.createRequest(for: estimateFare!, isScheduled: false, scheduleDate: nil)
-     }
-     }
-     self.rideSelectionView?.scheduleAction = { estimateFare in
-     self.schedulePickerView(on: { (date) in
-     print(date)
-     if estimateFare != nil {
-     self.createRequest(for: estimateFare!, isScheduled: true, scheduleDate: date)
-     }
-     })
-     }
+     func showEstimationView(with service : Service){
+        
+     self.removeRideNow()
      self.isOnBooking = true
-     self.view.addSubview(self.rideSelectionView!)
+     if self.estimationFareView == nil {
+        print("ViewAddressOuter ", #function)
+        var selectedPaymentDetail : CardEntity?
+        var paymentType : PaymentType = (User.main.isCashAllowed ? .CASH : User.main.isCardAllowed ? .CARD : .NONE)
+        self.loader.isHidden = true
+        let isWalletAvailable = User.main.wallet_balance != 0
+        let heightPadding : CGFloat = (isWalletAvailable ? 0 : 40)
+        self.estimationFareView = Bundle.main.loadNibNamed(XIB.Names.RequestSelectionView, owner: self, options: [:])?.first as? RequestSelectionView
+        self.estimationFareView?.frame = CGRect(x: 0, y: self.view.frame.height-(self.estimationFareView!.bounds.height-heightPadding), width: self.view.frame.width, height: self.estimationFareView!.frame.height-heightPadding)
+        self.estimationFareView?.show(with: .bottom, completion: nil)
+        self.view.addSubview(self.estimationFareView!)
+        self.estimationFareView?.scheduleAction = { service in
+            self.schedulePickerView(on: { (date) in
+                self.createRequest(for: service, isScheduled: true, scheduleDate: date,cardEntity: selectedPaymentDetail, paymentType: paymentType)
+            })
+        }
+        self.estimationFareView?.rideNowAction = { [weak self] service in
+                self?.createRequest(for: service, isScheduled: false, scheduleDate: nil, cardEntity: selectedPaymentDetail, paymentType: paymentType)
+        }
+        self.estimationFareView?.paymentChangeClick = { [weak self] in
+            if let vc = self?.storyboard?.instantiateViewController(withIdentifier: Storyboard.Ids.PaymentViewController) as? PaymentViewController{
+                vc.isChangingPayment = true
+                vc.onclickPayment = { (paymentTypeEntity , cardEntity) in
+                    selectedPaymentDetail = cardEntity
+                    paymentType = paymentTypeEntity
+                    self?.estimationFareView?.paymentType = paymentType
+                }
+                let navigation = UINavigationController(rootViewController: vc)
+                self?.present(navigation, animated: true, completion: nil)
+            }
+        }
+        self.estimationFareView?.onclickCoupon = { [weak self] (availableCoupons, completion) in
+            self?.showCouponView(coupons: availableCoupons, completion: { (couponEntity) in
+                completion?(couponEntity) // sending back the couponEntity 
+                self?.removeCouponView()
+            })
+        }
      }
-     
-     self.rideSelectionView?.setValues(values: fare)
-     
-     }
-     
-     
+     self.estimationFareView?.setValues(values: service)
+  }
      // MARK:- Remove RideNow View
      
-     func removeRideNowView(){
+    func removeEstimationFareView(){
      
-     self.rideSelectionView?.dismissView(onCompletion: {
-     self.rideSelectionView = nil
-     self.isOnBooking = false
-     self.loader.isHidden = true
-     })
-     } */
+     self.estimationFareView?.dismissView(onCompletion: {
+            self.estimationFareView = nil
+            self.isOnBooking = false
+            self.loader.isHidden = true
+            self.isOnBooking = false
+        })
+     }
+    
+    
+    // MARK:- Show Coupon View
+    
+    func showCouponView(coupons: [PromocodeEntity], completion : @escaping ((PromocodeEntity)->Void)) {
+        
+        if self.couponView == nil, let couponViewObject = Bundle.main.loadNibNamed(XIB.Names.CouponView, owner: self, options: [:])?.first as? CouponView {
+            couponViewObject.frame = CGRect(origin: CGPoint(x: 0, y: self.view.frame.height-couponViewObject.frame.height), size: CGSize(width: self.view.frame.width, height: couponViewObject.frame.height))
+            couponView = couponViewObject
+            self.view.addBackgroundView(in: self.view, gesture: UITapGestureRecognizer(target: self, action: #selector(self.removeCouponView)))
+            self.couponView?.applyCouponAction = { coupon in
+                completion(coupon)
+            }
+            couponView?.show(with: .bottom, completion: nil)
+            self.view.addSubview(couponView!)
+            self.couponView?.set(values: coupons)
+        }
+        
+    }
+    
+    // MARK:- Remove CouponView
+    
+    @IBAction private func removeCouponView() {
+        self.view.removeBackgroundView()
+        self.couponView?.dismissView(onCompletion: {
+            self.couponView = nil
+        })
+    }
+    
     
     
     // MARK:- Show RideStatus View
@@ -534,6 +578,7 @@ extension HomeViewController {
         if ![RideStatus.searching].contains(status) && status != .none {
             self.removeLoaderView()
             self.removeRideNow()
+            self.removeEstimationFareView()
         }
         if ![RideStatus.started, .accepted, .arrived, .pickedup].contains(status) {
             self.removeRideStatusView()
@@ -600,6 +645,7 @@ extension HomeViewController {
             self.removeLoaderView()
             self.clearMapview()
             self.removeRideNow()
+            self.removeEstimationFareView()
             self.isOnBooking = false
         }
         

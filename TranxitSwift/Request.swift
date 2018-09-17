@@ -47,6 +47,7 @@ class Request : JSONSerializable {
     var longitude : Double?
     var address : String?
     var tips : Float?
+    var promocode_id : Int?
     
   /*
     enum CodingKeys: String, CodingKey {

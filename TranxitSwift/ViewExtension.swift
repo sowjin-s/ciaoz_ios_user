@@ -393,6 +393,16 @@ extension UIView {
         }
     }
     
+    // MARK:- Add Dashed Line
+    func addDashedLine() {
+        let lineBorder = CAShapeLayer()
+        lineBorder.strokeColor = UIColor.black.cgColor
+        lineBorder.lineDashPattern = [4,4]
+        lineBorder.frame = self.bounds
+        lineBorder.fillColor = nil
+        lineBorder.path = UIBezierPath(rect: self.bounds).cgPath
+        self.layer.addSublayer(lineBorder)
+    }
     
     
 }

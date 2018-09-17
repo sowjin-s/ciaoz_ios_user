@@ -78,6 +78,9 @@ extension Interactor : PostInteractorOutputProtocol {
             
         case .addMoney:
             self.presenter?.sendWalletEntity(api: api, data: response)
+        
+        case .promocodes:
+            self.presenter?.sendPromocodeList(api: api, data: response)
             
         default :
             break

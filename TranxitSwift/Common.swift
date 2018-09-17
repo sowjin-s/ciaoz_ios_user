@@ -104,6 +104,7 @@ class Common {
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = view
             mail.setToRecipients(mailId)
+            mail.setSubject(helpSubject.localize())
             view.present(mail, animated: true)
         } else {
             UIScreen.main.focusedView?.make(toast: Constants.string.couldnotOpenEmailAttheMoment.localize())

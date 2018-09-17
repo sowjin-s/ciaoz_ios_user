@@ -21,6 +21,7 @@ target 'User' do
     pod 'IHKeyboardAvoiding'
     pod 'Fabric', '~> 1.7.7'
     pod 'Crashlytics', '~> 3.10.2'
+    pod 'FirebaseAnalytics', '~> 4.0.0'
     pod 'Firebase/Core'
     pod 'Firebase/Database'
     pod 'Firebase/Storage'
@@ -39,6 +40,13 @@ target 'User' do
   target 'UserUITests' do
     inherit! :search_paths
     # Pods for testing
+  end
+  
+  post_install do |installer|
+      installer.pods_project.build_configurations.each do |config|
+          config.build_settings.delete('CODE_SIGNING_ALLOWED')
+          config.build_settings.delete('CODE_SIGNING_REQUIRED')
+      end
   end
 
 end

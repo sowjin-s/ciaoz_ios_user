@@ -216,6 +216,9 @@ struct Constants {
     let addTips = "Add Tips"
     let proceed = "Proceed"
     let extimationFareNotAvailable = "Estimation fare not available"
+    let viewCoupons = "View Coupons"
+    let useThis = "Use This"
+    let validity = "Validity"
 }
 
 
@@ -257,11 +260,12 @@ struct DateFormat {
     
     static let list = DateFormat()
     let yyyy_mm_dd_HH_MM_ss = "yyyy-MM-dd HH:mm:ss"
-    let MMM_dd_yyyy_hh_mm_ss_a = "MMM dd, yyyy hh:mm:ss a"
+    let MMM_dd_yyyy_hh_mm_ss_a = "MMM dd, yyyy hh:mm:ss a" 
     let hhmmddMMMyyyy = "hh:mm a - dd:MMM:yyyy"
     let ddMMyyyyhhmma = "dd-MM-yyyy hh:mma"
     let ddMMMyyyy = "dd MMM yyyy"
     let hh_mm_a = "hh : mm a"
+    let dd_MM_yyyy = "dd/MM/yyyy"
 }
 
 

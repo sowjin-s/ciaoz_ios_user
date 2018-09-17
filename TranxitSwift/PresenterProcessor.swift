@@ -82,6 +82,12 @@ class PresenterProcessor {
         return data.getDecodedObject(from: WalletEntity.self)
     }
     
+    // MARK:- Send Promocodes
+    
+    func getPromocodes(data : Data)->[PromocodeEntity] {
+        return data.getDecodedObject(from: PromoCodeList.self)?.promo_list ?? []
+    }
+    
     
 }
 

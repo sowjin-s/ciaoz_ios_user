@@ -20,13 +20,14 @@ import UIKit
     private static var lastNotification: Foundation.Notification?
     private static var updatedConstraints = [NSLayoutConstraint]()
     private static var updatedConstraintConstants = [CGFloat]()
-    private(set) static var isKeyboardVisible = false
     private static var avoidingViewUsesAutoLayout = false
     private static var triggerViews = [UIView]()
+    private static var showingAnimationCount = 0
     
+    public private(set) static var isKeyboardVisible = false
     public static var buffer: CGFloat = 0.0
     public static var paddingForCurrentAvoidingView: CGFloat = 0.0
-    public static var padding: CGFloat = 0.0 {
+    @objc public static var padding: CGFloat = 0.0 {
         willSet {
             if self.paddingForCurrentAvoidingView == newValue {
                 // if paddingCurrent has been set explicitly, dont reset it
@@ -35,7 +36,7 @@ import UIKit
         }
     }
     public static var keyboardAvoidingMode = KeyboardAvoidingMode.minimum
-    public static var avoidingBlock: ((Bool, CGFloat, CGFloat, UIViewAnimationOptions)->Void)? {
+    @objc public static var avoidingBlock: ((Bool, CGFloat, CGFloat, UIViewAnimationOptions)->Void)? {
         willSet {
             self.initialise()
         }
@@ -46,7 +47,7 @@ import UIKit
         }
     }
     private static var _avoidingView: UIView?
-    public static var avoidingView: UIView? {
+    @objc public static var avoidingView: UIView? {
         get {
             return _avoidingView
         }
@@ -68,8 +69,10 @@ import UIKit
         
         // hack for bug in iOS 11.2
         let keyboardFrameEnd = notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! CGRect
-        keyboardFrameBegin = CGRect(x: keyboardFrameBegin.origin.x, y: keyboardFrameBegin.origin.y, width: keyboardFrameBegin.size.width, height: keyboardFrameEnd.size.height)
-
+        if keyboardFrameEnd.size.height > keyboardFrameBegin.size.height {
+            keyboardFrameBegin = CGRect(x: keyboardFrameBegin.origin.x, y: keyboardFrameBegin.origin.y, width: keyboardFrameBegin.size.width, height: keyboardFrameEnd.size.height)
+        }
+        
         var keyboardHeightDiff:CGFloat = 0.0
         if keyboardFrameBegin.size.height > 0 {
             keyboardHeightDiff = keyboardFrameBegin.size.height - keyboardFrame.size.height
@@ -100,6 +103,7 @@ import UIKit
             animationDuration = 0.1
         }
         if isKeyBoardShowing {
+            self.showingAnimationCount = 0
             for triggerView in self.triggerViews {
                 
                 //showing and docked
@@ -123,8 +127,8 @@ import UIKit
                         break
                     }
                 }
+                var displacement = (isPortrait ? -keyboardFrame.size.height : -keyboardFrame.size.width)
                 if diff < self.buffer || keyboardHeightDiff != 0 {
-                    var displacement = (isPortrait ? -keyboardFrame.size.height : -keyboardFrame.size.width)
                     var delay: CGFloat = 0.0
                     switch self.keyboardAvoidingMode {
                     case .maximum:
@@ -173,6 +177,7 @@ import UIKit
                             }
                             self.avoidingView!.superview!.setNeedsUpdateConstraints()
                         }
+                        self.showingAnimationCount += 1
                         
                         UIView.animate(withDuration: TimeInterval(animationDuration), delay: TimeInterval(delay), options: UIViewAnimationOptions(rawValue: UInt(animationOptions)), animations: {() -> Void in
                             if self.avoidingViewUsesAutoLayout {
@@ -184,11 +189,13 @@ import UIKit
                                 transform = transform.translatedBy(x: 0, y: displacement)
                                 self.avoidingView!.transform = transform
                             }
-                        }, completion: { _ in })
+                        }, completion: { _ in
+                            self.showingAnimationCount -= 1
+                        })
                     }
                 }
                 if self.avoidingBlock != nil {
-                    self.avoidingBlock!(isKeyBoardShowing, animationDuration, keyboardFrame.size.height, UIViewAnimationOptions(rawValue: UInt(animationOptions)))
+                    self.avoidingBlock!(isKeyBoardShowing, animationDuration, displacement, UIViewAnimationOptions(rawValue: UInt(animationOptions)))
                 }
             }
             
@@ -223,8 +230,10 @@ import UIKit
                         self.avoidingView!.transform = CGAffineTransform.identity
                     }
                 }, completion: {(_ finished: Bool) -> Void in
-                    self.updatedConstraints.removeAll()
-                    self.updatedConstraintConstants.removeAll()
+                    if self.showingAnimationCount <= 0 {
+                        self.updatedConstraints.removeAll()
+                        self.updatedConstraintConstants.removeAll()
+                    }
                 })
             }
             if self.avoidingBlock != nil {
@@ -235,7 +244,7 @@ import UIKit
     }
     
     // The triggerView is required if the avoidingView isn't nil
-    public class func setAvoidingView(_ avoidingView: UIView?, withTriggerView triggerView: UIView) {
+    @objc public class func setAvoidingView(_ avoidingView: UIView?, withTriggerView triggerView: UIView) {
         self.setAvoidingView(avoidingView, withOptionalTriggerView: triggerView)
     }
     
@@ -263,7 +272,7 @@ import UIKit
     }
     
     public class func removeTriggerView(_ triggerView: UIView) {
-        if let index = triggerViews.index(of: triggerView) as Int! {
+        if let index = triggerViews.index(of: triggerView) {
             self.triggerViews.remove(at: index)
         }
     }
