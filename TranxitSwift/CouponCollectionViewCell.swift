@@ -16,8 +16,15 @@ class CouponCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var buttonApply : UIButton!
 
     var onClickApply : ((PromocodeEntity)->Void)?
-    
     private var values : PromocodeEntity?
+    
+    override var isSelected: Bool {
+        didSet{
+            self.buttonApply.setTitle({
+                return (isSelected ? Constants.string.remove : Constants.string.apply).localize().uppercased()
+            }(), for: .normal)
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,7 +41,6 @@ extension CouponCollectionViewCell {
     }
     
     private func localize() {
-        self.buttonApply.setTitle(Constants.string.useThis.localize().uppercased(), for: .normal)
         self.buttonApply.addTarget(self, action: #selector(self.buttonApplyAction), for: .touchUpInside)
         self.labelCouponCode.textColor = .black
         self.labelValidity.textColor = .lightGray

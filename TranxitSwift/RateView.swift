@@ -70,7 +70,7 @@ extension RateView {
         
         self.labelTitle.text = Constants.string.rateCard.localize()
         self.labelBaseFareString.text = Constants.string.baseFare.localize()
-        self.labelFareString.text = Constants.string.fare.localize()+"/"+distanceType.localize()
+        self.labelFareString.text = Constants.string.fare.localize()+"/"+String.removeNil(User.main.measurement)
         self.labelFareTypeString.text = Constants.string.fareType.localize()
         self.labelCapacityString.text = Constants.string.capacity.localize()
         self.buttonDone.setTitle(Constants.string.Done.localize(), for: .normal)
@@ -88,8 +88,8 @@ extension RateView {
                 }
             }
         }
-        self.labelBaseFare.text = String.removeNil(User.main.currency)+"\(Formatter.shared.limit(string: "\(values?.pricing?.base_price ?? 0)", maximumDecimal: 2) ?? "0")"
-        self.labelFare.text = String.removeNil(User.main.currency)+"\(Formatter.shared.limit(string: "\(values?.pricing?.estimated_fare ?? 0)", maximumDecimal: 2) ?? "0")" //"\(values?.pricing?.estimated_fare ?? 0)"
+        self.labelBaseFare.text = String.removeNil(User.main.currency)+"\(Formatter.shared.limit(string: "\(values?.pricing?.base_price ?? 0)", maximumDecimal: 2))"
+        self.labelFare.text = String.removeNil(User.main.currency)+"\(Formatter.shared.limit(string: "\(values?.pricing?.estimated_fare ?? 0)", maximumDecimal: 2))" //"\(values?.pricing?.estimated_fare ?? 0)"
         self.labelFareType.text = values?.calculator?.rawValue ?? "-"
         self.labelCapacity.text = "1 - \(values?.capacity ?? 0)"
         self.labelServiceName.text = values?.name?.uppercased()

@@ -27,9 +27,22 @@ class RequestSelectionView: UIView {
     
     var scheduleAction : ((Service)->())?
     var rideNowAction : ((Service)->())?
-    var paymentChangeClick : (()->Void)?
-    var onclickCoupon : ((_ couponList : [PromocodeEntity], _ promo : ((PromocodeEntity)->())?)->Void)?
-    var selectedCoupon : PromocodeEntity? // Selected Promocode
+    var paymentChangeClick : ((_ completion : @escaping ((CardEntity?)->()))->Void)?
+    var onclickCoupon : ((_ couponList : [PromocodeEntity],_ selected : PromocodeEntity?, _ promo : ((PromocodeEntity?)->())?)->Void)?
+    var selectedCoupon : PromocodeEntity? { // Selected Promocode
+        didSet{
+            if let percentage = selectedCoupon?.percentage, let maxAmount = selectedCoupon?.max_amount, let fare = self.service?.pricing?.estimated_fare{
+                
+                let discount = fare*(percentage/100)
+                let discountAmount = discount > maxAmount ? maxAmount : discount
+                self.setEstimationFare(amount: fare-discountAmount)
+                
+            } else {
+                self.setEstimationFare(amount: self.service?.pricing?.estimated_fare)
+            }
+        }
+    }
+    
     private var availablePromocodes = [PromocodeEntity]() { // Entire Promocodes available for selection
         didSet {
             self.isPromocodeEnabled = availablePromocodes.count>0
@@ -42,10 +55,11 @@ class RequestSelectionView: UIView {
             self.service?.pricing?.useWallet = isWalletChecked.hashValue
         }
     }
-    
+    private var selectedCard : CardEntity?
     var paymentType : PaymentType = .NONE {
         didSet {
-            let text = "\(Constants.string.payment.localize()):\(paymentType.rawValue.localize())"
+            let paymentString = paymentType == .CASH ? PaymentType.CASH.rawValue.localize() : "\(String.removeNil(self.selectedCard?.last_four))"
+            let text = "\(Constants.string.payment.localize()):\(paymentString)"
             self.labelPaymentMode.text = text
             self.labelPaymentMode.attributeColor = .secondary
             self.labelPaymentMode.startLocation = ((text.count)-(paymentType.rawValue.localize().count))
@@ -137,11 +151,14 @@ extension RequestSelectionView {
     func setValues(values : Service) {
         self.service = values
         self.viewUseWallet.isHidden = !(self.service?.pricing?.wallet_balance != 0)
-        self.labelEstimationFare.text = "\(User.main.currency ?? .Empty) \(self.service?.pricing?.estimated_fare ?? 0)"
+        self.setEstimationFare(amount: self.service?.pricing?.estimated_fare)
         self.paymentType = User.main.isCashAllowed ? .CASH :( User.main.isCardAllowed ? .CARD : .NONE)
         self.imageViewModal.setImage(with: values.image, placeHolder: #imageLiteral(resourceName: "CarplaceHolder"))
     }
     
+    func setEstimationFare(amount : Float?) {
+        self.labelEstimationFare.text = "\(User.main.currency ?? .Empty) \(Formatter.shared.limit(string: "\(amount ?? 0)", maximumDecimal: 2))"
+    }
     
     @IBAction private func buttonScheduleAction(){
         self.service?.promocode = self.selectedCoupon
@@ -158,13 +175,15 @@ extension RequestSelectionView {
         
     }
     @IBAction private func buttonCouponAction() {
-        self.onclickCoupon?( self.availablePromocodes, { [weak self] selectedCouponCode in  // send Available couponlist and get the selected coupon entity
+        self.onclickCoupon?( self.availablePromocodes,self.selectedCoupon, { [weak self] selectedCouponCode in  // send Available couponlist and get the selected coupon entity
             self?.selectedCoupon = selectedCouponCode
             self?.isPromocodeEnabled = true
-        })
+            })
     }
     @IBAction private func buttonChangePaymentAction() {
-        self.paymentChangeClick?()
+        self.paymentChangeClick?({ [weak self] selectedCard in
+            self?.selectedCard = selectedCard
+        })
     }
 }
 

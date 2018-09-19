@@ -65,11 +65,11 @@ class Formatter {
     
     // MARK:- Limit number to required Decimal Values
     
-    func limit(string number : String?, maximumDecimal limit : Int)->String?{
+    func limit(string number : String?, maximumDecimal limit : Int)->String{
         
         //initializeNumberFormatter()
         guard let float = Float(number ?? .Empty) else {
-            return nil
+            return .Empty
         }
         return String(format: "%.\(limit)f", float)//numberFormatter?.string(for: NSNumber(value: float))
         

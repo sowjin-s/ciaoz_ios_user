@@ -51,7 +51,8 @@ class InvoiceView: UIView {
     private var paymentType : PaymentType = .NONE { // Check Payment Type
         didSet {
             if paymentType != oldValue {
-                let text = "\(Constants.string.payment.localize()):\(paymentType.rawValue.localize())"
+                let paymentString = paymentType == .CASH ? PaymentType.CASH.rawValue.localize() : "\(self.selectedCard?.last_four ?? PaymentType.CARD.rawValue.localize())"
+                let text = "\(Constants.string.payment.localize()):\(paymentString)"
                 self.labelPaymentType.text = text
                 self.labelPaymentType.attributeColor = .secondary
                 self.labelPaymentType.startLocation = ((text.count)-(paymentType.rawValue.localize().count))
@@ -92,12 +93,13 @@ class InvoiceView: UIView {
     
     private var tipsAmount : Float = 0 {
         didSet {
-            self.buttonTips.setTitle(tipsAmount>0 ? "\(String.removeNil(User.main.currency)) \(Formatter.shared.limit(string: "\(tipsAmount)", maximumDecimal: 2) ?? "0.00")" : Constants.string.addTips.localize(), for: .normal)
+            self.buttonTips.setTitle(tipsAmount>0 ? "\(String.removeNil(User.main.currency)) \(Formatter.shared.limit(string: "\(tipsAmount)", maximumDecimal: 2))" : Constants.string.addTips.localize(), for: .normal)
         }
     }
     
     var onClickPaynow : ((Float)->Void)?
-    var onClickChangePayment : (()->Void)?
+    var onClickChangePayment : ((_ completion : @escaping ((CardEntity)->()))->Void)?
+    var selectedCard : CardEntity?
     var isShowingRecipt = false
     private var requestId = 0
     private var total : Float = 0
@@ -181,7 +183,7 @@ extension InvoiceView {
     func set(request : Request) {
         
         self.labelBooking.text = request.booking_id
-        self.labelDistanceTravelled.text = "\(Float.removeNil(request.payment?.distance)) \(distanceType.localize())"
+        self.labelDistanceTravelled.text = "\(Float.removeNil(request.payment?.distance)) \(String.removeNil(User.main.measurement))"
         self.labelTimeTaken.text = "\(String.removeNil(request.travel_time)) \(Constants.string.mins.localize())"
         self.paymentType = request.payment_mode ?? .NONE
         self.serviceCalculator = request.service?.calculator ?? .NONE
@@ -189,7 +191,7 @@ extension InvoiceView {
         self.isDiscountApplied = (request.payment?.discount ?? 0)>0
         // Set Amount to Label
         func setAmount(to label : UILabel, with amount : Float?) {
-            label.text = "\(String.removeNil(User.main.currency)) \(Formatter.shared.limit(string: "\(Float.removeNil(amount))", maximumDecimal: 2) ?? "0.00")"
+            label.text = "\(String.removeNil(User.main.currency)) \(Formatter.shared.limit(string: "\(Float.removeNil(amount))", maximumDecimal: 2))"
         }
         setAmount(to: self.labelBaseFare, with: request.payment?.fixed)
         //self.labelBaseFare.text = "\(String.removeNil(User.main.currency)) \(Formatter.shared.limit(string: "\(Float.removeNil(request.payment?.fixed))", maximumDecimal: 2) ?? "0")"
@@ -239,7 +241,9 @@ extension InvoiceView {
     
     // MARK:- Change Payment Type
     @IBAction private func buttonChangePaymentAction() {
-        self.onClickChangePayment?()
+        self.onClickChangePayment?({ [weak self] card in
+            self?.selectedCard = card
+        })
     }
     
     

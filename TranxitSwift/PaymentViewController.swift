@@ -175,7 +175,7 @@ extension PaymentViewController {
             } else if self.cardsList.count > indexPath.row {
                 tableCell.imageViewPayment.image =  #imageLiteral(resourceName: "visa")
                 tableCell.labelPayment.text = "XXXX-XXXX-XXXX-"+String.removeNil(cardsList[indexPath.row].last_four)
-                tableCell.accessoryType = cardsList[indexPath.row].is_default == true.hashValue ? .checkmark : .none
+                tableCell.accessoryType = cardsList[indexPath.row].is_default == 1 ? .checkmark : .none
             }
             return tableCell
         }

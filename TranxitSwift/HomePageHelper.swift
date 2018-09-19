@@ -60,16 +60,15 @@ class HomePageHelper {
             }
             
             // Checking whether the Cash or card payment is disabled
-            if let isCardEnabled = request.card, let isCashEnabled = request.cash {
-                if User.main.isCashAllowed.hashValue != isCashEnabled || User.main.isCardAllowed.hashValue != isCardEnabled {
-                    User.main.isCashAllowed = (true.hashValue == isCashEnabled)
-                    User.main.isCardAllowed = (true.hashValue == isCardEnabled)
+            if let isCardEnabledInt = request.card, let isCashEnabledInt = request.cash {
+                let isCashEnabled = (isCashEnabledInt == 1)
+                let isCardEnabled = (isCardEnabledInt == 1)
+                if User.main.isCashAllowed != isCashEnabled || User.main.isCardAllowed != isCardEnabled {
+                    User.main.isCashAllowed = isCashEnabled
+                    User.main.isCardAllowed = isCardEnabled
                     storeInUserDefaults()
                 }
             }
-            
-//            User.main.isCashAllowed = true //(true.hashValue == isCashEnabled)
-//            User.main.isCardAllowed = false // (true.hashValue == isCardEnabled)
             
             guard let requestFirst = request.data?.first else {
                 completion(nil, nil)

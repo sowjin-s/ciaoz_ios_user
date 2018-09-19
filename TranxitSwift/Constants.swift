@@ -217,7 +217,7 @@ struct Constants {
     let proceed = "Proceed"
     let extimationFareNotAvailable = "Estimation fare not available"
     let viewCoupons = "View Coupons"
-    let useThis = "Use This"
+    let apply = "Apply"
     let validity = "Validity"
 }
 

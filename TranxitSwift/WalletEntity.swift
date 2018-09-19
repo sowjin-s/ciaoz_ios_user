@@ -10,6 +10,6 @@ import Foundation
 
 class WalletEntity : JSONSerializable {
     var message : String?
-    var user : Profile?
+    var balance : Float?
 }
 

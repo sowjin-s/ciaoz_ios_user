@@ -160,17 +160,6 @@ extension RideNowView {
         self.onClickProceed?(self.selectedItem!)
     }
     
-//    // MARK:- View Wallet
-//
-//    @IBAction private func tapGestureAction(sender : UITapGestureRecognizer) {
-//        guard let senderView = sender.view else { return }
-//        if senderView == self.viewPayment {  // Is Clicking change payment
-//            self.onClickChangePayment?()
-//        } else if senderView == self.viewWallet {  // Is Clicking add or remove wallet amount
-//            self.isWalletChecked = !isWalletChecked
-//        }
-//    }
-    
     // Getting service array from  Homeviewcontroller
     func set(source : [Service]) {
         
@@ -183,7 +172,7 @@ extension RideNowView {
     
     // Setting address from HomeViewController
     func setAddress(source : LocationCoordinate, destination : LocationCoordinate) {
-        
+        // print("\nselected ------>",self.sourceCoordinate,self.destinationCoordinate)
         self.sourceCoordinate = source
         self.destinationCoordinate = destination
         
@@ -278,7 +267,7 @@ extension RideNowView {
     // Get Estimate Fare
     
     func getEstimateFareFor(serviceId : Int) {
-        
+       // print("\nselected -----",self.sourceCoordinate,self.destinationCoordinate)
         DispatchQueue.global(qos: .userInteractive).async {
             guard self.sourceCoordinate.latitude != 0, self.sourceCoordinate.longitude != 0, self.destinationCoordinate.latitude != 0, self.destinationCoordinate.longitude != 0 else {
                 return
@@ -289,6 +278,7 @@ extension RideNowView {
             estimateFare.d_latitude = self.destinationCoordinate.latitude
             estimateFare.d_longitude = self.destinationCoordinate.longitude
             estimateFare.service_type = serviceId
+           // print("\nselected ---",self.presenter)
             self.presenter?.get(api: .estimateFare, parameters: estimateFare.JSONRepresentation)
         }
         self.resetProgressView()
@@ -348,7 +338,7 @@ extension RideNowView {
         
         if self.datasource.count>selectedRow, self.datasource[selectedRow].pricing != nil {
             self.labelSurge.text = self.datasource[selectedRow].pricing?.surge_value
-            self.isSurge = self.datasource[selectedRow].pricing?.surge == true.hashValue
+            self.isSurge = self.datasource[selectedRow].pricing?.surge == 1
 //            self.isShowWallet = !(self.datasource[selectedRow].pricing?.wallet_balance == 0)
 //            self.labelWalletAmount.text = " \(String.removeNil(User.main.currency)) \(Formatter.shared.limit(string: "\(self.datasource[selectedRow].pricing?.wallet_balance ?? 0)", maximumDecimal: 2) ?? "0.00")"
         }
@@ -377,7 +367,7 @@ extension RideNowView : UICollectionViewDelegate, UICollectionViewDataSource, UI
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+       // print("\nselected ",indexPath)
         self.select(at: indexPath)
     }
     
@@ -402,7 +392,7 @@ extension RideNowView : UICollectionViewDelegate, UICollectionViewDataSource, UI
     
     
     private func select(at indexPath : IndexPath) {
-        
+       // print("\nselected -",datasource.count)
         if datasource.count>indexPath.row {
             //let id = datasource[indexPath.row].id
             self.isSurge = false // Hide surge till api loaded
@@ -419,6 +409,7 @@ extension RideNowView : UICollectionViewDelegate, UICollectionViewDataSource, UI
         }
         
         if selectedItem?.pricing == nil, let id = self.selectedItem?.id {
+           // print("\nselected --",id)
             self.getEstimateFareFor(serviceId: id)
         }
     }
@@ -438,6 +429,7 @@ extension RideNowView : PostViewProtocol {
     }
     
     func getEstimateFare(api: Base, data: EstimateFare?) {
+        // print("\nselected ",data)
         if let serviceTypeId = data?.service_type, let index = self.datasource.index(where: { $0.id == serviceTypeId }) {
             self.getProviders(by: serviceTypeId)
             self.datasource[index].pricing = data

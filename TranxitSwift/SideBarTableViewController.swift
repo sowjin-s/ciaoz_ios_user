@@ -52,7 +52,7 @@ class SideBarTableViewController: UITableViewController {
         self.localize()
         self.setValues()
         self.navigationController?.isNavigationBarHidden = true
-        UIApplication.shared.isStatusBarHidden = true
+        //self.prefersStatusBarHidden = true
     }
     
     override func viewWillLayoutSubviews() {
@@ -62,7 +62,7 @@ class SideBarTableViewController: UITableViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        UIApplication.shared.isStatusBarHidden = false
+       // self.prefersStatusBarHidden = false
     }
     
 }
@@ -144,7 +144,7 @@ extension SideBarTableViewController {
             self.push(to: Storyboard.Ids.PaymentViewController)
         case (0,1):
             fallthrough
-        case (0,4):
+        case (0,3):
             if let vc = self.drawerController?.getViewController(for: .none)?.storyboard?.instantiateViewController(withIdentifier: Storyboard.Ids.YourTripsPassbookViewController) as? YourTripsPassbookViewController {
                 vc.isYourTripsSelected = indexPath.row == 1
                 (self.drawerController?.getViewController(for: .none) as? UINavigationController)?.pushViewController(vc, animated: true)

@@ -17,7 +17,7 @@ let defaultMapLocation = LocationCoordinate(latitude: 13.009245, longitude: 80.2
 //let locationApi = "https://maps.googleapis.com/maps/api/place/details/json?reference=%@&sensor=true&key=%@"
 let baseUrl = "http://schedule.deliveryventure.com/"//"https://schedule.tranxit.co/"
 let passwordLengthMax = 10
-let distanceType = "km"
+//let distanceType = "km"
 let requestCheckInterval : TimeInterval = 5
 //var sosNumber = 911
 var supportNumber = "919585290750"

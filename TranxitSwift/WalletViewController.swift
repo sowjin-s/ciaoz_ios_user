@@ -203,7 +203,7 @@ extension WalletViewController : PostViewProtocol {
     }
    
     func getWalletEntity(api: Base, data: WalletEntity?) {
-        User.main.wallet_balance = data?.user?.wallet_balance
+        User.main.wallet_balance = data?.balance
         storeInUserDefaults()
         DispatchQueue.main.async {
             self.loader.isHidden = true

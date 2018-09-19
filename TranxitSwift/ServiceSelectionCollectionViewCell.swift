@@ -51,13 +51,13 @@ class ServiceSelectionCollectionViewCell: UICollectionViewCell {
     func setLabelPricing() {
         self.labelPricing.text =  isSelected ? {
             if let distance = self.service?.pricing?.distance {
-                return "\(distance) \(distanceType.localize())"
+                return "\(distance) \(String.removeNil(User.main.measurement))"
             }
             return nil
             }() : nil
         self.labelETA.text =  isSelected ? {
             if let fare = self.service?.pricing?.estimated_fare {
-                return "\(String.removeNil(User.main.currency))\(fare)"
+                return "\(String.removeNil(User.main.currency))\(Formatter.shared.limit(string: "\(fare)", maximumDecimal: 2))"
             }
             return nil
             }() : nil

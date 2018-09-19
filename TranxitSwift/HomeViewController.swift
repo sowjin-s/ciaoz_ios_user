@@ -155,8 +155,7 @@
         
         override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
-            self.navigationController?.isNavigationBarHidden = true
-            self.localize()
+            self.viewWillAppearCustom()
             //IQKeyboardManager.shared.enable = true
         }
         
@@ -180,14 +179,12 @@ extension HomeViewController {
     private func initialLoads() {
             
             self.addMapView()
-            self.getFavouriteLocationsFromLocal()
             self.getFavouriteLocations()
             self.viewSideMenu.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sideMenuAction)))
             self.navigationController?.isNavigationBarHidden = true
             self.viewFavouriteDestination.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.favouriteLocationAction(sender:))))
             self.viewFavouriteSource.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.favouriteLocationAction(sender:))))
             [self.viewSourceLocation, self.viewDestinationLocation].forEach({ $0.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.locationTapAction(sender:))))})
-            [self.viewHomeLocation, self.viewWorkLocation].forEach({ $0.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.viewLocationButtonAction(sender:))))})
             self.currentLocation.bind(listener: { (locationCoordinate) in
                 // TODO:- Handle Current Location
                 if locationCoordinate != nil {
@@ -215,6 +212,16 @@ extension HomeViewController {
 //            NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShowRateView(info:)), name: .UIKeyboardWillShow, object: nil)
 //            NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHideRateView(info:)), name: .UIKeyboardWillHide, object: nil)      }
         }
+    
+    // MARK:- View Will appear
+    
+    private func viewWillAppearCustom() {
+        
+        self.navigationController?.isNavigationBarHidden = true
+        self.localize()
+        self.getFavouriteLocationsFromLocal()
+        
+    }
         
         // MARK:- View Will Layouts
         
@@ -294,26 +301,28 @@ extension HomeViewController {
         private func getFavouriteLocationsFromLocal() {
             
             let favouriteLocationFromLocal = CoreDataHelper().favouriteLocations()
-            
+            [self.viewHomeLocation, self.viewWorkLocation].forEach({
+                 $0?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.viewLocationButtonAction(sender:))))
+                 $0?.isHidden = true
+            })
             for location in favouriteLocationFromLocal
             {
                 switch location.key {
-                    case CoreDataEntity.home.rawValue where location.value is Work:
+                    case CoreDataEntity.work.rawValue where location.value is Work:
                         if let workObject = location.value as? Work, let address = workObject.address {
                             favouriteLocations.append((location.key, (address, LocationCoordinate(latitude: workObject.latitude, longitude: workObject.longitude))))
+                            self.viewWorkLocation.isHidden = false
                         }
-                   case CoreDataEntity.home.rawValue where location.value is Work:
+                   case CoreDataEntity.home.rawValue where location.value is Home:
                         if let homeObject = location.value as? Home, let address = homeObject.address {
                             favouriteLocations.append((location.key, (address, LocationCoordinate(latitude: homeObject.latitude, longitude: homeObject.longitude))))
+                            self.viewHomeLocation.isHidden = false
                         }
                 default:
                     break
                     
                 }
-                
-                
             }
-            
         }
         
         // MARK:- View Location Action
@@ -423,9 +432,11 @@ extension HomeViewController {
             
             if let locationView = Bundle.main.loadNibNamed(XIB.Names.LocationSelectionView, owner: self, options: [:])?.first as? LocationSelectionView {
                 locationView.frame = self.view.bounds
-                locationView.setValues(address: (sourceLocationDetail,destinationLocationDetail)) { (address) in
+                locationView.setValues(address: (sourceLocationDetail,destinationLocationDetail)) { [weak self] (address) in
+                    guard let self = self else {return}
                     self.sourceLocationDetail = address.source
                     self.destinationLocationDetail = address.destination
+                   // print("\nselected-->>>>>",self.sourceLocationDetail?.value?.coordinate, self.destinationLocationDetail?.coordinate)
                     self.drawPolyline() // Draw polyline between source and destination
                     if [RideStatus.accepted, .arrived, .pickedup, .started].contains(riderStatus) {
                         if let dAddress = address.destination?.address, let coordinate = address.destination?.coordinate {
@@ -834,7 +845,7 @@ extension HomeViewController {
                 if api == .locationServicePostDelete {
                     UIApplication.shared.keyWindow?.make(toast: message)
                 } else {
-                    if code != StatusCode.notreachable.rawValue {
+                    if code != StatusCode.notreachable.rawValue && api != .checkRequest{
                         showAlert(message: message, okHandler: nil, fromView: self)
                     }
                 }

@@ -120,6 +120,7 @@
 		0875010720D7D4EC00CFA858 /* SiriIntent.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0875010020D7D4EC00CFA858 /* SiriIntent.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0875011020D7F22F00CFA858 /* OfflineBookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875010F20D7F22F00CFA858 /* OfflineBookingViewController.swift */; };
 		087DCFAE2077920A0040BDBB /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087DCFAD2077920A0040BDBB /* Sequence.swift */; };
+		0881352321527DD800DA668E /* search.json in Resources */ = {isa = PBXBuildFile; fileRef = 0881352221527DD800DA668E /* search.json */; };
 		08813E57213D146B00830717 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08813E56213D146B00830717 /* UserDefaultsKeys.swift */; };
 		08813E58213D147800830717 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08813E56213D146B00830717 /* UserDefaultsKeys.swift */; };
 		08813E5D213D507700830717 /* ConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08813E5C213D507700830717 /* ConfigViewController.swift */; };
@@ -378,6 +379,7 @@
 		0875010B20D7D56400CFA858 /* User.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = User.entitlements; sourceTree = "<group>"; };
 		0875010F20D7F22F00CFA858 /* OfflineBookingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineBookingViewController.swift; sourceTree = "<group>"; };
 		087DCFAD2077920A0040BDBB /* Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequence.swift; sourceTree = "<group>"; };
+		0881352221527DD800DA668E /* search.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = search.json; sourceTree = "<group>"; };
 		08813E56213D146B00830717 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
 		08813E5A213D443400830717 /* SiriIntent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SiriIntent.entitlements; sourceTree = "<group>"; };
 		08813E5C213D507700830717 /* ConfigViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigViewController.swift; sourceTree = "<group>"; };
@@ -600,6 +602,7 @@
 		081548FA20A1DE67004D0F7D /* Animation */ = {
 			isa = PBXGroup;
 			children = (
+				0881352221527DD800DA668E /* search.json */,
 				08B8F43A2115EBCF0055FB82 /* bouncy_mapmaker.json */,
 				082C441620E7911700A7C892 /* FloatingButton */,
 				08BE879620DA421B00876C93 /* Map_style.json */,
@@ -1867,6 +1870,7 @@
 				082D1B9920933D300000B7C8 /* WalkThroughView.xib in Resources */,
 				088185C320A4688200F07AFF /* GoogleService-Info.plist in Resources */,
 				083617B620B6AE3A009C9658 /* InvoiceView.xib in Resources */,
+				0881352321527DD800DA668E /* search.json in Resources */,
 				08001A0D203C241E0076D324 /* CountryPicker.bundle in Resources */,
 				0826C13620B011C80005D0D8 /* RequestSelectionView.xib in Resources */,
 				0811B17920E7B2AD00B78323 /* ChatReciever.xib in Resources */,

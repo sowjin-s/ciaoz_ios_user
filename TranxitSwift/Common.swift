@@ -84,6 +84,7 @@ class Common {
         User.main.wallet_balance = profile?.wallet_balance
         User.main.sos = profile?.sos
         User.main.dispatcherNumber = profile?.app_contact
+        User.main.measurement = profile?.measurement
     }
     
     // MARK:- Make Call

@@ -13,6 +13,8 @@ struct PromocodeEntity : JSONSerializable {
     var promo_code : String?
     var promo_description : String?
     var expiration : String?
+    var max_amount : Float?
+    var percentage : Float?
 }
 
 struct PromoCodeList: JSONSerializable {

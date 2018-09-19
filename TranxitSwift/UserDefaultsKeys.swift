@@ -31,4 +31,5 @@ struct Keys {
     let dispacher = "dispacher"
     let cash = "cash"
     let card = "card"
+    let measurement = "measurement"
 }

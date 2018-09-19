@@ -20,6 +20,8 @@ extension HomeViewController {
     
     func showRideNowView(with source : [Service]) {
         guard let sourceLocation = self.sourceLocationDetail?.value, let destinationLocation = self.destinationLocationDetail else { return }
+       // print("\nselected--**",self.sourceLocationDetail?.value?.coordinate, self.destinationLocationDetail?.coordinate)
+
 //        var selectedPaymentDetail : CardEntity?
 //        var paymentType : PaymentType = (User.main.isCashAllowed ? .CASH : User.main.isCardAllowed ? .CARD : .NONE)
         if self.rideNowView == nil {
@@ -60,8 +62,8 @@ extension HomeViewController {
 //                }
 //            }
         }
-        self.rideNowView?.set(source: source)
         self.rideNowView?.setAddress(source: sourceLocation.coordinate, destination: destinationLocation.coordinate)
+        self.rideNowView?.set(source: source)
     }
     
     // MARK:- Remove RideNowView
@@ -179,21 +181,23 @@ extension HomeViewController {
         self.estimationFareView?.rideNowAction = { [weak self] service in
                 self?.createRequest(for: service, isScheduled: false, scheduleDate: nil, cardEntity: selectedPaymentDetail, paymentType: paymentType)
         }
-        self.estimationFareView?.paymentChangeClick = { [weak self] in
+        self.estimationFareView?.paymentChangeClick = { [weak self]  completion in
             if let vc = self?.storyboard?.instantiateViewController(withIdentifier: Storyboard.Ids.PaymentViewController) as? PaymentViewController{
                 vc.isChangingPayment = true
-                vc.onclickPayment = { (paymentTypeEntity , cardEntity) in
+                vc.onclickPayment = { [weak self] (paymentTypeEntity , cardEntity) in
+                    guard let self = self else {return}
                     selectedPaymentDetail = cardEntity
                     paymentType = paymentTypeEntity
-                    self?.estimationFareView?.paymentType = paymentType
+                    completion(cardEntity)
+                    self.estimationFareView?.paymentType = paymentType
                 }
                 let navigation = UINavigationController(rootViewController: vc)
                 self?.present(navigation, animated: true, completion: nil)
             }
         }
-        self.estimationFareView?.onclickCoupon = { [weak self] (availableCoupons, completion) in
-            self?.showCouponView(coupons: availableCoupons, completion: { (couponEntity) in
-                completion?(couponEntity) // sending back the couponEntity 
+        self.estimationFareView?.onclickCoupon = { [weak self] (availableCoupons,selected, completion) in // available coupons, currently selected coupons, completion to send response
+            self?.showCouponView(coupons: availableCoupons, currentlySelected: selected, completion: { (couponEntity) in
+                completion?(couponEntity) // sending back the couponEntity
                 self?.removeCouponView()
             })
         }
@@ -215,7 +219,7 @@ extension HomeViewController {
     
     // MARK:- Show Coupon View
     
-    func showCouponView(coupons: [PromocodeEntity], completion : @escaping ((PromocodeEntity)->Void)) {
+    func showCouponView(coupons: [PromocodeEntity],currentlySelected selected : PromocodeEntity?,completion : @escaping ((PromocodeEntity?)->Void)) {
         
         if self.couponView == nil, let couponViewObject = Bundle.main.loadNibNamed(XIB.Names.CouponView, owner: self, options: [:])?.first as? CouponView {
             couponViewObject.frame = CGRect(origin: CGPoint(x: 0, y: self.view.frame.height-couponViewObject.frame.height), size: CGSize(width: self.view.frame.width, height: couponViewObject.frame.height))
@@ -226,7 +230,7 @@ extension HomeViewController {
             }
             couponView?.show(with: .bottom, completion: nil)
             self.view.addSubview(couponView!)
-            self.couponView?.set(values: coupons)
+            self.couponView?.set(values: coupons, selected: selected)
         }
         
     }
@@ -309,13 +313,15 @@ extension HomeViewController {
                 }
                 self.presenter?.post(api: .payNow, data: requestObj.toData())
             }
-            self.invoiceView?.onClickChangePayment = {
+            self.invoiceView?.onClickChangePayment = { [weak self] completion in 
                 print("Called",#function)
+                guard let self = self else {return}
                 if let vc = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.Ids.PaymentViewController) as? PaymentViewController{
                     vc.isChangingPayment = true
                     vc.isShowCash = false
                     vc.onclickPayment = { (paymentTypeEntity , cardEntity) in
                         if paymentTypeEntity == .CARD, cardEntity != nil {
+                            completion(cardEntity!)
                             self.updatePaymentType(with: cardEntity!)
                         }
                     }
@@ -558,7 +564,7 @@ extension HomeViewController {
             riderStatus = .none
         case .completed:
             riderStatus = .none
-            if request.paid == true.hashValue {
+            if request.paid == 1 {
                 self.showRatingView(with: request)
             } else {
                 self.showInvoiceView(with: request)

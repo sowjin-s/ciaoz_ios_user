@@ -22,14 +22,15 @@ class User : NSObject, NSCoding, JSONSerializable {
     var mobile : String?
     var currency : String?
     var refreshToken : String?
-    var wallet_balance : Int?
+    var wallet_balance : Float?
     var sos : String?
     var loginType : String?
     var dispatcherNumber : String?
     var isCashAllowed : Bool
     var isCardAllowed : Bool
+    var measurement : String?
     
-    init(id : Int?, accessToken : String?, firstName : String?, lastName : String?, mobile : String?, email : String?, currency : String?, picture : String?, refreshToken : String?, walletBalance : Int?, sos : String?, loginType : String?, dispatcherNumber : String?, isCardAllowed : Bool, isCashAllowed : Bool){
+    init(id : Int?, accessToken : String?, firstName : String?, lastName : String?, mobile : String?, email : String?, currency : String?, picture : String?, refreshToken : String?, walletBalance : Float?, sos : String?, loginType : String?, dispatcherNumber : String?, isCardAllowed : Bool, isCashAllowed : Bool, measurement : String?){
                 
         self.id = id
         self.accessToken = accessToken
@@ -46,11 +47,12 @@ class User : NSObject, NSCoding, JSONSerializable {
         self.dispatcherNumber = dispatcherNumber
         self.isCardAllowed = isCardAllowed
         self.isCashAllowed = isCashAllowed
+        self.measurement = measurement
     }
     
     convenience
     override init(){
-        self.init(id: nil, accessToken: nil, firstName : nil, lastName : nil, mobile : nil, email : nil, currency : nil, picture : nil, refreshToken : nil, walletBalance : nil, sos : nil, loginType : nil,dispatcherNumber : nil, isCardAllowed: false, isCashAllowed : true)
+        self.init(id: nil, accessToken: nil, firstName : nil, lastName : nil, mobile : nil, email : nil, currency : nil, picture : nil, refreshToken : nil, walletBalance : nil, sos : nil, loginType : nil,dispatcherNumber : nil, isCardAllowed: false, isCashAllowed : true, measurement : "km")
     }
     
     
@@ -65,14 +67,15 @@ class User : NSObject, NSCoding, JSONSerializable {
         let currency = aDecoder.decodeObject(forKey: Keys.list.currency) as? String
         let picture = aDecoder.decodeObject(forKey: Keys.list.picture) as? String
         let refreshToken = aDecoder.decodeObject(forKey: Keys.list.refreshToken) as? String
-        let walletBalance = aDecoder.decodeObject(forKey: Keys.list.wallet) as? Int
+        let walletBalance = aDecoder.decodeObject(forKey: Keys.list.wallet) as? Float
         let sos = aDecoder.decodeObject(forKey: Keys.list.sos) as? String
         let loginType = aDecoder.decodeObject(forKey: Keys.list.loginType) as? String
         let dispatcherNumber = aDecoder.decodeObject(forKey: Keys.list.dispacher) as? String
         let isCardAllowed = aDecoder.decodeBool(forKey: Keys.list.card)
         let isCashAllowed = aDecoder.decodeBool(forKey: Keys.list.cash)
+        let measurement = aDecoder.decodeObject(forKey: Keys.list.measurement) as? String
         
-        self.init(id: id, accessToken : accessToken, firstName : firstName, lastName : lastName, mobile : mobile, email: email, currency : currency, picture : picture, refreshToken : refreshToken, walletBalance : walletBalance, sos : sos,loginType : loginType, dispatcherNumber : dispatcherNumber, isCardAllowed : isCardAllowed, isCashAllowed : isCashAllowed)
+        self.init(id: id, accessToken : accessToken, firstName : firstName, lastName : lastName, mobile : mobile, email: email, currency : currency, picture : picture, refreshToken : refreshToken, walletBalance : walletBalance, sos : sos,loginType : loginType, dispatcherNumber : dispatcherNumber, isCardAllowed : isCardAllowed, isCashAllowed : isCashAllowed, measurement : measurement)
         
     }
     
@@ -94,6 +97,7 @@ class User : NSObject, NSCoding, JSONSerializable {
         aCoder.encode(self.dispatcherNumber, forKey: Keys.list.dispacher)
         aCoder.encode(self.isCashAllowed, forKey: Keys.list.cash)
         aCoder.encode(self.isCardAllowed, forKey: Keys.list.card)
+        aCoder.encode(self.measurement, forKey: Keys.list.measurement)
     }
     
     
