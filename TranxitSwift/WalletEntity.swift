@@ -11,5 +11,14 @@ import Foundation
 class WalletEntity : JSONSerializable {
     var message : String?
     var balance : Float?
+    var wallet_balance : Float?
+    var wallet_transation : [WalletTransaction]?
 }
 
+struct WalletTransaction : JSONSerializable {
+    var amount : Float?
+    var close_balance : Float?
+    var transaction_alias : String?
+    var created_at : String?
+    var transaction_desc : String?
+}

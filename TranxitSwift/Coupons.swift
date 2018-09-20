@@ -20,7 +20,6 @@ struct CouponWallet : JSONSerializable {
     var via : String?
     var status : String?
     var promocode : PromoCode?
-    
 }
 
 struct PromoCode : JSONSerializable {
@@ -31,3 +30,4 @@ struct PromoCode : JSONSerializable {
     var status : String?
     
 }
+

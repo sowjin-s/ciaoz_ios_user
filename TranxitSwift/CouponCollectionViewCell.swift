@@ -26,6 +26,8 @@ class CouponCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    var isHideApplyButton = false
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.initialLoads()
@@ -54,7 +56,6 @@ extension CouponCollectionViewCell {
         Common.setFont(to: labelCouponDescription, isTitle: true)
         Common.setFont(to: labelValidity)
         Common.setFont(to: buttonApply, isTitle: true)
-        
     }
     
     // Set values for CollectionCell
@@ -66,6 +67,8 @@ extension CouponCollectionViewCell {
         if let dateObject = Formatter.shared.getDate(from: self.values?.expiration, format: DateFormat.list.yyyy_mm_dd_HH_MM_ss){
             self.labelValidity.text =  Constants.string.validity.localize()+" : "+"\(Formatter.shared.getString(from: dateObject, format: DateFormat.list.dd_MM_yyyy) ?? .Empty)"
         }
+        self.buttonApply.isHidden = isHideApplyButton
+
     }
     
     // Button Apply action

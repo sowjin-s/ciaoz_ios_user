@@ -219,6 +219,8 @@ struct Constants {
     let viewCoupons = "View Coupons"
     let apply = "Apply"
     let validity = "Validity"
+    let paid = "Paid"
+    let noCoupons = "No Coupons"
 }
 
 

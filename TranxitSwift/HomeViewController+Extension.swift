@@ -294,6 +294,7 @@ extension HomeViewController {
     func showInvoiceView(with request : Request) {
         
         self.buttonSOS.isHidden = !(riderStatus == .pickedup)
+        self.mapViewHelper?.mapView?.clear()
         if self.invoiceView == nil, let invoice = Bundle.main.loadNibNamed(XIB.Names.InvoiceView, owner: self, options: [:])?.first as? InvoiceView {
             self.viewAddressOuter.isHidden = true
             self.viewLocationButtons.isHidden = true
@@ -309,7 +310,7 @@ extension HomeViewController {
                 let requestObj = Request()
                 requestObj.request_id = request.id
                 if tipsAmount>0 {
-                 requestObj.tips = ((tipsAmount*100).rounded()/100)
+                 requestObj.tips = (Float(Int(tipsAmount*100))/100)
                 }
                 self.presenter?.post(api: .payNow, data: requestObj.toData())
             }

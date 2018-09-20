@@ -35,8 +35,8 @@ class WalletViewController: UIViewController {
     private var isWalletAvailable : Bool = false {
         didSet {
             self.buttonAddAmount.isHidden = !isWalletAvailable
-            self.viewCard.alpha = CGFloat(isWalletAvailable.hashValue)
-            self.viewWallet.alpha = CGFloat(isWalletAvailable.hashValue)
+            self.viewCard.alpha = CGFloat(isWalletAvailable ? 1 : 0)
+            self.viewWallet.alpha = CGFloat(isWalletAvailable ? 1 : 0)
         }
     }
     
@@ -71,6 +71,7 @@ class WalletViewController: UIViewController {
 extension WalletViewController {
     
     private func initalLoads() {
+        
         self.setWalletBalance()
         self.presenter?.get(api: .getProfile, parameters: nil)
         self.view.dismissKeyBoardonTap()
@@ -208,6 +209,7 @@ extension WalletViewController : PostViewProtocol {
         DispatchQueue.main.async {
             self.loader.isHidden = true
             self.setWalletBalance()
+            self.textFieldAmount.text = nil
             UIApplication.shared.keyWindow?.makeToast(data?.message)
         }
     }

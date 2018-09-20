@@ -227,8 +227,11 @@ extension YourTripsDetailViewController {
             viewReciptView.frame = CGRect(origin: CGPoint(x: 0, y: (UIApplication.shared.keyWindow?.frame.height)!-viewReciptView.frame.height), size: CGSize(width: self.view.frame.width, height: viewReciptView.frame.height))
             self.viewRecipt = viewReciptView
             UIApplication.shared.keyWindow?.addSubview(viewReciptView)
-            viewReciptView.show(with: .bottom) {
-                self.addBlurView()
+            viewReciptView.show(with: .bottom) { [weak self] in
+                self?.addBlurView()
+            }
+            viewReciptView.onClickPaynow = { [unowned self]_ in
+                 self.hideRecipt()
             }
         }
         

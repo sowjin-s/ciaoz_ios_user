@@ -23,6 +23,7 @@
 		0809321620A0642700B88318 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0809321520A0642700B88318 /* UserData.swift */; };
 		0809321820A067EF00B88318 /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0809321720A067EF00B88318 /* LoginRequest.swift */; };
 		0809321A20A08E0200B88318 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0809321920A08E0200B88318 /* Profile.swift */; };
+		080C1E9521539350002F5613 /* CouponCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C1E9421539350002F5613 /* CouponCollectionViewController.swift */; };
 		080FB9D820BC452B008C23F5 /* AccountKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 080FB9D620BC452A008C23F5 /* AccountKit.framework */; };
 		080FB9D920BC452B008C23F5 /* AccountKitStrings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 080FB9D720BC452A008C23F5 /* AccountKitStrings.bundle */; };
 		0811B16A20E7AF6600B78323 /* ChatResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0811B16520E7AF6300B78323 /* ChatResponse.swift */; };
@@ -278,6 +279,7 @@
 		0809321720A067EF00B88318 /* LoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
 		0809321920A08E0200B88318 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		080A8B60206B718700154B2D /* WebRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebRTC.framework; path = WhatsAppClone/Lib/include/WebRTC/WebRTC.framework; sourceTree = "<group>"; };
+		080C1E9421539350002F5613 /* CouponCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponCollectionViewController.swift; sourceTree = "<group>"; };
 		080FB9D620BC452A008C23F5 /* AccountKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AccountKit.framework; sourceTree = "<group>"; };
 		080FB9D720BC452A008C23F5 /* AccountKitStrings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AccountKitStrings.bundle; sourceTree = "<group>"; };
 		0811B16520E7AF6300B78323 /* ChatResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatResponse.swift; sourceTree = "<group>"; };
@@ -1060,6 +1062,7 @@
 			isa = PBXGroup;
 			children = (
 				083617CF20B71AAE009C9658 /* CouponViewController.swift */,
+				080C1E9421539350002F5613 /* CouponCollectionViewController.swift */,
 			);
 			name = Coupon;
 			sourceTree = "<group>";
@@ -2162,6 +2165,7 @@
 				083617C320B70D7F009C9658 /* YourTripsPassbookViewController.swift in Sources */,
 				08A50C422109B6B100CCDDA8 /* ReasonView.swift in Sources */,
 				082C442320E7913A00A7C892 /* FloatyDelegate.swift in Sources */,
+				080C1E9521539350002F5613 /* CouponCollectionViewController.swift in Sources */,
 				083617B320B6943A009C9658 /* FloatRatingView.swift in Sources */,
 				08CA2F7C20D927DC00F99FCA /* Reachability.swift in Sources */,
 				081E9CF920BFFB6C004C6884 /* EstimateFareRequest.swift in Sources */,

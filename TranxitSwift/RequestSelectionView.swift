@@ -52,7 +52,7 @@ class RequestSelectionView: UIView {
     private var isWalletChecked = false {  // Handle Wallet
         didSet {
             self.imageViewWallet.image = isWalletChecked ? #imageLiteral(resourceName: "check") : #imageLiteral(resourceName: "check-box-empty")
-            self.service?.pricing?.useWallet = isWalletChecked.hashValue
+            self.service?.pricing?.useWallet = isWalletChecked ? 1 : 0
         }
     }
     private var selectedCard : CardEntity?

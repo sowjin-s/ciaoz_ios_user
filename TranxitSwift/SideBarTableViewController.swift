@@ -20,6 +20,7 @@ class SideBarTableViewController: UITableViewController {
     
     private let sideBarList = [Constants.string.payment,
                                Constants.string.yourTrips,
+                               Constants.string.coupon,
                                Constants.string.wallet,
                                Constants.string.passbook,
                                Constants.string.settings,
@@ -144,20 +145,22 @@ extension SideBarTableViewController {
             self.push(to: Storyboard.Ids.PaymentViewController)
         case (0,1):
             fallthrough
-        case (0,3):
+        case (0,4):
             if let vc = self.drawerController?.getViewController(for: .none)?.storyboard?.instantiateViewController(withIdentifier: Storyboard.Ids.YourTripsPassbookViewController) as? YourTripsPassbookViewController {
                 vc.isYourTripsSelected = indexPath.row == 1
                 (self.drawerController?.getViewController(for: .none) as? UINavigationController)?.pushViewController(vc, animated: true)
             }
         case (0,2):
+            self.push(to: CouponCollectionViewController())
+        case (0,3):
             self.push(to: Storyboard.Ids.WalletViewController)
-        case (0,4):
-            self.push(to: Storyboard.Ids.SettingTableViewController)
         case (0,5):
-            self.push(to: Storyboard.Ids.HelpViewController)
+            self.push(to: Storyboard.Ids.SettingTableViewController)
         case (0,6):
-            (self.drawerController?.getViewController(for: .none)?.childViewControllers.first as? HomeViewController)?.share(items: [baseUrl])
+            self.push(to: Storyboard.Ids.HelpViewController)
         case (0,7):
+            (self.drawerController?.getViewController(for: .none)?.childViewControllers.first as? HomeViewController)?.share(items: [baseUrl])
+        case (0,8):
             self.logout()
             
         default:
@@ -167,11 +170,15 @@ extension SideBarTableViewController {
     }
     
     private func push(to identifier : String) {
-        let viewController = self.storyboard!.instantiateViewController(withIdentifier: identifier)
+         let viewController = self.storyboard!.instantiateViewController(withIdentifier: identifier)
         (self.drawerController?.getViewController(for: .none) as? UINavigationController)?.pushViewController(viewController, animated: true)
         
     }
     
+    private func push(to vc : UIViewController) {
+        (self.drawerController?.getViewController(for: .none) as? UINavigationController)?.pushViewController(vc, animated: true)
+        
+    }
     
     // MARK:- Logout
     

@@ -93,7 +93,7 @@ class InvoiceView: UIView {
     
     private var tipsAmount : Float = 0 {
         didSet {
-            self.buttonTips.setTitle(tipsAmount>0 ? "\(String.removeNil(User.main.currency)) \(Formatter.shared.limit(string: "\(tipsAmount)", maximumDecimal: 2))" : Constants.string.addTips.localize(), for: .normal)
+           self.updatePayment()
         }
     }
     
@@ -102,7 +102,16 @@ class InvoiceView: UIView {
     var selectedCard : CardEntity?
     var isShowingRecipt = false
     private var requestId = 0
-    private var total : Float = 0
+    private var total : Float = 0 {
+        didSet{
+            self.updatePayment()
+        }
+    }
+    private var payyable : Float = 0 {
+        didSet{
+            self.updatePayment()
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -173,15 +182,16 @@ extension InvoiceView {
         self.buttonTips.setTitle(Constants.string.addTips.localize(), for: .normal)
         self.labelTotalString.text = Constants.string.total.localize()
         self.labelWalletString.text = Constants.string.walletDeduction.localize()
-        self.labelToPayString.text = Constants.string.toPay.localize()
         self.labelDiscountString.text = Constants.string.discount.localize()
-        self.buttonPayNow.setTitle(Constants.string.paynow.localize(), for: .normal)
         self.labelTitle.text = Constants.string.invoice.localize()
         
     }
     
     func set(request : Request) {
         
+        self.buttonPayNow.setTitle((isShowingRecipt ? Constants.string.Done : Constants.string.paynow).localize(), for: .normal)
+        self.labelToPayString.text = (isShowingRecipt ? Constants.string.paid : Constants.string.toPay).localize()
+
         self.labelBooking.text = request.booking_id
         self.labelDistanceTravelled.text = "\(Float.removeNil(request.payment?.distance)) \(String.removeNil(User.main.measurement))"
         self.labelTimeTaken.text = "\(String.removeNil(request.travel_time)) \(Constants.string.mins.localize())"
@@ -214,25 +224,24 @@ extension InvoiceView {
         setAmount(to: self.labelDistanceFare, with: distanceFare)
         setAmount(to: self.labelTimeFare, with: timeFare)
         setAmount(to: self.labelTax, with: request.payment?.tax)
-        setAmount(to: self.labelTotal, with: request.payment?.total)
         setAmount(to: self.labelWallet, with: request.payment?.wallet)
         setAmount(to: self.labelDiscount, with: request.payment?.discount)
-        setAmount(to: self.labelToPay, with: request.payment?.payable)
         self.total = request.payment?.total ?? 0
-        
-        if Float.removeNil(request.payment?.tips) > 0 {
-            self.tipsAmount = Float.removeNil(request.payment?.tips)
+        if self.tipsAmount == 0 {
+            self.tipsAmount = request.payment?.tips ?? 0
         }
-        
-        //self.labelDistanceFare.text = "\(String.removeNil(User.main.currency)) \(Formatter.shared.limit(string: "\(distanceFare)", maximumDecimal: 2) ?? "0.00")"
-        //self.labelTimeFare.text = "\(String.removeNil(User.main.currency)) \(Formatter.shared.limit(string: "\(Float.removeNil(timeFare))", maximumDecimal: 2) ?? "0.00")"
-       // self.labelTax.text = "\(String.removeNil(User.main.currency)) \(Formatter.shared.limit(string: "\(request.payment?.tax ?? 0)", maximumDecimal: 2) ?? "0.00")"
-//        let tipsAmount = "\(String.removeNil(User.main.currency)) \(Formatter.shared.limit(string: "\(0)", maximumDecimal: 2) ?? "0.00")"
-//        self.buttonTips.setTitle(tipsAmount, for: .normal)
-       // self.labelTotal.text = "\(String.removeNil(User.main.currency)) \(Formatter.shared.limit(string: "\(Float.removeNil(request.payment?.total))", maximumDecimal: 2) ?? "0.00")"
-       // self.labelWallet.text = "\(String.removeNil(User.main.currency)) \(Formatter.shared.limit(string: "\(Float.removeNil(request.payment?.wallet))", maximumDecimal: 2) ?? "0.00")"
-      //  self.labelDiscount.text = "\(String.removeNil(User.main.currency)) \(Formatter.shared.limit(string: "\(Float.removeNil(request.payment?.discount))", maximumDecimal: 2) ?? "0.00")"
-        self.buttonPayNow.isHidden = (request.payment_mode == .CASH || isShowingRecipt)
+        if self.isShowingRecipt { // On recipt page
+            self.payyable = self.total-((request.payment?.discount ?? 0)+(request.payment?.wallet ?? 0))
+        } else { // On Invoice page
+            self.payyable = request.payment?.payable ?? 0
+        }
+        self.buttonPayNow.isHidden = (request.payment_mode == .CASH && !isShowingRecipt)
+    }
+    
+    private func updatePayment() {
+        self.buttonTips.setTitle((tipsAmount>0 || self.isShowingRecipt) ? " \(String.removeNil(User.main.currency)) \(Formatter.shared.limit(string: "\(tipsAmount)", maximumDecimal: 2)) " : " \(Constants.string.addTips.localize()) ", for: .normal)
+        self.labelTotal.text = "\(String.removeNil(User.main.currency)) \(Formatter.shared.limit(string: "\(tipsAmount+total)", maximumDecimal: 2))"
+        self.labelToPay.text = "\(String.removeNil(User.main.currency)) \(Formatter.shared.limit(string: "\(tipsAmount+payyable)", maximumDecimal: 2))"
     }
     
     @IBAction private func buttonPaynowAction() {

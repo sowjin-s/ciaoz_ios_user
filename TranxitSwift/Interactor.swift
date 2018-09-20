@@ -70,13 +70,13 @@ extension Interactor : PostInteractorOutputProtocol {
         case .locationService:
             self.presenter?.sendLocationService(api: api, data: response)
         
-        case .walletPassbook, .couponPassbook:
+        case .couponPassbook:
             self.presenter?.sendCouponWallet(api: api, data: response)
         
         case .getCards:
             self.presenter?.sendCardEntityList(api: api, data: response)
             
-        case .addMoney:
+        case .addMoney, .walletPassbook:
             self.presenter?.sendWalletEntity(api: api, data: response)
         
         case .promocodes:

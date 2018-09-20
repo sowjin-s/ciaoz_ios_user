@@ -20,7 +20,7 @@ class ViewTips: UIView {
     var tipsAmount : Float = 0 {
         didSet {
             if tipsAmount > 0 {
-                self.textFieldCustom.text = "\(User.main.currency ?? .Empty)\(tipsAmount)"
+                self.textFieldCustom.text = "\(User.main.currency ?? .Empty)\(Formatter.shared.limit(string: "\(tipsAmount)", maximumDecimal: 2))"
             }else {
                 self.textFieldCustom.placeholder = "\(User.main.currency ?? .Empty)\(tipsAmount)"
             }

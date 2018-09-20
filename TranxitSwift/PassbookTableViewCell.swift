@@ -47,13 +47,24 @@ class PassbookTableViewCell: UITableViewCell {
     
     func set(values : CouponWallet) {
         
-        if let dateObject = Formatter.shared.getDate(from:  values.created_at, format: DateFormat.list.yyyy_mm_dd_HH_MM_ss) {
+        if let dateObject = Formatter.shared.getDate(from: values.created_at, format: DateFormat.list.yyyy_mm_dd_HH_MM_ss) {
             self.labelDate.text = Formatter.shared.getString(from: dateObject, format: DateFormat.list.ddMMMyyyy)
         }
         self.labelCouponStatus.text = values.promocode?.status?.localize()
-        self.labelPaymentType.text = isWalletSelected ? values.via : values.promocode?.promo_code
+        self.labelPaymentType.text =  values.promocode?.promo_code
         let discountValue = values.promocode?.discount_type == Constants.string.amount.lowercased() ? "\(User.main.currency ?? .Empty) \(values.promocode?.discount ?? 0)" : "\(values.promocode?.discount ?? 0) % \(Constants.string.OFF.localize())"
-        self.labelOffer.text = isWalletSelected ? "\(User.main.currency ?? .Empty) \(values.amount ?? 0)" : "\(discountValue)"
+        self.labelOffer.text =  "\(discountValue)"
+        
+    }
+    
+    func set(values : WalletTransaction) {
+        
+        if let dateObject = Formatter.shared.getDate(from:  values.created_at, format: DateFormat.list.yyyy_mm_dd_HH_MM_ss) {
+            self.labelDate.text = Formatter.shared.getString(from: dateObject, format: DateFormat.list.ddMMMyyyy)
+        }
+        self.labelPaymentType.text = values.transaction_desc
+       // let discountValue = values.promocode?.discount_type == Constants.string.amount.lowercased() ? "\(User.main.currency ?? .Empty) \(values.promocode?.discount ?? 0)" : "\(values.promocode?.discount ?? 0) % \(Constants.string.OFF.localize())"
+        self.labelOffer.text =  "\(User.main.currency ?? .Empty) \(Formatter.shared.limit(string: "\(values.amount ?? 0)", maximumDecimal: 2))"
         
     }
     
