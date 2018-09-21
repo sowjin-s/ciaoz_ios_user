@@ -20,13 +20,13 @@ enum Transition {
         switch self {
             
         case .top :
-            return kCATransitionFromBottom
+            return convertFromCATransitionSubtype(CATransitionSubtype.fromBottom)
         case .bottom :
-            return kCATransitionFromTop
+            return convertFromCATransitionSubtype(CATransitionSubtype.fromTop)
         case .right :
-            return kCATransitionFromLeft
+            return convertFromCATransitionSubtype(CATransitionSubtype.fromLeft)
         case .left :
-            return kCATransitionFromRight
+            return convertFromCATransitionSubtype(CATransitionSubtype.fromRight)
             
         }
         
@@ -42,12 +42,12 @@ extension UIView {
     func show(with transition : Transition, duration : CFTimeInterval = 0.5, completion : (()->())?) {
         
         let animation = CATransition()
-        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        animation.type = kCATransitionPush
-        animation.subtype = transition.type
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        animation.type = CATransitionType.push
+        animation.subtype = convertToOptionalCATransitionSubtype(transition.type)
         animation.duration = duration
        
-        self.layer.add(animation, forKey: kCATransitionPush)
+        self.layer.add(animation, forKey: convertFromCATransitionType(CATransitionType.push))
         DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
             completion?()
         }
@@ -327,7 +327,7 @@ extension UIView {
         layer.strokeColor = strokeColor.cgColor
        // layer.lineWidth = 20
         layer.fillColor = fillColor.cgColor
-        layer.lineCap = kCALineCapRound
+        layer.lineCap = CAShapeLayerLineCap.round
       //  layer.lineDashPhase
         layer.position = CGPoint(x: self.bounds.width/2, y: self.bounds.height)
        
@@ -337,12 +337,12 @@ extension UIView {
     func showAnimateView(_ view: UIView, isShow: Bool, direction: Transition, duration : Float = 0.8 ) {
         if isShow {
             view.isHidden = false
-            self.bringSubview(toFront: view)
+            self.bringSubviewToFront(view)
             print(direction.type)
             pushTransition(CFTimeInterval(duration), view: view, withDirection: direction)
         }
         else {
-            self.sendSubview(toBack: view)
+            self.sendSubviewToBack(view)
             view.isHidden = true
             pushTransition(CFTimeInterval(duration), view: view, withDirection: direction)
         }
@@ -350,11 +350,11 @@ extension UIView {
     
     func pushTransition(_ duration: CFTimeInterval, view: UIView, withDirection direction: Transition) {
         let animation = CATransition()
-        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        animation.type = kCATransitionPush
-        animation.subtype = direction.type
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        animation.type = CATransitionType.push
+        animation.subtype = convertToOptionalCATransitionSubtype(direction.type)
         animation.duration = duration
-        view.layer.add(animation, forKey: kCATransitionMoveIn)
+        view.layer.add(animation, forKey: convertFromCATransitionType(CATransitionType.moveIn))
         
     }
     // Shake View
@@ -405,4 +405,20 @@ extension UIView {
     }
     
     
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromCATransitionSubtype(_ input: CATransitionSubtype) -> String {
+	return input.rawValue
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToOptionalCATransitionSubtype(_ input: String?) -> CATransitionSubtype? {
+	guard let input = input else { return nil }
+	return CATransitionSubtype(rawValue: input)
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromCATransitionType(_ input: CATransitionType) -> String {
+	return input.rawValue
 }

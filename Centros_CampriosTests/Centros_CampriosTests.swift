@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import Centros_Camprios
+@testable import User
 
 class Centros_CampriosTests: XCTestCase {
     

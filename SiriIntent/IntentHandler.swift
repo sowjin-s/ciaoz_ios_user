@@ -24,6 +24,6 @@ class IntentHandler: INExtension {
 
 public extension UIImage {
     public var inImage: INImage {
-        return INImage(imageData: UIImagePNGRepresentation(self)!)
+        return INImage(imageData: self.pngData()!)
     }
 }

@@ -28,11 +28,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var reachability : Reachability?
     static let shared = AppDelegate()
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
        
         FirebaseApp.configure()
         self.appearence()
-        setLocalization(language: .english)
         self.google()
         self.IQKeyboard()
         self.siri()
@@ -66,13 +65,18 @@ extension AppDelegate {
     // MARK:- Appearence
     private func appearence() {
         
+        if let languageStr = UserDefaults.standard.value(forKey: Keys.list.language) as? String, let language = Language(rawValue: languageStr) {
+            setLocalization(language: language)
+        }else {
+            setLocalization(language: .english)
+        }
         UINavigationBar.appearance().barTintColor = .white
         UINavigationBar.appearance().tintColor = .darkGray
-        var attributes = [NSAttributedStringKey : Any]()
+        var attributes = [NSAttributedString.Key : Any]()
         attributes.updateValue(UIColor.black, forKey: .foregroundColor)
-        attributes.updateValue(UIFont(name: FontCustom.Bold.rawValue, size: 16.0)!, forKey : NSAttributedStringKey.font)
+        attributes.updateValue(UIFont(name: FontCustom.Bold.rawValue, size: 16.0)!, forKey : NSAttributedString.Key.font)
         UINavigationBar.appearance().titleTextAttributes = attributes
-        attributes.updateValue(UIFont(name:FontCustom.Medium.rawValue, size: 18.0)!, forKey : NSAttributedStringKey.font)
+        attributes.updateValue(UIFont(name:FontCustom.Medium.rawValue, size: 18.0)!, forKey : NSAttributedString.Key.font)
         if #available(iOS 11.0, *) {
             UINavigationBar.appearance().largeTitleTextAttributes = attributes
         }
@@ -131,7 +135,7 @@ extension AppDelegate {
     }
     
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         return GIDSignIn.sharedInstance().handle(url as URL?,
                                                  sourceApplication: options[.sourceApplication] as? String,
                                                  annotation: options[.annotation])
@@ -204,7 +208,7 @@ extension AppDelegate {
         print("Reachability \(self.reachability?.connection.description ?? .Empty)", #function)
         guard self.reachability != nil else { return }
         if self.reachability!.connection == .none && riderStatus == .none {
-            if let rootView = UIApplication.shared.keyWindow?.rootViewController?.childViewControllers.last, (rootView is HomeViewController), retrieveUserData() {
+            if let rootView = UIApplication.shared.keyWindow?.rootViewController?.children.last, (rootView is HomeViewController), retrieveUserData() {
                 rootView.present(id: Storyboard.Ids.OfflineBookingViewController, animation: true)
             }
         } else {

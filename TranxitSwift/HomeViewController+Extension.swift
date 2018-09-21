@@ -354,8 +354,8 @@ extension HomeViewController {
         guard self.ratingView == nil else { return }
         self.removeInvoiceView()
         if let rating = Bundle.main.loadNibNamed(XIB.Names.RatingView, owner: self, options: [:])?.first as? RatingView {
-            NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShowRateView(info:)), name: .UIKeyboardWillShow, object: nil)
-            NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHideRateView(info:)), name: .UIKeyboardWillHide, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShowRateView(info:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHideRateView(info:)), name: UIResponder.keyboardWillHideNotification, object: nil)
             self.viewAddressOuter.isHidden = true
             self.viewLocationButtons.isHidden = true
             rating.frame = CGRect(origin: CGPoint(x: 0, y: self.view.frame.height-rating.frame.height), size: CGSize(width: self.view.frame.width, height: rating.frame.height))
@@ -386,8 +386,8 @@ extension HomeViewController {
             self.viewAddressOuter.isHidden = false
             self.viewLocationButtons.isHidden = false
             self.clearMapview()
-            NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
-            NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
+            NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+            NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
         })
     }
     
@@ -395,7 +395,7 @@ extension HomeViewController {
     
     @IBAction func keyboardWillShowRateView(info : NSNotification){
         
-        guard let keyboard = (info.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else{
+        guard let keyboard = (info.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else{
             return
         }
        self.ratingView?.frame.origin.y =  keyboard.origin.y-(self.ratingView?.frame.height ?? 0 )
@@ -406,7 +406,7 @@ extension HomeViewController {
     
     @IBAction func keyboardWillHideRateView(info : NSNotification){
         
-        guard let keyboard = (info.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else{
+        guard let keyboard = (info.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else{
             return
         }
          self.ratingView?.frame.origin.y += keyboard.size.height

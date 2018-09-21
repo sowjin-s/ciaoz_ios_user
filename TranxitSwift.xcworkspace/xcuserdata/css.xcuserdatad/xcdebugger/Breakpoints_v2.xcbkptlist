@@ -50,15 +50,6 @@
                </BreakpointActionProxy>
             </Actions>
             <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__clang_call_terminate"
-                  moduleName = "libglInterpose.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  offsetFromSymbolStart = "13436">
-               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -186,12 +177,12 @@
                   moduleName = "User"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/css/Documents/Jeff%20Space/Appoets/Projects/Tranxit_Rollbacked%20/tranxitswiftbase_ios_user/TranxitSwift/RideNowView.swift"
-                  timestampString = "559119108.455547"
+                  timestampString = "559231583.967015"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "433"
                   endingLineNumber = "433"
-                  offsetFromSymbolStart = "56">
+                  offsetFromSymbolStart = "65">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -201,12 +192,12 @@
                   moduleName = "User"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/css/Documents/Jeff%20Space/Appoets/Projects/Tranxit_Rollbacked%20/tranxitswiftbase_ios_user/TranxitSwift/RideNowView.swift"
-                  timestampString = "559119108.457426"
+                  timestampString = "559231583.9702049"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "433"
                   endingLineNumber = "433"
-                  offsetFromSymbolStart = "36">
+                  offsetFromSymbolStart = "34">
                </Location>
             </Locations>
          </BreakpointContent>

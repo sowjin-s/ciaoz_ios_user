@@ -1,10 +1,10 @@
-/*
- Localizable.strings
- TranxitSwift
- 
- Created by CSS on 21/09/18.
- Copyright © 2018 Appoets. All rights reserved.
- */
+/* 
+  Localizable.strings
+  TranxitSwift
+
+  Created by CSS on 21/09/18.
+  Copyright © 2018 Appoets. All rights reserved.
+*/
 
 "Write Something" = "Write Something";
 "No Chat History Found" = "No Chat History Found";

@@ -32,7 +32,7 @@ extension CouponView {
         self.pageControl.currentPage = 0
         self.pageControl.pageIndicatorTintColor = .lightGray
         self.pageControl.currentPageIndicatorTintColor = .secondary
-        self.pageControl.addTarget(self, action: #selector(self.pageControlAction(sender:)), for: UIControlEvents.valueChanged)
+        self.pageControl.addTarget(self, action: #selector(self.pageControlAction(sender:)), for: UIControl.Event.valueChanged)
         self.collectionView.register(UINib(nibName: XIB.Names.CouponCollectionViewCell, bundle: nil), forCellWithReuseIdentifier: XIB.Names.CouponCollectionViewCell)
         self.collectionView.delegate = self
         self.collectionView.dataSource = self

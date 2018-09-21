@@ -353,7 +353,7 @@ extension SingleChatController {
         
         SelectImageView.main.show(imagePickerIn: self) { (images) in
             
-            if let image = images.first, let imageData = image.resizeImage(newWidth: 400), let data = UIImagePNGRepresentation(imageData), let currentId = self.currentUser.id {
+            if let image = images.first, let imageData = image.resizeImage(newWidth: 400), let data = imageData.pngData(), let currentId = self.currentUser.id {
                 
                 self.progressViewImage.isHidden = false
                 
@@ -635,7 +635,7 @@ extension SingleChatController : UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         if self.datasource[indexPath.row].response?.type == Mime.text.rawValue {
-            return UITableViewAutomaticDimension
+            return UITableView.automaticDimension
         }
         
         return 400 * (568 / UIScreen.main.bounds.height)

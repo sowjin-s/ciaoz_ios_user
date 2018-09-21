@@ -193,7 +193,7 @@ extension InvoiceView {
         self.labelToPayString.text = (isShowingRecipt ? Constants.string.paid : Constants.string.toPay).localize()
 
         self.labelBooking.text = request.booking_id
-        self.labelDistanceTravelled.text = "\(Float.removeNil(request.payment?.distance)) \(String.removeNil(User.main.measurement))"
+        self.labelDistanceTravelled.text = "\(String.removeNil(request.distance)) \(String.removeNil(User.main.measurement))"
         self.labelTimeTaken.text = "\(String.removeNil(request.travel_time)) \(Constants.string.mins.localize())"
         self.paymentType = request.payment_mode ?? .NONE
         self.serviceCalculator = request.service?.calculator ?? .NONE

@@ -43,8 +43,8 @@ extension CouponCollectionViewController {
         self.collectionView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 1).isActive = true
          self.collectionView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 1).isActive = true
         if #available(iOS 11.0, *) {
-            self.collectionView.centerXAnchor.constraintEqualToSystemSpacingAfter(self.view.centerXAnchor, multiplier: 1).isActive = true
-            self.collectionView.centerYAnchor.constraintEqualToSystemSpacingBelow(self.view.centerYAnchor, multiplier: 1).isActive = true
+            self.collectionView.centerXAnchor.constraint(equalToSystemSpacingAfter: self.view.centerXAnchor, multiplier: 1).isActive = true
+            self.collectionView.centerYAnchor.constraint(equalToSystemSpacingBelow: self.view.centerYAnchor, multiplier: 1).isActive = true
         }
         self.collectionView?.register(UINib(nibName: XIB.Names.CouponCollectionViewCell, bundle: nil), forCellWithReuseIdentifier: XIB.Names.CouponCollectionViewCell)
         self.navigationController?.isNavigationBarHidden = false

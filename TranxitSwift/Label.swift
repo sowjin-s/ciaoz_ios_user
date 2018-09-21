@@ -66,12 +66,12 @@ class Label : UILabel {
     
     private func updateAttributedText(){
         
-        let mutableString = NSMutableAttributedString(string: String.removeNil(self.text), attributes: [NSAttributedStringKey.font: self.font ?? (UIFont(name: "Lato-Regular", size: 16.0))!])
+        let mutableString = NSMutableAttributedString(string: String.removeNil(self.text), attributes: [NSAttributedString.Key.font: self.font ?? (UIFont(name: "Lato-Regular", size: 16.0))!])
         
-        var attributes = [NSAttributedStringKey : Any]()
+        var attributes = [NSAttributedString.Key : Any]()
         
         if isUnderLined{
-            attributes.updateValue(NSUnderlineStyle.styleSingle.rawValue, forKey: .underlineStyle)
+            attributes.updateValue(NSUnderlineStyle.single.rawValue, forKey: .underlineStyle)
         }
         attributes.updateValue(attributeColor, forKey: .foregroundColor)
         //   attributes.updateValue(UIFont(name: "Lato-Heavy", size: 20.0)!, forKey : NSAttributedStringKey.font)

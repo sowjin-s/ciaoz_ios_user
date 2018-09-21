@@ -389,7 +389,7 @@ extension HomeViewController {
                 self.selectionViewAction(in: senderView)
             }
             self.selectedLocationView.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
-            self.viewAddress.bringSubview(toFront: self.selectedLocationView)
+            self.viewAddress.bringSubviewToFront(self.selectedLocationView)
             // self.showLocationView()
         }
         

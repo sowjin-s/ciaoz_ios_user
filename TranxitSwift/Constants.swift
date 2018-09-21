@@ -221,6 +221,8 @@ struct Constants {
     let validity = "Validity"
     let paid = "Paid"
     let noCoupons = "No Coupons"
+    let english = "English"
+    let spanish = "Spanish"
 }
 
 
@@ -283,10 +285,29 @@ enum DeviceType : String, Codable {
 
 //Lanugage
 
-enum Language : String {
+enum Language : String, Codable {
     case english = "en"
-   // case spanish = "Spanish"
-    static var count: Int{ return 1 }
+    case spanish = "es"
+    
+    var code : String {
+        switch self {
+        case .english:
+            return "en"
+        case .spanish:
+            return "es"
+        }
+    }
+    
+    var title : String {
+        switch self {
+        case .english:
+            return Constants.string.english
+        case .spanish:
+            return Constants.string.spanish
+        }
+    }
+    
+    static var count: Int{ return 2 }
 }
 
 

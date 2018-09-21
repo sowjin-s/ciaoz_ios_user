@@ -79,7 +79,7 @@ extension EmailViewController {
     private func localize() {
         
         self.textFieldEmail.placeholder = Constants.string.emailPlaceHolder.localize()
-        let attr :[NSAttributedStringKey : Any]  = [.font : UIFont.systemFont(ofSize: 14)]
+        let attr :[NSAttributedString.Key : Any]  = [.font : UIFont.systemFont(ofSize: 14)]
         self.buttonCreateAcount.setAttributedTitle(NSAttributedString(string: Constants.string.iNeedTocreateAnAccount.localize(), attributes: attr), for: .normal)
         self.navigationItem.title = Constants.string.whatsYourEmailAddress.localize()
         

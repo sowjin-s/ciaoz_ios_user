@@ -23,6 +23,7 @@ class Profile : JSONSerializable {
     var sos : String?
     var app_contact : String?
     var measurement : String?
+    var language : Language?
     
     required init(from decoder: Decoder) throws {
         
@@ -44,11 +45,10 @@ class Profile : JSONSerializable {
         } else {
          mobile = try? values.decode(String.self, forKey: .mobile)
         }
-        
+        language = try? values.decode(Language.self, forKey: .language)
     }
     init() {
     }
     
 }
-
 

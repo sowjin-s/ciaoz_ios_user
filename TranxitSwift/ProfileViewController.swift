@@ -116,8 +116,8 @@ extension ProfileViewController {
     
     private func setDesign() {
         
-        var attributes : [ NSAttributedStringKey : Any ] = [.font : UIFont.systemFont(ofSize: 18, weight: .bold)]
-        attributes.updateValue(UIColor.white, forKey: NSAttributedStringKey.foregroundColor)
+        var attributes : [ NSAttributedString.Key : Any ] = [.font : UIFont.systemFont(ofSize: 18, weight: .bold)]
+        attributes.updateValue(UIColor.white, forKey: NSAttributedString.Key.foregroundColor)
         self.buttonSave.setAttributedTitle(NSAttributedString(string: Constants.string.save.uppercased().localize(), attributes: attributes), for: .normal)
         [textFieldFirst, textFieldLast, textFieldEmail, textFieldPhone].forEach({
             $0?.borderInactiveColor = nil
@@ -207,7 +207,7 @@ extension ProfileViewController {
         json.removeValue(forKey: "wallet_balance")
         json.removeValue(forKey: "sos")
 
-        if self.changedImage != nil, let dataImg = UIImagePNGRepresentation(self.changedImage!) {
+        if self.changedImage != nil, let dataImg = self.changedImage!.pngData() {
             self.presenter?.post(api: .updateProfile, imageData: [WebConstants.string.picture : dataImg], parameters: json)
         } else {
             self.presenter?.post(api: .updateProfile, data: profile.toData())

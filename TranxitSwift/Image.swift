@@ -25,11 +25,11 @@ extension UIImage {
     
     func isEqual(to image : UIImage?) -> Bool {
         
-        guard  image != nil, let imageData1 = UIImagePNGRepresentation(image!)  else {
+        guard  image != nil, let imageData1 = image!.pngData()  else {
             return false
         }
         
-        guard let imageData2 = UIImagePNGRepresentation(self) else {
+        guard let imageData2 = self.pngData() else {
             return false
         }
         

@@ -85,13 +85,17 @@ class Common {
         User.main.sos = profile?.sos
         User.main.dispatcherNumber = profile?.app_contact
         User.main.measurement = profile?.measurement
+        if let language = profile?.language {
+            UserDefaults.standard.set(language.rawValue, forKey: Keys.list.language)
+            setLocalization(language: language)
+        }
     }
     
     // MARK:- Make Call
     class func call(to number : String?) {
         
         if let providerNumber = number, let url = URL(string: "tel://\(providerNumber)"), UIApplication.shared.canOpenURL(url) {
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
         } else {
             UIScreen.main.focusedView?.make(toast: Constants.string.cannotMakeCallAtThisMoment.localize())
         }
@@ -170,3 +174,8 @@ class Common {
 
 
 
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
+}
