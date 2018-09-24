@@ -680,7 +680,9 @@ extension HomeViewController {
     //                        showAlert(message: error?.localizedDescription, okHandler: nil, fromView: self)
     //                    }
                 } else if request != nil {
-                   
+                    if let requestId = request?.id {
+                        self.currentRequestId = requestId
+                    }
                     if let pLatitude = request?.provider?.latitude, let pLongitude = request?.provider?.longitude {
                         DispatchQueue.main.async {
                             self.moveProviderMarker(to: LocationCoordinate(latitude: pLatitude, longitude: pLongitude))

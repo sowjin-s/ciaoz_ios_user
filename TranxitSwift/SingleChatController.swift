@@ -52,6 +52,7 @@ class SingleChatController: UIViewController {
     private var chatType :  ChatType!   // Current Chat eg:-  single or group
     
     private var currentUserId = 0
+    private var requestId = 0
     
     private var isSendShown = false {
         
@@ -102,11 +103,12 @@ extension SingleChatController {
     
     //MARK:- Set Current User Data
     
-    func set(user : Provider, chatType : ChatType = .single){
+    func set(user : Provider, chatType : ChatType = .single, requestId : Int){
         
         self.currentUser = user
         self.chatType = chatType
         self.currentUserId = currentUser.id ?? 0
+        self.requestId = requestId
         
     }
     
@@ -119,10 +121,8 @@ extension SingleChatController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        
         super.viewWillDisappear(animated)
         self.navigationController?.navigationBar.removeGestureRecognizer(self.navigationTapgesture)
-        
     }
     
     
@@ -241,7 +241,7 @@ extension SingleChatController {
     
     private func startObservers(){
         
-        let chatPath = Common.getChatId(with: currentUser.id)
+        let chatPath = Common.getChatId(with: requestId)
         
         let childObserver = FirebaseHelper.shared.observe(path : chatPath, with: .childAdded) { (childValue) in
             
@@ -353,11 +353,11 @@ extension SingleChatController {
         
         SelectImageView.main.show(imagePickerIn: self) { (images) in
             
-            if let image = images.first, let imageData = image.resizeImage(newWidth: 400), let data = imageData.pngData(), let currentId = self.currentUser.id {
+            if let image = images.first, let imageData = image.resizeImage(newWidth: 400), let data = imageData.pngData() {
                 
                 self.progressViewImage.isHidden = false
                 
-                let task = FirebaseHelper.shared.write(to: currentId, with: data, mime: .image, type : self.chatType, completion: { (isCompleted) in
+                let task = FirebaseHelper.shared.write(to: self.requestId, with: data, mime: .image, type : self.chatType, completion: { (isCompleted) in
                     
                     DispatchQueue.main.async {
                         self.progressViewImage.isHidden = true
@@ -402,12 +402,11 @@ extension SingleChatController {
         
 //        self.validatedIfBlocked {
         
-            FirebaseHelper.shared.write(to: self.currentUserId, with: self.textViewSingleChat.text, type : self.chatType)
+        FirebaseHelper.shared.write(to: self.requestId, with: self.textViewSingleChat.text, type : self.chatType, userId : Int.removeNil(User.main.id), driverId : currentUserId)
            // self.sendPush(with: self.textViewSingleChat.text)
            // self.initimateServerAboutChat()
-        
+        let message = "\(User.main.firstName ?? .Empty) : \(self.textViewSingleChat.text ?? .Empty)"
         DispatchQueue.global(qos: .background).async {
-            let message = "\(User.main.firstName ?? .Empty) : \(self.textViewSingleChat.text ?? .Empty)"
             self.presenter?.post(api: .chatPush, data: ChatPush(sender : .provider, user_id: self.currentUserId, message: message).toData())
         }
         self.textViewSingleChat.text = .Empty
@@ -589,13 +588,13 @@ extension SingleChatController : UITableViewDataSource, UITableViewDelegate {
         
         if let chat = datasource[indexPath.row].response, let tableCell = tableView.dequeueReusableCell(withIdentifier: getCellId(from: chat), for: indexPath) as? ChatCell {
             
-            if chat.user == User.main.id {
+            if chat.sender == UserType.user.rawValue {
                 
-                tableCell.setSender(values: datasource[indexPath.row])
+                tableCell.setSender(values: datasource[indexPath.row], requestId: requestId)
                 
             } else {
                 
-                tableCell.setRecieved(values: datasource[indexPath.row], chatType: self.chatType)
+                tableCell.setRecieved(values: datasource[indexPath.row], chatType: self.chatType, requestId: self.requestId)
             
                 
             }
@@ -661,7 +660,7 @@ extension SingleChatController : UITableViewDataSource, UITableViewDelegate {
 
     private func getCellId(from entity : ChatEntity)->String {
         
-        if entity.senderType == UserType.user.rawValue {
+        if entity.sender == UserType.user.rawValue {
             return entity.type == Mime.text.rawValue ? senderCellTextId : senderMediaId
         } else {
             return entity.type == Mime.text.rawValue ? recieverCellTextId : reciverMediaId

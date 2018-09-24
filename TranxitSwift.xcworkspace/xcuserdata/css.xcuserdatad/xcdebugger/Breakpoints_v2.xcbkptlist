@@ -50,6 +50,15 @@
                </BreakpointActionProxy>
             </Actions>
             <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__clang_call_terminate"
+                  moduleName = "libglInterpose.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  offsetFromSymbolStart = "13436">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -129,7 +138,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TranxitSwift/HomeViewController+Extension.swift"
-            timestampString = "559130796.160845"
+            timestampString = "559479441.2783999"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "222"
@@ -177,12 +186,12 @@
                   moduleName = "User"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/css/Documents/Jeff%20Space/Appoets/Projects/Tranxit_Rollbacked%20/tranxitswiftbase_ios_user/TranxitSwift/RideNowView.swift"
-                  timestampString = "559231583.967015"
+                  timestampString = "559465154.740911"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "433"
                   endingLineNumber = "433"
-                  offsetFromSymbolStart = "65">
+                  offsetFromSymbolStart = "56">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -192,12 +201,12 @@
                   moduleName = "User"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/css/Documents/Jeff%20Space/Appoets/Projects/Tranxit_Rollbacked%20/tranxitswiftbase_ios_user/TranxitSwift/RideNowView.swift"
-                  timestampString = "559231583.9702049"
+                  timestampString = "559465154.743055"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "433"
                   endingLineNumber = "433"
-                  offsetFromSymbolStart = "34">
+                  offsetFromSymbolStart = "36">
                </Location>
             </Locations>
          </BreakpointContent>

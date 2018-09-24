@@ -159,12 +159,12 @@ class Common {
     
     // MARK:- Get Chat Id
     
-    class func  getChatId(with providerId : Int?) -> String {
+    class func getChatId(with requestId : Int?) -> String {
     
-        guard let userId = User.main.id, let providerId = providerId else {
+        guard  let requestId = requestId else {
             return ProcessInfo().globallyUniqueString }
     
-        return userId <= providerId ? "u\(userId)_p\(providerId)" : "p\(providerId)_u\(userId)"
+        return "\(requestId)" //userId <= providerId ? "u\(userId)_p\(providerId)" : "p\(providerId)_u\(userId)"
     
     }
     

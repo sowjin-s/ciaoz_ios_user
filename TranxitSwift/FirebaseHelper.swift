@@ -25,9 +25,9 @@ class FirebaseHelper{
     
     // Write Text Message
     
-    func write(to userId : Int, with text : String, type chatType : ChatType = .single){
+    func write(to requestId : Int, with text : String, type chatType : ChatType = .single,userId : Int, driverId : Int){
         
-        self.storeData(to: userId, with: text, mime: .text, type: chatType)
+        self.storeData(to: requestId, with: text, mime: .text, type: chatType, userId: userId, driverId: driverId)
         
     }
     
@@ -44,7 +44,7 @@ class FirebaseHelper{
             guard url != nil else {
                 return
             }
-            self.storeData(to: userId, with: url, mime: type, type: chatType)
+            self.storeData(to: userId, with: url, mime: type, type: chatType, userId: 0, driverId: 0)
             
         })
         
@@ -73,7 +73,7 @@ class FirebaseHelper{
                 }
             }
             
-            self.storeData(to: userId, with: urlValue, mime: type, type: chatType)
+            self.storeData(to: userId, with: urlValue, mime: type, type: chatType, userId: 0, driverId: 0)
             
         })
         
@@ -82,9 +82,9 @@ class FirebaseHelper{
     
     // Update Message in Specific Path
     
-    func update(chat: ChatEntity, key : String, toUser user : Int, type chatType : ChatType = .single){
+    func update(chat: ChatEntity, key : String, toUser requestId : Int, type chatType : ChatType = .single){
         
-        let chatPath = Common.getChatId(with: user)
+        let chatPath = Common.getChatId(with: requestId)
         chat.timestamp = (chat.timestamp ?? 0) * 1000 // multiplying for Date Fix Android
         self.update(chat: chat, key: key, inRoom: chatPath)
         
@@ -165,16 +165,17 @@ extension FirebaseHelper {
     
     // Common Function to Store Data
     
-    private func storeData(to userId : Int, with string : String?, mime type : Mime, type chatType : ChatType){
+    private func storeData(to requestId : Int, with string : String?, mime type : Mime, type chatType : ChatType, userId : Int, driverId : Int){
         let chat = ChatEntity()
         chat.read = MessageStatus.sent.rawValue
         chat.user = User.main.id
-        chat.sender = userId
+        chat.sender = UserType.user.rawValue
         chat.number = String.removeNil(User.main.mobile)
         chat.readedMembers = [User.main.id!]
         chat.timestamp = Formatter.shared.removeDecimal(from: Date().timeIntervalSince1970*1000)
         chat.type = type.rawValue
-        chat.senderType = UserType.user.rawValue
+        chat.userId = userId
+        chat.driverId = driverId
         
         if type == .text {
             chat.text = string
@@ -187,7 +188,7 @@ extension FirebaseHelper {
         }
         
         self.initializeDB()
-        let chatPath = Common.getChatId(with: userId)
+        let chatPath = Common.getChatId(with: requestId)
         self.ref?.child(chatPath).child(self.ref!.childByAutoId().key).setValue(chat.JSONRepresentation)
     }
     
@@ -276,7 +277,7 @@ extension FirebaseHelper {
         self.initializeDB()
         self.ref!.child(path).queryOrderedByKey().queryLimited(toLast: limit).observeSingleEvent(of: eventType) { (snap) in
             value(self.getModal(from: snap))
-            print(snap.childrenCount,"    \n",snap.value)
+           // print(snap.childrenCount,"    \n",snap.value)
         }
     }
     
@@ -350,7 +351,7 @@ extension FirebaseHelper {
         response?.key = snap.key
         
         chat?.read = snap.value.value(forKey: FirebaseConstants.main.read) as? Int
-        chat?.sender = snap.value.value(forKey: FirebaseConstants.main.sender) as? Int
+        chat?.sender = snap.value.value(forKey: FirebaseConstants.main.sender) as? String
         chat?.user = snap.value.value(forKey: FirebaseConstants.main.user) as? Int
         chat?.text = snap.value.value(forKey: FirebaseConstants.main.text) as? String
         if let dateValue = (snap.value.value(forKey: FirebaseConstants.main.timestamp) as? Int), dateValue>1000 {
@@ -361,7 +362,6 @@ extension FirebaseHelper {
         chat?.url = snap.value.value(forKey: FirebaseConstants.main.url) as? String
         chat?.number = snap.value.value(forKey: FirebaseConstants.main.number) as? String
         chat?.groupId = snap.value.value(forKey: FirebaseConstants.main.groupId) as? Int
-        chat?.senderType = snap.value.value(forKey: FirebaseConstants.main.senderType) as? String
         if chat?.type == Mime.audio.rawValue{ // Setting initial value for Audio File
             response?.progress = 0
         }

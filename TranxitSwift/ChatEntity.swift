@@ -11,7 +11,7 @@ import Foundation
 class ChatEntity : JSONSerializable {
     
     var user : Int?
-    var sender : Int?
+    var sender : String?
     var text : String?
     var url : String?
     var timestamp : Int?
@@ -20,5 +20,7 @@ class ChatEntity : JSONSerializable {
     var number : String?
     var groupId : Int?
     var readedMembers : [Int]?
-    var senderType : String?
+//  var senderType : String?
+    var userId : Int?
+    var driverId : Int?
 }

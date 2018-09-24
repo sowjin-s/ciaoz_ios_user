@@ -429,7 +429,7 @@ extension HomeViewController {
             //            lottieView.play()
             
             let marker = GMSMarker(position: CLLocationCoordinate2DMake(locationData.latitude!, locationData.longitude!))
-            marker.icon = #imageLiteral(resourceName: "map-vehicle-icon-black").resizeImage(newWidth: 40)
+            marker.icon = #imageLiteral(resourceName: "map-vehicle-icon-black").resizeImage(newWidth: 20)
             marker.groundAnchor = CGPoint(x: 0.5, y: 1)
             marker.map = mapViewHelper?.mapView
             self.markersProviders.append(marker)
@@ -706,7 +706,7 @@ extension HomeViewController {
             }
             floaty.addItem(icon: #imageLiteral(resourceName: "chatIcon").resizeImage(newWidth: 25)) { (_) in
                 if let vc = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.Ids.SingleChatController) as? SingleChatController {
-                    vc.set(user: provider!)
+                    vc.set(user: provider!, requestId: self.currentRequestId)
                     let navigation = UINavigationController(rootViewController: vc)
                     self.present(navigation, animated: true, completion: nil)
                 }
