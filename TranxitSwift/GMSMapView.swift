@@ -17,6 +17,7 @@ private struct MapPath : Decodable{
 private struct Route : Decodable{
     
     var overview_polyline : OverView?
+    var legs : [LegsObject]?
 }
 
 private struct OverView : Decodable {
@@ -24,13 +25,38 @@ private struct OverView : Decodable {
     var points : String?
 }
 
+private struct LegsObject : Decodable {
+    var duration : DurationObject?
+}
 
+private struct DurationObject : Decodable {
+    var text : String?
+}
 
 extension GMSMapView {
     
     //MARK:- Call API for polygon points
     
     func drawPolygon(from source: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D){
+        self.getGoogleResponse(between: source, to: destination) { (mapPath) in
+            if let points = mapPath.routes?.first?.overview_polyline?.points {
+                self.drawPath(with: points)
+            }
+        }
+    }
+    
+    // MARK;- Get estimation between coordinates
+    
+    func getEstimation(between source: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D, completion : @escaping((String)->Void)) {
+        self.getGoogleResponse(between: source, to: destination) { (mapPath) in
+            if let estimationString = mapPath.routes?.first?.legs?.first?.duration?.text {
+                completion(estimationString)
+            }
+        }
+    }
+    
+    // Get response Between Coordinates
+    private func getGoogleResponse(between source: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D, completion : @escaping((MapPath)->Void)) {
         
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
@@ -49,26 +75,17 @@ extension GMSMapView {
                 
                 do {
                     
-                    let route = try JSONDecoder().decode(MapPath.self, from: data!)
-                    
-                    if let points = route.routes?.first?.overview_polyline?.points {
-                        self.drawPath(with: points)
-                    }
-                    
-                   // print(route.routes?.first?.overview_polyline?.points)
+                    let mapPath = try JSONDecoder().decode(MapPath.self, from: data!)
+                     completion(mapPath)
+                    // print(route.routes?.first?.overview_polyline?.points)
                     
                 } catch let error {
                     
                     print("Failed to draw ",error.localizedDescription)
                 }
                 
-                
                 }.resume()
-            
-            
         }
-        
-        
     }
     
     //MARK:- Draw polygon

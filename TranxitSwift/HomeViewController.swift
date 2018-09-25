@@ -128,6 +128,7 @@
         }()
         
         var currentRequestId = 0
+        var timerETA : Timer?
         
         //MARKERS
         
