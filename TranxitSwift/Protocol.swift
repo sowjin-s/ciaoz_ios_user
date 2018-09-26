@@ -196,6 +196,7 @@ extension PostViewProtocol {
     func getCardEnities(api : Base, data : [CardEntity]) {return}
     func getWalletEntity(api : Base, data : WalletEntity?) {return}
     func getPromocodeList(api : Base, data : [PromocodeEntity]) {return}
+    
 }
 
 
