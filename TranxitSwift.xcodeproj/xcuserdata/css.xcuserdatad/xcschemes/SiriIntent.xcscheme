@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0940"
+   LastUpgradeVersion = "1000"
    wasCreatedForAppExtension = "YES"
    version = "2.0">
    <BuildAction
@@ -30,8 +30,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8894E21F1FE7D7980097B4B3"
-               BuildableName = "User.app"
-               BlueprintName = "User"
+               BuildableName = "TranxitUser.app"
+               BlueprintName = "TranxitUser"
                ReferencedContainer = "container:TranxitSwift.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -97,8 +97,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8894E21F1FE7D7980097B4B3"
-            BuildableName = "User.app"
-            BlueprintName = "User"
+            BuildableName = "TranxitUser.app"
+            BlueprintName = "TranxitUser"
             ReferencedContainer = "container:TranxitSwift.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
