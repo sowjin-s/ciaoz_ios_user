@@ -152,7 +152,7 @@
 		08BF24BB20BD71F3003A4B96 /* ChangeResetPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BF24BA20BD71F3003A4B96 /* ChangeResetPasswordController.swift */; };
 		08BF24BE20BD80AE003A4B96 /* UserBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BF24BD20BD80AE003A4B96 /* UserBase.swift */; };
 		08BF24C020BD864C003A4B96 /* Default.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BF24BF20BD864C003A4B96 /* Default.swift */; };
-		08C7D146215CA83000F65F7B /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08032BD2204812A0006BFC4E /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		08C7D146215CA83000F65F7B /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08032BD2204812A0006BFC4E /* Alamofire.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		08C8F2272004A60A0065CE24 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C8F2262004A60A0065CE24 /* Image.swift */; };
 		08C9E90E20D244F7002928EA /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C9E90D20D244F7002928EA /* Rating.swift */; };
 		08CA2F7C20D927DC00F99FCA /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA2F7B20D927DC00F99FCA /* Reachability.swift */; };
