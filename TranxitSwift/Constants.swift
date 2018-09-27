@@ -223,6 +223,7 @@ struct Constants {
     let noCoupons = "No Coupons"
     let english = "English"
     let spanish = "Spanish"
+    let becomeADriver = "Become a Driver"
 }
 
 

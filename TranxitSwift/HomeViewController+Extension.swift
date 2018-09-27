@@ -151,6 +151,7 @@ extension HomeViewController {
             self.rideNowView?.alpha = isHide ? 0 : 1
             self.floatyButton?.alpha = isHide ? 0 : 1
             self.reasonView?.alpha = isHide ? 0 : 1
+            self.buttonSOS.alpha = isHide ? 0 : 1
         }
         
     }
@@ -546,10 +547,7 @@ extension HomeViewController {
             if let dAddress = request.d_address, let dLatitude = request.d_latitude, let dLongitude = request.d_longitude, let sAddress = request.s_address, let sLattitude = request.s_latitude, let sLongitude = request.s_longitude {
                 self.destinationLocationDetail = LocationDetail(dAddress, LocationCoordinate(latitude: dLatitude, longitude: dLongitude))
                 self.sourceLocationDetail?.value = LocationDetail(sAddress,LocationCoordinate(latitude: sLattitude, longitude: sLongitude))
-                // MARK:- Showing Provider ETA
-                if let pLatitude = request.provider?.latitude, let pLongitude = request.provider?.longitude, [RideStatus.accepted, .started].contains(riderStatus) {
-                    self.showETA(with: LocationCoordinate(latitude: pLatitude, longitude: pLongitude))
-                }
+                
                 DispatchQueue.main.async {
                     self.drawPolyline()
                 }
@@ -724,7 +722,7 @@ extension HomeViewController {
     
     //MARK:- Set ETA
     
-    private func showETA(with providerLocation : LocationCoordinate) {
+    func showETA(with providerLocation : LocationCoordinate) {
         guard let sourceLocation = self.sourceLocationDetail?.value else {return}
         self.mapViewHelper?.mapView?.getEstimation(between: sourceLocation.coordinate, to: providerLocation, completion: { (estimation) in
             DispatchQueue.main.async {

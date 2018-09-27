@@ -41,7 +41,6 @@
         
         var providerLastLocation = LocationCoordinate()
         lazy var markerProviderLocation : GMSMarker = {  // Provider Location Marker
-            
             let marker = GMSMarker()
             let imageView = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
             imageView.contentMode =  .scaleAspectFit
@@ -50,7 +49,6 @@
             marker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
             marker.map = self.mapViewHelper?.mapView
             return marker
-            
         }()
         
         private var selectedLocationView = UIView() // View to change the location pinpoint
@@ -687,6 +685,11 @@ extension HomeViewController {
                     if let pLatitude = request?.provider?.latitude, let pLongitude = request?.provider?.longitude {
                         DispatchQueue.main.async {
                             self.moveProviderMarker(to: LocationCoordinate(latitude: pLatitude, longitude: pLongitude))
+                            // MARK:- Showing Provider ETA
+                            let currentStatus = request?.status ?? .none
+                            if [RideStatus.accepted, .started, .arrived].contains(currentStatus) {
+                                self.showETA(with: LocationCoordinate(latitude: pLatitude, longitude: pLongitude))
+                            }
                         }
                     }
                     guard riderStatus != request?.status else {

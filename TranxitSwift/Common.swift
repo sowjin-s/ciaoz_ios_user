@@ -102,6 +102,12 @@ class Common {
         
     }
     
+    class func open(url urlString: String) {
+        if let  url = URL(string: urlString), UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
+        }
+    }
+    
     // MARK:- Send Email
     class func sendEmail(to mailId : [String], from view : UIViewController & MFMailComposeViewControllerDelegate) {
         

@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_UserVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_UserVersionString[];
+FOUNDATION_EXPORT double Pods_TranxitUserVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_TranxitUserVersionString[];
 

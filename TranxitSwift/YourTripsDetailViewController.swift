@@ -145,7 +145,7 @@ extension YourTripsDetailViewController {
         
         self.imageViewProvider.makeRoundedCorner()
         let height = tableView.tableFooterView?.frame.origin.y ?? 0//(self.buttonViewReciptAndCall.convert(self.buttonViewReciptAndCall.frame, to: UIApplication.shared.keyWindow ?? self.tableView).origin.y+self.buttonViewReciptAndCall.frame.height)
-        guard height < UIScreen.main.bounds.height else { return }
+        guard height <= UIScreen.main.bounds.height else { return }
         let footerHeight = UIScreen.main.bounds.height-height
         self.tableView.tableFooterView?.frame.size.height = (footerHeight-(self.buttonViewReciptAndCall.frame.height*2)-(self.navigationController?.navigationBar.frame.height ?? 0))
     }

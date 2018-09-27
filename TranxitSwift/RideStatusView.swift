@@ -120,7 +120,7 @@ extension RideStatusView {
         
         self.request = values
         self.currentStatus = values.status ?? .none
-        self.labelETA.isHidden = !([RideStatus.accepted,.started].contains(values.status!))
+        self.labelETA.isHidden = !([RideStatus.accepted,.started,.arrived].contains(self.currentStatus))
         self.labelTopTitle.text = {
             switch values.status! {
                 case .accepted, .started:

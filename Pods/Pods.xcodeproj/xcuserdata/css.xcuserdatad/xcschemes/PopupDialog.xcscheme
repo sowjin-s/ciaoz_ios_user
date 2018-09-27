@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D01CAF6A1BBEACBB7D8D45D42D12B0EC"
+               BlueprintIdentifier = "E4BEA5DF466A4D72E81A135D65510D3D"
                BuildableName = "PopupDialog.framework"
                BlueprintName = "PopupDialog"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D01CAF6A1BBEACBB7D8D45D42D12B0EC"
+            BlueprintIdentifier = "E4BEA5DF466A4D72E81A135D65510D3D"
             BuildableName = "PopupDialog.framework"
             BlueprintName = "PopupDialog"
             ReferencedContainer = "container:Pods.xcodeproj">
