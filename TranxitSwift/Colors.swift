@@ -64,19 +64,16 @@ extension UIColor {
     }
     
     //Gradient Start Color
-    
     static var startGradient : UIColor {
         return UIColor(red: 83/255, green: 173/255, blue: 46/255, alpha: 1)
     }
     
     //Gradient End Color
-    
     static var endGradient : UIColor {
         return UIColor(red: 158/255, green: 178/255, blue: 45/255, alpha: 1)
     }
     
     // Blue Color
-    
     static var brightBlue : UIColor {
         return UIColor(red: 40/255, green: 25/255, blue: 255/255, alpha: 1)
     }
@@ -94,9 +91,7 @@ extension UIColor {
             return colorAsUInt
             
             // colorAsUInt == 0xCC6699 // true
-            
         }
-        
         return 0xCC6699
     }
 }

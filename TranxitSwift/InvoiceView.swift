@@ -44,7 +44,7 @@ class InvoiceView: UIView {
     @IBOutlet private weak var viewTax : UIView!
     @IBOutlet private weak var viewWallet : UIView!
     @IBOutlet private weak var viewDiscount : UIView!
-   // @IBOutlet private weak var viewToPay: UIView!
+    @IBOutlet private weak var viewDistance: UIView!
     @IBOutlet private weak var viewTips : UIView!
     
     private var viewTipsXib : ViewTips?
@@ -130,6 +130,7 @@ extension InvoiceView {
         self.tipsAmount = 0
         self.localize()
         self.setDesign()
+        self.viewDistance.isHidden = true 
     }
     
     // MARK:- Set Designs
