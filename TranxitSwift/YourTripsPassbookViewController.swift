@@ -101,7 +101,7 @@ extension YourTripsPassbookViewController {
     private func registerCell(){
         
         tableViewList.register(UINib(nibName: XIB.Names.YourTripCell, bundle: nil), forCellReuseIdentifier: XIB.Names.YourTripCell)
-        tableViewList.register(UINib(nibName: XIB.Names.PassbookTableViewCell, bundle: nil), forCellReuseIdentifier: XIB.Names.PassbookTableViewCell)
+        tableViewList.register(UINib(nibName: XIB.Names.PassbookWalletTransaction, bundle: nil), forCellReuseIdentifier: XIB.Names.PassbookWalletTransaction)
         
     }
     
@@ -231,17 +231,18 @@ extension YourTripsPassbookViewController : UITableViewDelegate,UITableViewDataS
             }
         } else {
             
-            if let cell = tableView.dequeueReusableCell(withIdentifier: XIB.Names.PassbookTableViewCell, for: indexPath) as? PassbookTableViewCell {
-                cell.isWalletSelected = isFirstBlockSelected
+            if let cell = tableView.dequeueReusableCell(withIdentifier: XIB.Names.PassbookWalletTransaction, for: indexPath) as? PassbookWalletTableViewCell {
+               // cell.isWalletSelected = isFirstBlockSelected
                 if isFirstBlockSelected {
                     if datasourceWallet.count>indexPath.row{
-                        cell.set(values: datasourceWallet[indexPath.row])
-                    }
-                } else {
-                    if datasourceCoupon.count>indexPath.row{
-                        cell.set(values: datasourceCoupon[indexPath.row])
+                        cell.set(value: datasourceWallet[indexPath.row])
                     }
                 }
+//                else {
+//                    if datasourceCoupon.count>indexPath.row{
+//                        cell.set(values: datasourceCoupon[indexPath.row])
+//                    }
+//                }
                 return cell
             }
             

@@ -130,8 +130,9 @@
         
         //MARKERS
         
-        private var sourceMarker : GMSMarker = {
+        var sourceMarker : GMSMarker = {
             let marker = GMSMarker()
+            marker.title = Constants.string.ETA.localize()
             marker.appearAnimation = .pop
             marker.icon =  #imageLiteral(resourceName: "sourcePin").resizeImage(newWidth: 30)
             return marker

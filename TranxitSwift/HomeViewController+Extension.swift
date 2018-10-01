@@ -32,8 +32,12 @@ extension HomeViewController {
             self.rideNowView?.show(with: .bottom, completion: nil)
             self.view.addSubview(self.rideNowView!)
             self.isOnBooking = true
-            self.rideNowView?.onClickProceed = { service in 
-                self.showEstimationView(with: service)
+            self.rideNowView?.onClickProceed = { [weak self] service in
+                self?.showEstimationView(with: service)
+            }
+            self.rideNowView?.onClickService = { service in
+                self.sourceMarker.snippet = service?.pricing?.time
+                self.mapViewHelper?.mapView?.selectedMarker = (service?.pricing?.time) == nil ? nil : self.sourceMarker
             }
             //self.rideNowView?.imageViewCard.image = paymentType.image
 //            self.rideNowView?.onClickRideNow = { service in
@@ -73,6 +77,7 @@ extension HomeViewController {
         self.isOnBooking = false
         self.rideNowView?.dismissView(onCompletion: {
             self.rideNowView = nil
+            self.mapViewHelper?.mapView?.selectedMarker = nil
         })
         
     }
@@ -174,9 +179,9 @@ extension HomeViewController {
         self.estimationFareView?.frame = CGRect(x: 0, y: self.view.frame.height-(self.estimationFareView!.bounds.height-heightPadding), width: self.view.frame.width, height: self.estimationFareView!.frame.height-heightPadding)
         self.estimationFareView?.show(with: .bottom, completion: nil)
         self.view.addSubview(self.estimationFareView!)
-        self.estimationFareView?.scheduleAction = { service in
-            self.schedulePickerView(on: { (date) in
-                self.createRequest(for: service, isScheduled: true, scheduleDate: date,cardEntity: selectedPaymentDetail, paymentType: paymentType)
+        self.estimationFareView?.scheduleAction = { [weak self] service in
+            self?.schedulePickerView(on: { (date) in
+            self?.createRequest(for: service, isScheduled: true, scheduleDate: date,cardEntity: selectedPaymentDetail, paymentType: paymentType)
             })
         }
         self.estimationFareView?.rideNowAction = { [weak self] service in

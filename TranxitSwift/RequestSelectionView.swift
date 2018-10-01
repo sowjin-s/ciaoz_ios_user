@@ -24,6 +24,7 @@ class RequestSelectionView: UIView {
     @IBOutlet private weak var buttonCoupon : UIButton!
     @IBOutlet private weak var imageViewModal : UIImageView!
     @IBOutlet private weak var viewImageModalBg : UIView!
+    @IBOutlet private weak var labelWalletBalance : UILabel!
     
     var scheduleAction : ((Service)->())?
     var rideNowAction : ((Service)->())?
@@ -131,6 +132,7 @@ extension RequestSelectionView {
         Common.setFont(to: labelPaymentMode)
         Common.setFont(to: buttonChangePayment)
         Common.setFont(to: buttonCoupon)
+        Common.setFont(to: labelWalletBalance, isTitle: true)
         
     }
     
@@ -150,10 +152,11 @@ extension RequestSelectionView {
     
     func setValues(values : Service) {
         self.service = values
-        self.viewUseWallet.isHidden = !(self.service?.pricing?.wallet_balance != 0)
+        self.viewUseWallet.isHidden = !(Float.removeNil(self.service?.pricing?.wallet_balance)>0)
         self.setEstimationFare(amount: self.service?.pricing?.estimated_fare)
         self.paymentType = User.main.isCashAllowed ? .CASH :( User.main.isCardAllowed ? .CARD : .NONE)
         self.imageViewModal.setImage(with: values.image, placeHolder: #imageLiteral(resourceName: "CarplaceHolder"))
+        self.labelWalletBalance.text = "\(String.removeNil(User.main.currency)) \(Formatter.shared.limit(string: "\(Float.removeNil(self.service?.pricing?.wallet_balance))", maximumDecimal: 2))"
     }
     
     func setEstimationFare(amount : Float?) {

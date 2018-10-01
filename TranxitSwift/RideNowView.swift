@@ -32,6 +32,7 @@ class RideNowView: UIView {
    // var onClickChangePayment : (()->Void)? // Onclick Change Pricing
   //  var onClickSchedule : ((Service?)->Void)? // Onclick schedule
     var onClickProceed : ((Service)->Void)? // Onlclick Ride Now
+    var onClickService : ((Service?)->Void)? // Onclick each servicetype
     private var rateView : RateView?
     private var selectedItem : Service?
     private var timer : Timer?
@@ -379,6 +380,7 @@ extension RideNowView : UICollectionViewDelegate, UICollectionViewDataSource, UI
                 if self.selectedRow == indexPath.row {
                     if !collectionCell.isSelected {
                         collectionCell.isSelected = true
+                        self.onClickService?(self.datasource[indexPath.row])
                     }
                 } else {
                     collectionCell.isSelected = false
@@ -405,6 +407,8 @@ extension RideNowView : UICollectionViewDelegate, UICollectionViewDataSource, UI
             //self.labelCapacity.text = "\(Int.removeNil(self.selectedItem?.capacity))"
             self.selectedRow = indexPath.row
             self.setSurgeViewAndWallet()
+            self.onClickService?(self.selectedItem)  // Send selectedItem to show the ETA on Map
+            
             //self.getProviders(by: id)
         }
         

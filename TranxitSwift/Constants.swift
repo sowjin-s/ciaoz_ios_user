@@ -224,6 +224,7 @@ struct Constants {
     let english = "English"
     let spanish = "Spanish"
     let becomeADriver = "Become a Driver"
+    let balance = "Balance"
 }
 
 

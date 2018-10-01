@@ -64,6 +64,7 @@ struct XIB {
     let ReasonView = "ReasonView"
     let CouponCollectionViewCell = "CouponCollectionViewCell"
     let CouponView = "CouponView"
+    let PassbookWalletTransaction = "PassbookWalletTransaction"
 }
 
 
