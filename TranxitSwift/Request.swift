@@ -48,7 +48,7 @@ class Request : JSONSerializable {
     var address : String?
     var tips : Float?
     var promocode_id : Int?
-    
+    var unit : String?
   /*
     enum CodingKeys: String, CodingKey {
         
@@ -111,6 +111,8 @@ class Request : JSONSerializable {
         rating = try? values.decode(Rating.self, forKey: .rating)
         message = try? values.decode(String.self, forKey: .message)
         paid = try? values.decode(Int.self, forKey: .paid)
+        unit = try? values.decode(String.self, forKey: .unit)
+
     }
  
     init() {   }
