@@ -59,7 +59,7 @@ class RequestSelectionView: UIView {
     private var selectedCard : CardEntity?
     var paymentType : PaymentType = .NONE {
         didSet {
-            let paymentString = paymentType == .CASH ? PaymentType.CASH.rawValue.localize() : "\(String.removeNil(self.selectedCard?.last_four))"
+            let paymentString = paymentType == .CASH ? PaymentType.CASH.rawValue.localize() : "\("XXXX-"+String.removeNil(self.selectedCard?.last_four))"
             let text = "\(Constants.string.payment.localize()):\(paymentString)"
             self.labelPaymentMode.text = text
             self.labelPaymentMode.attributeColor = .secondary

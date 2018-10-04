@@ -506,7 +506,14 @@ extension HomeViewController {
             
         }
         
-        
+    // MARK:- Cancel Request if it exceeds a certain interval
+    
+        @IBAction func validateRequest() {
+            if riderStatus == .searching {
+                UIApplication.shared.keyWindow?.makeToast(Constants.string.noDriversFound.localize())
+                self.cancelRequest()
+            }
+        }
         
         
         // MARK:- SideMenu Button Action
@@ -515,11 +522,7 @@ extension HomeViewController {
             
             
             if self.isOnBooking { // If User is on Ride Selection remove all view and make it to default
-                self.removeLoaderView()
-                self.removeUnnecessaryView(with: .cancelled)
-                self.clearMapview()
-                self.viewAddressOuter.isHidden = false
-                self.viewLocationButtons.isHidden = false
+               self.clearAllView()
                 print("ViewAddressOuter ", #function)
             } else {
                 self.drawerController?.openSide(.left)
@@ -527,6 +530,17 @@ extension HomeViewController {
             }
             
         }
+    
+      // Clear Map
+    
+     func clearAllView() {
+        self.removeLoaderView()
+        self.removeUnnecessaryView(with: .cancelled)
+        self.clearMapview()
+        self.viewAddressOuter.isHidden = false
+        self.viewLocationButtons.isHidden = false
+    }
+    
 
         // MARK:- Show DateTimePicker
         
@@ -558,7 +572,7 @@ extension HomeViewController {
         if let reachability = notification.object as? Reachability, ([Reachability.Connection.cellular, .wifi].contains(reachability.connection)) {
             self.getCurrentLocationDetails()
         }
-    }
+      }
 
     }
     
@@ -852,9 +866,11 @@ extension HomeViewController {
                 if api == .locationServicePostDelete {
                     UIApplication.shared.keyWindow?.make(toast: message)
                 } else {
-                    if code != StatusCode.notreachable.rawValue && api != .checkRequest{
+                    if code != StatusCode.notreachable.rawValue && api != .checkRequest && api != .cancelRequest{
                         showAlert(message: message, okHandler: nil, fromView: self)
                     }
+                    
+                    
                 }
                 if api == .sendRequest {
                     self.removeLoaderView()
@@ -872,17 +888,7 @@ extension HomeViewController {
             
         }
         
-//        func getEstimateFare(api: Base, data: EstimateFare?) {
-//
-//            if data != nil {
-//                DispatchQueue.main.async {
-//                    var estimateFare = data
-//                    estimateFare?.model = self.service?.name
-//                    //self.showRideNowView(with: estimateFare!)
-//                }
-//            }
-//        }
-        
+
         func getRequest(api: Base, data: Request?) {
             
             print(data?.request_id ?? 0)
@@ -894,10 +900,6 @@ extension HomeViewController {
                     self.showLoaderView(with: self.currentRequestId)
                 }
             }
-            
-//            self.currentRequestId = data?.request_id ?? 0
-//            self.checkForProviderStatus()
-            
         }
         
         func success(api: Base, message: String?) {
@@ -918,9 +920,9 @@ extension HomeViewController {
                 if api == .cancelRequest {
                     riderStatus = .none
                 }
-                DispatchQueue.main.async {
-                    self.view.makeToast(message)
-                }
+//                DispatchQueue.main.async {
+//                    self.view.makeToast(message)
+//                }
             } else {
                 riderStatus = .none // Make Ride Status to Default
                 if api == .payNow { // Remove PayNow if Card Payment is Success

@@ -61,7 +61,6 @@ class ServiceSelectionCollectionViewCell: UICollectionViewCell {
             }
             return nil
             }() : nil
-        
     }
     
     

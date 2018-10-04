@@ -79,6 +79,9 @@ class Label : UILabel {
         //        let underlineAttribute = (NSAttributedStringKey.underlineStyle: NSUnderlineStyle.styleSingle.rawValue)
         //        let colorAttribute = (NSAttributedStringKey.foregroundColor: attributeColor)
         // mutableString.addAttribute(NSAttributedStringKey.foregroundColor, value: attributeColor, range: NSRange(location:startLocation,length:length))
+        if (startLocation+length)>String.removeNil(text).count {
+            self.length = String.removeNil(text).count-startLocation
+        }
         mutableString.addAttributes(attributes, range: NSRange(location:startLocation,length:length))
         self.attributedText = mutableString
     }

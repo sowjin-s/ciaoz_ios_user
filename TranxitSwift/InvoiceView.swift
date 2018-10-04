@@ -51,7 +51,7 @@ class InvoiceView: UIView {
     private var paymentType : PaymentType = .NONE { // Check Payment Type
         didSet {
             if paymentType != oldValue {
-                let paymentString = paymentType == .CASH ? PaymentType.CASH.rawValue.localize() : "\(self.selectedCard?.last_four ?? PaymentType.CARD.rawValue.localize())"
+                let paymentString = paymentType == .CASH ? PaymentType.CASH.rawValue.localize() : (self.selectedCard?.last_four==nil) ? PaymentType.CARD.rawValue.localize() : "XXXX-\(String.removeNil(self.selectedCard?.last_four))"
                 let text = "\(Constants.string.payment.localize()):\(paymentString)"
                 self.labelPaymentType.text = text
                 self.labelPaymentType.attributeColor = .secondary
@@ -72,10 +72,8 @@ class InvoiceView: UIView {
     
     private var serviceCalculator : ServiceCalculator = .NONE {  // Hide Distance Fare and Time fare based on Service Calculator
         didSet {
-            if self.serviceCalculator != oldValue {
-                self.viewDistanceFare.isHidden = ![ServiceCalculator.DISTANCE, .DISTANCEHOUR, .DISTANCEMIN].contains(serviceCalculator)
-                self.viewTimeFare.isHidden = [ServiceCalculator.MIN, .HOUR,.DISTANCEHOUR, .DISTANCEMIN].contains(serviceCalculator)
-            }
+            self.viewDistanceFare.isHidden = ![ServiceCalculator.DISTANCE, .DISTANCEHOUR, .DISTANCEMIN].contains(serviceCalculator)
+            self.viewTimeFare.isHidden = ![ServiceCalculator.MIN, .HOUR,.DISTANCEHOUR, .DISTANCEMIN].contains(serviceCalculator)
         }
     }
     

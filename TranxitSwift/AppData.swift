@@ -26,3 +26,4 @@ var offlineNumber = "57777"
 let stripePublishableKey = "pk_test_0G4SKYMm8dK6kgayCPwKWTXy"
 let helpSubject = "Hello \(AppName)"
 let driverUrl = "https://itunes.apple.com/us/app/tranxit-driver/id1204269279?mt=8"
+let requestInterval : TimeInterval = 60  // seconds

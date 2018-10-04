@@ -76,10 +76,9 @@ extension HomeViewController {
         
         self.isOnBooking = false
         self.rideNowView?.dismissView(onCompletion: {
-            self.rideNowView = nil
             self.mapViewHelper?.mapView?.selectedMarker = nil
         })
-        
+        self.rideNowView = nil
     }
     
     
@@ -215,11 +214,11 @@ extension HomeViewController {
     func removeEstimationFareView(){
      
      self.estimationFareView?.dismissView(onCompletion: {
-            self.estimationFareView = nil
             self.isOnBooking = false
             self.loader.isHidden = true
             self.isOnBooking = false
         })
+        self.estimationFareView = nil
      }
     
     
@@ -564,7 +563,7 @@ extension HomeViewController {
             
         case .searching:
             self.showLoaderView(with: self.currentRequestId)
-            
+            self.perform(#selector(self.validateRequest), with: self, afterDelay: requestInterval)
         case .accepted, .arrived, .started, .pickedup:
             self.showRideStatusView(with: request)
             
@@ -590,8 +589,10 @@ extension HomeViewController {
     
     func removeUnnecessaryView(with status : RideStatus) {
         
-        if ![RideStatus.searching].contains(status) && status != .none {
+        if ![RideStatus.searching].contains(status) {
             self.removeLoaderView()
+        }
+        if ![RideStatus.none, .searching].contains(status) {
             self.removeRideNow()
             self.removeEstimationFareView()
         }
