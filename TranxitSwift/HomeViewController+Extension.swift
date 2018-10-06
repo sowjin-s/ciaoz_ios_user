@@ -35,7 +35,8 @@ extension HomeViewController {
             self.rideNowView?.onClickProceed = { [weak self] service in
                 self?.showEstimationView(with: service)
             }
-            self.rideNowView?.onClickService = { service in
+            self.rideNowView?.onClickService = { [weak self] service in
+                guard let self = self else {return}
                 self.sourceMarker.snippet = service?.pricing?.time
                 self.mapViewHelper?.mapView?.selectedMarker = (service?.pricing?.time) == nil ? nil : self.sourceMarker
             }
@@ -187,7 +188,7 @@ extension HomeViewController {
                 self?.createRequest(for: service, isScheduled: false, scheduleDate: nil, cardEntity: selectedPaymentDetail, paymentType: paymentType)
         }
         self.estimationFareView?.paymentChangeClick = { [weak self]  completion in
-            if let vc = self?.storyboard?.instantiateViewController(withIdentifier: Storyboard.Ids.PaymentViewController) as? PaymentViewController{
+            if let vc = self?.storyboard?.instantiateViewController(withIdentifier: Storyboard.Ids.PaymentViewController) as? PaymentViewController {
                 vc.isChangingPayment = true
                 vc.onclickPayment = { [weak self] (paymentTypeEntity , cardEntity) in
                     guard let self = self else {return}
@@ -272,6 +273,7 @@ extension HomeViewController {
             self.moveProviderMarker(to: LocationCoordinate(latitude: latitude, longitude: longitude))
         }
         self.buttonSOS.isHidden = !(request.status == .pickedup)
+        self.floatyButton?.isHidden = request.status == .pickedup
         rideStatusView?.set(values: request)
         rideStatusView?.onClickCancel = {
             self.cancelCurrentRide(isSendReason: true)

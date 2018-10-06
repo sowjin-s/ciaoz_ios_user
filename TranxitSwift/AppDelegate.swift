@@ -104,14 +104,14 @@ extension AppDelegate {
         print("Apn Token ", deviceToken.map { String(format: "%02.2hhx", $0) }.joined())
     }
 
-    func application(_ application: UIApplication,
-                     didReceiveRemoteNotification notification: [AnyHashable : Any],
-                     fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        
-        print("Notification  :  ", notification)
-        completionHandler(.newData)
-        
-    }
+//    func application(_ application: UIApplication,
+//                     didReceiveRemoteNotification notification: [AnyHashable : Any],
+//                     fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+//        
+//        print("Notification  :  ", notification)
+//        completionHandler(.newData)
+//        
+//    }
     
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {

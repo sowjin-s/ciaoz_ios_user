@@ -53,7 +53,7 @@ class SignUpUserTableViewController: UITableViewController {
     
     
     private var userInfo : UserData?
-    
+    private var accountKit : AKFAccountKit?
     private lazy var  loader = {
         return createActivityIndicator(UIApplication.shared.keyWindow ?? self.view)
     }()
@@ -189,7 +189,7 @@ extension SignUpUserTableViewController {
             self.showToast(string: ErrorMessage.list.enterMobileNumber.localize())
             return
         }
-        guard let password = passwordText.text, !password.isEmpty else {
+        guard let password = passwordText.text, !password.isEmpty, password.count>=6 else {
              self.showToast(string: ErrorMessage.list.enterPassword.localize())
             return
         }
@@ -218,12 +218,12 @@ extension SignUpUserTableViewController {
         //self.presenter?.post(api: .signUp, data: MakeJson. )
        // self.present(id: Storyboard.Ids.DrawerController, animation: true)
 
-       let accountKit = AKFAccountKit(responseType: .accessToken)
+       self.accountKit = AKFAccountKit(responseType: .accessToken)
        let akPhone = AKFPhoneNumber(countryCode: "in", phoneNumber: phoneNumber)
-       let accountKitVC = accountKit.viewControllerForPhoneLogin(with: akPhone, state: UUID().uuidString)
-       accountKitVC.enableSendToFacebook = true
-       self.prepareLogin(viewcontroller: accountKitVC)
-       self.present(accountKitVC, animated: true, completion: nil)
+       let accountKitVC = accountKit?.viewControllerForPhoneLogin(with: akPhone, state: UUID().uuidString)
+       accountKitVC!.enableSendToFacebook = true
+       self.prepareLogin(viewcontroller: accountKitVC!)
+       self.present(accountKitVC!, animated: true, completion: nil)
       
         
     }
@@ -351,10 +351,31 @@ extension SignUpUserTableViewController : AKFViewControllerDelegate {
     }
     
     func viewController(_ viewController: (UIViewController & AKFViewController)!, didCompleteLoginWith accessToken: AKFAccessToken!, state: String!) {
-        viewController.dismiss(animated: true) {
-              self.loader.isHidden = false
-              self.presenter?.post(api: .signUp, data: self.userInfo?.toData())
+        func dismiss() {
+            viewController.dismiss(animated: true) { }
+            self.loader.isHidden = false
+            self.presenter?.post(api: .signUp, data: self.userInfo?.toData())
         }
+        if accountKit != nil {
+            accountKit!.requestAccount({ (account, error) in
+                if let phoneNumber = account?.phoneNumber {
+                    var mobileString = phoneNumber.stringRepresentation()
+                    if mobileString.hasPrefix("+") {
+                        mobileString.removeFirst()
+                        if let mobileInt = Int(mobileString) {
+                            self.userInfo?.mobile = mobileInt
+                        }
+                    }
+                }
+                dismiss()
+                return
+                //print("--->>",account?.phoneNumber.)
+               // print("--->>>",error)
+            })
+        }else {
+            dismiss()
+        }
+        
     }
     
 }

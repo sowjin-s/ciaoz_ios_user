@@ -210,7 +210,7 @@ extension RideNowView {
     // MARK:- Show Rate View
     
     private func showRateView() {
-        
+        guard selectedItem?.pricing != nil else {return}
         UIView.animate(withDuration: 0.5) {
             self.rateView?.alpha = 1
         }

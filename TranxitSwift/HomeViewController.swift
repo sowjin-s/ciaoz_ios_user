@@ -310,12 +310,20 @@ extension HomeViewController {
                 switch location.key {
                     case CoreDataEntity.work.rawValue where location.value is Work:
                         if let workObject = location.value as? Work, let address = workObject.address {
-                            favouriteLocations.append((location.key, (address, LocationCoordinate(latitude: workObject.latitude, longitude: workObject.longitude))))
+                            if let index = favouriteLocations.firstIndex(where: { $0.address == Constants.string.work}) {
+                                favouriteLocations[index] = (location.key, (address, LocationCoordinate(latitude: workObject.latitude, longitude: workObject.longitude)))
+                            } else {
+                                favouriteLocations.append((location.key, (address, LocationCoordinate(latitude: workObject.latitude, longitude: workObject.longitude))))
+                            }
                             self.viewWorkLocation.isHidden = false
                         }
                    case CoreDataEntity.home.rawValue where location.value is Home:
                         if let homeObject = location.value as? Home, let address = homeObject.address {
-                            favouriteLocations.append((location.key, (address, LocationCoordinate(latitude: homeObject.latitude, longitude: homeObject.longitude))))
+                            if let index = favouriteLocations.firstIndex(where: { $0.address == Constants.string.home}) {
+                                favouriteLocations[index] = (location.key, (address, LocationCoordinate(latitude: homeObject.latitude, longitude: homeObject.longitude)))
+                            } else {
+                                favouriteLocations.append((location.key, (address, LocationCoordinate(latitude: homeObject.latitude, longitude: homeObject.longitude))))
+                            }
                             self.viewHomeLocation.isHidden = false
                         }
                 default:
@@ -713,8 +721,9 @@ extension HomeViewController {
                     riderStatus = request?.status ?? .none
                     self.handle(request: request!)
                 } else {
+                    let previousStatus = riderStatus
                     riderStatus = request?.status ?? .none
-                    if riderStatus != .none {
+                    if riderStatus != previousStatus {
                          self.clearMapview()
                     }
                     self.removeUnnecessaryView(with: .none)

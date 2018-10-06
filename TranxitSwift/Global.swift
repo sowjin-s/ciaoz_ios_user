@@ -20,6 +20,7 @@ typealias FavouriteLocation = (address :String,location :LocationDetail?)
 
 var favouriteLocations = [FavouriteLocation]()
 
+
 // MARK:- Store Favourite Locations
 
 func storeFavouriteLocations(from locationService : LocationService?) {
