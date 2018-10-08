@@ -23,7 +23,7 @@ let requestCheckInterval : TimeInterval = 5
 var supportNumber = "919585290750"
 var supportEmail = "support@tranxit.com"
 var offlineNumber = "57777"
-let stripePublishableKey = "pk_test_0G4SKYMm8dK6kgayCPwKWTXy"
+let stripePublishableKey = "pk_test_EacUddWKtq5XqAt3dGdpr0YW"
 let helpSubject = "Hello \(AppName)"
 let driverUrl = "https://itunes.apple.com/us/app/tranxit-driver/id1204269279?mt=8"
 let requestInterval : TimeInterval = 60  // seconds
