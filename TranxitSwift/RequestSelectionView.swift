@@ -59,12 +59,17 @@ class RequestSelectionView: UIView {
     private var selectedCard : CardEntity?
     var paymentType : PaymentType = .NONE {
         didSet {
-            let paymentString = paymentType == .CASH ? PaymentType.CASH.rawValue.localize() : "\("XXXX-"+String.removeNil(self.selectedCard?.last_four))"
+            var paymentString : String = .Empty
+            if paymentType == .NONE {
+                paymentString = Constants.string.NA.localize()
+            } else {
+                paymentString = paymentType == .CASH ? PaymentType.CASH.rawValue.localize() : (self.selectedCard == nil ? PaymentType.CARD.rawValue.localize() : "\("XXXX-"+String.removeNil(self.selectedCard?.last_four))")
+            }
             let text = "\(Constants.string.payment.localize()):\(paymentString)"
             self.labelPaymentMode.text = text
             self.labelPaymentMode.attributeColor = .secondary
-            self.labelPaymentMode.startLocation = ((text.count)-(paymentType.rawValue.localize().count))
-            self.labelPaymentMode.length = paymentType.rawValue.localize().count
+            self.labelPaymentMode.startLocation = ((text.count)-(paymentString.count))
+            self.labelPaymentMode.length = paymentString.count
         }
     }
     
@@ -111,7 +116,7 @@ extension RequestSelectionView {
         self.setDesign()
         self.viewUseWallet.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.useWalletAction)))
         self.paymentType = .NONE
-        self.buttonChangePayment.isHidden = !(User.main.isCashAllowed && User.main.isCardAllowed) // Change button enabled only if both payment modes are enabled
+        self.buttonChangePayment.isHidden = !(User.main.isCashAllowed || User.main.isCardAllowed) // Change button enabled only if both payment modes are enabled
         self.buttonChangePayment.addTarget(self, action: #selector(self.buttonChangePaymentAction), for: .touchUpInside)
         self.buttonCoupon.addTarget(self, action: #selector(self.buttonCouponAction), for: .touchUpInside)
         self.isPromocodeEnabled = false
