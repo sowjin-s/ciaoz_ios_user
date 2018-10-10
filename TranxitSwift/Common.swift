@@ -8,6 +8,7 @@
 
 import UIKit
 import MessageUI
+import KWDrawerController
 
 class Common {
     
@@ -152,12 +153,20 @@ class Common {
         switch (field.self) {
         case is UITextField:
             (field as? UITextField)?.font = font
-        case is UILabel:
+            if [NSTextAlignment.left, .right].contains((field as! UITextField).textAlignment) {
+                (field as? UITextField)?.textAlignment = (selectedLanguage == .arabic) ? .right : .left
+            }        case is UILabel:
             (field as? UILabel)?.font = font//UIFont(name: isTitle ? FontCustom.avenier_Heavy.rawValue : FontCustom.avenier_Medium.rawValue, size: customSize)
+            if [NSTextAlignment.left, .right].contains((field as! UILabel).textAlignment) {
+                (field as? UILabel)?.textAlignment = (selectedLanguage == .arabic) ? .right : .left
+            }
+            
         case is UIButton:
             (field as? UIButton)?.titleLabel?.font = font//UIFont(name: isTitle ? FontCustom.avenier_Heavy.rawValue : FontCustom.avenier_Medium.rawValue, size: customSize)
+           // (field as? UIButton)?.titleLabel?.textAlignment = (selectedLanguage == .arabic && (field as! UIButton).titleLabel?.textAlignment == .left) ? .right : .left
         case is UITextView:
             (field as? UITextView)?.font = font//UIFont(name: isTitle ? FontCustom.avenier_Heavy.rawValue : FontCustom.avenier_Medium.rawValue, size: customSize)
+            //(field as? UITextView)?.textAlignment = (selectedLanguage == .arabic && (field as! UITextView).textAlignment == .left) ? .right : .left
         default:
             break
         }
@@ -172,6 +181,20 @@ class Common {
     
         return "\(requestId)" //userId <= providerId ? "u\(userId)_p\(providerId)" : "p\(providerId)_u\(userId)"
     
+    }
+    
+    //MARK:- Set Drawer Controller
+    class func setDrawerController()->UIViewController {
+        
+        let drawerController =  DrawerController()
+        if let sideBarController = Router.main.instantiateViewController(withIdentifier: Storyboard.Ids.SideBarTableViewController) as? SideBarTableViewController  {
+            //let drawerSide : DrawerSide = selectedLanguage == .arabic ? .right : .left
+            let mainController = Router.main.instantiateViewController(withIdentifier: Storyboard.Ids.LaunchNavigationController)
+            drawerController.setViewController(sideBarController, for: .left)
+            drawerController.setViewController(sideBarController, for: .right)
+            drawerController.setViewController(mainController, for: .none)
+        }
+        return drawerController
     }
     
     

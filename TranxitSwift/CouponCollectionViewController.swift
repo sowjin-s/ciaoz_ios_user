@@ -29,6 +29,7 @@ extension CouponCollectionViewController {
     private func initialLoads() {
         
         let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.minimumLineSpacing = 5
         flowLayout.itemSize = CGSize(width: self.view.frame.width, height: 200)
         flowLayout.scrollDirection = .vertical
         self.collectionView = UICollectionView(frame: self.view.bounds, collectionViewLayout: flowLayout)

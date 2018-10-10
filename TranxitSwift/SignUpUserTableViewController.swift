@@ -114,6 +114,8 @@ extension SignUpUserTableViewController {
         self.emailtext.placeholder = Constants.string.emailPlaceHolder.localize()
         self.passwordText.placeholder = Constants.string.password
         self.confirmPwdText.placeholder = Constants.string.ConfirmPassword.localize()
+        self.phoneNumber.placeholder = Constants.string.phoneNumber.localize()
+        self.passwordText.placeholder = Constants.string.password.localize()
 //        self.countryText.placeholder = Constants.string.country.localize()
 //        self.timeZone.placeholder = Constants.string.timeZone.localize()
 //        self.referralCodeText.placeholder = Constants.string.referalCode.localize()
@@ -302,7 +304,7 @@ extension SignUpUserTableViewController : PostViewProtocol {
             User.main.accessToken = data?.access_token
             Common.storeUserData(from: data)
             storeInUserDefaults()
-            self.navigationController?.present(id: Storyboard.Ids.DrawerController, animation: true)
+            self.navigationController?.present(Common.setDrawerController(), animated: true, completion: nil)
             //self.presenter?.get(api: .getProfile, parameters: nil)
             //self.presenter?.post(api: .login, data: MakeJson.login(withUser: userInfo?.email,password:userInfo?.password))
             return

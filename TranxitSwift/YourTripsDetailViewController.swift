@@ -29,7 +29,7 @@ class YourTripsDetailViewController: UITableViewController {
     @IBOutlet private weak var labelSourceLocation : UILabel!
     @IBOutlet private weak var labelDestinationLocation : UILabel!
     @IBOutlet private weak var viewComments : UIView!
-    @IBOutlet private weak var stackViewButtons : UIStackView!
+    @IBOutlet private weak var viewButtons : UIView!
     
     var isUpcomingTrips = false  // Boolean to handle Past and Upcoming Trips
     
@@ -48,7 +48,6 @@ class YourTripsDetailViewController: UITableViewController {
         self.initialLoads()
         self.localize()
         self.setDesign()
-        
     }
     
     override func viewWillLayoutSubviews() {
@@ -63,6 +62,7 @@ class YourTripsDetailViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.viewButtons.isHidden = false
 //        if isUpcomingTrips {
 //        } else {
 //            self.viewLocation.removeFromSuperview()
@@ -72,8 +72,13 @@ class YourTripsDetailViewController: UITableViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.hideRecipt()
+        self.viewButtons.isHidden = true
     }
 
+    deinit {
+        self.viewButtons.removeFromSuperview()
+    }
+    
 }
 
 // MARK:- Methods
@@ -96,6 +101,11 @@ extension YourTripsDetailViewController {
         self.viewRating.emptyImage = #imageLiteral(resourceName: "StarEmpty")
         self.viewRating.fullImage = #imageLiteral(resourceName: "StarFull")
         self.imageViewMap.image = #imageLiteral(resourceName: "rd-map")
+        UIApplication.shared.keyWindow?.addSubview(self.viewButtons)
+        self.viewButtons.widthAnchor.constraint(equalTo: UIApplication.shared.keyWindow!.widthAnchor, multiplier: 0.8, constant: 0).isActive = true
+        self.viewButtons.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        self.viewButtons.bottomAnchor.constraint(equalTo: UIApplication.shared.keyWindow!.bottomAnchor).isActive = true 
+        self.viewButtons.centerXAnchor.constraint(equalTo: UIApplication.shared.keyWindow!.centerXAnchor, constant: 0).isActive = true
         //UIApplication.shared.keyWindow?.addSubview(self.stackViewButtons)
     }
     

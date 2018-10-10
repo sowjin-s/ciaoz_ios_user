@@ -22,7 +22,7 @@ class YourTripsPassbookViewController: UIViewController {
     private var isFirstBlockSelected = true {
         didSet {
             UIView.animate(withDuration: 0.5) {
-                self.underLineView.frame.origin.x = self.isFirstBlockSelected ? 0 : (self.view.bounds.width/2)
+                self.underLineView.frame.origin.x = (selectedLanguage == .arabic ? !self.isFirstBlockSelected : self.isFirstBlockSelected) ? 0 : (self.view.bounds.width/2)
             }
         }
     }

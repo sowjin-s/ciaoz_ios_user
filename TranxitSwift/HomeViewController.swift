@@ -211,6 +211,7 @@ extension HomeViewController {
 
 //            NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShowRateView(info:)), name: .UIKeyboardWillShow, object: nil)
 //            NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHideRateView(info:)), name: .UIKeyboardWillHide, object: nil)      }
+            self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false 
         }
     
     // MARK:- View Will appear
@@ -533,7 +534,7 @@ extension HomeViewController {
                self.clearAllView()
                 print("ViewAddressOuter ", #function)
             } else {
-                self.drawerController?.openSide(.left)
+                self.drawerController?.openSide(selectedLanguage == .arabic ? .right : .left)
                 self.viewSideMenu.addPressAnimation()
             }
             

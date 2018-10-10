@@ -118,7 +118,7 @@ extension ProfileViewController {
         
         var attributes : [ NSAttributedString.Key : Any ] = [.font : UIFont.systemFont(ofSize: 18, weight: .bold)]
         attributes.updateValue(UIColor.white, forKey: NSAttributedString.Key.foregroundColor)
-        self.buttonSave.setAttributedTitle(NSAttributedString(string: Constants.string.save.uppercased().localize(), attributes: attributes), for: .normal)
+        self.buttonSave.setAttributedTitle(NSAttributedString(string: Constants.string.save.localize().uppercased(), attributes: attributes), for: .normal)
         [textFieldFirst, textFieldLast, textFieldEmail, textFieldPhone].forEach({
             $0?.borderInactiveColor = nil
             $0?.borderActiveColor = nil

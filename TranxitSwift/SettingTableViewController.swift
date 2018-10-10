@@ -16,7 +16,6 @@ class SettingTableViewController: UITableViewController {
     private var numberOfRows = 2
     
     private let header = [Constants.string.changeLanguage, Constants.string.favourites, .Empty]
-    private let languages = [Language.english, .spanish]
     
     private let favouriteLocation = 1
     private let changeLanguage = 0
@@ -63,12 +62,17 @@ extension SettingTableViewController {
             selectedLanguage = language
         }
         self.navigationController?.isNavigationBarHidden = false
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.backButtonClick))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.backClick))
         self.navigationItem.title = Constants.string.settings.localize()
         self.loader.isHidden = false
         self.presenter?.get(api: .locationService, parameters: nil)
         
     }
+    
+    @IBAction private func backClick() {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+    
     
     private func initMaps() {
         
@@ -113,7 +117,7 @@ extension SettingTableViewController {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
-        return self.header[section] //section == 0 && numberOfRows == 0 ? Constants.string.noFavouritesFound.localize() :
+        return self.header[section].localize() //section == 0 && numberOfRows == 0 ? Constants.string.noFavouritesFound.localize() :
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -173,12 +177,14 @@ extension SettingTableViewController {
     private func didSelect(at indexPath : IndexPath) {
         
         if indexPath.section == self.changeLanguage {
-            self.selectedLanguage = languages[indexPath.row]
+            self.selectedLanguage = Language.allCases[indexPath.row]
             let languageObject = LanguageEntity()
             languageObject.language = self.selectedLanguage
             self.presenter?.post(api: .updateLanguage, data: languageObject.toData()) // Sending selected language to backend
             UserDefaults.standard.set(self.selectedLanguage.rawValue, forKey: Keys.list.language)
-            self.tableView.reloadRows(at: (0..<self.languages.count).map({IndexPath(row: $0, section: self.changeLanguage)}), with: .automatic)
+            self.tableView.reloadRows(at: (0..<Language.allCases.count).map({IndexPath(row: $0, section: self.changeLanguage)}), with: .automatic)
+            self.switchSettingPage()
+            
         } else if indexPath.section ==  self.favouriteLocation {
             self.loader.isHidden = false
             self.initMaps()
@@ -198,9 +204,21 @@ extension SettingTableViewController {
                 })
             }
         }
-        
     }
     
+    private func switchSettingPage() {
+        guard let transitionView = self.navigationController?.view else {return}
+        let settingVc = Router.main.instantiateViewController(withIdentifier: Storyboard.Ids.SettingTableViewController)
+        UIView.beginAnimations("anim", context: nil)
+        UIView.setAnimationDuration(0.8)
+        UIView.setAnimationCurve(.easeInOut)
+        UIView.setAnimationTransition(selectedLanguage == .arabic ? .flipFromLeft : .flipFromRight, for: transitionView, cache: false)
+        self.navigationController?.pushViewController(settingVc, animated: true)
+        UIView.commitAnimations()
+        if Int.removeNil(navigationController?.viewControllers.count) > 2 {
+            self.navigationController?.viewControllers.remove(at: 1)
+        }
+    }
     
     // Get Cell
     
@@ -223,9 +241,9 @@ extension SettingTableViewController {
             return tableCell
         } else if indexPath.section == self.changeLanguage, let tableCell = tableView.dequeueReusableCell(withIdentifier: languageCellId, for: indexPath) as? LanguageSelection {
             
-            tableCell.labelTitle.text = self.languages[indexPath.row].title.localize()
+            tableCell.labelTitle.text = Language.allCases[indexPath.row].title.localize()
             tableCell.imageViewIcon.tintColorId = 2
-            tableCell.imageViewIcon.image = (self.selectedLanguage == self.languages[indexPath.row] ? #imageLiteral(resourceName: "check") : #imageLiteral(resourceName: "check-box-empty")).withRenderingMode(.alwaysTemplate)
+            tableCell.imageViewIcon.image = (self.selectedLanguage == Language.allCases[indexPath.row] ? #imageLiteral(resourceName: "check") : #imageLiteral(resourceName: "check-box-empty")).withRenderingMode(.alwaysTemplate)
             tableCell.selectionStyle = .none
             return tableCell
         } else if indexPath.section == self.otherLocations, Int.removeNil(self.locationService?.others?.count) > indexPath.row{
@@ -288,7 +306,11 @@ class SettingTableCell : UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.imageView?.contentMode = .scaleAspectFit
+        Common.setFont(to: labelTitle)
+        Common.setFont(to: labelAddress)
     }
+    
+    
     
 }
 

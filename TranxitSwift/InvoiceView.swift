@@ -190,7 +190,6 @@ extension InvoiceView {
         
         self.buttonPayNow.setTitle((isShowingRecipt ? Constants.string.Done : Constants.string.paynow).localize(), for: .normal)
         self.labelToPayString.text = (isShowingRecipt ? Constants.string.paid : Constants.string.toPay).localize()
-
         self.labelBooking.text = request.booking_id
         self.labelDistanceTravelled.text = "\(Formatter.shared.limit(string: "\(request.distanceInt ?? 0)", maximumDecimal: 1)) \(String.removeNil(request.unit))"
         self.labelTimeTaken.text = "\(String.removeNil(request.travel_time)) \(Constants.string.mins.localize())"

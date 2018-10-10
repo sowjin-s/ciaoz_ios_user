@@ -424,8 +424,6 @@
 		08CEA1AA2073B47F00553DE2 /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		08CEB1342105A1B000AC217A /* CardEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardEntity.swift; sourceTree = "<group>"; };
 		08CEB1362105AF2F00AC217A /* AddCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardViewController.swift; sourceTree = "<group>"; };
-		08D752D62155065D00250E92 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Launch.strings; sourceTree = "<group>"; };
-		08D752D72155065F00250E92 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/User.strings; sourceTree = "<group>"; };
 		08D752D821551E9900250E92 /* LanguageEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageEntity.swift; sourceTree = "<group>"; };
 		08D752DD215523A200250E92 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		08D752DF215523B300250E92 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Launch.strings; sourceTree = "<group>"; };
@@ -433,7 +431,6 @@
 		08D752E1215523B400250E92 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		08D752E2215523C200250E92 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Launch.strings; sourceTree = "<group>"; };
 		08D752E3215523C500250E92 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/User.strings; sourceTree = "<group>"; };
-		08D752E4215523C500250E92 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		08D7CCBC213976DC0055C95D /* ChatPush.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatPush.swift; sourceTree = "<group>"; };
 		08DDE666209361F2009FEBC6 /* WalkThroughViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkThroughViewController.swift; sourceTree = "<group>"; };
 		08DDE6682093633B009FEBC6 /* WalkThroughPreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkThroughPreviewController.swift; sourceTree = "<group>"; };
@@ -447,6 +444,12 @@
 		08EA70CE2147D1A200079908 /* ViewTips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTips.swift; sourceTree = "<group>"; };
 		08ECB215200DD0220008BF27 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		08ED0E4D206CF12F0016732B /* PushKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PushKit.framework; path = System/Library/Frameworks/PushKit.framework; sourceTree = SDKROOT; };
+		08F19797216DE393003D1A51 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Launch.strings; sourceTree = "<group>"; };
+		08F19798216DE394003D1A51 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/User.strings; sourceTree = "<group>"; };
+		08F19799216DE394003D1A51 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
+		08F1979A216E076C003D1A51 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Launch.strings; sourceTree = "<group>"; };
+		08F1979B216E076D003D1A51 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/User.strings; sourceTree = "<group>"; };
+		08F1979C216E076E003D1A51 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		08F2B6B820123D2000CAB24E /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		08F3CBBF2024720A00F5EEDF /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		08F595E12076462900369048 /* UIAplication+RLT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAplication+RLT.swift"; sourceTree = "<group>"; };
@@ -1838,6 +1841,7 @@
 			knownRegions = (
 				Base,
 				en,
+				ar,
 				es,
 			);
 			mainGroup = 8894E2171FE7D7980097B4B3;
@@ -2296,7 +2300,8 @@
 			children = (
 				08D752DD215523A200250E92 /* Base */,
 				08D752E1215523B400250E92 /* en */,
-				08D752E4215523C500250E92 /* es */,
+				08F19799216DE394003D1A51 /* ar */,
+				08F1979C216E076E003D1A51 /* es */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -2305,9 +2310,10 @@
 			isa = PBXVariantGroup;
 			children = (
 				08FA708820E3CA99009B060A /* Base */,
-				08D752D62155065D00250E92 /* es */,
 				08D752DF215523B300250E92 /* en */,
 				08D752E2215523C200250E92 /* es */,
+				08F19797216DE393003D1A51 /* ar */,
+				08F1979A216E076C003D1A51 /* es */,
 			);
 			name = Launch.storyboard;
 			sourceTree = "<group>";
@@ -2316,9 +2322,10 @@
 			isa = PBXVariantGroup;
 			children = (
 				08FA708B20E3CAA3009B060A /* Base */,
-				08D752D72155065F00250E92 /* es */,
 				08D752E0215523B300250E92 /* en */,
 				08D752E3215523C500250E92 /* es */,
+				08F19798216DE394003D1A51 /* ar */,
+				08F1979B216E076D003D1A51 /* es */,
 			);
 			name = User.storyboard;
 			sourceTree = "<group>";
@@ -2417,7 +2424,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -2471,7 +2478,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -2497,7 +2504,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/TranxitSwift/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10;
+				IPHONEOS_DEPLOYMENT_TARGET = 11;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.appoets.tranxit.user;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2528,7 +2535,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/TranxitSwift/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10;
+				IPHONEOS_DEPLOYMENT_TARGET = 11;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.appoets.tranxit.user;
 				PRODUCT_NAME = "$(TARGET_NAME)";

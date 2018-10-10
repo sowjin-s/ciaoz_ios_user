@@ -222,7 +222,7 @@ struct Constants {
     let paid = "Paid"
     let noCoupons = "No Coupons"
     let english = "English"
-    let spanish = "Spanish"
+    let arabic = "Arabic"
     let becomeADriver = "Become a Driver"
     let balance = "Balance"
     let noDriversFound = "No Drivers found,\nSorry for the inconvenience"
@@ -288,16 +288,16 @@ enum DeviceType : String, Codable {
 
 //Lanugage
 
-enum Language : String, Codable {
+enum Language : String, Codable, CaseIterable {
     case english = "en"
-    case spanish = "es"
+    case arabic = "ar"
     
     var code : String {
         switch self {
         case .english:
             return "en"
-        case .spanish:
-            return "es"
+        case .arabic:
+            return "ar"
         }
     }
     
@@ -305,8 +305,8 @@ enum Language : String, Codable {
         switch self {
         case .english:
             return Constants.string.english
-        case .spanish:
-            return Constants.string.spanish
+        case .arabic:
+            return Constants.string.arabic
         }
     }
     

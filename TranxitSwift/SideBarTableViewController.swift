@@ -78,10 +78,9 @@ extension SideBarTableViewController {
         // self.drawerController?.fadeColor = UIColor
         self.drawerController?.shadowOpacity = 0.2
         let fadeWidth = self.view.frame.width*(0.2)
-        self.profileImageCenterContraint.constant = 0//-(fadeWidth/3)
+        //self.profileImageCenterContraint.constant = 0//-(fadeWidth/3)
         self.drawerController?.drawerWidth = Float(self.view.frame.width - fadeWidth)
         self.viewShadow.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.imageViewAction)))
-        self.setDesigns()
     }
     
     // MARK:- Set Designs
@@ -99,7 +98,7 @@ extension SideBarTableViewController {
     private func setDesigns () {
         
         Common.setFont(to: labelName)
-        Common.setFont(to: labelEmail)
+        Common.setFont(to: labelEmail, size : 12)
     }
     
     
@@ -114,6 +113,7 @@ extension SideBarTableViewController {
         }
         self.labelName.text = String.removeNil(User.main.firstName)+" "+String.removeNil(User.main.lastName)
         self.labelEmail.text = User.main.email
+        self.setDesigns()
     }
     
     
@@ -214,6 +214,7 @@ extension SideBarTableViewController {
         let tableCell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
         tableCell.textLabel?.textColor = .secondary
         tableCell.textLabel?.text = sideBarList[indexPath.row].localize()
+        tableCell.textLabel?.textAlignment = .left
         Common.setFont(to: tableCell.textLabel!, isTitle: true)
         return tableCell
     }

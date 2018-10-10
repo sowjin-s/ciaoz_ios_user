@@ -228,7 +228,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G9u-8Z-sAN">
-                                    <rect key="frame" x="190" y="0.33333333333337123" width="82" height="30"/>
+                                    <rect key="frame" x="144" y="0.33333333333337123" width="82" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="6bJ-qm-ueA"/>
                                     </constraints>
@@ -248,15 +248,17 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="26P-I5-HNd" firstAttribute="leading" secondItem="Spo-AB-1so" secondAttribute="leading" id="1xx-sS-cu8"/>
+                                <constraint firstItem="G9u-8Z-sAN" firstAttribute="leading" secondItem="26P-I5-HNd" secondAttribute="trailing" constant="8" id="6eq-ST-vQ6"/>
                                 <constraint firstItem="G9u-8Z-sAN" firstAttribute="centerY" secondItem="Spo-AB-1so" secondAttribute="centerY" id="BW8-4G-V9o"/>
                                 <constraint firstItem="G9u-8Z-sAN" firstAttribute="height" secondItem="Spo-AB-1so" secondAttribute="height" id="QlG-KN-GZg"/>
                                 <constraint firstItem="26P-I5-HNd" firstAttribute="centerY" secondItem="Spo-AB-1so" secondAttribute="centerY" id="iZq-4U-r4c"/>
-                                <constraint firstAttribute="trailing" secondItem="G9u-8Z-sAN" secondAttribute="trailing" id="mGk-lY-29I"/>
+                                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="G9u-8Z-sAN" secondAttribute="trailing" constant="10" id="mGk-lY-29I"/>
                                 <constraint firstItem="26P-I5-HNd" firstAttribute="width" secondItem="Spo-AB-1so" secondAttribute="width" multiplier="1:2" id="qZI-Lg-FLZ"/>
                             </constraints>
                             <variation key="default">
                                 <mask key="constraints">
                                     <exclude reference="QlG-KN-GZg"/>
+                                    <exclude reference="mGk-lY-29I"/>
                                 </mask>
                             </variation>
                         </view>

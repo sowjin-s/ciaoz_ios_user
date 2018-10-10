@@ -13,6 +13,7 @@ import AudioUnit
 
 var currentBundle : Bundle!
 var selectedShortCutItem : CoreDataEntity?
+var selectedLanguage : Language = .english
 
 // Store Favourite Locations
 
@@ -199,7 +200,9 @@ internal func clearUserDefaults(){
 // MARK:- Force Logout
 
 func forceLogout(with message : String? = nil) {
-    
+    let user = User()
+    user.id = User.main.id
+    Webservice().retrieve(api: .logout, url: nil, data: user.toData(), imageData: nil, paramters: nil, type: .POST, completion: nil)
     DispatchQueue.main.async { // stopping timer on unauthorized status
          HomePageHelper.shared.stopListening()
     }
@@ -229,9 +232,12 @@ internal func initializeUserData()->User
 
 
 func setLocalization(language : Language){
-    
+   
     if let path = Bundle.main.path(forResource: language.code, ofType: "lproj"), let bundle = Bundle(path: path) {
         
+        let attribute : UISemanticContentAttribute = language == .arabic ? .forceRightToLeft : .forceLeftToRight
+        UIView.appearance().semanticContentAttribute = attribute
+        selectedLanguage = language
         currentBundle = bundle
         
     } else {
