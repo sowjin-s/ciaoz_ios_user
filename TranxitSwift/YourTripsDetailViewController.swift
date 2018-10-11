@@ -102,9 +102,10 @@ extension YourTripsDetailViewController {
         self.viewRating.fullImage = #imageLiteral(resourceName: "StarFull")
         self.imageViewMap.image = #imageLiteral(resourceName: "rd-map")
         UIApplication.shared.keyWindow?.addSubview(self.viewButtons)
+        self.viewButtons.translatesAutoresizingMaskIntoConstraints = false
         self.viewButtons.widthAnchor.constraint(equalTo: UIApplication.shared.keyWindow!.widthAnchor, multiplier: 0.8, constant: 0).isActive = true
         self.viewButtons.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        self.viewButtons.bottomAnchor.constraint(equalTo: UIApplication.shared.keyWindow!.bottomAnchor).isActive = true 
+        self.viewButtons.bottomAnchor.constraint(equalTo: UIApplication.shared.keyWindow!.bottomAnchor, constant: -16).isActive = true 
         self.viewButtons.centerXAnchor.constraint(equalTo: UIApplication.shared.keyWindow!.centerXAnchor, constant: 0).isActive = true
         //UIApplication.shared.keyWindow?.addSubview(self.stackViewButtons)
     }

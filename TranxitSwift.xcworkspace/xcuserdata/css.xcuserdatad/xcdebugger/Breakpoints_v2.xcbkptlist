@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TranxitSwift/SettingTableViewController.swift"
-            timestampString = "560878976.500621"
+            timestampString = "560935097.708521"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "276"
-            endingLineNumber = "276"
+            startingLineNumber = "295"
+            endingLineNumber = "295"
             landmarkName = "getLocationService(api:data:)"
             landmarkType = "7">
          </BreakpointContent>

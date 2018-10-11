@@ -1897,6 +1897,11 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="149.5"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                         </imageView>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="aTs-pl-zat">
+                            <rect key="frame" x="0.0" y="501.5" width="320" height="1"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
                         <sections>
                             <tableViewSection id="oNV-Aj-pgm">
                                 <cells>
@@ -2215,7 +2220,7 @@
                             </constraints>
                         </stackView>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="58L-bU-1cX" firstAttribute="bottom" secondItem="COf-FW-XcG" secondAttribute="bottom" id="MX3-Hp-Qwj"/>
                         <constraint firstItem="58L-bU-1cX" firstAttribute="centerX" secondItem="COf-FW-XcG" secondAttribute="centerX" id="RMO-bC-Etb"/>

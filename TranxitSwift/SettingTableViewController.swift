@@ -27,7 +27,7 @@ class SettingTableViewController: UITableViewController {
     
     private var selectedLanguage : Language = .english {
         didSet{
-            setLocalization(language: selectedLanguage)
+              setLocalization(language: selectedLanguage)
         }
     }
     
@@ -51,6 +51,11 @@ class SettingTableViewController: UITableViewController {
 //        super.viewWillDisappear(animated)
 //        self.navigationController?.isNavigationBarHidden = true
 //    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.viewwillAppearCustom()
+    }
 
 }
 
@@ -62,7 +67,14 @@ extension SettingTableViewController {
             selectedLanguage = language
         }
         self.navigationController?.isNavigationBarHidden = false
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.backClick))
+//        if selectedLanguage != .arabic {
+//            self.navigationItem.leftBarButtonItem = backButton
+//            self.navigationItem.rightBarButtonItem = nil
+//        } else {
+//            self.navigationItem.rightBarButtonItem = backButton
+//            self.navigationItem.leftBarButtonItem = nil
+//        }
+//        self.navigationItem.backBarButtonItem = UIBarButtonItem()
         self.navigationItem.title = Constants.string.settings.localize()
         self.loader.isHidden = false
         self.presenter?.get(api: .locationService, parameters: nil)
@@ -73,6 +85,9 @@ extension SettingTableViewController {
         self.navigationController?.popToRootViewController(animated: true)
     }
     
+    private func viewwillAppearCustom() {
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.backClick))
+    }
     
     private func initMaps() {
         
@@ -177,10 +192,12 @@ extension SettingTableViewController {
     private func didSelect(at indexPath : IndexPath) {
         
         if indexPath.section == self.changeLanguage {
-            self.selectedLanguage = Language.allCases[indexPath.row]
+            let language = Language.allCases[indexPath.row]
             let languageObject = LanguageEntity()
-            languageObject.language = self.selectedLanguage
+            languageObject.language = language
             self.presenter?.post(api: .updateLanguage, data: languageObject.toData()) // Sending selected language to backend
+            guard language != self.selectedLanguage else {return}
+            self.selectedLanguage = language
             UserDefaults.standard.set(self.selectedLanguage.rawValue, forKey: Keys.list.language)
             self.tableView.reloadRows(at: (0..<Language.allCases.count).map({IndexPath(row: $0, section: self.changeLanguage)}), with: .automatic)
             self.switchSettingPage()
@@ -207,6 +224,7 @@ extension SettingTableViewController {
     }
     
     private func switchSettingPage() {
+        self.navigationController?.isNavigationBarHidden = true // For Changing backbutton direction on RTL Changes
         guard let transitionView = self.navigationController?.view else {return}
         let settingVc = Router.main.instantiateViewController(withIdentifier: Storyboard.Ids.SettingTableViewController)
         UIView.beginAnimations("anim", context: nil)
@@ -214,6 +232,7 @@ extension SettingTableViewController {
         UIView.setAnimationCurve(.easeInOut)
         UIView.setAnimationTransition(selectedLanguage == .arabic ? .flipFromLeft : .flipFromRight, for: transitionView, cache: false)
         self.navigationController?.pushViewController(settingVc, animated: true)
+        self.navigationController?.isNavigationBarHidden = false
         UIView.commitAnimations()
         if Int.removeNil(navigationController?.viewControllers.count) > 2 {
             self.navigationController?.viewControllers.remove(at: 1)
