@@ -98,7 +98,7 @@ class Common {
         if let providerNumber = number, let url = URL(string: "tel://\(providerNumber)"), UIApplication.shared.canOpenURL(url) {
             UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
         } else {
-            UIScreen.main.focusedView?.make(toast: Constants.string.cannotMakeCallAtThisMoment.localize())
+            UIApplication.shared.keyWindow?.make(toast: Constants.string.cannotMakeCallAtThisMoment.localize())
         }
         
     }
@@ -155,15 +155,19 @@ class Common {
             (field as? UITextField)?.font = font
             if [NSTextAlignment.left, .right].contains((field as! UITextField).textAlignment) {
                 (field as? UITextField)?.textAlignment = (selectedLanguage == .arabic) ? .right : .left
-            }        case is UILabel:
+            }
+        case is UILabel:
             (field as? UILabel)?.font = font//UIFont(name: isTitle ? FontCustom.avenier_Heavy.rawValue : FontCustom.avenier_Medium.rawValue, size: customSize)
             if [NSTextAlignment.left, .right].contains((field as! UILabel).textAlignment) {
                 (field as? UILabel)?.textAlignment = (selectedLanguage == .arabic) ? .right : .left
             }
             
         case is UIButton:
-            (field as? UIButton)?.titleLabel?.font = font//UIFont(name: isTitle ? FontCustom.avenier_Heavy.rawValue : FontCustom.avenier_Medium.rawValue, size: customSize)
-           // (field as? UIButton)?.titleLabel?.textAlignment = (selectedLanguage == .arabic && (field as! UIButton).titleLabel?.textAlignment == .left) ? .right : .left
+            (field as? UIButton)?.titleLabel?.font = font
+            
+            if [UIControl.ContentHorizontalAlignment.left, .right].contains((field as! UIButton).contentHorizontalAlignment) {
+                (field as! UIButton).contentHorizontalAlignment = (selectedLanguage == .arabic) ? .right : .left
+            }
         case is UITextView:
             (field as? UITextView)?.font = font//UIFont(name: isTitle ? FontCustom.avenier_Heavy.rawValue : FontCustom.avenier_Medium.rawValue, size: customSize)
             //(field as? UITextView)?.textAlignment = (selectedLanguage == .arabic && (field as! UITextView).textAlignment == .left) ? .right : .left

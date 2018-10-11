@@ -139,14 +139,14 @@ extension UIViewController {
     
     func showImage(with completion : @escaping ((UIImage?)->())){
         
-        let alert = UIAlertController(title: Constants.string.selectSource, message: nil, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: Constants.string.camera, style: .default, handler: { (_) in
+        let alert = UIAlertController(title: Constants.string.selectSource.localize(), message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: Constants.string.camera.localize(), style: .default, handler: { (_) in
             self.chooseImage(with: .camera)
         }))
-        alert.addAction(UIAlertAction(title: Constants.string.photoLibrary, style: .default, handler: { (_) in
+        alert.addAction(UIAlertAction(title: Constants.string.photoLibrary.localize(), style: .default, handler: { (_) in
             self.chooseImage(with: .photoLibrary)
         }))
-        alert.addAction(UIAlertAction(title: Constants.string.Cancel, style: .cancel, handler:nil))
+        alert.addAction(UIAlertAction(title: Constants.string.Cancel.localize(), style: .cancel, handler:nil))
         alert.view.tintColor = .primary
         imageCompletion = completion
         self.present(alert, animated: true, completion: nil)

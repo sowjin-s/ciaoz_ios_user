@@ -272,7 +272,7 @@ extension SocialLoginViewController : PostViewProtocol {
         if api == .getProfile {
             Common.storeUserData(from: data)
             storeInUserDefaults()
-            self.navigationController?.present(id: Storyboard.Ids.DrawerController, animation: true)
+            self.navigationController?.present(Common.setDrawerController(), animated: true, completion: nil)
         }
         loader.isHideInMainThread(true)
         

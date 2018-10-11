@@ -35,7 +35,7 @@ class Formatter {
     func getString(from date : Date?, format : String)->String?{
         
         initializeDateFormatter()
-        
+        dateFormatter?.locale = Locale(identifier: selectedLanguage.code)
         dateFormatter?.dateFormat = format
         return date == nil ? nil : dateFormatter?.string(from: date!)
         

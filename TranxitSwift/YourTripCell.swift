@@ -80,7 +80,7 @@ class YourTripCell: UITableViewCell {
             }
         }
         
-        self.upCommingBookingIDLlabel.text = Constants.string.bookingId+": "+String.removeNil(values.booking_id)
+        self.upCommingBookingIDLlabel.text = Constants.string.bookingId.localize()+": "+String.removeNil(values.booking_id)
         self.upCommingCarName.text = values.service?.name
         self.upCommingCarName.isHidden = isPastButton
         
