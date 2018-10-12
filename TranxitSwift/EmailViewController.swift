@@ -16,6 +16,8 @@ class EmailViewController: UIViewController {
     @IBOutlet private var scrollView : UIScrollView!
     @IBOutlet private var viewScroll : UIView!
     
+    var isHideLeftBarButton = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initialLoads()
@@ -56,7 +58,9 @@ extension EmailViewController {
         self.localize()
         self.view.dismissKeyBoardonTap()
         self.viewNext.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.nextAction)))
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.backButtonClick))
+        if !isHideLeftBarButton {
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.backButtonClick))
+        }
         self.scrollView.addSubview(viewScroll)
         self.buttonCreateAcount.addTarget(self, action: #selector(self.createAccountAction), for: .touchUpInside)
         self.scrollView.contentOffset = .zero

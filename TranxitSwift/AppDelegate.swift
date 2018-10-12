@@ -43,6 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          DispatchQueue.global(qos: .background).async {
             self.startReachabilityChecking()
          }
+         self.checkUpdates()
          return true
     }
     
@@ -87,7 +88,36 @@ extension AppDelegate {
         
     }
     
-    
+    // MARK:- Check Update
+    private func checkUpdates() {
+        
+        var request = ChatPush()
+        request.version = Bundle.main.getVersion()
+        request.device_type = .ios
+        request.sender = .user
+        Webservice().retrieve(api: .versionCheck, url: nil, data: request.toData(), imageData: nil, paramters: nil, type: .POST) { (error, data) in
+            guard let responseObject = data?.getDecodedObject(from: ChatPush.self),
+                let forceUpdate = responseObject.force_update,
+                forceUpdate,
+                let appUrl = responseObject.url,
+                let urlObject = URL(string: appUrl),
+                UIApplication.shared.canOpenURL(urlObject)
+                else {
+                    return
+            }
+            
+            func showUpdateUI() {
+                DispatchQueue.main.async {
+                    let alert = showAlert(message: Constants.string.newVersionAvailableMessage.localize(), handler: { (_) in
+                        UIApplication.shared.open(urlObject, options: [:], completionHandler: nil)
+                        showUpdateUI()
+                    })
+                    UIApplication.topViewController()?.present(alert, animated: true, completion: nil)
+                }
+            }
+            showUpdateUI()
+        }
+    }
     
 }
 

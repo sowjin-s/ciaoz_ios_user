@@ -226,6 +226,7 @@ struct Constants {
     let becomeADriver = "Become a Driver"
     let balance = "Balance"
     let noDriversFound = "No Drivers found,\nSorry for the inconvenience"
+    let newVersionAvailableMessage = "A new version of this App is available in the App Store"
 }
 
 

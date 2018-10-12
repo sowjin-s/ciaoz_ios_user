@@ -12,4 +12,8 @@ struct ChatPush : JSONSerializable {
     var sender : UserType?
     var user_id : Int?
     var message : String?
+    var device_type : DeviceType?
+    var version : String?
+    var force_update : Bool?
+    var url : String?
 }

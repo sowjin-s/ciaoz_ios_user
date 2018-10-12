@@ -184,7 +184,7 @@ extension YourTripsDetailViewController {
             }
         }
         
-        self.viewRating.rating = Float(self.dataSource?.rating?.user_rating ?? 0)
+        self.viewRating.rating = Float(self.dataSource?.rating?.provider_rating ?? 0)
         self.textViewComments.text = self.dataSource?.rating?.provider_comment ?? Constants.string.noComments.localize()
         self.labelSourceLocation.text = self.dataSource?.s_address
         self.labelDestinationLocation.text = self.dataSource?.d_address

@@ -149,7 +149,7 @@
 "Change Language"                                                = "Change Language";
 "No favourite address available"                                 = "No favourite address available";
 "Cannot make call at this moment"                                = "Cannot make call at this moment";
-"Offer"                                                          = "Offer";
+"Offer"                                                          = "Offers";
 "Amount"                                                         = "Amount";
 "Credited By"                                                    = "Credited By";
 "Coupon Code"                                                    = "Coupon Code";
@@ -232,3 +232,4 @@
 "No Drivers found,\nSorry for the inconvenience" = "No Drivers found,\nSorry for the inconvenience";
 "CARD" = "CARD";
 "CASH" = "CASH";
+"A new version of this App is available in the App Store" = "A new version of this App is available in the App Store";

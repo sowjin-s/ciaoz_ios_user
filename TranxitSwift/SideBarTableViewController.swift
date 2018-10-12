@@ -20,7 +20,7 @@ class SideBarTableViewController: UITableViewController {
     
     private let sideBarList = [Constants.string.payment,
                                Constants.string.yourTrips,
-                               Constants.string.coupon,
+                               Constants.string.offer,
                                Constants.string.wallet,
                                Constants.string.passbook,
                                Constants.string.settings,
@@ -213,7 +213,7 @@ extension SideBarTableViewController {
         
         let tableCell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
         tableCell.textLabel?.textColor = .secondary
-        tableCell.textLabel?.text = sideBarList[indexPath.row].localize()
+        tableCell.textLabel?.text = sideBarList[indexPath.row].localize().capitalizingFirstLetter()
         tableCell.textLabel?.textAlignment = .left
         Common.setFont(to: tableCell.textLabel!, isTitle: true)
         return tableCell

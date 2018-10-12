@@ -407,7 +407,11 @@ extension SingleChatController {
            // self.initimateServerAboutChat()
         let message = "\(User.main.firstName ?? .Empty) : \(self.textViewSingleChat.text ?? .Empty)"
         DispatchQueue.global(qos: .background).async {
-            self.presenter?.post(api: .chatPush, data: ChatPush(sender : .provider, user_id: self.currentUserId, message: message).toData())
+            var chatObject = ChatPush()
+            chatObject.sender = .provider
+            chatObject.user_id = self.currentUserId
+            chatObject.message = message
+            self.presenter?.post(api: .chatPush, data: chatObject.toData())
         }
         self.textViewSingleChat.text = .Empty
         self.textViewDidEndEditing(self.textViewSingleChat)
