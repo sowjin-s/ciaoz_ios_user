@@ -33,7 +33,7 @@ class Router {
         interactor.presenter = presenter
         presenter.interactor = interactor
         
-        return retrieveUserData() ? main.instantiateViewController(withIdentifier: Storyboard.Ids.DrawerController) : {
+        return retrieveUserData() ? Common.setDrawerController() : {
             let vc = user.instantiateViewController(withIdentifier: Storyboard.Ids.LaunchViewController)
             let navigationController = UINavigationController(rootViewController: vc)
             navigationController.isNavigationBarHidden = true

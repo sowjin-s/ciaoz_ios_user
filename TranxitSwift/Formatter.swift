@@ -35,7 +35,7 @@ class Formatter {
     func getString(from date : Date?, format : String)->String?{
         
         initializeDateFormatter()
-        
+        dateFormatter?.locale = Locale(identifier: selectedLanguage.code)
         dateFormatter?.dateFormat = format
         return date == nil ? nil : dateFormatter?.string(from: date!)
         
@@ -65,15 +65,13 @@ class Formatter {
     
     // MARK:- Limit number to required Decimal Values
     
-    func limit(string number : String?, maximumDecimal limit : Int)->String?{
+    func limit(string number : String?, maximumDecimal limit : Int)->String{
         
-        initializeNumberFormatter()
+        //initializeNumberFormatter()
         guard let float = Float(number ?? .Empty) else {
-            return nil
-
+            return .Empty
         }
-        numberFormatter?.maximumFractionDigits = limit
-        return numberFormatter?.string(for: NSNumber(value: float))
+        return String(format: "%.\(limit)f", float)//numberFormatter?.string(for: NSNumber(value: float))
         
     }
     

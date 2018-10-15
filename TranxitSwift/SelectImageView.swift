@@ -9,7 +9,7 @@ import UIKit
 import ImagePicker
 import Lightbox
 
-class SelectImageView {
+class SelectImageView : NSObject{
     
 private var completion : (([UIImage])->())?
     
@@ -17,7 +17,7 @@ private var completion : (([UIImage])->())?
     
     func show(imagePickerIn view : UIViewController, completion : @escaping ([UIImage])->()){
         
-        var config = Configuration()
+        let config = Configuration()
         config.allowPinchToZoom = true
         config.canRotateCamera = true
         config.doneButtonTitle = Constants.string.Done

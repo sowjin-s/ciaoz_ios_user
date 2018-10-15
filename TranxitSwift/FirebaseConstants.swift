@@ -16,7 +16,7 @@ struct FirebaseConstants {
     let storageBase = "storageBase"
     
     let reciever = "reciever"
-    let timeStamp = "timeStamp"
+    let timestamp = "timestamp"
     let sender = "sender"
     let read = "read"
     let type = "type"
@@ -24,6 +24,9 @@ struct FirebaseConstants {
     let url = "url"
     let number = "number"
     let groupId = "groupId"
+    let user = "user"
+    let readedMembers = "readedMembers"
+    var senderType = "senderType"
     
 }
 
@@ -32,7 +35,7 @@ struct FirebaseConstants {
 enum MessageStatus : Int {
     
     case sent = 0
-    case recieved = 2
+    //  case recieved = 1
     case read = 1
     
 }
@@ -53,6 +56,8 @@ enum Mime : String {
         switch self {
         case .image:
             return "image/png"
+        case .audio:
+            return "audio/wav"
         default :
             return .Empty
             
@@ -65,19 +70,22 @@ enum Mime : String {
         switch self {
         case .image:
             return ".png"
-        
+            
         case .audio :
-            return ".mp4"
-        
+            return ".wav"
+            
         case .video:
-            return ".mp3"
-        
+            return ".mp4"
+            
         default:
             return .Empty
         }
         
     }
     
-    
-    
+}
+
+enum UserType : String, Codable{
+    case user
+    case provider
 }

@@ -16,7 +16,7 @@ class Request : JSONSerializable {
     var d_longitude : Double?
     var service_type : Int?
     var distance : String?
-    var distanceInt : Int?
+    var distanceInt : Float?
     var payment_mode : PaymentType?
     var card_id : String?
     var s_address : String?
@@ -46,7 +46,9 @@ class Request : JSONSerializable {
     var latitude : Double?
     var longitude : Double?
     var address : String?
-    
+    var tips : Float?
+    var promocode_id : Int?
+    var unit : String?
   /*
     enum CodingKeys: String, CodingKey {
         
@@ -89,7 +91,7 @@ class Request : JSONSerializable {
         use_wallet = try? values.decode(Int.self, forKey: .use_wallet)
         provider = try? values.decode(Provider.self, forKey: .provider)
         distance = try? values.decode(String.self, forKey: .distance)
-        distanceInt = try? values.decode(Int.self, forKey: .distance)
+        distanceInt = try? values.decode(Float.self, forKey: .distance)
         service = try? values.decode(Service.self, forKey: .service_type)
         service_type =  try? values.decode(Int.self, forKey: .service_type)
         schedule_date = try? values.decode(String.self, forKey: .schedule_date)
@@ -109,6 +111,8 @@ class Request : JSONSerializable {
         rating = try? values.decode(Rating.self, forKey: .rating)
         message = try? values.decode(String.self, forKey: .message)
         paid = try? values.decode(Int.self, forKey: .paid)
+        unit = try? values.decode(String.self, forKey: .unit)
+
     }
  
     init() {   }

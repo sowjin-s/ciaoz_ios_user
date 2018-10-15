@@ -43,22 +43,12 @@ struct Constants {
     let enterOtp = "Enter OTP"
     let otpIncorrect = "OTP incorrect"
     let enterCurrentPassword = "Current Password"
-    let walkthroughDummy = """
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-     when an unknown printer took a galley of type and scrambled it to make a
-    type specimen book. It has survived not only five centuries, but also the leap
-    into electronic typesetting, remaining essentially unchanged.It
-    was popularised in the 1960s with the release of Letraset sheets
-    containing Lorem Ipsum passages, and more recently with desktop publishing
-    software like Aldus PageMaker including versions of Lorem Ipsum
-    """
-    let walkthroughWelcome = "Introducing Tranxit Driver to take rides from the Tranxit app users."
-    let walkthroughDrive = "Be your own boss, set your own schedule. Get the latest driving features all in one spot."
-    let walkthroughEarn = "Get well paid to help out strangers get to where they need to go,withdraw your earnigs every week/monthly."
+    let walkthroughWelcome = "Services to transport you where you need to go. A lot can happen, on our ride."
+    let walkthroughDrive = "Take a ride whenever and wherever you want. Plan and Schedule for us to pick you up."
+    let walkthroughEarn = "We have the most friendly drivers who will go the extra mile for you."
     let welcome = "Welcome"
-    let drive = "Drive"
-    let earn = "Earn"
+    let schedule = "Schedule"
+    let drivers = "Drivers"
     let country = "Country"
     let timeZone = "Time Zone"
     let referalCode = "Referral Code"
@@ -101,7 +91,7 @@ struct Constants {
     let save = "save"
     let lookingToChangePassword = "Looking to change password?"
     let areYouSure = "Are you sure?"
-    let areYouSureWantToLogout = "Are you want to logout?"
+    let areYouSureWantToLogout = "Are you sure want to logout?"
     let sure = "Sure"
     let source = "Source"
     let destination = "Destination"
@@ -200,7 +190,6 @@ struct Constants {
     let iNeedCab = "I need a cab @"
     let donotEditMessage = "(Please donot edit this SMS. Standard SMS charges of Rs.3 per SMS may apply)"
     let pleaseTryAgain = "Please try again"
-    
     let ADDCOUPON = "ADD COUPON"
     let addAmount = "Add Money"
     let ADDAMT = "ADD AMOUNT"
@@ -218,28 +207,28 @@ struct Constants {
     let reasonForCancellation = "Reason For Cancellation"
     let addCard = "Add Card to continue with wallet"
     let enterValidAmount = "Enter Valid Amount"
+    let allPaymentMethodsBlocked = "All payment methods has been blocked"
+    let selectCardToContinue = "select card to continue"
+    let timeFare = "Time Fare"
+    let tips = "Tips"
+    let walletDeduction = "Wallet Deduction"
+    let toPay = "To Pay"
+    let addTips = "Add Tips"
+    let proceed = "Proceed"
+    let extimationFareNotAvailable = "Estimation fare not available"
+    let viewCoupons = "View Coupons"
+    let apply = "Apply"
+    let validity = "Validity"
+    let paid = "Paid"
+    let noCoupons = "No Coupons"
+    let english = "English"
+    let arabic = "Arabic"
+    let becomeADriver = "Become a Driver"
+    let balance = "Balance"
+    let noDriversFound = "No Drivers found,\nSorry for the inconvenience"
+    let newVersionAvailableMessage = "A new version of this App is available in the App Store"
 }
 
-//Defaults Keys
-
-struct Keys {
-    
-    static let list = Keys()
-    let userData = "userData"
-    let idKey = "id"
-    let accessToken = "accesstoken"
-    let firstName = "firstName"
-    let lastName = "lastName"
-    let picture = "picture"
-    let email = "email"
-    let mobile = "mobile"
-    let currency = "currency"
-    let language = "language"
-    let refreshToken = "refreshToken"
-    let wallet = "wallet"
-    let sos = "sos"
-    let loginType = "LoginType"
-}
 
 //ENUM TRIP TYPE
 
@@ -256,7 +245,20 @@ enum  PaymentType : String, Codable {
     
     case CASH = "CASH"
     case CARD = "CARD"
+    case NONE = "NONE"
     
+    var image : UIImage? {
+        var name = "ic_error"
+        switch self {
+        case .CARD:
+            name = "visa"
+        case .CASH:
+            name = "money_icon"
+        case .NONE :
+            name = "ic_error"
+        }
+      return UIImage(named: name)
+   }
 }
 
 
@@ -266,11 +268,12 @@ struct DateFormat {
     
     static let list = DateFormat()
     let yyyy_mm_dd_HH_MM_ss = "yyyy-MM-dd HH:mm:ss"
-    let MMM_dd_yyyy_hh_mm_ss_a = "MMM dd, yyyy hh:mm:ss a"
+    let MMM_dd_yyyy_hh_mm_ss_a = "MMM dd, yyyy hh:mm:ss a" 
     let hhmmddMMMyyyy = "hh:mm a - dd:MMM:yyyy"
     let ddMMyyyyhhmma = "dd-MM-yyyy hh:mma"
     let ddMMMyyyy = "dd MMM yyyy"
     let hh_mm_a = "hh : mm a"
+    let dd_MM_yyyy = "dd/MM/yyyy"
 }
 
 
@@ -286,10 +289,29 @@ enum DeviceType : String, Codable {
 
 //Lanugage
 
-enum Language : String {
+enum Language : String, Codable, CaseIterable {
     case english = "en"
-   // case spanish = "Spanish"
-    static var count: Int{ return 1 }
+    case arabic = "ar"
+    
+    var code : String {
+        switch self {
+        case .english:
+            return "en"
+        case .arabic:
+            return "ar"
+        }
+    }
+    
+    var title : String {
+        switch self {
+        case .english:
+            return Constants.string.english
+        case .arabic:
+            return Constants.string.arabic
+        }
+    }
+    
+    static var count: Int{ return 2 }
 }
 
 
@@ -321,9 +343,18 @@ enum RideStatus : String, Codable {
     
 }
 
+// MARK:- Service Calclulator
+
+enum ServiceCalculator : String, Codable {
+    case MIN
+    case HOUR
+    case DISTANCE
+    case DISTANCEMIN
+    case DISTANCEHOUR
+    case NONE
+}
+
 enum Vibration : UInt {
     case weak = 1519
     case threeBooms = 1107
 }
-
-

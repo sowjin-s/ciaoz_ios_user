@@ -39,7 +39,7 @@ class ForgotPasswordViewController: UIViewController {
         super.viewWillLayoutSubviews()
         self.viewNext.makeRoundedCorner()
         self.viewScroll.frame = self.scrollView.bounds
-        self.scrollView.contentSize = self.viewScroll.bounds.size
+        self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.viewScroll.frame.height)
     }
     
 }

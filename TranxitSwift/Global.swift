@@ -13,12 +13,14 @@ import AudioUnit
 
 var currentBundle : Bundle!
 var selectedShortCutItem : CoreDataEntity?
+var selectedLanguage : Language = .english
 
 // Store Favourite Locations
 
 typealias FavouriteLocation = (address :String,location :LocationDetail?)
 
 var favouriteLocations = [FavouriteLocation]()
+
 
 // MARK:- Store Favourite Locations
 
@@ -144,7 +146,7 @@ internal func createActivityIndicator(_ uiView : UIView)->UIView{
     let actInd: UIActivityIndicatorView = UIActivityIndicatorView()
     actInd.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
     actInd.clipsToBounds = true
-    actInd.activityIndicatorViewStyle = .whiteLarge
+    actInd.style = .whiteLarge
     
     actInd.center = CGPoint(x: loadingView.frame.size.width / 2, y: loadingView.frame.size.height / 2)
     loadingView.addSubview(actInd)
@@ -164,8 +166,10 @@ internal func storeInUserDefaults(){
     
     let data = NSKeyedArchiver.archivedData(withRootObject: User.main)
     UserDefaults.standard.set(data, forKey: Keys.list.userData)
+    let groupDefaults = UserDefaults(suiteName: Keys.list.appGroup)
+    groupDefaults?.set(true, forKey: Keys.list.isLoggedIn)
     UserDefaults.standard.synchronize()
-    
+    groupDefaults?.synchronize()
     print("Store in UserDefaults--", UserDefaults.standard.value(forKey: Keys.list.userData) ?? "Failed")
 }
 
@@ -173,13 +177,9 @@ internal func storeInUserDefaults(){
 internal func retrieveUserData()->Bool{
     
     if let data = UserDefaults.standard.object(forKey: Keys.list.userData) as? Data, let userData = NSKeyedUnarchiver.unarchiveObject(with: data) as? User {
-        
         User.main = userData
-        
-        return true
     }
-    
-    return false
+    return User.main.id != nil
     
 }
 
@@ -188,9 +188,11 @@ internal func clearUserDefaults(){
     
     User.main = initializeUserData()  // Clear local User Data
     UserDefaults.standard.set(nil, forKey: Keys.list.userData)
+    let groupDefaults = UserDefaults(suiteName: Keys.list.appGroup)
+    groupDefaults?.set(false, forKey: Keys.list.isLoggedIn)
     UserDefaults.standard.removeVolatileDomain(forName: Bundle.main.bundleIdentifier!)
     UserDefaults.standard.synchronize()
-    
+    groupDefaults?.synchronize()
     print("Clear UserDefaults--", UserDefaults.standard.value(forKey: Keys.list.userData) ?? "Success")
     
 }
@@ -198,14 +200,18 @@ internal func clearUserDefaults(){
 // MARK:- Force Logout
 
 func forceLogout(with message : String? = nil) {
-
+    let user = User()
+    user.id = User.main.id
+    Webservice().retrieve(api: .logout, url: nil, data: user.toData(), imageData: nil, paramters: nil, type: .POST, completion: nil)
+    DispatchQueue.main.async { // stopping timer on unauthorized status
+         HomePageHelper.shared.stopListening()
+    }
     clearUserDefaults()
     UIApplication.shared.windows.last?.rootViewController?.popOrDismiss(animation: true)
     let navigationController = UINavigationController(rootViewController: Router.user.instantiateViewController(withIdentifier: Storyboard.Ids.LaunchViewController))
     navigationController.isNavigationBarHidden = true
     UIApplication.shared.windows.first?.rootViewController = navigationController
     UIApplication.shared.windows.first?.makeKeyAndVisible()
-    
     if message != nil {
         UIApplication.shared.keyWindow?.makeToast(message)
     }
@@ -226,9 +232,12 @@ internal func initializeUserData()->User
 
 
 func setLocalization(language : Language){
-    
-    if let path = Bundle.main.path(forResource: language.rawValue, ofType: "lproj"), let bundle = Bundle(path: path) {
+   
+    if let path = Bundle.main.path(forResource: language.code, ofType: "lproj"), let bundle = Bundle(path: path) {
         
+        let attribute : UISemanticContentAttribute = language == .arabic ? .forceRightToLeft : .forceLeftToRight
+        UIView.appearance().semanticContentAttribute = attribute
+        selectedLanguage = language
         currentBundle = bundle
         
     } else {

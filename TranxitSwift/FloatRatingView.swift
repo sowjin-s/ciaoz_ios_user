@@ -48,7 +48,7 @@ open class FloatRatingView: UIView {
             // Update empty image views
             for imageView in emptyImageViews {
                 imageView.image = emptyImage?.withRenderingMode(.alwaysTemplate)
-                imageView.tintColorId = 1
+                imageView.tintColor = .rating
             }
             refresh()
         }
@@ -63,7 +63,7 @@ open class FloatRatingView: UIView {
             // Update full image views
             for imageView in fullImageViews {
                 imageView.image = fullImage?.withRenderingMode(.alwaysTemplate)
-                imageView.tintColorId = 1
+                imageView.tintColor = .rating
             }
             refresh()
         }
@@ -72,7 +72,7 @@ open class FloatRatingView: UIView {
     /**
      Sets the empty and full image view content mode.
      */
-    var imageContentMode: UIViewContentMode = UIViewContentMode.scaleAspectFit
+    var imageContentMode: UIView.ContentMode = UIView.ContentMode.scaleAspectFit
     
     /**
      Minimum rating.

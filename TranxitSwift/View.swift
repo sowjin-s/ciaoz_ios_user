@@ -186,7 +186,7 @@ class View: UIView {
         layer.frame = CGRect(origin: CGPoint(x: 0, y: isBottomLineInverted ?(self.bounds.height-bottomlineHeight) : 0), size: CGSize(width: self.bounds.width, height: bottomlineHeight))
         layer.backgroundColor = bottomLineColor.cgColor
         self.layer.addSublayer(layer)
-        layer.contentsGravity = kCAGravityResizeAspectFill
+        layer.contentsGravity = CALayerContentsGravity.resizeAspectFill
         
     }
     

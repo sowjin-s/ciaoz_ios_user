@@ -28,26 +28,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var reachability : Reachability?
     static let shared = AppDelegate()
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
        
         FirebaseApp.configure()
         self.appearence()
-        setLocalization(language: .english)
         self.google()
         self.IQKeyboard()
         self.siri()
         self.registerPush(forApp: application)
         self.stripe()
-      //  return true
-       
-        
-        
          window?.rootViewController = Router.setWireFrame()
          window?.becomeKey()
          window?.makeKeyAndVisible()
          DispatchQueue.global(qos: .background).async {
             self.startReachabilityChecking()
          }
+         self.checkUpdates()
          return true
     }
     
@@ -70,19 +66,58 @@ extension AppDelegate {
     // MARK:- Appearence
     private func appearence() {
         
+        if let languageStr = UserDefaults.standard.value(forKey: Keys.list.language) as? String, let language = Language(rawValue: languageStr) {
+            setLocalization(language: language)
+        }else {
+            setLocalization(language: .english)
+        }
         UINavigationBar.appearance().barTintColor = .white
         UINavigationBar.appearance().tintColor = .darkGray
-        var attributes = [NSAttributedStringKey : Any]()
+        var attributes = [NSAttributedString.Key : Any]()
         attributes.updateValue(UIColor.black, forKey: .foregroundColor)
-        attributes.updateValue(UIFont(name: FontCustom.Bold.rawValue, size: 16.0)!, forKey : NSAttributedStringKey.font)
+        attributes.updateValue(UIFont(name: FontCustom.Bold.rawValue, size: 16.0)!, forKey : NSAttributedString.Key.font)
         UINavigationBar.appearance().titleTextAttributes = attributes
-        attributes.updateValue(UIFont(name:FontCustom.Medium.rawValue, size: 18.0)!, forKey : NSAttributedStringKey.font)
+        attributes.updateValue(UIFont(name:FontCustom.Medium.rawValue, size: 18.0)!, forKey : NSAttributedString.Key.font)
         if #available(iOS 11.0, *) {
             UINavigationBar.appearance().largeTitleTextAttributes = attributes
         }
+        
+        UIPageControl.appearance().pageIndicatorTintColor = .lightGray
+        UIPageControl.appearance().currentPageIndicatorTintColor = .primary
+        UIPageControl.appearance().backgroundColor = .clear
+        
     }
     
-    
+    // MARK:- Check Update
+    private func checkUpdates() {
+        
+        var request = ChatPush()
+        request.version = Bundle.main.getVersion()
+        request.device_type = .ios
+        request.sender = .user
+        Webservice().retrieve(api: .versionCheck, url: nil, data: request.toData(), imageData: nil, paramters: nil, type: .POST) { (error, data) in
+            guard let responseObject = data?.getDecodedObject(from: ChatPush.self),
+                let forceUpdate = responseObject.force_update,
+                forceUpdate,
+                let appUrl = responseObject.url,
+                let urlObject = URL(string: appUrl),
+                UIApplication.shared.canOpenURL(urlObject)
+                else {
+                    return
+            }
+            
+            func showUpdateUI() {
+                DispatchQueue.main.async {
+                    let alert = showAlert(message: Constants.string.newVersionAvailableMessage.localize(), handler: { (_) in
+                        UIApplication.shared.open(urlObject, options: [:], completionHandler: nil)
+                        showUpdateUI()
+                    })
+                    UIApplication.topViewController()?.present(alert, animated: true, completion: nil)
+                }
+            }
+            showUpdateUI()
+        }
+    }
     
 }
 
@@ -99,14 +134,14 @@ extension AppDelegate {
         print("Apn Token ", deviceToken.map { String(format: "%02.2hhx", $0) }.joined())
     }
 
-    func application(_ application: UIApplication,
-                     didReceiveRemoteNotification notification: [AnyHashable : Any],
-                     fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        print("Notification  :  ", notification)
-
-        completionHandler(.newData)
-        
-    }
+//    func application(_ application: UIApplication,
+//                     didReceiveRemoteNotification notification: [AnyHashable : Any],
+//                     fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+//        
+//        print("Notification  :  ", notification)
+//        completionHandler(.newData)
+//        
+//    }
     
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
@@ -131,7 +166,7 @@ extension AppDelegate {
     }
     
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         return GIDSignIn.sharedInstance().handle(url as URL?,
                                                  sourceApplication: options[.sourceApplication] as? String,
                                                  annotation: options[.annotation])
@@ -199,15 +234,14 @@ extension AppDelegate {
     
     // MARK:- Reachability Action
     
-    @IBAction private func reachabilityAction() {
+    @objc private func reachabilityAction(notification : Notification) {
         
         print("Reachability \(self.reachability?.connection.description ?? .Empty)", #function)
         guard self.reachability != nil else { return }
         if self.reachability!.connection == .none && riderStatus == .none {
-            if let rootView = UIApplication.shared.keyWindow?.rootViewController?.childViewControllers.last, !(rootView is OfflineBookingViewController) {
+            if let rootView = UIApplication.shared.keyWindow?.rootViewController?.children.last, (rootView is HomeViewController), retrieveUserData() {
                 rootView.present(id: Storyboard.Ids.OfflineBookingViewController, animation: true)
             }
-
         } else {
             (UIApplication.topViewController() as? OfflineBookingViewController)?.dismiss(animated: true, completion: nil)
         }

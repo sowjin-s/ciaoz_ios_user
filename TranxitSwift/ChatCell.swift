@@ -26,14 +26,14 @@ class ChatCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+         self.imageViewStatus.isHidden = true
     }
 
-    func setSender(values : ChatResponse) {
+    func setSender(values : ChatResponse, requestId : Int) {
         
        self.set(values: values.response, isRecieved: false)
        self.imageViewStatus.image = values.response?.read == MessageStatus.sent.rawValue ? #imageLiteral(resourceName: "sent") : #imageLiteral(resourceName: "read")
-
+        
     }
     
     
@@ -48,15 +48,15 @@ class ChatCell: UITableViewCell {
     
     
     
-    func setRecieved(values : ChatResponse, chatType : ChatType = .single){
+    func setRecieved(values : ChatResponse, chatType : ChatType = .single, requestId : Int){
        
-        guard let entity = values.response , let key = values.key, let sender = entity.sender else {
+        guard let entity = values.response , let key = values.key else {
             return
         }
        
         if entity.read == MessageStatus.sent.rawValue {
             entity.read = MessageStatus.read.rawValue
-            FirebaseHelper.shared.update(chat: entity, key: key, toUser: sender)
+            FirebaseHelper.shared.update(chat: entity, key: key, toUser: requestId)
         }
         
         self.set(values: values.response, isRecieved: true)
@@ -100,7 +100,8 @@ class ChatCell: UITableViewCell {
         
         self.labelCell?.textColor = isRecieved ? .black : .white
         self.viewCell.backgroundColor = isRecieved ? .white : UIColor.lightGray
-        self.labelTime.text = Formatter.shared.relativePast(for: Date(timeIntervalSince1970: TimeInterval(values?.timeStamp ?? 0)))
+        self.labelTime.text = Formatter.shared.relativePast(for: Date(timeIntervalSince1970: TimeInterval(values?.timestamp ?? 0)))
+        //
         self.layoutIfNeeded()
  
     }

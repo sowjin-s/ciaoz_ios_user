@@ -62,7 +62,7 @@ extension UIViewController {
     
     func pushRight(toViewController viewController : UIViewController){
         
-        self.makePush(transition: kCATransitionFromLeft)
+        self.makePush(transition: convertFromCATransitionSubtype(CATransitionSubtype.fromLeft))
         navigationController?.pushViewController(viewController, animated: false)
         
     }
@@ -71,9 +71,9 @@ extension UIViewController {
         
         let transition = CATransition()
         transition.duration = 0.45
-        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionDefault)
-        transition.type = kCATransitionPush
-        transition.subtype = type
+        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.default)
+        transition.type = CATransitionType.push
+        transition.subtype = convertToOptionalCATransitionSubtype(type)
         //transition.delegate = self
         navigationController?.view.layer.add(transition, forKey: nil)
         //navigationController?.isNavigationBarHidden = false
@@ -82,7 +82,7 @@ extension UIViewController {
     
     func popLeft() {
         
-        self.makePush(transition: kCATransitionFromRight)
+        self.makePush(transition: convertFromCATransitionSubtype(CATransitionSubtype.fromRight))
         navigationController?.popViewController(animated: true)
         
     }
@@ -96,19 +96,18 @@ extension UIViewController {
         
         constraintValue = constraint.constant
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(info:)), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(info:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(info:)), name: .UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(info:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(info:)), name: .UIKeyboardWillChangeFrame, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(info:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
       
-        
     }
     //MARK:- Keyboard will show
     
     @IBAction private func keyboardWillShow(info : NSNotification){
         
-        guard let keyboard = (info.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else{
+        guard let keyboard = (info.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else{
             return
         }
         bottomConstraint?.constant = -(keyboard.height)
@@ -140,14 +139,14 @@ extension UIViewController {
     
     func showImage(with completion : @escaping ((UIImage?)->())){
         
-        let alert = UIAlertController(title: Constants.string.selectSource, message: nil, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: Constants.string.camera, style: .default, handler: { (_) in
+        let alert = UIAlertController(title: Constants.string.selectSource.localize(), message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: Constants.string.camera.localize(), style: .default, handler: { (_) in
             self.chooseImage(with: .camera)
         }))
-        alert.addAction(UIAlertAction(title: Constants.string.photoLibrary, style: .default, handler: { (_) in
+        alert.addAction(UIAlertAction(title: Constants.string.photoLibrary.localize(), style: .default, handler: { (_) in
             self.chooseImage(with: .photoLibrary)
         }))
-        alert.addAction(UIAlertAction(title: Constants.string.Cancel, style: .cancel, handler:nil))
+        alert.addAction(UIAlertAction(title: Constants.string.Cancel.localize(), style: .cancel, handler:nil))
         alert.view.tintColor = .primary
         imageCompletion = completion
         self.present(alert, animated: true, completion: nil)
@@ -156,7 +155,7 @@ extension UIViewController {
 
     // MARK:- Show Image Picker
     
-    private func chooseImage(with source : UIImagePickerControllerSourceType){
+    private func chooseImage(with source : UIImagePickerController.SourceType){
         
         if UIImagePickerController.isSourceTypeAvailable(source) {
             
@@ -226,10 +225,13 @@ extension UIViewController {
 
 extension UIViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
         
         picker.dismiss(animated: true) {
-            if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
+            if let image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.editedImage)] as? UIImage {
                 imageCompletion?(image)
             }
         }
@@ -245,3 +247,24 @@ extension UIViewController : UIImagePickerControllerDelegate, UINavigationContro
 
 
 
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromCATransitionSubtype(_ input: CATransitionSubtype) -> String {
+	return input.rawValue
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToOptionalCATransitionSubtype(_ input: String?) -> CATransitionSubtype? {
+	guard let input = input else { return nil }
+	return CATransitionSubtype(rawValue: input)
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+	return input.rawValue
+}

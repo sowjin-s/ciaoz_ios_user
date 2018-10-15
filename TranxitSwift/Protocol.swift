@@ -142,6 +142,7 @@ protocol PostPresenterOutputProtocol : class {
     func sendCouponWallet(api : Base, data : Data)
     func sendCardEntityList(api : Base, data : Data)
     func sendWalletEntity(api : Base, data: Data)
+    func sendPromocodeList(api : Base, data: Data)
 }
 
 
@@ -164,6 +165,7 @@ protocol PostViewProtocol : class {
     func getCouponWallet(api : Base, data : [CouponWallet])
     func getCardEnities(api : Base, data : [CardEntity])
     func getWalletEntity(api : Base, data : WalletEntity?)
+    func getPromocodeList(api : Base, data : [PromocodeEntity])
 }
 
 
@@ -171,6 +173,7 @@ extension PostViewProtocol {
     
     var presenter: PostPresenterInputProtocol? {
         get {
+            print("Controller  --  ",self)
             presenterObject?.controller = self
             self.presenter = presenterObject
             return presenterObject
@@ -192,6 +195,7 @@ extension PostViewProtocol {
     func getCouponWallet(api : Base, data : [CouponWallet]) { return }
     func getCardEnities(api : Base, data : [CardEntity]) {return}
     func getWalletEntity(api : Base, data : WalletEntity?) {return}
+    func getPromocodeList(api : Base, data : [PromocodeEntity]) {return}
     
 }
 

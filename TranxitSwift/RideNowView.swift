@@ -14,24 +14,25 @@ class RideNowView: UIView {
     @IBOutlet private weak var labelSurge : UILabel!
     @IBOutlet private weak var labelSurgeDescription : UILabel!
     @IBOutlet private weak var viewSurge: UIView!
-    @IBOutlet private weak var labelCapacity : UILabel!
-    @IBOutlet weak var labelCardNumber : UILabel!
-    @IBOutlet weak var imageViewCard : UIImageView!
+//    @IBOutlet private weak var labelCapacity : UILabel!
+//    @IBOutlet weak var labelCardNumber : UILabel!
+//    @IBOutlet weak var imageViewCard : UIImageView!
     @IBOutlet weak var progressView : UIProgressView!
     @IBOutlet private weak var collectionViewService : UICollectionView!
-    @IBOutlet private weak var buttonSchedule : UIButton!
-    @IBOutlet private weak var buttonRideNow : UIButton!
-    // @IBOutlet private weak var labelServiceTitle : UILabel!
-    @IBOutlet private weak var imageViewWallet : ImageView!
-    @IBOutlet private weak var viewWallet : UIView!
-    @IBOutlet private weak var labelWallet : UILabel!
-    @IBOutlet private weak var viewPayment : UIView!
-    @IBOutlet private weak var labelWalletAmount : UILabel!
+    @IBOutlet private weak var buttonProceed : UIButton!
+//    @IBOutlet private weak var buttonRideNow : UIButton!
+//    // @IBOutlet private weak var labelServiceTitle : UILabel!
+//    @IBOutlet private weak var imageViewWallet : ImageView!
+//    @IBOutlet private weak var viewWallet : UIView!
+//    @IBOutlet private weak var labelWallet : UILabel!
+//    @IBOutlet private weak var viewPayment : UIView!
+//    @IBOutlet private weak var labelWalletAmount : UILabel!
     
     private var datasource = [Service]()
-    var onClickChangePayment : (()->Void)? // Onclick Change Pricing
-    var onClickSchedule : ((Service?)->Void)? // Onclick schedule
-    var onClickRideNow : ((Service?)->Void)? // Onlclick Ride Now
+   // var onClickChangePayment : (()->Void)? // Onclick Change Pricing
+  //  var onClickSchedule : ((Service?)->Void)? // Onclick schedule
+    var onClickProceed : ((Service)->Void)? // Onlclick Ride Now
+    var onClickService : ((Service?)->Void)? // Onclick each servicetype
     private var rateView : RateView?
     private var selectedItem : Service?
     private var timer : Timer?
@@ -42,12 +43,12 @@ class RideNowView: UIView {
     private var destinationCoordinate = LocationCoordinate()
     private var selectedRow = -1
 
-    var isWalletChecked = false {  // Handle Wallet
-        didSet {
-            self.imageViewWallet.image = (isWalletChecked ? #imageLiteral(resourceName: "check") : #imageLiteral(resourceName: "check-box-empty")).withRenderingMode(.alwaysTemplate)
-        }
-    }
-    
+//    var isWalletChecked = false {  // Handle Wallet
+//        didSet {
+//            self.imageViewWallet.image = (isWalletChecked ? #imageLiteral(resourceName: "check") : #imageLiteral(resourceName: "check-box-empty")).withRenderingMode(.alwaysTemplate)
+//        }
+//    }
+//
     private var isSurge = false {
         didSet {
             UIView.animate(withDuration: 0.5) {
@@ -56,13 +57,20 @@ class RideNowView: UIView {
         }
     }
     
-    var isShowWallet  = false {
-        
+//    var isShowWallet  = false {
+//
+//        didSet {
+//            self.viewWallet.isHidden = !isShowWallet
+//            self.labelWalletAmount.isHidden = !isShowWallet
+//        }
+//
+//    }
+    // boolean to disable or enable the ride buttons
+    private var isRideEnabled = true {
         didSet {
-            self.viewWallet.isHidden = !isShowWallet
-            self.labelWalletAmount.isHidden = !isShowWallet
+            self.buttonProceed.isEnabled = isRideEnabled
+            self.buttonProceed.alpha = isRideEnabled ? 1 : 0.7
         }
-        
     }
     
     
@@ -72,7 +80,9 @@ class RideNowView: UIView {
         self.initialLoads()
         self.localize()
         self.setDesign()
+        //self.setViews()
     }
+    
 }
 
 extension RideNowView {
@@ -82,45 +92,61 @@ extension RideNowView {
         self.collectionViewService.delegate = self
         self.collectionViewService.dataSource = self
         self.collectionViewService.register(UINib(nibName: XIB.Names.ServiceSelectionCollectionViewCell, bundle: nil), forCellWithReuseIdentifier: XIB.Names.ServiceSelectionCollectionViewCell)
-        self.buttonSchedule.addTarget(self, action: #selector(self.buttonActions(sender:)), for: .touchUpInside)
-        self.buttonRideNow.addTarget(self, action: #selector(self.buttonActions(sender:)), for: .touchUpInside)
-        self.imageViewCard.image = #imageLiteral(resourceName: "money_icon")
-        self.labelCardNumber.text = Constants.string.cash.localize()
+        self.buttonProceed.addTarget(self, action: #selector(self.buttonActions(sender:)), for: .touchUpInside)
+       // self.buttonRideNow.addTarget(self, action: #selector(self.buttonActions(sender:)), for: .touchUpInside)
+       // self.imageViewCard.image = #imageLiteral(resourceName: "money_icon")
+      //  self.labelCardNumber.text = Constants.string.cash.localize()
         let layer = viewCurve.createCircleShapeLayer(strokeColor: .clear, fillColor: .black)
         self.viewCurve.layer.insertSublayer(layer, below: labelSurge.layer)
-        self.viewWallet.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.tapGestureAction(sender:))))
-        self.viewPayment.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.tapGestureAction(sender:))))
+       // self.viewWallet.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.tapGestureAction(sender:))))
+       // self.viewPayment.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.tapGestureAction(sender:))))
         //self.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(self.panAction(sender:))))
-        self.isWalletChecked = false
+       // self.isWalletChecked = false
         self.viewSurge.alpha = 0
-        self.isShowWallet = false
+       // self.isShowWallet = false
         self.initializeRateView()
         self.setProgressView()
+        self.isRideEnabled = false
     }
+    
+//    // MARK:-
+//
+//    private func setViews() {
+//        let imageViewCash = UIImageView(image: #imageLiteral(resourceName: "paymentChange").withRenderingMode(.alwaysTemplate))
+//        imageViewCash.tintColor = .black
+//        imageViewCash.contentMode = .scaleAspectFit
+//        imageViewCash.translatesAutoresizingMaskIntoConstraints = false
+//       // self.viewPayment.addSubview(imageViewCash)
+//        imageViewCash.topAnchor.constraint(equalTo: viewPayment.topAnchor, constant: 4).isActive = true
+//        imageViewCash.trailingAnchor.constraint(equalTo: viewPayment.trailingAnchor, constant: 4).isActive = true
+//        imageViewCash.heightAnchor.constraint(equalTo: self.viewPayment.heightAnchor, multiplier: 0.5).isActive = true
+//        imageViewCash.widthAnchor.constraint(equalTo: self.viewPayment.heightAnchor, multiplier: 0.5).isActive = true
+//    }
     
     // MARK:- Set Designs
     
     private func setDesign() {
         
         //Common.setFont(to: labelServiceTitle, isTitle: true)
-        Common.setFont(to: buttonRideNow, isTitle: true)
-        Common.setFont(to: buttonSchedule, isTitle: true)
+        Common.setFont(to: buttonProceed)
+       // Common.setFont(to: buttonSchedule, isTitle: true)
         Common.setFont(to: labelSurge, isTitle: true)
         Common.setFont(to: labelSurgeDescription)
-        Common.setFont(to: labelCapacity)
-        Common.setFont(to: labelCardNumber)
-        Common.setFont(to: labelWallet)
-        Common.setFont(to: labelWalletAmount, isTitle: true)
+//        Common.setFont(to: labelCapacity)
+//        Common.setFont(to: labelCardNumber)
+//        Common.setFont(to: labelWallet)
+//        Common.setFont(to: labelWalletAmount, isTitle: true)
         
     }
     
     // MARK:- Localize
     
     private func localize(){
-        self.buttonSchedule.setTitle(Constants.string.scheduleRide.localize().uppercased(), for: .normal)
-        self.buttonRideNow.setTitle(Constants.string.rideNow.localize().uppercased(), for: .normal)
+        //self.buttonSchedule.setTitle(Constants.string.scheduleRide.localize().uppercased(), for: .normal)
+      //  self.buttonRideNow.setTitle(Constants.string.rideNow.localize().uppercased(), for: .normal)
         // self.labelServiceTitle.text = Constants.string.service.localize()
-        self.labelWallet.text = Constants.string.wallet.localize()
+        //self.labelWallet.text = Constants.string.wallet.localize()
+        self.buttonProceed.setTitle(Constants.string.proceed.localize().uppercased(), for: .normal)
         self.labelSurgeDescription.text = Constants.string.peakInfo.localize()
     }
     
@@ -129,27 +155,10 @@ extension RideNowView {
     @IBAction private func buttonActions(sender : UIButton) {
         
         guard self.selectedItem?.pricing != nil else {
-            UIApplication.shared.keyWindow?.makeToast(Constants.string.pleaseTryAgain.localize())
+            UIApplication.shared.keyWindow?.makeToast(Constants.string.extimationFareNotAvailable.localize())
             return
         }
-        self.selectedItem?.pricing?.useWallet = self.isWalletChecked.hashValue // send wallet status
-        
-        if sender == buttonSchedule {
-            self.onClickSchedule?(self.selectedItem)
-        } else if sender == buttonRideNow {
-            self.onClickRideNow?(self.selectedItem)
-        }
-    }
-    
-    // MARK:- View Wallet
-    
-    @IBAction private func tapGestureAction(sender : UITapGestureRecognizer) {
-        guard let senderView = sender.view else { return }
-        if senderView == self.viewPayment {  // Is Clicking change payment
-            self.onClickChangePayment?()
-        } else if senderView == self.viewWallet {  // Is Clicking add or remove wallet amount
-            self.isWalletChecked = !isWalletChecked
-        }
+        self.onClickProceed?(self.selectedItem!)
     }
     
     // Getting service array from  Homeviewcontroller
@@ -158,13 +167,13 @@ extension RideNowView {
         self.selectedRow = -1
         self.datasource = source
         self.collectionViewService.reloadData()
+        self.isRideEnabled = false
         self.collectionView(collectionViewService, didSelectItemAt: IndexPath(item: 0, section: 0))
-        
     }
     
     // Setting address from HomeViewController
     func setAddress(source : LocationCoordinate, destination : LocationCoordinate) {
-        
+        // print("\nselected ------>",self.sourceCoordinate,self.destinationCoordinate)
         self.sourceCoordinate = source
         self.destinationCoordinate = destination
         
@@ -201,7 +210,7 @@ extension RideNowView {
     // MARK:- Show Rate View
     
     private func showRateView() {
-        
+        guard selectedItem?.pricing != nil else {return}
         UIView.animate(withDuration: 0.5) {
             self.rateView?.alpha = 1
         }
@@ -259,9 +268,9 @@ extension RideNowView {
     // Get Estimate Fare
     
     func getEstimateFareFor(serviceId : Int) {
-        
+       // print("\nselected -----",self.sourceCoordinate,self.destinationCoordinate)
         DispatchQueue.global(qos: .userInteractive).async {
-            guard self.sourceCoordinate.latitude>0, self.sourceCoordinate.longitude>0, self.destinationCoordinate.latitude>0, self.destinationCoordinate.longitude>0 else {
+            guard self.sourceCoordinate.latitude != 0, self.sourceCoordinate.longitude != 0, self.destinationCoordinate.latitude != 0, self.destinationCoordinate.longitude != 0 else {
                 return
             }
             var estimateFare = EstimateFareRequest()
@@ -270,6 +279,7 @@ extension RideNowView {
             estimateFare.d_latitude = self.destinationCoordinate.latitude
             estimateFare.d_longitude = self.destinationCoordinate.longitude
             estimateFare.service_type = serviceId
+           // print("\nselected ---",self.presenter)
             self.presenter?.get(api: .estimateFare, parameters: estimateFare.JSONRepresentation)
         }
         self.resetProgressView()
@@ -279,17 +289,11 @@ extension RideNowView {
     // Get Providers In Current Location
     
     private func getProviders(by serviceId : Int){
-        
         DispatchQueue.global(qos: .background).async {
-            
           //  guard let currentLoc = self.sourceCoordinate .value  else { return }
-            
-            let json = [Constants.string.latitude : self.sourceCoordinate.latitude, Constants.string.longitude : self.sourceCoordinate.longitude, Constants.string.service : serviceId] as [String : Any]
-            
-            self.presenter?.get(api: .getProviders, parameters: json)
-            
+                let json = [Constants.string.latitude : self.sourceCoordinate.latitude, Constants.string.longitude : self.sourceCoordinate.longitude, Constants.string.service : serviceId] as [String : Any]
+                self.presenter?.get(api: .getProviders, parameters: json)
         }
-        
     }
     
     // MARK:- Set Progress View
@@ -335,9 +339,9 @@ extension RideNowView {
         
         if self.datasource.count>selectedRow, self.datasource[selectedRow].pricing != nil {
             self.labelSurge.text = self.datasource[selectedRow].pricing?.surge_value
-            self.isSurge = self.datasource[selectedRow].pricing?.surge == true.hashValue
-            self.isShowWallet = !(self.datasource[selectedRow].pricing?.wallet_balance == 0)
-            self.labelWalletAmount.text = " \(String.removeNil(User.main.currency)) \(self.datasource[selectedRow].pricing?.wallet_balance ?? 0)"
+            self.isSurge = self.datasource[selectedRow].pricing?.surge == 1
+//            self.isShowWallet = !(self.datasource[selectedRow].pricing?.wallet_balance == 0)
+//            self.labelWalletAmount.text = " \(String.removeNil(User.main.currency)) \(Formatter.shared.limit(string: "\(self.datasource[selectedRow].pricing?.wallet_balance ?? 0)", maximumDecimal: 2) ?? "0.00")"
         }
         
     }
@@ -364,7 +368,7 @@ extension RideNowView : UICollectionViewDelegate, UICollectionViewDataSource, UI
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+       // print("\nselected ",indexPath)
         self.select(at: indexPath)
     }
     
@@ -376,6 +380,7 @@ extension RideNowView : UICollectionViewDelegate, UICollectionViewDataSource, UI
                 if self.selectedRow == indexPath.row {
                     if !collectionCell.isSelected {
                         collectionCell.isSelected = true
+                        self.onClickService?(self.datasource[indexPath.row])
                     }
                 } else {
                     collectionCell.isSelected = false
@@ -389,8 +394,9 @@ extension RideNowView : UICollectionViewDelegate, UICollectionViewDataSource, UI
     
     
     private func select(at indexPath : IndexPath) {
-        
-        if datasource.count>indexPath.row, let id = datasource[indexPath.row].id {
+       // print("\nselected -",datasource.count)
+        if datasource.count>indexPath.row {
+            //let id = datasource[indexPath.row].id
             self.isSurge = false // Hide surge till api loaded
             self.collectionViewService.cellForItem(at: IndexPath(item: self.selectedRow, section: 0))?.isSelected = false
             if self.selectedRow == indexPath.row {
@@ -398,13 +404,16 @@ extension RideNowView : UICollectionViewDelegate, UICollectionViewDataSource, UI
                 return
             }
             self.selectedItem = self.datasource[indexPath.row]
-            self.labelCapacity.text = "1-\(Int.removeNil(self.selectedItem?.capacity))"
+            //self.labelCapacity.text = "\(Int.removeNil(self.selectedItem?.capacity))"
             self.selectedRow = indexPath.row
             self.setSurgeViewAndWallet()
-            self.getProviders(by: id)
+            self.onClickService?(self.selectedItem)  // Send selectedItem to show the ETA on Map
+            
+            //self.getProviders(by: id)
         }
         
         if selectedItem?.pricing == nil, let id = self.selectedItem?.id {
+           // print("\nselected --",id)
             self.getEstimateFareFor(serviceId: id)
         }
     }
@@ -416,15 +425,20 @@ extension RideNowView : PostViewProtocol {
     
     func onError(api: Base, message: String, statusCode code: Int) {
         DispatchQueue.main.async {
-            self.make(toast: message)
+            print("\nController --- ",message,code)
+            UIApplication.shared.keyWindow?.makeToast(message)
             self.resetProgressView()
+            self.isRideEnabled = false
         }
     }
     
     func getEstimateFare(api: Base, data: EstimateFare?) {
-        if let index = self.datasource.index(where: { $0.id == data?.service_type }) {
+        // print("\nselected ",data)
+        if let serviceTypeId = data?.service_type, let index = self.datasource.index(where: { $0.id == serviceTypeId }) {
+            self.getProviders(by: serviceTypeId)
             self.datasource[index].pricing = data
             DispatchQueue.main.async {
+                self.isRideEnabled = (User.main.isCardAllowed || User.main.isCashAllowed) // Allow only if any payment gateway is enabled
                 self.resetProgressView()
                 self.setSurgeViewAndWallet()
                 self.collectionViewService.reloadItems(at: [IndexPath(item: index, section: 0)])

@@ -34,6 +34,8 @@ struct Storyboard {
     let OfflineBookingViewController = "OfflineBookingViewController"
     let SingleChatController = "SingleChatController"
     let AddCardViewController = "AddCardViewController"
+    let SideBarTableViewController = "SideBarTableViewController"
+    let LaunchNavigationController = "LaunchNavigationController"
 }
 
 
@@ -62,6 +64,9 @@ struct XIB {
     let RideNowView = "RideNowView"
     let CancelListTableViewCell = "CancelListTableViewCell"
     let ReasonView = "ReasonView"
+    let CouponCollectionViewCell = "CouponCollectionViewCell"
+    let CouponView = "CouponView"
+    let PassbookWalletTransaction = "PassbookWalletTransaction"
 }
 
 

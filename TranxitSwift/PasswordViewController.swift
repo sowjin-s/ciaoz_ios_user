@@ -56,7 +56,6 @@ extension PasswordViewController {
     }
 
     private func initialLoads(){
-        
         self.setDesigns()
         self.localize()
         self.view.dismissKeyBoardonTap()
@@ -69,12 +68,10 @@ extension PasswordViewController {
         self.setFrame()
         self.buttonCreateAccount.addTarget(self, action: #selector(self.createAccountAction), for: .touchUpInside)
         self.buttonForgotPassword.addTarget(self, action: #selector(self.forgotPasswordAction), for: .touchUpInside)
-//        self.textFieldPassword.setPasswordView()
-        
+//      self.textFieldPassword.setPasswordView()
     }
     
-    private func setFrame(){
-        
+    private func setFrame() {
         self.viewNext.makeRoundedCorner()
         self.viewScroll.frame = self.scrollView.bounds
         self.scrollView.contentSize = self.viewScroll.bounds.size
@@ -220,7 +217,7 @@ extension PasswordViewController : PostViewProtocol {
         guard data != nil  else { return  }
         Common.storeUserData(from: data)
         storeInUserDefaults()
-        let drawer = Router.main.instantiateViewController(withIdentifier: Storyboard.Ids.DrawerController)
+        let drawer = Common.setDrawerController() //Router.main.instantiateViewController(withIdentifier: Storyboard.Ids.DrawerController)
         self.present(drawer, animated: true, completion: {
             self.navigationController?.viewControllers.removeAll()
         })

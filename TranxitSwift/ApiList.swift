@@ -37,6 +37,7 @@ enum StatusCode : Int {
 
 enum Base : String{
   
+    
     case signUp = "/api/user/signup"
     case login = "/oauth/token"
     case googleLogin = "/api/user/auth/google"
@@ -71,6 +72,10 @@ enum Base : String{
     case deleteCard = "/api/user/card/destory"
     case userVerify = "/api/user/verify"
     case addMoney = "/api/user/add/money"
+    case chatPush = "/api/user/chat"
+    case promocodes = "/api/user/promocodes_list"
+    case updateLanguage = "/api/user/update/language"
+    case versionCheck = "/api/user/checkversion"
     
     init(fromRawValue: String){
         self = Base(rawValue: fromRawValue) ?? .signUp

@@ -16,11 +16,10 @@ struct Coupon : JSONSerializable {
 struct CouponWallet : JSONSerializable {
     
     var created_at : String?
-    var amount : String?
+    var amount : Float?
     var via : String?
     var status : String?
     var promocode : PromoCode?
-    
 }
 
 struct PromoCode : JSONSerializable {
@@ -31,3 +30,4 @@ struct PromoCode : JSONSerializable {
     var status : String?
     
 }
+

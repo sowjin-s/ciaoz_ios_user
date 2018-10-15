@@ -33,7 +33,6 @@ class HelpViewController: UIViewController {
         super.viewDidLoad()
         self.initalLoads()
         buttonAction()
-        
     }
     
     override func viewWillLayoutSubviews() {
@@ -68,6 +67,7 @@ extension HelpViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.backButtonClick))
         self.navigationItem.title = Constants.string.help.localize()
         self.setDesign()
+        //self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false 
     }
     
     private func buttonAction(){

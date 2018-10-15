@@ -13,7 +13,7 @@ class Store {
     // Get Review From User
     class func review() {
         if #available(iOS 10.3, *) {
-           // SKStoreReviewController.requestReview()
+          //  SKStoreReviewController.requestReview()
         } 
     }
 }

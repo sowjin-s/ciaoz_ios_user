@@ -82,7 +82,7 @@ extension ProfileViewController {
         self.viewPersonal.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.setTripTypeAction(sender:))))
         self.viewBusiness.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.setTripTypeAction(sender:))))
         self.imageViewProfile.isUserInteractionEnabled = true
-        [self.imageViewProfile, self.viewImageChange].forEach({$0?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.changeImage)))}) 
+        [self.imageViewEdit, self.viewImageChange].forEach({$0?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.changeImage)))}) 
         self.buttonSave.addTarget(self, action: #selector(self.buttonSaveAction), for: .touchUpInside)
         self.buttonChangePassword.addTarget(self, action: #selector(self.changePasswordAction), for: .touchUpInside)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.backButtonClick))
@@ -116,9 +116,9 @@ extension ProfileViewController {
     
     private func setDesign() {
         
-        var attributes : [ NSAttributedStringKey : Any ] = [.font : UIFont.systemFont(ofSize: 18, weight: .bold)]
-        attributes.updateValue(UIColor.white, forKey: NSAttributedStringKey.foregroundColor)
-        self.buttonSave.setAttributedTitle(NSAttributedString(string: Constants.string.save.uppercased().localize(), attributes: attributes), for: .normal)
+        var attributes : [ NSAttributedString.Key : Any ] = [.font : UIFont.systemFont(ofSize: 18, weight: .bold)]
+        attributes.updateValue(UIColor.white, forKey: NSAttributedString.Key.foregroundColor)
+        self.buttonSave.setAttributedTitle(NSAttributedString(string: Constants.string.save.localize().uppercased(), attributes: attributes), for: .normal)
         [textFieldFirst, textFieldLast, textFieldEmail, textFieldPhone].forEach({
             $0?.borderInactiveColor = nil
             $0?.borderActiveColor = nil
@@ -207,7 +207,7 @@ extension ProfileViewController {
         json.removeValue(forKey: "wallet_balance")
         json.removeValue(forKey: "sos")
 
-        if self.changedImage != nil, let dataImg = UIImagePNGRepresentation(self.changedImage!) {
+        if self.changedImage != nil, let dataImg = self.changedImage!.pngData() {
             self.presenter?.post(api: .updateProfile, imageData: [WebConstants.string.picture : dataImg], parameters: json)
         } else {
             self.presenter?.post(api: .updateProfile, data: profile.toData())

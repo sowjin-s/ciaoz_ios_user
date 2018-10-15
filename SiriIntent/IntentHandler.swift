@@ -13,8 +13,6 @@ class IntentHandler: INExtension {
     
     override func handler(for intent: INIntent) -> Any? {
         
-        print(intent)
-        
         if intent is INRequestRideIntent {
             return RideRequestHandler()
         }
@@ -26,6 +24,6 @@ class IntentHandler: INExtension {
 
 public extension UIImage {
     public var inImage: INImage {
-        return INImage(imageData: UIImagePNGRepresentation(self)!)
+        return INImage(imageData: self.pngData()!)
     }
 }

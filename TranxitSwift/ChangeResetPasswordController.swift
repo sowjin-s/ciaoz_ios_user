@@ -200,7 +200,11 @@ extension ChangeResetPasswordController : PostViewProtocol {
                 showAlert(message: message, okHandler: {
                    
                     if self.isChangePassword {
-                        self.popOrDismiss(animation: true)
+                        if let loginVC = Router.user.instantiateViewController(withIdentifier: Storyboard.Ids.EmailViewController) as? EmailViewController {
+                            loginVC.isHideLeftBarButton = true
+                            let navigationControllerVC = UINavigationController(rootViewController: loginVC)
+                            self.navigationController?.present(navigationControllerVC, animated: true, completion: nil)
+                        }
                     } else {
                         self.navigationController?.popToRootViewController(animated: true)
                     }

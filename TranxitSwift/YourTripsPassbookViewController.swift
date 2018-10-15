@@ -15,17 +15,19 @@ class YourTripsPassbookViewController: UIViewController {
     @IBOutlet var upCommingBtn: UIButton!
     @IBOutlet private var underLineView: UIView!
     @IBOutlet private var tableViewList : UITableView!
+    @IBOutlet private weak var viewUpcomming : UIView!
     
-    var isYourTripsSelected = true // Boolean Handle Passbook and Yourtrips list
+    var isYourTripsSelected = true  // Boolean Handle Passbook and Yourtrips list
+    
     private var isFirstBlockSelected = true {
         didSet {
             UIView.animate(withDuration: 0.5) {
-                self.underLineView.frame.origin.x = self.isFirstBlockSelected ? 0 : (self.view.bounds.width/2)
+                self.underLineView.frame.origin.x = (selectedLanguage == .arabic ? !self.isFirstBlockSelected : self.isFirstBlockSelected) ? 0 : (self.view.bounds.width/2)
             }
         }
     }
     
-    lazy var loader  : UIView = {
+   private lazy var loader  : UIView = {
         return createActivityIndicator(UIApplication.shared.keyWindow ?? self.view)
     }()
     
@@ -33,7 +35,7 @@ class YourTripsPassbookViewController: UIViewController {
     private var datasourceYourTripsUpcoming = [Request]()
     private var datasourceYourTripsPast = [Request]()
     private var datasourceCoupon = [CouponWallet]()
-    private var datasourceWallet = [CouponWallet]()
+    private var datasourceWallet = [WalletTransaction]()
 
     
     override func viewDidLoad() {
@@ -85,6 +87,7 @@ extension YourTripsPassbookViewController {
         
         Common.setFont(to: pastBtn, isTitle: true)
         Common.setFont(to: upCommingBtn, isTitle:  true)
+        self.viewUpcomming.isHidden = !isYourTripsSelected
     }
     
  
@@ -98,7 +101,7 @@ extension YourTripsPassbookViewController {
     private func registerCell(){
         
         tableViewList.register(UINib(nibName: XIB.Names.YourTripCell, bundle: nil), forCellReuseIdentifier: XIB.Names.YourTripCell)
-        tableViewList.register(UINib(nibName: XIB.Names.PassbookTableViewCell, bundle: nil), forCellReuseIdentifier: XIB.Names.PassbookTableViewCell)
+        tableViewList.register(UINib(nibName: XIB.Names.PassbookWalletTransaction, bundle: nil), forCellReuseIdentifier: XIB.Names.PassbookWalletTransaction)
         
     }
     
@@ -228,12 +231,18 @@ extension YourTripsPassbookViewController : UITableViewDelegate,UITableViewDataS
             }
         } else {
             
-            if let cell = tableView.dequeueReusableCell(withIdentifier: XIB.Names.PassbookTableViewCell, for: indexPath) as? PassbookTableViewCell {
-                cell.isWalletSelected = isFirstBlockSelected
-                let datasource = (self.isFirstBlockSelected ? self.datasourceWallet : self.datasourceCoupon)
-                if datasource.count>indexPath.row{
-                    cell.set(values: datasource[indexPath.row])
+            if let cell = tableView.dequeueReusableCell(withIdentifier: XIB.Names.PassbookWalletTransaction, for: indexPath) as? PassbookWalletTableViewCell {
+               // cell.isWalletSelected = isFirstBlockSelected
+                if isFirstBlockSelected {
+                    if datasourceWallet.count>indexPath.row{
+                        cell.set(value: datasourceWallet[indexPath.row])
+                    }
                 }
+//                else {
+//                    if datasourceCoupon.count>indexPath.row{
+//                        cell.set(values: datasourceCoupon[indexPath.row])
+//                    }
+//                }
                 return cell
             }
             
@@ -242,12 +251,12 @@ extension YourTripsPassbookViewController : UITableViewDelegate,UITableViewDataS
         
     }
     
-    private func getData()->(trips :[Request],wallet : [CouponWallet]) {
+    private func getData()->(trips :[Request],wallet : [WalletTransaction], coupon :[CouponWallet]) {
         
         if isYourTripsSelected {
-            return ((isFirstBlockSelected ? self.datasourceYourTripsPast : self.datasourceYourTripsUpcoming),[])
+            return ((isFirstBlockSelected ? self.datasourceYourTripsPast : self.datasourceYourTripsUpcoming),[],[])
         } else {
-            return ([],(isFirstBlockSelected ? self.datasourceWallet : self.datasourceCoupon))
+            return ([],self.datasourceWallet,self.datasourceCoupon)
         }
         
     }
@@ -282,8 +291,6 @@ extension YourTripsPassbookViewController : PostViewProtocol  {
         
         if api == .couponPassbook {
             self.datasourceCoupon = data
-        } else if api == .walletPassbook {
-            self.datasourceWallet = data
         }
         reloadTable()
     }
@@ -293,7 +300,17 @@ extension YourTripsPassbookViewController : PostViewProtocol  {
             UIApplication.shared.keyWindow?.makeToast(message)
         }
         self.getFromApi()
-
+    }
+    
+    func getWalletEntity(api: Base, data: WalletEntity?) {
+        if api == .walletPassbook {
+            DispatchQueue.main.async {
+                User.main.wallet_balance = data?.balance
+                storeInUserDefaults()
+            }
+            self.datasourceWallet = data?.wallet_transation ?? []
+            self.reloadTable()
+        }
     }
     
     

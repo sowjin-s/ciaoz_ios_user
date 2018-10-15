@@ -29,7 +29,7 @@ class YourTripsDetailViewController: UITableViewController {
     @IBOutlet private weak var labelSourceLocation : UILabel!
     @IBOutlet private weak var labelDestinationLocation : UILabel!
     @IBOutlet private weak var viewComments : UIView!
-    @IBOutlet private weak var stackViewButtons : UIStackView!
+    @IBOutlet private weak var viewButtons : UIView!
     
     var isUpcomingTrips = false  // Boolean to handle Past and Upcoming Trips
     
@@ -48,7 +48,6 @@ class YourTripsDetailViewController: UITableViewController {
         self.initialLoads()
         self.localize()
         self.setDesign()
-        
     }
     
     override func viewWillLayoutSubviews() {
@@ -63,6 +62,7 @@ class YourTripsDetailViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.viewButtons.isHidden = false
 //        if isUpcomingTrips {
 //        } else {
 //            self.viewLocation.removeFromSuperview()
@@ -72,8 +72,13 @@ class YourTripsDetailViewController: UITableViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.hideRecipt()
+        self.viewButtons.isHidden = true
     }
 
+    deinit {
+        self.viewButtons.removeFromSuperview()
+    }
+    
 }
 
 // MARK:- Methods
@@ -96,6 +101,12 @@ extension YourTripsDetailViewController {
         self.viewRating.emptyImage = #imageLiteral(resourceName: "StarEmpty")
         self.viewRating.fullImage = #imageLiteral(resourceName: "StarFull")
         self.imageViewMap.image = #imageLiteral(resourceName: "rd-map")
+        UIApplication.shared.keyWindow?.addSubview(self.viewButtons)
+        self.viewButtons.translatesAutoresizingMaskIntoConstraints = false
+        self.viewButtons.widthAnchor.constraint(equalTo: UIApplication.shared.keyWindow!.widthAnchor, multiplier: 0.8, constant: 0).isActive = true
+        self.viewButtons.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        self.viewButtons.bottomAnchor.constraint(equalTo: UIApplication.shared.keyWindow!.bottomAnchor, constant: -16).isActive = true 
+        self.viewButtons.centerXAnchor.constraint(equalTo: UIApplication.shared.keyWindow!.centerXAnchor, constant: 0).isActive = true
         //UIApplication.shared.keyWindow?.addSubview(self.stackViewButtons)
     }
     
@@ -145,7 +156,7 @@ extension YourTripsDetailViewController {
         
         self.imageViewProvider.makeRoundedCorner()
         let height = tableView.tableFooterView?.frame.origin.y ?? 0//(self.buttonViewReciptAndCall.convert(self.buttonViewReciptAndCall.frame, to: UIApplication.shared.keyWindow ?? self.tableView).origin.y+self.buttonViewReciptAndCall.frame.height)
-        guard height < UIScreen.main.bounds.height else { return }
+        guard height <= UIScreen.main.bounds.height else { return }
         let footerHeight = UIScreen.main.bounds.height-height
         self.tableView.tableFooterView?.frame.size.height = (footerHeight-(self.buttonViewReciptAndCall.frame.height*2)-(self.navigationController?.navigationBar.frame.height ?? 0))
     }
@@ -173,7 +184,7 @@ extension YourTripsDetailViewController {
             }
         }
         
-        self.viewRating.rating = Float(self.dataSource?.rating?.user_rating ?? 0)
+        self.viewRating.rating = Float(self.dataSource?.rating?.provider_rating ?? 0)
         self.textViewComments.text = self.dataSource?.rating?.provider_comment ?? Constants.string.noComments.localize()
         self.labelSourceLocation.text = self.dataSource?.s_address
         self.labelDestinationLocation.text = self.dataSource?.d_address
@@ -227,8 +238,11 @@ extension YourTripsDetailViewController {
             viewReciptView.frame = CGRect(origin: CGPoint(x: 0, y: (UIApplication.shared.keyWindow?.frame.height)!-viewReciptView.frame.height), size: CGSize(width: self.view.frame.width, height: viewReciptView.frame.height))
             self.viewRecipt = viewReciptView
             UIApplication.shared.keyWindow?.addSubview(viewReciptView)
-            viewReciptView.show(with: .bottom) {
-                self.addBlurView()
+            viewReciptView.show(with: .bottom) { [weak self] in
+                self?.addBlurView()
+            }
+            viewReciptView.onClickPaynow = { [unowned self]_ in
+                 self.hideRecipt()
             }
         }
         

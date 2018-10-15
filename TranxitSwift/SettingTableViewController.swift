@@ -16,7 +16,6 @@ class SettingTableViewController: UITableViewController {
     private var numberOfRows = 2
     
     private let header = [Constants.string.changeLanguage, Constants.string.favourites, .Empty]
-    private let languages = [Language.english]
     
     private let favouriteLocation = 1
     private let changeLanguage = 0
@@ -26,7 +25,11 @@ class SettingTableViewController: UITableViewController {
         return createActivityIndicator(UIApplication.shared.keyWindow ?? self.view)
     }()
     
-    private var selectedLanguage : Language = .english
+    private var selectedLanguage : Language = .english {
+        didSet{
+              setLocalization(language: selectedLanguage)
+        }
+    }
     
     private var locationService : LocationService?
     private var mapHelper : GoogleMapsHelper?
@@ -36,9 +39,7 @@ class SettingTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        if let lang = UserDefaults.standard.value(forKey: Keys.list.language) as? String, let language = Language(rawValue: lang) {
-            selectedLanguage = language
-        }
+        
         self.initalLoads()
     }
 
@@ -50,6 +51,11 @@ class SettingTableViewController: UITableViewController {
 //        super.viewWillDisappear(animated)
 //        self.navigationController?.isNavigationBarHidden = true
 //    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.viewwillAppearCustom()
+    }
 
 }
 
@@ -57,13 +63,30 @@ class SettingTableViewController: UITableViewController {
 extension SettingTableViewController {
     
     private func initalLoads() {
-        
+        if let lang = UserDefaults.standard.value(forKey: Keys.list.language) as? String, let language = Language(rawValue: lang) {
+            selectedLanguage = language
+        }
         self.navigationController?.isNavigationBarHidden = false
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.backButtonClick))
+//        if selectedLanguage != .arabic {
+//            self.navigationItem.leftBarButtonItem = backButton
+//            self.navigationItem.rightBarButtonItem = nil
+//        } else {
+//            self.navigationItem.rightBarButtonItem = backButton
+//            self.navigationItem.leftBarButtonItem = nil
+//        }
+//        self.navigationItem.backBarButtonItem = UIBarButtonItem()
         self.navigationItem.title = Constants.string.settings.localize()
         self.loader.isHidden = false
         self.presenter?.get(api: .locationService, parameters: nil)
         
+    }
+    
+    @IBAction private func backClick() {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+    
+    private func viewwillAppearCustom() {
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.backClick))
     }
     
     private func initMaps() {
@@ -109,7 +132,7 @@ extension SettingTableViewController {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
-        return self.header[section] //section == 0 && numberOfRows == 0 ? Constants.string.noFavouritesFound.localize() :
+        return self.header[section].localize() //section == 0 && numberOfRows == 0 ? Constants.string.noFavouritesFound.localize() :
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -122,7 +145,7 @@ extension SettingTableViewController {
         return section == self.favouriteLocation ? numberOfRows : (section == self.changeLanguage ? Language.count : Int.removeNil(self.locationService?.others?.count))
     }
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
             
@@ -142,7 +165,7 @@ extension SettingTableViewController {
         
     }
     
-    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         
         if indexPath.section == self.favouriteLocation  || indexPath.section == self.otherLocations{
             if (indexPath.row == 0 && (locationService?.home?.first?.address) != nil) || (indexPath.row == 1 && (locationService?.work?.first?.address) != nil) || indexPath.section == self.otherLocations {
@@ -169,9 +192,16 @@ extension SettingTableViewController {
     private func didSelect(at indexPath : IndexPath) {
         
         if indexPath.section == self.changeLanguage {
-            self.selectedLanguage = languages[indexPath.row]
+            let language = Language.allCases[indexPath.row]
+            let languageObject = LanguageEntity()
+            languageObject.language = language
+            self.presenter?.post(api: .updateLanguage, data: languageObject.toData()) // Sending selected language to backend
+            guard language != self.selectedLanguage else {return}
+            self.selectedLanguage = language
             UserDefaults.standard.set(self.selectedLanguage.rawValue, forKey: Keys.list.language)
-            self.tableView.reloadRows(at: self.languages.map({ IndexPath(row: $0.hashValue, section: self.changeLanguage) }) , with: .automatic)
+            self.tableView.reloadRows(at: (0..<Language.allCases.count).map({IndexPath(row: $0, section: self.changeLanguage)}), with: .automatic)
+            self.switchSettingPage()
+            
         } else if indexPath.section ==  self.favouriteLocation {
             self.loader.isHidden = false
             self.initMaps()
@@ -191,9 +221,23 @@ extension SettingTableViewController {
                 })
             }
         }
-        
     }
     
+    private func switchSettingPage() {
+        self.navigationController?.isNavigationBarHidden = true // For Changing backbutton direction on RTL Changes
+        guard let transitionView = self.navigationController?.view else {return}
+        let settingVc = Router.main.instantiateViewController(withIdentifier: Storyboard.Ids.SettingTableViewController)
+        UIView.beginAnimations("anim", context: nil)
+        UIView.setAnimationDuration(0.8)
+        UIView.setAnimationCurve(.easeInOut)
+        UIView.setAnimationTransition(selectedLanguage == .arabic ? .flipFromLeft : .flipFromRight, for: transitionView, cache: false)
+        self.navigationController?.pushViewController(settingVc, animated: true)
+        self.navigationController?.isNavigationBarHidden = false
+        UIView.commitAnimations()
+        if Int.removeNil(navigationController?.viewControllers.count) > 2 {
+            self.navigationController?.viewControllers.remove(at: 1)
+        }
+    }
     
     // Get Cell
     
@@ -216,9 +260,9 @@ extension SettingTableViewController {
             return tableCell
         } else if indexPath.section == self.changeLanguage, let tableCell = tableView.dequeueReusableCell(withIdentifier: languageCellId, for: indexPath) as? LanguageSelection {
             
-            tableCell.labelTitle.text = self.languages[indexPath.row].rawValue.localize()
+            tableCell.labelTitle.text = Language.allCases[indexPath.row].title.localize()
             tableCell.imageViewIcon.tintColorId = 2
-            tableCell.imageViewIcon.image = (self.selectedLanguage == self.languages[indexPath.row] ? #imageLiteral(resourceName: "check") : #imageLiteral(resourceName: "check-box-empty")).withRenderingMode(.alwaysTemplate)
+            tableCell.imageViewIcon.image = (self.selectedLanguage == Language.allCases[indexPath.row] ? #imageLiteral(resourceName: "check") : #imageLiteral(resourceName: "check-box-empty")).withRenderingMode(.alwaysTemplate)
             tableCell.selectionStyle = .none
             return tableCell
         } else if indexPath.section == self.otherLocations, Int.removeNil(self.locationService?.others?.count) > indexPath.row{
@@ -281,7 +325,11 @@ class SettingTableCell : UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.imageView?.contentMode = .scaleAspectFit
+        Common.setFont(to: labelTitle)
+        Common.setFont(to: labelAddress)
     }
+    
+    
     
 }
 

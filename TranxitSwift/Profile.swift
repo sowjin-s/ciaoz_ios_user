@@ -19,9 +19,11 @@ class Profile : JSONSerializable {
     var device_token : String?
     var access_token : String?
     var currency : String?
-    var wallet_balance : Int?
+    var wallet_balance : Float?
     var sos : String?
-    
+    var app_contact : String?
+    var measurement : String?
+    var language : Language?
     
     required init(from decoder: Decoder) throws {
         
@@ -35,17 +37,18 @@ class Profile : JSONSerializable {
         access_token = try? values.decode(String.self, forKey: .access_token)
         currency = try? values.decode(String.self, forKey: .currency)
         sos = try? values.decode(String.self, forKey: .sos)
-        wallet_balance = try? values.decode(Int.self, forKey: .wallet_balance)
+        wallet_balance = try? values.decode(Float.self, forKey: .wallet_balance)
+        app_contact = try? values.decode(String.self, forKey: .app_contact)
+        measurement = try? values.decode(String.self, forKey: .measurement)
         if let mobileInt = try? values.decode(Int.self, forKey: .mobile) {
          mobile = "\(mobileInt)"
         } else {
          mobile = try? values.decode(String.self, forKey: .mobile)
         }
-        
+        language = try? values.decode(Language.self, forKey: .language)
     }
     init() {
     }
     
 }
-
 

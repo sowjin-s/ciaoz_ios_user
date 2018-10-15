@@ -53,7 +53,7 @@ class SignUpUserTableViewController: UITableViewController {
     
     
     private var userInfo : UserData?
-    
+    private var accountKit : AKFAccountKit?
     private lazy var  loader = {
         return createActivityIndicator(UIApplication.shared.keyWindow ?? self.view)
     }()
@@ -114,6 +114,8 @@ extension SignUpUserTableViewController {
         self.emailtext.placeholder = Constants.string.emailPlaceHolder.localize()
         self.passwordText.placeholder = Constants.string.password
         self.confirmPwdText.placeholder = Constants.string.ConfirmPassword.localize()
+        self.phoneNumber.placeholder = Constants.string.phoneNumber.localize()
+        self.passwordText.placeholder = Constants.string.password.localize()
 //        self.countryText.placeholder = Constants.string.country.localize()
 //        self.timeZone.placeholder = Constants.string.timeZone.localize()
 //        self.referralCodeText.placeholder = Constants.string.referalCode.localize()
@@ -189,7 +191,7 @@ extension SignUpUserTableViewController {
             self.showToast(string: ErrorMessage.list.enterMobileNumber.localize())
             return
         }
-        guard let password = passwordText.text, !password.isEmpty else {
+        guard let password = passwordText.text, !password.isEmpty, password.count>=6 else {
              self.showToast(string: ErrorMessage.list.enterPassword.localize())
             return
         }
@@ -218,12 +220,12 @@ extension SignUpUserTableViewController {
         //self.presenter?.post(api: .signUp, data: MakeJson. )
        // self.present(id: Storyboard.Ids.DrawerController, animation: true)
 
-       let accountKit = AKFAccountKit(responseType: .accessToken)
+       self.accountKit = AKFAccountKit(responseType: .accessToken)
        let akPhone = AKFPhoneNumber(countryCode: "in", phoneNumber: phoneNumber)
-       let accountKitVC = accountKit.viewControllerForPhoneLogin(with: akPhone, state: UUID().uuidString)
-       accountKitVC.enableSendToFacebook = true
-       self.prepareLogin(viewcontroller: accountKitVC)
-       self.present(accountKitVC, animated: true, completion: nil)
+       let accountKitVC = accountKit?.viewControllerForPhoneLogin(with: akPhone, state: UUID().uuidString)
+       accountKitVC!.enableSendToFacebook = true
+       self.prepareLogin(viewcontroller: accountKitVC!)
+       self.present(accountKitVC!, animated: true, completion: nil)
       
         
     }
@@ -296,23 +298,28 @@ extension SignUpUserTableViewController : PostViewProtocol {
     
     func getProfile(api: Base, data: Profile?) {
         
-        if api == .signUp, data != nil {
-            
+        loader.isHideInMainThread(true)
+        
+        if api == .signUp, data != nil, data?.access_token != nil {
+            User.main.accessToken = data?.access_token
             Common.storeUserData(from: data)
             storeInUserDefaults()
-            self.presenter?.post(api: .login, data: MakeJson.login(withUser: userInfo?.email,password:userInfo?.password))
+            self.navigationController?.present(Common.setDrawerController(), animated: true, completion: nil)
+            //self.presenter?.get(api: .getProfile, parameters: nil)
+            //self.presenter?.post(api: .login, data: MakeJson.login(withUser: userInfo?.email,password:userInfo?.password))
             return
             
-        }else if api == .getProfile {
+        }
+        /*else if api == .getProfile {
             Common.storeUserData(from: data)
             storeInUserDefaults()
             self.navigationController?.present(id: Storyboard.Ids.DrawerController, animation: true)
         } else {
             loader.isHideInMainThread(true)
-        }
+        } */
     }
     
-    func getOath(api: Base, data: LoginRequest?) {
+   /* func getOath(api: Base, data: LoginRequest?) {
      
         loader.isHideInMainThread(true)
         if api == .login, let accessToken = data?.access_token {
@@ -329,7 +336,7 @@ extension SignUpUserTableViewController : PostViewProtocol {
             
         }
         
-    }
+    } */
     
 }
 
@@ -346,10 +353,31 @@ extension SignUpUserTableViewController : AKFViewControllerDelegate {
     }
     
     func viewController(_ viewController: (UIViewController & AKFViewController)!, didCompleteLoginWith accessToken: AKFAccessToken!, state: String!) {
-        viewController.dismiss(animated: true) {
-              self.loader.isHidden = false
-              self.presenter?.post(api: .signUp, data: self.userInfo?.toData())
+        func dismiss() {
+            viewController.dismiss(animated: true) { }
+            self.loader.isHidden = false
+            self.presenter?.post(api: .signUp, data: self.userInfo?.toData())
         }
+        if accountKit != nil {
+            accountKit!.requestAccount({ (account, error) in
+                if let phoneNumber = account?.phoneNumber {
+                    var mobileString = phoneNumber.stringRepresentation()
+                    if mobileString.hasPrefix("+") {
+                        mobileString.removeFirst()
+                        if let mobileInt = Int(mobileString) {
+                            self.userInfo?.mobile = mobileInt
+                        }
+                    }
+                }
+                dismiss()
+                return
+                //print("--->>",account?.phoneNumber.)
+               // print("--->>>",error)
+            })
+        }else {
+            dismiss()
+        }
+        
     }
     
 }

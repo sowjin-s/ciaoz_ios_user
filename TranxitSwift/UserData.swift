@@ -26,6 +26,7 @@ class UserData : UserBase {
     var social_unique_id : String?
     var device_id : String?
     var otp : Int?
+    var measurement : String?
   
 }
 

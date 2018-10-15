@@ -9,7 +9,7 @@
 import Foundation
 import FirebaseDatabase
 import FirebaseStorage
-
+import UIKit
 
 typealias UploadTask = StorageUploadTask
 typealias SnapShot = DataSnapshot
@@ -25,9 +25,9 @@ class FirebaseHelper{
     
     // Write Text Message
     
-    func write(to userId : Int, with text : String, type chatType : ChatType = .single){
+    func write(to requestId : Int, with text : String, type chatType : ChatType = .single,userId : Int, driverId : Int){
         
-        self.storeData(to: userId, with: text, mime: .text, type: chatType)
+        self.storeData(to: requestId, with: text, mime: .text, type: chatType, userId: userId, driverId: driverId)
         
     }
     
@@ -41,12 +41,10 @@ class FirebaseHelper{
         return self.upload(data: data,forUser : userId, mime: type, type : chatType, metadata: metadata, completion: { (url) in
             
             completion(url != nil)
-            
             guard url != nil else {
                 return
             }
-            
-            self.storeData(to: userId, with: url, mime: type, type: chatType)
+            self.storeData(to: userId, with: url, mime: type, type: chatType, userId: 0, driverId: 0)
             
         })
         
@@ -59,15 +57,23 @@ class FirebaseHelper{
         
         let metadata = self.initializeStorage(with: type)
         
-        return self.upload(file: url,forUser : userId, mime: type, type : chatType,metadata: metadata, completion: { (url) in
+        return self.upload(file: url,forUser : userId, mime: type, type : chatType,metadata: metadata, completion: { (urlValue) in
             
-            completion(url != nil)
-            
-            guard url != nil else {
+            completion(urlValue != nil)
+            guard urlValue != nil else {
                 return
             }
             
-            self.storeData(to: userId, with: url, mime: type, type: chatType)
+            if let audioUrl = URL(string: urlValue!), let documentsDirectoryURL =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+                let destinationUrl = documentsDirectoryURL.appendingPathComponent(audioUrl.lastPathComponent)
+                do {
+                    try FileManager.default.moveItem(at: url, to: destinationUrl)
+                } catch let err {
+                    print("Error ",err.localizedDescription)
+                }
+            }
+            
+            self.storeData(to: userId, with: urlValue, mime: type, type: chatType, userId: 0, driverId: 0)
             
         })
         
@@ -76,15 +82,41 @@ class FirebaseHelper{
     
     // Update Message in Specific Path
     
-    func update(chat: ChatEntity, key : String, toUser user : Int, type chatType : ChatType = .single){
+    func update(chat: ChatEntity, key : String, toUser requestId : Int, type chatType : ChatType = .single){
         
-        let chatPath = Common.getChatId(with: user) ?? .Empty
-        
+        let chatPath = Common.getChatId(with: requestId)
+        chat.timestamp = (chat.timestamp ?? 0) * 1000 // multiplying for Date Fix Android
         self.update(chat: chat, key: key, inRoom: chatPath)
         
     }
     
-    
+    // Get unread chat messages
+    func getUnreadMessages(for userId : Int,chatType : ChatType = .single,  completion : @escaping ((_ userId : Int,_ count : Int)->Void)) {
+        self.initializeDB()
+        
+        if chatType == .single {
+            self.ref?.child(Common.getChatId(with: userId)).queryOrdered(byChild: FirebaseConstants.main.read).queryEqual(toValue: 0).observe(.value, with: { (snapShot) in
+                if let snapValue = snapShot.value as? NSDictionary, let snaps =  snapValue.allValues as? [NSDictionary] {
+                    var count = 0
+                    for snap in snaps where (snap[FirebaseConstants.main.user] as? Int) != User.main.id{
+                        count += 1
+                    }
+                    completion(userId,count)
+                }
+            })
+        } else if chatType == .group {
+            self.ref?.child(Common.getChatId(with: userId)).queryOrdered(byChild: FirebaseConstants.main.user).observe(.value, with: { (snapShot) in
+                if let snapValue = snapShot.value as? NSDictionary, let snaps =  snapValue.allValues as? [NSDictionary] {
+                    var count = 0
+                    for snap in snaps where !((snap[FirebaseConstants.main.readedMembers] as? [Int])?.contains(User.main.id!) ?? false) {
+                        count += 1
+                    }
+                    completion(userId,count)
+                }
+            })
+        }
+        
+    }
 }
 
 
@@ -96,13 +128,11 @@ extension FirebaseHelper {
     // Initializing DB
     
     private func initializeDB(){
-        
-        if ref == nil {
+        if self.ref == nil {
             let db = Database.database()
             db.isPersistenceEnabled = true
             self.ref = db.reference()
         }
-        
     }
     
     // Initializing Storage
@@ -125,7 +155,9 @@ extension FirebaseHelper {
     
     private func update(chat : ChatEntity, key : String, inRoom room : String){
         
-        self.ref?.child(room).child(key).updateChildValues(chat.JSONRepresentation)
+        var chatEntity = chat.JSONRepresentation
+        chatEntity.removeValue(forKey: FirebaseConstants.main.timestamp)
+        self.ref?.child(room).child(key).updateChildValues(chatEntity)
         
     }
     
@@ -133,25 +165,22 @@ extension FirebaseHelper {
     
     // Common Function to Store Data
     
-    private func storeData(to userId : Int, with string : String?, mime type : Mime, type chatType : ChatType){
-        
+    private func storeData(to requestId : Int, with string : String?, mime type : Mime, type chatType : ChatType, userId : Int, driverId : Int){
         let chat = ChatEntity()
         chat.read = MessageStatus.sent.rawValue
-        chat.reciever = userId
-        chat.sender = User.main.id
+        chat.user = User.main.id
+        chat.sender = UserType.user.rawValue
         chat.number = String.removeNil(User.main.mobile)
-        
-        chat.timeStamp = Formatter.shared.removeDecimal(from: Date().timeIntervalSince1970)
+        chat.readedMembers = [User.main.id!]
+        chat.timestamp = Formatter.shared.removeDecimal(from: Date().timeIntervalSince1970*1000)
         chat.type = type.rawValue
+        chat.userId = userId
+        chat.driverId = driverId
         
         if type == .text {
-            
             chat.text = string
-            
         } else {
-            
             chat.url = string
-            
         }
         
         if chatType == .group {
@@ -159,9 +188,8 @@ extension FirebaseHelper {
         }
         
         self.initializeDB()
-        let chatPath = Common.getChatId(with: userId) ?? .Empty
-        self.ref?.child(chatPath).child(ref!.childByAutoId().key).setValue(chat.JSONRepresentation)
-        
+        let chatPath = Common.getChatId(with: requestId)
+        self.ref?.child(chatPath).child(self.ref!.childByAutoId().key).setValue(chat.JSONRepresentation)
     }
     
     
@@ -170,7 +198,7 @@ extension FirebaseHelper {
     
     private func upload(data : Data,forUser user : Int, mime : Mime, type chatType : ChatType, metadata : StorageMetadata, completion : @escaping (_  downloadUrl : String?) -> ())->UploadTask{
         
-        let chatPath = Common.getChatId(with: user) ?? .Empty//chatType == .group ? getGroupChat(with: user) : getRoom(forUser: user)
+        let chatPath = Common.getChatId(with: user)
         let ref = self.storage?.reference(withPath: chatPath).child(ProcessInfo().globallyUniqueString+mime.ext)
         let uploadTask = ref?.putData(data, metadata: metadata, completion: { (metaData, error) in
             
@@ -201,7 +229,7 @@ extension FirebaseHelper {
     
     private func upload(file url : URL,forUser user : Int, mime : Mime, type chatType : ChatType, metadata : StorageMetadata, completion : @escaping (_  downloadUrl : String?) -> ())->UploadTask{
         
-        let chatPath = Common.getChatId(with: user) ?? .Empty//chatType == .group ? getGroupChat(with: user) : getRoom(forUser: user)
+        let chatPath = Common.getChatId(with: user)
         let ref = self.storage?.reference(withPath: chatPath).child(ProcessInfo().globallyUniqueString+mime.ext)
         let uploadTask = ref?.putFile(from: url, metadata: metadata, completion: { (metaData, error) in
             
@@ -229,27 +257,32 @@ extension FirebaseHelper {
 
 
 //MARK:- Observers
-
-
 extension FirebaseHelper {
     
     // Observe if any value changes
     
-    func observe(path : String, with : EventType, value : @escaping ([ChatResponse])->())->UInt {
+    func observe(path : String, with eventType : EventType, value : @escaping ([ChatResponse])->())->UInt {
         
         self.initializeDB()
-        
-        return self.ref!.child(path).queryOrdered(byChild: "timeStamp").observe(with, with: { (snapShot) in
-            
+        return self.ref!.child(path).queryOrderedByKey().observe(eventType, with: { (snapShot) in
             value(self.getModal(from: snapShot))
             
         })
+    }
+    
+    // Observe with limit
+    
+    func observe(path : String, with eventType : EventType, limit : UInt, value : @escaping ([ChatResponse])->()) {
         
-        
-        
+        self.initializeDB()
+        self.ref!.child(path).queryOrderedByKey().queryLimited(toLast: limit).observeSingleEvent(of: eventType) { (snap) in
+            value(self.getModal(from: snap))
+           // print(snap.childrenCount,"    \n",snap.value)
+        }
     }
     
     // Remove Firebase Observers
+    
     func remove(observers : [UInt]){
         
         self.initializeDB()
@@ -282,7 +315,7 @@ extension FirebaseHelper {
     // Get Values From SnapShot
     
     private func getModal(from snapShot : SnapShot)->[ChatResponse]{
-        
+        print("Fetched from DB ",snapShot.childrenCount)
         var chatArray = [ChatResponse]()
         var response : ChatResponse?
         var chat : ChatEntity?
@@ -304,7 +337,7 @@ extension FirebaseHelper {
         
         
         return chatArray.sorted(by: { (obj1, obj2) -> Bool in
-            return Int.removeNil(obj1.response?.timeStamp)<Int.removeNil(obj2.response?.timeStamp)
+            return Int.removeNil(obj1.response?.timestamp)<Int.removeNil(obj2.response?.timestamp)
         })
     }
     
@@ -318,18 +351,26 @@ extension FirebaseHelper {
         response?.key = snap.key
         
         chat?.read = snap.value.value(forKey: FirebaseConstants.main.read) as? Int
-        chat?.reciever = snap.value.value(forKey: FirebaseConstants.main.reciever) as? Int
-        chat?.sender = snap.value.value(forKey: FirebaseConstants.main.sender) as? Int
+        chat?.sender = snap.value.value(forKey: FirebaseConstants.main.sender) as? String
+        chat?.user = snap.value.value(forKey: FirebaseConstants.main.user) as? Int
         chat?.text = snap.value.value(forKey: FirebaseConstants.main.text) as? String
-        chat?.timeStamp = snap.value.value(forKey: FirebaseConstants.main.timeStamp) as? Int
+        if let dateValue = (snap.value.value(forKey: FirebaseConstants.main.timestamp) as? Int), dateValue>1000 {
+            chat?.timestamp = dateValue/1000 // Subtracting milliseconds from dateobject
+            print("Date since   \(Formatter.shared.relativePast(for: Date(timeIntervalSince1970: TimeInterval(dateValue/1000))))")
+        }
         chat?.type = snap.value.value(forKey: FirebaseConstants.main.type) as? String
         chat?.url = snap.value.value(forKey: FirebaseConstants.main.url) as? String
         chat?.number = snap.value.value(forKey: FirebaseConstants.main.number) as? String
         chat?.groupId = snap.value.value(forKey: FirebaseConstants.main.groupId) as? Int
-        
+        if chat?.type == Mime.audio.rawValue{ // Setting initial value for Audio File
+            response?.progress = 0
+        }
+        chat?.readedMembers = snap.value.value(forKey: FirebaseConstants.main.readedMembers) as? [Int]
         response?.response = chat
         
     }
     
     
 }
+
+

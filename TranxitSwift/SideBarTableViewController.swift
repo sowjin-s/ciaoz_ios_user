@@ -18,15 +18,16 @@ class SideBarTableViewController: UITableViewController {
     
     // private let sideBarList = [Constants.string.payment,Constants.string.yourTrips,Constants.string.coupon,Constants.string.wallet,Constants.string.passbook,Constants.string.settings,Constants.string.help,Constants.string.share,Constants.string.inviteReferral,Constants.string.faqSupport,Constants.string.termsAndConditions,Constants.string.privacyPolicy,Constants.string.logout]
     
-    private let sideBarList = [Constants.string.payment.localize(),
-                               Constants.string.yourTrips.localize(),
-                               Constants.string.coupon.localize(),
-                               Constants.string.wallet.localize(),
-                               Constants.string.passbook.localize(),
-                               Constants.string.settings.localize(),
-                               Constants.string.help.localize(),
-                               Constants.string.share.localize(),
-                               Constants.string.logout.localize()]
+    private let sideBarList = [Constants.string.payment,
+                               Constants.string.yourTrips,
+                               Constants.string.offer,
+                               Constants.string.wallet,
+                               Constants.string.passbook,
+                               Constants.string.settings,
+                               Constants.string.help,
+                               Constants.string.share,
+                               Constants.string.becomeADriver,
+                               Constants.string.logout]
     
     private let cellId = "cellId"
     
@@ -53,7 +54,7 @@ class SideBarTableViewController: UITableViewController {
         self.localize()
         self.setValues()
         self.navigationController?.isNavigationBarHidden = true
-        UIApplication.shared.isStatusBarHidden = true
+        //self.prefersStatusBarHidden = true
     }
     
     override func viewWillLayoutSubviews() {
@@ -63,7 +64,7 @@ class SideBarTableViewController: UITableViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        UIApplication.shared.isStatusBarHidden = false
+       // self.prefersStatusBarHidden = false
     }
     
 }
@@ -77,10 +78,9 @@ extension SideBarTableViewController {
         // self.drawerController?.fadeColor = UIColor
         self.drawerController?.shadowOpacity = 0.2
         let fadeWidth = self.view.frame.width*(0.2)
-        self.profileImageCenterContraint.constant = 0//-(fadeWidth/3)
+        //self.profileImageCenterContraint.constant = 0//-(fadeWidth/3)
         self.drawerController?.drawerWidth = Float(self.view.frame.width - fadeWidth)
         self.viewShadow.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.imageViewAction)))
-        self.setDesigns()
     }
     
     // MARK:- Set Designs
@@ -98,7 +98,7 @@ extension SideBarTableViewController {
     private func setDesigns () {
         
         Common.setFont(to: labelName)
-        Common.setFont(to: labelEmail)
+        Common.setFont(to: labelEmail, size : 12)
     }
     
     
@@ -113,6 +113,7 @@ extension SideBarTableViewController {
         }
         self.labelName.text = String.removeNil(User.main.firstName)+" "+String.removeNil(User.main.lastName)
         self.labelEmail.text = User.main.email
+        self.setDesigns()
     }
     
     
@@ -151,7 +152,7 @@ extension SideBarTableViewController {
                 (self.drawerController?.getViewController(for: .none) as? UINavigationController)?.pushViewController(vc, animated: true)
             }
         case (0,2):
-            self.push(to: Storyboard.Ids.CouponViewController)
+            self.push(to: CouponCollectionViewController())
         case (0,3):
             self.push(to: Storyboard.Ids.WalletViewController)
         case (0,5):
@@ -159,8 +160,10 @@ extension SideBarTableViewController {
         case (0,6):
             self.push(to: Storyboard.Ids.HelpViewController)
         case (0,7):
-            (self.drawerController?.getViewController(for: .none)?.childViewControllers.first as? HomeViewController)?.share(items: [baseUrl])
+            (self.drawerController?.getViewController(for: .none)?.children.first as? HomeViewController)?.share(items: [baseUrl])
         case (0,8):
+            Common.open(url: driverUrl)
+        case (0,9):
             self.logout()
             
         default:
@@ -170,11 +173,15 @@ extension SideBarTableViewController {
     }
     
     private func push(to identifier : String) {
-        let viewController = self.storyboard!.instantiateViewController(withIdentifier: identifier)
+         let viewController = self.storyboard!.instantiateViewController(withIdentifier: identifier)
         (self.drawerController?.getViewController(for: .none) as? UINavigationController)?.pushViewController(viewController, animated: true)
         
     }
     
+    private func push(to vc : UIViewController) {
+        (self.drawerController?.getViewController(for: .none) as? UINavigationController)?.pushViewController(vc, animated: true)
+        
+    }
     
     // MARK:- Logout
     
@@ -206,7 +213,8 @@ extension SideBarTableViewController {
         
         let tableCell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
         tableCell.textLabel?.textColor = .secondary
-        tableCell.textLabel?.text = sideBarList[indexPath.row].localize()
+        tableCell.textLabel?.text = sideBarList[indexPath.row].localize().capitalizingFirstLetter()
+        tableCell.textLabel?.textAlignment = .left
         Common.setFont(to: tableCell.textLabel!, isTitle: true)
         return tableCell
     }

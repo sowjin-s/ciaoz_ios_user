@@ -12,7 +12,7 @@ import UIKit
 class HomePageHelper {
     
     private var timer : Timer?
-    
+    static var shared = HomePageHelper()
     // MARK:- Start Listening for Provider Status Changes
     func startListening(on completion : @escaping ((CustomError?,Request?)->Void)) {
         
@@ -47,22 +47,33 @@ class HomePageHelper {
             
             guard error == nil else {
                 completion(error, nil)
-                DispatchQueue.main.async { self.stopListening() }
+               // DispatchQueue.main.async { self.stopListening() }
                 return
             }
             
             guard let data = data,
-                let request = data.getDecodedObject(from: RequestModal.self)?.data
+                let request = data.getDecodedObject(from: RequestModal.self)
                 else {
                     completion(error, nil)
-                    DispatchQueue.main.async { self.stopListening() }
+                   // DispatchQueue.main.async { self.stopListening() }
                     return
             }
             
-            guard let requestFirst = request.first else {
+            // Checking whether the Cash or card payment is disabled
+            if let isCardEnabledInt = request.card, let isCashEnabledInt = request.cash {
+                let isCashEnabled = (isCashEnabledInt == 1)
+                let isCardEnabled = (isCardEnabledInt == 1)
+                if User.main.isCashAllowed != isCashEnabled || User.main.isCardAllowed != isCardEnabled {
+                    User.main.isCashAllowed = isCashEnabled
+                    User.main.isCardAllowed = isCardEnabled
+                    storeInUserDefaults()
+                }
+            }
+            
+            guard let requestFirst = request.data?.first else {
                 completion(nil, nil)
                 riderStatus = .none
-                DispatchQueue.main.async { self.stopListening() }
+               // DispatchQueue.main.async { self.stopListening() }
                 return
             }
             completion(nil, requestFirst)
@@ -82,7 +93,4 @@ class HomePageHelper {
     
 }
 
-fileprivate struct RequestModal : JSONSerializable {
-    var data : [Request]?
-    
-}
+

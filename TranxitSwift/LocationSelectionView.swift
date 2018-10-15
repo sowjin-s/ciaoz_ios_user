@@ -220,7 +220,7 @@ extension LocationSelectionView : UITableViewDataSource, UITableViewDelegate {
                         self.make(toast: error!.localizedDescription)
                         
                     } else if let addressString = place?.formattedAddress, let coordinate = place?.coordinate{
-                        
+                       // print("\nselected ---- ",coordinate)
                         self.autoFill(with: (addressString,coordinate))
                     }
                 }
@@ -241,6 +241,7 @@ extension LocationSelectionView : UITableViewDataSource, UITableViewDelegate {
         
         if self.address?.source?.value != nil, self.address?.destination != nil {
             self.completion?(self.address!)
+            // print("\nselected ----->>",self.completion, self.address!.destination, self.address!.source?.value?.coordinate)
             self.backButtonAction()
         }
         

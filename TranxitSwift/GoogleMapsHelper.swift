@@ -125,8 +125,6 @@ class GoogleMapsHelper : NSObject {
             print("Error in creating URL Geocoding")
             return
         }
-       
-        
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             
             if let places = data?.getDecodedObject(from: Place.self), let address = places.results?.first?.formatted_address, let lattitude = places.results?.first?.geometry?.location?.lat, let longitude = places.results?.first?.geometry?.location?.lng {

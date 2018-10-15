@@ -2,11 +2,14 @@
  Localizable.strings
  TranxitSwift
  
- Created by CSS on 27/06/18.
+ Created by CSS on 21/09/18.
  Copyright © 2018 Appoets. All rights reserved.
  */
 
-
+"Write Something" = "Write Something";
+"No Chat History Found" = "No Chat History Found";
+"Yes" = "Yes";
+"No" = "No";
 "Done"                                                          ="Done";
 "Back"                                                          ="Back";
 "Delete"                                                        ="Delete";
@@ -17,7 +20,6 @@
 "NA"                                                            ="NA";
 "Mobile Number"                                                 ="Mobile Number";
 "Next"                                                          ="Next";
-
 "Select Source"                                                 ="Select Source";
 "ConfirmPassword"                                               ="ConfirmPassword";
 "Camera"                                                        ="Camera";
@@ -31,23 +33,18 @@
 "Enter OTP"                                                     ="Enter OTP";
 "OTP incorrect"                                                 ="OTP incorrect";
 "Current Password"                                              ="Current Password";
-
-"Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum" = "Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum";
-"Introducing Tranxit Driver to take rides from the Tranxit app users."="Introducing Tranxit Driver to take rides from the Tranxit app users.";
-"Be your own boss, set your own schedule. Get the latest driving features all in one spot."="Be your own boss, set your own schedule. Get the latest driving features all in one spot.";
-"Get well paid to help out strangers get to where they need to go,withdraw your earnigs every week/monthly."="Get well paid to help out strangers get to where they need to go,withdraw your earnigs every week/monthly.";
-
-
+"Services to transport you where you need to go. A lot can happen, on our ride." = "Services to transport you where you need to go. A lot can happen, on our ride.";
+"Take a ride whenever and wherever you want. Plan and Schedule for us to pick you up." = "Take a ride whenever and wherever you want. Plan and Schedule for us to pick you up.";
+"We have the most friendly drivers who will go the extra mile for you." = "We have the most friendly drivers who will go the extra mile for you.";
 "Welcome"                                                        ="Welcome";
-"Drive"                                                          ="Drive";
-"Earn"                                                           ="Earn";
+"Schedule"                                                       ="Schedule";
+"Drivers"                                                        ="Drivers";
 "Country"                                                        ="Country";
 "Time Zone"                                                      ="Time Zone";
 "Referral Code"                                                  ="Referral Code";
 "Business"                                                       ="Business";
 "name@example.com"                                               ="name@example.com";
 "Email"                                                          ="Email";
-
 "I need to create an account"                                    ="I need to create an account";
 "What's your Email Address?"                                     ="What's your Email Address?";
 "Welcome back, sign in to continue"                              ="Welcome back, sign in to continue";
@@ -63,7 +60,6 @@
 "Facebook"                                                       ="Facebook";
 "Google"                                                         ="Google";
 "Payment"                                                        ="Payment";
-
 "Your Trips"                                                     ="Your Trips";
 "Coupon"                                                         ="Coupon";
 "Wallet"                                                         ="Wallet";
@@ -73,7 +69,6 @@
 "Share"                                                          ="Share";
 "Invite Referral"                                                ="Invite Referral";
 "FAQ Support"                                                    ="FAQ Support";
-
 "Terms and Conditions"                                           ="Terms and Conditions";
 "Privacy Policy"                                                 ="Privacy Policy";
 "Logout"                                                         ="Logout";
@@ -86,7 +81,7 @@
 "save"                                                           ="save";
 "Looking to change password?"                                    ="Looking to change password?";
 "Are you sure?"                                                  ="Are you sure?";
-"Are you want to logout?"                                        ="Are you want to logout?";
+"Are you sure want to logout?"                                   ="Are you sure want to logout?";
 "Sure"                                                           ="Sure";
 "Source"                                                         ="Source";
 "Destination"                                                    ="Destination";
@@ -112,7 +107,6 @@
 "ride now"                                                       = "ride now";
 "Schedule your Ride"                                             = "Schedule your Ride";
 "Select"                                                         = "Select";
-
 "Driver accepted your request."                                  = "Driver accepted your request.";
 "You are on ride."                                               = "You are on ride.";
 "Booking ID"                                                     = "Booking ID";
@@ -130,7 +124,6 @@
 "Submit"                                                         = "Submit";
 "Driver has arrived at your location."                           = "Driver has arrived at your location.";
 "Due to peak hours, charges will be varied based on availability of provider." = "Due to peak hours, charges will be varied based on availability of provider.";
-
 
 "Call"                                                           = "Call";
 "Past"                                                           = "Past";
@@ -156,12 +149,11 @@
 "Change Language"                                                = "Change Language";
 "No favourite address available"                                 = "No favourite address available";
 "Cannot make call at this moment"                                = "Cannot make call at this moment";
-"Offer"                                                          = "Offer";
+"Offer"                                                          = "Offers";
 "Amount"                                                         = "Amount";
 "Credited By"                                                    = "Credited By";
 "Coupon Code"                                                    = "Coupon Code";
 "OFF"                                                            = "OFF";
-
 "Could not open Email at the moment."                            = "Could not open Email at the moment.";
 "Could not reach th web"                                         = "Could not reach th web";
 "Would you like to make a SOS Call?"                             = "Would you like to make a SOS Call?";
@@ -190,7 +182,6 @@
 "No Internet?"                                                   = "No Internet?";
 "Book Now using SMS"                                             = "Book Now using SMS";
 "Tap the button below to send your current location by SMS."     = "Tap the button below to send your current location by SMS.";
-
 "Standard charges may apply"                                     = "Standard charges may apply";
 "No thanks, I'll try later"                                      = "No thanks, I'll try later";
 "I need a cab @"                                                 = "I need a cab @";
@@ -198,7 +189,6 @@
 "TRANXIT Enterprise © 2018"                                      = "TRANXIT Enterprise © 2018";
 "miles"                                                          = "miles";
 "Please try again"                                               = "Please try again";
-
 "ADD COUPON"                                                     = "ADD COUPON";
 "Add Money"                                                      = "Add Money";
 "ADD AMOUNT"                                                     = "ADD AMOUNT";
@@ -212,6 +202,34 @@
 "Are you sure want to delete this card?" = "Are you sure want to delete this card?";
 "Remove" = "Remove";
 "Discount" = "Discount";
-
-
-
+"Plan Changed" = "Plan Changed";
+"Booked another cab" = "Booked another cab";
+"Driver Delayed" = "Driver Delayed";
+"Lost Wallet" = "Lost Wallet";
+"Others If Any" = "Others If Any";
+"Reason For Cancellation" = "Reason For Cancellation";
+"Add Card to continue with wallet" = "Add Card to continue with wallet";
+"Enter Valid Amount" = "Enter Valid Amount";
+"All payment methods has been blocked" = "All payment methods has been blocked";
+"select card to continue" = "select card to continue";
+"Time Fare" = "Time Fare";
+"Tips" = "Tips";
+"Wallet Deduction" = "Wallet Deduction";
+"To Pay" = "To Pay";
+"Add Tips" = "Add Tips";
+"Proceed" = "Proceed";
+"Estimation fare not available" = "Estimation fare not available";
+"View Coupons" = "View Coupons";
+"Apply" = "Apply";
+"Validity" = "Validity";
+"Paid" = "Paid";
+"No Coupons" = "No Coupons";
+"English" = "English";
+"Spanish" = "Spanish";
+"Arabic" = "Arabic";
+"Become a Driver" = "Become a Driver";
+"Balance" = "Balance";
+"No Drivers found,\nSorry for the inconvenience" = "No Drivers found,\nSorry for the inconvenience";
+"CARD" = "CARD";
+"CASH" = "CASH";
+"A new version of this App is available in the App Store" = "A new version of this App is available in the App Store";

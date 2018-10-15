@@ -54,24 +54,26 @@ extension UIColor {
     }
     
     // Secondary Color
+    static var rating : UIColor {
+        return #colorLiteral(red: 0.9921568627, green: 0.7882352941, blue: 0.1568627451, alpha: 1) //UIColor(red: 238/255, green: 98/255, blue: 145/255, alpha: 1)
+    }
+    
+    // Secondary Color
     static var lightBlue : UIColor {
-        return UIColor(red: 38/255, green: 118/255, blue: 188/255, alpha: 1)
+        return #colorLiteral(red: 0.1490196078, green: 0.462745098, blue: 0.737254902, alpha: 1) //UIColor(red: 38/255, green: 118/255, blue: 188/255, alpha: 1)
     }
     
     //Gradient Start Color
-    
     static var startGradient : UIColor {
         return UIColor(red: 83/255, green: 173/255, blue: 46/255, alpha: 1)
     }
     
     //Gradient End Color
-    
     static var endGradient : UIColor {
         return UIColor(red: 158/255, green: 178/255, blue: 45/255, alpha: 1)
     }
     
     // Blue Color
-    
     static var brightBlue : UIColor {
         return UIColor(red: 40/255, green: 25/255, blue: 255/255, alpha: 1)
     }
@@ -89,9 +91,7 @@ extension UIColor {
             return colorAsUInt
             
             // colorAsUInt == 0xCC6699 // true
-            
         }
-        
         return 0xCC6699
     }
 }

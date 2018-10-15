@@ -23,7 +23,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>3.0.2</string>
+	<string>3.0.4</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -88,11 +88,6 @@
 		<string>clanpro_book</string>
 		<string>clanpro_medium</string>
 		<string>clanpro_narrnews</string>
-	</array>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>remote-notification</string>
-		<string>voip</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>Launch</string>

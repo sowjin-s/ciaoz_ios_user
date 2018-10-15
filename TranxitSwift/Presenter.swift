@@ -61,6 +61,10 @@ extension Presenter : PostPresenterInputProtocol {
 
 extension Presenter : PostPresenterOutputProtocol {
     
+    func sendPromocodeList(api: Base, data: Data) {
+        controller?.getPromocodeList(api: api, data: PresenterProcessor.shared.getPromocodes(data: data))
+    }
+    
     func sendUserData(api: Base, data: Data) {
         controller?.getUserData(api: api, data: PresenterProcessor.shared.userData(data: data))
     }

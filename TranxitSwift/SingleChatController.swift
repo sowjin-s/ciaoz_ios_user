@@ -33,8 +33,6 @@ class SingleChatController: UIViewController {
     
     @IBOutlet private weak var progressViewImage : UIProgressView!
     
-    var presenter: PostPresenterInputProtocol?  // PostviewProtocol  variable
-    
     private var navigationTapgesture : UITapGestureRecognizer!
     private var imageButtonView : UIImageView? // used to modify profile image after changes
     
@@ -54,12 +52,13 @@ class SingleChatController: UIViewController {
     private var chatType :  ChatType!   // Current Chat eg:-  single or group
     
     private var currentUserId = 0
+    private var requestId = 0
     
     private var isSendShown = false {
         
         didSet {
             
-            self.viewCamera.isHidden = isSendShown
+            self.viewCamera.isHidden = true //isSendShown
             self.viewSend.isHidden = !isSendShown
             self.viewRecord.isHidden = true
             
@@ -104,11 +103,12 @@ extension SingleChatController {
     
     //MARK:- Set Current User Data
     
-    func set(user : Provider, chatType : ChatType = .single){
+    func set(user : Provider, chatType : ChatType = .single, requestId : Int){
         
         self.currentUser = user
         self.chatType = chatType
         self.currentUserId = currentUser.id ?? 0
+        self.requestId = requestId
         
     }
     
@@ -121,10 +121,8 @@ extension SingleChatController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        
         super.viewWillDisappear(animated)
         self.navigationController?.navigationBar.removeGestureRecognizer(self.navigationTapgesture)
-        
     }
     
     
@@ -221,7 +219,7 @@ extension SingleChatController {
         self.viewSend.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sendOnclick)))
         self.viewRecord.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.recordOnclick)))
         self.viewCamera.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.cameraOnclick)))
-        
+        self.isSendShown = false
         self.startObservers()
         
     }
@@ -243,7 +241,7 @@ extension SingleChatController {
     
     private func startObservers(){
         
-        guard let chatPath = Common.getChatId(with: currentUser.id) else { return }
+        let chatPath = Common.getChatId(with: requestId)
         
         let childObserver = FirebaseHelper.shared.observe(path : chatPath, with: .childAdded) { (childValue) in
             
@@ -355,11 +353,11 @@ extension SingleChatController {
         
         SelectImageView.main.show(imagePickerIn: self) { (images) in
             
-            if let image = images.first, let imageData = image.resizeImage(newWidth: 400), let data = UIImagePNGRepresentation(imageData), let currentId = self.currentUser.id {
+            if let image = images.first, let imageData = image.resizeImage(newWidth: 400), let data = imageData.pngData() {
                 
                 self.progressViewImage.isHidden = false
                 
-                let task = FirebaseHelper.shared.write(to: currentId, with: data, mime: .image, type : self.chatType, completion: { (isCompleted) in
+                let task = FirebaseHelper.shared.write(to: self.requestId, with: data, mime: .image, type : self.chatType, completion: { (isCompleted) in
                     
                     DispatchQueue.main.async {
                         self.progressViewImage.isHidden = true
@@ -404,11 +402,19 @@ extension SingleChatController {
         
 //        self.validatedIfBlocked {
         
-            FirebaseHelper.shared.write(to: self.currentUserId, with: self.textViewSingleChat.text, type : self.chatType)
+        FirebaseHelper.shared.write(to: self.requestId, with: self.textViewSingleChat.text, type : self.chatType, userId : Int.removeNil(User.main.id), driverId : currentUserId)
            // self.sendPush(with: self.textViewSingleChat.text)
            // self.initimateServerAboutChat()
-            self.textViewSingleChat.text = .Empty
-            self.textViewDidEndEditing(self.textViewSingleChat)
+        let message = "\(User.main.firstName ?? .Empty) : \(self.textViewSingleChat.text ?? .Empty)"
+        DispatchQueue.global(qos: .background).async {
+            var chatObject = ChatPush()
+            chatObject.sender = .provider
+            chatObject.user_id = self.currentUserId
+            chatObject.message = message
+            self.presenter?.post(api: .chatPush, data: chatObject.toData())
+        }
+        self.textViewSingleChat.text = .Empty
+        self.textViewDidEndEditing(self.textViewSingleChat)
 //
 //            if let currentUserData = RealmHelper.main.getObject(of: RealmContact.self, with: self.currentUserId) {
 //                RealmHelper.main.modify {
@@ -586,13 +592,13 @@ extension SingleChatController : UITableViewDataSource, UITableViewDelegate {
         
         if let chat = datasource[indexPath.row].response, let tableCell = tableView.dequeueReusableCell(withIdentifier: getCellId(from: chat), for: indexPath) as? ChatCell {
             
-            if chat.sender == User.main.id {
+            if chat.sender == UserType.user.rawValue {
                 
-                tableCell.setSender(values: datasource[indexPath.row])
+                tableCell.setSender(values: datasource[indexPath.row], requestId: requestId)
                 
             } else {
                 
-                tableCell.setRecieved(values: datasource[indexPath.row], chatType: self.chatType)
+                tableCell.setRecieved(values: datasource[indexPath.row], chatType: self.chatType, requestId: self.requestId)
             
                 
             }
@@ -632,7 +638,7 @@ extension SingleChatController : UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         if self.datasource[indexPath.row].response?.type == Mime.text.rawValue {
-            return UITableViewAutomaticDimension
+            return UITableView.automaticDimension
         }
         
         return 400 * (568 / UIScreen.main.bounds.height)
@@ -656,21 +662,12 @@ extension SingleChatController : UITableViewDataSource, UITableViewDelegate {
         
     }
 
-
-
-
-    
-    
     private func getCellId(from entity : ChatEntity)->String {
         
-        if entity.sender == User.main.id {
-            
+        if entity.sender == UserType.user.rawValue {
             return entity.type == Mime.text.rawValue ? senderCellTextId : senderMediaId
-            
         } else {
-            
             return entity.type == Mime.text.rawValue ? recieverCellTextId : reciverMediaId
-            
         }
         
     }

@@ -8,6 +8,7 @@
 
 import UIKit
 import MessageUI
+import KWDrawerController
 
 class Common {
     
@@ -83,17 +84,29 @@ class Common {
         User.main.picture = profile?.picture
         User.main.wallet_balance = profile?.wallet_balance
         User.main.sos = profile?.sos
+        User.main.dispatcherNumber = profile?.app_contact
+        User.main.measurement = profile?.measurement
+        if let language = profile?.language {
+            UserDefaults.standard.set(language.rawValue, forKey: Keys.list.language)
+            setLocalization(language: language)
+        }
     }
     
     // MARK:- Make Call
     class func call(to number : String?) {
         
         if let providerNumber = number, let url = URL(string: "tel://\(providerNumber)"), UIApplication.shared.canOpenURL(url) {
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
         } else {
-            UIScreen.main.focusedView?.make(toast: Constants.string.cannotMakeCallAtThisMoment.localize())
+            UIApplication.shared.keyWindow?.make(toast: Constants.string.cannotMakeCallAtThisMoment.localize())
         }
         
+    }
+    
+    class func open(url urlString: String) {
+        if let  url = URL(string: urlString), UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
+        }
     }
     
     // MARK:- Send Email
@@ -103,6 +116,7 @@ class Common {
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = view
             mail.setToRecipients(mailId)
+            mail.setSubject(helpSubject.localize())
             view.present(mail, animated: true)
         } else {
             UIScreen.main.focusedView?.make(toast: Constants.string.couldnotOpenEmailAttheMoment.localize())
@@ -139,12 +153,24 @@ class Common {
         switch (field.self) {
         case is UITextField:
             (field as? UITextField)?.font = font
+            if [NSTextAlignment.left, .right].contains((field as! UITextField).textAlignment) {
+                (field as? UITextField)?.textAlignment = (selectedLanguage == .arabic) ? .right : .left
+            }
         case is UILabel:
             (field as? UILabel)?.font = font//UIFont(name: isTitle ? FontCustom.avenier_Heavy.rawValue : FontCustom.avenier_Medium.rawValue, size: customSize)
+            if [NSTextAlignment.left, .right].contains((field as! UILabel).textAlignment) {
+                (field as? UILabel)?.textAlignment = (selectedLanguage == .arabic) ? .right : .left
+            }
+            
         case is UIButton:
-            (field as? UIButton)?.titleLabel?.font = font//UIFont(name: isTitle ? FontCustom.avenier_Heavy.rawValue : FontCustom.avenier_Medium.rawValue, size: customSize)
+            (field as? UIButton)?.titleLabel?.font = font
+            
+            if [UIControl.ContentHorizontalAlignment.left, .right].contains((field as! UIButton).contentHorizontalAlignment) {
+                (field as! UIButton).contentHorizontalAlignment = (selectedLanguage == .arabic) ? .right : .left
+            }
         case is UITextView:
             (field as? UITextView)?.font = font//UIFont(name: isTitle ? FontCustom.avenier_Heavy.rawValue : FontCustom.avenier_Medium.rawValue, size: customSize)
+            //(field as? UITextView)?.textAlignment = (selectedLanguage == .arabic && (field as! UITextView).textAlignment == .left) ? .right : .left
         default:
             break
         }
@@ -152,12 +178,27 @@ class Common {
     
     // MARK:- Get Chat Id
     
-    class func  getChatId(with providerId : Int?) -> String? {
+    class func getChatId(with requestId : Int?) -> String {
     
-        guard let userId = User.main.id, let providerId = providerId else { return nil }
+        guard  let requestId = requestId else {
+            return ProcessInfo().globallyUniqueString }
     
-        return userId <= providerId ? "u\(userId)_p\(providerId)" : "p\(providerId)_u\(userId)"
+        return "\(requestId)" //userId <= providerId ? "u\(userId)_p\(providerId)" : "p\(providerId)_u\(userId)"
     
+    }
+    
+    //MARK:- Set Drawer Controller
+    class func setDrawerController()->UIViewController {
+        
+        let drawerController =  DrawerController()
+        if let sideBarController = Router.main.instantiateViewController(withIdentifier: Storyboard.Ids.SideBarTableViewController) as? SideBarTableViewController  {
+            //let drawerSide : DrawerSide = selectedLanguage == .arabic ? .right : .left
+            let mainController = Router.main.instantiateViewController(withIdentifier: Storyboard.Ids.LaunchNavigationController)
+            drawerController.setViewController(sideBarController, for: .left)
+            drawerController.setViewController(sideBarController, for: .right)
+            drawerController.setViewController(mainController, for: .none)
+        }
+        return drawerController
     }
     
     
@@ -166,3 +207,8 @@ class Common {
 
 
 
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
+}

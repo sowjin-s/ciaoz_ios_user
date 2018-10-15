@@ -79,7 +79,7 @@ extension OfflineBookingViewController  {
         
         if self.currentLocation != nil {
             let text = Constants.string.iNeedCab.localize()+" \(self.currentLocation!.latitude),\(self.currentLocation!.longitude)"+Constants.string.donotEditMessage.localize()
-            Common.sendMessage(to: [offlineNumber], text: text, from: self)
+            Common.sendMessage(to: [User.main.dispatcherNumber ?? offlineNumber], text: text, from: self)
         }
         
     }

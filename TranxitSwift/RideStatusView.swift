@@ -23,6 +23,7 @@ class RideStatusView: UIView {
     @IBOutlet private weak var buttonCancel : UIButton!
     @IBOutlet private weak var labelOtp : UILabel!
     @IBOutlet private weak var constraintSurge : NSLayoutConstraint!
+    @IBOutlet private weak var labelETA : UILabel!
     
     private var currentStatus : RideStatus = .none {
         didSet{
@@ -73,7 +74,7 @@ extension RideStatusView {
     // MARK:- Set Designs
     
     private func setDesign() {
-        
+        Common.setFont(to: labelETA, isTitle: true)
         Common.setFont(to: labelOtp, isTitle: true)
         Common.setFont(to: labelTopTitle)
         Common.setFont(to: labelServiceName)
@@ -108,12 +109,18 @@ extension RideStatusView {
         viewRating.contentMode = .scaleAspectFit
     }
     
+    func setETA(value : String) {
+        self.labelETA.text = " \(Constants.string.ETA.localize()): \(value) "
+    }
+    
+    
     // MARK:- Set Values
     
     func set(values : Request) {
         
         self.request = values
         self.currentStatus = values.status ?? .none
+        self.labelETA.isHidden = !([RideStatus.accepted,.started,.arrived].contains(self.currentStatus))
         self.labelTopTitle.text = {
             switch values.status! {
                 case .accepted, .started:
