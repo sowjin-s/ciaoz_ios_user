@@ -127,6 +127,7 @@
         
         var currentRequestId = 0
         var timerETA : Timer?
+        private var isScheduled = false // Flag For Schedule
         
         //MARKERS
         
@@ -720,14 +721,27 @@ extension HomeViewController {
                         return
                     }
                     riderStatus = request?.status ?? .none
+                    self.isScheduled = ((request?.is_scheduled ?? false) && riderStatus == .searching)
                     self.handle(request: request!)
                 } else {
+                    
                     let previousStatus = riderStatus
                     riderStatus = request?.status ?? .none
                     if riderStatus != previousStatus {
                          self.clearMapview()
                     }
-                    self.removeUnnecessaryView(with: .none)
+                    if self.isScheduled {
+                        self.isScheduled = false
+                        if let yourtripsVC = Router.main.instantiateViewController(withIdentifier: Storyboard.Ids.YourTripsPassbookViewController) as? YourTripsPassbookViewController {
+                            yourtripsVC.isYourTripsSelected = true
+                            yourtripsVC.isFirstBlockSelected = true
+                            self.navigationController?.pushViewController(yourtripsVC, animated: true)
+                        }
+                        self.removeUnnecessaryView(with: .cancelled)
+                    } else {
+                        self.removeUnnecessaryView(with: .none)
+                    }
+                    
                 }
             })
         }

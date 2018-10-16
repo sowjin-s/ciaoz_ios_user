@@ -17,7 +17,7 @@ target 'TranxitUser' do
     #pod 'IQKeyboardManager'
     pod 'Google/SignIn'
     pod 'FBSDKLoginKit'
-    pod 'IQKeyboardManagerSwift', '~> 5.0.0'
+    pod 'IQKeyboardManagerSwift' #, '~> 5.0.0'
     pod 'IHKeyboardAvoiding'
     pod 'Fabric', '~> 1.7.7'
     pod 'Crashlytics', '~> 3.10.2'
