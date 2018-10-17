@@ -32,4 +32,5 @@ struct Keys {
     let cash = "cash"
     let card = "card"
     let measurement = "measurement"
+    let stripe = "stripe"
 }

@@ -9,6 +9,7 @@
 import UIKit
 import MessageUI
 import KWDrawerController
+import Stripe
 
 class Common {
     
@@ -89,6 +90,10 @@ class Common {
         if let language = profile?.language {
             UserDefaults.standard.set(language.rawValue, forKey: Keys.list.language)
             setLocalization(language: language)
+        }
+        if let stripeKey = profile?.stripe_publishable_key {
+            User.main.stripeKey = stripeKey
+            STPPaymentConfiguration.shared().publishableKey = User.main.stripeKey ?? stripePublishableKey
         }
     }
     
