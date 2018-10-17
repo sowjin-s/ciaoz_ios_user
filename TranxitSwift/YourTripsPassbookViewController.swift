@@ -19,11 +19,9 @@ class YourTripsPassbookViewController: UIViewController {
     
     var isYourTripsSelected = true  // Boolean Handle Passbook and Yourtrips list
     
-    private var isFirstBlockSelected = true {
+    var isFirstBlockSelected = true {
         didSet {
-            UIView.animate(withDuration: 0.5) {
-                self.underLineView.frame.origin.x = (selectedLanguage == .arabic ? !self.isFirstBlockSelected : self.isFirstBlockSelected) ? 0 : (self.view.bounds.width/2)
-            }
+            self.animateUnderLine()
         }
     }
     
@@ -41,6 +39,11 @@ class YourTripsPassbookViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initalLoads()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        self.animateUnderLine()
     }
     
 //    override func viewWillAppear(_ animated: Bool) {
@@ -103,6 +106,16 @@ extension YourTripsPassbookViewController {
         tableViewList.register(UINib(nibName: XIB.Names.YourTripCell, bundle: nil), forCellReuseIdentifier: XIB.Names.YourTripCell)
         tableViewList.register(UINib(nibName: XIB.Names.PassbookWalletTransaction, bundle: nil), forCellReuseIdentifier: XIB.Names.PassbookWalletTransaction)
         
+    }
+    
+    // MARK:- Animate Under Line
+    
+    private func animateUnderLine() {
+        if self.underLineView != nil {
+            UIView.animate(withDuration: 0.5) {
+                 self.underLineView.frame.origin.x = (selectedLanguage == .arabic ? !self.isFirstBlockSelected : self.isFirstBlockSelected) ? 0 : (self.view.bounds.width/2)
+            }
+        }
     }
     
     

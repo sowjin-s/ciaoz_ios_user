@@ -174,7 +174,7 @@ extension AppDelegate {
     
     private func IQKeyboard() {
         
-        IQKeyboardManager.sharedManager().enable = false
+        IQKeyboardManager.shared.enable = false
     }
     
     private func siri() {
