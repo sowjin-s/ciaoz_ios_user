@@ -24,6 +24,8 @@ class Profile : JSONSerializable {
     var app_contact : String?
     var measurement : String?
     var language : Language?
+    var stripe_secret_key : String?
+    var stripe_publishable_key : String?
     
     required init(from decoder: Decoder) throws {
         
@@ -46,7 +48,10 @@ class Profile : JSONSerializable {
          mobile = try? values.decode(String.self, forKey: .mobile)
         }
         language = try? values.decode(Language.self, forKey: .language)
+        stripe_secret_key = try? values.decode(String.self, forKey: .stripe_secret_key)
+        stripe_publishable_key = try? values.decode(String.self, forKey: .stripe_publishable_key)
     }
+    
     init() {
     }
     

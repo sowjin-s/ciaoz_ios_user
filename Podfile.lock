@@ -92,7 +92,7 @@ PODS:
   - ImagePicker (3.1.0)
   - Imaginary (3.0.3):
     - Cache (~> 4.0)
-  - IQKeyboardManagerSwift (6.1.1)
+  - IQKeyboardManagerSwift (5.0.8)
   - KWDrawerController (4.1.6):
     - KWDrawerController/Core (= 4.1.6)
   - KWDrawerController/Core (4.1.6)
@@ -128,7 +128,7 @@ DEPENDENCIES:
   - GooglePlaces
   - IHKeyboardAvoiding
   - ImagePicker
-  - IQKeyboardManagerSwift
+  - IQKeyboardManagerSwift (~> 5.0.0)
   - KWDrawerController (~> 4.1.6)
   - Lightbox
   - lottie-ios
@@ -215,7 +215,7 @@ SPEC CHECKSUMS:
   IHKeyboardAvoiding: e6a8f06434baf4c3b45825c3eedb35cea5d0d76b
   ImagePicker: db1fd7626337b2577c523bef5f499bbbe5a37079
   Imaginary: 9b45836a5af881f452a86e0a1215772ae4712d00
-  IQKeyboardManagerSwift: 977affaeb4d6e971975c7790a6850f31d38f1207
+  IQKeyboardManagerSwift: 2e7dc7f98c111458c1ea2b373f893e8cf95e2b97
   KWDrawerController: bf8fc10ddc596ddbfdabda401357a99dba04a1c8
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   Lightbox: 2dc267df8be2285bc7724cb11cbbf4aaaf59dced
@@ -224,6 +224,6 @@ SPEC CHECKSUMS:
   PopupDialog: 3d4e8e0795c3a614f407d730986c9b9af9781123
   Stripe: 2c69e216061d54d9c538204bb4f58bd597ddfc5b
 
-PODFILE CHECKSUM: 5f43c17bd633add67c4b5e7721d8a09a399255dc
+PODFILE CHECKSUM: 812dbbde40abf43f3dc35fbfc16f1e705b426c64
 
 COCOAPODS: 1.5.3
