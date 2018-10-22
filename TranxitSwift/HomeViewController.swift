@@ -734,7 +734,7 @@ extension HomeViewController {
                         self.isScheduled = false
                         if let yourtripsVC = Router.main.instantiateViewController(withIdentifier: Storyboard.Ids.YourTripsPassbookViewController) as? YourTripsPassbookViewController {
                             yourtripsVC.isYourTripsSelected = true
-                            yourtripsVC.isFirstBlockSelected = true
+                            yourtripsVC.isFirstBlockSelected = false
                             self.navigationController?.pushViewController(yourtripsVC, animated: true)
                         }
                         self.removeUnnecessaryView(with: .cancelled)

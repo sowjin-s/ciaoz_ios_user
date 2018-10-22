@@ -46,6 +46,11 @@ class YourTripsPassbookViewController: UIViewController {
         self.animateUnderLine()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.navigationController?.isNavigationBarHidden = false
+    }
+    
 //    override func viewWillAppear(_ animated: Bool) {
 //        super.viewWillAppear(animated)
 //        switchViewAction()
