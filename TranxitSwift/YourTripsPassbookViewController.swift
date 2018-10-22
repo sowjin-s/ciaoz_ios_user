@@ -155,7 +155,7 @@ extension YourTripsPassbookViewController {
     
     private func switchViewAction(){
        // self.pastUnderLineView.isHidden = false
-        self.isFirstBlockSelected = true
+       // self.isFirstBlockSelected = true
         self.pastBtn.tag = 1
         self.upCommingBtn.tag = 2
         self.pastBtn.addTarget(self, action: #selector(ButtonTapped(sender:)), for: .touchUpInside)

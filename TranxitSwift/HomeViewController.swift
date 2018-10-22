@@ -732,11 +732,11 @@ extension HomeViewController {
                     }
                     if self.isScheduled {
                         self.isScheduled = false
-                        if let yourtripsVC = Router.main.instantiateViewController(withIdentifier: Storyboard.Ids.YourTripsPassbookViewController) as? YourTripsPassbookViewController {
-                            yourtripsVC.isYourTripsSelected = true
-                            yourtripsVC.isFirstBlockSelected = false
-                            self.navigationController?.pushViewController(yourtripsVC, animated: true)
-                        }
+//                        if let yourtripsVC = Router.main.instantiateViewController(withIdentifier: Storyboard.Ids.YourTripsPassbookViewController) as? YourTripsPassbookViewController {
+//                            yourtripsVC.isYourTripsSelected = true
+//                            yourtripsVC.isFirstBlockSelected = false
+//                            self.navigationController?.pushViewController(yourtripsVC, animated: true)
+//                        }
                         self.removeUnnecessaryView(with: .cancelled)
                     } else {
                         self.removeUnnecessaryView(with: .none)
