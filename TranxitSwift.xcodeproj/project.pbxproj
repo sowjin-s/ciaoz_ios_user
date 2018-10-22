@@ -190,8 +190,6 @@
 		08FA70AC20E3E695009B060A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08FA70AB20E3E695009B060A /* Main.storyboard */; };
 		08FA91A120EA7C6700723B26 /* FirebaseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FA919F20EA7C6700723B26 /* FirebaseConstants.swift */; };
 		08FA91A220EA7C6700723B26 /* FirebaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FA91A020EA7C6700723B26 /* FirebaseHelper.swift */; };
-		337623DB856DC15292841022 /* Pods_UserTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BAEE7F0D8C6A2D81D0196FD /* Pods_UserTests.framework */; };
-		33814EF930A77471862AD2E1 /* Pods_UserUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 125CF2125C22EBE6A0F5F76F /* Pods_UserUITests.framework */; };
 		345481F34FE8F4E422FE29BC /* Pods_TranxitUser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11262F3AD017B98534D5D64C /* Pods_TranxitUser.framework */; };
 		38492B362000F65E001830AD /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38492B352000F65E001830AD /* View.swift */; };
 		38492B382000F6A8001830AD /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38492B372000F6A8001830AD /* String.swift */; };
@@ -212,8 +210,6 @@
 		889480211FECE717006AF5A9 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889480201FECE717006AF5A9 /* Button.swift */; };
 		8894E2241FE7D7980097B4B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8894E2231FE7D7980097B4B3 /* AppDelegate.swift */; };
 		8894E22B1FE7D7980097B4B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8894E22A1FE7D7980097B4B3 /* Assets.xcassets */; };
-		8894E2391FE7D7980097B4B3 /* Centros_CampriosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8894E2381FE7D7980097B4B3 /* Centros_CampriosTests.swift */; };
-		8894E2441FE7D7980097B4B3 /* Centros_CampriosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8894E2431FE7D7980097B4B3 /* Centros_CampriosUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -223,20 +219,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 087500FF20D7D4EC00CFA858;
 			remoteInfo = SiriIntent;
-		};
-		8894E2351FE7D7980097B4B3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8894E2181FE7D7980097B4B3 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8894E21F1FE7D7980097B4B3;
-			remoteInfo = Centros_Camprios;
-		};
-		8894E2401FE7D7980097B4B3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8894E2181FE7D7980097B4B3 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8894E21F1FE7D7980097B4B3;
-			remoteInfo = Centros_Camprios;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -490,12 +472,6 @@
 		8894E2201FE7D7980097B4B3 /* TranxitUser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TranxitUser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8894E2231FE7D7980097B4B3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8894E22A1FE7D7980097B4B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		8894E2341FE7D7980097B4B3 /* UserTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UserTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8894E2381FE7D7980097B4B3 /* Centros_CampriosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Centros_CampriosTests.swift; sourceTree = "<group>"; };
-		8894E23A1FE7D7980097B4B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8894E23F1FE7D7980097B4B3 /* UserUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UserUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8894E2431FE7D7980097B4B3 /* Centros_CampriosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Centros_CampriosUITests.swift; sourceTree = "<group>"; };
-		8894E2451FE7D7980097B4B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9BAEE7F0D8C6A2D81D0196FD /* Pods_UserTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UserTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B228E6C0E51E6A2FC44EC24E /* Pods-UserTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UserTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UserTests/Pods-UserTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C4044B64CC30575C2C21E08C /* Pods-TranxitUser.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TranxitUser.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TranxitUser/Pods-TranxitUser.debug.xcconfig"; sourceTree = "<group>"; };
@@ -517,22 +493,6 @@
 				080FB9D820BC452B008C23F5 /* AccountKit.framework in Frameworks */,
 				08ED0E4E206CF12F0016732B /* PushKit.framework in Frameworks */,
 				345481F34FE8F4E422FE29BC /* Pods_TranxitUser.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8894E2311FE7D7980097B4B3 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				337623DB856DC15292841022 /* Pods_UserTests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8894E23C1FE7D7980097B4B3 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				33814EF930A77471862AD2E1 /* Pods_UserUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1486,8 +1446,6 @@
 			children = (
 				0875010B20D7D56400CFA858 /* User.entitlements */,
 				8894E2221FE7D7980097B4B3 /* TranxitSwift */,
-				8894E2371FE7D7980097B4B3 /* Centros_CampriosTests */,
-				8894E2421FE7D7980097B4B3 /* Centros_CampriosUITests */,
 				0875010120D7D4EC00CFA858 /* SiriIntent */,
 				8894E2211FE7D7980097B4B3 /* Products */,
 				5F3758D020AEF4C96CC2AB25 /* Frameworks */,
@@ -1499,8 +1457,6 @@
 			isa = PBXGroup;
 			children = (
 				8894E2201FE7D7980097B4B3 /* TranxitUser.app */,
-				8894E2341FE7D7980097B4B3 /* UserTests.xctest */,
-				8894E23F1FE7D7980097B4B3 /* UserUITests.xctest */,
 				0875010020D7D4EC00CFA858 /* SiriIntent.appex */,
 			);
 			name = Products;
@@ -1514,24 +1470,6 @@
 				8894E2521FE7D7F20097B4B3 /* VIPER */,
 			);
 			path = TranxitSwift;
-			sourceTree = "<group>";
-		};
-		8894E2371FE7D7980097B4B3 /* Centros_CampriosTests */ = {
-			isa = PBXGroup;
-			children = (
-				8894E2381FE7D7980097B4B3 /* Centros_CampriosTests.swift */,
-				8894E23A1FE7D7980097B4B3 /* Info.plist */,
-			);
-			path = Centros_CampriosTests;
-			sourceTree = "<group>";
-		};
-		8894E2421FE7D7980097B4B3 /* Centros_CampriosUITests */ = {
-			isa = PBXGroup;
-			children = (
-				8894E2431FE7D7980097B4B3 /* Centros_CampriosUITests.swift */,
-				8894E2451FE7D7980097B4B3 /* Info.plist */,
-			);
-			path = Centros_CampriosUITests;
 			sourceTree = "<group>";
 		};
 		8894E2521FE7D7F20097B4B3 /* VIPER */ = {
@@ -1740,44 +1678,6 @@
 			productReference = 8894E2201FE7D7980097B4B3 /* TranxitUser.app */;
 			productType = "com.apple.product-type.application";
 		};
-		8894E2331FE7D7980097B4B3 /* UserTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8894E24B1FE7D7980097B4B3 /* Build configuration list for PBXNativeTarget "UserTests" */;
-			buildPhases = (
-				2FA2E4F1B80E71E73C5CAD37 /* [CP] Check Pods Manifest.lock */,
-				8894E2301FE7D7980097B4B3 /* Sources */,
-				8894E2311FE7D7980097B4B3 /* Frameworks */,
-				8894E2321FE7D7980097B4B3 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				8894E2361FE7D7980097B4B3 /* PBXTargetDependency */,
-			);
-			name = UserTests;
-			productName = Centros_CampriosTests;
-			productReference = 8894E2341FE7D7980097B4B3 /* UserTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		8894E23E1FE7D7980097B4B3 /* UserUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8894E24E1FE7D7980097B4B3 /* Build configuration list for PBXNativeTarget "UserUITests" */;
-			buildPhases = (
-				DED6EC7CF54DFD433635949A /* [CP] Check Pods Manifest.lock */,
-				8894E23B1FE7D7980097B4B3 /* Sources */,
-				8894E23C1FE7D7980097B4B3 /* Frameworks */,
-				8894E23D1FE7D7980097B4B3 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				8894E2411FE7D7980097B4B3 /* PBXTargetDependency */,
-			);
-			name = UserUITests;
-			productName = Centros_CampriosUITests;
-			productReference = 8894E23F1FE7D7980097B4B3 /* UserUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1820,18 +1720,6 @@
 							};
 						};
 					};
-					8894E2331FE7D7980097B4B3 = {
-						CreatedOnToolsVersion = 9.2;
-						LastSwiftMigration = 1000;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 8894E21F1FE7D7980097B4B3;
-					};
-					8894E23E1FE7D7980097B4B3 = {
-						CreatedOnToolsVersion = 9.2;
-						LastSwiftMigration = 1000;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 8894E21F1FE7D7980097B4B3;
-					};
 				};
 			};
 			buildConfigurationList = 8894E21B1FE7D7980097B4B3 /* Build configuration list for PBXProject "TranxitSwift" */;
@@ -1850,8 +1738,6 @@
 			projectRoot = "";
 			targets = (
 				8894E21F1FE7D7980097B4B3 /* TranxitUser */,
-				8894E2331FE7D7980097B4B3 /* UserTests */,
-				8894E23E1FE7D7980097B4B3 /* UserUITests */,
 				087500FF20D7D4EC00CFA858 /* SiriIntent */,
 			);
 		};
@@ -1916,20 +1802,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8894E2321FE7D7980097B4B3 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8894E23D1FE7D7980097B4B3 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -1968,24 +1840,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TranxitUser/Pods-TranxitUser-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2FA2E4F1B80E71E73C5CAD37 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-UserTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		36FE41E08BB6523989DD5A96 /* [CP] Embed Pods Frameworks */ = {
@@ -2064,24 +1918,6 @@
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-TranxitUser-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DED6EC7CF54DFD433635949A /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-UserUITests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2258,22 +2094,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8894E2301FE7D7980097B4B3 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8894E2391FE7D7980097B4B3 /* Centros_CampriosTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8894E23B1FE7D7980097B4B3 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8894E2441FE7D7980097B4B3 /* Centros_CampriosUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -2281,16 +2101,6 @@
 			isa = PBXTargetDependency;
 			target = 087500FF20D7D4EC00CFA858 /* SiriIntent */;
 			targetProxy = 0875010520D7D4EC00CFA858 /* PBXContainerItemProxy */;
-		};
-		8894E2361FE7D7980097B4B3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8894E21F1FE7D7980097B4B3 /* TranxitUser */;
-			targetProxy = 8894E2351FE7D7980097B4B3 /* PBXContainerItemProxy */;
-		};
-		8894E2411FE7D7980097B4B3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8894E21F1FE7D7980097B4B3 /* TranxitUser */;
-			targetProxy = 8894E2401FE7D7980097B4B3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2546,76 +2356,6 @@
 			};
 			name = Release;
 		};
-		8894E24C1FE7D7980097B4B3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = B228E6C0E51E6A2FC44EC24E /* Pods-UserTests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4S6XZZR5Y9;
-				INFOPLIST_FILE = Centros_CampriosTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.appoets.Centros-CampriosTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/User.app/User";
-			};
-			name = Debug;
-		};
-		8894E24D1FE7D7980097B4B3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 44871E415E80C1EFC3F563BB /* Pods-UserTests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4S6XZZR5Y9;
-				INFOPLIST_FILE = Centros_CampriosTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.appoets.Centros-CampriosTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/User.app/User";
-			};
-			name = Release;
-		};
-		8894E24F1FE7D7980097B4B3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0B49CCFC0DC564068D0BC9C5 /* Pods-UserUITests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4S6XZZR5Y9;
-				INFOPLIST_FILE = Centros_CampriosUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.appoets.Centros-CampriosUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Centros_Camprios;
-			};
-			name = Debug;
-		};
-		8894E2501FE7D7980097B4B3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 74A14DEF36E53C0124AB8E73 /* Pods-UserUITests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4S6XZZR5Y9;
-				INFOPLIST_FILE = Centros_CampriosUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.appoets.Centros-CampriosUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Centros_Camprios;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -2642,24 +2382,6 @@
 			buildConfigurations = (
 				8894E2491FE7D7980097B4B3 /* Debug */,
 				8894E24A1FE7D7980097B4B3 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		8894E24B1FE7D7980097B4B3 /* Build configuration list for PBXNativeTarget "UserTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8894E24C1FE7D7980097B4B3 /* Debug */,
-				8894E24D1FE7D7980097B4B3 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		8894E24E1FE7D7980097B4B3 /* Build configuration list for PBXNativeTarget "UserUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8894E24F1FE7D7980097B4B3 /* Debug */,
-				8894E2501FE7D7980097B4B3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
