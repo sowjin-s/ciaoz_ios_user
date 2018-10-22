@@ -57,7 +57,7 @@ class InvoiceView: UIView {
                 self.labelPaymentType.attributeColor = .secondary
                 self.labelPaymentType.startLocation = ((text.count)-(paymentType.rawValue.localize().count))
                 self.labelPaymentType.length = paymentType.rawValue.localize().count
-                self.buttonChangePayment.isHidden = (isShowingRecipt)
+                self.buttonChangePayment.isHidden = (isShowingRecipt && User.main.isCardAllowed)
                 self.viewTips.isHidden = !(self.paymentType == .CARD || isShowingRecipt)
                 self.viewTips.isUserInteractionEnabled = !isShowingRecipt // Disable userInteraction to Tips if from Past trips
             }

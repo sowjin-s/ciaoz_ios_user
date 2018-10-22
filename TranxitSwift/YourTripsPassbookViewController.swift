@@ -46,6 +46,11 @@ class YourTripsPassbookViewController: UIViewController {
         self.animateUnderLine()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.navigationController?.isNavigationBarHidden = false
+    }
+    
 //    override func viewWillAppear(_ animated: Bool) {
 //        super.viewWillAppear(animated)
 //        switchViewAction()
@@ -150,7 +155,7 @@ extension YourTripsPassbookViewController {
     
     private func switchViewAction(){
        // self.pastUnderLineView.isHidden = false
-        self.isFirstBlockSelected = true
+       // self.isFirstBlockSelected = true
         self.pastBtn.tag = 1
         self.upCommingBtn.tag = 2
         self.pastBtn.addTarget(self, action: #selector(ButtonTapped(sender:)), for: .touchUpInside)
