@@ -645,10 +645,12 @@ extension HomeViewController {
         cancelButton.titleColor = .primary
         let sureButton = PopupDialogButton(title: Constants.string.yes.localize()) {
             if isSendReason {
-                self.showCancelReasonView(completion: { (reason) in  // Getting Cancellation Reason After Providing Accepting Ride
-                    cancelRide(reason: reason)
-                    self.removeCancelView()
-                })
+//                self.showCancelReasonView(completion: { (reason) in  // Getting Cancellation Reason After Providing Accepting Ride
+//                    cancelRide(reason: reason)
+//                    self.removeCancelView()
+//                })
+                
+                cancelRide()
             } else {
                  cancelRide()
             }

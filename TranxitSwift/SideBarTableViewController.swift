@@ -106,7 +106,9 @@ extension SideBarTableViewController {
     
     private func setValues(){
         
-        Cache.image(forUrl: Common.getImageUrl(for: User.main.picture)) { (image) in
+        let url = (User.main.picture?.contains(WebConstants.string.http) ?? false) ? User.main.picture : Common.getImageUrl(for: User.main.picture)
+        
+        Cache.image(forUrl: url) { (image) in
             DispatchQueue.main.async {
                 self.imageViewProfile.image = image == nil ? #imageLiteral(resourceName: "userPlaceholder") : image
             }

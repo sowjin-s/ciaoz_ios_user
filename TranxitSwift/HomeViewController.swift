@@ -212,7 +212,8 @@ extension HomeViewController {
 
 //            NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShowRateView(info:)), name: .UIKeyboardWillShow, object: nil)
 //            NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHideRateView(info:)), name: .UIKeyboardWillHide, object: nil)      }
-            self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false 
+            self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+            self.presenter?.get(api: .getProfile, parameters: nil)
         }
     
     // MARK:- View Will appear
@@ -961,7 +962,10 @@ extension HomeViewController {
             storeFavouriteLocations(from: data)
             
         }
-        
+        func getProfile(api: Base, data: Profile?) {
+            Common.storeUserData(from: data)
+            storeInUserDefaults()
+        }
         
     }
     

@@ -101,11 +101,20 @@ extension ProfileViewController {
     // MARK:- Set Profile Details
     
     private func setProfile(){
-        Cache.image(forUrl: Common.getImageUrl(for: User.main.picture)) { (image) in
+        
+        let url = (User.main.picture?.contains(WebConstants.string.http) ?? false) ? User.main.picture : Common.getImageUrl(for: User.main.picture)
+        
+        Cache.image(forUrl: url) { (image) in
             DispatchQueue.main.async {
                 self.imageViewProfile.image = image == nil ? #imageLiteral(resourceName: "userPlaceholder") : image
             }
         }
+        
+//        Cache.image(forUrl: Common.getImageUrl(for: User.main.picture)) { (image) in
+//            DispatchQueue.main.async {
+//                self.imageViewProfile.image = image == nil ? #imageLiteral(resourceName: "userPlaceholder") : image
+//            }
+//        }
         self.textFieldFirst.text = User.main.firstName
         self.textFieldLast.text = User.main.lastName
         self.textFieldEmail.text = User.main.email
