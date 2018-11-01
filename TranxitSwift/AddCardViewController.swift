@@ -35,7 +35,7 @@ extension AddCardViewController {
     func initialLoads() {
         
         STPPaymentConfiguration.shared().publishableKey = User.main.stripeKey ?? stripePublishableKey//need to add on drive code
-        self.creditCardView.cardHolderString = String.removeNil(User.main.firstName)+" "+String.removeNil(User.main.lastName)
+        //self.creditCardView.cardHolderString =  String.removeNil(User.main.firstName)+" "+String.removeNil(User.main.lastName)
         self.creditCardView.defaultCardColor = .primary
         self.createTextField()
         self.navigationController?.isNavigationBarHidden = false

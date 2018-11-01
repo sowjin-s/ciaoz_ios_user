@@ -520,9 +520,11 @@ extension HomeViewController {
     // MARK:- Cancel Request if it exceeds a certain interval
     
         @IBAction func validateRequest() {
+            
             if riderStatus == .searching {
                 UIApplication.shared.keyWindow?.makeToast(Constants.string.noDriversFound.localize())
                 self.cancelRequest()
+                
             }
         }
         

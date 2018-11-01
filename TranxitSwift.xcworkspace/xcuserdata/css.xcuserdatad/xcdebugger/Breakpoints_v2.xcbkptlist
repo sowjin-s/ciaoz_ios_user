@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TranxitSwift/RideStatusView.swift"
-            timestampString = "562313016.090602"
+            timestampString = "562762249.120392"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "183"
-            endingLineNumber = "183"
+            startingLineNumber = "184"
+            endingLineNumber = "184"
             landmarkName = "cancelShareAction()"
             landmarkType = "7">
          </BreakpointContent>
@@ -106,7 +106,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TranxitSwift/HomeViewController+Extension.swift"
-            timestampString = "562320062.486378"
+            timestampString = "562762249.12046"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "486"
@@ -138,7 +138,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TranxitSwift/HomeViewController+Extension.swift"
-            timestampString = "562320062.486463"
+            timestampString = "562762249.120536"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "278"
@@ -153,8 +153,8 @@
                   symbolName = "TranxitUser.HomeViewController.showRideStatusView(with: TranxitUser.Request) -&gt; ()"
                   moduleName = "TranxitUser"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/css/Desktop/NEWTRANXIT/tranxitswiftbase_ios_user/TranxitSwift/HomeViewController+Extension.swift"
-                  timestampString = "562316669.5127521"
+                  urlString = "file:///Users/css/Desktop/TRANXITUSER/tranxitswiftbase_ios_user/TranxitSwift/HomeViewController+Extension.swift"
+                  timestampString = "562758571.277369"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "278"
@@ -168,8 +168,8 @@
                   symbolName = "closure #1 () -&gt; () in TranxitUser.HomeViewController.showRideStatusView(with: TranxitUser.Request) -&gt; ()"
                   moduleName = "TranxitUser"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/css/Desktop/NEWTRANXIT/tranxitswiftbase_ios_user/TranxitSwift/HomeViewController+Extension.swift"
-                  timestampString = "562316669.530274"
+                  urlString = "file:///Users/css/Desktop/TRANXITUSER/tranxitswiftbase_ios_user/TranxitSwift/HomeViewController+Extension.swift"
+                  timestampString = "562758571.279164"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "279"
@@ -186,7 +186,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TranxitSwift/HomeViewController+Extension.swift"
-            timestampString = "562320062.486519"
+            timestampString = "562762249.120586"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "491"
@@ -249,8 +249,8 @@
                   symbolName = "TranxitUser.ReasonView.didSelectReason.getter : Swift.Optional&lt;(Swift.String) -&gt; ()&gt;"
                   moduleName = "TranxitUser"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/css/Desktop/NEWTRANXIT/tranxitswiftbase_ios_user/TranxitSwift/ReasonView.swift"
-                  timestampString = "562316669.6724581"
+                  urlString = "file:///Users/css/Desktop/TRANXITUSER/tranxitswiftbase_ios_user/TranxitSwift/ReasonView.swift"
+                  timestampString = "562758571.292716"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "27"
@@ -264,8 +264,8 @@
                   symbolName = "TranxitUser.ReasonView.didSelectReason.setter : Swift.Optional&lt;(Swift.String) -&gt; ()&gt;"
                   moduleName = "TranxitUser"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/css/Desktop/NEWTRANXIT/tranxitswiftbase_ios_user/TranxitSwift/ReasonView.swift"
-                  timestampString = "562316669.675416"
+                  urlString = "file:///Users/css/Desktop/TRANXITUSER/tranxitswiftbase_ios_user/TranxitSwift/ReasonView.swift"
+                  timestampString = "562758571.29449"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "27"
@@ -279,8 +279,8 @@
                   symbolName = "TranxitUser.ReasonView.init(frame: __C.CGRect) -&gt; TranxitUser.ReasonView"
                   moduleName = "TranxitUser"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/css/Desktop/NEWTRANXIT/tranxitswiftbase_ios_user/TranxitSwift/ReasonView.swift"
-                  timestampString = "562316669.678406"
+                  urlString = "file:///Users/css/Desktop/TRANXITUSER/tranxitswiftbase_ios_user/TranxitSwift/ReasonView.swift"
+                  timestampString = "562758571.296227"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "27"
@@ -294,8 +294,8 @@
                   symbolName = "TranxitUser.ReasonView.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;TranxitUser.ReasonView&gt;"
                   moduleName = "TranxitUser"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/css/Desktop/NEWTRANXIT/tranxitswiftbase_ios_user/TranxitSwift/ReasonView.swift"
-                  timestampString = "562316669.68137"
+                  urlString = "file:///Users/css/Desktop/TRANXITUSER/tranxitswiftbase_ios_user/TranxitSwift/ReasonView.swift"
+                  timestampString = "562758571.2980911"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "27"
@@ -359,54 +359,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TranxitSwift/AddCardViewController.swift"
-            timestampString = "562320062.486674"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
-            landmarkName = "onError(api:message:statusCode:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "TranxitUser.AddCardViewController.onError(api: TranxitUser.Base, message: Swift.String, statusCode: Swift.Int) -&gt; ()"
-                  moduleName = "TranxitUser"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/css/Desktop/NEWTRANXIT/tranxitswiftbase_ios_user/TranxitSwift/AddCardViewController.swift"
-                  timestampString = "562316669.690487"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "119"
-                  endingLineNumber = "119"
-                  offsetFromSymbolStart = "48">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in TranxitUser.AddCardViewController.onError(api: TranxitUser.Base, message: Swift.String, statusCode: Swift.Int) -&gt; ()"
-                  moduleName = "TranxitUser"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/css/Desktop/NEWTRANXIT/tranxitswiftbase_ios_user/TranxitSwift/AddCardViewController.swift"
-                  timestampString = "562316669.6933399"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "120"
-                  endingLineNumber = "120"
-                  offsetFromSymbolStart = "36">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "TranxitSwift/Common.swift"
             timestampString = "562315542.093978"
             startingColumnNumber = "9223372036854775807"
@@ -414,22 +366,6 @@
             startingLineNumber = "95"
             endingLineNumber = "95"
             landmarkName = "storeUserData(from:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TranxitSwift/AddCardViewController.swift"
-            timestampString = "562320062.486745"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "23"
-            endingLineNumber = "23"
-            landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -527,6 +463,308 @@
             endingLineNumber = "188"
             landmarkName = "buttonSaveAction()"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TranxitSwift/HomeViewController.swift"
+            timestampString = "562762249.120827"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "890"
+            endingLineNumber = "890"
+            landmarkName = "onError(api:message:statusCode:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TranxitUser.HomeViewController.onError(api: TranxitUser.Base, message: Swift.String, statusCode: Swift.Int) -&gt; ()"
+                  moduleName = "TranxitUser"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/css/Desktop/TRANXITUSER/tranxitswiftbase_ios_user/TranxitSwift/HomeViewController.swift"
+                  timestampString = "562758571.331094"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "891"
+                  endingLineNumber = "891"
+                  offsetFromSymbolStart = "48">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in TranxitUser.HomeViewController.onError(api: TranxitUser.Base, message: Swift.String, statusCode: Swift.Int) -&gt; ()"
+                  moduleName = "TranxitUser"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/css/Desktop/TRANXITUSER/tranxitswiftbase_ios_user/TranxitSwift/HomeViewController.swift"
+                  timestampString = "562758571.333137"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "892"
+                  endingLineNumber = "892"
+                  offsetFromSymbolStart = "56">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TranxitSwift/HomeViewController.swift"
+            timestampString = "562762249.120881"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "920"
+            endingLineNumber = "920"
+            landmarkName = "getRequest(api:data:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TranxitSwift/HomeViewController.swift"
+            timestampString = "562762249.1209331"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "909"
+            endingLineNumber = "909"
+            landmarkName = "getServiceList(api:data:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TranxitSwift/HomeViewController.swift"
+            timestampString = "562762249.12098"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "933"
+            endingLineNumber = "933"
+            landmarkName = "success(api:message:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TranxitSwift/HomeViewController.swift"
+            timestampString = "562762249.12103"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "962"
+            endingLineNumber = "962"
+            landmarkName = "getLocationService(api:data:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TranxitSwift/HomeViewController.swift"
+            timestampString = "562762249.121076"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "968"
+            endingLineNumber = "968"
+            landmarkName = "getProfile(api:data:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TranxitSwift/HomeViewController.swift"
+            timestampString = "562762249.121122"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "524"
+            endingLineNumber = "524"
+            landmarkName = "validateRequest()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TranxitSwift/HomeViewController.swift"
+            timestampString = "562762249.12117"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "788"
+            endingLineNumber = "788"
+            landmarkName = "cancelRequest(reason:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TranxitSwift/RatingView.swift"
+            timestampString = "562758337.856439"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "buttonActionRating()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TranxitSwift/HomeViewController+Extension.swift"
+            timestampString = "562762249.12124"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "378"
+            endingLineNumber = "378"
+            landmarkName = "showRatingView(with:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TranxitSwift/HomeViewController+Extension.swift"
+            timestampString = "562762249.1212879"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "380"
+            endingLineNumber = "380"
+            landmarkName = "showRatingView(with:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TranxitSwift/InvoiceView.swift"
+            timestampString = "562762249.121349"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "190"
+            endingLineNumber = "190"
+            landmarkName = "set(request:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TranxitSwift/InvoiceView.swift"
+            timestampString = "562762249.121393"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "12"
+            endingLineNumber = "12"
+            landmarkName = "InvoiceView"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TranxitUser.InvoiceView.(labelBookingString in _95124C831E76DE3E7F9CA57B41F4E916).getter : weak Swift.Optional&lt;__C.UILabel&gt;"
+                  moduleName = "TranxitUser"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/css/Desktop/TRANXITUSER/tranxitswiftbase_ios_user/TranxitSwift/InvoiceView.swift"
+                  timestampString = "562758571.381171"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "96">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TranxitUser.InvoiceView.(labelBookingString in _95124C831E76DE3E7F9CA57B41F4E916).setter : weak Swift.Optional&lt;__C.UILabel&gt;"
+                  moduleName = "TranxitUser"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/css/Desktop/TRANXITUSER/tranxitswiftbase_ios_user/TranxitSwift/InvoiceView.swift"
+                  timestampString = "562758571.383182"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "112">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TranxitUser.InvoiceView.init(frame: __C.CGRect) -&gt; TranxitUser.InvoiceView"
+                  moduleName = "TranxitUser"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/css/Desktop/TRANXITUSER/tranxitswiftbase_ios_user/TranxitSwift/InvoiceView.swift"
+                  timestampString = "562758571.385443"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "44">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TranxitUser.InvoiceView.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;TranxitUser.InvoiceView&gt;"
+                  moduleName = "TranxitUser"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/css/Desktop/TRANXITUSER/tranxitswiftbase_ios_user/TranxitSwift/InvoiceView.swift"
+                  timestampString = "562758571.387671"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "56">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

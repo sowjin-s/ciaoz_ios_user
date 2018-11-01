@@ -111,7 +111,7 @@ struct Constants {
     let ETA = "ETA"
     let model = "Model"
     let useWalletAmount = "Use Wallet Amount"
-    let scheduleRide = "schedule ride"
+    let scheduleRide = "schedule"
     let rideNow = "ride now"
     let scheduleARide = "Schedule your Ride"
     let select = "Select"

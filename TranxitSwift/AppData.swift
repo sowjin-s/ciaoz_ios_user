@@ -15,7 +15,7 @@ let appSecretKey = "yVnKClKDHPcDlqqO1V05RtDRdvtrVHfvjlfqliha"
 let appClientId = 2
 let defaultMapLocation = LocationCoordinate(latitude: 13.009245, longitude: 80.212929)
 //let locationApi = "https://maps.googleapis.com/maps/api/place/details/json?reference=%@&sensor=true&key=%@"
-let baseUrl = "https://schedule.tranxit.co/" // "http://schedule.deliveryventure.com/"//
+let baseUrl =  "https://schedule.tranxit.co/" // "http://schedule.deliveryventure.com/"//
 let passwordLengthMax = 10
 //let distanceType = "km"
 let requestCheckInterval : TimeInterval = 5
