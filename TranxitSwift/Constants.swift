@@ -164,7 +164,7 @@ struct Constants {
     let wouldyouLiketoMakeaSOSCall = "Would you like to make a SOS Call?"
     let mins = "mins"
     let invoice = "Invoice"
-    let viewRecipt = "View Recipt"
+    let viewRecipt = "View Receipt"
     let payVia = "Pay via"
     let comments = "Comments"
     let pastTripDetails = "Past Trip Details"
