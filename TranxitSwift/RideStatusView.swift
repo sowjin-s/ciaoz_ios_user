@@ -126,6 +126,7 @@ extension RideStatusView {
                 case .accepted, .started:
                    return Constants.string.driverAccepted.localize()
                 case .arrived:
+                    self.labelETA.isHidden = true
                    return Constants.string.driverArrived.localize()
                 case .pickedup:
                    self.labelOtp.isHidden = true
