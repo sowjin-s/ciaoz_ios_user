@@ -46,7 +46,7 @@ class WalletViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.initalLoads()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -57,6 +57,7 @@ class WalletViewController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = false
         self.isWalletAvailable = User.main.isCardAllowed
+        self.initalLoads()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

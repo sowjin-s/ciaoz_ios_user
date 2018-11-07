@@ -22,6 +22,7 @@ class PaymentViewController: UITableViewController {
     // Boolean for Card selection whether to show or not
     var isShowCash = true
     var isChangingPayment = false
+    var paymentTypeStr = ""
     var onclickPayment : ((PaymentType ,CardEntity?)->Void)? // Change payment Mode from Request
     private var cardsList = [CardEntity]()
     private lazy var loader  : UIView = {
@@ -172,10 +173,16 @@ extension PaymentViewController {
             if indexPath.section == 0  {
                 tableCell.imageViewPayment.image =  #imageLiteral(resourceName: "money_icon")
                 tableCell.labelPayment.text = Constants.string.cash.localize()
+                if paymentTypeStr == PaymentType.CASH.rawValue {
+                    tableCell.accessoryType = .checkmark 
+                }
             } else if self.cardsList.count > indexPath.row {
                 tableCell.imageViewPayment.image =  #imageLiteral(resourceName: "visa")
                 tableCell.labelPayment.text = "XXXX-XXXX-XXXX-"+String.removeNil(cardsList[indexPath.row].last_four)
-                tableCell.accessoryType = cardsList[indexPath.row].is_default == 1 ? .checkmark : .none
+                if paymentTypeStr == PaymentType.CARD.rawValue {
+                    tableCell.accessoryType = cardsList[indexPath.row].is_default == 1 ? .checkmark : .none
+                }
+                
             }
             return tableCell
         }

@@ -118,7 +118,7 @@ extension YourTripsPassbookViewController {
     private func animateUnderLine() {
         if self.underLineView != nil {
             UIView.animate(withDuration: 0.5) {
-                 self.underLineView.frame.origin.x = (selectedLanguage == .arabic ? !self.isFirstBlockSelected : self.isFirstBlockSelected) ? 0 : (self.view.bounds.width/2)
+                 self.underLineView.frame.origin.x = (selectedLanguage == .arabic ? !self.isFirstBlockSelected : self.isFirstBlockSelected) ? 0 : 0//(self.view.bounds.width/2)
             }
         }
     }

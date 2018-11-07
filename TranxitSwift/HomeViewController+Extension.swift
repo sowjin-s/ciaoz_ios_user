@@ -190,6 +190,7 @@ extension HomeViewController {
         self.estimationFareView?.paymentChangeClick = { [weak self]  completion in
             if let vc = self?.storyboard?.instantiateViewController(withIdentifier: Storyboard.Ids.PaymentViewController) as? PaymentViewController {
                 vc.isChangingPayment = true
+                vc.paymentTypeStr = paymentType.rawValue
                 vc.onclickPayment = { [weak self] (paymentTypeEntity , cardEntity) in
                     guard let self = self else {return}
                     selectedPaymentDetail = cardEntity
@@ -299,7 +300,7 @@ extension HomeViewController {
     // MARK:- Show Invoice View
     
     func showInvoiceView(with request : Request) {
-        
+        isRateViewShowed = false
         self.buttonSOS.isHidden = !(riderStatus == .pickedup)
         self.mapViewHelper?.mapView?.clear()
         if self.invoiceView == nil, let invoice = Bundle.main.loadNibNamed(XIB.Names.InvoiceView, owner: self, options: [:])?.first as? InvoiceView {
@@ -320,6 +321,9 @@ extension HomeViewController {
                  requestObj.tips = (Float(Int(tipsAmount*100))/100)
                 }
                 self.presenter?.post(api: .payNow, data: requestObj.toData())
+            }
+            self.invoiceView?.onDoneClick = { onClick in
+                self.showRatingView(with: request)
             }
             self.invoiceView?.onClickChangePayment = { [weak self] completion in 
                 print("Called",#function)
@@ -358,8 +362,12 @@ extension HomeViewController {
     
     func showRatingView(with request : Request) {
         
-        guard self.ratingView == nil else { return }
+        guard self.ratingView == nil else {
+            print("return")
+            return
+        }
         self.removeInvoiceView()
+        isRateViewShowed = true
         if let rating = Bundle.main.loadNibNamed(XIB.Names.RatingView, owner: self, options: [:])?.first as? RatingView {
             NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShowRateView(info:)), name: UIResponder.keyboardWillShowNotification, object: nil)
             NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHideRateView(info:)), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -376,7 +384,11 @@ extension HomeViewController {
                 var rate = Rate()
                 rate.request_id = self.currentRequestId
                 rate.rating = rating
-                rate.comment = comments
+                if comments == Constants.string.writeYourComments {
+                    rate.comment = ""
+                }else{
+                    rate.comment = comments
+                }
                 self.presenter?.post(api: .rateProvider, data: rate.toData())
             }
             self.removeRatingView()
@@ -574,11 +586,43 @@ extension HomeViewController {
             riderStatus = .none
         case .completed:
             riderStatus = .none
-            if request.paid == 1 {
-                self.showRatingView(with: request)
-            } else {
+            if request.payment_mode == .CASH && request.paid == 0{
+              self.showInvoiceView(with: request)
+            }else if (request.payment_mode == .CASH && request.use_wallet == 1) && request.paid == 1{
+                if (!isRateViewShowed){
+                    self.showInvoiceView(with: request)
+                }
+            }else if (request.payment_mode == .CARD  && request.paid == 0){
                 self.showInvoiceView(with: request)
+            }else if (request.payment_mode == .CARD && request.use_wallet == 1) && request.paid == 1{
+                if (!isRateViewShowed){
+                    self.showInvoiceView(with: request)
+                }
+            }else if request.use_wallet == 1 && request.paid == 0{
+                self.showInvoiceView(with: request)
+            }else if request.use_wallet == 1 && request.paid == 1{
+                if (!isRateViewShowed){
+                    self.showInvoiceView(with: request)
+                }
+//                self.showInvoiceView(with: request)
+            }else{
+                self.showRatingView(with: request)
             }
+           /* if request.paid == 1 && (!isRateViewShowed) {
+                self.showInvoiceView(with: request)
+//                }else{
+//                    self.showInvoiceView(with: request)
+//                }
+//                self.showRatingView(with: request)
+            }else if request.payment_mode == .CASH && (!isRateViewShowed) {
+                self.showInvoiceView(with: request)
+            }else if request.payment_mode == .CARD && request.paid == 0{
+                self.showInvoiceView(with: request)
+            }else if request.use_wallet == 1 && request.paid == 1{
+                self.showInvoiceView(with: request)
+            }else{
+                self.showRatingView(with: request)
+            }*/
         default:
             break
         }

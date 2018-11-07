@@ -102,7 +102,7 @@
         //  private var favouriteLocations : LocationService? //[(type : String,address: [LocationDetail])]() // Favourite Locations of User
         
         var currentLocation = Bind<LocationCoordinate>(defaultMapLocation)
-        
+        var isRateViewShowed:Bool = false
         //var serviceSelectionView : ServiceSelectionView?
         var estimationFareView : RequestSelectionView?
         var couponView : CouponView?
@@ -209,7 +209,7 @@ extension HomeViewController {
             self.setDesign()
             NotificationCenter.default.addObserver(self, selector: #selector(self.observer(notification:)), name: .providers, object: nil)
             NotificationCenter.default.addObserver(self, selector: #selector(self.networkChanged(notification:)), name: NSNotification.Name.reachabilityChanged, object: nil)
-
+        
 //            NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShowRateView(info:)), name: .UIKeyboardWillShow, object: nil)
 //            NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHideRateView(info:)), name: .UIKeyboardWillHide, object: nil)      }
             self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
@@ -219,7 +219,7 @@ extension HomeViewController {
     // MARK:- View Will appear
     
     private func viewWillAppearCustom() {
-        
+        isRateViewShowed = false
         self.navigationController?.isNavigationBarHidden = true
         self.localize()
         self.getFavouriteLocationsFromLocal()
@@ -938,6 +938,7 @@ extension HomeViewController {
             if api == .locationServicePostDelete {
                 self.presenter?.get(api: .locationService, parameters: nil)
             }else if api == .rateProvider  {
+                isRateViewShowed = false
                 riderStatus = .none
                 return
             }

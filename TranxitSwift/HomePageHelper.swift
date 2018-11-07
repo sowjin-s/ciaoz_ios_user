@@ -77,7 +77,6 @@ class HomePageHelper {
                 return
             }
             completion(nil, requestFirst)
-            
         }
     }
     

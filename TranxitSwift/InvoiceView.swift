@@ -57,7 +57,11 @@ class InvoiceView: UIView {
                 self.labelPaymentType.attributeColor = .secondary
                 self.labelPaymentType.startLocation = ((text.count)-(paymentType.rawValue.localize().count))
                 self.labelPaymentType.length = paymentType.rawValue.localize().count
-                self.buttonChangePayment.isHidden = (isShowingRecipt && User.main.isCardAllowed)
+                if (User.main.isCardAllowed == false){
+                    self.buttonChangePayment.isHidden = true
+                }else {
+                    self.buttonChangePayment.isHidden = (isShowingRecipt && User.main.isCardAllowed)
+                }
                 self.viewTips.isHidden = !(self.paymentType == .CARD || isShowingRecipt)
                 self.viewTips.isUserInteractionEnabled = !isShowingRecipt // Disable userInteraction to Tips if from Past trips
             }
@@ -96,6 +100,7 @@ class InvoiceView: UIView {
     }
     
     var onClickPaynow : ((Float)->Void)?
+    var onDoneClick : ((Bool)->Void)?
     var onClickChangePayment : ((_ completion : @escaping ((CardEntity)->()))->Void)?
     var selectedCard : CardEntity?
     var isShowingRecipt = false
@@ -187,8 +192,12 @@ extension InvoiceView {
     }
     
     func set(request : Request) {
-        
-        self.buttonPayNow.setTitle((isShowingRecipt ? Constants.string.Done : Constants.string.paynow).localize(), for: .normal)
+        if (isShowingRecipt || request.paid == 1) {
+            self.buttonPayNow.setTitle(Constants.string.Done.localize(), for: .normal)
+        }else{
+            self.buttonPayNow.setTitle(Constants.string.paynow.localize(), for: .normal)
+        }
+//        self.buttonPayNow.setTitle((isShowingRecipt ? Constants.string.Done : ).localize(), for: .normal)
         self.labelToPayString.text = (isShowingRecipt ? Constants.string.paid : Constants.string.toPay).localize()
         self.labelBooking.text = request.booking_id
         self.labelDistanceTravelled.text = "\(Formatter.shared.limit(string: "\(request.distanceInt ?? 0)", maximumDecimal: 1)) \(String.removeNil(request.unit))"
@@ -233,7 +242,15 @@ extension InvoiceView {
         } else { // On Invoice page
             self.payyable = request.payment?.payable ?? 0
         }
-        self.buttonPayNow.isHidden = (request.payment_mode == .CASH && !isShowingRecipt)
+        if (request.payment_mode == .CASH && !isShowingRecipt) && (request.paid == 0){
+             self.buttonPayNow.isHidden = true
+        }
+        if (request.paid == 1){
+            self.buttonPayNow.isHidden = false
+        }
+        
+        
+//        self.buttonPayNow.isHidden = (request.payment_mode == .CASH && !isShowingRecipt)
     }
     
     private func updatePayment() {
@@ -243,7 +260,11 @@ extension InvoiceView {
     }
     
     @IBAction private func buttonPaynowAction() {
-        self.onClickPaynow?(self.tipsAmount)
+        if buttonPayNow.titleLabel?.text == Constants.string.Done{
+            self.onDoneClick?(true)
+        }else{
+            self.onClickPaynow?(self.tipsAmount)
+        }
     }
     
     // MARK:- Change Payment Type

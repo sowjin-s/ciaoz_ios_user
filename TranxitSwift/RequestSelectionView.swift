@@ -116,7 +116,12 @@ extension RequestSelectionView {
         self.setDesign()
         self.viewUseWallet.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.useWalletAction)))
         self.paymentType = .NONE
-        self.buttonChangePayment.isHidden = !(User.main.isCashAllowed || User.main.isCardAllowed) // Change button enabled only if both payment modes are enabled
+        if (User.main.isCardAllowed == false){
+            self.buttonChangePayment.isHidden = true
+        }else {
+            self.buttonChangePayment.isHidden = !(User.main.isCashAllowed || User.main.isCardAllowed)
+        }
+//        self.buttonChangePayment.isHidden = !(User.main.isCashAllowed && User.main.isCardAllowed) // Change button enabled only if both payment modes are enabled
         self.buttonChangePayment.addTarget(self, action: #selector(self.buttonChangePaymentAction), for: .touchUpInside)
         self.buttonCoupon.addTarget(self, action: #selector(self.buttonCouponAction), for: .touchUpInside)
         self.isPromocodeEnabled = false
