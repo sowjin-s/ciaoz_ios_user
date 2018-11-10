@@ -151,6 +151,9 @@ extension SideBarTableViewController {
         case (0,4):
             if let vc = self.drawerController?.getViewController(for: .none)?.storyboard?.instantiateViewController(withIdentifier: Storyboard.Ids.YourTripsPassbookViewController) as? YourTripsPassbookViewController {
                 vc.isYourTripsSelected = indexPath.row == 1
+                if indexPath.row == 1{
+                    vc.isFromTrips = true
+                }
                 (self.drawerController?.getViewController(for: .none) as? UINavigationController)?.pushViewController(vc, animated: true)
             }
         case (0,2):

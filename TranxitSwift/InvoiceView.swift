@@ -248,9 +248,12 @@ extension InvoiceView {
             self.payyable = request.payment?.payable ?? 0
         }
         if (request.payment_mode == .CASH && !isShowingRecipt) && (request.paid == 0){
-             self.buttonPayNow.isHidden = true
+            self.labelPaymentType.isHidden = false
+            self.buttonPayNow.isHidden = true
         }
         if (request.paid == 1){
+            self.labelPaymentType.isHidden = true
+            self.buttonChangePayment.isHidden = true
             self.buttonPayNow.isHidden = false
         }
         

@@ -16,7 +16,7 @@ class YourTripsPassbookViewController: UIViewController {
     @IBOutlet private var underLineView: UIView!
     @IBOutlet private var tableViewList : UITableView!
     @IBOutlet private weak var viewUpcomming : UIView!
-    
+    var isFromTrips:Bool = false
     var isYourTripsSelected = true  // Boolean Handle Passbook and Yourtrips list
     
     var isFirstBlockSelected = true {
@@ -49,6 +49,7 @@ class YourTripsPassbookViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController?.isNavigationBarHidden = false
+        
     }
     
 //    override func viewWillAppear(_ animated: Bool) {
@@ -118,7 +119,8 @@ extension YourTripsPassbookViewController {
     private func animateUnderLine() {
         if self.underLineView != nil {
             UIView.animate(withDuration: 0.5) {
-                 self.underLineView.frame.origin.x = (selectedLanguage == .arabic ? !self.isFirstBlockSelected : self.isFirstBlockSelected) ? 0 : 0//(self.view.bounds.width/2)
+                let viewWidth = self.isFromTrips ? self.view.bounds.width/2 : 0.0
+                 self.underLineView.frame.origin.x = (selectedLanguage == .arabic ? !self.isFirstBlockSelected : self.isFirstBlockSelected) ? 0 : viewWidth//(self.view.bounds.width/2)
             }
         }
     }
