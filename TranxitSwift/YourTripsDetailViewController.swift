@@ -244,6 +244,9 @@ extension YourTripsDetailViewController {
             viewReciptView.onClickPaynow = { [unowned self]_ in
                  self.hideRecipt()
             }
+            viewReciptView.onDoneClick = { [unowned self]_ in
+                self.hideRecipt()
+            }
         }
         
     }
