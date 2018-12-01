@@ -103,6 +103,7 @@
         
         var currentLocation = Bind<LocationCoordinate>(defaultMapLocation)
         var isRateViewShowed:Bool = false
+        var isInvoiceShowed:Bool = false
         //var serviceSelectionView : ServiceSelectionView?
         var estimationFareView : RequestSelectionView?
         var couponView : CouponView?
@@ -220,6 +221,7 @@ extension HomeViewController {
     
     private func viewWillAppearCustom() {
         isRateViewShowed = false
+        isInvoiceShowed = false
         self.navigationController?.isNavigationBarHidden = true
         self.localize()
         self.getFavouriteLocationsFromLocal()

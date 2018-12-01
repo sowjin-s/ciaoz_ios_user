@@ -32,15 +32,15 @@ target 'TranxitUser' do
     pod 'Stripe'
     pod 'CreditCardForm'
 
-  target 'UserTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
-  target 'UserUITests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
+#  target 'UserTests' do
+#    inherit! :search_paths
+#    # Pods for testing
+#  end
+#
+#  target 'UserUITests' do
+#    inherit! :search_paths
+#    # Pods for testing
+#  end
   
   post_install do |installer|
       installer.pods_project.build_configurations.each do |config|

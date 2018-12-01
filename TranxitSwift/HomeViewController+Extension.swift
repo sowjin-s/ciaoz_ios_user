@@ -314,6 +314,7 @@ extension HomeViewController {
             
             self.invoiceView?.onClickPaynow = { tipsAmount in
                 print("Called",#function)
+                self.isInvoiceShowed = true
                 self.loader.isHidden = false
                 let requestObj = Request()
                 requestObj.request_id = request.id
@@ -323,6 +324,7 @@ extension HomeViewController {
                 self.presenter?.post(api: .payNow, data: requestObj.toData())
             }
             self.invoiceView?.onDoneClick = { onClick in
+                self.isInvoiceShowed = true
                 self.showRatingView(with: request)
             }
             self.invoiceView?.onClickChangePayment = { [weak self] completion in 
@@ -586,27 +588,48 @@ extension HomeViewController {
             riderStatus = .none
         case .completed:
             riderStatus = .none
-            if request.payment_mode == .CASH && request.paid == 0{
-              self.showInvoiceView(with: request)
-            }else if (request.payment_mode == .CASH && request.use_wallet == 1) && request.paid == 1{
-                if (!isRateViewShowed){
-                    self.showInvoiceView(with: request)
+            if request.payment_mode == .CARD {
+                if request.use_wallet == 1 {
+                    if request.paid == 0 {
+                        self.showInvoiceView(with: request)
+                    }else{
+                        if isInvoiceShowed {
+                            self.showRatingView(with: request)
+                        }else{
+                            self.showInvoiceView(with: request)
+                        }
+                    }
+                }else{
+                    if isInvoiceShowed {
+                        self.showRatingView(with: request)
+                    }else{
+                        self.showInvoiceView(with: request)
+                    }
+//                    if !isRateViewShowed {
+//                        self.showInvoiceView(with: request)
+//                    }else{
+//                        self.showRatingView(with: request)
+//
+//                    }
                 }
-            }else if (request.payment_mode == .CARD  && request.paid == 0){
-                self.showInvoiceView(with: request)
-            }else if (request.payment_mode == .CARD && request.use_wallet == 1) && request.paid == 1{
-                if (!isRateViewShowed){
-                    self.showInvoiceView(with: request)
-                }
-            }else if request.use_wallet == 1 && request.paid == 0{
-                self.showInvoiceView(with: request)
-            }else if request.use_wallet == 1 && request.paid == 1{
-                if (!isRateViewShowed){
-                    self.showInvoiceView(with: request)
-                }
-//                self.showInvoiceView(with: request)
             }else{
-                self.showRatingView(with: request)
+                if request.use_wallet == 1 {
+                    if request.paid == 0 {
+                        self.showInvoiceView(with: request)
+                    }else{
+                        if isInvoiceShowed  {
+                            self.showRatingView(with: request)
+                        }else{
+                            self.showInvoiceView(with: request)
+                        }
+                    }
+                }else{
+                    if isInvoiceShowed {
+                        self.showRatingView(with: request)
+                    }else{
+                        self.showInvoiceView(with: request)
+                    }
+                }
             }
            /* if request.paid == 1 && (!isRateViewShowed) {
                 self.showInvoiceView(with: request)

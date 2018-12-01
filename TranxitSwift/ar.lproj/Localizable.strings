@@ -30,6 +30,7 @@
 "We have the most friendly drivers who will go the extra mile for you."     =    "لدينا أكثر السائقين الصديقة الذين سوف تتقدموا خطوة لك.";
 "Welcome"     =    "أهلا بك";
 "Schedule"     =    "جدول";
+"schedule"     =    "جدول";
 "Drivers"     =    "السائقين";
 "Country"     =    "بلد";
 "Time Zone"     =    "وحدة زمنية";
@@ -180,7 +181,7 @@
 "Your wallet amount is"     =    "كمية محفظة الخاص بك هو";
 "Support"     =    "الدعم";
 "Our team persons will contact you soon!"     =    "والأشخاص فريقنا بالاتصال بك قريبا!";
-"English"     =    "الإنجليزية";
+"English"     =    "English";//"الإنجليزية";
 "Your wallet amount is"     =    "كمية محفظة الخاص بك هو";
 "Support"     =    "الدعم";
 "Our team persons will contact you soon!"     =    "والأشخاص فريقنا بالاتصال بك قريبا!";
@@ -209,7 +210,7 @@
 "Validity"     =    "صلاحية";
 "Paid"     =    "دفع";
 "No Coupons"     =    "لا كوبونات";
-"English"     =    "الإنجليزية";
+"English"     =    "English";//"الإنجليزية";
 "Spanish"     =    "الأسبانية";
 "Arabic" = "عربى";
 "Become a Driver"     =    "تصبح سائق";

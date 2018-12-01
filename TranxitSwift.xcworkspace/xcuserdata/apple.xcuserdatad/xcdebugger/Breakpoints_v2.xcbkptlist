@@ -9,14 +9,14 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TranxitSwift/HomeViewController+Extension.swift"
-            timestampString = "563782008.806363"
+            filePath = "TranxitSwift/InvoiceView.swift"
+            timestampString = "563723926.777604"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "192"
-            endingLineNumber = "192"
-            landmarkName = "showEstimationView(with:)"
-            landmarkType = "7">
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "paymentType"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -26,13 +26,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TranxitSwift/InvoiceView.swift"
-            timestampString = "563723926.777604"
+            timestampString = "565015305.39748"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
-            landmarkName = "paymentType"
-            landmarkType = "24">
+            startingLineNumber = "306"
+            endingLineNumber = "306"
+            landmarkName = "buttonTipsAction(sender:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
