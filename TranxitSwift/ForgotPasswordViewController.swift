@@ -37,9 +37,7 @@ class ForgotPasswordViewController: UIViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        self.viewNext.makeRoundedCorner()
-        self.viewScroll.frame = self.scrollView.bounds
-        self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.viewScroll.frame.height)
+//        self.setFrame()
     }
     
 }
@@ -56,10 +54,18 @@ extension ForgotPasswordViewController {
         self.viewNext.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.nextAction)))
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.backButtonClick))
         self.scrollView.addSubview(viewScroll)
+        self.scrollView.isDirectionalLockEnabled = true
+        self.setFrame()
         self.textFieldEmail.text = emailString
         if #available(iOS 11.0, *) {
             self.navigationItem.largeTitleDisplayMode = .never
         }
+    }
+    
+    private func setFrame() {
+        self.viewNext.makeRoundedCorner()
+        self.viewScroll.frame = self.scrollView.bounds
+        self.scrollView.contentSize = self.viewScroll.bounds.size
     }
     
     

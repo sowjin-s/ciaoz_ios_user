@@ -60,7 +60,9 @@ extension Presenter : PostPresenterInputProtocol {
 //MARK:- Implementation PostPresenterOutputProtocol
 
 extension Presenter : PostPresenterOutputProtocol {
-    
+    func sendHelpAPI(api: Base, data: Data) {
+        controller?.getHelp(api: api, data: PresenterProcessor.shared.getHelpAPI(data: data)!)
+    }
     func sendPromocodeList(api: Base, data: Data) {
         controller?.getPromocodeList(api: api, data: PresenterProcessor.shared.getPromocodes(data: data))
     }
@@ -119,6 +121,8 @@ extension Presenter : PostPresenterOutputProtocol {
     func sendWalletEntity(api: Base, data: Data) {
         controller?.getWalletEntity(api: api, data: PresenterProcessor.shared.getWalletEntity(data: data))
     }
+    
+    
 }
 
 

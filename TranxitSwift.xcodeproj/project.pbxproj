@@ -190,6 +190,8 @@
 		08FA70AC20E3E695009B060A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08FA70AB20E3E695009B060A /* Main.storyboard */; };
 		08FA91A120EA7C6700723B26 /* FirebaseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FA919F20EA7C6700723B26 /* FirebaseConstants.swift */; };
 		08FA91A220EA7C6700723B26 /* FirebaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FA91A020EA7C6700723B26 /* FirebaseHelper.swift */; };
+		180240D421C39026008DD9F3 /* LocationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180240D321C39026008DD9F3 /* LocationEntity.swift */; };
+		18D7C04121C11EB7009065ED /* HelpEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D7C04021C11EB7009065ED /* HelpEntity.swift */; };
 		345481F34FE8F4E422FE29BC /* Pods_TranxitUser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11262F3AD017B98534D5D64C /* Pods_TranxitUser.framework */; };
 		38492B362000F65E001830AD /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38492B352000F65E001830AD /* View.swift */; };
 		38492B382000F6A8001830AD /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38492B372000F6A8001830AD /* String.swift */; };
@@ -450,6 +452,8 @@
 		0B49CCFC0DC564068D0BC9C5 /* Pods-UserUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UserUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UserUITests/Pods-UserUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		11262F3AD017B98534D5D64C /* Pods_TranxitUser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TranxitUser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		125CF2125C22EBE6A0F5F76F /* Pods_UserUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UserUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		180240D321C39026008DD9F3 /* LocationEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationEntity.swift; sourceTree = "<group>"; };
+		18D7C04021C11EB7009065ED /* HelpEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpEntity.swift; sourceTree = "<group>"; };
 		38492B352000F65E001830AD /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		38492B372000F6A8001830AD /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		38492B392000F741001830AD /* JsonSerializing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonSerializing.swift; sourceTree = "<group>"; };
@@ -1516,6 +1520,7 @@
 			isa = PBXGroup;
 			children = (
 				081E9CF820BFFB6C004C6884 /* EstimateFareRequest.swift */,
+				18D7C04021C11EB7009065ED /* HelpEntity.swift */,
 				082D1B8420931B3D0000B7C8 /* Country.swift */,
 				082D1B8220931AB70000B7C8 /* ErrorLog.swift */,
 				082D1B80209318C30000B7C8 /* User.swift */,
@@ -1540,6 +1545,7 @@
 				08E49CEA2142686800FCD042 /* RequestModal.swift */,
 				085161D4214FE30E00EF474E /* PromocodeEntity.swift */,
 				08D752D821551E9900250E92 /* LanguageEntity.swift */,
+				180240D321C39026008DD9F3 /* LocationEntity.swift */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -1973,6 +1979,7 @@
 				889480211FECE717006AF5A9 /* Button.swift in Sources */,
 				08583BF6211C17DF00B5ABC0 /* Store.swift in Sources */,
 				08641D8F20A1B51C00AA0D1F /* CircularTransition.swift in Sources */,
+				18D7C04121C11EB7009065ED /* HelpEntity.swift in Sources */,
 				08E49CEB2142686800FCD042 /* RequestModal.swift in Sources */,
 				08D7CCBD213976DD0055C95D /* ChatPush.swift in Sources */,
 				083DA4B920D0FF5B00DD473E /* YourTripsDetailViewController.swift in Sources */,
@@ -2061,6 +2068,7 @@
 				082D1B892093287A0000B7C8 /* LaunchViewController.swift in Sources */,
 				082D1B8320931AB70000B7C8 /* ErrorLog.swift in Sources */,
 				086BAF60200778330087F15A /* Common.swift in Sources */,
+				180240D421C39026008DD9F3 /* LocationEntity.swift in Sources */,
 				883389541FE8EE81006B6C05 /* Interactor.swift in Sources */,
 				0826325E20AC6DA900EBC529 /* HomeViewController+Extension.swift in Sources */,
 				086C90132099F34A002CD9B1 /* SocialLoginViewController.swift in Sources */,

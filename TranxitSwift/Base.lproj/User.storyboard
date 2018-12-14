@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="ClanPro-Medium.otf">
+        <array key="clanpro_medium.otf">
             <string>ClanPro-Medium</string>
         </array>
-        <array key="ClanPro-NarrNews.otf">
+        <array key="clanpro_narrnews.otf">
             <string>ClanPro-NarrNews</string>
         </array>
     </customFonts>
@@ -396,7 +396,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZKs-CN-kmt">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZKs-CN-kmt">
                                 <rect key="frame" x="0.0" y="20" width="414" height="716"/>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yLG-XR-yuG">

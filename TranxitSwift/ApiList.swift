@@ -76,6 +76,7 @@ enum Base : String{
     case promocodes = "/api/user/promocodes_list"
     case updateLanguage = "/api/user/update/language"
     case versionCheck = "/api/user/checkversion"
+    case help = "/api/user/help"
     
     init(fromRawValue: String){
         self = Base(rawValue: fromRawValue) ?? .signUp

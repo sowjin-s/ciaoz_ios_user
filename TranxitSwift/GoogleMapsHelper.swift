@@ -45,13 +45,13 @@ class GoogleMapsHelper : NSObject {
     var locationManager : CLLocationManager?
     private var currentLocation : ((CLLocation)->Void)?
    
-    func getMapView(withDelegate delegate: GMSMapViewDelegate? = nil, in view : UIView, withPosition position :LocationCoordinate = defaultMapLocation, zoom : Float = 15) {
+    func getMapView(withDelegate delegate: GMSMapViewDelegate? = nil, in view : UIView, withPosition position :LocationCoordinate = defaultMapLocation, zoom : Float = 18) {
         
        mapView = GMSMapView(frame: view.frame)
        self.setMapStyle(to : mapView)
        mapView?.isMyLocationEnabled = true
        mapView?.delegate = delegate
-       mapView?.camera = GMSCameraPosition.camera(withTarget: position, zoom: 15)
+       mapView?.camera = GMSCameraPosition.camera(withTarget: position, zoom: 18)
        view.addSubview(mapView!)
     }
     
@@ -71,7 +71,7 @@ class GoogleMapsHelper : NSObject {
         CATransaction.begin()
         CATransaction.setValue(2, forKey: kCATransactionAnimationDuration)
         CATransaction.setCompletionBlock {
-            self.mapView?.animate(to: GMSCameraPosition.camera(withTarget: location, zoom: 15))
+            self.mapView?.animate(to: GMSCameraPosition.camera(withTarget: location, zoom: 18))
         }
         CATransaction.commit()
         self.mapView?.center = center  //  Getting current location marker to center point

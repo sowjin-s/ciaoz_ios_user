@@ -101,7 +101,7 @@ struct Constants {
     let selectService = "Select Service"
     let service = "Service"
     let more = "More"
-    let change = "change"
+    let change = "Change"
     let getPricing = "GET PRICING"
     let cancelRequest = "Cancel Request"
     let cancelRequestDescription = "Are you sure want to cancel the request?"
@@ -227,6 +227,12 @@ struct Constants {
     let balance = "Balance"
     let noDriversFound = "No Drivers found,\nSorry for the inconvenience"
     let newVersionAvailableMessage = "A new version of this App is available in the App Store"
+    let changePasswordMsg = "Password changed and please login with new password"
+    let MIN = "MIN"
+    let HOUR = "HOUR"
+    let DISTANCE = "DISTANCE"
+    let DISTANCEMIN = "DISTANCEMIN"
+    let DISTANCEHOUR = "DISTANCEHOUR"
 }
 
 
@@ -353,6 +359,8 @@ enum ServiceCalculator : String, Codable {
     case DISTANCEHOUR
     case NONE
 }
+
+
 
 enum Vibration : UInt {
     case weak = 1519

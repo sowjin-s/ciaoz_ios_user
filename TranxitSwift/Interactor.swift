@@ -81,7 +81,8 @@ extension Interactor : PostInteractorOutputProtocol {
         
         case .promocodes:
             self.presenter?.sendPromocodeList(api: api, data: response)
-            
+        case .help :
+            self.presenter?.sendHelpAPI(api: api, data: response)
         default :
             break
             

@@ -88,6 +88,11 @@ class PresenterProcessor {
         return data.getDecodedObject(from: PromoCodeList.self)?.promo_list ?? []
     }
     
+    // MARK:- Help
+    
+    func getHelpAPI(data : Data)->HelpEntity? {
+        return data.getDecodedObject(from: HelpEntity.self)
+    }
     
 }
 

@@ -67,6 +67,7 @@ extension HelpViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.backButtonClick))
         self.navigationItem.title = Constants.string.help.localize()
         self.setDesign()
+        self.presenter?.get(api: .help, parameters: nil)
         //self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false 
     }
     
@@ -121,3 +122,17 @@ extension HelpViewController : SFSafariViewControllerDelegate {
     }
 }
 
+
+extension HelpViewController:PostViewProtocol {
+    func onError(api: Base, message: String, statusCode code: Int) {
+        DispatchQueue.main.async {
+            showAlert(message: message, okHandler: nil, fromView: self)
+        }
+    }
+    
+    func getHelp(api: Base, data: HelpEntity) {
+        supportEmail = data.contact_email!
+        supportNumber = data.contact_number!
+    }
+    
+}

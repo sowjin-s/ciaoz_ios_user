@@ -129,6 +129,7 @@ extension InvoiceView {
     func intialLoads() {
         self.buttonPayNow.addTarget(self, action: #selector(self.buttonPaynowAction), for: .touchUpInside)
         self.buttonChangePayment.addTarget(self, action: #selector(self.buttonChangePaymentAction), for: .touchUpInside)
+        self.buttonChangePayment.setTitle(Constants.string.change.localize(), for: .normal)
         self.buttonTips.addTarget(self, action: #selector(self.buttonTipsAction(sender:)), for: .touchUpInside)
         self.tipsAmount = 0
         self.localize()
@@ -258,6 +259,8 @@ extension InvoiceView {
             self.buttonChangePayment.isHidden = true
             self.buttonPayNow.isHidden = false
         }
+        self.viewTips.isHidden = request.payment_mode == .CASH
+        
         
         
 //        self.buttonPayNow.isHidden = (request.payment_mode == .CASH && !isShowingRecipt)

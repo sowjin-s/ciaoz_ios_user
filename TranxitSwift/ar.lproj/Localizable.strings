@@ -26,7 +26,7 @@
 "OTP incorrect"     =    "مكتب المدعي العام غير صحيحة";
 "Current Password"     =    "كلمة السر الحالية";
 "Services to transport you where you need to go. A lot can happen, on our ride."     =    "خدمات لنقل لك حيث كنت في حاجة للذهاب. وهناك الكثير يمكن أن يحدث، على ركوب لنا.";
-"Take a ride whenever and wherever you want. Plan and Schedule for us to pick you up."     =    "تتخذ مطية كلما وحيثما تريد. الخطة والجدول الزمني بالنسبة لنا لpickyou تصل.";
+"Take a ride whenever and wherever you want. Plan and Schedule for us to pick you up."     =    "تتخذ مطيخذ جولة كلما وأينما تريد. خطة وجدول زمني لنا لنقلك";
 "We have the most friendly drivers who will go the extra mile for you."     =    "لدينا أكثر السائقين الصديقة الذين سوف تتقدموا خطوة لك.";
 "Welcome"     =    "أهلا بك";
 "Schedule"     =    "جدول";
@@ -84,7 +84,7 @@
 "Select Service"     =    "حدد خدمة";
 "Service"     =    "الخدمات";
 "More"     =    "أكثر من";
-"change"     =    "يتغيرون";
+"Change"     =    "يتغيرون";
 "GET PRICING"     =    "الحصول على التسعير";
 "Cancel Request"     =    "إلغاء الطلب";
 "Are you sure want to cancel the request?"     =    "هل أنت متأكد تريد إلغاء الطلب؟";
@@ -220,10 +220,13 @@
 "CASH" = "السيولة النقدية";
 "A new version of this App is available in the App Store" = "يتوفر إصدار جديد من هذا التطبيق في App Store";
 
+"Password changed and please login with new password" = "تم تغيير كلمة المرور ويرجى تسجيل الدخول باستخدام كلمة مرور جديدة";
 
-
-
-
+"MIN" = "دقيقة";
+"HOUR" = "ساعة";
+"DISTANCE" = "مسافه: بعد";
+"DISTANCEMIN" = "المسافة / دقيقة";
+"DISTANCEHOUR" = "المسافة / ساعة";
 
 
 

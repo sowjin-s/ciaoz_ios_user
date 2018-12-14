@@ -23,5 +23,7 @@ class Service : JSONSerializable {
     var pricing : EstimateFare?
     var calculator : ServiceCalculator?
     var promocode : PromocodeEntity?
+    var price : Int?
+    
 }
 

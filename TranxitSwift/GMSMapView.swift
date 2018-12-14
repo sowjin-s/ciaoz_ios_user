@@ -77,7 +77,8 @@ extension GMSMapView {
                     
                     let mapPath = try JSONDecoder().decode(MapPath.self, from: data!)
                      completion(mapPath)
-                    // print(route.routes?.first?.overview_polyline?.points)
+                    print("Routes === \(mapPath.routes!)")
+                     print(mapPath.routes?.first?.overview_polyline?.points)
                     
                 } catch let error {
                     

@@ -27,8 +27,8 @@ class ChangeResetPasswordController: UIViewController {
     
     var isChangePassword = true {
         didSet {
-            self.textFieldNewPassword.isEnabled = isChangePassword
-            self.textFieldConfirmPassword.isEnabled = isChangePassword
+//            self.textFieldNewPassword.isEnabled = isChangePassword
+//            self.textFieldConfirmPassword.isEnabled = isChangePassword
             self.labelDescription.isHidden = isChangePassword
         }
     }
@@ -103,6 +103,7 @@ extension ChangeResetPasswordController {
     private func localize(){
         
         self.textFieldOtpOrCurrentPassword.placeholder = (!isChangePassword ? Constants.string.enterOtp : Constants.string.enterCurrentPassword).localize()
+        self.textFieldOtpOrCurrentPassword.isSecureTextEntry = (!isChangePassword ? false : true)
         self.textFieldConfirmPassword.placeholder = Constants.string.ConfirmPassword.localize()
         self.textFieldNewPassword.placeholder = Constants.string.newPassword.localize()
         self.navigationItem.title = (isChangePassword ? Constants.string.changePassword : Constants.string.resetPassword).localize()
@@ -141,6 +142,23 @@ extension ChangeResetPasswordController {
             }
             return
         }
+        
+        guard let otpStr = self.textFieldOtpOrCurrentPassword.text,!otpStr.isEmpty else {
+            self.view.make(toast: Constants.string.enterOtp.localize()) {
+                self.textFieldConfirmPassword.becomeFirstResponder()
+            }
+            return
+        }
+        if let enterOTP = textFieldOtpOrCurrentPassword.text {
+            let isMatched = userDataObject?.otp == Int(enterOTP)
+            if (!isMatched) {
+                self.view.make(toast: Constants.string.otpIncorrect.localize()) {
+                    self.textFieldConfirmPassword.becomeFirstResponder()
+                }
+                return
+            }
+            
+        }
        
         if isChangePassword {
             self.userDataObject = UserDataResponse()
@@ -176,10 +194,14 @@ extension ChangeResetPasswordController : UITextFieldDelegate {
                 self.view.makeToast(Constants.string.otpIncorrect.localize(), point: CGPoint(x: self.view.frame.width/2, y: 100), title: nil, image: nil, completion: nil)
             }
             
-            self.textFieldNewPassword.isEnabled = isMatched
-            self.textFieldConfirmPassword.isEnabled = isMatched
+//            self.textFieldNewPassword.isEnabled = isMatched
+//            self.textFieldConfirmPassword.isEnabled = isMatched
         }
     }
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        return true
+    }
+    
 }
 
 //MARK:- PostViewProtocol
@@ -197,20 +219,40 @@ extension ChangeResetPasswordController : PostViewProtocol {
         
         if message != nil {
             DispatchQueue.main.async {
-                showAlert(message: message, okHandler: {
+                showAlert(message: Constants.string.changePasswordMsg.localize(), okHandler: {
                    
                     if self.isChangePassword {
-                        if let loginVC = Router.user.instantiateViewController(withIdentifier: Storyboard.Ids.EmailViewController) as? EmailViewController {
-                            loginVC.isHideLeftBarButton = true
-                            let navigationControllerVC = UINavigationController(rootViewController: loginVC)
-                            self.navigationController?.present(navigationControllerVC, animated: true, completion: nil)
-                        }
+//                        if let loginVC = Router.user.instantiateViewController(withIdentifier: Storyboard.Ids.EmailViewController) as? EmailViewController {
+//                            loginVC.isHideLeftBarButton = true
+//                            let navigationControllerVC = UINavigationController(rootViewController: loginVC)
+//                            self.navigationController?.present(navigationControllerVC, animated: true, completion: nil)
+//                        }
+                        self.forceLogout()
                     } else {
                         self.navigationController?.popToRootViewController(animated: true)
                     }
                     
                 }, fromView: self)
             }
+        }
+    }
+    
+    func forceLogout(with message : String? = nil) {
+        let user = User()
+        user.id = User.main.id
+        Webservice().retrieve(api: .logout, url: nil, data: user.toData(), imageData: nil, paramters: nil, type: .POST, completion: nil)
+        DispatchQueue.main.async { // stopping timer on unauthorized status
+            HomePageHelper.shared.stopListening()
+        }
+        clearUserDefaults()
+        UIApplication.shared.windows.last?.rootViewController?.popOrDismiss(animation: true)
+        let navigationController = UINavigationController(rootViewController: Router.user.instantiateViewController(withIdentifier: Storyboard.Ids.LaunchViewController))
+        navigationController.isNavigationBarHidden = true
+        
+        UIApplication.shared.windows.first?.rootViewController = navigationController
+        UIApplication.shared.windows.first?.makeKeyAndVisible()
+        if message != nil {
+            UIApplication.shared.keyWindow?.makeToast(message)
         }
     }
 }

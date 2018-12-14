@@ -570,6 +570,9 @@ extension HomeViewController {
             let minimumDate = Calendar.current.date(byAdding: dateComponents, to: now)
             let datePicker = DateTimePicker.create(minimumDate: minimumDate, maximumDate: maximumDate)
             datePicker.includeMonth = true
+            datePicker.cancelButtonTitle = Constants.string.Cancel.localize()
+            
+            datePicker.doneButtonTitle = Constants.string.Done.localize()
             datePicker.is12HourFormat = true
             datePicker.dateFormat = DateFormat.list.hhmmddMMMyyyy
             datePicker.highlightColor = .primary

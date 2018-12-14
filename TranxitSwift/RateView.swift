@@ -62,6 +62,9 @@ extension RateView {
         Common.setFont(to: labelCapacity)
         Common.setFont(to: labelCapacityString)
         Common.setFont(to: buttonDone, isTitle: true)
+        self.labelFare.textAlignment = selectedLanguage == .arabic ? .left : .right
+        self.labelBaseFare.textAlignment = selectedLanguage == .arabic ? .left : .right
+        self.labelFareType.textAlignment = selectedLanguage == .arabic ? .left : .right
     }
     
     // MARK:- Localize
@@ -89,8 +92,9 @@ extension RateView {
             }
         }
         self.labelBaseFare.text = String.removeNil(User.main.currency)+"\(Formatter.shared.limit(string: "\(values?.pricing?.base_price ?? 0)", maximumDecimal: 2))"
-        self.labelFare.text = String.removeNil(User.main.currency)+"\(Formatter.shared.limit(string: "\(values?.pricing?.estimated_fare ?? 0)", maximumDecimal: 2))" //"\(values?.pricing?.estimated_fare ?? 0)"
-        self.labelFareType.text = values?.calculator?.rawValue ?? "-"
+        self.labelFare.text = String.removeNil(User.main.currency)+"\(Formatter.shared.limit(string: "\(values?.price ?? 0)", maximumDecimal: 2))" //"\(values?.pricing?.estimated_fare ?? 0)"
+        
+        self.labelFareType.text = values?.calculator?.rawValue.localize() ?? "-"
         self.labelCapacity.text = "1 - \(values?.capacity ?? 0)"
         self.labelServiceName.text = values?.name?.uppercased()
         

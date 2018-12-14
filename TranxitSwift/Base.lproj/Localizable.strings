@@ -92,7 +92,7 @@
 "Select Service"                                                 ="Select Service";
 "Service"                                                        ="Service";
 "More"                                                           ="More";
-"change"                                                         ="change";
+"Change"                                                         ="Change";
 "GET PRICING"                                                    ="GET PRICING";
 "Cancel Request"                                                 ="Cancel Request";
 
@@ -235,4 +235,10 @@
 "A new version of this App is available in the App Store" = "A new version of this App is available in the App Store";
 
 "schedule"                                                       ="Schedule";
+"Password changed and please login with new password" = "Password changed and please login with new password";
+"MIN" = "Min";
+"HOUR" = "Hour";
+"DISTANCE" = "Distance";
+"DISTANCEMIN" = "Distance / Min";
+"DISTANCEHOUR" = "Distance / Hour";
 

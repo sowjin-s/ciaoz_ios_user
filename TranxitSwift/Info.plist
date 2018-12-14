@@ -85,9 +85,9 @@
 	<string>$(PRODUCT_DISPLAY_NAME) would like to access siri for voice booking.</string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>clanpro_book</string>
-		<string>clanpro_medium</string>
-		<string>clanpro_narrnews</string>
+		<string>clanpro_book.otf</string>
+		<string>clanpro_medium.otf</string>
+		<string>clanpro_narrnews.otf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>Launch</string>

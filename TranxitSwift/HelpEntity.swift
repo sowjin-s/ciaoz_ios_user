@@ -7,3 +7,11 @@
 //
 
 import Foundation
+
+struct HelpEntity : JSONSerializable {
+    
+    var contact_number : String?
+    var contact_email : String?
+    
+}
+

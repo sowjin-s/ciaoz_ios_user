@@ -301,6 +301,7 @@ extension HomeViewController {
     
     func showInvoiceView(with request : Request) {
         isRateViewShowed = false
+        self.isInvoiceShowed = true
         self.buttonSOS.isHidden = !(riderStatus == .pickedup)
         self.mapViewHelper?.mapView?.clear()
         if self.invoiceView == nil, let invoice = Bundle.main.loadNibNamed(XIB.Names.InvoiceView, owner: self, options: [:])?.first as? InvoiceView {
@@ -324,7 +325,7 @@ extension HomeViewController {
                 self.presenter?.post(api: .payNow, data: requestObj.toData())
             }
             self.invoiceView?.onDoneClick = { onClick in
-                self.isInvoiceShowed = true
+                
                 self.showRatingView(with: request)
             }
             self.invoiceView?.onClickChangePayment = { [weak self] completion in 
@@ -696,9 +697,12 @@ extension HomeViewController {
     
     func share(items : [Any]) {
         
+//        let activityController = UIActivityViewController(activityItems: items, applicationActivities: nil)
+//        activityController.setValue("Test", forKey: "Subject")
+//        self.present(activityController, animated: true, completion: nil)
         let activityController = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        activityController.popoverPresentationController?.sourceView = self.view
         self.present(activityController, animated: true, completion: nil)
-        
     }
     
     // MARK:- Cancel Current Ride
@@ -811,3 +815,4 @@ extension HomeViewController {
     
     
 }
+

@@ -152,7 +152,7 @@ extension LocationSelectionView : UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return indexPath.section == 0 ? (datasource.count>0 ? 0 : 60) : 40
+        return indexPath.section == 0 ? (datasource.count>0 ? 0 : 60) : 70
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -266,9 +266,23 @@ extension LocationSelectionView : UITableViewDataSource, UITableViewDelegate {
         } else  { // Predications
             
             if let tableCell = self.tableViewBottom.dequeueReusableCell(withIdentifier: XIB.Names.LocationTableViewCell, for: indexPath) as? LocationTableViewCell, datasource.count>indexPath.row{
-                
-                tableCell.textLabel?.attributedText = datasource[indexPath.row].attributedFullText
-                Common.setFont(to: tableCell.textLabel!)
+                tableCell.imageLocationPin.image = #imageLiteral(resourceName: "ic_location_pin")
+                let placesClient = GMSPlacesClient.shared()
+                placesClient.lookUpPlaceID(datasource[indexPath.row].placeID!, callback: { (place, error) -> Void in
+                    if let error = error {
+                        print("lookup place id query error: \(error.localizedDescription)")
+                        return
+                    }
+                    if let place = place {
+                        let formatAddress = place.formattedAddress
+                        let addressName = place.name
+                        let formatAddressString = formatAddress!.replacingOccurrences(of: "\(addressName), ", with: "", options: .literal, range: nil)
+                        tableCell.lblLocationTitle.text = addressName
+                        tableCell.lblLocationSubTitle.text = formatAddressString
+                    }
+                })
+                Common.setFont(to: tableCell.lblLocationTitle!)
+                Common.setFont(to: tableCell.lblLocationSubTitle!)
                 return tableCell
             }
             
@@ -277,7 +291,6 @@ extension LocationSelectionView : UITableViewDataSource, UITableViewDelegate {
         return UITableViewCell()
         
     }
-    
     
 }
 

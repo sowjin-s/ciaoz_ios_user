@@ -233,3 +233,10 @@
 "CARD" = "CARD";
 "CASH" = "CASH";
 "A new version of this App is available in the App Store" = "A new version of this App is available in the App Store";
+"Password changed and please login with new password" = "Password changed and please login with new password";
+
+"MIN" = "Min";
+"HOUR" = "Hour";
+"DISTANCE" = "Distance";
+"DISTANCEMIN" = "Distance / Min";
+"DISTANCEHOUR" = "Distance / Hour";

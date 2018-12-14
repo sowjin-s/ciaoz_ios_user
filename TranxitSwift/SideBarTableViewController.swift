@@ -165,7 +165,7 @@ extension SideBarTableViewController {
         case (0,6):
             self.push(to: Storyboard.Ids.HelpViewController)
         case (0,7):
-            (self.drawerController?.getViewController(for: .none)?.children.first as? HomeViewController)?.share(items: [baseUrl])
+            (self.drawerController?.getViewController(for: .none)?.children.first as? HomeViewController)?.share(items: ["\(AppName)", URL.init(string: baseUrl)!])
         case (0,8):
             Common.open(url: driverUrl)
         case (0,9):
