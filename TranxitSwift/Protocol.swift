@@ -205,3 +205,6 @@ extension PostViewProtocol {
 
 
 
+protocol RerouteDelegate: class {
+    func doReroute()
+}

@@ -16,6 +16,7 @@ class LocationSelectionView: UIView {
     @IBOutlet private weak var viewBack : UIView!
     @IBOutlet  weak var textFieldSource : UITextField!
     @IBOutlet  weak var textFieldDestination : UITextField!
+    
    // @IBOutlet private weak var viewSourceCancel : UIView!
     //@IBOutlet private weak var viewDestinationCancel : UIView!
   
@@ -135,6 +136,8 @@ extension LocationSelectionView {
         })
         
     }
+    
+   
     
 }
 

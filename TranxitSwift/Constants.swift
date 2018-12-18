@@ -8,9 +8,12 @@
 
 import UIKit
 import Foundation
+import GoogleMaps
 
 typealias ViewController = (UIViewController & PostViewProtocol)
 var presenterObject :PostPresenterInputProtocol?
+
+var polyLinePath = GMSPolyline()
 
 // MARK: - Constant Strings
 

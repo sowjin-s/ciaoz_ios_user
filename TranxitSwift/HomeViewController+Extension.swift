@@ -270,9 +270,10 @@ extension HomeViewController {
             rideStatus.show(with: .bottom, completion: nil)
         }
         // Change Provider Location 
-        if let latitude = request.provider?.latitude, let longitude = request.provider?.longitude {
-            self.moveProviderMarker(to: LocationCoordinate(latitude: latitude, longitude: longitude))
-        }
+//        if let latitude = request.provider?.latitude, let longitude = request.provider?.longitude {
+            self.getDataFromFirebase(providerID: (request.provider?.id)!)
+//            self.moveProviderMarker(to: LocationCoordinate(latitude: latitude, longitude: longitude))
+//        }
         self.buttonSOS.isHidden = !(request.status == .pickedup)
         self.floatyButton?.isHidden = request.status == .pickedup
         rideStatusView?.set(values: request)
@@ -325,7 +326,6 @@ extension HomeViewController {
                 self.presenter?.post(api: .payNow, data: requestObj.toData())
             }
             self.invoiceView?.onDoneClick = { onClick in
-                
                 self.showRatingView(with: request)
             }
             self.invoiceView?.onClickChangePayment = { [weak self] completion in 
@@ -570,7 +570,7 @@ extension HomeViewController {
                 self.sourceLocationDetail?.value = LocationDetail(sAddress,LocationCoordinate(latitude: sLattitude, longitude: sLongitude))
                 
                 DispatchQueue.main.async {
-                    self.drawPolyline()
+                    self.drawPolyline(isReroute: false)
                 }
             }
             

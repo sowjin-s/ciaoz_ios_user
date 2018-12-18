@@ -142,23 +142,24 @@ extension ChangeResetPasswordController {
             }
             return
         }
-        
-        guard let otpStr = self.textFieldOtpOrCurrentPassword.text,!otpStr.isEmpty else {
-            self.view.make(toast: Constants.string.enterOtp.localize()) {
-                self.textFieldConfirmPassword.becomeFirstResponder()
-            }
-            return
-        }
-        if let enterOTP = textFieldOtpOrCurrentPassword.text {
-            let isMatched = userDataObject?.otp == Int(enterOTP)
-            if (!isMatched) {
-                self.view.make(toast: Constants.string.otpIncorrect.localize()) {
+        if !isChangePassword {
+            guard let otpStr = self.textFieldOtpOrCurrentPassword.text,!otpStr.isEmpty else {
+                self.view.make(toast: Constants.string.enterOtp.localize()) {
                     self.textFieldConfirmPassword.becomeFirstResponder()
                 }
                 return
             }
-            
+            if let enterOTP = textFieldOtpOrCurrentPassword.text {
+                let isMatched = userDataObject?.otp == Int(enterOTP)
+                if (!isMatched) {
+                    self.view.make(toast: Constants.string.otpIncorrect.localize()) {
+                        self.textFieldConfirmPassword.becomeFirstResponder()
+                    }
+                    return
+                }
+            }
         }
+        
        
         if isChangePassword {
             self.userDataObject = UserDataResponse()

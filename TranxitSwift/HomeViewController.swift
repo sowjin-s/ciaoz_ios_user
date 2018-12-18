@@ -11,6 +11,8 @@
     import GoogleMaps
     import GooglePlaces
     import DateTimePicker
+    import Firebase
+    import MapKit
     //import IQKeyboardManagerSwift
     
     var riderStatus : RideStatus = .none // Provider Current Status
@@ -352,7 +354,7 @@ extension HomeViewController {
             if destinationLocationDetail == nil { // No Previous Location Avaliable
                 self.showLocationView()
             } else {
-                self.drawPolyline() // Draw polyline between source and destination
+                self.drawPolyline(isReroute: false) // Draw polyline between source and destination
                 self.getServicesList() // get Services
             }
             
@@ -450,7 +452,7 @@ extension HomeViewController {
                     self.sourceLocationDetail = address.source
                     self.destinationLocationDetail = address.destination
                    // print("\nselected-->>>>>",self.sourceLocationDetail?.value?.coordinate, self.destinationLocationDetail?.coordinate)
-                    self.drawPolyline() // Draw polyline between source and destination
+                    self.drawPolyline(isReroute: false) // Draw polyline between source and destination
                     if [RideStatus.accepted, .arrived, .pickedup, .started].contains(riderStatus) {
                         if let dAddress = address.destination?.address, let coordinate = address.destination?.coordinate {
                               self.updateLocation(with: (dAddress,coordinate))
@@ -491,14 +493,18 @@ extension HomeViewController {
         
         //MARK:- Draw Polyline
         
-        func drawPolyline() {
+        func drawPolyline(isReroute:Bool) {
             
             self.imageViewMarkerCenter.isHidden = true
-            if let sourceCoordinate = self.sourceLocationDetail?.value?.coordinate,
+            if var sourceCoordinate = self.sourceLocationDetail?.value?.coordinate,
                 let destinationCoordinate = self.destinationLocationDetail?.coordinate {  // Draw polyline from source to destination
                 self.mapViewHelper?.mapView?.clear()
                 self.sourceMarker.map = self.mapViewHelper?.mapView
                 self.destinationMarker.map = self.mapViewHelper?.mapView
+                if isReroute{
+                    var coordinate = CLLocationCoordinate2D(latitude: (currentLocation.value?.latitude)!, longitude: (currentLocation.value?.longitude)!)
+                    sourceCoordinate = coordinate
+                }
                 self.sourceMarker.position = sourceCoordinate
                 self.destinationMarker.position = destinationCoordinate
                 //self.selectionViewAction(in: self.viewSourceLocation)
@@ -603,7 +609,7 @@ extension HomeViewController {
             if self.isUserInteractingWithMap {
                 
                 func getUpdate(on location : CLLocationCoordinate2D, completion :@escaping ((LocationDetail)->Void)) {
-                    self.drawPolyline()
+                    self.drawPolyline(isReroute: false)
                     self.getServicesList()
                     self.mapViewHelper?.getPlaceAddress(from: location, on: { (locationDetail) in
                         completion(locationDetail)
@@ -628,12 +634,8 @@ extension HomeViewController {
                         }
                     }
                 }
-                
             }
             self.isMapInteracted(false)
-            
-          
-            
         }
         
         func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
@@ -717,7 +719,8 @@ extension HomeViewController {
                     }
                     if let pLatitude = request?.provider?.latitude, let pLongitude = request?.provider?.longitude {
                         DispatchQueue.main.async {
-                            self.moveProviderMarker(to: LocationCoordinate(latitude: pLatitude, longitude: pLongitude))
+//                            self.moveProviderMarker(to: LocationCoordinate(latitude: pLatitude, longitude: pLongitude))
+                            self.getDataFromFirebase(providerID: (request?.provider?.id)!)
                             // MARK:- Showing Provider ETA
                             let currentStatus = request?.status ?? .none
                             if [RideStatus.accepted, .started, .arrived].contains(currentStatus) {
@@ -754,6 +757,44 @@ extension HomeViewController {
             })
         }
         
+        func getDataFromFirebase(providerID:Int)  {
+            Database .database()
+                .reference()
+                .child("loc_p_\(providerID)").observe(.value, with: { (snapshot) in
+                    guard let dict = snapshot.value as? NSDictionary else {
+                        print("Error")
+                        return
+                    }
+                    var latDouble = 0.0 //for android sending any or double
+                    var longDouble = 0.0
+                    if let latitude = dict.value(forKey: "lat") as? Double {
+                        latDouble = Double(latitude)
+                    }else{
+                        let strLat = dict.value(forKey: "lat")
+                        latDouble = Double("\(strLat ?? 0.0)")!
+                    }
+                    if let longitude = dict.value(forKey: "lng") as? Double {
+                        longDouble = Double(longitude)
+                    }else{
+                        let strLong = dict.value(forKey: "lng")
+                        longDouble = Double("\(strLong ?? 0.0)")!
+                    }
+                    
+//                    if let pLatitude = latDouble, let pLongitude = longDouble {
+                        DispatchQueue.main.async {
+                            print("Moving \(latDouble) \(longDouble)")
+                            self.moveProviderMarker(to: LocationCoordinate(latitude: latDouble , longitude: longDouble ))
+                            if polyLinePath.path != nil {
+                                self.mapViewHelper?.checkPolyline(coordinate:  LocationCoordinate(latitude: latDouble , longitude: longDouble ))
+                            }
+                        }
+                
+                    drawpolylineCheck = {
+                        self.drawPolyline(isReroute: true)
+                    }
+//                    }
+                })
+        }
         
         // Get Services provided by Provider
         

@@ -260,7 +260,7 @@ extension InvoiceView {
             self.buttonPayNow.isHidden = false
         }
         self.viewTips.isHidden = request.payment_mode == .CASH
-        
+        self.viewTimeFare.isHidden = timeFare == 0
         
         
 //        self.buttonPayNow.isHidden = (request.payment_mode == .CASH && !isShowingRecipt)

@@ -35,15 +35,20 @@ private struct DurationObject : Decodable {
 
 extension GMSMapView {
     
+    
+    
     //MARK:- Call API for polygon points
     
     func drawPolygon(from source: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D){
         self.getGoogleResponse(between: source, to: destination) { (mapPath) in
             if let points = mapPath.routes?.first?.overview_polyline?.points {
+                
                 self.drawPath(with: points)
+               
             }
         }
     }
+    
     
     // MARK;- Get estimation between coordinates
     
@@ -74,7 +79,9 @@ extension GMSMapView {
                 }
                 
                 do {
-                    
+                    let parsedResult = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [String:AnyObject]
+                    print(parsedResult)
+
                     let mapPath = try JSONDecoder().decode(MapPath.self, from: data!)
                      completion(mapPath)
                     print("Routes === \(mapPath.routes!)")
@@ -99,6 +106,7 @@ extension GMSMapView {
         
             guard let path = GMSPath(fromEncodedPath: points) else { return }
             let polyline = GMSPolyline(path: path)
+            polyLinePath = polyline
             polyline.strokeWidth = 3.0
             polyline.strokeColor = .primary
             polyline.map = self
@@ -111,6 +119,6 @@ extension GMSMapView {
         
     }
     
-    
-    
 }
+
+

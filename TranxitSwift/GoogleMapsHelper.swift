@@ -13,6 +13,8 @@ import MapKit
 typealias LocationCoordinate = CLLocationCoordinate2D
 typealias LocationDetail = (address : String, coordinate :LocationCoordinate)
 
+var drawpolylineCheck : (()->())?
+
 private struct Place : Decodable {
     
     var results : [Address]?
@@ -150,6 +152,9 @@ extension GoogleMapsHelper: CLLocationManagerDelegate {
         if let location = locations.last {
           print("Location: \(location)")
           self.currentLocation?(location)
+            if polyLinePath.path != nil {
+                self.checkPolyline(coordinate: location.coordinate)
+            }
         }
         
     }
@@ -173,5 +178,16 @@ extension GoogleMapsHelper: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         locationManager?.stopUpdatingLocation()
         print("Error: \(error)")
+    }
+    func checkPolyline(coordinate: CLLocationCoordinate2D)  {
+        if GMSGeometryContainsLocation(coordinate, polyLinePath.path!, true)
+        {
+            print("=== true")
+        }
+        else
+        {
+//            drawpolylineCheck!()
+            print("=== false")
+        }
     }
 }
