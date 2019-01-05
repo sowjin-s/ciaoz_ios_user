@@ -12,7 +12,7 @@ class MakeJson {
     
     // MARK:- SignUp
     
-   class func signUp(loginBy : LoginType = .manual, email : String?, password : String?, socialId : String? = nil, firstName : String?, lastName : String?, mobile : Int?)->UserData {
+    class func signUp(loginBy : LoginType = .manual, email : String?, password : String?, socialId : String? = nil, firstName : String?, lastName : String?, mobile : Int?,referral_code:String?)->UserData {
         
         let userDataObject = UserData()
         userDataObject.device_id = UUID().uuidString
@@ -25,7 +25,7 @@ class MakeJson {
         userDataObject.mobile = mobile 
         userDataObject.password = password
         userDataObject.social_unique_id = socialId
-    
+        userDataObject.referral_code = referral_code
 //        var json = userDataObject.JSONRepresentation
 //
 //        if socialId == nil {

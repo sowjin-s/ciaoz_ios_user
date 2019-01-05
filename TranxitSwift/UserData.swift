@@ -27,7 +27,7 @@ class UserData : UserBase {
     var device_id : String?
     var otp : Int?
     var measurement : String?
-  
+    var referral_code:String?
 }
 
 class ForgotResponse : JSONSerializable {

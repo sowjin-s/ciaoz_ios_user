@@ -36,6 +36,7 @@ struct Storyboard {
     let AddCardViewController = "AddCardViewController"
     let SideBarTableViewController = "SideBarTableViewController"
     let LaunchNavigationController = "LaunchNavigationController"
+    let ReferalController = "ReferalController"
 }
 
 

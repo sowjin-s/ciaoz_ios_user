@@ -60,6 +60,16 @@ extension Presenter : PostPresenterInputProtocol {
 //MARK:- Implementation PostPresenterOutputProtocol
 
 extension Presenter : PostPresenterOutputProtocol {
+    
+    func sendReason(api: Base, data: Data) {
+        controller?.getReason(api: api, data: PresenterProcessor.shared.getReasonData(data: data)!)
+    }
+    
+    func sendSetting(api: Base, data: Data) {
+        controller?.getSettings(api: api, data: PresenterProcessor.shared.getSettings(data: data)!)
+    }
+    
+    
     func sendHelpAPI(api: Base, data: Data) {
         controller?.getHelp(api: api, data: PresenterProcessor.shared.getHelpAPI(data: data)!)
     }

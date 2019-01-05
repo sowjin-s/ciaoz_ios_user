@@ -94,6 +94,18 @@ class PresenterProcessor {
         return data.getDecodedObject(from: HelpEntity.self)
     }
     
+    // MARK:- Settings
+    
+    func getSettings(data : Data)->SettingsEntity? {
+        return data.getDecodedObject(from: SettingsEntity.self)
+    }
+    
+    // MARK:- Reason
+    
+    func getReasonData(data : Data)->[ReasonEntity]? {
+        return data.getDecodedObject(from: [ReasonEntity].self) ?? []
+    }
+    
 }
 
 

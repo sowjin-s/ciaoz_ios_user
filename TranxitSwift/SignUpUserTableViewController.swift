@@ -19,9 +19,13 @@ class SignUpUserTableViewController: UITableViewController {
     
     @IBOutlet var confirmPwdText: HoshiTextField!
     
-    //@IBOutlet var countryText: HoshiTextField!
+    @IBOutlet var countryText: HoshiTextField!
+    @IBOutlet var textFieldReferCode: HoshiTextField!
+    @IBOutlet var viewReferCode: UIView!
     
-   // @IBOutlet var timeZone: HoshiTextField!
+    @IBOutlet weak var countryImageView: UIImageView!
+    
+    // @IBOutlet var timeZone: HoshiTextField!
     
    // @IBOutlet var referralCodeText: HoshiTextField!
     
@@ -54,10 +58,11 @@ class SignUpUserTableViewController: UITableViewController {
     
     private var userInfo : UserData?
     private var accountKit : AKFAccountKit?
+    private var countryCode : String?
     private lazy var  loader = {
         return createActivityIndicator(UIApplication.shared.keyWindow ?? self.view)
     }()
-    
+    var isReferalEnable = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,6 +74,7 @@ class SignUpUserTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         localize()
         self.navigationController?.isNavigationBarHidden = false
+        self.presenter?.get(api: .settings, parameters: nil)
     }
     
     override func viewWillLayoutSubviews() {
@@ -103,6 +109,11 @@ extension SignUpUserTableViewController {
         Common.setFont(to: passwordText)
         Common.setFont(to: confirmPwdText)
         Common.setFont(to: phoneNumber)
+        if selectedLanguage == .arabic {
+            self.countryText.textAlignment = .left
+        }else{
+            self.countryText.textAlignment = .right
+        }
         
     }
     
@@ -116,7 +127,8 @@ extension SignUpUserTableViewController {
         self.confirmPwdText.placeholder = Constants.string.ConfirmPassword.localize()
         self.phoneNumber.placeholder = Constants.string.phoneNumber.localize()
         self.passwordText.placeholder = Constants.string.password.localize()
-//        self.countryText.placeholder = Constants.string.country.localize()
+        self.countryText.placeholder = Constants.string.country.localize()
+        self.textFieldReferCode.placeholder = Constants.string.referalCode.localize()
 //        self.timeZone.placeholder = Constants.string.timeZone.localize()
 //        self.referralCodeText.placeholder = Constants.string.referalCode.localize()
 //        self.businessLabel.text = Constants.string.business.localize()
@@ -142,7 +154,21 @@ extension SignUpUserTableViewController {
         self.passwordText.delegate = self
         self.confirmPwdText.delegate = self
         self.phoneNumber.delegate = self
+        self.countryText.delegate = self
         self.navigationController?.view.addSubview(nextView)
+        
+        if let countryCode = (Locale.current as NSLocale).object(forKey: .countryCode) as? String {
+            print(countryCode)
+            let country = Common.getCountries()
+            for eachCountry in country {
+                if countryCode == eachCountry.code {
+                    print(eachCountry.dial_code)
+                    countryText.text = eachCountry.dial_code
+                    let myImage = UIImage(named: "CountryPicker.bundle/\(eachCountry.code).png")
+                    countryImageView.image = myImage
+                }
+            }
+        }
     }
     
     
@@ -203,12 +229,12 @@ extension SignUpUserTableViewController {
             self.showToast(string: ErrorMessage.list.passwordDonotMatch.localize())
             return
         }
-        userInfo =  MakeJson.signUp(loginBy: .manual, email: email, password: password, socialId: nil, firstName: firstName, lastName: lastName, mobile: mobile)
-       /* guard let country = countryText.text, country.isEmpty else {
-            UIApplication.shared.keyWindow?.makeToast(ErrorMessage.list.enterCountry)
-            return
-        }
-        guard let timeZone = timeZone.text, timeZone.isEmpty else {
+        userInfo =  MakeJson.signUp(loginBy: .manual, email: email, password: password, socialId: nil, firstName: firstName, lastName: lastName, mobile: mobile, referral_code: isReferalEnable == 0 ? "" : self.textFieldReferCode.text!)
+//        guard let country = countryText.text, country.isEmpty else {
+//            UIApplication.shared.keyWindow?.makeToast(ErrorMessage.list.enterCountry)
+//            return
+//        }
+       /* guard let timeZone = timeZone.text, timeZone.isEmpty else {
             UIApplication.shared.keyWindow?.makeToast(ErrorMessage.list.enterTimezone)
             return
         }
@@ -221,7 +247,7 @@ extension SignUpUserTableViewController {
        // self.present(id: Storyboard.Ids.DrawerController, animation: true)
 
        self.accountKit = AKFAccountKit(responseType: .accessToken)
-       let akPhone = AKFPhoneNumber(countryCode: "in", phoneNumber: phoneNumber)
+        let akPhone = AKFPhoneNumber(countryCode: countryCode ?? "", phoneNumber: phoneNumber)
        let accountKitVC = accountKit?.viewControllerForPhoneLogin(with: akPhone, state: UUID().uuidString)
        accountKitVC!.enableSendToFacebook = true
        self.prepareLogin(viewcontroller: accountKitVC!)
@@ -289,6 +315,13 @@ extension SignUpUserTableViewController : PostViewProtocol {
                 self.emailtext.becomeFirstResponder()
             }
         }
+        if api == .phoneNubVerify {
+            self.phoneNumber.shake()
+            vibrate(with: .weak)
+            DispatchQueue.main.async {
+                self.phoneNumber.becomeFirstResponder()
+            }
+        }
         DispatchQueue.main.async {
             self.loader.isHidden = true
             self.showToast(string: message)
@@ -317,6 +350,11 @@ extension SignUpUserTableViewController : PostViewProtocol {
         } else {
             loader.isHideInMainThread(true)
         } */
+    }
+    
+    func getSettings(api: Base, data: SettingsEntity) {
+        self.viewReferCode.isHidden = data.referral?.referral == "0"
+        self.isReferalEnable = Int((data.referral?.referral)!)!
     }
     
    /* func getOath(api: Base, data: LoginRequest?) {
@@ -351,6 +389,8 @@ extension SignUpUserTableViewController : AKFViewControllerDelegate {
     func viewController(_ viewController: (UIViewController & AKFViewController)!, didFailWithError error: Error!) {
         viewController.dismiss(animated: true, completion: nil)
     }
+    
+    
     
     func viewController(_ viewController: (UIViewController & AKFViewController)!, didCompleteLoginWith accessToken: AKFAccessToken!, state: String!) {
         func dismiss() {
@@ -390,6 +430,30 @@ extension SignUpUserTableViewController : UITextFieldDelegate {
         return textField.resignFirstResponder()
     }
     
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if textField == countryText {
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "CountryListController") as! CountryListController
+            self.present(vc, animated: true, completion: nil)
+            vc.searchCountryCode = { code in
+                print(code)
+                self.countryCode = code
+                let country = Common.getCountries()
+                for eachCountry in country {
+                    if code == eachCountry.code {
+                        print(eachCountry.dial_code)
+                        self.countryText.text = eachCountry.dial_code
+                        let myImage = UIImage(named: "CountryPicker.bundle/\(eachCountry.code).png")
+                        self.countryImageView.image = myImage
+                    }
+                }
+                
+            }
+            
+            return false
+        }
+        return true
+    }
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         (textField as? HoshiTextField)?.borderActiveColor = .primary
         if textField == emailtext {
@@ -408,7 +472,33 @@ extension SignUpUserTableViewController : UITextFieldDelegate {
                 presenter?.post(api: .userVerify, data: user.toData())
             }
         }
+        
+        if textField == phoneNumber {
+            if phoneNumber.text != "" {
+                let user = User()
+                
+                let nub = "\(countryText.text!)\(phoneNumber.text!)"
+                user.mobile = nub
+                //user.id  = User.main.id
+                presenter?.post(api: .phoneNubVerify, data: user.toData())
+            }
+        }
+        
+        if textField == lastNameText {
+            if let countryCode = (Locale.current as NSLocale).object(forKey: .countryCode) as? String {
+                print(countryCode)
+                let country = Common.getCountries()
+                for eachCountry in country {
+                    if countryCode == eachCountry.code {
+                        print(eachCountry.dial_code)
+                        countryText.text = eachCountry.dial_code
+                    }
+                }
+            }
+        }
+        
     }
+    
     
 //    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 //

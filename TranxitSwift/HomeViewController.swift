@@ -89,6 +89,7 @@
         
         var sourceLocationDetail : Bind<LocationDetail>? = Bind<LocationDetail>(nil)
         
+        
         var destinationLocationDetail : LocationDetail? {  // Destination Location Detail
             didSet{
                 DispatchQueue.main.async {
@@ -132,6 +133,8 @@
         var timerETA : Timer?
         private var isScheduled = false // Flag For Schedule
         
+        var cancelReason = [ReasonEntity]()
+        
         //MARKERS
         
         var sourceMarker : GMSMarker = {
@@ -161,6 +164,7 @@
             super.viewWillAppear(animated)
             self.viewWillAppearCustom()
             //IQKeyboardManager.shared.enable = true
+            //self.invoiceView?.o
         }
         
         override func didReceiveMemoryWarning() {
@@ -205,6 +209,9 @@ extension HomeViewController {
                     self.textFieldSourceLocation.text = locationDetail?.address
                 }
             })
+        //Mark : destination pin
+        
+        
             self.viewDestinationLocation.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
             self.checkForProviderStatus()
             self.buttonSOS.isHidden = true
@@ -217,6 +224,14 @@ extension HomeViewController {
 //            NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHideRateView(info:)), name: .UIKeyboardWillHide, object: nil)      }
             self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
             self.presenter?.get(api: .getProfile, parameters: nil)
+        
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
+                self.presenter?.get(api: .cancelReason, parameters: nil)
+            })
+           //Mark :Hide it , android is not have
+            self.viewFavouriteSource.isHidden = true
+            self.viewFavouriteDestination.isHidden = true
+        
         }
     
     // MARK:- View Will appear
@@ -495,7 +510,7 @@ extension HomeViewController {
         
         func drawPolyline(isReroute:Bool) {
             
-            self.imageViewMarkerCenter.isHidden = true
+           // self.imageViewMarkerCenter.isHidden = true
             if var sourceCoordinate = self.sourceLocationDetail?.value?.coordinate,
                 let destinationCoordinate = self.destinationLocationDetail?.coordinate {  // Draw polyline from source to destination
                 self.mapViewHelper?.mapView?.clear()
@@ -624,7 +639,8 @@ extension HomeViewController {
                             self.sourceLocationDetail?.value = locationDetail
                         }
                     }
-                } else if self.selectedLocationView == self.viewDestinationLocation, self.destinationLocationDetail != nil {
+                }
+                else if self.selectedLocationView == self.viewDestinationLocation, self.destinationLocationDetail != nil {
                     
                     if let location = mapViewHelper?.mapView?.projection.coordinate(for: viewMapOuter.center) {
                         self.destinationLocationDetail?.coordinate = location
@@ -1016,7 +1032,13 @@ extension HomeViewController {
             storeInUserDefaults()
         }
         
+        func getReason(api: Base, data: [ReasonEntity]) {
+            self.cancelReason = data
+        }
+        
     }
     
+    
+
     
     

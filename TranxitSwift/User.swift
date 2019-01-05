@@ -30,8 +30,12 @@ class User : NSObject, NSCoding, JSONSerializable {
     var isCardAllowed : Bool
     var measurement : String?
     var stripeKey : String?
+    var referral_count :String?
+    var referral_unique_id : String?
+    var referral_total_text : String?
+    var referral_text : String?
     
-    init(id : Int?, accessToken : String?, firstName : String?, lastName : String?, mobile : String?, email : String?, currency : String?, picture : String?, refreshToken : String?, walletBalance : Float?, sos : String?, loginType : String?, dispatcherNumber : String?, isCardAllowed : Bool, isCashAllowed : Bool, measurement : String?, stripeKey : String?){
+    init(id : Int?, accessToken : String?, firstName : String?, lastName : String?, mobile : String?, email : String?, currency : String?, picture : String?, refreshToken : String?, walletBalance : Float?, sos : String?, loginType : String?, dispatcherNumber : String?, isCardAllowed : Bool, isCashAllowed : Bool, measurement : String?, stripeKey : String?,referral_count:String?,referral_unique_id:String?,referral_total_text:String?,referral_text:String?){
                 
         self.id = id
         self.accessToken = accessToken
@@ -50,11 +54,15 @@ class User : NSObject, NSCoding, JSONSerializable {
         self.isCashAllowed = isCashAllowed
         self.measurement = measurement
         self.stripeKey = stripeKey
+        self.referral_count = referral_count
+        self.referral_unique_id = referral_unique_id
+        self.referral_total_text = referral_total_text
+        self.referral_text = referral_text
     }
     
     convenience
     override init(){
-        self.init(id: nil, accessToken: nil, firstName : nil, lastName : nil, mobile : nil, email : nil, currency : nil, picture : nil, refreshToken : nil, walletBalance : nil, sos : nil, loginType : nil,dispatcherNumber : nil, isCardAllowed: false, isCashAllowed : true, measurement : "km", stripeKey : nil)
+        self.init(id: nil, accessToken: nil, firstName : nil, lastName : nil, mobile : nil, email : nil, currency : nil, picture : nil, refreshToken : nil, walletBalance : nil, sos : nil, loginType : nil,dispatcherNumber : nil, isCardAllowed: false, isCashAllowed : true, measurement : "km", stripeKey : nil,referral_count:nil,referral_unique_id:nil,referral_total_text:nil,referral_text:nil)
     }
     
     
@@ -77,8 +85,12 @@ class User : NSObject, NSCoding, JSONSerializable {
         let isCashAllowed = aDecoder.decodeBool(forKey: Keys.list.cash)
         let measurement = aDecoder.decodeObject(forKey: Keys.list.measurement) as? String
         let stripeKey = aDecoder.decodeObject(forKey: Keys.list.stripe) as? String
+        let referral_count = aDecoder.decodeObject(forKey: Keys.list.referral_count) as? String
+        let referral_unique_id = aDecoder.decodeObject(forKey: Keys.list.referral_unique_id) as? String
+        let referral_text = aDecoder.decodeObject(forKey: Keys.list.referral_text) as? String
+        let referral_total_text = aDecoder.decodeObject(forKey: Keys.list.referral_total_text) as? String
         
-        self.init(id: id, accessToken : accessToken, firstName : firstName, lastName : lastName, mobile : mobile, email: email, currency : currency, picture : picture, refreshToken : refreshToken, walletBalance : walletBalance, sos : sos,loginType : loginType, dispatcherNumber : dispatcherNumber, isCardAllowed : isCardAllowed, isCashAllowed : isCashAllowed, measurement : measurement, stripeKey : stripeKey)
+        self.init(id: id, accessToken : accessToken, firstName : firstName, lastName : lastName, mobile : mobile, email: email, currency : currency, picture : picture, refreshToken : refreshToken, walletBalance : walletBalance, sos : sos,loginType : loginType, dispatcherNumber : dispatcherNumber, isCardAllowed : isCardAllowed, isCashAllowed : isCashAllowed, measurement : measurement, stripeKey : stripeKey,referral_count:referral_count,referral_unique_id:referral_unique_id,referral_total_text:referral_total_text,referral_text:referral_text)
         
     }
     
@@ -102,6 +114,10 @@ class User : NSObject, NSCoding, JSONSerializable {
         aCoder.encode(self.isCardAllowed, forKey: Keys.list.card)
         aCoder.encode(self.measurement, forKey: Keys.list.measurement)
         aCoder.encode(self.stripeKey, forKey: Keys.list.stripe)
+        aCoder.encode(self.referral_unique_id , forKey: Keys.list.referral_unique_id)
+        aCoder.encode(self.referral_count , forKey: Keys.list.referral_count)
+        aCoder.encode(self.referral_text , forKey: Keys.list.referral_text)
+        aCoder.encode(self.referral_total_text , forKey: Keys.list.referral_total_text)
     }
     
     

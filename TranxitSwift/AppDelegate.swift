@@ -32,6 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        
         FirebaseApp.configure()
         self.appearence()
+        Database.database().isPersistenceEnabled = true
         self.google()
         self.IQKeyboard()
         self.siri()

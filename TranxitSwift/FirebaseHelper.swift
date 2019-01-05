@@ -130,7 +130,7 @@ extension FirebaseHelper {
     private func initializeDB(){
         if self.ref == nil {
             let db = Database.database()
-            db.isPersistenceEnabled = true
+           // db.isPersistenceEnabled = true
             self.ref = db.reference()
         }
     }

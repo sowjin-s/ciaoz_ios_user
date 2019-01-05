@@ -38,6 +38,8 @@ class InvoiceView: UIView {
     @IBOutlet private weak var buttonChangePayment : UIButton!
     @IBOutlet private weak var buttonPayNow : UIButton!
     @IBOutlet private weak var labelTitle : UILabel!
+    @IBOutlet private weak var labelWaitingString : UILabel!
+    @IBOutlet private weak var labelWaitingTime : UILabel!
     
     @IBOutlet private weak var viewDistanceFare : UIView!
     @IBOutlet private weak var viewTimeFare : UIView!
@@ -46,6 +48,7 @@ class InvoiceView: UIView {
     @IBOutlet private weak var viewDiscount : UIView!
     @IBOutlet private weak var viewDistance: UIView!
     @IBOutlet private weak var viewTips : UIView!
+    @IBOutlet private weak var viewWaitingTime : UIView!
     
     private var viewTipsXib : ViewTips?
     private var paymentType : PaymentType = .NONE { // Check Payment Type
@@ -168,6 +171,8 @@ extension InvoiceView {
         Common.setFont(to: labelWalletString)
         Common.setFont(to: labelPaymentType)
         Common.setFont(to: buttonChangePayment)
+        Common.setFont(to: labelWaitingTime)
+        Common.setFont(to: labelWaitingString)
     }
     
     
@@ -189,7 +194,7 @@ extension InvoiceView {
         self.labelWalletString.text = Constants.string.walletDeduction.localize()
         self.labelDiscountString.text = Constants.string.discount.localize()
         self.labelTitle.text = Constants.string.invoice.localize()
-        
+        self.labelWaitingString.text = Constants.string.WaitingTime.localize()
     }
     
     func set(request : Request) {
@@ -261,7 +266,8 @@ extension InvoiceView {
         }
         self.viewTips.isHidden = request.payment_mode == .CASH
         self.viewTimeFare.isHidden = timeFare == 0
-        
+        self.viewWaitingTime.isHidden = request.payment?.waiting_amount == 0
+        self.labelWaitingTime.text = "\(request.payment?.waiting_amount ?? 0)"
         
 //        self.buttonPayNow.isHidden = (request.payment_mode == .CASH && !isShowingRecipt)
     }

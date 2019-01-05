@@ -87,6 +87,11 @@ class Common {
         User.main.sos = profile?.sos
         User.main.dispatcherNumber = profile?.app_contact
         User.main.measurement = profile?.measurement
+        User.main.referral_unique_id = profile?.referral_unique_id
+        User.main.referral_count = profile?.referral_count
+        User.main.referral_total_text = profile?.referral_total_text
+        User.main.referral_text = profile?.referral_text
+        
         if let language = profile?.language {
             UserDefaults.standard.set(language.rawValue, forKey: Keys.list.language)
             setLocalization(language: language)

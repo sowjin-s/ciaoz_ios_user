@@ -33,4 +33,8 @@ struct Keys {
     let card = "card"
     let measurement = "measurement"
     let stripe = "stripe"
+    let referral_unique_id = "referral_unique_id"
+    let referral_count = "referral_count"
+    let referral_text = "referral_text"
+    let referral_total_text = "referral_total_text"
 }

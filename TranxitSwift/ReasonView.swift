@@ -9,13 +9,15 @@
 import UIKit
 
 class ReasonView: UIView, UIScrollViewDelegate {
-
+    
     @IBOutlet private weak var tableview : UITableView!
     @IBOutlet private weak var scrollView : UIScrollView!
     @IBOutlet private weak var labelTitle : UILabel!
-    //@IBOutlet private weak var buttonDone : UIButton!
+    @IBOutlet private weak var buttonClose : UIButton!
     
-    private let datasource = [Constants.string.planChanged,Constants.string.bookedAnotherCab,Constants.string.driverDelayed,Constants.string.lostWallet, Constants.string.othersIfAny]
+    var onClickClose : ((Bool)->Void)?
+    private var datasource:[String] = []
+    //[Constants.string.planChanged,Constants.string.bookedAnotherCab,Constants.string.driverDelayed,Constants.string.lostWallet, Constants.string.othersIfAny]
     private var selectedIndexPath = IndexPath(row: -1, section: -1)
     
     private var isShowTextView = false {
@@ -34,9 +36,9 @@ class ReasonView: UIView, UIScrollViewDelegate {
         self.isShowTextView = false
         Common.setFont(to: labelTitle)
         labelTitle.text = Constants.string.reasonForCancellation.localize()
-//        buttonDone.setTitle(Constants.string.Done.localize(), for: .normal)
-//        Common.setFont(to: buttonDone)
-//        buttonDone.addTarget(self, action: #selector(self.buttonDoneAction), for: .touchUpInside)
+        //        buttonDone.setTitle(Constants.string.Done.localize(), for: .normal)
+        //        Common.setFont(to: buttonDone)
+        buttonClose.addTarget(self, action: #selector(self.buttonCloseAction), for: .touchUpInside)
     }
 }
 
@@ -63,11 +65,18 @@ extension ReasonView {
         return view
     }
     
-//    // MARK:- Button Done Action
-//
-//    @IBAction private func buttonDoneAction() {
-//
-//    }
+    func set(value:[ReasonEntity])  {
+        for reason in value {
+            self.datasource.append(reason.reason!)
+        }
+        self.datasource.append(Constants.string.othersIfAny)
+        self.tableview.reloadInMainThread()
+    }
+    // MARK:- Button Done Action
+    
+    @IBAction private func buttonCloseAction() {
+        self.onClickClose!(true)
+    }
     
 }
 
@@ -84,7 +93,7 @@ extension ReasonView : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       return datasource.count
+        return datasource.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

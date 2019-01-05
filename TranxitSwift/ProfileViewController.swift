@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AccountKit
 
 class ProfileViewController: UITableViewController {
     
@@ -41,6 +42,8 @@ class ProfileViewController: UITableViewController {
     
     private var changedImage : UIImage?
     
+    private var accountKit : AKFAccountKit?
+    
     private lazy var loader : UIView = {
        
         return createActivityIndicator(UIScreen.main.focusedView ?? self.view)
@@ -64,6 +67,7 @@ class ProfileViewController: UITableViewController {
         self.navigationController?.isNavigationBarHidden = false
         //self.isEnabled = IQKeyboardManager.shared.enable
         //IQKeyboardManager.shared.enable = false
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -189,6 +193,28 @@ extension ProfileViewController {
             return
         }
         
+//        if self.textFieldPhone.text != User.main.mobile {
+//
+//            let user = User()
+//            user.mobile = self.textFieldPhone.text
+//            presenter?.post(api: .phoneNubVerify, data: user.toData())
+//
+//            self.accountKit = AKFAccountKit(responseType: .accessToken)
+//            let akPhone = AKFPhoneNumber(countryCode: "in", phoneNumber: "")
+//            let accountKitVC = accountKit?.viewControllerForPhoneLogin(with: akPhone, state: UUID().uuidString)
+//            accountKitVC!.enableSendToFacebook = true
+//            self.prepareLogin(viewcontroller: accountKitVC!)
+//            self.present(accountKitVC!, animated: true, completion: nil)
+//        }
+        if self.textFieldPhone.text != User.main.mobile {
+
+            let user = User()
+            user.mobile = self.textFieldPhone.text
+            presenter?.post(api: .phoneNubVerify, data: user.toData())
+        }
+        
+        
+        
 //        guard let email = self.textFieldEmail.text, email.count>0 else {
 //            UIScreen.main.focusedView?.make(toast: ErrorMessage.list.enterEmail.localize())
 //            return
@@ -256,6 +282,69 @@ extension ProfileViewController {
         
     }
     
+    private func prepareLogin(viewcontroller : UIViewController&AKFViewController) {
+        
+        viewcontroller.delegate = self as? AKFViewControllerDelegate
+        viewcontroller.uiManager = AKFSkinManager(skinType: .contemporary, primaryColor: .primary)
+        viewcontroller.uiManager.theme?()?.buttonTextColor = .secondary
+        
+    }
+    
+    @IBAction private func editBtnAction(sender: UIButton) {
+        
+       
+        self.accountKit = AKFAccountKit(responseType: .accessToken)
+        let akPhone = AKFPhoneNumber(countryCode: "in", phoneNumber: "")
+        let accountKitVC = accountKit?.viewControllerForPhoneLogin(with: akPhone, state: UUID().uuidString)
+        accountKitVC!.enableSendToFacebook = true
+        self.prepareLogin(viewcontroller: accountKitVC!)
+        self.present(accountKitVC!, animated: true, completion: nil)
+      
+    }
+    
+    
+}
+
+// MARK :- AKFAccoutKit delegate
+
+extension ProfileViewController : AKFViewControllerDelegate {
+    
+    func viewControllerDidCancel(_ viewController: (UIViewController & AKFViewController)!) {
+        viewController.dismiss(animated: true, completion: nil)
+    }
+    
+    func viewController(_ viewController: (UIViewController & AKFViewController)!, didFailWithError error: Error!) {
+        viewController.dismiss(animated: true, completion: nil)
+    }
+    
+    func viewController(_ viewController: (UIViewController & AKFViewController)!, didCompleteLoginWith accessToken: AKFAccessToken!, state: String!) {
+        print(state)
+        viewController.dismiss(animated: true) {
+            //self.loader.isHidden = false
+            //self.presenter?.post(api: .signUp, data: self.userSignUpInfo?.toData())
+            
+            AKFAccountKit(responseType: AKFResponseType.accessToken).requestAccount({ (account, error) in
+                
+                // self.accessToken = accessToken as! String
+                guard let number = account?.phoneNumber?.phoneNumber, let code = account?.phoneNumber?.countryCode, let numberInt = Int(code+number) else {
+                    self.onError(api: .addPromocode, message: .Empty, statusCode: 0)
+                    return
+                }
+                
+                print(numberInt)
+                
+                self.textFieldPhone.text = String(numberInt)
+                
+                
+            })
+            
+        }
+        
+    }
+    
+    
+    
+    
     
 }
 
@@ -297,7 +386,14 @@ extension ProfileViewController {
 extension ProfileViewController : PostViewProtocol {
     
     func onError(api: Base, message: String, statusCode code: Int) {
-        
+       
+        if api == .phoneNubVerify {
+            self.textFieldPhone.shake()
+            vibrate(with: .weak)
+            DispatchQueue.main.async {
+                self.textFieldPhone.resignFirstResponder()
+            }
+        }
         DispatchQueue.main.async {
            UIApplication.shared.keyWindow?.make(toast: message)
             self.loader.isHidden = true

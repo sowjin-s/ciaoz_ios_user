@@ -144,6 +144,8 @@ protocol PostPresenterOutputProtocol : class {
     func sendWalletEntity(api : Base, data: Data)
     func sendPromocodeList(api : Base, data: Data)
     func sendHelpAPI(api : Base, data: Data)
+    func sendSetting(api : Base, data: Data)
+    func sendReason(api : Base, data: Data)
 }
 
 
@@ -168,7 +170,8 @@ protocol PostViewProtocol : class {
     func getWalletEntity(api : Base, data : WalletEntity?)
     func getPromocodeList(api : Base, data : [PromocodeEntity])
     func getHelp(api : Base, data : HelpEntity)
-    
+    func getSettings(api : Base, data : SettingsEntity)
+    func getReason(api : Base, data : [ReasonEntity])
 }
 
 
@@ -200,11 +203,9 @@ extension PostViewProtocol {
     func getWalletEntity(api : Base, data : WalletEntity?) {return}
     func getPromocodeList(api : Base, data : [PromocodeEntity]) {return}
     func getHelp(api : Base, data : HelpEntity) {return}
-    
+    func getSettings(api : Base, data : SettingsEntity) {return}
+    func getReason(api : Base, data : [ReasonEntity]) {return}
 }
 
 
 
-protocol RerouteDelegate: class {
-    func doReroute()
-}

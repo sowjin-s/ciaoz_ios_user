@@ -505,6 +505,7 @@ extension HomeViewController {
             self.reasonView?.didSelectReason = { cancelReason in
                completion(cancelReason)
             }
+            reasonView.set(value: self.cancelReason)
             self.view.addSubview(reasonView)
             self.reasonView?.transform = CGAffineTransform(scaleX: 0.3, y: 0.3)
             UIView.animate(withDuration: 0.5,
@@ -515,6 +516,10 @@ extension HomeViewController {
                            animations: {
                            self.reasonView?.transform = .identity },
                            completion: { Void in()  })
+        }
+        self.reasonView?.onClickClose = { _ in
+            self.reasonView?.removeFromSuperview()
+            self.reasonView = nil
         }
         
     }
@@ -716,12 +721,12 @@ extension HomeViewController {
         cancelButton.titleColor = .primary
         let sureButton = PopupDialogButton(title: Constants.string.yes.localize()) {
             if isSendReason {
-//                self.showCancelReasonView(completion: { (reason) in  // Getting Cancellation Reason After Providing Accepting Ride
-//                    cancelRide(reason: reason)
-//                    self.removeCancelView()
-//                })
+                self.showCancelReasonView(completion: { (reason) in  // Getting Cancellation Reason After Providing Accepting Ride
+                cancelRide(reason: reason)
+                self.removeCancelView()
+            })
                 
-                cancelRide()
+//                cancelRide()
             } else {
                  cancelRide()
             }

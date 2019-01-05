@@ -31,6 +31,7 @@ target 'TranxitUser' do
     pod 'FacebookLogin'
     pod 'Stripe'
     pod 'CreditCardForm'
+    pod 'DropDown'
 
 #  target 'UserTests' do
 #    inherit! :search_paths

@@ -41,7 +41,7 @@
 "Drivers"                                                        ="Drivers";
 "Country"                                                        ="Country";
 "Time Zone"                                                      ="Time Zone";
-"Referral Code"                                                  ="Referral Code";
+"Referral Code (Optional)"                                       ="Referral Code (Optional)";
 "Business"                                                       ="Business";
 "name@example.com"                                               ="name@example.com";
 "Email"                                                          ="Email";

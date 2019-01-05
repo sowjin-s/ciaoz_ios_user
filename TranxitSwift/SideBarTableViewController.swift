@@ -18,7 +18,7 @@ class SideBarTableViewController: UITableViewController {
     
     // private let sideBarList = [Constants.string.payment,Constants.string.yourTrips,Constants.string.coupon,Constants.string.wallet,Constants.string.passbook,Constants.string.settings,Constants.string.help,Constants.string.share,Constants.string.inviteReferral,Constants.string.faqSupport,Constants.string.termsAndConditions,Constants.string.privacyPolicy,Constants.string.logout]
     
-    private let sideBarList = [Constants.string.payment,
+    private var sideBarList = [Constants.string.payment,
                                Constants.string.yourTrips,
                                Constants.string.offer,
                                Constants.string.wallet,
@@ -27,6 +27,7 @@ class SideBarTableViewController: UITableViewController {
                                Constants.string.help,
                                Constants.string.share,
                                Constants.string.becomeADriver,
+//                               Constants.string.invideFriends,
                                Constants.string.logout]
     
     private let cellId = "cellId"
@@ -36,6 +37,8 @@ class SideBarTableViewController: UITableViewController {
         return createActivityIndicator(self.view)
         
     }()
+    
+    private var isReferalEnable = 0
     
 
     override func viewDidLoad() {
@@ -55,6 +58,9 @@ class SideBarTableViewController: UITableViewController {
         self.setValues()
         self.navigationController?.isNavigationBarHidden = true
         //self.prefersStatusBarHidden = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+            self.presenter?.get(api: .settings, parameters: nil)
+        })
     }
     
     override func viewWillLayoutSubviews() {
@@ -169,12 +175,17 @@ extension SideBarTableViewController {
         case (0,8):
             Common.open(url: driverUrl)
         case (0,9):
+             if self.isReferalEnable == 1 {
+                self.push(to: Storyboard.Ids.ReferalController)
+             }else{
+                self.logout()
+             }
+        case (0,10):
             self.logout()
-            
+        
         default:
             break
         }
-        
     }
     
     private func push(to identifier : String) {
@@ -253,6 +264,20 @@ extension SideBarTableViewController : PostViewProtocol {
             self.loader.isHidden = true
             forceLogout()
         }
+    }
+    
+    func getSettings(api: Base, data: SettingsEntity) {
+        self.isReferalEnable = Int((data.referral?.referral)!)!
+        if self.isReferalEnable == 0 {
+            if let index = sideBarList.index(of: Constants.string.invideFriends) {
+                self.sideBarList.remove(at: index)
+            }
+        }else{
+            if !self.sideBarList.contains(Constants.string.invideFriends) {
+                self.sideBarList.insert(Constants.string.invideFriends, at: self.sideBarList.count-1)
+            }
+        }
+        self.tableView.reloadInMainThread()
     }
 }
 

@@ -27,6 +27,10 @@ class Profile : JSONSerializable {
     var stripe_secret_key : String?
     var stripe_publishable_key : String?
     var login_by:String?
+    var referral_count : String?
+    var referral_unique_id : String?
+    var referral_total_text : String?
+    var referral_text : String?
     
     required init(from decoder: Decoder) throws {
         
@@ -52,6 +56,11 @@ class Profile : JSONSerializable {
         stripe_secret_key = try? values.decode(String.self, forKey: .stripe_secret_key)
         stripe_publishable_key = try? values.decode(String.self, forKey: .stripe_publishable_key)
         login_by = try? values.decode(String.self, forKey: .login_by)
+        
+        referral_count = try? values.decode(String.self, forKey: .referral_count)
+        referral_unique_id = try? values.decode(String.self, forKey: .referral_unique_id)
+        referral_total_text = try? values.decode(String.self, forKey: .referral_total_text)
+        referral_text = try? values.decode(String.self, forKey: .referral_text)
     }
     
     init() {

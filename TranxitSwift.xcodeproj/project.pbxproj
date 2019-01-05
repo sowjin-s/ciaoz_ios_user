@@ -191,6 +191,7 @@
 		08FA91A120EA7C6700723B26 /* FirebaseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FA919F20EA7C6700723B26 /* FirebaseConstants.swift */; };
 		08FA91A220EA7C6700723B26 /* FirebaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FA91A020EA7C6700723B26 /* FirebaseHelper.swift */; };
 		180240D421C39026008DD9F3 /* LocationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180240D321C39026008DD9F3 /* LocationEntity.swift */; };
+		18B338E121DF6A6A006CEA74 /* ReasonEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B338E021DF6A6A006CEA74 /* ReasonEntity.swift */; };
 		18D7C04121C11EB7009065ED /* HelpEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D7C04021C11EB7009065ED /* HelpEntity.swift */; };
 		345481F34FE8F4E422FE29BC /* Pods_TranxitUser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11262F3AD017B98534D5D64C /* Pods_TranxitUser.framework */; };
 		38492B362000F65E001830AD /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38492B352000F65E001830AD /* View.swift */; };
@@ -212,6 +213,10 @@
 		889480211FECE717006AF5A9 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889480201FECE717006AF5A9 /* Button.swift */; };
 		8894E2241FE7D7980097B4B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8894E2231FE7D7980097B4B3 /* AppDelegate.swift */; };
 		8894E22B1FE7D7980097B4B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8894E22A1FE7D7980097B4B3 /* Assets.xcassets */; };
+		A2EA8DFE21D750B800949332 /* CountryListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EA8DFD21D750B800949332 /* CountryListController.swift */; };
+		A2EA8E0021D750C300949332 /* CountryListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EA8DFF21D750C300949332 /* CountryListCell.swift */; };
+		A2EA8E0221D7ACF400949332 /* ReferalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EA8E0121D7ACF300949332 /* ReferalController.swift */; };
+		A2EA8E0421D7AD7E00949332 /* SettingsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EA8E0321D7AD7E00949332 /* SettingsEntity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -453,6 +458,7 @@
 		11262F3AD017B98534D5D64C /* Pods_TranxitUser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TranxitUser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		125CF2125C22EBE6A0F5F76F /* Pods_UserUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UserUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		180240D321C39026008DD9F3 /* LocationEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationEntity.swift; sourceTree = "<group>"; };
+		18B338E021DF6A6A006CEA74 /* ReasonEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReasonEntity.swift; sourceTree = "<group>"; };
 		18D7C04021C11EB7009065ED /* HelpEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpEntity.swift; sourceTree = "<group>"; };
 		38492B352000F65E001830AD /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		38492B372000F6A8001830AD /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -477,6 +483,10 @@
 		8894E2231FE7D7980097B4B3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8894E22A1FE7D7980097B4B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9BAEE7F0D8C6A2D81D0196FD /* Pods_UserTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UserTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2EA8DFD21D750B800949332 /* CountryListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryListController.swift; sourceTree = "<group>"; };
+		A2EA8DFF21D750C300949332 /* CountryListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryListCell.swift; sourceTree = "<group>"; };
+		A2EA8E0121D7ACF300949332 /* ReferalController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReferalController.swift; sourceTree = "<group>"; };
+		A2EA8E0321D7AD7E00949332 /* SettingsEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsEntity.swift; sourceTree = "<group>"; };
 		B228E6C0E51E6A2FC44EC24E /* Pods-UserTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UserTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UserTests/Pods-UserTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C4044B64CC30575C2C21E08C /* Pods-TranxitUser.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TranxitUser.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TranxitUser/Pods-TranxitUser.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -524,6 +534,8 @@
 		0805BDBF209C503D00ACDC38 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
+				A2EA8DFF21D750C300949332 /* CountryListCell.swift */,
+				A2EA8DFD21D750B800949332 /* CountryListController.swift */,
 				0805BDC0209C504900ACDC38 /* SignUpUserTableViewController.swift */,
 			);
 			name = SignUp;
@@ -799,6 +811,7 @@
 		082D1B9420933C5B0000B7C8 /* User Storyboard */ = {
 			isa = PBXGroup;
 			children = (
+				A2EA8E0121D7ACF300949332 /* ReferalController.swift */,
 				08813E5B213D505F00830717 /* Config */,
 				0805BDBF209C503D00ACDC38 /* SignUp */,
 				086C90112099F32F002CD9B1 /* Social Login */,
@@ -1519,6 +1532,8 @@
 		8894E2571FE7D87B0097B4B3 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				18B338E021DF6A6A006CEA74 /* ReasonEntity.swift */,
+				A2EA8E0321D7AD7E00949332 /* SettingsEntity.swift */,
 				081E9CF820BFFB6C004C6884 /* EstimateFareRequest.swift */,
 				18D7C04021C11EB7009065ED /* HelpEntity.swift */,
 				082D1B8420931B3D0000B7C8 /* Country.swift */,
@@ -2001,6 +2016,7 @@
 				08E2B21B20C94F49002E689B /* Model.xcdatamodeld in Sources */,
 				08ECB216200DD0220008BF27 /* NavigationBar.swift in Sources */,
 				089B4F7520C03A0300DDEAF3 /* Request.swift in Sources */,
+				A2EA8E0021D750C300949332 /* CountryListCell.swift in Sources */,
 				8894801D1FECE1BD006AF5A9 /* Int.swift in Sources */,
 				083A59B520A454F800D64574 /* GooglePlacesHelper.swift in Sources */,
 				0802718720A2DBE200EAE8C8 /* LocationSelectionView.swift in Sources */,
@@ -2017,6 +2033,7 @@
 				081E9CF520BFCC0E004C6884 /* Service.swift in Sources */,
 				08CEB1372105AF2F00AC217A /* AddCardViewController.swift in Sources */,
 				0811B16A20E7AF6600B78323 /* ChatResponse.swift in Sources */,
+				A2EA8E0421D7AD7E00949332 /* SettingsEntity.swift in Sources */,
 				8871FBD51FE7DC8E002335D5 /* Protocol.swift in Sources */,
 				083A59AA20A434E000D64574 /* LocationTableViewCell.swift in Sources */,
 				082C441E20E7913A00A7C892 /* FloatyWindow.swift in Sources */,
@@ -2028,6 +2045,8 @@
 				8894801F1FECE2CA006AF5A9 /* Label.swift in Sources */,
 				082C441F20E7913A00A7C892 /* FloatyItem.swift in Sources */,
 				082F77D120A5AA2200D6474B /* ServiceSelectionCollectionViewCell.swift in Sources */,
+				18B338E121DF6A6A006CEA74 /* ReasonEntity.swift in Sources */,
+				A2EA8E0221D7ACF400949332 /* ReferalController.swift in Sources */,
 				085161D5214FE30E00EF474E /* PromocodeEntity.swift in Sources */,
 				08A8823620C6DEBE0088BC5A /* KeyboardHelper.swift in Sources */,
 				0811B17A20E7B2AD00B78323 /* ChatCell.swift in Sources */,
@@ -2046,6 +2065,7 @@
 				08A39DA220B5BB9300314935 /* RideStatusView.swift in Sources */,
 				08BE879D20DA429800876C93 /* Work+CoreDataProperties.swift in Sources */,
 				0811B16B20E7AF6600B78323 /* ChatEntity.swift in Sources */,
+				A2EA8DFE21D750B800949332 /* CountryListController.swift in Sources */,
 				08147B81208A23F600C5CFD3 /* Bundle.swift in Sources */,
 				08813E57213D146B00830717 /* UserDefaultsKeys.swift in Sources */,
 				8871FBD81FE7DD72002335D5 /* Constants.swift in Sources */,

@@ -34,7 +34,7 @@
 "Drivers"     =    "السائقين";
 "Country"     =    "بلد";
 "Time Zone"     =    "وحدة زمنية";
-"Referral Code"     =    "كود الإحالة";
+"Referral Code (Optional)"     =    "إحالة قانون (اختياري)";
 "Business"     =    "اعمال";
 "name@example.com"     =    "name@example.com";
 "Email"     =    "البريد الإلكتروني";
@@ -228,9 +228,12 @@
 "DISTANCEMIN" = "المسافة / دقيقة";
 "DISTANCEHOUR" = "المسافة / ساعة";
 
+ "Waiting Time"    = "وقت الانتظار";
+"Invite Friends" = "ادعو أصدقاء";
+"Your Referral Code" = "قانون الإحالة الخاص بك";
 
-
-
+"Hey check this app" = "يا تحقق من هذا التطبيق";
+"Install this app with referral code" = "تثبيت هذا التطبيق مع رمز الإحالة";
 
 
 

@@ -54,7 +54,7 @@ struct Constants {
     let drivers = "Drivers"
     let country = "Country"
     let timeZone = "Time Zone"
-    let referalCode = "Referral Code"
+    let referalCode = "Referral Code (Optional)"
     let business = "Business"
     let emailPlaceHolder = "name@example.com"
     let email = "Email"
@@ -236,6 +236,14 @@ struct Constants {
     let DISTANCE = "DISTANCE"
     let DISTANCEMIN = "DISTANCEMIN"
     let DISTANCEHOUR = "DISTANCEHOUR"
+    
+    let WaitingTime = "Waiting Time"
+    let invideFriends = "Invite Friends"
+    let referHeading = "Your Referral Code"
+    
+    //Referral
+    let referalMessage = "Hey check this app \(AppName)"
+    let installMessage = "Install this app with referral code"
 }
 
 
