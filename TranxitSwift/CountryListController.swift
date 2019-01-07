@@ -128,8 +128,13 @@ extension CountryListController:UISearchBarDelegate {
         self.countryListTbl.reloadData()
     }
     
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+    func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         searchActive = true
+        return true
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+       // searchActive = true
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
