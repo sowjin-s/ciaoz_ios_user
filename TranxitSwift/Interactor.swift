@@ -87,6 +87,14 @@ extension Interactor : PostInteractorOutputProtocol {
             self.presenter?.sendSetting(api: api, data: response)
         case .cancelReason:
             self.presenter?.sendReason(api: api, data: response)
+        case .getDisputeList:
+            self.presenter?.sendDisputeList(api: api, data: response)
+        case .postDispute , .lostItem:
+            self.presenter?.sendDispute(api: api, data: response)
+        case .extendTrip :
+            self.presenter?.sendExtendTrip(api: api, data: response)
+        case .notificationManager:
+            self.presenter?.sendNotificationList(api: api, data: response)
             
         default :
             break

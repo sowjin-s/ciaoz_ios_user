@@ -217,6 +217,15 @@
 		A2EA8E0021D750C300949332 /* CountryListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EA8DFF21D750C300949332 /* CountryListCell.swift */; };
 		A2EA8E0221D7ACF400949332 /* ReferalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EA8E0121D7ACF300949332 /* ReferalController.swift */; };
 		A2EA8E0421D7AD7E00949332 /* SettingsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EA8E0321D7AD7E00949332 /* SettingsEntity.swift */; };
+		C650B49621EC5A99005F81AF /* ExtendTrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = C650B49521EC5A99005F81AF /* ExtendTrip.swift */; };
+		C6901A3D21E9BE4F00CC65E9 /* DisputeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6901A3C21E9BE4F00CC65E9 /* DisputeList.swift */; };
+		C6DE271D21EC985A009D4B6C /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DE271B21EC9843009D4B6C /* NotificationTableViewCell.swift */; };
+		C6DE271E21EC985A009D4B6C /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DE271C21EC9859009D4B6C /* NotificationsViewController.swift */; };
+		C6DE272021EC98AB009D4B6C /* NotificationManagerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DE271F21EC98AA009D4B6C /* NotificationManagerModel.swift */; };
+		C6EBAA8321EA2026007E2ADA /* DisputeLostItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6EBAA8121EA2021007E2ADA /* DisputeLostItemView.xib */; };
+		C6EBAA8421EA2026007E2ADA /* DisputeLostItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EBAA8221EA2026007E2ADA /* DisputeLostItemView.swift */; };
+		C6EBAA8721EA2161007E2ADA /* DisputeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EBAA8521EA2161007E2ADA /* DisputeCell.swift */; };
+		C6EBAA8821EA2161007E2ADA /* DisputeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6EBAA8621EA2161007E2ADA /* DisputeCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -489,6 +498,15 @@
 		A2EA8E0321D7AD7E00949332 /* SettingsEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsEntity.swift; sourceTree = "<group>"; };
 		B228E6C0E51E6A2FC44EC24E /* Pods-UserTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UserTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UserTests/Pods-UserTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C4044B64CC30575C2C21E08C /* Pods-TranxitUser.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TranxitUser.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TranxitUser/Pods-TranxitUser.debug.xcconfig"; sourceTree = "<group>"; };
+		C650B49521EC5A99005F81AF /* ExtendTrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendTrip.swift; sourceTree = "<group>"; };
+		C6901A3C21E9BE4F00CC65E9 /* DisputeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisputeList.swift; sourceTree = "<group>"; };
+		C6DE271B21EC9843009D4B6C /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
+		C6DE271C21EC9859009D4B6C /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
+		C6DE271F21EC98AA009D4B6C /* NotificationManagerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManagerModel.swift; sourceTree = "<group>"; };
+		C6EBAA8121EA2021007E2ADA /* DisputeLostItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DisputeLostItemView.xib; sourceTree = "<group>"; };
+		C6EBAA8221EA2026007E2ADA /* DisputeLostItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisputeLostItemView.swift; sourceTree = "<group>"; };
+		C6EBAA8521EA2161007E2ADA /* DisputeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisputeCell.swift; sourceTree = "<group>"; };
+		C6EBAA8621EA2161007E2ADA /* DisputeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DisputeCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -917,8 +935,12 @@
 		083617CA20B714BF009C9658 /* YourTrips */ = {
 			isa = PBXGroup;
 			children = (
+				C6EBAA8221EA2026007E2ADA /* DisputeLostItemView.swift */,
+				C6EBAA8121EA2021007E2ADA /* DisputeLostItemView.xib */,
 				083617CC20B714CD009C9658 /* YourTripCell.swift */,
 				083617CB20B714CD009C9658 /* YourTripCell.xib */,
+				C6EBAA8521EA2161007E2ADA /* DisputeCell.swift */,
+				C6EBAA8621EA2161007E2ADA /* DisputeCell.xib */,
 			);
 			name = YourTrips;
 			sourceTree = "<group>";
@@ -1195,6 +1217,8 @@
 		08B7DC70209A1487002CF17A /* Main StoryBoard */ = {
 			isa = PBXGroup;
 			children = (
+				C6DE271C21EC9859009D4B6C /* NotificationsViewController.swift */,
+				C6DE271B21EC9843009D4B6C /* NotificationTableViewCell.swift */,
 				082C442420E7AE0200A7C892 /* Chat  */,
 				0875010E20D7F1EF00CFA858 /* OfflineBooking */,
 				083DA4B520D0FD2100DD473E /* YourTrips Detail */,
@@ -1532,6 +1556,7 @@
 		8894E2571FE7D87B0097B4B3 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				C6DE271F21EC98AA009D4B6C /* NotificationManagerModel.swift */,
 				18B338E021DF6A6A006CEA74 /* ReasonEntity.swift */,
 				A2EA8E0321D7AD7E00949332 /* SettingsEntity.swift */,
 				081E9CF820BFFB6C004C6884 /* EstimateFareRequest.swift */,
@@ -1561,6 +1586,8 @@
 				085161D4214FE30E00EF474E /* PromocodeEntity.swift */,
 				08D752D821551E9900250E92 /* LanguageEntity.swift */,
 				180240D321C39026008DD9F3 /* LocationEntity.swift */,
+				C6901A3C21E9BE4F00CC65E9 /* DisputeList.swift */,
+				C650B49521EC5A99005F81AF /* ExtendTrip.swift */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -1776,6 +1803,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6EBAA8821EA2161007E2ADA /* DisputeCell.xib in Resources */,
 				08EA70CD2147D18E00079908 /* TipsView.xib in Resources */,
 				08FA708A20E3CAA3009B060A /* User.storyboard in Resources */,
 				080FB9D920BC452B008C23F5 /* AccountKitStrings.bundle in Resources */,
@@ -1798,6 +1826,7 @@
 				0865456721620A3500BF546D /* PassbookWalletTransaction.xib in Resources */,
 				0823428A20AD775A0055DDF8 /* LoaderView.xib in Resources */,
 				0811B17720E7B2AD00B78323 /* ImageCellReciever.xib in Resources */,
+				C6EBAA8321EA2026007E2ADA /* DisputeLostItemView.xib in Resources */,
 				082F77CD20A5A13900D6474B /* ServiceSelectionView.xib in Resources */,
 				08E9675E20D2C1B80077DB4F /* RateView.xib in Resources */,
 				083617BD20B6C756009C9658 /* RatingView.xib in Resources */,
@@ -1968,6 +1997,7 @@
 				8871FBDD1FE7DDDF002335D5 /* ApiList.swift in Sources */,
 				08F595E42076462A00369048 /* UIView+Blur.swift in Sources */,
 				080855A020AB2A2E00E081D2 /* GMSMapView.swift in Sources */,
+				C6EBAA8721EA2161007E2ADA /* DisputeCell.swift in Sources */,
 				082D1B7F2093159A0000B7C8 /* HoshiTextField.swift in Sources */,
 				083617D020B71AAE009C9658 /* CouponViewController.swift in Sources */,
 				086545652162062100BF546D /* PassbookWalletTableViewCell.swift in Sources */,
@@ -1989,6 +2019,7 @@
 				084182B5200F508900527D0D /* TableView.swift in Sources */,
 				08C9E90E20D244F7002928EA /* Rating.swift in Sources */,
 				082C442620E7AE0E00A7C892 /* SingleChatController.swift in Sources */,
+				C6EBAA8421EA2026007E2ADA /* DisputeLostItemView.swift in Sources */,
 				084BB94B2094401D00EFD493 /* EmailViewController.swift in Sources */,
 				086BAF5C200777890087F15A /* Global.swift in Sources */,
 				889480211FECE717006AF5A9 /* Button.swift in Sources */,
@@ -2006,6 +2037,7 @@
 				08CEA1AB2073B47F00553DE2 /* Application.swift in Sources */,
 				38492B362000F65E001830AD /* View.swift in Sources */,
 				08E2B21E20C950FD002E689B /* CoreDataHelper.swift in Sources */,
+				C6DE271E21EC985A009D4B6C /* NotificationsViewController.swift in Sources */,
 				08B7DC72209A14A1002CF17A /* HomeViewController.swift in Sources */,
 				883389501FE8E3DC006B6C05 /* WebService.swift in Sources */,
 				083617CE20B714CE009C9658 /* YourTripCell.swift in Sources */,
@@ -2027,6 +2059,7 @@
 				083617BF20B6E3C6009C9658 /* WalletViewController.swift in Sources */,
 				08F2B6B920123D2000CAB24E /* Cache.swift in Sources */,
 				089B4F7B20C116D600DDEAF3 /* Payment.swift in Sources */,
+				C6901A3D21E9BE4F00CC65E9 /* DisputeList.swift in Sources */,
 				0809321820A067EF00B88318 /* LoginRequest.swift in Sources */,
 				08B73D0420947C5C00B60F74 /* PasswordViewController.swift in Sources */,
 				085161D2214FB32900EF474E /* CouponCollectionViewCell.swift in Sources */,
@@ -2042,6 +2075,7 @@
 				08F595E32076462A00369048 /* UIAplication+RLT.swift in Sources */,
 				089B4F7720C10FD600DDEAF3 /* HomePageHelper.swift in Sources */,
 				086BAF6420078E220087F15A /* ViewController.swift in Sources */,
+				C650B49621EC5A99005F81AF /* ExtendTrip.swift in Sources */,
 				8894801F1FECE2CA006AF5A9 /* Label.swift in Sources */,
 				082C441F20E7913A00A7C892 /* FloatyItem.swift in Sources */,
 				082F77D120A5AA2200D6474B /* ServiceSelectionCollectionViewCell.swift in Sources */,
@@ -2090,6 +2124,7 @@
 				086BAF60200778330087F15A /* Common.swift in Sources */,
 				180240D421C39026008DD9F3 /* LocationEntity.swift in Sources */,
 				883389541FE8EE81006B6C05 /* Interactor.swift in Sources */,
+				C6DE272021EC98AB009D4B6C /* NotificationManagerModel.swift in Sources */,
 				0826325E20AC6DA900EBC529 /* HomeViewController+Extension.swift in Sources */,
 				086C90132099F34A002CD9B1 /* SocialLoginViewController.swift in Sources */,
 				082D1B81209318C30000B7C8 /* User.swift in Sources */,
@@ -2113,6 +2148,7 @@
 				085C6FF420C194B000C13A74 /* Rate.swift in Sources */,
 				08DF19C82006221B00B83AE3 /* AppData.swift in Sources */,
 				0805BDC3209C54F900ACDC38 /* ProfileViewController.swift in Sources */,
+				C6DE271D21EC985A009D4B6C /* NotificationTableViewCell.swift in Sources */,
 				085161CA214FA31B00EF474E /* CouponView.swift in Sources */,
 				0823428820AD774C0055DDF8 /* LoaderView.swift in Sources */,
 				08B7DC75209A14E0002CF17A /* SideBarTableViewController.swift in Sources */,

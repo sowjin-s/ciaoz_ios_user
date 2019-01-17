@@ -30,7 +30,7 @@
         @IBOutlet weak private var viewDestinationLocation : UIView!
         @IBOutlet weak private var viewAddress : UIView!
         @IBOutlet weak var viewAddressOuter : UIView!
-        @IBOutlet weak private var textFieldSourceLocation : UITextField!
+        @IBOutlet weak var textFieldSourceLocation : UITextField!
         @IBOutlet weak private var textFieldDestinationLocation : UITextField!
         @IBOutlet weak private var imageViewMarkerCenter : UIImageView!
         @IBOutlet weak private var imageViewSideBar : UIImageView!
@@ -38,6 +38,8 @@
         @IBOutlet weak private var viewHomeLocation : UIView!
         @IBOutlet weak private var viewWorkLocation : UIView!
         @IBOutlet weak var viewLocationButtons : UIStackView!
+        
+        @IBOutlet weak var buttonWithoutDest:UIButton! //not used
         
         @IBOutlet var constraint : NSLayoutConstraint!
         
@@ -125,6 +127,8 @@
         var floatyButton : Floaty?
         var reasonView : ReasonView?
         
+        var withoutDest:Bool = false
+        
         lazy var loader  : UIView = {
             return createActivityIndicator(self.view)
         }()
@@ -132,6 +136,7 @@
         var currentRequestId = 0
         var timerETA : Timer?
         private var isScheduled = false // Flag For Schedule
+        var isTapDone:Bool = false
         
         var cancelReason = [ReasonEntity]()
         
@@ -206,7 +211,13 @@ extension HomeViewController {
 //                }
                 DispatchQueue.main.async {
                     self.isSourceFavourited = false // reset favourite location on change
-                    self.textFieldSourceLocation.text = locationDetail?.address
+                    if riderStatus == .pickedup {
+                        self.textFieldSourceLocation.text = Constants.string.destinationChange.localize()
+                        self.textFieldSourceLocation.textColor = .lightGray
+                    }else{
+                        self.textFieldSourceLocation.text = locationDetail?.address
+                        self.textFieldSourceLocation.textColor = .black
+                    }
                 }
             })
         //Mark : destination pin
@@ -231,7 +242,7 @@ extension HomeViewController {
            //Mark :Hide it , android is not have
             self.viewFavouriteSource.isHidden = true
             self.viewFavouriteDestination.isHidden = true
-        
+//            self.buttonWithoutDest.addTarget(self, action: #selector(tapWithoutDest), for: .touchUpInside)
         }
     
     // MARK:- View Will appear
@@ -276,6 +287,7 @@ extension HomeViewController {
             
             self.textFieldSourceLocation.placeholder = Constants.string.source.localize()
             self.textFieldDestinationLocation.placeholder = Constants.string.destination.localize()
+//            self.buttonWithoutDest.setTitle(Constants.string.withoutDest, for: .normal)
             
         }
         
@@ -285,6 +297,9 @@ extension HomeViewController {
             
             Common.setFont(to: textFieldSourceLocation)
             Common.setFont(to: textFieldDestinationLocation)
+//            Common.setFont(to: buttonWithoutDest)
+//            Common.setFont(to: buttonWithoutDest, isTitle: true, size: 17)
+//            buttonWithoutDest.titleLabel?.textColor = .primary
         }
         
         // MARK:- Add Mapview
@@ -306,7 +321,38 @@ extension HomeViewController {
             self.currentLocation.value = location.coordinate
         })
     }
+    
+//    @objc func tapWithoutDest() {
+//        self.getServicesList()
+//        withoutDest = true
+//    }
+    
+    
+    func showRideNowWithoutDest(with source : [Service]) {
+       
         
+        if self.rideNowView == nil {
+            
+            self.rideNowView = Bundle.main.loadNibNamed(XIB.Names.RideNowView, owner: self, options: [:])?.first as? RideNowView
+            self.rideNowView?.frame = CGRect(origin: CGPoint(x: 0, y: self.view.frame.height-self.rideNowView!.frame.height), size: CGSize(width: self.view.frame.width, height: self.rideNowView!.frame.height))
+            self.rideNowView?.clipsToBounds = false
+            self.rideNowView?.show(with: .bottom, completion: nil)
+            self.view.addSubview(self.rideNowView!)
+            self.isOnBooking = true
+            self.rideNowView?.onClickProceed = { [weak self] service in
+                self?.showEstimationView(with: service)
+            }
+            self.rideNowView?.onClickService = { [weak self] service in
+                guard let self = self else {return}
+                self.sourceMarker.snippet = service?.pricing?.time
+                self.mapViewHelper?.mapView?.selectedMarker = (service?.pricing?.time) == nil ? nil : self.sourceMarker
+            }
+           
+        }
+        self.rideNowView?.setAddress(source: currentLocation.value!, destination: currentLocation.value!)
+        self.rideNowView?.set(source: source)
+    }
+    
         // MARK:- Observer
         
        @objc private func observer(notification : Notification) {
@@ -371,6 +417,7 @@ extension HomeViewController {
             } else {
                 self.drawPolyline(isReroute: false) // Draw polyline between source and destination
                 self.getServicesList() // get Services
+//                self.withoutDest = false
             }
             
         }
@@ -470,11 +517,21 @@ extension HomeViewController {
                     self.drawPolyline(isReroute: false) // Draw polyline between source and destination
                     if [RideStatus.accepted, .arrived, .pickedup, .started].contains(riderStatus) {
                         if let dAddress = address.destination?.address, let coordinate = address.destination?.coordinate {
-                              self.updateLocation(with: (dAddress,coordinate))
+                            if coordinate.latitude != 0 && coordinate.longitude != 0 {
+                                if riderStatus == .pickedup {
+                                    showAlert(message: Constants.string.locationChange.localize(), okHandler: {
+                                        self.extendTrip(requestID: self.currentRequestId, dLat: coordinate.latitude, dLong: coordinate.longitude, address: dAddress)
+                                    }, cancelHandler: {
+                                        
+                                    }, fromView: self)
+                                }
+                            }
+                            self.updateLocation(with: (dAddress,coordinate))
                         }
                     } else {
                         self.removeUnnecessaryView(with: .cancelled) // Remove services or ride now if previously open
                         self.getServicesList() // get Services
+//                        self.withoutDest = false
                     }
                 }
                 self.view.addSubview(locationView)
@@ -556,7 +613,6 @@ extension HomeViewController {
         
         @IBAction private func sideMenuAction(){
             
-            
             if self.isOnBooking { // If User is on Ride Selection remove all view and make it to default
                self.clearAllView()
                 print("ViewAddressOuter ", #function)
@@ -626,6 +682,7 @@ extension HomeViewController {
                 func getUpdate(on location : CLLocationCoordinate2D, completion :@escaping ((LocationDetail)->Void)) {
                     self.drawPolyline(isReroute: false)
                     self.getServicesList()
+//                    self.withoutDest = false
                     self.mapViewHelper?.getPlaceAddress(from: location, on: { (locationDetail) in
                         completion(locationDetail)
                     })
@@ -646,7 +703,16 @@ extension HomeViewController {
                         self.destinationLocationDetail?.coordinate = location
                         getUpdate(on: location) { (locationDetail) in
                             self.destinationLocationDetail = locationDetail
-                            self.updateLocation(with: locationDetail) // Update Request Destination Location
+                            if riderStatus == .pickedup {
+                                showAlert(message: Constants.string.locationChange.localize(), okHandler: {
+                                    
+                                    self.extendTrip(requestID: self.currentRequestId, dLat: locationDetail.coordinate.latitude, dLong: locationDetail.coordinate.longitude, address: locationDetail.address)
+                                }, cancelHandler: {
+                                    
+                                }, fromView: self)
+                            }else{
+                                self.updateLocation(with: locationDetail) // Update Request Destination Location
+                            }
                         }
                     }
                 }
@@ -676,7 +742,7 @@ extension HomeViewController {
                     self.sourceMarker.map = nil
                     self.imageViewMarkerCenter.tintColor = .secondary
                     self.imageViewMarkerCenter.image = #imageLiteral(resourceName: "sourcePin").withRenderingMode(.alwaysTemplate)
-                    self.imageViewMarkerCenter.isHidden = false
+                    self.imageViewMarkerCenter.isHidden = true // false
                     //                if let location = mapViewHelper?.mapView?.projection.coordinate(for: viewMapOuter.center) {
                     //                    self.sourceLocationDetail?.value?.coordinate = location
                     //                    self.mapViewHelper?.getPlaceAddress(from: location, on: { (locationDetail) in
@@ -693,7 +759,7 @@ extension HomeViewController {
                     self.destinationMarker.map = nil
                     self.imageViewMarkerCenter.tintColor = .primary
                     self.imageViewMarkerCenter.image = #imageLiteral(resourceName: "destinationPin").withRenderingMode(.alwaysTemplate)
-                    self.imageViewMarkerCenter.isHidden = false
+                    self.imageViewMarkerCenter.isHidden = true//false
                     //                if let location = mapViewHelper?.mapView?.projection.coordinate(for: viewMapOuter.center) {
                     //                    self.destinationLocationDetail?.coordinate = location
                     //                    self.mapViewHelper?.getPlaceAddress(from: location, on: { (locationDetail) in
@@ -710,6 +776,15 @@ extension HomeViewController {
             //            self.imageViewMarkerCenter.isHidden = true
             //        }
             
+        }
+        
+        func extendTrip(requestID:Int,dLat:Double,dLong:Double,address:String) {
+            var extendTrip = ExtendTrip()
+            extendTrip.request_id = requestID
+            extendTrip.latitude = dLat
+            extendTrip.longitude = dLong
+            extendTrip.address = address
+            self.presenter?.post(api: .extendTrip, data: extendTrip.toData())
         }
         
     }
@@ -818,11 +893,15 @@ extension HomeViewController {
             if self.sourceLocationDetail?.value != nil, self.destinationLocationDetail != nil, riderStatus == .none || riderStatus == .searching { // Get Services only if location Available
                 self.presenter?.get(api: .servicesList, parameters: nil)
             }
+            //without destination
+//            if self.withoutDest {
+//                self.presenter?.get(api: .servicesList, parameters: nil)
+//            }
         }
         
         // Get Estimate Fare
         
-        func getEstimateFareFor(serviceId : Int) {
+        func getEstimateFareFor(serviceId : Int,isWODest:Bool) {
             
             DispatchQueue.global(qos: .userInteractive).async {
                 
@@ -971,7 +1050,12 @@ extension HomeViewController {
             
             if api == .servicesList {
                 DispatchQueue.main.async {  // Show Services
-                    self.showRideNowView(with: data)
+//                    if self.withoutDest {
+//                        self.showRideNowWithoutDest(with: data)
+//                    }else{
+                        self.showRideNowView(with: data)
+//                    }
+                    
                 }
             }
             
@@ -983,10 +1067,18 @@ extension HomeViewController {
             print(data?.request_id ?? 0)
             if api == .sendRequest {
                 self.success(api: api, message: data?.message)
+                
                 self.currentRequestId = data?.request_id ?? 0
                 self.checkForProviderStatus()
-                DispatchQueue.main.async {
-                    self.showLoaderView(with: self.currentRequestId)
+                
+                if data?.message == Constants.string.scheduleReqMsg {
+                    UIApplication.shared.keyWindow?.makeToast(Constants.string.rideCreated.localize())
+                    clearAllView()
+                    self.removeLoaderView()
+                }else{
+                    DispatchQueue.main.async {
+                        self.showLoaderView(with: self.currentRequestId)
+                    }
                 }
             }
         }
@@ -1034,6 +1126,10 @@ extension HomeViewController {
         
         func getReason(api: Base, data: [ReasonEntity]) {
             self.cancelReason = data
+        }
+        
+        func getExtendTrip(api: Base, data: ExtendTrip) {
+            print(data)
         }
         
     }

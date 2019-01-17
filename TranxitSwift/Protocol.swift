@@ -146,6 +146,11 @@ protocol PostPresenterOutputProtocol : class {
     func sendHelpAPI(api : Base, data: Data)
     func sendSetting(api : Base, data: Data)
     func sendReason(api : Base, data: Data)
+    func sendDisputeList(api : Base, data: Data)
+    func sendDispute(api : Base, data: Data)
+    func sendLostItem(api : Base, data: Data)
+    func sendExtendTrip(api : Base, data: Data)
+    func sendNotificationList(api : Base, data : Data)
 }
 
 
@@ -172,6 +177,10 @@ protocol PostViewProtocol : class {
     func getHelp(api : Base, data : HelpEntity)
     func getSettings(api : Base, data : SettingsEntity)
     func getReason(api : Base, data : [ReasonEntity])
+    func getDisputeList(api : Base, data : [DisputeList])
+    func getDispute(api : Base, data : DisputeList)
+    func getExtendTrip(api : Base, data : ExtendTrip)
+    func getNotificationsMangerList(api : Base, data : [NotificationManagerModel]?)
 }
 
 
@@ -205,6 +214,10 @@ extension PostViewProtocol {
     func getHelp(api : Base, data : HelpEntity) {return}
     func getSettings(api : Base, data : SettingsEntity) {return}
     func getReason(api : Base, data : [ReasonEntity]) {return}
+    func getDisputeList(api : Base, data : [DisputeList]) {return}
+    func getDispute(api : Base, data : DisputeList) {return}
+    func getExtendTrip(api : Base, data : ExtendTrip) {return}
+    func getNotificationsMangerList(api : Base, data : [NotificationManagerModel]?){return}
 }
 
 

@@ -217,6 +217,9 @@ extension PaymentViewController {
     
     @available(iOS 11.0, *)
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        if indexPath.section == 0 {
+            return UISwipeActionsConfiguration(actions: [])
+        }
        return self.swipeAction(at: indexPath)
     }
 }

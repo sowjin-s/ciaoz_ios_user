@@ -40,6 +40,8 @@ class InvoiceView: UIView {
     @IBOutlet private weak var labelTitle : UILabel!
     @IBOutlet private weak var labelWaitingString : UILabel!
     @IBOutlet private weak var labelWaitingTime : UILabel!
+    @IBOutlet private weak var labelTollChargeString : UILabel!
+    @IBOutlet private weak var labelTollCharge : UILabel!
     
     @IBOutlet private weak var viewDistanceFare : UIView!
     @IBOutlet private weak var viewTimeFare : UIView!
@@ -49,6 +51,10 @@ class InvoiceView: UIView {
     @IBOutlet private weak var viewDistance: UIView!
     @IBOutlet private weak var viewTips : UIView!
     @IBOutlet private weak var viewWaitingTime : UIView!
+    @IBOutlet private weak var viewTollCharge : UIView!
+    @IBOutlet private weak var viewToPay : UIView!
+    
+    var request : Request?
     
     private var viewTipsXib : ViewTips?
     private var paymentType : PaymentType = .NONE { // Check Payment Type
@@ -173,6 +179,8 @@ extension InvoiceView {
         Common.setFont(to: buttonChangePayment)
         Common.setFont(to: labelWaitingTime)
         Common.setFont(to: labelWaitingString)
+        Common.setFont(to: labelTollCharge)
+        Common.setFont(to: labelTollChargeString)
     }
     
     
@@ -195,10 +203,12 @@ extension InvoiceView {
         self.labelDiscountString.text = Constants.string.discount.localize()
         self.labelTitle.text = Constants.string.invoice.localize()
         self.labelWaitingString.text = Constants.string.WaitingTime.localize()
+        self.labelTollChargeString.text = Constants.string.tollCharge.localize()
     }
     
     func set(request : Request) {
-        if (isShowingRecipt || request.paid == 1) {
+        self.request = request
+        if (isShowingRecipt || request.paid == 1 || request.payment_mode == .CASH) {
             self.buttonPayNow.setTitle(Constants.string.Done.localize(), for: .normal)
         }else{
             self.buttonPayNow.setTitle(Constants.string.paynow.localize(), for: .normal)
@@ -244,6 +254,8 @@ extension InvoiceView {
         setAmount(to: self.labelTax, with: request.payment?.tax)
         setAmount(to: self.labelWallet, with: request.payment?.wallet)
         setAmount(to: self.labelDiscount, with: request.payment?.discount)
+        setAmount(to: self.labelWaitingTime, with: request.payment?.waiting_amount)
+        setAmount(to: self.labelTollCharge, with: request.payment?.toll_charge)
         self.total = request.payment?.total ?? 0
         if self.tipsAmount == 0 {
             self.tipsAmount = request.payment?.tips ?? 0
@@ -255,7 +267,7 @@ extension InvoiceView {
         }
         if (request.payment_mode == .CASH && !isShowingRecipt) && (request.paid == 0){
             self.labelPaymentType.isHidden = false
-            self.buttonPayNow.isHidden = true
+            self.buttonPayNow.isHidden = false //true
         }else{
             self.buttonPayNow.isHidden = false
         }
@@ -267,8 +279,8 @@ extension InvoiceView {
         self.viewTips.isHidden = request.payment_mode == .CASH
         self.viewTimeFare.isHidden = timeFare == 0
         self.viewWaitingTime.isHidden = request.payment?.waiting_amount == 0
-        self.labelWaitingTime.text = "\(request.payment?.waiting_amount ?? 0)"
-        
+        self.viewTollCharge.isHidden = request.payment?.toll_charge == 0
+        self.viewToPay.isHidden = request.payment?.payable == 0
 //        self.buttonPayNow.isHidden = (request.payment_mode == .CASH && !isShowingRecipt)
     }
     
@@ -280,6 +292,10 @@ extension InvoiceView {
     
     @IBAction private func buttonPaynowAction() {
         if buttonPayNow.titleLabel?.text == Constants.string.Done{
+            if request?.paid == 0 {
+                self.makeToast(Constants.string.confirmPayment.localize(), duration: 1.0, position: .center)
+                return
+            }
             self.onDoneClick?(true)
         }else{
             self.onClickPaynow?(self.tipsAmount)

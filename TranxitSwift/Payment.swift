@@ -30,6 +30,7 @@ struct Payment : JSONSerializable {
     let hour : Float?
     let tips : Float?
     let waiting_amount : Float?
+    let toll_charge : Float?
 }
 
 

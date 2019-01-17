@@ -236,8 +236,17 @@
 "Install this app with referral code" = "تثبيت هذا التطبيق مع رمز الإحالة";
 
 
+"Dispute" = "خلاف";
+"Lost Items"   =   "المواد المفقودة";
 
-
+"Please confirm payment" = "يرجى تأكيد الدفع";
+"Ride Created Successfully" = "ركوب يخلق بنجاح";
+"Want to change destination?" = "تريد تغيير الوجهة؟";
+"Notification Manager" = "مدير الإخطار";
+"Update Ride? \n If you update your destination your fare may change" =  "تحديث ركوب؟ \n إذا قمت بتحديث وجهتك ، فقد تتغير أجرة سفرك";
+"Your Dispute already created" = "النزاع الخاص بك بالفعل";
+"Please enter your comments" = "يرجى إدخال تعليقاتك";
+"Please choose dispute type" = "يرجى اختيار نوع النزاع";
 
 
 

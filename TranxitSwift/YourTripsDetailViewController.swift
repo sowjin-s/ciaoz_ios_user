@@ -31,6 +31,10 @@ class YourTripsDetailViewController: UITableViewController {
     @IBOutlet private weak var viewComments : UIView!
     @IBOutlet private weak var viewButtons : UIView!
     
+    @IBOutlet private weak var viewMore : UIView!
+    @IBOutlet private weak var buttonDispute : UIButton!
+    @IBOutlet private weak var buttonLostItem : UIButton!
+    
     var isUpcomingTrips = false  // Boolean to handle Past and Upcoming Trips
     
     lazy var loader  : UIView = {
@@ -42,6 +46,8 @@ class YourTripsDetailViewController: UITableViewController {
     private var viewRecipt : InvoiceView?
     private var blurView : UIView?
     private var requestId : Int?
+    private var disputeView : DisputeLostItemView?
+    var disputeList:[String]=[]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,20 +69,32 @@ class YourTripsDetailViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.viewButtons.isHidden = false
+        self.viewMore.isHidden = false
+        
 //        if isUpcomingTrips {
 //        } else {
 //            self.viewLocation.removeFromSuperview()
 //        }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        var disputeList = DisputeList()
+        disputeList.dispute_type = "user"
+        self.presenter?.post(api: .getDisputeList, data: disputeList.toData())
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.hideRecipt()
         self.viewButtons.isHidden = true
+        self.viewMore.isHidden = true
+        
     }
 
     deinit {
         self.viewButtons.removeFromSuperview()
+        self.viewMore.removeFromSuperview()
+        self.disputeView = nil
     }
     
 }
@@ -89,9 +107,12 @@ extension YourTripsDetailViewController {
     private func initialLoads() {
         
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.backButtonClick))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "ic_more").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.tapMore))
         self.buttonCancelRide.isHidden = !isUpcomingTrips
         self.buttonCancelRide.addTarget(self, action: #selector(self.buttonCancelRideAction(sender:)), for: .touchUpInside)
         self.buttonViewReciptAndCall.addTarget(self, action: #selector(self.buttonCallAndReciptAction(sender:)), for: .touchUpInside)
+        self.buttonDispute.addTarget(self, action: #selector(self.buttonDisputeAction(sender:)), for: .touchUpInside)
+        self.buttonLostItem.addTarget(self, action: #selector(self.buttonLostItemAction(sender:)), for: .touchUpInside)
         self.loader.isHidden = false
         let api : Base = self.isUpcomingTrips ? .upcomingTripDetail : .pastTripDetail
         self.presenter?.get(api: api, parameters: ["request_id":self.requestId!])
@@ -107,7 +128,19 @@ extension YourTripsDetailViewController {
         self.viewButtons.heightAnchor.constraint(equalToConstant: 50).isActive = true
         self.viewButtons.bottomAnchor.constraint(equalTo: UIApplication.shared.keyWindow!.bottomAnchor, constant: -16).isActive = true 
         self.viewButtons.centerXAnchor.constraint(equalTo: UIApplication.shared.keyWindow!.centerXAnchor, constant: 0).isActive = true
+        
+        let moreViewY = (self.navigationController?.navigationBar.frame.height)!+(self.navigationController?.navigationBar.frame.origin.y)!
+        self.viewMore.frame = CGRect(x: self.view.frame.width-170, y: moreViewY , width: 150, height: 100)
+        UIApplication.shared.keyWindow?.addSubview(self.viewMore)
+        self.viewMore.alpha = 0
         //UIApplication.shared.keyWindow?.addSubview(self.stackViewButtons)
+        
+        let touchOutside: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.touchOutside))
+        view.addGestureRecognizer(touchOutside)
+    }
+    
+    @objc func touchOutside() {
+       self.viewMore.alpha = 0
     }
     
     
@@ -120,6 +153,8 @@ extension YourTripsDetailViewController {
         
         self.buttonViewReciptAndCall.setTitle((isUpcomingTrips ? Constants.string.call:Constants.string.viewRecipt).localize().uppercased(), for: .normal)
         self.labelPayViaString.text = (isUpcomingTrips ? Constants.string.paymentMethod : Constants.string.payVia).localize()
+        self.buttonLostItem.setTitle(Constants.string.lostItem.localize(), for: .normal)
+        self.buttonDispute.setTitle(Constants.string.dispute.localize(), for: .normal)
         
         if isUpcomingTrips {
             self.buttonCancelRide.setTitle(Constants.string.cancelRide.localize().uppercased(), for: .normal)
@@ -134,17 +169,19 @@ extension YourTripsDetailViewController {
     
     private func setDesign() {
         
-       Common.setFont(to: self.labelCommentsString, isTitle: true)
-       Common.setFont(to: self.labelPayViaString, isTitle:  true)
+        Common.setFont(to: self.labelCommentsString, isTitle: true)
+        Common.setFont(to: self.labelPayViaString, isTitle:  true)
         Common.setFont(to: self.labelDate, size : 12)
-       Common.setFont(to: self.labelTime, size : 12)
-       Common.setFont(to: self.labelBookingId)
-       Common.setFont(to: self.labelPrice)
-       Common.setFont(to: self.labelProviderName)
-       Common.setFont(to: self.labelSourceLocation, size : 12)
-       Common.setFont(to: self.labelDestinationLocation, size : 12)
-       Common.setFont(to: self.labelPayVia)
-       Common.setFont(to: self.buttonViewReciptAndCall, isTitle: true)
+        Common.setFont(to: self.labelTime, size : 12)
+        Common.setFont(to: self.labelBookingId)
+        Common.setFont(to: self.labelPrice)
+        Common.setFont(to: self.labelProviderName)
+        Common.setFont(to: self.labelSourceLocation, size : 12)
+        Common.setFont(to: self.labelDestinationLocation, size : 12)
+        Common.setFont(to: self.labelPayVia)
+        Common.setFont(to: self.buttonViewReciptAndCall, isTitle: true)
+        Common.setFont(to: self.buttonDispute, isTitle: false)
+        Common.setFont(to: self.buttonLostItem, isTitle: false)
        if isUpcomingTrips {
             Common.setFont(to: self.buttonCancelRide, isTitle: true)
        }
@@ -185,7 +222,8 @@ extension YourTripsDetailViewController {
         }
         
         self.viewRating.rating = Float(self.dataSource?.rating?.provider_rating ?? 0)
-        self.textViewComments.text = self.dataSource?.rating?.provider_comment ?? Constants.string.noComments.localize()
+        let comment = self.dataSource?.rating?.provider_comment
+        self.textViewComments.text = comment?.count == 0 ? Constants.string.noComments.localize() : comment
         self.labelSourceLocation.text = self.dataSource?.s_address
         self.labelDestinationLocation.text = self.dataSource?.d_address
         self.labelPayVia.text = self.dataSource?.payment_mode?.rawValue.localize()
@@ -229,6 +267,31 @@ extension YourTripsDetailViewController {
         
     }
     
+    @objc func tapMore() {
+        UIView.animate(withDuration: 0.3, animations: {
+            if self.viewMore?.alpha == 0.0 {
+                self.viewMore.alpha = 1.0
+            }else{
+                self.viewMore.alpha = 0.0
+            }
+        })
+    }
+    
+    @IBAction private func buttonDisputeAction(sender : UIButton) {
+        self.viewMore.alpha = 0.0
+        if self.dataSource?.is_dispute == 1 {
+            showAlert(message: Constants.string.disputecreated.localize(), okHandler: nil, fromView: self)
+            return
+        }
+        self.showDisputeView(isDispute:true)
+        
+    }
+    
+    @IBAction private func buttonLostItemAction(sender : UIButton) {
+        self.showDisputeView(isDispute: false)
+        self.viewMore.alpha = 0.0
+    }
+    
     // MARK:- Show Recipt
     private func showRecipt() {
         
@@ -249,6 +312,38 @@ extension YourTripsDetailViewController {
             }
         }
         
+    }
+    
+    func showDisputeView(isDispute:Bool){
+        if self.disputeView == nil, let disputeView = Bundle.main.loadNibNamed(XIB.Names.DisputeLostItemView, owner: self, options: [:])?.first as? DisputeLostItemView {
+            let disputeHeight = isDispute ? disputeView.frame.height : 250
+            disputeView.frame = CGRect(x: 0, y: self.view.frame.height-disputeHeight, width: self.view.frame.width, height: disputeHeight)
+            self.disputeView = disputeView
+            if isDispute {
+                disputeView.set(value: self.disputeList, isDispute: isDispute, requestID: self.requestId!)
+            }else{
+                disputeView.set(value: [], isDispute: isDispute, requestID: self.requestId!)
+            }
+            
+            UIApplication.shared.keyWindow?.addSubview(disputeView)
+            self.disputeView?.transform = CGAffineTransform(scaleX: 0.3, y: 0.3)
+            UIView.animate(withDuration: 0.5,
+                           delay: 0,
+                           usingSpringWithDamping: CGFloat(0.5),
+                           initialSpringVelocity: CGFloat(1.0),
+                           options: .allowUserInteraction,
+                           animations: {
+                            self.disputeView?.transform = .identity },
+                           completion: { Void in()  })
+        }
+        self.disputeView?.onClickClose = { closed in
+            UIView.animate(withDuration: 0.3, animations: {
+                self.disputeView?.alpha = 0
+            }, completion: { (_) in
+                self.disputeView?.removeFromSuperview()
+                self.disputeView = nil
+            })
+        }
     }
     
     
@@ -300,8 +395,12 @@ extension YourTripsDetailViewController: PostViewProtocol {
             self.loader.isHidden = true
             self.setValues()
         }
-        
-        
+    }
+    
+    func getDisputeList(api: Base, data: [DisputeList]) {
+        for disputeName in data {
+            self.disputeList.append(disputeName.dispute_name ?? "")
+        }
     }
     
     

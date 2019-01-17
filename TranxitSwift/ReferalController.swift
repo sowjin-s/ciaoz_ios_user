@@ -81,7 +81,7 @@ extension ReferalController {
     
     // MARK:- Remove Recipt
     @IBAction private func shareReferal() {
-        let  message = Constants.string.referalMessage.localize() + "\n\n" + userAppStoreUtl + "\n\n" + Constants.string.installMessage.localize() + " \n " + User.main.referral_unique_id!
+        let  message = Constants.string.referalMessage.localize() + "\n\n" + "User: " + AppStoreUrl.user.rawValue + "\n Provider : " + AppStoreUrl.driver.rawValue + "\n\n" + Constants.string.installMessage.localize() + " \n " + User.main.referral_unique_id!
         let message1 = MessageWithSubject(subject: "Here is the subject", message: message)
         let itemsToShare:[Any] = [message1]
 //        self.share(items: [AppName,message])

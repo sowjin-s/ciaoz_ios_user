@@ -29,3 +29,11 @@ let helpSubject = "\(AppName) Help"
 let driverUrl = "https://itunes.apple.com/us/app/tranxit-driver/id1204269279?mt=8"
 let userAppStoreUtl = "https://itunes.apple.com/us/app/tranxit/id1204487551?ls=1&mt=8"
 let requestInterval : TimeInterval = 60  // seconds
+
+
+enum AppStoreUrl : String {
+    
+    case user = "https://itunes.apple.com/us/app/tranxit/id1204487551?ls=1&mt=8"
+    case driver = "https://itunes.apple.com/us/app/tranxit-driver/id1204269279?mt=8"
+    
+}

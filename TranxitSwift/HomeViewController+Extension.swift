@@ -326,6 +326,7 @@ extension HomeViewController {
                 self.presenter?.post(api: .payNow, data: requestObj.toData())
             }
             self.invoiceView?.onDoneClick = { onClick in
+                self.isTapDone = true
                 self.showRatingView(with: request)
             }
             self.invoiceView?.onClickChangePayment = { [weak self] completion in 
@@ -584,15 +585,19 @@ extension HomeViewController {
         switch status{
             
         case .searching:
+            isTapDone = false
             self.showLoaderView(with: self.currentRequestId)
             self.perform(#selector(self.validateRequest), with: self, afterDelay: requestInterval)
+//            self.buttonWithoutDest.isHidden = false
         case .accepted, .arrived, .started, .pickedup:
+//            self.buttonWithoutDest.isHidden = true
             self.showRideStatusView(with: request)
             
         case .dropped:
             self.showInvoiceView(with: request)
             riderStatus = .none
         case .completed:
+//            self.buttonWithoutDest.isHidden = false
             riderStatus = .none
             if request.payment_mode == .CARD {
                 if request.use_wallet == 1 {
@@ -631,7 +636,11 @@ extension HomeViewController {
                     }
                 }else{
                     if isInvoiceShowed {
-                        self.showRatingView(with: request)
+                        if !isTapDone {
+                            self.showInvoiceView(with: request)
+                        }else{
+                            self.showRatingView(with: request)
+                        }
                     }else{
                         self.showInvoiceView(with: request)
                     }

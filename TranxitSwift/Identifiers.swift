@@ -37,6 +37,7 @@ struct Storyboard {
     let SideBarTableViewController = "SideBarTableViewController"
     let LaunchNavigationController = "LaunchNavigationController"
     let ReferalController = "ReferalController"
+    let NotificationController = "NotificationsViewController"
 }
 
 
@@ -68,6 +69,8 @@ struct XIB {
     let CouponCollectionViewCell = "CouponCollectionViewCell"
     let CouponView = "CouponView"
     let PassbookWalletTransaction = "PassbookWalletTransaction"
+    let disputeCell = "DisputeCell"
+    let DisputeLostItemView = "DisputeLostItemView"
 }
 
 

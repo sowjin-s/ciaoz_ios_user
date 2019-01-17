@@ -240,3 +240,15 @@
 "DISTANCE" = "Distance";
 "DISTANCEMIN" = "Distance / Min";
 "DISTANCEHOUR" = "Distance / Hour";
+
+"Dispute" = "Dispute";
+"Lost Items"   =   "Lost Items";
+
+"Please confirm payment" = "Please confirm payment";
+"Ride Created Successfully" = "Ride Created Successfully";
+"Want to change destination?" = "Want to change destination?";
+"Notification Manager" = "Notification Manager";
+"Update Ride? \n If you update your destination your fare may change" =  "Update Ride? \n If you update your destination your fare may change";
+"Your Dispute already created" = "Your Dispute already created";
+"Please enter your comments" = "Please enter your comments";
+"Please choose dispute type" = "Please choose dispute type";

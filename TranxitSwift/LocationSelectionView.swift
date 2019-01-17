@@ -224,7 +224,10 @@ extension LocationSelectionView : UITableViewDataSource, UITableViewDelegate {
                         
                     } else if let addressString = place?.formattedAddress, let coordinate = place?.coordinate{
                        // print("\nselected ---- ",coordinate)
-                        self.autoFill(with: (addressString,coordinate))
+                        DispatchQueue.main.async {
+                            self.autoFill(with: (addressString,coordinate))
+                        }
+                        
                     }
                 }
             }

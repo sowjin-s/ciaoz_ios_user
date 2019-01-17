@@ -27,7 +27,8 @@ class SideBarTableViewController: UITableViewController {
                                Constants.string.help,
                                Constants.string.share,
                                Constants.string.becomeADriver,
-//                               Constants.string.invideFriends,
+                               Constants.string.notifications,
+                               Constants.string.invideFriends,
                                Constants.string.logout]
     
     private let cellId = "cellId"
@@ -173,14 +174,12 @@ extension SideBarTableViewController {
         case (0,7):
             (self.drawerController?.getViewController(for: .none)?.children.first as? HomeViewController)?.share(items: ["\(AppName)", URL.init(string: baseUrl)!])
         case (0,8):
-            Common.open(url: driverUrl)
+            Common.open(url: AppStoreUrl.driver.rawValue)
         case (0,9):
-             if self.isReferalEnable == 1 {
-                self.push(to: Storyboard.Ids.ReferalController)
-             }else{
-                self.logout()
-             }
+            self.push(to: Storyboard.Ids.NotificationController)
         case (0,10):
+            self.push(to: Storyboard.Ids.ReferalController)
+        case (0,11):
             self.logout()
         
         default:
@@ -225,6 +224,13 @@ extension SideBarTableViewController {
 
 extension SideBarTableViewController {
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if self.isReferalEnable == 0 && indexPath.row == 9 {
+            return 0
+        }
+        return 50
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let tableCell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
@@ -268,15 +274,6 @@ extension SideBarTableViewController : PostViewProtocol {
     
     func getSettings(api: Base, data: SettingsEntity) {
         self.isReferalEnable = Int((data.referral?.referral)!)!
-        if self.isReferalEnable == 0 {
-            if let index = sideBarList.index(of: Constants.string.invideFriends) {
-                self.sideBarList.remove(at: index)
-            }
-        }else{
-            if !self.sideBarList.contains(Constants.string.invideFriends) {
-                self.sideBarList.insert(Constants.string.invideFriends, at: self.sideBarList.count-1)
-            }
-        }
         self.tableView.reloadInMainThread()
     }
 }

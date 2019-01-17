@@ -240,10 +240,31 @@ struct Constants {
     let WaitingTime = "Waiting Time"
     let invideFriends = "Invite Friends"
     let referHeading = "Your Referral Code"
+    let tollCharge = "Toll Charge"
     
     //Referral
     let referalMessage = "Hey check this app \(AppName)"
     let installMessage = "Install this app with referral code"
+    
+    let dispute = "Dispute"
+    let lostItem = "Lost Items"
+    
+    
+    
+    let disputeMsg = "Please choose dispute type"
+    let enterComment = "Please enter your comments"
+    let disputecreated = "Your Dispute already created"
+    let locationChange = "Update Ride? \n If you update your destination your fare may change"
+    let withoutDest = "Without destination?"
+    let notifications = "Notification Manager"
+    let destinationChange = "Want to change destination?"
+    
+    let scheduleReqMsg = "Schedule request created!"
+    
+    let rideCreated = "Ride Created Successfully"
+    
+    let confirmPayment = "Please confirm payment"
+    
 }
 
 

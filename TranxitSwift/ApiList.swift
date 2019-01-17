@@ -80,6 +80,11 @@ enum Base : String{
     case settings = "/api/user/settings"
     case cancelReason = "/api/user/reasons"
     case phoneNubVerify = "/api/user/verify-credentials"
+    case postDispute = "/api/user/dispute"
+    case getDisputeList = "/api/user/dispute-list"
+    case lostItem = "/api/user/drop-item"
+    case extendTrip = "/api/user/extend/trip"
+    case notificationManager = "/api/user/notifications/user"
     
     init(fromRawValue: String){
         self = Base(rawValue: fromRawValue) ?? .signUp

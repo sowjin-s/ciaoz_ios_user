@@ -106,6 +106,36 @@ class PresenterProcessor {
         return data.getDecodedObject(from: [ReasonEntity].self) ?? []
     }
     
+    // MARK:- Get DisputeList
+    
+    func getDisputeList(data : Data)->[DisputeList]? {
+        return data.getDecodedObject(from: [DisputeList].self) ?? []
+    }
+    
+    // MARK:- Send Dispute
+    
+    func getPostDispute(data : Data)->DisputeList? {
+        return data.getDecodedObject(from: DisputeList.self)
+    }
+    
+    // MARK:- Lost Item
+    
+    func getLostItem(data : Data)->DisputeList? {
+        return data.getDecodedObject(from: DisputeList.self)
+    }
+    
+    // MARK:- Extend Trip
+    
+    func getExtendTrip(data : Data)->ExtendTrip? {
+        return data.getDecodedObject(from: ExtendTrip.self)
+    }
+    
+    // MARK:- Notification
+    
+    func notifications(data : Data)->[NotificationManagerModel]? {
+        
+        return data.getDecodedObject(from: [NotificationManagerModel].self)
+    }
 }
 
 

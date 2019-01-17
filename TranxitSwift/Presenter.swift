@@ -61,6 +61,27 @@ extension Presenter : PostPresenterInputProtocol {
 
 extension Presenter : PostPresenterOutputProtocol {
     
+    func sendNotificationList(api: Base, data: Data) {
+        controller?.getNotificationsMangerList(api: api, data: PresenterProcessor.shared.notifications(data: data))
+    }
+    
+    
+    func sendExtendTrip(api: Base, data: Data) {
+        controller?.getExtendTrip(api: api, data: PresenterProcessor.shared.getExtendTrip(data: data)!)
+    }
+    
+    func sendLostItem(api: Base, data: Data) {
+        controller?.getDispute(api: api, data: PresenterProcessor.shared.getLostItem(data: data)!)
+    }
+    
+    func sendDispute(api: Base, data: Data) {
+        controller?.getDispute(api: api, data: PresenterProcessor.shared.getPostDispute(data: data)!)
+    }
+    
+    func sendDisputeList(api: Base, data: Data) {
+        controller?.getDisputeList(api: api, data: PresenterProcessor.shared.getDisputeList(data: data)!)
+    }
+    
     func sendReason(api: Base, data: Data) {
         controller?.getReason(api: api, data: PresenterProcessor.shared.getReasonData(data: data)!)
     }
