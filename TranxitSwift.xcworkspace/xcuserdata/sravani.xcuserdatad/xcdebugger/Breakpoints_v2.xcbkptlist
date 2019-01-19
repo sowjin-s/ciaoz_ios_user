@@ -106,12 +106,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TranxitSwift/HomeViewController.swift"
-            timestampString = "568386640.9548301"
+            timestampString = "569586081.1977299"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "504"
-            endingLineNumber = "504"
-            landmarkName = "removeLocationView()"
+            startingLineNumber = "525"
+            endingLineNumber = "525"
+            landmarkName = "HomeViewController"
+            landmarkType = "21">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TranxitSwift/HomeViewController.swift"
+            timestampString = "569586081.200115"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "272"
+            endingLineNumber = "272"
+            landmarkName = "viewWillAppearCustom()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -122,23 +138,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TranxitSwift/HomeViewController.swift"
-            timestampString = "568386640.9549069"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "251"
-            endingLineNumber = "251"
-            landmarkName = "viewLayouts()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TranxitSwift/HomeViewController.swift"
-            timestampString = "568386640.9549659"
+            timestampString = "569586081.201336"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "100"
@@ -170,12 +170,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TranxitSwift/HomeViewController.swift"
-            timestampString = "568386640.955039"
+            timestampString = "569586081.202791"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "648"
-            endingLineNumber = "648"
-            landmarkName = "mapView(_:idleAt:)"
+            startingLineNumber = "669"
+            endingLineNumber = "669"
+            landmarkName = "schedulePickerView(on:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -186,13 +186,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TranxitSwift/HomeViewController.swift"
-            timestampString = "568386640.9550951"
+            timestampString = "569586081.203827"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "634"
-            endingLineNumber = "634"
-            landmarkName = "mapView(_:idleAt:)"
-            landmarkType = "7">
+            startingLineNumber = "655"
+            endingLineNumber = "655"
+            landmarkName = "HomeViewController"
+            landmarkType = "21">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -209,6 +209,83 @@
             endingLineNumber = "48"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TranxitUser.YourTripsDetailViewController.(requestId in _DBCF65705C696A08F6C3538C94A19034).getter : Swift.Optional&lt;Swift.Int&gt;"
+                  moduleName = "TranxitUser"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sravani/Desktop/sravani/Tranxit_base/tranxitswiftbase_ios_user/TranxitSwift/YourTripsDetailViewController.swift"
+                  timestampString = "569582481.294741"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "48"
+                  endingLineNumber = "48"
+                  offsetFromSymbolStart = "108">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TranxitUser.YourTripsDetailViewController.(requestId in _DBCF65705C696A08F6C3538C94A19034).setter : Swift.Optional&lt;Swift.Int&gt;"
+                  moduleName = "TranxitUser"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sravani/Desktop/sravani/Tranxit_base/tranxitswiftbase_ios_user/TranxitSwift/YourTripsDetailViewController.swift"
+                  timestampString = "569582481.296887"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "48"
+                  endingLineNumber = "48"
+                  offsetFromSymbolStart = "128">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TranxitUser.YourTripsDetailViewController.init(style: __C.UITableViewStyle) -&gt; TranxitUser.YourTripsDetailViewController"
+                  moduleName = "TranxitUser"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sravani/Desktop/sravani/Tranxit_base/tranxitswiftbase_ios_user/TranxitSwift/YourTripsDetailViewController.swift"
+                  timestampString = "569582481.298911"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "48"
+                  endingLineNumber = "48"
+                  offsetFromSymbolStart = "2604">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TranxitUser.YourTripsDetailViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; TranxitUser.YourTripsDetailViewController"
+                  moduleName = "TranxitUser"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sravani/Desktop/sravani/Tranxit_base/tranxitswiftbase_ios_user/TranxitSwift/YourTripsDetailViewController.swift"
+                  timestampString = "569582481.301497"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "48"
+                  endingLineNumber = "48"
+                  offsetFromSymbolStart = "2628">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TranxitUser.YourTripsDetailViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;TranxitUser.YourTripsDetailViewController&gt;"
+                  moduleName = "TranxitUser"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sravani/Desktop/sravani/Tranxit_base/tranxitswiftbase_ios_user/TranxitSwift/YourTripsDetailViewController.swift"
+                  timestampString = "569582481.303913"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "48"
+                  endingLineNumber = "48"
+                  offsetFromSymbolStart = "2604">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -378,7 +455,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TranxitSwift/CountryListController.swift"
-            timestampString = "568548939.205922"
+            timestampString = "569511064.85978"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "47"
@@ -474,7 +551,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TranxitSwift/CountryListController.swift"
-            timestampString = "568548939.206423"
+            timestampString = "569511064.861975"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "150"
@@ -488,7 +565,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TranxitSwift/CountryListController.swift"
-            timestampString = "568548939.206661"
+            timestampString = "569511064.862332"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "150"
@@ -502,7 +579,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TranxitSwift/CountryListController.swift"
-            timestampString = "568548939.206879"
+            timestampString = "569511064.862687"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "150"
@@ -516,11 +593,43 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TranxitSwift/CountryListController.swift"
-            timestampString = "568548939.2070971"
+            timestampString = "569511064.862983"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "150"
             endingLineNumber = "150">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TranxitSwift/LaunchViewController.swift"
+            timestampString = "569586081.205985"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "LaunchViewController"
+            landmarkType = "21">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TranxitSwift/LaunchViewController.swift"
+            timestampString = "569586081.206406"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -58,6 +58,10 @@
 	<string>227306957774573</string>
 	<key>FacebookDisplayName</key>
 	<string>Tranxit</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>com.appoets.tranxit.provider</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
