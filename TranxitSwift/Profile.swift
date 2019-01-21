@@ -31,6 +31,8 @@ class Profile : JSONSerializable {
     var referral_unique_id : String?
     var referral_total_text : String?
     var referral_text : String?
+    var otp : Int?
+    var ride_otp : Int?
     
     required init(from decoder: Decoder) throws {
         
@@ -48,9 +50,9 @@ class Profile : JSONSerializable {
         app_contact = try? values.decode(String.self, forKey: .app_contact)
         measurement = try? values.decode(String.self, forKey: .measurement)
         if let mobileInt = try? values.decode(Int.self, forKey: .mobile) {
-         mobile = "\(mobileInt)"
+            mobile = "\(mobileInt)"
         } else {
-         mobile = try? values.decode(String.self, forKey: .mobile)
+            mobile = try? values.decode(String.self, forKey: .mobile)
         }
         language = try? values.decode(Language.self, forKey: .language)
         stripe_secret_key = try? values.decode(String.self, forKey: .stripe_secret_key)
@@ -61,6 +63,8 @@ class Profile : JSONSerializable {
         referral_unique_id = try? values.decode(String.self, forKey: .referral_unique_id)
         referral_total_text = try? values.decode(String.self, forKey: .referral_total_text)
         referral_text = try? values.decode(String.self, forKey: .referral_text)
+        otp = try? values.decode(Int.self, forKey: .otp)
+        ride_otp = try? values.decode(Int.self, forKey: .ride_otp)
     }
     
     init() {

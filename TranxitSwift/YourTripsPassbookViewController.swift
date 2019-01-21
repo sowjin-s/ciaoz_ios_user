@@ -25,7 +25,7 @@ class YourTripsPassbookViewController: UIViewController {
         }
     }
     
-   private lazy var loader  : UIView = {
+    private lazy var loader  : UIView = {
         return createActivityIndicator(UIApplication.shared.keyWindow ?? self.view)
     }()
     
@@ -34,7 +34,7 @@ class YourTripsPassbookViewController: UIViewController {
     private var datasourceYourTripsPast = [Request]()
     private var datasourceCoupon = [CouponWallet]()
     private var datasourceWallet = [WalletTransaction]()
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,15 +52,15 @@ class YourTripsPassbookViewController: UIViewController {
         
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        switchViewAction()
-//    }
-
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(animated)
-//        self.navigationController?.isNavigationBarHidden = true
-//    }
+    //    override func viewWillAppear(_ animated: Bool) {
+    //        super.viewWillAppear(animated)
+    //        switchViewAction()
+    //    }
+    
+    //    override func viewWillDisappear(_ animated: Bool) {
+    //        super.viewWillDisappear(animated)
+    //        self.navigationController?.isNavigationBarHidden = true
+    //    }
     
 }
 
@@ -99,7 +99,7 @@ extension YourTripsPassbookViewController {
         self.viewUpcomming.isHidden = !isYourTripsSelected
     }
     
- 
+    
     private func localize(){
         
         self.pastBtn.setTitle( isYourTripsSelected ? Constants.string.past.localize() : Constants.string.walletHistory.localize(), for: .normal)
@@ -120,7 +120,7 @@ extension YourTripsPassbookViewController {
         if self.underLineView != nil {
             UIView.animate(withDuration: 0.5) {
                 let viewWidth = self.isFromTrips ? self.view.bounds.width/2 : 0.0
-                 self.underLineView.frame.origin.x = (selectedLanguage == .arabic ? !self.isFirstBlockSelected : self.isFirstBlockSelected) ? 0 : viewWidth//(self.view.bounds.width/2)
+                self.underLineView.frame.origin.x = (selectedLanguage == .arabic ? !self.isFirstBlockSelected : self.isFirstBlockSelected) ? 0 : viewWidth//(self.view.bounds.width/2)
             }
         }
     }
@@ -131,7 +131,7 @@ extension YourTripsPassbookViewController {
     private func checkEmptyView() {
         
         self.tableViewList.backgroundView = {
-           
+            
             if (self.isYourTripsSelected ? getData().trips.count : getData().wallet.count) == 0 {
                 let label = Label(frame: UIScreen.main.bounds)
                 label.numberOfLines = 0
@@ -156,8 +156,8 @@ extension YourTripsPassbookViewController {
     }
     
     private func switchViewAction(){
-       // self.pastUnderLineView.isHidden = false
-       // self.isFirstBlockSelected = true
+        // self.pastUnderLineView.isHidden = false
+        // self.isFirstBlockSelected = true
         self.pastBtn.tag = 1
         self.upCommingBtn.tag = 2
         self.pastBtn.addTarget(self, action: #selector(ButtonTapped(sender:)), for: .touchUpInside)
@@ -174,7 +174,7 @@ extension YourTripsPassbookViewController {
         DispatchQueue.main.async {
             self.loader.isHidden = true
             self.checkEmptyView()
-            self.tableViewList.reloadData()
+            self.tableViewList.reloadInMainThread()
         }
     }
     
@@ -188,10 +188,10 @@ extension YourTripsPassbookViewController {
         })
         cancelButton.titleColor = .primary
         let sureButton = PopupDialogButton(title: Constants.string.yes.localize()) {
-           self.loader.isHidden = false
-           let request = Request()
-           request.request_id = requestId
-           self.presenter?.post(api: .cancelRequest, data: request.toData())
+            self.loader.isHidden = false
+            let request = Request()
+            request.request_id = requestId
+            self.presenter?.post(api: .cancelRequest, data: request.toData())
         }
         sureButton.titleColor = .red
         alert.addButtons([cancelButton,sureButton])
@@ -252,17 +252,17 @@ extension YourTripsPassbookViewController : UITableViewDelegate,UITableViewDataS
         } else {
             
             if let cell = tableView.dequeueReusableCell(withIdentifier: XIB.Names.PassbookWalletTransaction, for: indexPath) as? PassbookWalletTableViewCell {
-               // cell.isWalletSelected = isFirstBlockSelected
+                // cell.isWalletSelected = isFirstBlockSelected
                 if isFirstBlockSelected {
                     if datasourceWallet.count>indexPath.row{
                         cell.set(value: datasourceWallet[indexPath.row])
                     }
                 }
-//                else {
-//                    if datasourceCoupon.count>indexPath.row{
-//                        cell.set(values: datasourceCoupon[indexPath.row])
-//                    }
-//                }
+                //                else {
+                //                    if datasourceCoupon.count>indexPath.row{
+                //                        cell.set(values: datasourceCoupon[indexPath.row])
+                //                    }
+                //                }
                 return cell
             }
             

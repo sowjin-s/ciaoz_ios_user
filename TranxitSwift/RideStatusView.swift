@@ -159,6 +159,7 @@ extension RideStatusView {
         self.labelServiceDescription.text = values.provider_service?.service_model
         self.labelOtp.text = " \(Constants.string.otp.localize()+": "+String.removeNil(values.otp)) "
         self.isOnSurge = values.surge == 1
+        self.labelOtp.isHidden = User.main.ride_otp == 0
     }
     
     // MARK:- Call Provider

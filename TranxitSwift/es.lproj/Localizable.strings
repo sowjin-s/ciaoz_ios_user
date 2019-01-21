@@ -252,3 +252,6 @@
 "Your Dispute already created" = "Your Dispute already created";
 "Please enter your comments" = "Please enter your comments";
 "Please choose dispute type" = "Please choose dispute type";
+
+"You are using both user and driver apps in same device. So app may not work properly" = "You are using both user and driver apps in same device. So app may not work properly";
+"Continue" = "Continue";

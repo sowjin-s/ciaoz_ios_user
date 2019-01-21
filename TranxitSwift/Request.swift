@@ -51,33 +51,35 @@ class Request : JSONSerializable {
     var unit : String?
     var is_scheduled : Bool?
     var is_dispute : Int?
-  /*
-    enum CodingKeys: String, CodingKey {
-        
-        case id = "id"
-        case booking_id = "booking_id"
-        case status = "status"
-        case payment_mode = "payment_mode"
-        case distance = "distance"
-        case s_address = "s_address"
-        case s_latitude = "s_latitude"
-        case s_longitude = "s_longitude"
-        case d_address = "d_address"
-        case d_latitude = "d_latitude"
-        case d_longitude = "d_longitude"
-        case use_wallet = "use_wallet"
-        case schedule_date = "schedule_date"
-        case request_id = "request_id"
-        case current_provider = "current_provider"
-        case schedule_time = "schedule_time"
-        case provider
-        case service_type
-        
-    }
- 
-  */
+    var dispute : Dispute?
+    var lostitem : Lostitem?
+    /*
+     enum CodingKeys: String, CodingKey {
+     
+     case id = "id"
+     case booking_id = "booking_id"
+     case status = "status"
+     case payment_mode = "payment_mode"
+     case distance = "distance"
+     case s_address = "s_address"
+     case s_latitude = "s_latitude"
+     case s_longitude = "s_longitude"
+     case d_address = "d_address"
+     case d_latitude = "d_latitude"
+     case d_longitude = "d_longitude"
+     case use_wallet = "use_wallet"
+     case schedule_date = "schedule_date"
+     case request_id = "request_id"
+     case current_provider = "current_provider"
+     case schedule_time = "schedule_time"
+     case provider
+     case service_type
+     
+     }
+     
+     */
     
- 
+    
     required init(from decoder: Decoder) throws {
         
         let values = try decoder.container(keyedBy: CodingKeys.self)
@@ -116,11 +118,65 @@ class Request : JSONSerializable {
         unit = try? values.decode(String.self, forKey: .unit)
         is_scheduled = (try? values.decode(String.self, forKey: .is_scheduled) == "YES")
         is_dispute = try? values.decode(Int.self, forKey: .is_dispute)
+        dispute = try? values.decode(Dispute.self, forKey: .dispute)
+        lostitem = try? values.decode(Lostitem.self, forKey: .lostitem)
     }
- 
+    
     init() {   }
- 
+    
     
     
 }
 
+
+class Dispute: JSONSerializable {
+    var comments : String?
+    var dispute_name : String?
+    var dispute_type : String?
+    var id : Int?
+    var is_admin : Int?
+    var refund_amount : Int?
+    var status : String?
+    var user_id : Int?
+    
+    required init(from decoder: Decoder) throws {
+        
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        id = try? values.decode(Int.self, forKey: .id)
+        comments = try? values.decode(String.self, forKey: .comments)
+        dispute_name = try? values.decode(String.self, forKey: .dispute_name)
+        dispute_type = try? values.decode(String.self, forKey: .dispute_type)
+        is_admin = try? values.decode(Int.self, forKey: .is_admin)
+        refund_amount = try? values.decode(Int.self, forKey: .refund_amount)
+        status = try? values.decode(String.self, forKey: .status)
+        user_id = try? values.decode(Int.self, forKey: .user_id)
+    }
+    
+    init() {   }
+}
+
+class Lostitem: JSONSerializable {
+    var comments : String?
+    var comments_by : String?
+    var is_admin : Int?
+    var id : Int?
+    var lost_item_name : String?
+    var parent_id : Int?
+    var status : String?
+    var user_id : Int?
+    
+    required init(from decoder: Decoder) throws {
+        
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        id = try? values.decode(Int.self, forKey: .id)
+        comments = try? values.decode(String.self, forKey: .comments)
+        is_admin = try? values.decode(Int.self, forKey: .is_admin)
+        lost_item_name = try? values.decode(String.self, forKey: .lost_item_name)
+        is_admin = try? values.decode(Int.self, forKey: .is_admin)
+        parent_id = try? values.decode(Int.self, forKey: .parent_id)
+        status = try? values.decode(String.self, forKey: .status)
+        user_id = try? values.decode(Int.self, forKey: .user_id)
+    }
+    
+    init() {   }
+}

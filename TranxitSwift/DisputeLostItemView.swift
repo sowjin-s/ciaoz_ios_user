@@ -40,7 +40,7 @@ class DisputeLostItemView: UIView, UIScrollViewDelegate {
         self.tableview.dataSource = self
         self.tableview.delegate = self
         self.tableview.register(UINib(nibName: XIB.Names.disputeCell, bundle: nil), forCellReuseIdentifier: XIB.Names.disputeCell)
-        self.isShowTextView = true
+        self.isShowTextView = false
         Common.setFont(to: labelTitle, isTitle: true, size: 18)
         Common.setFont(to: buttonSubmit)
         self.buttonSubmit.backgroundColor = .primary
@@ -76,9 +76,16 @@ extension DisputeLostItemView {
         for reason in value {
             self.datasource.append(reason)
         }
+        if isDispute {
+            self.datasource.append(Constants.string.othersIfAny)
+        }else{
+            self.isShowTextView = true
+        }
+        
         self.requestID = requestID
         self.labelTitle.text = isDispute ? Constants.string.dispute.localize() : Constants.string.lostItem.localize()
         self.isDispute = isDispute
+        self.isShowTextView = !isDispute
         self.tableview.reloadInMainThread()
     }
     // MARK:- Button Done Action
@@ -92,17 +99,23 @@ extension DisputeLostItemView {
             showToast(msg: Constants.string.disputeMsg.localize())
             return
         }
-        guard let text = textView?.text, !text.isEmpty else {
+        if isDispute && self.selectedIndexPath.row == self.datasource.count-1 {
             showToast(msg: Constants.string.enterComment.localize())
             return
         }
+        if !isDispute {
+            guard let text = textView?.text, !text.isEmpty else {
+                showToast(msg: Constants.string.enterComment.localize())
+                return
+            }
+        }
+        
         var Dispute = DisputeList()
         Dispute.user_id = User.main.id
         Dispute.request_id = requestID
         if isDispute {
-            Dispute.dispute_type = "user"
-            Dispute.dispute_name = self.datasource[selectedIndexPath.row]
-            Dispute.comments = textView?.text
+            Dispute.dispute_type = UserType.user.rawValue
+            Dispute.dispute_name = self.selectedIndexPath.row == self.datasource.count-1 ? self.textView?.text! : self.datasource[selectedIndexPath.row]
             self.presenter?.post(api: .postDispute, data: Dispute.toData())
         }else{
             Dispute.lost_item_name = textView?.text
@@ -152,17 +165,20 @@ extension DisputeLostItemView : UITableViewDelegate, UITableViewDataSource {
             tableView.deselectRow(at: indexPath, animated: true)
         }
         var cell = tableView.cellForRow(at: selectedIndexPath) as? DisputeCell
-//        tableView.cellForRow(at: selectedIndexPath)?.accessoryType = .none
+        //        tableView.cellForRow(at: selectedIndexPath)?.accessoryType = .none
         cell?.imageRadio.image = #imageLiteral(resourceName: "circle-shape-outline")
         self.selectedIndexPath = indexPath
         cell = tableView.cellForRow(at: selectedIndexPath) as? DisputeCell
-//        tableView.cellForRow(at: selectedIndexPath)?.accessoryType = .checkmark
+        //        tableView.cellForRow(at: selectedIndexPath)?.accessoryType = .checkmark
         cell?.imageRadio.image = #imageLiteral(resourceName: "radio-on-button")
         if (indexPath.row == (datasource.count-1)) {
             if !self.isShowTextView {
                 self.isShowTextView = true
+            }else{
+                self.isShowTextView = false
             }
         } else {
+            self.isShowTextView = false
             self.didSelectReason?(self.datasource[indexPath.row])
         }
     }
@@ -187,7 +203,7 @@ extension DisputeLostItemView:PostViewProtocol{
         print(data.message as Any)
         self.onClickClose!(true)
     }
-   
+    
     
 }
 

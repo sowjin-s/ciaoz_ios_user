@@ -30,6 +30,7 @@ let driverUrl = "https://itunes.apple.com/us/app/tranxit-driver/id1204269279?mt=
 let userAppStoreUtl = "https://itunes.apple.com/us/app/tranxit/id1204487551?ls=1&mt=8"
 let requestInterval : TimeInterval = 60  // seconds
 
+let driverBundleID = "com.appoets.tranxit.provider"
 
 enum AppStoreUrl : String {
     

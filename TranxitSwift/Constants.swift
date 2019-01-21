@@ -248,7 +248,11 @@ struct Constants {
     
     let dispute = "Dispute"
     let lostItem = "Lost Items"
-    
+    let disputeStatus = "Dispute Status"
+    let lostItemStatus = "Lost Item Status"
+    let open = "open"
+    let you = "You"
+    let admin = "Admin"
     
     
     let disputeMsg = "Please choose dispute type"
@@ -264,6 +268,9 @@ struct Constants {
     let rideCreated = "Ride Created Successfully"
     
     let confirmPayment = "Please confirm payment"
+    
+    let warningMsg = "You are using both user and driver apps in same device. So app may not work properly"
+    let Continue = "Continue"
     
 }
 
@@ -324,6 +331,16 @@ enum DeviceType : String, Codable {
     case android = "android"
     
 }
+
+//Dispute Status
+
+enum DisputeStatus : String, Codable {
+    
+    case open
+    case closed
+    
+}
+
 
 //Lanugage
 

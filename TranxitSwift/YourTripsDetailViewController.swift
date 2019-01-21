@@ -47,7 +47,9 @@ class YourTripsDetailViewController: UITableViewController {
     private var blurView : UIView?
     private var requestId : Int?
     private var disputeView : DisputeLostItemView?
+    private var disputeStatusView : DisputeStatusView?
     var disputeList:[String]=[]
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,7 +62,7 @@ class YourTripsDetailViewController: UITableViewController {
         super.viewWillLayoutSubviews()
         self.setLayouts()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         self.imageViewMap.image = nil
@@ -71,15 +73,15 @@ class YourTripsDetailViewController: UITableViewController {
         self.viewButtons.isHidden = false
         self.viewMore.isHidden = false
         
-//        if isUpcomingTrips {
-//        } else {
-//            self.viewLocation.removeFromSuperview()
-//        }
+        //        if isUpcomingTrips {
+        //        } else {
+        //            self.viewLocation.removeFromSuperview()
+        //        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         var disputeList = DisputeList()
-        disputeList.dispute_type = "user"
+        disputeList.dispute_type = UserType.user.rawValue
         self.presenter?.post(api: .getDisputeList, data: disputeList.toData())
     }
     
@@ -90,11 +92,22 @@ class YourTripsDetailViewController: UITableViewController {
         self.viewMore.isHidden = true
         
     }
-
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        self.disputeView?.removeFromSuperview()
+        self.disputeView = nil
+        self.disputeStatusView?.removeFromSuperview()
+        self.disputeStatusView = nil
+    }
+    
     deinit {
         self.viewButtons.removeFromSuperview()
         self.viewMore.removeFromSuperview()
+        self.disputeView?.removeFromSuperview()
         self.disputeView = nil
+        self.disputeStatusView?.removeFromSuperview()
+        self.disputeStatusView = nil
+        
     }
     
 }
@@ -107,7 +120,9 @@ extension YourTripsDetailViewController {
     private func initialLoads() {
         
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.backButtonClick))
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "ic_more").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.tapMore))
+        if !isUpcomingTrips {
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "ic_more").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.tapMore))
+        }
         self.buttonCancelRide.isHidden = !isUpcomingTrips
         self.buttonCancelRide.addTarget(self, action: #selector(self.buttonCancelRideAction(sender:)), for: .touchUpInside)
         self.buttonViewReciptAndCall.addTarget(self, action: #selector(self.buttonCallAndReciptAction(sender:)), for: .touchUpInside)
@@ -126,7 +141,7 @@ extension YourTripsDetailViewController {
         self.viewButtons.translatesAutoresizingMaskIntoConstraints = false
         self.viewButtons.widthAnchor.constraint(equalTo: UIApplication.shared.keyWindow!.widthAnchor, multiplier: 0.8, constant: 0).isActive = true
         self.viewButtons.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        self.viewButtons.bottomAnchor.constraint(equalTo: UIApplication.shared.keyWindow!.bottomAnchor, constant: -16).isActive = true 
+        self.viewButtons.bottomAnchor.constraint(equalTo: UIApplication.shared.keyWindow!.bottomAnchor, constant: -16).isActive = true
         self.viewButtons.centerXAnchor.constraint(equalTo: UIApplication.shared.keyWindow!.centerXAnchor, constant: 0).isActive = true
         
         let moreViewY = (self.navigationController?.navigationBar.frame.height)!+(self.navigationController?.navigationBar.frame.origin.y)!
@@ -140,7 +155,7 @@ extension YourTripsDetailViewController {
     }
     
     @objc func touchOutside() {
-       self.viewMore.alpha = 0
+        self.viewMore.alpha = 0
     }
     
     
@@ -154,7 +169,6 @@ extension YourTripsDetailViewController {
         self.buttonViewReciptAndCall.setTitle((isUpcomingTrips ? Constants.string.call:Constants.string.viewRecipt).localize().uppercased(), for: .normal)
         self.labelPayViaString.text = (isUpcomingTrips ? Constants.string.paymentMethod : Constants.string.payVia).localize()
         self.buttonLostItem.setTitle(Constants.string.lostItem.localize(), for: .normal)
-        self.buttonDispute.setTitle(Constants.string.dispute.localize(), for: .normal)
         
         if isUpcomingTrips {
             self.buttonCancelRide.setTitle(Constants.string.cancelRide.localize().uppercased(), for: .normal)
@@ -182,9 +196,9 @@ extension YourTripsDetailViewController {
         Common.setFont(to: self.buttonViewReciptAndCall, isTitle: true)
         Common.setFont(to: self.buttonDispute, isTitle: false)
         Common.setFont(to: self.buttonLostItem, isTitle: false)
-       if isUpcomingTrips {
+        if isUpcomingTrips {
             Common.setFont(to: self.buttonCancelRide, isTitle: true)
-       }
+        }
     }
     
     // MARK:- Layouts
@@ -202,7 +216,7 @@ extension YourTripsDetailViewController {
     // MARK:- Set values
     
     private func setValues() {
-      
+        
         let mapImage = self.dataSource?.static_map?.replacingOccurrences(of: "%7C", with: "|").addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         Cache.image(forUrl: mapImage) { (image) in
             if image != nil {
@@ -236,6 +250,8 @@ extension YourTripsDetailViewController {
         }
         self.labelPrice.text = String.removeNil(User.main.currency)+" \(self.dataSource?.payment?.total ?? 0)"
         
+        self.buttonDispute.setTitle(self.dataSource?.is_dispute == 1 ? Constants.string.disputeStatus.localize() : Constants.string.dispute.localize(), for: .normal)
+        self.buttonLostItem.setTitle(self.dataSource?.lostitem != nil ? Constants.string.lostItemStatus.localize() : Constants.string.lostItem.localize(), for: .normal)
     }
     
     // MARK:- Cancel Ride
@@ -280,7 +296,8 @@ extension YourTripsDetailViewController {
     @IBAction private func buttonDisputeAction(sender : UIButton) {
         self.viewMore.alpha = 0.0
         if self.dataSource?.is_dispute == 1 {
-            showAlert(message: Constants.string.disputecreated.localize(), okHandler: nil, fromView: self)
+            //            showAlert(message: Constants.string.disputecreated.localize(), okHandler: nil, fromView: self)
+            showDisputeStatus(isDispute: true)
             return
         }
         self.showDisputeView(isDispute:true)
@@ -288,8 +305,12 @@ extension YourTripsDetailViewController {
     }
     
     @IBAction private func buttonLostItemAction(sender : UIButton) {
-        self.showDisputeView(isDispute: false)
         self.viewMore.alpha = 0.0
+        if self.dataSource?.lostitem != nil {
+            self.showDisputeStatus(isDispute: false)
+            return
+        }
+        self.showDisputeView(isDispute: false)
     }
     
     // MARK:- Show Recipt
@@ -305,7 +326,7 @@ extension YourTripsDetailViewController {
                 self?.addBlurView()
             }
             viewReciptView.onClickPaynow = { [unowned self]_ in
-                 self.hideRecipt()
+                self.hideRecipt()
             }
             viewReciptView.onDoneClick = { [unowned self]_ in
                 self.hideRecipt()
@@ -346,6 +367,38 @@ extension YourTripsDetailViewController {
         }
     }
     
+    private func showDisputeStatus(isDispute:Bool){
+        if self.disputeStatusView == nil, let disputeStatusView = Bundle.main.loadNibNamed(XIB.Names.DisputeStatusView, owner: self, options: [:])?.first as? DisputeStatusView {
+            
+            disputeStatusView.frame = CGRect(x: 0, y: self.view.frame.height-disputeStatusView.frame.height, width: self.view.frame.width, height: disputeStatusView.frame.height)
+            self.disputeStatusView = disputeStatusView
+            
+            if isDispute {
+                disputeStatusView.setDispute(dispute: (self.dataSource?.dispute)!)
+            }else{
+                disputeStatusView.setLostItem(lostItem: (self.dataSource?.lostitem)!)
+            }
+            
+            UIApplication.shared.keyWindow?.addSubview(disputeStatusView)
+            self.disputeStatusView?.transform = CGAffineTransform(scaleX: 0.3, y: 0.3)
+            UIView.animate(withDuration: 0.5,
+                           delay: 0,
+                           usingSpringWithDamping: CGFloat(0.5),
+                           initialSpringVelocity: CGFloat(1.0),
+                           options: .allowUserInteraction,
+                           animations: {
+                            self.disputeStatusView?.transform = .identity },
+                           completion: { Void in()  })
+        }
+        self.disputeStatusView?.onClickClose = { _ in
+            UIView.animate(withDuration: 0.3, animations: {
+                self.disputeStatusView?.alpha = 0
+            }, completion: { (_) in
+                self.disputeStatusView?.removeFromSuperview()
+                self.disputeStatusView = nil
+            })
+        }
+    }
     
     private func addBlurView() {
         
@@ -362,7 +415,7 @@ extension YourTripsDetailViewController {
     }
     
     // MARK:- Remove Recipt
-   @IBAction private func hideRecipt() {
+    @IBAction private func hideRecipt() {
         
         self.viewRecipt?.dismissView(onCompletion: {
             self.viewRecipt = nil
@@ -386,9 +439,10 @@ extension YourTripsDetailViewController: PostViewProtocol {
     
     
     func getRequestArray(api: Base, data: [Request]) {
-       
+        
         if data.count>0 {
             self.dataSource = data.first
+            
         }
         
         DispatchQueue.main.async {
@@ -424,14 +478,14 @@ extension YourTripsDetailViewController: PostViewProtocol {
 
 extension YourTripsDetailViewController {
     
-   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    
-    if isUpcomingTrips && indexPath.row == 3 {
-        return 0
-    } else  {
-         return heightArray[indexPath.row]
-    }
-
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if isUpcomingTrips && indexPath.row == 3 {
+            return 0
+        } else  {
+            return heightArray[indexPath.row]
+        }
+        
     }
     
 }

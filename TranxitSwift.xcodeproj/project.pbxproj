@@ -188,6 +188,12 @@
 		08FA91A120EA7C6700723B26 /* FirebaseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FA919F20EA7C6700723B26 /* FirebaseConstants.swift */; };
 		08FA91A220EA7C6700723B26 /* FirebaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FA91A020EA7C6700723B26 /* FirebaseHelper.swift */; };
 		180240D421C39026008DD9F3 /* LocationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180240D321C39026008DD9F3 /* LocationEntity.swift */; };
+		18B215EF21F63E01005E465C /* DisputeReceiverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B215E921F63E00005E465C /* DisputeReceiverCell.swift */; };
+		18B215F021F63E01005E465C /* DisputeReceiverCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18B215EA21F63E01005E465C /* DisputeReceiverCell.xib */; };
+		18B215F121F63E01005E465C /* DisputeSenderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B215EB21F63E01005E465C /* DisputeSenderCell.swift */; };
+		18B215F221F63E01005E465C /* DisputeSenderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18B215EC21F63E01005E465C /* DisputeSenderCell.xib */; };
+		18B215F321F63E01005E465C /* DisputeStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B215ED21F63E01005E465C /* DisputeStatusView.swift */; };
+		18B215F421F63E01005E465C /* DisputeStatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18B215EE21F63E01005E465C /* DisputeStatusView.xib */; };
 		18B338E121DF6A6A006CEA74 /* ReasonEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B338E021DF6A6A006CEA74 /* ReasonEntity.swift */; };
 		18D7C04121C11EB7009065ED /* HelpEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D7C04021C11EB7009065ED /* HelpEntity.swift */; };
 		38492B362000F65E001830AD /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38492B352000F65E001830AD /* View.swift */; };
@@ -455,6 +461,12 @@
 		08FA919F20EA7C6700723B26 /* FirebaseConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseConstants.swift; sourceTree = "<group>"; };
 		08FA91A020EA7C6700723B26 /* FirebaseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseHelper.swift; sourceTree = "<group>"; };
 		180240D321C39026008DD9F3 /* LocationEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationEntity.swift; sourceTree = "<group>"; };
+		18B215E921F63E00005E465C /* DisputeReceiverCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisputeReceiverCell.swift; sourceTree = "<group>"; };
+		18B215EA21F63E01005E465C /* DisputeReceiverCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DisputeReceiverCell.xib; sourceTree = "<group>"; };
+		18B215EB21F63E01005E465C /* DisputeSenderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisputeSenderCell.swift; sourceTree = "<group>"; };
+		18B215EC21F63E01005E465C /* DisputeSenderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DisputeSenderCell.xib; sourceTree = "<group>"; };
+		18B215ED21F63E01005E465C /* DisputeStatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisputeStatusView.swift; sourceTree = "<group>"; };
+		18B215EE21F63E01005E465C /* DisputeStatusView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DisputeStatusView.xib; sourceTree = "<group>"; };
 		18B338E021DF6A6A006CEA74 /* ReasonEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReasonEntity.swift; sourceTree = "<group>"; };
 		18D7C04021C11EB7009065ED /* HelpEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpEntity.swift; sourceTree = "<group>"; };
 		38492B352000F65E001830AD /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
@@ -926,6 +938,7 @@
 				083617CB20B714CD009C9658 /* YourTripCell.xib */,
 				C6EBAA8521EA2161007E2ADA /* DisputeCell.swift */,
 				C6EBAA8621EA2161007E2ADA /* DisputeCell.xib */,
+				18B215E821F63DEA005E465C /* Dispute Status */,
 			);
 			name = YourTrips;
 			sourceTree = "<group>";
@@ -1345,6 +1358,19 @@
 				08FA708420E3C9A0009B060A /* RideNowView.swift */,
 			);
 			name = RideNow;
+			sourceTree = "<group>";
+		};
+		18B215E821F63DEA005E465C /* Dispute Status */ = {
+			isa = PBXGroup;
+			children = (
+				18B215E921F63E00005E465C /* DisputeReceiverCell.swift */,
+				18B215EA21F63E01005E465C /* DisputeReceiverCell.xib */,
+				18B215EB21F63E01005E465C /* DisputeSenderCell.swift */,
+				18B215EC21F63E01005E465C /* DisputeSenderCell.xib */,
+				18B215ED21F63E01005E465C /* DisputeStatusView.swift */,
+				18B215EE21F63E01005E465C /* DisputeStatusView.xib */,
+			);
+			name = "Dispute Status";
 			sourceTree = "<group>";
 		};
 		5F3758D020AEF4C96CC2AB25 /* Frameworks */ = {
@@ -1779,6 +1805,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C6EBAA8821EA2161007E2ADA /* DisputeCell.xib in Resources */,
+				18B215F221F63E01005E465C /* DisputeSenderCell.xib in Resources */,
 				08EA70CD2147D18E00079908 /* TipsView.xib in Resources */,
 				08FA708A20E3CAA3009B060A /* User.storyboard in Resources */,
 				08001A0C203C241E0076D324 /* countryCodes.json in Resources */,
@@ -1796,6 +1823,7 @@
 				08585F4B2115E94B009DE743 /* ripple.json in Resources */,
 				085161D3214FB32900EF474E /* CouponCollectionViewCell.xib in Resources */,
 				0811B17620E7B2AD00B78323 /* ImageCellSender.xib in Resources */,
+				18B215F421F63E01005E465C /* DisputeStatusView.xib in Resources */,
 				085161CC214FA32A00EF474E /* CouponView.xib in Resources */,
 				0865456721620A3500BF546D /* PassbookWalletTransaction.xib in Resources */,
 				0823428A20AD775A0055DDF8 /* LoaderView.xib in Resources */,
@@ -1817,6 +1845,7 @@
 				0811B17920E7B2AD00B78323 /* ChatReciever.xib in Resources */,
 				0802718920A2DC0100EAE8C8 /* LocationSelectionView.xib in Resources */,
 				08A50C482109B78A00CCDDA8 /* CancelListTableViewCell.xib in Resources */,
+				18B215F021F63E01005E465C /* DisputeReceiverCell.xib in Resources */,
 				082F77D220A5AA2200D6474B /* ServiceSelectionCollectionViewCell.xib in Resources */,
 				083617CD20B714CE009C9658 /* YourTripCell.xib in Resources */,
 				085F4DDF21367E5100648591 /* clanpro_medium.otf in Resources */,
@@ -2059,6 +2088,7 @@
 				08CEB1372105AF2F00AC217A /* AddCardViewController.swift in Sources */,
 				0811B16A20E7AF6600B78323 /* ChatResponse.swift in Sources */,
 				A2EA8E0421D7AD7E00949332 /* SettingsEntity.swift in Sources */,
+				18B215EF21F63E01005E465C /* DisputeReceiverCell.swift in Sources */,
 				8871FBD51FE7DC8E002335D5 /* Protocol.swift in Sources */,
 				083A59AA20A434E000D64574 /* LocationTableViewCell.swift in Sources */,
 				082C441E20E7913A00A7C892 /* FloatyWindow.swift in Sources */,
@@ -2072,6 +2102,7 @@
 				082C441F20E7913A00A7C892 /* FloatyItem.swift in Sources */,
 				082F77D120A5AA2200D6474B /* ServiceSelectionCollectionViewCell.swift in Sources */,
 				18B338E121DF6A6A006CEA74 /* ReasonEntity.swift in Sources */,
+				18B215F321F63E01005E465C /* DisputeStatusView.swift in Sources */,
 				A2EA8E0221D7ACF400949332 /* ReferalController.swift in Sources */,
 				085161D5214FE30E00EF474E /* PromocodeEntity.swift in Sources */,
 				08A8823620C6DEBE0088BC5A /* KeyboardHelper.swift in Sources */,
@@ -2128,6 +2159,7 @@
 				0811B18320E7B55100B78323 /* SelectImageView.swift in Sources */,
 				082C442220E7913A00A7C892 /* FloatyViewController.swift in Sources */,
 				082D1B92209333F10000B7C8 /* FontHelper.swift in Sources */,
+				18B215F121F63E01005E465C /* DisputeSenderCell.swift in Sources */,
 				08A8821520C572510088BC5A /* Coupons.swift in Sources */,
 				082D1B7E2093159A0000B7C8 /* TextFieldEffects.swift in Sources */,
 				8833895D1FE8FC22006B6C05 /* Identifiers.swift in Sources */,

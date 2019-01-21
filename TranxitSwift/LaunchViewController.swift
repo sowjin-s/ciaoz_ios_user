@@ -30,12 +30,12 @@ class LaunchViewController: UIViewController {
     // if driver app exist need to show warning alert
     func driverAppExist() {
         let app = UIApplication.shared
-        let bundleId = "com.appoets.tranxit.user://"
+        let bundleId = driverBundleID+"://"
         
         if app.canOpenURL(URL(string: bundleId)!) {
-            let appExistAlert = UIAlertController(title: "", message: "You are using both user and provider apps in same device. So app may not work properly ", preferredStyle: .actionSheet)
+            let appExistAlert = UIAlertController(title: "", message: Constants.string.warningMsg.localize(), preferredStyle: .actionSheet)
             
-            appExistAlert.addAction(UIAlertAction(title: "Continue", style: .default, handler: { (Void) in
+            appExistAlert.addAction(UIAlertAction(title: Constants.string.Continue.localize(), style: .default, handler: { (Void) in
                 print("App is install")
             }))
             present(appExistAlert, animated: true, completion: nil)

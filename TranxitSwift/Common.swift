@@ -91,6 +91,8 @@ class Common {
         User.main.referral_count = profile?.referral_count
         User.main.referral_total_text = profile?.referral_total_text
         User.main.referral_text = profile?.referral_text
+        User.main.otp = profile?.otp
+        User.main.ride_otp = profile?.ride_otp
         
         if let language = profile?.language {
             UserDefaults.standard.set(language.rawValue, forKey: Keys.list.language)

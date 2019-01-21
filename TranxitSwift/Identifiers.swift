@@ -71,6 +71,9 @@ struct XIB {
     let PassbookWalletTransaction = "PassbookWalletTransaction"
     let disputeCell = "DisputeCell"
     let DisputeLostItemView = "DisputeLostItemView"
+    let DisputeSenderCell = "DisputeSenderCell"
+    let DisputeReceiverCell = "DisputeReceiverCell"
+    let DisputeStatusView = "DisputeStatusView"
 }
 
 

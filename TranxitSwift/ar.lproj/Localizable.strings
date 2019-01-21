@@ -248,7 +248,8 @@
 "Please enter your comments" = "يرجى إدخال تعليقاتك";
 "Please choose dispute type" = "يرجى اختيار نوع النزاع";
 
-
+"You are using both user and driver apps in same device. So app may not work properly" = "أنت تستخدم كل من تطبيقات المستخدم وبرامج التشغيل في نفس الجهاز. لذلك قد لا يعمل التطبيق بشكل صحيح";
+"Continue" = "استمر";
 
 
 
