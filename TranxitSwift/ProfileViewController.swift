@@ -284,7 +284,7 @@ extension ProfileViewController {
     
     private func prepareLogin(viewcontroller : UIViewController&AKFViewController) {
         
-        viewcontroller.delegate = self as? AKFViewControllerDelegate
+        viewcontroller.delegate = self
         viewcontroller.uiManager = AKFSkinManager(skinType: .contemporary, primaryColor: .primary)
         viewcontroller.uiManager.theme?()?.buttonTextColor = .secondary
         

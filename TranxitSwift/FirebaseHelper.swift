@@ -189,7 +189,7 @@ extension FirebaseHelper {
         
         self.initializeDB()
         let chatPath = Common.getChatId(with: requestId)
-        self.ref?.child(chatPath).child(self.ref!.childByAutoId().key).setValue(chat.JSONRepresentation)
+        self.ref?.child(chatPath).child(self.ref!.childByAutoId().key!).setValue(chat.JSONRepresentation)
     }
     
     

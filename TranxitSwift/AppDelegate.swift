@@ -12,13 +12,13 @@ import UIKit
 import UserNotifications
 import GoogleMaps
 import GooglePlaces
+import GoogleSignIn
 import IQKeyboardManagerSwift
 import CoreData
 import Intents
 import Crashlytics
 import Fabric
 import Firebase
-import Google
 import Stripe
 
 @UIApplicationMain
@@ -161,8 +161,8 @@ extension AppDelegate {
         
         GMSServices.provideAPIKey(googleMapKey)
         GMSPlacesClient.provideAPIKey(googleMapKey)
-        var error : NSError?
-        GGLContext.sharedInstance().configureWithError(&error)
+//        var error : NSError?
+//        GGLContext.sharedInstance().configureWithError(&error)
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
     }
     
@@ -174,7 +174,7 @@ extension AppDelegate {
     }
     
     private func IQKeyboard() {
-        IQKeyboardManager.sharedManager().enable = false
+        IQKeyboardManager.shared.enable = false
     }
     
     private func siri() {

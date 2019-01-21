@@ -86,7 +86,7 @@ extension NotificationsViewController : PostViewProtocol {
     func getNotificationsMangerList(api: Base, data: [NotificationManagerModel]?) {
        
         if api == .notificationManager {
-             print(data)
+            print(data!)
             dataSource = data
             self.tableView.reloadData()
             

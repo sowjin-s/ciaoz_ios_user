@@ -52,7 +52,7 @@ extension ViewTips  {
         
         self.opacityShadow = 3
         self.radiusShadow = 2
-        self.colorShadow = UIColor.lightGray.alpha(0.5)
+        self.colorShadow = UIColor.lightGray
         
         self.labelTitle = UILabel()
         self.labelTitle.textColor = .black

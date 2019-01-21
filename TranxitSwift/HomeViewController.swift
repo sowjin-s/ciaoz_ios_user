@@ -593,7 +593,7 @@ extension HomeViewController {
                 self.sourceMarker.map = self.mapViewHelper?.mapView
                 self.destinationMarker.map = self.mapViewHelper?.mapView
                 if isReroute{
-                    var coordinate = CLLocationCoordinate2D(latitude: (currentLocation.value?.latitude)!, longitude: (currentLocation.value?.longitude)!)
+                    let coordinate = CLLocationCoordinate2D(latitude: (currentLocation.value?.latitude)!, longitude: (currentLocation.value?.longitude)!)
                     sourceCoordinate = coordinate
                 }
                 self.sourceMarker.position = sourceCoordinate

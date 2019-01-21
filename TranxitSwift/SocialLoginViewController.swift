@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Google
+import GoogleSignIn
 import FacebookLogin
 import FacebookCore
 import AccountKit

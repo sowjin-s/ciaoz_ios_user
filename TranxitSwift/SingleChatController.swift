@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import ImagePicker
 import Lightbox
 
 // ENUM Chat Type
