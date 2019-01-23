@@ -14,3 +14,8 @@ struct ExtendTrip : JSONSerializable {
     var longitude : Double?
     var address:String?
 }
+
+
+struct TokenEntity : JSONSerializable {
+    var token : String?
+}

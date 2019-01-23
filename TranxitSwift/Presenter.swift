@@ -60,6 +60,9 @@ extension Presenter : PostPresenterInputProtocol {
 //MARK:- Implementation PostPresenterOutputProtocol
 
 extension Presenter : PostPresenterOutputProtocol {
+    func sendBrainTreeToken(api: Base, data: Data) {
+        controller?.getBrainTreeToken(api: api, data: PresenterProcessor.shared.brainTreeToken(data: data)!)
+    }
     
     func sendNotificationList(api: Base, data: Data) {
         controller?.getNotificationsMangerList(api: api, data: PresenterProcessor.shared.notifications(data: data))
@@ -150,6 +153,10 @@ extension Presenter : PostPresenterOutputProtocol {
     }
     
     func sendWalletEntity(api: Base, data: Data) {
+        controller?.getWalletEntity(api: api, data: PresenterProcessor.shared.getWalletEntity(data: data))
+    }
+    
+    func sendBrainTreeEntity(api: Base, data: Data) {
         controller?.getWalletEntity(api: api, data: PresenterProcessor.shared.getWalletEntity(data: data))
     }
     

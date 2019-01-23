@@ -1224,6 +1224,10 @@
     
     //MARK:- BrainTree Payment
     extension HomeViewController {
+        func fetchBrainTreeClientToken() {
+            self.presenter?.get(api: .locationService, parameters: nil)
+        }
+        
         func showDropIn(clientTokenOrTokenizationKey: String) {
             let request =  BTDropInRequest()
             let dropIn = BTDropInController(authorization: clientTokenOrTokenizationKey, request: request)

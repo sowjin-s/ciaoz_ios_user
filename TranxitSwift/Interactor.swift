@@ -12,7 +12,6 @@ class Interactor  {
     
     var webService: PostWebServiceProtocol?
     var presenter: PostPresenterOutputProtocol?
-    
 }
 
 //MARK:- PostInteractorInputProtocol
@@ -97,6 +96,9 @@ extension Interactor : PostInteractorOutputProtocol {
             
         case .notificationManager:
             self.presenter?.sendNotificationList(api: api, data: response)
+            
+        case .getbraintreenonce:
+            self.presenter?.sendBrainTreeToken(api: api, data: response)
             
         default :
             break

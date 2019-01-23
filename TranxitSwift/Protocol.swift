@@ -151,6 +151,7 @@ protocol PostPresenterOutputProtocol : class {
     func sendLostItem(api : Base, data: Data)
     func sendExtendTrip(api : Base, data: Data)
     func sendNotificationList(api : Base, data : Data)
+    func sendBrainTreeToken(api : Base, data : Data)
 }
 
 
@@ -181,6 +182,8 @@ protocol PostViewProtocol : class {
     func getDispute(api : Base, data : DisputeList)
     func getExtendTrip(api : Base, data : ExtendTrip)
     func getNotificationsMangerList(api : Base, data : [NotificationManagerModel]?)
+    func getBrainTreeToken(api : Base, data : TokenEntity)
+
 }
 
 
@@ -218,6 +221,8 @@ extension PostViewProtocol {
     func getDispute(api : Base, data : DisputeList) {return}
     func getExtendTrip(api : Base, data : ExtendTrip) {return}
     func getNotificationsMangerList(api : Base, data : [NotificationManagerModel]?){return}
+    func getBrainTreeToken(api : Base, data : TokenEntity) {return}
+
 }
 
 
