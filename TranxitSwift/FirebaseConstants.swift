@@ -35,9 +35,7 @@ struct FirebaseConstants {
 enum MessageStatus : Int {
     
     case sent = 0
-    //  case recieved = 1
     case read = 1
-    
 }
 
 
@@ -62,7 +60,6 @@ enum Mime : String {
             return .Empty
             
         }
-        
     }
     
     var ext : String {
@@ -80,7 +77,6 @@ enum Mime : String {
         default:
             return .Empty
         }
-        
     }
     
 }

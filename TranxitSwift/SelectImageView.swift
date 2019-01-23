@@ -9,9 +9,12 @@ import UIKit
 
 class SelectImageView : NSObject{
     
-private var completion : (([UIImage])->())?
-    
-   static let main = SelectImageView()
+    // MARK: - Local Variable
+    static let main = SelectImageView()
+
+    // MARK: - Local Completion Handler
+    private var completion : (([UIImage])->())?
+
     
     func show(imagePickerIn view : UIViewController, completion : @escaping ([UIImage])->()){
         

@@ -5,34 +5,50 @@ target 'TranxitUser' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
+    #Alamofire Webservices
     pod 'Alamofire'
+    
+    #Google
     pod 'GoogleMaps'
     pod 'GoogleSignIn'
     pod 'GooglePlaces'
+    
+    #Firebase
     pod 'FirebaseAnalytics'
     pod 'Firebase/Database'
     pod 'Firebase/Core'
     pod 'Firebase/Storage'
     pod 'Firebase/Auth'
     pod 'Firebase/Messaging'
+    
+    #Crashlytics
+    pod 'Fabric'
+    pod 'Crashlytics'
+    
+    #Facebook
     pod 'FacebookCore'
     pod 'FacebookLogin'
     pod 'FacebookShare'
-    pod 'Fabric'
-    pod 'Crashlytics'
-    pod 'lottie-ios'
+    pod 'AccountKit'
+    
+    #Keyboard
     pod 'IQKeyboardManagerSwift'
     pod 'IHKeyboardAvoiding'
+    
+    #Payment & Bank
+    pod 'Stripe'
+    pod 'BraintreeDropIn'
+    pod 'CreditCardForm', :git => 'https://github.com/orazz/CreditCardForm-iOS', branch: 'master'
+    
+    #Others
+    pod 'lottie-ios'
     pod 'KWDrawerController'
     pod 'DateTimePicker'
     pod 'PopupDialog'
-#    pod 'ImagePicker'
     pod 'Lightbox'
-    pod 'Stripe'
-    pod 'AccountKit'
     pod 'DropDown'
-    pod 'CreditCardForm', :git => 'https://github.com/orazz/CreditCardForm-iOS', branch: 'master'
-  
+
+
   post_install do |installer|
       installer.pods_project.build_configurations.each do |config|
           config.build_settings.delete('CODE_SIGNING_ALLOWED')

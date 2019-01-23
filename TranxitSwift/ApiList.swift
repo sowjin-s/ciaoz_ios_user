@@ -96,10 +96,6 @@ enum Base : String{
             return Base.signUp
         }
         
-//        for val in iterateEnum(Base.self) where val.rawValue == key {
-//            return val
-//        }
-        
         if let base = Base(rawValue: key) {
             return base
         }

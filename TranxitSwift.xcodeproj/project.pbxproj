@@ -138,7 +138,6 @@
 		08A50C482109B78A00CCDDA8 /* CancelListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08A50C462109B78A00CCDDA8 /* CancelListTableViewCell.xib */; };
 		08A8821320C512760088BC5A /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A8821220C512760088BC5A /* LocationService.swift */; };
 		08A8821520C572510088BC5A /* Coupons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A8821420C572510088BC5A /* Coupons.swift */; };
-		08A8823620C6DEBE0088BC5A /* KeyboardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A8823520C6DEBE0088BC5A /* KeyboardHelper.swift */; };
 		08B73D0420947C5C00B60F74 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B73D0320947C5C00B60F74 /* PasswordViewController.swift */; };
 		08B7DC72209A14A1002CF17A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B7DC71209A14A1002CF17A /* HomeViewController.swift */; };
 		08B7DC75209A14E0002CF17A /* SideBarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B7DC74209A14E0002CF17A /* SideBarTableViewController.swift */; };
@@ -188,6 +187,10 @@
 		08FA91A120EA7C6700723B26 /* FirebaseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FA919F20EA7C6700723B26 /* FirebaseConstants.swift */; };
 		08FA91A220EA7C6700723B26 /* FirebaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FA91A020EA7C6700723B26 /* FirebaseHelper.swift */; };
 		180240D421C39026008DD9F3 /* LocationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180240D321C39026008DD9F3 /* LocationEntity.swift */; };
+		187A0FF521F87022006F0054 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 187A0FED21F86A82006F0054 /* SystemConfiguration.framework */; };
+		187A0FF821F870DD006F0054 /* PaymentSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 187A0FF721F870DC006F0054 /* PaymentSDK.framework */; };
+		1885EDED21F8718C00099726 /* PaymentSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 187A0FF721F870DC006F0054 /* PaymentSDK.framework */; };
+		1885EDEE21F8718C00099726 /* PaymentSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 187A0FF721F870DC006F0054 /* PaymentSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		18B215EF21F63E01005E465C /* DisputeReceiverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B215E921F63E00005E465C /* DisputeReceiverCell.swift */; };
 		18B215F021F63E01005E465C /* DisputeReceiverCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18B215EA21F63E01005E465C /* DisputeReceiverCell.xib */; };
 		18B215F121F63E01005E465C /* DisputeSenderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B215EB21F63E01005E465C /* DisputeSenderCell.swift */; };
@@ -242,15 +245,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		08032BD42048133E006BFC4E /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 8;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
 		087500E420D7D27700CFA858 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -260,6 +254,17 @@
 				0875010720D7D4EC00CFA858 /* SiriIntent.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1885EDEF21F8718D00099726 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1885EDEE21F8718C00099726 /* PaymentSDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -399,7 +404,6 @@
 		08A50C462109B78A00CCDDA8 /* CancelListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CancelListTableViewCell.xib; sourceTree = "<group>"; };
 		08A8821220C512760088BC5A /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		08A8821420C572510088BC5A /* Coupons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coupons.swift; sourceTree = "<group>"; };
-		08A8823520C6DEBE0088BC5A /* KeyboardHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHelper.swift; sourceTree = "<group>"; };
 		08B73D0320947C5C00B60F74 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		08B7DC71209A14A1002CF17A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		08B7DC74209A14E0002CF17A /* SideBarTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarTableViewController.swift; sourceTree = "<group>"; };
@@ -461,6 +465,9 @@
 		08FA919F20EA7C6700723B26 /* FirebaseConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseConstants.swift; sourceTree = "<group>"; };
 		08FA91A020EA7C6700723B26 /* FirebaseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseHelper.swift; sourceTree = "<group>"; };
 		180240D321C39026008DD9F3 /* LocationEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationEntity.swift; sourceTree = "<group>"; };
+		187A0FED21F86A82006F0054 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		187A0FF121F86F44006F0054 /* PaymentSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PaymentSDK.framework; path = /Users/apple/Documents/MyProduct/tranxitswiftbase_ios_user/PaymentSDK.framework; sourceTree = "<absolute>"; };
+		187A0FF721F870DC006F0054 /* PaymentSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PaymentSDK.framework; sourceTree = "<group>"; };
 		18B215E921F63E00005E465C /* DisputeReceiverCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisputeReceiverCell.swift; sourceTree = "<group>"; };
 		18B215EA21F63E01005E465C /* DisputeReceiverCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DisputeReceiverCell.xib; sourceTree = "<group>"; };
 		18B215EB21F63E01005E465C /* DisputeSenderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisputeSenderCell.swift; sourceTree = "<group>"; };
@@ -519,6 +526,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1885EDED21F8718C00099726 /* PaymentSDK.framework in Frameworks */,
+				187A0FF521F87022006F0054 /* SystemConfiguration.framework in Frameworks */,
+				187A0FF821F870DD006F0054 /* PaymentSDK.framework in Frameworks */,
 				08147B7F208A1A9700C5CFD3 /* SafariServices.framework in Frameworks */,
 				08ED0E4E206CF12F0016732B /* PushKit.framework in Frameworks */,
 				C4BB5B4F175BE4034471BDE9 /* Pods_TranxitUser.framework in Frameworks */,
@@ -979,13 +989,6 @@
 			name = "YourTrips Detail";
 			sourceTree = "<group>";
 		};
-		084182BA200F6BE200527D0D /* Requests */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Requests;
-			sourceTree = "<group>";
-		};
 		08457762207363E000E890F5 /* AVPlayer */ = {
 			isa = PBXGroup;
 			children = (
@@ -1022,11 +1025,9 @@
 		0846135F20627389002616EF /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				08E8D79720EB6DEA00DA34AF /* Stripe */,
 				0811B18420E7B55500B78323 /* ImagePicker */,
 				0811B17B20E7B52100B78323 /* Firebase */,
 				08E2B21F20C9583D002E689B /* CoreData */,
-				08A8823420C6DDE20088BC5A /* Keyboard Helper */,
 				08F595E02076460F00369048 /* Parallalex */,
 				08F3CBBD202471DC00F5EEDF /* Toast */,
 				0846135E20627374002616EF /* Bind */,
@@ -1189,14 +1190,6 @@
 			name = CancelReason;
 			sourceTree = "<group>";
 		};
-		08A8823420C6DDE20088BC5A /* Keyboard Helper */ = {
-			isa = PBXGroup;
-			children = (
-				08A8823520C6DEBE0088BC5A /* KeyboardHelper.swift */,
-			);
-			name = "Keyboard Helper";
-			sourceTree = "<group>";
-		};
 		08B73D0220947C4900B60F74 /* Password */ = {
 			isa = PBXGroup;
 			children = (
@@ -1281,13 +1274,6 @@
 			name = CoreData;
 			sourceTree = "<group>";
 		};
-		08E8D79720EB6DEA00DA34AF /* Stripe */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Stripe;
-			sourceTree = "<group>";
-		};
 		08E9675C20D2C19F0077DB4F /* Rate View */ = {
 			isa = PBXGroup;
 			children = (
@@ -1360,6 +1346,14 @@
 			name = RideNow;
 			sourceTree = "<group>";
 		};
+		1885EDEC21F8716900099726 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				187A0FF121F86F44006F0054 /* PaymentSDK.framework */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		18B215E821F63DEA005E465C /* Dispute Status */ = {
 			isa = PBXGroup;
 			children = (
@@ -1376,6 +1370,8 @@
 		5F3758D020AEF4C96CC2AB25 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				187A0FF721F870DC006F0054 /* PaymentSDK.framework */,
+				187A0FED21F86A82006F0054 /* SystemConfiguration.framework */,
 				08147B7E208A1A9600C5CFD3 /* SafariServices.framework */,
 				08ED0E4D206CF12F0016732B /* PushKit.framework */,
 				087500CF20D7D27600CFA858 /* IntentsUI.framework */,
@@ -1453,7 +1449,6 @@
 				086BAF5520076DF80087F15A /* Make Json */,
 				086BAF5320076D870087F15A /* Api */,
 				086BAF5420076D990087F15A /* Request Serializer */,
-				084182BA200F6BE200527D0D /* Requests */,
 				082D1B6A209310840000B7C8 /* Reachability */,
 			);
 			name = "Base Url";
@@ -1496,6 +1491,7 @@
 				8894E2211FE7D7980097B4B3 /* Products */,
 				5F3758D020AEF4C96CC2AB25 /* Frameworks */,
 				EB1CCA3499386EE09E6218FD /* Pods */,
+				1885EDEC21F8716900099726 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1711,11 +1707,11 @@
 				8894E21C1FE7D7980097B4B3 /* Sources */,
 				8894E21D1FE7D7980097B4B3 /* Frameworks */,
 				8894E21E1FE7D7980097B4B3 /* Resources */,
-				08032BD42048133E006BFC4E /* CopyFiles */,
 				08224B542099CCB200EA1CB4 /* ShellScript */,
 				087500E420D7D27700CFA858 /* Embed App Extensions */,
 				FACC63C1BDD25EBE62222CEF /* [CP] Embed Pods Frameworks */,
 				425BDFE623A80545895D257A /* [CP] Copy Pods Resources */,
+				1885EDEF21F8718D00099726 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1932,6 +1928,8 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-TranxitUser/Pods-TranxitUser-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/Braintree/Braintree.framework",
+				"${BUILT_PRODUCTS_DIR}/BraintreeDropIn/BraintreeDropIn.framework",
 				"${BUILT_PRODUCTS_DIR}/Cache/Cache.framework",
 				"${BUILT_PRODUCTS_DIR}/CreditCardForm/CreditCardForm.framework",
 				"${BUILT_PRODUCTS_DIR}/DateTimePicker/DateTimePicker.framework",
@@ -1964,6 +1962,8 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Braintree.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BraintreeDropIn.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cache.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CreditCardForm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DateTimePicker.framework",
@@ -2105,7 +2105,6 @@
 				18B215F321F63E01005E465C /* DisputeStatusView.swift in Sources */,
 				A2EA8E0221D7ACF400949332 /* ReferalController.swift in Sources */,
 				085161D5214FE30E00EF474E /* PromocodeEntity.swift in Sources */,
-				08A8823620C6DEBE0088BC5A /* KeyboardHelper.swift in Sources */,
 				0811B17A20E7B2AD00B78323 /* ChatCell.swift in Sources */,
 				083A59B120A4351D00D64574 /* LocationHeaderTableViewCell.swift in Sources */,
 				086BAF5720076E0D0087F15A /* MakeJson.swift in Sources */,

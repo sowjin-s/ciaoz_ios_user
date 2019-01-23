@@ -20,6 +20,4 @@ class LottieHelper {
         heartView.frame = frame
         return heartView
     }
-    
-
 }

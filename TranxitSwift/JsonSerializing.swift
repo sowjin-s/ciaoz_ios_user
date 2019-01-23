@@ -65,18 +65,6 @@ extension JSONSerializable {
         }
         
     }
-    
-    
-    
-//    func toData()->Data?{  // Convert struct directly into json request
-//
-//        let representation = JSONRepresentation
-//
-//        return getData(representation)
-//
-//
-//    }
-    
 }
 
 // MARK:- For Data

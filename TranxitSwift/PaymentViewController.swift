@@ -8,15 +8,15 @@
 
 import UIKit
 import Stripe
-//import IQKeyboardManagerSwift
 
 class PaymentViewController: UITableViewController {
     
+    //MARK:- IBOutlet Variable
     @IBOutlet private var buttonAddPayments : UIButton!
     
+    //MARK:- Local Variable
     private let tableCellId = "tableCellId"
-    
-    private var headers = [Constants.string.paymentMethods] //Constants.string.yourCards
+    private var headers = [Constants.string.paymentMethods]
     private var totalCount = [Int:Int]()
    
     // Boolean for Card selection whether to show or not
@@ -94,11 +94,7 @@ extension PaymentViewController {
         
     }
     
-    
-    
-    
     // MARK:- Set Design
-    
     private func setDesign () {
         
         Common.setFont(to: buttonAddPayments)
