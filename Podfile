@@ -7,6 +7,10 @@ target 'TranxitUser' do
 
     #Alamofire Webservices
     pod 'Alamofire'
+    pod 'AlamofireObjectMapper'
+    
+    #Reachability Network check
+    pod 'ReachabilitySwift'
     
     #Google
     pod 'GoogleMaps'
@@ -47,7 +51,6 @@ target 'TranxitUser' do
     pod 'PopupDialog'
     pod 'Lightbox'
     pod 'DropDown'
-
 
   post_install do |installer|
       installer.pods_project.build_configurations.each do |config|

@@ -16,6 +16,7 @@
     import PaymentSDK
     import BraintreeDropIn
     import Braintree
+    import Reachability
     
     var riderStatus : RideStatus = .none // Provider Current Status
     
@@ -1237,6 +1238,7 @@
                     // result.paymentMethod
                     // result.paymentIcon
                     // result.paymentDescription
+                    print(result)
                 }
                 controller.dismiss(animated: true, completion: nil)
             }

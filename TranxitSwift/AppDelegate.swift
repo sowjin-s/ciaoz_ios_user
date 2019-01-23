@@ -20,6 +20,7 @@ import Crashlytics
 import Fabric
 import Firebase
 import Stripe
+import Reachability
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

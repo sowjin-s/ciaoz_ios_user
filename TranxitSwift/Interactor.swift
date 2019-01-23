@@ -11,7 +11,6 @@ import Foundation
 class Interactor  {
     
     var webService: PostWebServiceProtocol?
-    
     var presenter: PostPresenterOutputProtocol?
     
 }
@@ -22,20 +21,17 @@ extension Interactor : PostInteractorInputProtocol {
     
     func send(api: Base, url: String, data: Data?, type: HttpType) {
       
-        webService?.retrieve(api: api,url: url, data: data, imageData: nil, paramters: nil, type: type, completion: nil)
-        
+        self.webService?.retrieve(api: api,url: url, data: data, imageData: nil, paramters: nil, type: type, completion: nil)
     }
     
     func send(api: Base, data: Data?, paramters: [String : Any]?, type: HttpType) {
-        webService?.retrieve(api: api,url: nil, data: data, imageData: nil, paramters: paramters, type: type, completion: nil)
+        self.webService?.retrieve(api: api,url: nil, data: data, imageData: nil, paramters: paramters, type: type, completion: nil)
     }
     
     func send(api: Base, imageData: [String : Data]?, parameters: [String : Any]?) {
-        webService?.retrieve(api: api,url: nil, data: nil, imageData: imageData, paramters: parameters, type: .POST, completion: nil)
+        self.webService?.retrieve(api: api,url: nil, data: nil, imageData: imageData, paramters: parameters, type: .POST, completion: nil)
     }
-    
 }
-
 
 extension Interactor : PostInteractorOutputProtocol {
 
@@ -80,18 +76,25 @@ extension Interactor : PostInteractorOutputProtocol {
         
         case .promocodes:
             self.presenter?.sendPromocodeList(api: api, data: response)
+            
         case .help :
             self.presenter?.sendHelpAPI(api: api, data: response)
+            
         case .settings :
             self.presenter?.sendSetting(api: api, data: response)
+            
         case .cancelReason:
             self.presenter?.sendReason(api: api, data: response)
+            
         case .getDisputeList:
             self.presenter?.sendDisputeList(api: api, data: response)
+            
         case .postDispute , .lostItem:
             self.presenter?.sendDispute(api: api, data: response)
+            
         case .extendTrip :
             self.presenter?.sendExtendTrip(api: api, data: response)
+            
         case .notificationManager:
             self.presenter?.sendNotificationList(api: api, data: response)
             
@@ -99,15 +102,11 @@ extension Interactor : PostInteractorOutputProtocol {
             break
             
         }
-        
     }
     
     func on(api: Base, error: CustomError) {
         
-        presenter?.onError(api: api, error: error)
-        
+        self.presenter?.onError(api: api, error: error)
     }
-    
-    
 }
 
