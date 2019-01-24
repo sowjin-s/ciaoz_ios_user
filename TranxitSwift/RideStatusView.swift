@@ -69,7 +69,29 @@ extension RideStatusView {
         self.buttonCancel.addTarget(self, action: #selector(self.cancelShareAction), for: .touchUpInside)
         self.setDesign()
         
+//        let gesture = UIPanGestureRecognizer(target: self, action: #selector(wasDragged(gestureRecognizer:)))
+//        self.addGestureRecognizer(gesture)
+//        gesture.delegate = self
     }
+    
+/*    @objc func wasDragged(gestureRecognizer: UIPanGestureRecognizer) {
+        
+        if gestureRecognizer.state == UIGestureRecognizerState.began || gestureRecognizer.state == UIGestureRecognizerState.changed {
+            
+            let translation = gestureRecognizer.translation(in: self.view)
+            print(gestureRecognizer.view!.center.y)
+            
+            if(gestureRecognizer.view!.center.y < 555) {
+                
+                gestureRecognizer.view!.center = CGPoint(x: gestureRecognizer.view!.center.x, y: gestureRecognizer.view!.center.y + translation.y)
+                
+            }else {
+                gestureRecognizer.view!.center = CGPoint(x:gestureRecognizer.view!.center.x, y:554)
+            }
+            gestureRecognizer.setTranslation(CGPoint(x: 0, y: 0), in: self.view)
+        }
+    } */
+
     
     // MARK:- Set Designs
     
@@ -124,7 +146,8 @@ extension RideStatusView {
         self.labelTopTitle.text = {
             switch values.status! {
                 case .accepted, .started:
-                   return Constants.string.driverAccepted.localize()
+                    self.labelOtp.isHidden = User.main.ride_otp == 0
+                    return Constants.string.driverAccepted.localize()
                 case .arrived:
                     self.labelETA.isHidden = true
                    return Constants.string.driverArrived.localize()
@@ -159,7 +182,7 @@ extension RideStatusView {
         self.labelServiceDescription.text = values.provider_service?.service_model
         self.labelOtp.text = " \(Constants.string.otp.localize()+": "+String.removeNil(values.otp)) "
         self.isOnSurge = values.surge == 1
-        self.labelOtp.isHidden = User.main.ride_otp == 0
+//        self.labelOtp.isHidden = User.main.ride_otp == 0
     }
     
     // MARK:- Call Provider

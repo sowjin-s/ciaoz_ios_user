@@ -44,6 +44,7 @@ extension GMSMapView {
             if let points = mapPath.routes?.first?.overview_polyline?.points {
                 
                 self.drawPath(with: points)
+                gmsPath = GMSPath.init(fromEncodedPath: points)!
                
             }
         }

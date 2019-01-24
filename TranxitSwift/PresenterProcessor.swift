@@ -136,6 +136,11 @@ class PresenterProcessor {
         
         return data.getDecodedObject(from: [NotificationManagerModel].self)
     }
+    
+    func brainTreeToken(data : Data)->TokenEntity? {
+        
+        return data.getDecodedObject(from: TokenEntity.self)
+    }
 }
 
 
