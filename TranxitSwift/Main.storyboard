@@ -254,15 +254,35 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wOr-bi-9HM">
+                                                        <rect key="frame" x="224" y="3.5" width="27" height="28"/>
+                                                        <subviews>
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_swap" translatesAutoresizingMaskIntoConstraints="NO" id="tYX-ik-NOj">
+                                                                <rect key="frame" x="4" y="4" width="19" height="20"/>
+                                                            </imageView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="27" id="0gF-2n-PHF"/>
+                                                            <constraint firstAttribute="bottom" secondItem="tYX-ik-NOj" secondAttribute="bottom" constant="4" id="HZy-Ha-0Kv"/>
+                                                            <constraint firstItem="tYX-ik-NOj" firstAttribute="leading" secondItem="wOr-bi-9HM" secondAttribute="leading" constant="4" id="MiW-ap-soK"/>
+                                                            <constraint firstAttribute="trailing" secondItem="tYX-ik-NOj" secondAttribute="trailing" constant="4" id="W7A-UR-P6b"/>
+                                                            <constraint firstItem="tYX-ik-NOj" firstAttribute="top" secondItem="wOr-bi-9HM" secondAttribute="top" constant="4" id="ZGL-uo-NrN"/>
+                                                        </constraints>
+                                                    </view>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="wOr-bi-9HM" secondAttribute="trailing" constant="8" id="3aU-b6-ez9"/>
                                                     <constraint firstItem="N5R-Mr-wMu" firstAttribute="leading" secondItem="xPD-qg-Xbo" secondAttribute="leading" constant="8" id="8xI-Fx-BHS"/>
                                                     <constraint firstItem="N5R-Mr-wMu" firstAttribute="centerY" secondItem="xPD-qg-Xbo" secondAttribute="centerY" id="M1B-hI-hLg"/>
                                                     <constraint firstItem="So4-kH-PyU" firstAttribute="centerY" secondItem="xPD-qg-Xbo" secondAttribute="centerY" id="Onq-so-cfk"/>
+                                                    <constraint firstItem="wOr-bi-9HM" firstAttribute="top" secondItem="xPD-qg-Xbo" secondAttribute="top" constant="3.5" id="Rit-S3-DGk"/>
                                                     <constraint firstItem="So4-kH-PyU" firstAttribute="leading" secondItem="N5R-Mr-wMu" secondAttribute="trailing" constant="-3" id="VcM-8i-k3q"/>
+                                                    <constraint firstAttribute="bottom" secondItem="wOr-bi-9HM" secondAttribute="bottom" constant="2.5" id="YUc-O5-EYR"/>
                                                     <constraint firstAttribute="trailing" secondItem="So4-kH-PyU" secondAttribute="trailing" constant="4" id="kxb-R2-YR0"/>
                                                     <constraint firstItem="So4-kH-PyU" firstAttribute="height" secondItem="xPD-qg-Xbo" secondAttribute="height" multiplier="0.8" id="l3X-kQ-yMp"/>
+                                                    <constraint firstItem="wOr-bi-9HM" firstAttribute="leading" secondItem="N5R-Mr-wMu" secondAttribute="trailing" constant="-6" id="mgs-Od-5z5"/>
                                                 </constraints>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="size" keyPath="offsetShadow">
@@ -457,6 +477,7 @@
                         <outlet property="textFieldSourceLocation" destination="IKL-XO-jhY" id="RTN-Ea-mW2"/>
                         <outlet property="viewAddress" destination="fx1-9G-vOI" id="J2a-aT-ZlU"/>
                         <outlet property="viewAddressOuter" destination="sOi-HC-iqQ" id="9gM-TK-qHH"/>
+                        <outlet property="viewChangeDestinaiton" destination="wOr-bi-9HM" id="gni-hV-yng"/>
                         <outlet property="viewCurrentLocation" destination="b4w-n3-RDh" id="RZy-gX-qQr"/>
                         <outlet property="viewDestinationLocation" destination="xPD-qg-Xbo" id="NUt-we-BdG"/>
                         <outlet property="viewFavouriteDestination" destination="So4-kH-PyU" id="S5m-sE-euI"/>
@@ -2759,6 +2780,7 @@
         <image name="home" width="128" height="128"/>
         <image name="ic_gift_card" width="384" height="384"/>
         <image name="ic_share" width="24" height="24"/>
+        <image name="ic_swap" width="512" height="512"/>
         <image name="menu_icon" width="64" height="50"/>
         <image name="message" width="409.60000610351562" height="409.60000610351562"/>
         <image name="noInternet" width="204.80000305175781" height="204.80000305175781"/>

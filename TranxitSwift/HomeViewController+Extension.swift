@@ -576,7 +576,10 @@ extension HomeViewController {
                 self.sourceLocationDetail?.value = LocationDetail(sAddress,LocationCoordinate(latitude: sLattitude, longitude: sLongitude))
                 
                 DispatchQueue.main.async {
-                    self.drawPolyline(isReroute: false)
+                    if !isRerouteEnable {
+                        self.drawPolyline(isReroute: false)
+                        print("Polydraw 4")
+                    }
                 }
             }
             
@@ -771,19 +774,61 @@ extension HomeViewController {
     
     // MARK:- Provider Location Marker
     
-    func moveProviderMarker(to location : LocationCoordinate) {
+    func moveProviderMarker(to location : LocationCoordinate,bearing:Double) {
         
         if markerProviderLocation.map == nil {
             markerProviderLocation.map = mapViewHelper?.mapView
         }
-        let originCoordinate = CGPoint(x: providerLastLocation.latitude-location.latitude, y: providerLastLocation.longitude-location.longitude)
-        let tanDegree = atan2(originCoordinate.x, originCoordinate.y)
+//        let originCoordinate = CGPoint(x: providerLastLocation.latitude-location.latitude, y: providerLastLocation.longitude-location.longitude)
+//        let tanDegree = atan2(originCoordinate.x, originCoordinate.y)
         CATransaction.begin()
         CATransaction.setAnimationDuration(2)
         markerProviderLocation.position = location
-        markerProviderLocation.rotation = CLLocationDegrees(tanDegree*CGFloat.pi/180)
+        markerProviderLocation.rotation = bearing //CLLocationDegrees(tanDegree*CGFloat.pi/180)
         CATransaction.commit()
         self.providerLastLocation = location
+    }
+    
+    func updateCamera() {
+        self.mapViewHelper?.mapView?.animate(to: GMSCameraPosition(target: CLLocationCoordinate2D(latitude: self.providerLastLocation.latitude, longitude: self.providerLastLocation.longitude), zoom: 18, bearing: 0, viewingAngle: 0))
+    }
+    
+    func updateTravelledPath(currentLoc: CLLocationCoordinate2D){
+        
+        createPoly(index: pathIndex)
+        
+        for i in 0..<gmsPath.count(){
+            //            let pathLat = Double(self.path.coordinate(at: i).latitude)
+            let pathLat = gmsPath.coordinate(at: i).latitude.rounded(toPlaces: 3)
+            let pathLong = gmsPath.coordinate(at: i).longitude.rounded(toPlaces: 3)
+            
+            let currentLat = currentLoc.latitude.rounded(toPlaces: 3)
+            let currentLong = currentLoc.longitude.rounded(toPlaces: 3)
+          
+          
+            if currentLat == pathLat && currentLong == pathLong{
+                pathIndex = Int(i)
+                break   //Breaking the loop when the index found
+            }
+        }
+    }
+    
+    
+    func createPoly(index :Int){
+        
+        //Creating new path from the current location to the destination
+        let newPath = GMSMutablePath()
+        if Int(gmsPath.count()) > index {
+            for i in index..<Int(gmsPath.count()){
+                newPath.add(gmsPath.coordinate(at: UInt(i)))
+            }
+           gmsPath = newPath
+            polyLinePath.map = nil
+            polyLinePath = GMSPolyline(path: gmsPath)
+            polyLinePath.strokeColor = .primary
+            polyLinePath.strokeWidth = 3.0
+            polyLinePath.map = self.mapViewHelper?.mapView
+        }
     }
     
     // MARK:- Add Floating Button

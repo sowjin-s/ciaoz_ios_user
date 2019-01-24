@@ -40,6 +40,7 @@
         @IBOutlet weak var buttonSOS : UIButton!
         @IBOutlet weak private var viewHomeLocation : UIView!
         @IBOutlet weak private var viewWorkLocation : UIView!
+        @IBOutlet weak var viewChangeDestinaiton : UIView!
         @IBOutlet weak var viewLocationButtons : UIStackView!
         
         @IBOutlet weak var buttonWithoutDest:UIButton! //not used
@@ -161,6 +162,9 @@
         }()
         
         var markersProviders = [GMSMarker]()
+        var pathIndex = 0
+        var reRouteTimer : Timer?
+        
         
         override func viewDidLoad() {
             super.viewDidLoad()
@@ -264,19 +268,30 @@
             //Mark :Hide it , android is not have
             self.viewFavouriteSource.isHidden = true
             self.viewFavouriteDestination.isHidden = true
-            //            self.buttonWithoutDest.addTarget(self, action: #selector(tapWithoutDest), for: .touchUpInside)
+            self.viewChangeDestinaiton.isHidden = true
+            self.viewChangeDestinaiton.backgroundColor = .primary
+//            self.buttonWithoutDest.addTarget(self, action: #selector(tapWithoutDest), for: .touchUpInside)
+            self.reRouteTimer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true, block: { (_) in
+                if isRerouteEnable {
+                    self.drawPolyline(isReroute: true)
+                    print("Reroute Timer")
+                }
+                if riderStatus == .pickedup {
+                     self.updateCamera()
+                }
+            })
         }
+    
+    // MARK:- View Will appear
+    
+    private func viewWillAppearCustom() {
+        isRateViewShowed = false
+        isInvoiceShowed = false
+        self.navigationController?.isNavigationBarHidden = true
+        self.localize()
+        self.getFavouriteLocationsFromLocal()
         
-        // MARK:- View Will appear
-        
-        private func viewWillAppearCustom() {
-            isRateViewShowed = false
-            isInvoiceShowed = false
-            self.navigationController?.isNavigationBarHidden = true
-            self.localize()
-            self.getFavouriteLocationsFromLocal()
-            
-        }
+    }
         
         // MARK:- View Will Layouts
         
@@ -437,6 +452,7 @@
             if destinationLocationDetail == nil { // No Previous Location Avaliable
                 self.showLocationView()
             } else {
+                print("Polydraw 1")
                 self.drawPolyline(isReroute: false) // Draw polyline between source and destination
                 self.getServicesList() // get Services
                 //                self.withoutDest = false
@@ -596,11 +612,14 @@
                 self.sourceMarker.map = self.mapViewHelper?.mapView
                 self.destinationMarker.map = self.mapViewHelper?.mapView
                 if isReroute{
-                    let coordinate = CLLocationCoordinate2D(latitude: (currentLocation.value?.latitude)!, longitude: (currentLocation.value?.longitude)!)
+                    isRerouteEnable = false
+                    let coordinate = CLLocationCoordinate2D(latitude: (providerLastLocation.latitude), longitude: (providerLastLocation.longitude))
                     sourceCoordinate = coordinate
                 }
-                self.sourceMarker.position = sourceCoordinate
-                self.destinationMarker.position = destinationCoordinate
+                if !isReroute {
+                    self.sourceMarker.position = sourceCoordinate
+                    self.destinationMarker.position = destinationCoordinate
+                }
                 //self.selectionViewAction(in: self.viewSourceLocation)
                 //self.selectionViewAction(in: self.viewDestinationLocation)
                 self.mapViewHelper?.mapView?.drawPolygon(from: sourceCoordinate, to: destinationCoordinate)
@@ -703,6 +722,7 @@
                 
                 func getUpdate(on location : CLLocationCoordinate2D, completion :@escaping ((LocationDetail)->Void)) {
                     self.drawPolyline(isReroute: false)
+                    print("Polydraw 3")
                     self.getServicesList()
                     //                    self.withoutDest = false
                     self.mapViewHelper?.getPlaceAddress(from: location, on: { (locationDetail) in
@@ -874,12 +894,15 @@
             Database .database()
                 .reference()
                 .child("loc_p_\(providerID)").observe(.value, with: { (snapshot) in
-                    guard let dict = snapshot.value as? NSDictionary else {
+                    guard let _ = snapshot.value as? NSDictionary else {
                         print("Error")
                         return
                     }
-                    var latDouble = 0.0 //for android sending any or double
+                    let providerLoc = ProviderLocation(from: snapshot)
+                    
+                   /* var latDouble = 0.0 //for android sending any or double
                     var longDouble = 0.0
+                    var bearingDouble = 0.0
                     if let latitude = dict.value(forKey: "lat") as? Double {
                         latDouble = Double(latitude)
                     }else{
@@ -892,20 +915,24 @@
                         let strLong = dict.value(forKey: "lng")
                         longDouble = Double("\(strLong ?? 0.0)")!
                     }
+                    if let bearing = dict.value(forKey: "bearing") as? Double {
+                        bearingDouble = bearing
+                    } */
                     
-                    //                    if let pLatitude = latDouble, let pLongitude = longDouble {
-                    DispatchQueue.main.async {
-                        print("Moving \(latDouble) \(longDouble)")
-                        self.moveProviderMarker(to: LocationCoordinate(latitude: latDouble , longitude: longDouble ))
-                        if polyLinePath.path != nil {
-                            self.mapViewHelper?.checkPolyline(coordinate:  LocationCoordinate(latitude: latDouble , longitude: longDouble ))
+//                    if let pLatitude = latDouble, let pLongitude = longDouble {
+                        DispatchQueue.main.async {
+                            print("Moving \(providerLoc?.lat) \(providerLoc?.lng)")
+                            self.moveProviderMarker(to: LocationCoordinate(latitude: providerLoc?.lat ?? 0.0 , longitude: providerLoc?.lng ?? 0.0),bearing: providerLoc?.bearing ?? 0.0)
+                            if polyLinePath.path != nil {
+                                if riderStatus == .pickedup {
+                                    self.updateTravelledPath(currentLoc: CLLocationCoordinate2D(latitude: providerLoc?.lat ?? defaultMapLocation.latitude, longitude: providerLoc?.lng ?? defaultMapLocation.longitude))
+                                    self.mapViewHelper?.checkPolyline(coordinate:  LocationCoordinate(latitude: providerLoc?.lat ?? defaultMapLocation.latitude , longitude: providerLoc?.lng ?? defaultMapLocation.longitude))
+                                }
+                            }
                         }
-                    }
+                
                     
-                    drawpolylineCheck = {
-                        self.drawPolyline(isReroute: true)
-                    }
-                    //                    }
+//                    }
                 })
         }
         
