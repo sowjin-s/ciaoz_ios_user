@@ -180,14 +180,15 @@ extension GoogleMapsHelper: CLLocationManagerDelegate {
         print("Error: \(error)")
     }
     func checkPolyline(coordinate: CLLocationCoordinate2D)  {
-        if GMSGeometryContainsLocation(coordinate, polyLinePath.path!, true)
+        if GMSGeometryIsLocationOnPathTolerance(coordinate, polyLinePath.path!, true, 100.0)
         {
             print("=== true")
         }
         else
         {
-//            drawpolylineCheck!()
+            isRerouteEnable = true
             print("=== false")
         }
     }
+    
 }

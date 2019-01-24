@@ -14,6 +14,8 @@ typealias ViewController = (UIViewController & PostViewProtocol)
 var presenterObject :PostPresenterInputProtocol?
 
 var polyLinePath = GMSPolyline()
+var gmsPath = GMSPath()
+var isRerouteEnable:Bool = false
 
 // MARK: - Constant Strings
 

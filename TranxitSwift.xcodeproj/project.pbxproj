@@ -196,6 +196,7 @@
 		18B215F421F63E01005E465C /* DisputeStatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18B215EE21F63E01005E465C /* DisputeStatusView.xib */; };
 		18B338E121DF6A6A006CEA74 /* ReasonEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B338E021DF6A6A006CEA74 /* ReasonEntity.swift */; };
 		18D7C04121C11EB7009065ED /* HelpEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D7C04021C11EB7009065ED /* HelpEntity.swift */; };
+		18E27B6A21F89AF6009A2867 /* ProviderLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E27B6921F89AF6009A2867 /* ProviderLocation.swift */; };
 		38492B362000F65E001830AD /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38492B352000F65E001830AD /* View.swift */; };
 		38492B382000F6A8001830AD /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38492B372000F6A8001830AD /* String.swift */; };
 		38492B3A2000F741001830AD /* JsonSerializing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38492B392000F741001830AD /* JsonSerializing.swift */; };
@@ -469,6 +470,7 @@
 		18B215EE21F63E01005E465C /* DisputeStatusView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DisputeStatusView.xib; sourceTree = "<group>"; };
 		18B338E021DF6A6A006CEA74 /* ReasonEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReasonEntity.swift; sourceTree = "<group>"; };
 		18D7C04021C11EB7009065ED /* HelpEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpEntity.swift; sourceTree = "<group>"; };
+		18E27B6921F89AF6009A2867 /* ProviderLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderLocation.swift; sourceTree = "<group>"; };
 		38492B352000F65E001830AD /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		38492B372000F6A8001830AD /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		38492B392000F741001830AD /* JsonSerializing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonSerializing.swift; sourceTree = "<group>"; };
@@ -1593,6 +1595,7 @@
 				180240D321C39026008DD9F3 /* LocationEntity.swift */,
 				C6901A3C21E9BE4F00CC65E9 /* DisputeList.swift */,
 				C650B49521EC5A99005F81AF /* ExtendTrip.swift */,
+				18E27B6921F89AF6009A2867 /* ProviderLocation.swift */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -2099,6 +2102,7 @@
 				086BAF6420078E220087F15A /* ViewController.swift in Sources */,
 				C650B49621EC5A99005F81AF /* ExtendTrip.swift in Sources */,
 				8894801F1FECE2CA006AF5A9 /* Label.swift in Sources */,
+				18E27B6A21F89AF6009A2867 /* ProviderLocation.swift in Sources */,
 				082C441F20E7913A00A7C892 /* FloatyItem.swift in Sources */,
 				082F77D120A5AA2200D6474B /* ServiceSelectionCollectionViewCell.swift in Sources */,
 				18B338E121DF6A6A006CEA74 /* ReasonEntity.swift in Sources */,
