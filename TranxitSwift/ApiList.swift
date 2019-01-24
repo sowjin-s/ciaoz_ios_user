@@ -39,7 +39,7 @@ enum Base : String{
   
     
     case signUp = "/api/user/signup"
-    case login = "/api/user/oauth/token" // /oauth/token
+    case login = "/api/user/oauth/token"
     case googleLogin = "/api/user/auth/google"
     case facebookLogin = "/api/user/auth/facebook"
     case getProfile = "/api/user/details"
@@ -86,6 +86,8 @@ enum Base : String{
     case extendTrip = "/api/user/extend/trip"
     case notificationManager = "/api/user/notifications/user"
     
+    case getbraintreenonce = "/api/user/braintree/token"
+    
     init(fromRawValue: String){
         self = Base(rawValue: fromRawValue) ?? .signUp
     }
@@ -95,10 +97,6 @@ enum Base : String{
         guard let key = Key else {
             return Base.signUp
         }
-        
-//        for val in iterateEnum(Base.self) where val.rawValue == key {
-//            return val
-//        }
         
         if let base = Base(rawValue: key) {
             return base

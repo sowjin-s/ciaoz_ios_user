@@ -79,17 +79,6 @@ class HomePageHelper {
             completion(nil, requestFirst)
         }
     }
-    
-//    deinit {
-//
-//        DispatchQueue.main.async {
-//            self.timer?.invalidate()
-//            self.reachability?.stopNotifier()
-//        }
-//
-//    }
-    
-    
 }
 
 

@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import Reachability
 import Crashlytics
 
 class Webservice : PostWebServiceProtocol {
@@ -18,7 +19,6 @@ class Webservice : PostWebServiceProtocol {
     
     
     //MARK:- SEND WEBSERVICE REQUEST TO BACKEND
-    
     func retrieve(api: Base,url : String?, data: Data?, imageData: [String:Data]?, paramters: [String : Any]?, type: HttpType, completion : ((CustomError?, Data?)->())?) {
         
         print("To url ", api.rawValue)

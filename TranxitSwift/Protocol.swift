@@ -128,7 +128,7 @@ protocol PostPresenterInputProtocol : class {
 //MARK:- Presenter Output
 
 protocol PostPresenterOutputProtocol : class {
- 
+    
     func onError(api : Base, error : CustomError)
     func sendOath(api : Base , data : Data)
     func sendProfile(api : Base, data : Data)
@@ -151,6 +151,7 @@ protocol PostPresenterOutputProtocol : class {
     func sendLostItem(api : Base, data: Data)
     func sendExtendTrip(api : Base, data: Data)
     func sendNotificationList(api : Base, data : Data)
+    func sendBrainTreeToken(api : Base, data : Data)
 }
 
 
@@ -159,7 +160,7 @@ protocol PostPresenterOutputProtocol : class {
 protocol PostViewProtocol : class {
     
     var presenter : PostPresenterInputProtocol? {get set}
-
+    
     func onError(api : Base, message : String, statusCode code : Int)
     func getOath(api : Base , data : LoginRequest?)
     func getProfile(api : Base, data : Profile?)
@@ -181,6 +182,8 @@ protocol PostViewProtocol : class {
     func getDispute(api : Base, data : DisputeList)
     func getExtendTrip(api : Base, data : ExtendTrip)
     func getNotificationsMangerList(api : Base, data : [NotificationManagerModel]?)
+    func getBrainTreeToken(api : Base, data : TokenEntity)
+
 }
 
 
@@ -218,6 +221,8 @@ extension PostViewProtocol {
     func getDispute(api : Base, data : DisputeList) {return}
     func getExtendTrip(api : Base, data : ExtendTrip) {return}
     func getNotificationsMangerList(api : Base, data : [NotificationManagerModel]?){return}
+    func getBrainTreeToken(api : Base, data : TokenEntity) {return}
+
 }
 
 

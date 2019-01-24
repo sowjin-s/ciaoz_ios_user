@@ -24,14 +24,8 @@ class Response : JSONSerializable {
     required init(from decoder: Decoder) throws{
         
         let container = try decoder.container(keyedBy: Key.self)
-        
         print(container)
-        
-        //  self.key = try container.decode(String.self, forKey: Key.init(stringValue: "Key")!)
-        //  self.response = try container.decode(ChatEntity.self, forKey: Key.init(stringValue: "response")!)
-        
     }
-    
 }
 
 

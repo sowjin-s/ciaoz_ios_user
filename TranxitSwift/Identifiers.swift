@@ -40,12 +40,7 @@ struct Storyboard {
     let NotificationController = "NotificationsViewController"
 }
 
-
-
-
-
 //MARK:- XIB Cell Names
-
 struct XIB {
     
     static let Names = XIB()
@@ -76,11 +71,7 @@ struct XIB {
     let DisputeStatusView = "DisputeStatusView"
 }
 
-
-
-
 //MARK:- Notification
-
 extension Notification.Name {
    public static let providers = Notification.Name("providers")
 }
