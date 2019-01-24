@@ -187,7 +187,6 @@
 		08FA91A220EA7C6700723B26 /* FirebaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FA91A020EA7C6700723B26 /* FirebaseHelper.swift */; };
 		180240D421C39026008DD9F3 /* LocationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180240D321C39026008DD9F3 /* LocationEntity.swift */; };
 		187A0FF521F87022006F0054 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 187A0FED21F86A82006F0054 /* SystemConfiguration.framework */; };
-		187A0FF821F870DD006F0054 /* PaymentSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 187A0FF721F870DC006F0054 /* PaymentSDK.framework */; };
 		1885EDED21F8718C00099726 /* PaymentSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 187A0FF721F870DC006F0054 /* PaymentSDK.framework */; };
 		1885EDEE21F8718C00099726 /* PaymentSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 187A0FF721F870DC006F0054 /* PaymentSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		18B215EF21F63E01005E465C /* DisputeReceiverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B215E921F63E00005E465C /* DisputeReceiverCell.swift */; };
@@ -526,7 +525,6 @@
 			files = (
 				1885EDED21F8718C00099726 /* PaymentSDK.framework in Frameworks */,
 				187A0FF521F87022006F0054 /* SystemConfiguration.framework in Frameworks */,
-				187A0FF821F870DD006F0054 /* PaymentSDK.framework in Frameworks */,
 				08147B7F208A1A9700C5CFD3 /* SafariServices.framework in Frameworks */,
 				08ED0E4E206CF12F0016732B /* PushKit.framework in Frameworks */,
 				C4BB5B4F175BE4034471BDE9 /* Pods_TranxitUser.framework in Frameworks */,
