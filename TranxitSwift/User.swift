@@ -36,8 +36,9 @@ class User : NSObject, NSCoding, JSONSerializable {
     var referral_text : String?
     var otp : Int?
     var ride_otp : Int?
+    var qrcode_url:String?
     
-    init(id : Int?, accessToken : String?, firstName : String?, lastName : String?, mobile : String?, email : String?, currency : String?, picture : String?, refreshToken : String?, walletBalance : Float?, sos : String?, loginType : String?, dispatcherNumber : String?, isCardAllowed : Bool, isCashAllowed : Bool, measurement : String?, stripeKey : String?,referral_count:String?,referral_unique_id:String?,referral_total_text:String?,referral_text:String?,otp:Int?,ride_otp:Int?){
+    init(id : Int?, accessToken : String?, firstName : String?, lastName : String?, mobile : String?, email : String?, currency : String?, picture : String?, refreshToken : String?, walletBalance : Float?, sos : String?, loginType : String?, dispatcherNumber : String?, isCardAllowed : Bool, isCashAllowed : Bool, measurement : String?, stripeKey : String?,referral_count:String?,referral_unique_id:String?,referral_total_text:String?,referral_text:String?,otp:Int?,ride_otp:Int?,qrcode_url:String?){
         
         self.id = id
         self.accessToken = accessToken
@@ -62,11 +63,12 @@ class User : NSObject, NSCoding, JSONSerializable {
         self.referral_text = referral_text
         self.otp = otp
         self.ride_otp = ride_otp
+        self.qrcode_url = qrcode_url
     }
     
     convenience
     override init(){
-        self.init(id: nil, accessToken: nil, firstName : nil, lastName : nil, mobile : nil, email : nil, currency : nil, picture : nil, refreshToken : nil, walletBalance : nil, sos : nil, loginType : nil,dispatcherNumber : nil, isCardAllowed: false, isCashAllowed : true, measurement : "km", stripeKey : nil,referral_count:nil,referral_unique_id:nil,referral_total_text:nil,referral_text:nil,otp:nil,ride_otp:nil)
+        self.init(id: nil, accessToken: nil, firstName : nil, lastName : nil, mobile : nil, email : nil, currency : nil, picture : nil, refreshToken : nil, walletBalance : nil, sos : nil, loginType : nil,dispatcherNumber : nil, isCardAllowed: false, isCashAllowed : true, measurement : "km", stripeKey : nil,referral_count:nil,referral_unique_id:nil,referral_total_text:nil,referral_text:nil,otp:nil,ride_otp:nil,qrcode_url:nil)
     }
     
     
@@ -95,8 +97,8 @@ class User : NSObject, NSCoding, JSONSerializable {
         let referral_total_text = aDecoder.decodeObject(forKey: Keys.list.referral_total_text) as? String
         let otp = aDecoder.decodeObject(forKey: Keys.list.otp) as? Int
         let ride_otp = aDecoder.decodeObject(forKey: Keys.list.ride_otp) as? Int
-        
-        self.init(id: id, accessToken : accessToken, firstName : firstName, lastName : lastName, mobile : mobile, email: email, currency : currency, picture : picture, refreshToken : refreshToken, walletBalance : walletBalance, sos : sos,loginType : loginType, dispatcherNumber : dispatcherNumber, isCardAllowed : isCardAllowed, isCashAllowed : isCashAllowed, measurement : measurement, stripeKey : stripeKey,referral_count:referral_count,referral_unique_id:referral_unique_id,referral_total_text:referral_total_text,referral_text:referral_text,otp:otp,ride_otp:ride_otp)
+        let qrcode_url = aDecoder.decodeObject(forKey: Keys.list.qrcode_url) as? String
+        self.init(id: id, accessToken : accessToken, firstName : firstName, lastName : lastName, mobile : mobile, email: email, currency : currency, picture : picture, refreshToken : refreshToken, walletBalance : walletBalance, sos : sos,loginType : loginType, dispatcherNumber : dispatcherNumber, isCardAllowed : isCardAllowed, isCashAllowed : isCashAllowed, measurement : measurement, stripeKey : stripeKey,referral_count:referral_count,referral_unique_id:referral_unique_id,referral_total_text:referral_total_text,referral_text:referral_text,otp:otp,ride_otp:ride_otp,qrcode_url:qrcode_url)
         
     }
     
@@ -126,6 +128,7 @@ class User : NSObject, NSCoding, JSONSerializable {
         aCoder.encode(self.referral_total_text , forKey: Keys.list.referral_total_text)
         aCoder.encode(self.otp , forKey: Keys.list.otp)
         aCoder.encode(self.ride_otp , forKey: Keys.list.ride_otp)
+        aCoder.encode(self.qrcode_url , forKey: Keys.list.qrcode_url)
     }
     
     

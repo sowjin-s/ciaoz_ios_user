@@ -69,6 +69,8 @@ struct XIB {
     let DisputeSenderCell = "DisputeSenderCell"
     let DisputeReceiverCell = "DisputeReceiverCell"
     let DisputeStatusView = "DisputeStatusView"
+    
+    let QRCodeView = "QRCodeView"
 }
 
 //MARK:- Notification

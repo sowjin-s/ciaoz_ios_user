@@ -30,6 +30,8 @@ class ProfileViewController: UITableViewController {
     
     @IBOutlet weak var QRCodeBtn: UIButton!
     
+     var QRView : QRCodeView?
+    
     private var tripType :TripType = .Business { // Store Radio option TripType
         
         didSet {
@@ -308,8 +310,14 @@ extension ProfileViewController {
     
     
     @IBAction private func QRCodeBtnTapped(sender : UIButton) {
-        
-        
+       
+        if QRView == nil {
+            self.QRView = Bundle.main.loadNibNamed(XIB.Names.QRCodeView, owner: self, options: [:])?.first as? QRCodeView
+                QRView?.center = view.center
+            self.QRView?.QRImageView.setImage(url: URL(string: baseUrl+User.main.qrcode_url!)!)
+            
+            self.view.addSubview(QRView!)
+        }
     }
     
 }

@@ -93,6 +93,7 @@ class Common {
         User.main.referral_text = profile?.referral_text
         User.main.otp = profile?.otp
         User.main.ride_otp = profile?.ride_otp
+        User.main.qrcode_url = profile?.qrcode_url
         
         if let language = profile?.language {
             UserDefaults.standard.set(language.rawValue, forKey: Keys.list.language)

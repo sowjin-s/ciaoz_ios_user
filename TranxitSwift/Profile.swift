@@ -33,6 +33,7 @@ class Profile : JSONSerializable {
     var referral_text : String?
     var otp : Int?
     var ride_otp : Int?
+    var qrcode_url : String?
     
     required init(from decoder: Decoder) throws {
         
@@ -65,6 +66,7 @@ class Profile : JSONSerializable {
         referral_text = try? values.decode(String.self, forKey: .referral_text)
         otp = try? values.decode(Int.self, forKey: .otp)
         ride_otp = try? values.decode(Int.self, forKey: .ride_otp)
+        qrcode_url = try? values.decode(String.self, forKey: .qrcode_url)
     }
     
     init() {
