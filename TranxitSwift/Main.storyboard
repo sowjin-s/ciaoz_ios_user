@@ -702,12 +702,12 @@
                                 <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your wallet amount is" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5hN-iD-CKU">
-                                        <rect key="frame" x="8" y="191.5" width="304" height="19.5"/>
+                                        <rect key="frame" x="8" y="191.5" width="304" height="17.5"/>
                                         <fontDescription key="fontDescription" name="ClanPro-Medium" family="Clan Pro" pointSize="15"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$ 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ttf-Fv-7of" customClass="Label" customModule="TranxitUser" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="216" width="304" height="30.5"/>
+                                        <rect key="frame" x="8" y="214" width="304" height="28"/>
                                         <fontDescription key="fontDescription" name="ClanPro-Medium" family="Clan Pro" pointSize="24"/>
                                         <color key="textColor" red="0.87843137250000003" green="0.42352941179999998" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -734,16 +734,16 @@
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="eLG-CS-Cmz">
-                                                <rect key="frame" x="16" y="64.5" width="256" height="33"/>
+                                                <rect key="frame" x="16" y="66.5" width="256" height="31"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="$ 0" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Olf-rv-tgI">
-                                                        <rect key="frame" x="0.0" y="0.0" width="60.5" height="33"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="60.5" height="31"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     </textField>
                                                     <button opaque="NO" tag="99" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ofj-cn-8Pa" customClass="Button" customModule="TranxitUser" customModuleProvider="target">
-                                                        <rect key="frame" x="65.5" y="0.0" width="60" height="33"/>
+                                                        <rect key="frame" x="65.5" y="0.0" width="60" height="31"/>
                                                         <color key="backgroundColor" red="0.96460121870000004" green="0.96476620440000005" blue="0.96459084750000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" name="ClanPro-Medium" family="Clan Pro" pointSize="16"/>
                                                         <state key="normal" title="$99">
@@ -768,7 +768,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="199" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SCS-va-z0Z" customClass="Button" customModule="TranxitUser" customModuleProvider="target">
-                                                        <rect key="frame" x="130.5" y="0.0" width="60.5" height="33"/>
+                                                        <rect key="frame" x="130.5" y="0.0" width="60.5" height="31"/>
                                                         <color key="backgroundColor" red="0.96460121870000004" green="0.96476620440000005" blue="0.96459084750000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" name="ClanPro-Medium" family="Clan Pro" pointSize="16"/>
                                                         <state key="normal" title="$199">
@@ -793,7 +793,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="299" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gH3-oF-qdw" customClass="Button" customModule="TranxitUser" customModuleProvider="target">
-                                                        <rect key="frame" x="196" y="0.0" width="60" height="33"/>
+                                                        <rect key="frame" x="196" y="0.0" width="60" height="31"/>
                                                         <color key="backgroundColor" red="0.96460121870000004" green="0.96476620440000005" blue="0.96459084750000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" name="ClanPro-Medium" family="Clan Pro" pointSize="16"/>
                                                         <state key="normal" title="$299">

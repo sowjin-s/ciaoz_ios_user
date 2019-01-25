@@ -128,6 +128,10 @@ extension Presenter : PostPresenterOutputProtocol {
         controller?.getServiceList(api: api, data: PresenterProcessor.shared.serviceList(data: data))
     }
     
+    func sendProviderList(api: Base, data: Data) {
+        controller?.getProviderList(api: api, data: PresenterProcessor.shared.providerList(data: data))
+    }
+    
     func sendEstimateFare(api: Base, data: Data) {
         controller?.getEstimateFare(api: api, data: PresenterProcessor.shared.estimateFare(data: data))
     }

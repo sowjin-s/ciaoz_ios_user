@@ -39,6 +39,8 @@ extension HomeViewController {
                 guard let self = self else {return}
                 self.sourceMarker.snippet = service?.pricing?.time
                 self.mapViewHelper?.mapView?.selectedMarker = (service?.pricing?.time) == nil ? nil : self.sourceMarker
+                self.selectedService = service
+                self.showProviderInCurrentLocation(with: self.listOfProviders!, serviceTypeID: (service?.id)!)
             }
             //self.rideNowView?.imageViewCard.image = paymentType.image
             //            self.rideNowView?.onClickRideNow = { service in
@@ -437,26 +439,42 @@ extension HomeViewController {
     
     // MARK:- Show Providers In Current Location
     
-    func showProviderInCurrentLocation(with data : [Service]) {
+    func showProviderInCurrentLocation(with data : [Provider],serviceTypeID:Int) {
         
         self.markersProviders.forEach({ $0.map = nil })
         self.markersProviders.removeAll()
         
         for locationData in data where locationData.longitude != nil && locationData.latitude != nil {
-            
-            //            let lottieView = LottieView(name: "suv")
-            //            lottieView.frame = CGRect(origin: .zero, size: CGSize(width: 50, height: 50))
-            //            lottieView.loopAnimation = true;
-            //            lottieView.play()
-            
-            let marker = GMSMarker(position: CLLocationCoordinate2DMake(locationData.latitude!, locationData.longitude!))
-            marker.icon = #imageLiteral(resourceName: "map-vehicle-icon-black").resizeImage(newWidth: 20)
+            let marker = GMSMarker()
             marker.groundAnchor = CGPoint(x: 0.5, y: 1)
             marker.map = mapViewHelper?.mapView
-            self.markersProviders.append(marker)
+            if serviceTypeID == 0 {
+                marker.position = CLLocationCoordinate2DMake(locationData.latitude!, locationData.longitude!)
+                marker.icon = #imageLiteral(resourceName: "map-vehicle-icon-black").resizeImage(newWidth: 20)
+                self.markersProviders.append(marker)
+            }else{
+                if serviceTypeID == locationData.service?.service_type_id {
+                    DispatchQueue.global(qos: .background).async {
+                        do
+                        {
+                            let data = try Data.init(contentsOf: URL.init(string:self.selectedService!.marker!)!)
+                            DispatchQueue.main.async {
+                                let image: UIImage = UIImage(data: data)!
+                                marker.icon = image.resizeImage(newWidth: 20)
+                                marker.position = CLLocationCoordinate2DMake(locationData.latitude!, locationData.longitude!)
+                                self.markersProviders.append(marker)
+                            }
+                        }
+                        catch {
+                            // error
+                        }
+                    }
+                    
+                }
+            }
+            
             
         }
-        
     }
     
     // MARK:- Show Loader View
@@ -805,7 +823,7 @@ extension HomeViewController {
     }
     
     func updateCamera() {
-        self.mapViewHelper?.mapView?.animate(to: GMSCameraPosition(target: CLLocationCoordinate2D(latitude: self.providerLastLocation.latitude, longitude: self.providerLastLocation.longitude), zoom: 18, bearing: 0, viewingAngle: 0))
+        self.mapViewHelper?.mapView?.animate(to: GMSCameraPosition(target: CLLocationCoordinate2D(latitude: self.providerLastLocation.latitude, longitude: self.providerLastLocation.longitude), zoom: 15, bearing: 0, viewingAngle: 0))
     }
     
     func updateTravelledPath(currentLoc: CLLocationCoordinate2D){

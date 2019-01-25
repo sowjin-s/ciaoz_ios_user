@@ -42,6 +42,7 @@ class RideNowView: UIView {
     private var sourceCoordinate = LocationCoordinate()
     private var destinationCoordinate = LocationCoordinate()
     private var selectedRow = -1
+    
 
 //    var isWalletChecked = false {  // Handle Wallet
 //        didSet {
@@ -288,13 +289,13 @@ extension RideNowView {
     
     // Get Providers In Current Location
     
-    private func getProviders(by serviceId : Int){
+  /*  private func getProviders(by serviceId : Int){
         DispatchQueue.global(qos: .background).async {
           //  guard let currentLoc = self.sourceCoordinate .value  else { return }
                 let json = [Constants.string.latitude : self.sourceCoordinate.latitude, Constants.string.longitude : self.sourceCoordinate.longitude, Constants.string.service : serviceId] as [String : Any]
                 self.presenter?.get(api: .getProviders, parameters: json)
         }
-    }
+    } */
     
     // MARK:- Set Progress View
     private func setProgressView() {
@@ -435,7 +436,7 @@ extension RideNowView : PostViewProtocol {
     func getEstimateFare(api: Base, data: EstimateFare?) {
         // print("\nselected ",data)
         if let serviceTypeId = data?.service_type, let index = self.datasource.index(where: { $0.id == serviceTypeId }) {
-            self.getProviders(by: serviceTypeId)
+          //  self.getProviders(by: serviceTypeId)
             self.datasource[index].pricing = data
             DispatchQueue.main.async {
                 self.isRideEnabled = (User.main.isCardAllowed || User.main.isCashAllowed) // Allow only if any payment gateway is enabled
@@ -446,14 +447,14 @@ extension RideNowView : PostViewProtocol {
         }
     }
     
-    func getServiceList(api: Base, data: [Service]) {
+  /*  func getServiceList(api: Base, data: [Service]) {
         
         if api == .getProviders {  // Show Providers in Current Location
             DispatchQueue.main.async {
-                NotificationCenter.default.post(name: .providers, object: nil, userInfo: [Notification.Name.providers.rawValue: data])
+                NotificationCenter.default.post(name: .providers, object: nil, userInfo: [Notification.Name.providers.rawValue: data,Notification.Name.index.rawValue:0])
             }
         }
-    }
+    } */
     
     
 }

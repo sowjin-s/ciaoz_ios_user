@@ -164,6 +164,8 @@
         var markersProviders = [GMSMarker]()
         var pathIndex = 0
         var reRouteTimer : Timer?
+        var listOfProviders : [Provider]?
+        var selectedService : Service?
         
         
         override func viewDidLoad() {
@@ -284,7 +286,7 @@
         self.navigationController?.isNavigationBarHidden = true
         self.localize()
         self.getFavouriteLocationsFromLocal()
-        
+        self.getAllProviders()
     }
         
         // MARK:- View Will Layouts
@@ -320,6 +322,13 @@
             self.textFieldDestinationLocation.placeholder = Constants.string.destination.localize()
             //            self.buttonWithoutDest.setTitle(Constants.string.withoutDest, for: .normal)
             
+        }
+        
+        func getAllProviders() {
+            if currentLocation.value?.latitude != nil || currentLocation.value?.longitude != nil {
+                let json = [Constants.string.latitude : self.sourceLocationDetail?.value?.coordinate.latitude ?? defaultMapLocation.latitude, Constants.string.longitude : self.sourceLocationDetail?.value?.coordinate.longitude ?? defaultMapLocation.longitude] as [String : Any]
+                self.presenter?.get(api: .getProviders, parameters: json)
+            }
         }
         
         // MARK:- Set Design
@@ -377,6 +386,8 @@
                     guard let self = self else {return}
                     self.sourceMarker.snippet = service?.pricing?.time
                     self.mapViewHelper?.mapView?.selectedMarker = (service?.pricing?.time) == nil ? nil : self.sourceMarker
+                    self.selectedService = service
+                    self.showProviderInCurrentLocation(with: self.listOfProviders!, serviceTypeID: (service?.id)!)
                 }
                 
             }
@@ -389,7 +400,7 @@
         @objc private func observer(notification : Notification) {
             
             if notification.name == .providers, let serviceArray = notification.userInfo?[Notification.Name.providers.rawValue] as? [Service] {
-                showProviderInCurrentLocation(with: serviceArray)
+//                showProviderInCurrentLocation(with: serviceArray, serviceTypeID: 0)
             }
             
         }
@@ -1108,6 +1119,17 @@
                 }
             }
             
+            
+            
+        }
+        
+        func getProviderList(api: Base, data: [Provider]) {
+            if api == .getProviders {  // Show Providers in Current Location
+                DispatchQueue.main.async {
+                    self.listOfProviders = data
+                    self.showProviderInCurrentLocation(with: self.listOfProviders!,serviceTypeID:0)
+                }
+            }
         }
         
         
@@ -1179,6 +1201,8 @@
         func getExtendTrip(api: Base, data: ExtendTrip) {
             print(data)
         }
+        
+        
         
     }
     

@@ -18,5 +18,15 @@ struct Provider : JSONSerializable {
     var last_name : String?
     var rating : String?
     var mobile : String?
+    var service : ServiceDetails?
 
+}
+
+struct ServiceDetails : JSONSerializable {
+    
+    var id : Int?
+    var service_model :String?
+    var service_type_id :Int?
+  
+    
 }

@@ -40,6 +40,12 @@ class PresenterProcessor {
         return data.getDecodedObject(from: [Service].self) ?? []
     }
     
+    // MARK:- Provider List
+    
+    func providerList(data : Data)->[Provider] {
+        return data.getDecodedObject(from: [Provider].self) ?? []
+    }
+    
     // MARK:- Estimate Fare
     
     func estimateFare(data : Data)->EstimateFare? {
