@@ -29,8 +29,8 @@
         @IBOutlet weak private var viewFavouriteDestination : UIView!
         @IBOutlet weak private var imageViewFavouriteSource : ImageView!
         @IBOutlet weak private var imageViewFavouriteDestination : ImageView!
-        @IBOutlet weak private var viewSourceLocation : UIView!
-        @IBOutlet weak private var viewDestinationLocation : UIView!
+        @IBOutlet weak var viewSourceLocation : UIView!
+        @IBOutlet weak var viewDestinationLocation : UIView!
         @IBOutlet weak private var viewAddress : UIView!
         @IBOutlet weak var viewAddressOuter : UIView!
         @IBOutlet weak var textFieldSourceLocation : UITextField!
@@ -41,6 +41,7 @@
         @IBOutlet weak private var viewHomeLocation : UIView!
         @IBOutlet weak private var viewWorkLocation : UIView!
         @IBOutlet weak var viewChangeDestinaiton : UIView!
+        @IBOutlet weak var viewLocationDot : UIView!
         @IBOutlet weak var viewLocationButtons : UIStackView!
         
         @IBOutlet weak var buttonWithoutDest:UIButton! //not used
@@ -111,7 +112,6 @@
         //  private var favouriteLocations : LocationService? //[(type : String,address: [LocationDetail])]() // Favourite Locations of User
         
         var currentLocation = Bind<LocationCoordinate>(defaultMapLocation)
-        var isRateViewShowed:Bool = false
         var isInvoiceShowed:Bool = false
         //var serviceSelectionView : ServiceSelectionView?
         var estimationFareView : RequestSelectionView?
@@ -236,14 +236,9 @@
                 //                    self.isSourceFavourited = false
                 //                }
                 DispatchQueue.main.async {
-                    self.isSourceFavourited = false // reset favourite location on change
-                    if riderStatus == .pickedup {
-                        self.textFieldSourceLocation.text = Constants.string.destinationChange.localize()
-                        self.textFieldSourceLocation.textColor = .lightGray
-                    }else{
+                        self.isSourceFavourited = false // reset favourite location on change
                         self.textFieldSourceLocation.text = locationDetail?.address
                         self.textFieldSourceLocation.textColor = .black
-                    }
                 }
             })
             //Mark : destination pin
@@ -271,7 +266,7 @@
             self.viewChangeDestinaiton.isHidden = true
             self.viewChangeDestinaiton.backgroundColor = .primary
 //            self.buttonWithoutDest.addTarget(self, action: #selector(tapWithoutDest), for: .touchUpInside)
-            self.reRouteTimer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true, block: { (_) in
+            self.reRouteTimer = Timer.scheduledTimer(withTimeInterval: 10.0, repeats: true, block: { (_) in
                 if isRerouteEnable {
                     self.drawPolyline(isReroute: true)
                     print("Reroute Timer")
@@ -285,7 +280,6 @@
     // MARK:- View Will appear
     
     private func viewWillAppearCustom() {
-        isRateViewShowed = false
         isInvoiceShowed = false
         self.navigationController?.isNavigationBarHidden = true
         self.localize()
@@ -550,21 +544,26 @@
                 locationView.setValues(address: (sourceLocationDetail,destinationLocationDetail)) { [weak self] (address) in
                     guard let self = self else {return}
                     self.sourceLocationDetail = address.source
-                    self.destinationLocationDetail = address.destination
-                    // print("\nselected-->>>>>",self.sourceLocationDetail?.value?.coordinate, self.destinationLocationDetail?.coordinate)
-                    self.drawPolyline(isReroute: false) // Draw polyline between source and destination
+                    if riderStatus != .pickedup { //
+                        self.destinationLocationDetail = address.destination
+                        self.drawPolyline(isReroute: false)  // Draw polyline between source and destination
+                    }
                     if [RideStatus.accepted, .arrived, .pickedup, .started].contains(riderStatus) {
                         if let dAddress = address.destination?.address, let coordinate = address.destination?.coordinate {
+                            
                             if coordinate.latitude != 0 && coordinate.longitude != 0 {
                                 if riderStatus == .pickedup {
                                     showAlert(message: Constants.string.locationChange.localize(), okHandler: {
+                                        self.destinationLocationDetail = address.destination
                                         self.extendTrip(requestID: self.currentRequestId, dLat: coordinate.latitude, dLong: coordinate.longitude, address: dAddress)
+                                        self.drawPolyline(isReroute: false)
                                     }, cancelHandler: {
                                         
                                     }, fromView: self)
                                 }
                             }
                             self.updateLocation(with: (dAddress,coordinate))
+                            
                         }
                     } else {
                         self.removeUnnecessaryView(with: .cancelled) // Remove services or ride now if previously open
@@ -608,6 +607,7 @@
             // self.imageViewMarkerCenter.isHidden = true
             if var sourceCoordinate = self.sourceLocationDetail?.value?.coordinate,
                 let destinationCoordinate = self.destinationLocationDetail?.coordinate {  // Draw polyline from source to destination
+                
                 self.mapViewHelper?.mapView?.clear()
                 self.sourceMarker.map = self.mapViewHelper?.mapView
                 self.destinationMarker.map = self.mapViewHelper?.mapView
@@ -856,7 +856,7 @@
                             self.getDataFromFirebase(providerID: (request?.provider?.id)!)
                             // MARK:- Showing Provider ETA
                             let currentStatus = request?.status ?? .none
-                            if [RideStatus.accepted, .started, .arrived].contains(currentStatus) {
+                            if [RideStatus.accepted, .started, .arrived, .pickedup].contains(currentStatus) {
                                 self.showETA(with: LocationCoordinate(latitude: pLatitude, longitude: pLongitude))
                             }
                         }
@@ -922,7 +922,7 @@
 //                    if let pLatitude = latDouble, let pLongitude = longDouble {
                         DispatchQueue.main.async {
                             print("Moving \(providerLoc?.lat) \(providerLoc?.lng)")
-                            self.moveProviderMarker(to: LocationCoordinate(latitude: providerLoc?.lat ?? 0.0 , longitude: providerLoc?.lng ?? 0.0),bearing: providerLoc?.bearing ?? 0.0)
+                            self.moveProviderMarker(to: LocationCoordinate(latitude: providerLoc?.lat ?? defaultMapLocation.latitude , longitude: providerLoc?.lng ?? defaultMapLocation.longitude),bearing: providerLoc?.bearing ?? 0.0)
                             if polyLinePath.path != nil {
                                 if riderStatus == .pickedup {
                                     self.updateTravelledPath(currentLoc: CLLocationCoordinate2D(latitude: providerLoc?.lat ?? defaultMapLocation.latitude, longitude: providerLoc?.lng ?? defaultMapLocation.longitude))
@@ -1026,8 +1026,8 @@
         // MARK:- Update Location for Existing Request
         
         func updateLocation(with detail : LocationDetail) {
-            
-            guard [RideStatus.accepted, .arrived, .pickedup, .started].contains(riderStatus) else { return } // Update Location only if status falls under certain category
+            //.pickedup
+            guard [RideStatus.accepted, .arrived, .started].contains(riderStatus) else { return } // Update Location only if status falls under certain category
             
             let request = Request()
             request.request_id = self.currentRequestId
@@ -1143,7 +1143,6 @@
             if api == .locationServicePostDelete {
                 self.presenter?.get(api: .locationService, parameters: nil)
             }else if api == .rateProvider  {
-                isRateViewShowed = false
                 riderStatus = .none
                 return
             }

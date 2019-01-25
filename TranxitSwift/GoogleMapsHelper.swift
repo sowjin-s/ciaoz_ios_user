@@ -183,6 +183,7 @@ extension GoogleMapsHelper: CLLocationManagerDelegate {
         if GMSGeometryIsLocationOnPathTolerance(coordinate, polyLinePath.path!, true, 100.0)
         {
             print("=== true")
+            isRerouteEnable = false
         }
         else
         {

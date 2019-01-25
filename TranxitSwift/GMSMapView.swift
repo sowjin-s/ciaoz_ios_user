@@ -103,9 +103,10 @@ extension GMSMapView {
         print("Drawing Polyline ", points)
         
         DispatchQueue.main.async {
-        
+            
             guard let path = GMSPath(fromEncodedPath: points) else { return }
             let polyline = GMSPolyline(path: path)
+            polyline.map = nil
             polyLinePath = polyline
             polyline.strokeWidth = 3.0
             polyline.strokeColor = .primary

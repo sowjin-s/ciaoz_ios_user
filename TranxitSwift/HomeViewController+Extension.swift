@@ -301,8 +301,6 @@ extension HomeViewController {
     // MARK:- Show Invoice View
     
     func showInvoiceView(with request : Request) {
-        isRateViewShowed = false
-        self.isInvoiceShowed = true
         self.buttonSOS.isHidden = !(riderStatus == .pickedup)
         self.mapViewHelper?.mapView?.clear()
         if self.invoiceView == nil, let invoice = Bundle.main.loadNibNamed(XIB.Names.InvoiceView, owner: self, options: [:])?.first as? InvoiceView {
@@ -326,6 +324,7 @@ extension HomeViewController {
                 self.presenter?.post(api: .payNow, data: requestObj.toData())
             }
             self.invoiceView?.onDoneClick = { onClick in
+                self.isInvoiceShowed = true
                 self.isTapDone = true
                 self.showRatingView(with: request)
             }
@@ -371,7 +370,6 @@ extension HomeViewController {
             return
         }
         self.removeInvoiceView()
-        isRateViewShowed = true
         if let rating = Bundle.main.loadNibNamed(XIB.Names.RatingView, owner: self, options: [:])?.first as? RatingView {
             NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShowRateView(info:)), name: UIResponder.keyboardWillShowNotification, object: nil)
             NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHideRateView(info:)), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -584,6 +582,13 @@ extension HomeViewController {
             }
             
         }
+        if [RideStatus.searching,RideStatus.started,RideStatus.arrived,RideStatus.completed].contains(status) {
+            self.viewChangeDestinaiton.isHidden = true
+            self.viewLocationDot.isHidden = false
+        }else{
+            self.viewChangeDestinaiton.isHidden = false
+            self.viewLocationDot.isHidden = true
+        }
         
         switch status{
             
@@ -592,13 +597,19 @@ extension HomeViewController {
             self.showLoaderView(with: self.currentRequestId)
             self.perform(#selector(self.validateRequest), with: self, afterDelay: requestInterval)
         //            self.buttonWithoutDest.isHidden = false
+            self.viewSourceLocation.isHidden = false
         case .accepted, .arrived, .started, .pickedup:
             //            self.buttonWithoutDest.isHidden = true
             self.showRideStatusView(with: request)
-            
+            if status == .pickedup {
+                self.viewSourceLocation.isHidden = true
+            }else{
+                self.viewSourceLocation.isHidden = false
+            }
         case .dropped:
             self.showInvoiceView(with: request)
             riderStatus = .none
+            self.viewSourceLocation.isHidden = false
         case .completed:
             //            self.buttonWithoutDest.isHidden = false
             riderStatus = .none
@@ -668,6 +679,9 @@ extension HomeViewController {
             break
         }
         
+        
+        
+        
         self.removeUnnecessaryView(with: status)
         
     }
@@ -694,6 +708,7 @@ extension HomeViewController {
         }
         if [RideStatus.none, .cancelled].contains(status) {
             self.currentRequestId = 0 // Remove Current Request
+            self.viewChangeDestinaiton.isHidden = true
         }
         
     }

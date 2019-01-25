@@ -24,13 +24,32 @@ class ProviderLocation {
     
     init?(from snapshot: DataSnapshot) {
         
-        let snapshotValue = snapshot.value as? [String: Any]
+        let snapshotValue = snapshot.value as? [String: Any] //check both double and string sometime android return string
         
-        guard let lat = snapshotValue?["lat"] as? Double, let lng = snapshotValue?["lng"] as? Double, let bearing = snapshotValue?["bearing"] as? Double else { return nil }
+        var longDouble = 0.0
+        var latDouble = 0.0
+        var bearingDouble = 0.0
         
-        self.lat = lat
-        self.lng = lng
-        self.bearing = bearing
+        if let latitude = snapshotValue?["lat"] as? Double {
+            latDouble = Double(latitude)
+        }else{
+            let strLat = snapshotValue?["lat"]
+            latDouble = Double("\(strLat ?? 0.0)")!
+        }
+        if let longitude = snapshotValue?["lng"] as? Double {
+            longDouble = Double(longitude)
+        }else{
+            let strLong = snapshotValue?["lng"]
+            longDouble = Double("\(strLong ?? 0.0)")!
+        }
+        if let bearing = snapshotValue?["bearing"] as? Double {
+            bearingDouble = bearing
+        }
+        
+        
+        self.lat = latDouble
+        self.lng = longDouble
+        self.bearing = bearingDouble
        
     }
     

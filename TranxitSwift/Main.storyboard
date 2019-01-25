@@ -158,19 +158,19 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sOi-HC-iqQ">
-                                <rect key="frame" x="16" y="75" width="288" height="87"/>
+                                <rect key="frame" x="16" y="69.5" width="288" height="98"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="fx1-9G-vOI" userLabel="Stack_View">
-                                        <rect key="frame" x="21" y="8.5" width="259" height="68"/>
+                                        <rect key="frame" x="21" y="9.5" width="259" height="77"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4bR-JZ-zYT">
-                                                <rect key="frame" x="0.0" y="0.0" width="259" height="34"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="259" height="38.5"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="atX-X9-rIG">
-                                                        <rect key="frame" x="227" y="3.5" width="28" height="27"/>
+                                                        <rect key="frame" x="227" y="4" width="28" height="30.5"/>
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unlike" translatesAutoresizingMaskIntoConstraints="NO" id="Uzq-BP-cnD" customClass="ImageView" customModule="TranxitUser" customModuleProvider="target">
-                                                                <rect key="frame" x="7" y="6.5" width="14" height="14"/>
+                                                                <rect key="frame" x="7" y="7.5" width="14" height="15.5"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="tintColorId">
                                                                         <integer key="value" value="2"/>
@@ -189,7 +189,7 @@
                                                         </constraints>
                                                     </view>
                                                     <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IKL-XO-jhY">
-                                                        <rect key="frame" x="8" y="9.5" width="219" height="15"/>
+                                                        <rect key="frame" x="8" y="12" width="219" height="15"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <textInputTraits key="textInputTraits"/>
@@ -224,13 +224,13 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xPD-qg-Xbo">
-                                                <rect key="frame" x="0.0" y="34" width="259" height="34"/>
+                                                <rect key="frame" x="0.0" y="38.5" width="259" height="38.5"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="So4-kH-PyU">
-                                                        <rect key="frame" x="227" y="3.5" width="28" height="27"/>
+                                                        <rect key="frame" x="227" y="4" width="28" height="30.5"/>
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unlike" translatesAutoresizingMaskIntoConstraints="NO" id="UYh-Mn-F8z" customClass="ImageView" customModule="TranxitUser" customModuleProvider="target">
-                                                                <rect key="frame" x="7" y="6.5" width="14" height="14"/>
+                                                                <rect key="frame" x="7" y="7.5" width="14" height="15.5"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="tintColorId">
                                                                         <integer key="value" value="1"/>
@@ -249,40 +249,40 @@
                                                         </constraints>
                                                     </view>
                                                     <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="N5R-Mr-wMu">
-                                                        <rect key="frame" x="8" y="9.5" width="222" height="15"/>
+                                                        <rect key="frame" x="8" y="11.5" width="222" height="15"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wOr-bi-9HM">
-                                                        <rect key="frame" x="224" y="3.5" width="27" height="28"/>
+                                                        <rect key="frame" x="229" y="0.0" width="30" height="38.5"/>
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_swap" translatesAutoresizingMaskIntoConstraints="NO" id="tYX-ik-NOj">
-                                                                <rect key="frame" x="4" y="4" width="19" height="20"/>
+                                                                <rect key="frame" x="4" y="4" width="19" height="24.5"/>
                                                             </imageView>
                                                         </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="27" id="0gF-2n-PHF"/>
-                                                            <constraint firstAttribute="bottom" secondItem="tYX-ik-NOj" secondAttribute="bottom" constant="4" id="HZy-Ha-0Kv"/>
+                                                            <constraint firstAttribute="width" constant="30" id="0gF-2n-PHF"/>
+                                                            <constraint firstAttribute="bottom" secondItem="tYX-ik-NOj" secondAttribute="bottom" constant="10" id="HZy-Ha-0Kv"/>
                                                             <constraint firstItem="tYX-ik-NOj" firstAttribute="leading" secondItem="wOr-bi-9HM" secondAttribute="leading" constant="4" id="MiW-ap-soK"/>
-                                                            <constraint firstAttribute="trailing" secondItem="tYX-ik-NOj" secondAttribute="trailing" constant="4" id="W7A-UR-P6b"/>
+                                                            <constraint firstAttribute="trailing" secondItem="tYX-ik-NOj" secondAttribute="trailing" constant="7" id="W7A-UR-P6b"/>
                                                             <constraint firstItem="tYX-ik-NOj" firstAttribute="top" secondItem="wOr-bi-9HM" secondAttribute="top" constant="4" id="ZGL-uo-NrN"/>
                                                         </constraints>
                                                     </view>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="wOr-bi-9HM" secondAttribute="trailing" constant="8" id="3aU-b6-ez9"/>
+                                                    <constraint firstAttribute="trailing" secondItem="wOr-bi-9HM" secondAttribute="trailing" id="3aU-b6-ez9"/>
                                                     <constraint firstItem="N5R-Mr-wMu" firstAttribute="leading" secondItem="xPD-qg-Xbo" secondAttribute="leading" constant="8" id="8xI-Fx-BHS"/>
                                                     <constraint firstItem="N5R-Mr-wMu" firstAttribute="centerY" secondItem="xPD-qg-Xbo" secondAttribute="centerY" id="M1B-hI-hLg"/>
                                                     <constraint firstItem="So4-kH-PyU" firstAttribute="centerY" secondItem="xPD-qg-Xbo" secondAttribute="centerY" id="Onq-so-cfk"/>
-                                                    <constraint firstItem="wOr-bi-9HM" firstAttribute="top" secondItem="xPD-qg-Xbo" secondAttribute="top" constant="3.5" id="Rit-S3-DGk"/>
+                                                    <constraint firstItem="wOr-bi-9HM" firstAttribute="top" secondItem="xPD-qg-Xbo" secondAttribute="top" id="Rit-S3-DGk"/>
                                                     <constraint firstItem="So4-kH-PyU" firstAttribute="leading" secondItem="N5R-Mr-wMu" secondAttribute="trailing" constant="-3" id="VcM-8i-k3q"/>
-                                                    <constraint firstAttribute="bottom" secondItem="wOr-bi-9HM" secondAttribute="bottom" constant="2.5" id="YUc-O5-EYR"/>
+                                                    <constraint firstAttribute="bottom" secondItem="wOr-bi-9HM" secondAttribute="bottom" id="YUc-O5-EYR"/>
                                                     <constraint firstAttribute="trailing" secondItem="So4-kH-PyU" secondAttribute="trailing" constant="4" id="kxb-R2-YR0"/>
                                                     <constraint firstItem="So4-kH-PyU" firstAttribute="height" secondItem="xPD-qg-Xbo" secondAttribute="height" multiplier="0.8" id="l3X-kQ-yMp"/>
-                                                    <constraint firstItem="wOr-bi-9HM" firstAttribute="leading" secondItem="N5R-Mr-wMu" secondAttribute="trailing" constant="-6" id="mgs-Od-5z5"/>
+                                                    <constraint firstItem="wOr-bi-9HM" firstAttribute="leading" secondItem="N5R-Mr-wMu" secondAttribute="trailing" constant="-1" id="mgs-Od-5z5"/>
                                                 </constraints>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="size" keyPath="offsetShadow">
@@ -305,10 +305,10 @@
                                         </subviews>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jNK-AM-XBv">
-                                        <rect key="frame" x="4" y="8.5" width="9" height="68"/>
+                                        <rect key="frame" x="4" y="9.5" width="9" height="77"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LIC-3Y-47L" userLabel="ViewRound">
-                                                <rect key="frame" x="0.5" y="13" width="8" height="8"/>
+                                                <rect key="frame" x="0.5" y="15.5" width="8" height="8"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="8" id="RkM-Pg-FA5"/>
@@ -321,7 +321,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fuc-2J-p1W" userLabel="ViewSquare">
-                                                <rect key="frame" x="0.5" y="47" width="8" height="8"/>
+                                                <rect key="frame" x="0.5" y="53.5" width="8" height="8"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="8" id="Pbh-8n-aJd"/>
@@ -329,7 +329,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XPq-j3-1od">
-                                                <rect key="frame" x="4" y="23" width="1" height="22"/>
+                                                <rect key="frame" x="4" y="25.5" width="1" height="26"/>
                                                 <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="1" id="krl-cg-Xg1"/>
@@ -439,6 +439,7 @@
                         <constraints>
                             <constraint firstItem="VUc-3z-HrO" firstAttribute="centerX" secondItem="WQy-tY-Vzu" secondAttribute="centerX" multiplier="0.2" id="1tX-b1-ThN"/>
                             <constraint firstItem="4Hr-ij-YKW" firstAttribute="bottom" secondItem="J8q-FU-qaJ" secondAttribute="bottom" id="GAD-SV-Wbm"/>
+                            <constraint firstItem="xPD-qg-Xbo" firstAttribute="height" secondItem="J8q-FU-qaJ" secondAttribute="width" multiplier="0.12" id="KGh-N7-kx1"/>
                             <constraint firstItem="Irs-SK-6CD" firstAttribute="width" secondItem="J8q-FU-qaJ" secondAttribute="width" multiplier="30:320" id="Mhn-It-cgO"/>
                             <constraint firstItem="sOi-HC-iqQ" firstAttribute="centerY" secondItem="WQy-tY-Vzu" secondAttribute="centerY" multiplier="0.4" constant="0.89999999999999147" id="OdB-Qy-S4b"/>
                             <constraint firstItem="sOi-HC-iqQ" firstAttribute="height" secondItem="J8q-FU-qaJ" secondAttribute="height" multiplier="100:667" constant="1.8425787106446734" id="Sdy-2E-wix"/>
@@ -452,6 +453,7 @@
                             <constraint firstItem="4Hr-ij-YKW" firstAttribute="trailing" secondItem="J8q-FU-qaJ" secondAttribute="trailing" id="d0N-cI-OaL"/>
                             <constraint firstItem="Irs-SK-6CD" firstAttribute="leading" secondItem="WQy-tY-Vzu" secondAttribute="leading" constant="16" id="eFz-YY-UvG"/>
                             <constraint firstItem="b4w-n3-RDh" firstAttribute="height" secondItem="Irs-SK-6CD" secondAttribute="height" multiplier="1.8" id="fLY-W1-fBU"/>
+                            <constraint firstItem="4bR-JZ-zYT" firstAttribute="height" secondItem="J8q-FU-qaJ" secondAttribute="width" multiplier="0.13" id="fuX-MB-cLa"/>
                             <constraint firstItem="Irs-SK-6CD" firstAttribute="height" secondItem="J8q-FU-qaJ" secondAttribute="width" multiplier="30:320" id="h49-JP-iqQ"/>
                             <constraint firstItem="sOi-HC-iqQ" firstAttribute="width" secondItem="J8q-FU-qaJ" secondAttribute="width" multiplier="0.9" id="h4Q-g4-qgQ"/>
                             <constraint firstItem="Eb3-lV-VTA" firstAttribute="width" secondItem="J8q-FU-qaJ" secondAttribute="width" multiplier="0.6" id="hlW-Gm-vPj"/>
@@ -463,6 +465,12 @@
                             <constraint firstItem="Irs-SK-6CD" firstAttribute="top" secondItem="WQy-tY-Vzu" secondAttribute="top" id="vbb-Ms-bpO"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="WQy-tY-Vzu"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Sdy-2E-wix"/>
+                                <exclude reference="fuX-MB-cLa"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="JjM-aA-nHT"/>
                     <nil key="simulatedTopBarMetrics"/>
@@ -484,6 +492,7 @@
                         <outlet property="viewFavouriteSource" destination="atX-X9-rIG" id="eKl-2K-e24"/>
                         <outlet property="viewHomeLocation" destination="kua-b9-hUW" id="yVh-bl-KDX"/>
                         <outlet property="viewLocationButtons" destination="Eb3-lV-VTA" id="QOP-NG-IcK"/>
+                        <outlet property="viewLocationDot" destination="jNK-AM-XBv" id="cFD-ye-8Re"/>
                         <outlet property="viewMapOuter" destination="4Hr-ij-YKW" id="Io0-gi-hLd"/>
                         <outlet property="viewSideMenu" destination="Irs-SK-6CD" id="yPi-rF-ZcM"/>
                         <outlet property="viewSourceLocation" destination="4bR-JZ-zYT" id="fzh-7o-dA8"/>
@@ -693,12 +702,12 @@
                                 <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your wallet amount is" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5hN-iD-CKU">
-                                        <rect key="frame" x="8" y="191.5" width="304" height="17.5"/>
+                                        <rect key="frame" x="8" y="191.5" width="304" height="19.5"/>
                                         <fontDescription key="fontDescription" name="ClanPro-Medium" family="Clan Pro" pointSize="15"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$ 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ttf-Fv-7of" customClass="Label" customModule="TranxitUser" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="214" width="304" height="28"/>
+                                        <rect key="frame" x="8" y="216" width="304" height="30.5"/>
                                         <fontDescription key="fontDescription" name="ClanPro-Medium" family="Clan Pro" pointSize="24"/>
                                         <color key="textColor" red="0.87843137250000003" green="0.42352941179999998" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -725,16 +734,16 @@
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="eLG-CS-Cmz">
-                                                <rect key="frame" x="16" y="66.5" width="256" height="31"/>
+                                                <rect key="frame" x="16" y="64.5" width="256" height="33"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="$ 0" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Olf-rv-tgI">
-                                                        <rect key="frame" x="0.0" y="0.0" width="60.5" height="31"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="60.5" height="33"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     </textField>
                                                     <button opaque="NO" tag="99" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ofj-cn-8Pa" customClass="Button" customModule="TranxitUser" customModuleProvider="target">
-                                                        <rect key="frame" x="65.5" y="0.0" width="60" height="31"/>
+                                                        <rect key="frame" x="65.5" y="0.0" width="60" height="33"/>
                                                         <color key="backgroundColor" red="0.96460121870000004" green="0.96476620440000005" blue="0.96459084750000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" name="ClanPro-Medium" family="Clan Pro" pointSize="16"/>
                                                         <state key="normal" title="$99">
@@ -759,7 +768,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="199" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SCS-va-z0Z" customClass="Button" customModule="TranxitUser" customModuleProvider="target">
-                                                        <rect key="frame" x="130.5" y="0.0" width="60.5" height="31"/>
+                                                        <rect key="frame" x="130.5" y="0.0" width="60.5" height="33"/>
                                                         <color key="backgroundColor" red="0.96460121870000004" green="0.96476620440000005" blue="0.96459084750000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" name="ClanPro-Medium" family="Clan Pro" pointSize="16"/>
                                                         <state key="normal" title="$199">
@@ -784,7 +793,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="299" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gH3-oF-qdw" customClass="Button" customModule="TranxitUser" customModuleProvider="target">
-                                                        <rect key="frame" x="196" y="0.0" width="60" height="31"/>
+                                                        <rect key="frame" x="196" y="0.0" width="60" height="33"/>
                                                         <color key="backgroundColor" red="0.96460121870000004" green="0.96476620440000005" blue="0.96459084750000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" name="ClanPro-Medium" family="Clan Pro" pointSize="16"/>
                                                         <state key="normal" title="$299">
