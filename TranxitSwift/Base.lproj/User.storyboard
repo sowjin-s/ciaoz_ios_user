@@ -736,12 +736,22 @@
                                                                 <action selector="editBtnActionWithSender:" destination="QQh-i2-HJA" eventType="touchUpInside" id="Q69-8O-9hk"/>
                                                             </connections>
                                                         </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JM7-DY-Lgz">
+                                                            <rect key="frame" x="286" y="34.666666666666664" width="50" height="44.999999999999993"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="50" id="32l-Wx-jnh"/>
+                                                                <constraint firstAttribute="height" constant="45" id="FtN-vf-nYX"/>
+                                                            </constraints>
+                                                            <state key="normal" image="QR"/>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="bottom" secondItem="B2S-4Z-xsA" secondAttribute="bottom" id="0q0-Tt-ujz"/>
+                                                        <constraint firstItem="Uwk-iG-6ta" firstAttribute="leading" secondItem="JM7-DY-Lgz" secondAttribute="trailing" constant="16" id="Lzg-Ay-zXn"/>
                                                         <constraint firstItem="B2S-4Z-xsA" firstAttribute="leading" secondItem="PDv-CC-vs1" secondAttribute="leading" constant="8" id="aCE-ar-azV"/>
                                                         <constraint firstAttribute="trailing" secondItem="Uwk-iG-6ta" secondAttribute="trailing" constant="20" id="afj-ar-LKc"/>
+                                                        <constraint firstItem="JM7-DY-Lgz" firstAttribute="centerY" secondItem="Uwk-iG-6ta" secondAttribute="centerY" id="blw-UA-1rH"/>
                                                         <constraint firstAttribute="trailing" secondItem="B2S-4Z-xsA" secondAttribute="trailing" constant="8" id="h39-pb-SW1"/>
                                                         <constraint firstItem="B2S-4Z-xsA" firstAttribute="top" secondItem="PDv-CC-vs1" secondAttribute="top" id="kFD-as-1nv"/>
                                                         <constraint firstAttribute="bottom" secondItem="Uwk-iG-6ta" secondAttribute="bottom" id="zQ2-9d-FHX"/>
@@ -926,6 +936,7 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="QRCodeBtn" destination="JM7-DY-Lgz" id="7gn-cp-O5s"/>
                         <outlet property="buttonChangePassword" destination="ENL-XW-BgV" id="mnz-Ev-tI7"/>
                         <outlet property="buttonSave" destination="HLi-bv-tQq" id="70w-RM-4bU"/>
                         <outlet property="imageViewBusiness" destination="Qmv-S9-oxd" id="yWO-Mj-sAl"/>
@@ -1682,6 +1693,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="QR" width="200" height="200"/>
         <image name="circle-shape-outline" width="128" height="128"/>
         <image name="editImage" width="42" height="42"/>
         <image name="forward" width="85" height="85"/>

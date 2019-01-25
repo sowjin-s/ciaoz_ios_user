@@ -39,4 +39,5 @@ struct Keys {
     let referral_total_text = "referral_total_text"
     let otp = "otp"
     let ride_otp = "ride_otp"
+    let qrcode_url = "qrcode_url"
 }

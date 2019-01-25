@@ -28,6 +28,9 @@ class ProfileViewController: UITableViewController {
     @IBOutlet private weak var viewBusiness : UIView!
     @IBOutlet private weak var viewPersonal : UIView!
     
+    @IBOutlet weak var QRCodeBtn: UIButton!
+    
+     var QRView : QRCodeView?
     
     private var tripType :TripType = .Business { // Store Radio option TripType
         
@@ -100,6 +103,9 @@ extension ProfileViewController {
         self.buttonChangePassword.isHidden = (User.main.loginType != LoginType.manual.rawValue)
         self.navigationController?.isNavigationBarHidden = false
         self.textFieldPhone.isEnabled = false
+        
+        self.QRCodeBtn.addTarget(self, action: #selector(self.QRCodeBtnTapped(sender:)), for: .touchUpInside)
+        
     }
     
     // MARK:- Set Profile Details
@@ -302,6 +308,17 @@ extension ProfileViewController {
       
     }
     
+    
+    @IBAction private func QRCodeBtnTapped(sender : UIButton) {
+       
+        if QRView == nil {
+            self.QRView = Bundle.main.loadNibNamed(XIB.Names.QRCodeView, owner: self, options: [:])?.first as? QRCodeView
+                QRView?.center = view.center
+            self.QRView?.QRImageView.setImage(url: URL(string: baseUrl+User.main.qrcode_url!)!)
+            
+            self.view.addSubview(QRView!)
+        }
+    }
     
 }
 

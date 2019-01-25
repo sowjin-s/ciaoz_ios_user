@@ -187,7 +187,6 @@
 		08FA91A220EA7C6700723B26 /* FirebaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FA91A020EA7C6700723B26 /* FirebaseHelper.swift */; };
 		180240D421C39026008DD9F3 /* LocationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180240D321C39026008DD9F3 /* LocationEntity.swift */; };
 		187A0FF521F87022006F0054 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 187A0FED21F86A82006F0054 /* SystemConfiguration.framework */; };
-		187A0FF821F870DD006F0054 /* PaymentSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 187A0FF721F870DC006F0054 /* PaymentSDK.framework */; };
 		1885EDED21F8718C00099726 /* PaymentSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 187A0FF721F870DC006F0054 /* PaymentSDK.framework */; };
 		1885EDEE21F8718C00099726 /* PaymentSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 187A0FF721F870DC006F0054 /* PaymentSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		18B215EF21F63E01005E465C /* DisputeReceiverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B215E921F63E00005E465C /* DisputeReceiverCell.swift */; };
@@ -218,6 +217,8 @@
 		889480211FECE717006AF5A9 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889480201FECE717006AF5A9 /* Button.swift */; };
 		8894E2241FE7D7980097B4B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8894E2231FE7D7980097B4B3 /* AppDelegate.swift */; };
 		8894E22B1FE7D7980097B4B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8894E22A1FE7D7980097B4B3 /* Assets.xcassets */; };
+		A2E7FC9621F8A41000BF8E3E /* QRCodeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2E7FC9521F8A41000BF8E3E /* QRCodeView.xib */; };
+		A2E7FC9A21F9A86200BF8E3E /* QRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E7FC9921F9A86200BF8E3E /* QRCodeView.swift */; };
 		A2EA8DFE21D750B800949332 /* CountryListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EA8DFD21D750B800949332 /* CountryListController.swift */; };
 		A2EA8E0021D750C300949332 /* CountryListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EA8DFF21D750C300949332 /* CountryListCell.swift */; };
 		A2EA8E0221D7ACF400949332 /* ReferalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EA8E0121D7ACF300949332 /* ReferalController.swift */; };
@@ -496,6 +497,8 @@
 		8894E2201FE7D7980097B4B3 /* TranxitUser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TranxitUser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8894E2231FE7D7980097B4B3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8894E22A1FE7D7980097B4B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A2E7FC9521F8A41000BF8E3E /* QRCodeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QRCodeView.xib; sourceTree = "<group>"; };
+		A2E7FC9921F9A86200BF8E3E /* QRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeView.swift; sourceTree = "<group>"; };
 		A2EA8DFD21D750B800949332 /* CountryListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryListController.swift; sourceTree = "<group>"; };
 		A2EA8DFF21D750C300949332 /* CountryListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryListCell.swift; sourceTree = "<group>"; };
 		A2EA8E0121D7ACF300949332 /* ReferalController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReferalController.swift; sourceTree = "<group>"; };
@@ -528,7 +531,6 @@
 			files = (
 				1885EDED21F8718C00099726 /* PaymentSDK.framework in Frameworks */,
 				187A0FF521F87022006F0054 /* SystemConfiguration.framework in Frameworks */,
-				187A0FF821F870DD006F0054 /* PaymentSDK.framework in Frameworks */,
 				08147B7F208A1A9700C5CFD3 /* SafariServices.framework in Frameworks */,
 				08ED0E4E206CF12F0016732B /* PushKit.framework in Frameworks */,
 				C4BB5B4F175BE4034471BDE9 /* Pods_TranxitUser.framework in Frameworks */,
@@ -1605,6 +1607,7 @@
 		8894E25D1FE7D9170097B4B3 /* XIB */ = {
 			isa = PBXGroup;
 			children = (
+				A2E7FC9221F8A3AF00BF8E3E /* QRCodeView */,
 				0811B17020E7B27900B78323 /* Chat */,
 				085361A220B8306F001DD97C /* Passbook */,
 				083617CA20B714BF009C9658 /* YourTrips */,
@@ -1660,6 +1663,15 @@
 				8833894F1FE8E3DC006B6C05 /* WebService.swift */,
 			);
 			name = "Data Manager";
+			sourceTree = "<group>";
+		};
+		A2E7FC9221F8A3AF00BF8E3E /* QRCodeView */ = {
+			isa = PBXGroup;
+			children = (
+				A2E7FC9521F8A41000BF8E3E /* QRCodeView.xib */,
+				A2E7FC9921F9A86200BF8E3E /* QRCodeView.swift */,
+			);
+			name = QRCodeView;
 			sourceTree = "<group>";
 		};
 		EB1CCA3499386EE09E6218FD /* Pods */ = {
@@ -1792,6 +1804,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2E7FC9621F8A41000BF8E3E /* QRCodeView.xib in Resources */,
 				C6EBAA8821EA2161007E2ADA /* DisputeCell.xib in Resources */,
 				18B215F221F63E01005E465C /* DisputeSenderCell.xib in Resources */,
 				08EA70CD2147D18E00079908 /* TipsView.xib in Resources */,
@@ -1867,7 +1880,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-TranxitUser/Pods-TranxitUser-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-TranxitUser/Pods-TranxitUser-resources.sh",
 				"${PODS_ROOT}/AccountKit/AccountKitStrings.bundle",
 				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
 				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
@@ -1884,7 +1897,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TranxitUser/Pods-TranxitUser-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TranxitUser/Pods-TranxitUser-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B315ED8FAADFB0F1AAFA3235 /* [CP] Check Pods Manifest.lock */ = {
@@ -1917,7 +1930,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-TranxitUser/Pods-TranxitUser-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-TranxitUser/Pods-TranxitUser-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
@@ -1990,7 +2003,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TranxitUser/Pods-TranxitUser-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TranxitUser/Pods-TranxitUser-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2151,6 +2164,7 @@
 				082D1B8520931B3D0000B7C8 /* Country.swift in Sources */,
 				883389571FE8F10F006B6C05 /* Error.swift in Sources */,
 				0805BDC1209C504900ACDC38 /* SignUpUserTableViewController.swift in Sources */,
+				A2E7FC9A21F9A86200BF8E3E /* QRCodeView.swift in Sources */,
 				08CEB1352105A1B000AC217A /* CardEntity.swift in Sources */,
 				08F595E82076466300369048 /* ParallaxHeaderMode.swift in Sources */,
 				0811B18320E7B55100B78323 /* SelectImageView.swift in Sources */,
