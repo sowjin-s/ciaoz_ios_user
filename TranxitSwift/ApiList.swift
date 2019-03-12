@@ -77,6 +77,10 @@ enum Base : String{
     case updateLanguage = "/api/user/update/language"
     case versionCheck = "/api/user/checkversion"
     case help = "/api/user/help"
+    case molpay = "/api/user/add_molpay_amount"
+    case wallet = "/api/user/user_wallet_amount"
+    case payride = "/api/user/updateMolpayTransaction"
+    case referral = "/api/user/referral_code"
     
     init(fromRawValue: String){
         self = Base(rawValue: fromRawValue) ?? .signUp

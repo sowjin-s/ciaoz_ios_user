@@ -63,7 +63,8 @@ class RequestSelectionView: UIView {
             if paymentType == .NONE {
                 paymentString = Constants.string.NA.localize()
             } else {
-                paymentString = paymentType == .CASH ? PaymentType.CASH.rawValue.localize() : (self.selectedCard == nil ? PaymentType.CARD.rawValue.localize() : "\("XXXX-"+String.removeNil(self.selectedCard?.last_four))")
+                paymentString = paymentType == .CASH ? PaymentType.CASH.rawValue.localize() : PaymentType.MOLPAY.rawValue.localize()
+                /*paymentString = paymentType == .CASH ? PaymentType.CASH.rawValue.localize() : (self.selectedCard == nil ? PaymentType.MOLPAY.rawValue.localize() : "\("XXXX-"+String.removeNil(self.selectedCard?.last_four))")*/
             }
             let text = "\(Constants.string.payment.localize()):\(paymentString)"
             self.labelPaymentMode.text = text
@@ -116,11 +117,12 @@ extension RequestSelectionView {
         self.setDesign()
         self.viewUseWallet.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.useWalletAction)))
         self.paymentType = .NONE
-        if (User.main.isCardAllowed == false){
+        self.buttonChangePayment.isHidden = false
+        /*if (User.main.isCardAllowed == false){
             self.buttonChangePayment.isHidden = true
         }else {
             self.buttonChangePayment.isHidden = !(User.main.isCashAllowed || User.main.isCardAllowed)
-        }
+        }*/
 //        self.buttonChangePayment.isHidden = !(User.main.isCashAllowed && User.main.isCardAllowed) // Change button enabled only if both payment modes are enabled
         self.buttonChangePayment.addTarget(self, action: #selector(self.buttonChangePaymentAction), for: .touchUpInside)
         self.buttonCoupon.addTarget(self, action: #selector(self.buttonCouponAction), for: .touchUpInside)
@@ -164,7 +166,7 @@ extension RequestSelectionView {
         self.service = values
         self.viewUseWallet.isHidden = !(Float.removeNil(self.service?.pricing?.wallet_balance)>0)
         self.setEstimationFare(amount: self.service?.pricing?.estimated_fare)
-        self.paymentType = User.main.isCashAllowed ? .CASH :( User.main.isCardAllowed ? .CARD : .NONE)
+        self.paymentType = User.main.isCashAllowed ? .CASH :( User.main.isCardAllowed ? .MOLPAY : .NONE)
         self.imageViewModal.setImage(with: values.image, placeHolder: #imageLiteral(resourceName: "CarplaceHolder"))
         self.labelWalletBalance.text = "\(String.removeNil(User.main.currency)) \(Formatter.shared.limit(string: "\(Float.removeNil(self.service?.pricing?.wallet_balance))", maximumDecimal: 2))"
     }

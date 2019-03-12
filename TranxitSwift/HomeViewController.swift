@@ -17,7 +17,13 @@
     
     var riderStatus : RideStatus = .none // Provider Current Status
     
-    class HomeViewController: UIViewController {
+    class HomeViewController: UIViewController, MOLPayLibDelegate {
+        
+        var isPaymentInstructionPresent: Bool = false
+        var isCloseButtonClick: Bool = false
+        var mp = MOLPayLib()
+        var tips : Float? = 0
+        
         
         @IBOutlet private var viewSideMenu : UIView!
         @IBOutlet private var viewCurrentLocation : UIView!
@@ -895,12 +901,12 @@ extension HomeViewController {
         }
         
         // MARK:- Change Payment Type For existing Request
-        func updatePaymentType(with cardDetail : CardEntity) {
+        func updatePaymentType(with mode : PaymentType) {
             
             let request = Request()
             request.request_id = self.currentRequestId
-            request.payment_mode = .CARD
-            request.card_id = cardDetail.card_id
+            request.payment_mode = mode
+           // if cardDetail != nil { request.card_id = cardDetail.card_id }
             self.loader.isHideInMainThread(false)
             self.presenter?.post(api: .updateRequest, data: request.toData())
             

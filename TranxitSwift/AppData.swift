@@ -8,23 +8,23 @@
 
 import UIKit
 
-let AppName = "Tranxit"
+let AppName = "Ciaoz"
 var deviceTokenString = Constants.string.noDevice
-let googleMapKey = "AIzaSyCKTSqyNLap7VgehJft0j9amCn52i0u7tQ"
-let appSecretKey = "yVnKClKDHPcDlqqO1V05RtDRdvtrVHfvjlfqliha"
+let googleMapKey = "AIzaSyCgdb3ysotP9U1qUU0IAkYoeeJfLzxfPb0"
+let appSecretKey = "z7uxjxYKkltLp87J92sDHZqM4igMXzYNb1xEWwlt"
 let appClientId = 2
 let defaultMapLocation = LocationCoordinate(latitude: 13.009245, longitude: 80.212929)
 //let locationApi = "https://maps.googleapis.com/maps/api/place/details/json?reference=%@&sensor=true&key=%@"
-let baseUrl = "http://schedule.deliveryventure.com/" //"https://schedule.tranxit.co/"
+let baseUrl = "https://app.ciaoz2u.com/" //"https://schedule.tranxit.co/"
 let passwordLengthMax = 10
 //let distanceType = "km"
 let requestCheckInterval : TimeInterval = 5
 //var sosNumber = 911
 
 var supportNumber = "919585290750"
-var supportEmail = "support@tranxit.com"
+var supportEmail = "support@ciaoz.com"
 var offlineNumber = "57777"
-let stripePublishableKey = "pk_test_EacUddWKtq5XqAt3dGdpr0YW"
+let stripePublishableKey = "sk_test_qx8uEcUebR3MXl8IZf2WedI5"
 let helpSubject = "\(AppName) Help"
-let driverUrl = "https://itunes.apple.com/us/app/tranxit-driver/id1204269279?mt=8"
+let driverUrl = "https://app.ciaoz2u.com/provider/login"
 let requestInterval : TimeInterval = 60  // seconds

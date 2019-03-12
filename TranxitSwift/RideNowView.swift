@@ -30,7 +30,7 @@ class RideNowView: UIView {
     
     private var datasource = [Service]()
    // var onClickChangePayment : (()->Void)? // Onclick Change Pricing
-  //  var onClickSchedule : ((Service?)->Void)? // Onclick schedule
+   // var onClickSchedule : ((Service?)->Void)? // Onclick schedule
     var onClickProceed : ((Service)->Void)? // Onlclick Ride Now
     var onClickService : ((Service?)->Void)? // Onclick each servicetype
     private var rateView : RateView?
@@ -339,6 +339,10 @@ extension RideNowView {
         
         if self.datasource.count>selectedRow, self.datasource[selectedRow].pricing != nil {
             self.labelSurge.text = self.datasource[selectedRow].pricing?.surge_value
+            
+           // self.datasource[selectedRow].pricing?.surge_value as AnyObject
+            
+            // self.datasource[selectedRow].pricing?.surge_value
             self.isSurge = self.datasource[selectedRow].pricing?.surge == 1
 //            self.isShowWallet = !(self.datasource[selectedRow].pricing?.wallet_balance == 0)
 //            self.labelWalletAmount.text = " \(String.removeNil(User.main.currency)) \(Formatter.shared.limit(string: "\(self.datasource[selectedRow].pricing?.wallet_balance ?? 0)", maximumDecimal: 2) ?? "0.00")"

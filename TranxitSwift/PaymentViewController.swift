@@ -31,7 +31,8 @@ class PaymentViewController: UITableViewController {
     
     private let cashSection = 0
     private let cardSection = 1
-    
+    private let MolpaySection = 1
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initalLoads()
@@ -91,7 +92,7 @@ extension PaymentViewController {
         let isShowCashRow = (!User.main.isCashAllowed || !isShowCash) ? 0 : 1
         totalCount.updateValue(isShowCashRow, forKey: cashSection) // Cash rows
         totalCount.updateValue(0, forKey: cardSection) // Card Row
-        
+        totalCount.updateValue(1, forKey: MolpaySection) // Molpay Row
     }
     
     
@@ -176,7 +177,13 @@ extension PaymentViewController {
                 if paymentTypeStr == PaymentType.CASH.rawValue {
                     tableCell.accessoryType = .checkmark 
                 }
-            } else if self.cardsList.count > indexPath.row {
+            }else if indexPath.section == 1{
+                tableCell.imageViewPayment.image =  #imageLiteral(resourceName: "molpay")
+                tableCell.labelPayment.text = Constants.string.molpay.localize()
+                if paymentTypeStr == PaymentType.MOLPAY.rawValue {
+                    tableCell.accessoryType = .checkmark
+                }
+            }else if self.cardsList.count > indexPath.row {
                 tableCell.imageViewPayment.image =  #imageLiteral(resourceName: "visa")
                 tableCell.labelPayment.text = "XXXX-XXXX-XXXX-"+String.removeNil(cardsList[indexPath.row].last_four)
                 if paymentTypeStr == PaymentType.CARD.rawValue {
@@ -206,9 +213,10 @@ extension PaymentViewController {
             tableView.deselectRow(at: indexPath, animated: true)
         }
         guard self.isChangingPayment else { return }
+        
         self.dismiss(animated: true) {
-            if indexPath.section == 1, self.cardsList.count > indexPath.row {
-                self.onclickPayment?(.CARD ,self.cardsList[indexPath.row])
+            if indexPath.section == 1 {
+                self.onclickPayment?(.MOLPAY, nil)
             } else {
                 self.onclickPayment?(.CASH, nil)
             }
@@ -217,7 +225,9 @@ extension PaymentViewController {
     
     @available(iOS 11.0, *)
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-       return self.swipeAction(at: indexPath)
+            //return self.swipeAction(at: indexPath)
+        let configuration = UISwipeActionsConfiguration()
+        return configuration
     }
 }
 

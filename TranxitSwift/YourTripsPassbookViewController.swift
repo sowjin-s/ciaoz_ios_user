@@ -287,7 +287,6 @@ extension YourTripsPassbookViewController : UITableViewDelegate,UITableViewDataS
 // MARK:- PostviewProtocol
 
 extension YourTripsPassbookViewController : PostViewProtocol  {
-    
     func onError(api: Base, message: String, statusCode code: Int) {
         print("Called", #function)
         DispatchQueue.main.async {

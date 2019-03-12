@@ -94,6 +94,25 @@ class PresenterProcessor {
         return data.getDecodedObject(from: HelpEntity.self)
     }
     
+    
+    // MARK:- Molpay Wallet
+    
+    func getMolpayWalletAPI(data : Data)->MolpayEntity? {
+        return data.getDecodedObject(from: MolpayEntity.self)
+    }
+    
+    
+    // MARK:- Molpay Wallet
+    
+    func getWalletAPI(data : Data)->walletModel? {
+        return data.getDecodedObject(from: walletModel.self)
+    }
+    
+    // MARK:- Referral
+    
+    func getReferralAPI(data : Data)->referralModel? {
+        return data.getDecodedObject(from: referralModel.self)
+    }
 }
 
 

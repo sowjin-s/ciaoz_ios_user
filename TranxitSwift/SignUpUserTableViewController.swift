@@ -8,6 +8,7 @@
 
 import UIKit
 import AccountKit
+import CountryList
 
 class SignUpUserTableViewController: UITableViewController {
     
@@ -19,10 +20,15 @@ class SignUpUserTableViewController: UITableViewController {
     
     @IBOutlet var confirmPwdText: HoshiTextField!
     
-    //@IBOutlet var countryText: HoshiTextField!
+    @IBOutlet var countryText: HoshiTextField!
     
-   // @IBOutlet var timeZone: HoshiTextField!
-    
+    @IBOutlet var timeZone: HoshiTextField!
+    @IBOutlet var referralCodeText: HoshiTextField!
+
+    @IBOutlet private weak var termsbtn: UIButton!
+    @IBOutlet private weak var checkboxbtn: UIButton!
+    @IBOutlet private weak var countrycode: UIButton!
+
    // @IBOutlet var referralCodeText: HoshiTextField!
     
    // @IBOutlet var businessLabel: UILabel!
@@ -36,6 +42,11 @@ class SignUpUserTableViewController: UITableViewController {
     @IBOutlet var nextView: UIView!
     
     @IBOutlet var nextImage: UIImageView!
+    
+    var TermsConditionsView : termscondition?
+    var rideNow : RideNowView?
+    private var countryList = CountryList()
+
     
    // @IBOutlet var BusinessView: UIView!
     // @IBOutlet var personalView: UIView!
@@ -53,16 +64,33 @@ class SignUpUserTableViewController: UITableViewController {
     
     
     private var userInfo : UserData?
+    private var emergency_country_code: String? = ""
     private var accountKit : AKFAccountKit?
+    
     private lazy var  loader = {
         return createActivityIndicator(UIApplication.shared.keyWindow ?? self.view)
     }()
+    
+    var isChecked: Bool = false {
+        didSet{
+            if isChecked == true {
+                let image = #imageLiteral(resourceName: "check").withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+                checkboxbtn.setImage(image, for: UIControl.State.normal)
+                checkboxbtn.tintColor = UIColor.black
+            } else {
+                let image = #imageLiteral(resourceName: "check-box-empty").withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+                checkboxbtn.setImage(image, for: UIControl.State.normal)
+                checkboxbtn.tintColor = UIColor.black
+            }
+        }
+    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setNavigationcontroller()        
         self.setDesign()
+        self.initialloads()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -90,7 +118,7 @@ class SignUpUserTableViewController: UITableViewController {
 }
 
 
-extension SignUpUserTableViewController {
+extension SignUpUserTableViewController: UIWebViewDelegate {
     
     
     // MARK:- Designs
@@ -103,9 +131,50 @@ extension SignUpUserTableViewController {
         Common.setFont(to: passwordText)
         Common.setFont(to: confirmPwdText)
         Common.setFont(to: phoneNumber)
+        Common.setFont(to: timeZone)
+        Common.setFont(to: countryText)
+        Common.setFont(to: termsbtn)
+        Common.setFont(to: referralCodeText)
+        Common.setFont(to: countrycode)
+
+        termsbtn.tintColor = UIColor.black
+        //let image = #imageLiteral(resourceName: "check-box-empty").withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+        //checkboxbtn.setImage(image, for: .normal)
+        checkboxbtn.tintColor = UIColor.black
+        countrycode.tintColor = UIColor.black
+    }
+    
+    private func initialloads(){
+        
+        self.checkboxbtn.addTarget(self, action: #selector(self.checkboxAction), for: .touchUpInside)
+        self.termsbtn.addTarget(self, action: #selector(self.termsAction), for: .touchUpInside)
+        self.countrycode.addTarget(self, action: #selector(self.ChangeCountryCode), for: .touchUpInside)
+        self.isChecked = false
+        self.countryList.delegate = self
+        if let countryCode = (Locale.current as NSLocale).object(forKey: .countryCode) as? String {
+            countrycode.setTitle("+" + getCountryCallingCode(countryRegionCode: countryCode), for: .normal)
+        }
         
     }
     
+    @IBAction private func termsAction() {
+      
+        self.TermsConditionsView = Bundle.main.loadNibNamed(XIB.Names.TermsConditions, owner: self, options: [:])?.first as? termscondition
+        print(TermsConditionsView?.frame.height as Any)
+        self.TermsConditionsView?.frame = CGRect(x: 0, y: 0, width: (self.view.frame.width), height: (self.view.frame.height - 140))
+        self.TermsConditionsView?.clipsToBounds = false
+        self.view.addSubview(TermsConditionsView!)
+        self.TermsConditionsView?.webpage.loadRequest(NSURLRequest(url: NSURL(string: "http://staging.ciaoz2u.com/privacy")! as URL) as URLRequest)
+    }
+
+    
+    @objc private func checkboxAction(sender: UIButton) {
+        if self.isChecked == false{
+            self.isChecked = true
+        }else{
+            self.isChecked = false
+        }
+    }
     
     private func localize(){
         
@@ -116,8 +185,11 @@ extension SignUpUserTableViewController {
         self.confirmPwdText.placeholder = Constants.string.ConfirmPassword.localize()
         self.phoneNumber.placeholder = Constants.string.phoneNumber.localize()
         self.passwordText.placeholder = Constants.string.password.localize()
-//        self.countryText.placeholder = Constants.string.country.localize()
-//        self.timeZone.placeholder = Constants.string.timeZone.localize()
+        self.countryText.placeholder = Constants.string.icnumber.localize()
+        self.referralCodeText.placeholder = Constants.string.referralCode.localize()
+        self.timeZone.placeholder = Constants.string.emergencycontact.localize()
+        self.termsbtn.setTitle(Constants.string.termsconditions.localize(), for: .normal)
+
 //        self.referralCodeText.placeholder = Constants.string.referalCode.localize()
 //        self.businessLabel.text = Constants.string.business.localize()
 //        self.personalLabel.text = Constants.string.personal.localize()
@@ -142,6 +214,9 @@ extension SignUpUserTableViewController {
         self.passwordText.delegate = self
         self.confirmPwdText.delegate = self
         self.phoneNumber.delegate = self
+        self.countryText.delegate = self
+        self.timeZone.delegate = self
+        self.referralCodeText.delegate = self
         self.navigationController?.view.addSubview(nextView)
     }
     
@@ -155,6 +230,12 @@ extension SignUpUserTableViewController {
         self.nextView.addGestureRecognizer(nextBtnGusture)
     }
     
+    
+    @IBAction private func ChangeCountryCode() {
+        
+        let navController = UINavigationController(rootViewController: countryList)
+        self.present(navController, animated: true, completion: nil)
+    }
     
 //    private func addGustureForRadioBtn(){
 //        let BusinessradioGusture = UITapGestureRecognizer(target: self, action: #selector(RatioButtonTapped(sender:)))
@@ -203,7 +284,19 @@ extension SignUpUserTableViewController {
             self.showToast(string: ErrorMessage.list.passwordDonotMatch.localize())
             return
         }
-        userInfo =  MakeJson.signUp(loginBy: .manual, email: email, password: password, socialId: nil, firstName: firstName, lastName: lastName, mobile: mobile)
+        guard let icnumber = self.countryText.text, !icnumber.isEmpty else {
+            self.showToast(string: ErrorMessage.list.entericnumber.localize())
+            return
+        }
+        guard let emergencycontact = self.timeZone.text, !emergencycontact.isEmpty else {
+            self.showToast(string: ErrorMessage.list.enteremergencycontact.localize())
+            return
+        }
+        guard isChecked != false else{
+            self.showToast(string: ErrorMessage.list.termscondition.localize())
+            return
+        }
+        userInfo =  MakeJson.signUp(loginBy: .manual, email: email, password: password, socialId: nil, firstName: firstName, lastName: lastName, mobile: mobile, emergencycontact: emergencycontact, icnumber: icnumber, referral_code: self.referralCodeText.text, emergency_country_code: emergency_country_code, country_code: "")
        /* guard let country = countryText.text, country.isEmpty else {
             UIApplication.shared.keyWindow?.makeToast(ErrorMessage.list.enterCountry)
             return
@@ -249,7 +342,7 @@ extension SignUpUserTableViewController {
         
         viewcontroller.delegate = self
         viewcontroller.uiManager = AKFSkinManager(skinType: .contemporary, primaryColor: .primary)
-        viewcontroller.uiManager.theme?()?.buttonTextColor = .secondary
+        viewcontroller.uiManager.theme?()?.buttonTextColor = .white
         
     }
     
@@ -366,6 +459,7 @@ extension SignUpUserTableViewController : AKFViewControllerDelegate {
                         mobileString.removeFirst()
                         if let mobileInt = Int(mobileString) {
                             self.userInfo?.mobile = mobileInt
+                            self.userInfo?.country_code = "+\(account?.phoneNumber?.countryCode ?? "")"
                         }
                     }
                 }
@@ -447,3 +541,15 @@ extension SignUpUserTableViewController : UITextFieldDelegate {
 //}
 
 
+//MARK:- Country List Delegate
+
+extension SignUpUserTableViewController : CountryListDelegate {
+    
+    func selectedCountry(country: Country) {
+        self.countrycode.setTitle("+" + country.phoneExtension, for: .normal)
+        //self.userInfo?.emergency_country_code = "+" + country.phoneExtension
+        emergency_country_code = "+\(country.phoneExtension)"
+        print(emergency_country_code ?? "")
+    }
+    
+}

@@ -22,6 +22,10 @@ struct ErrorMessage {
     let enterMobileNumber = "Enter Mobile Number"
     let enterCountry = "Enter Country"
     let enterTimezone = "Enter TimeZone"
+    let entericnumber = "Enter IC Number"
+    let enteremergencycontact = "Enter Emergency Contact"
+    let termscondition = "Agree Terms & Conditions"
     let enterConfirmPassword = "Enter Confirm Password"
     let passwordDonotMatch = "Password and Confirm password donot match"
+
 }

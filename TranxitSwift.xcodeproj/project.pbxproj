@@ -56,7 +56,6 @@
 		082C442320E7913A00A7C892 /* FloatyDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082C441D20E7913900A7C892 /* FloatyDelegate.swift */; };
 		082C442620E7AE0E00A7C892 /* SingleChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082C442520E7AE0E00A7C892 /* SingleChatController.swift */; };
 		082D14D520BAB7AC00536E1B /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082D14D420BAB7AC00536E1B /* Colors.swift */; };
-		082D1B7E2093159A0000B7C8 /* TextFieldEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082D1B7C209315990000B7C8 /* TextFieldEffects.swift */; };
 		082D1B7F2093159A0000B7C8 /* HoshiTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082D1B7D2093159A0000B7C8 /* HoshiTextField.swift */; };
 		082D1B81209318C30000B7C8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082D1B80209318C30000B7C8 /* User.swift */; };
 		082D1B8320931AB70000B7C8 /* ErrorLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082D1B8220931AB70000B7C8 /* ErrorLog.swift */; };
@@ -86,7 +85,10 @@
 		083A59B120A4351D00D64574 /* LocationHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083A59AF20A4351D00D64574 /* LocationHeaderTableViewCell.swift */; };
 		083A59B220A4351D00D64574 /* LocationHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083A59B020A4351D00D64574 /* LocationHeaderTableViewCell.xib */; };
 		083A59B520A454F800D64574 /* GooglePlacesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083A59B420A454F800D64574 /* GooglePlacesHelper.swift */; };
+		083D241C22042FFE00B4A7E0 /* MOLPayXDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 083D241A22042FFE00B4A7E0 /* MOLPayXDK.bundle */; };
+		083D241D22042FFE00B4A7E0 /* MOLPayXDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 083D241B22042FFE00B4A7E0 /* MOLPayXDK.framework */; };
 		083DA4B920D0FF5B00DD473E /* YourTripsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083DA4B820D0FF5B00DD473E /* YourTripsDetailViewController.swift */; };
+		0840E90E22364C7100E894CA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0840E90D22364C7100E894CA /* GoogleService-Info.plist */; };
 		084182B5200F508900527D0D /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084182B4200F508900527D0D /* TableView.swift */; };
 		084182B7200F689500527D0D /* PresenterProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084182B6200F689500527D0D /* PresenterProcessor.swift */; };
 		084577612073614300E890F5 /* AVPlayerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084577602073614300E890F5 /* AVPlayerHelper.swift */; };
@@ -99,7 +101,6 @@
 		085361A520B8308A001DD97C /* PassbookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085361A320B8308A001DD97C /* PassbookTableViewCell.swift */; };
 		085361A620B8308A001DD97C /* PassbookTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 085361A420B8308A001DD97C /* PassbookTableViewCell.xib */; };
 		085361A920B85CBF001DD97C /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085361A820B85CBF001DD97C /* SettingTableViewController.swift */; };
-		0855521520039E91002B01BC /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0855521420039E91002B01BC /* TextField.swift */; };
 		08583BF6211C17DF00B5ABC0 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08583BF5211C17DF00B5ABC0 /* Store.swift */; };
 		08585F4B2115E94B009DE743 /* ripple.json in Resources */ = {isa = PBXBuildFile; fileRef = 08585F4A2115E94B009DE743 /* ripple.json */; };
 		085AC38B21134AD7003AA0AE /* WalletEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085AC38A21134AD7003AA0AE /* WalletEntity.swift */; };
@@ -126,12 +127,13 @@
 		08813E57213D146B00830717 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08813E56213D146B00830717 /* UserDefaultsKeys.swift */; };
 		08813E58213D147800830717 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08813E56213D146B00830717 /* UserDefaultsKeys.swift */; };
 		08813E5D213D507700830717 /* ConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08813E5C213D507700830717 /* ConfigViewController.swift */; };
-		088185C320A4688200F07AFF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 088185C220A4688200F07AFF /* GoogleService-Info.plist */; };
 		088DC901200FCCA00095D552 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088DC900200FCCA00095D552 /* ViewExtension.swift */; };
 		089B4F7520C03A0300DDEAF3 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B4F7420C03A0300DDEAF3 /* Request.swift */; };
 		089B4F7720C10FD600DDEAF3 /* HomePageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B4F7620C10FD600DDEAF3 /* HomePageHelper.swift */; };
 		089B4F7920C1144F00DDEAF3 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B4F7820C1144F00DDEAF3 /* Provider.swift */; };
 		089B4F7B20C116D600DDEAF3 /* Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B4F7A20C116D600DDEAF3 /* Payment.swift */; };
+		08A27BBC221A98F600E92B5F /* MOLPayXDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 08A27BBA221A98F300E92B5F /* MOLPayXDK.bundle */; };
+		08A27BBD221A98F600E92B5F /* MOLPayXDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A27BBB221A98F500E92B5F /* MOLPayXDK.framework */; };
 		08A39DA020B5BB8100314935 /* RideStatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08A39D9F20B5BB8100314935 /* RideStatusView.xib */; };
 		08A39DA220B5BB9300314935 /* RideStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A39DA120B5BB9300314935 /* RideStatusView.swift */; };
 		08A50C422109B6B100CCDDA8 /* ReasonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A50C412109B6B100CCDDA8 /* ReasonView.swift */; };
@@ -154,10 +156,15 @@
 		08BF24BB20BD71F3003A4B96 /* ChangeResetPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BF24BA20BD71F3003A4B96 /* ChangeResetPasswordController.swift */; };
 		08BF24BE20BD80AE003A4B96 /* UserBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BF24BD20BD80AE003A4B96 /* UserBase.swift */; };
 		08BF24C020BD864C003A4B96 /* Default.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BF24BF20BD864C003A4B96 /* Default.swift */; };
+		08C1D8C522251EA300F73F70 /* TextFieldEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1D8C322251EA100F73F70 /* TextFieldEffects.swift */; };
+		08C1D8C622251EA300F73F70 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C1D8C422251EA300F73F70 /* TextField.swift */; };
+		08C37A822216C247005AE4B5 /* termscondition.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08C37A812216C247005AE4B5 /* termscondition.xib */; };
+		08C37A842216C264005AE4B5 /* termscondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C37A832216C264005AE4B5 /* termscondition.swift */; };
 		08C7D146215CA83000F65F7B /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 08032BD2204812A0006BFC4E /* Alamofire.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		08C8F2272004A60A0065CE24 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C8F2262004A60A0065CE24 /* Image.swift */; };
 		08C9E90E20D244F7002928EA /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C9E90D20D244F7002928EA /* Rating.swift */; };
 		08CA2F7C20D927DC00F99FCA /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA2F7B20D927DC00F99FCA /* Reachability.swift */; };
+		08CD69FB2227C19A00C58836 /* ReferralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CD69FA2227C19A00C58836 /* ReferralViewController.swift */; };
 		08CEA1AB2073B47F00553DE2 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CEA1AA2073B47F00553DE2 /* Application.swift */; };
 		08CEB1352105A1B000AC217A /* CardEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CEB1342105A1B000AC217A /* CardEntity.swift */; };
 		08CEB1372105AF2F00AC217A /* AddCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CEB1362105AF2F00AC217A /* AddCardViewController.swift */; };
@@ -286,6 +293,7 @@
 		081E9CF820BFFB6C004C6884 /* EstimateFareRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EstimateFareRequest.swift; sourceTree = "<group>"; };
 		081E9CFA20BFFB88004C6884 /* EstimateFare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimateFare.swift; sourceTree = "<group>"; };
 		081E9CFC20BFFE57004C6884 /* suv.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = suv.json; sourceTree = "<group>"; };
+		081FA37E22057CCB005C5F82 /* MolpayBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MolpayBridge.h; sourceTree = "<group>"; };
 		0823428720AD774C0055DDF8 /* LoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
 		0823428920AD775A0055DDF8 /* LoaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoaderView.xib; sourceTree = "<group>"; };
 		0826325D20AC6DA900EBC529 /* HomeViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewController+Extension.swift"; sourceTree = "<group>"; };
@@ -301,7 +309,6 @@
 		082C441D20E7913900A7C892 /* FloatyDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatyDelegate.swift; sourceTree = "<group>"; };
 		082C442520E7AE0E00A7C892 /* SingleChatController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleChatController.swift; sourceTree = "<group>"; };
 		082D14D420BAB7AC00536E1B /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
-		082D1B7C209315990000B7C8 /* TextFieldEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldEffects.swift; sourceTree = "<group>"; };
 		082D1B7D2093159A0000B7C8 /* HoshiTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HoshiTextField.swift; sourceTree = "<group>"; };
 		082D1B80209318C30000B7C8 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		082D1B8220931AB70000B7C8 /* ErrorLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorLog.swift; sourceTree = "<group>"; };
@@ -331,7 +338,10 @@
 		083A59AF20A4351D00D64574 /* LocationHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		083A59B020A4351D00D64574 /* LocationHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationHeaderTableViewCell.xib; sourceTree = "<group>"; };
 		083A59B420A454F800D64574 /* GooglePlacesHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GooglePlacesHelper.swift; sourceTree = "<group>"; };
+		083D241A22042FFE00B4A7E0 /* MOLPayXDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MOLPayXDK.bundle; sourceTree = "<group>"; };
+		083D241B22042FFE00B4A7E0 /* MOLPayXDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MOLPayXDK.framework; sourceTree = "<group>"; };
 		083DA4B820D0FF5B00DD473E /* YourTripsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YourTripsDetailViewController.swift; sourceTree = "<group>"; };
+		0840E90D22364C7100E894CA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		084182B4200F508900527D0D /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
 		084182B6200F689500527D0D /* PresenterProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenterProcessor.swift; sourceTree = "<group>"; };
 		084577602073614300E890F5 /* AVPlayerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVPlayerHelper.swift; sourceTree = "<group>"; };
@@ -344,7 +354,6 @@
 		085361A320B8308A001DD97C /* PassbookTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassbookTableViewCell.swift; sourceTree = "<group>"; };
 		085361A420B8308A001DD97C /* PassbookTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PassbookTableViewCell.xib; sourceTree = "<group>"; };
 		085361A820B85CBF001DD97C /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
-		0855521420039E91002B01BC /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		08583BF5211C17DF00B5ABC0 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		08585F4A2115E94B009DE743 /* ripple.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ripple.json; sourceTree = "<group>"; };
 		085AC38A21134AD7003AA0AE /* WalletEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletEntity.swift; sourceTree = "<group>"; };
@@ -374,12 +383,13 @@
 		08813E56213D146B00830717 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
 		08813E5A213D443400830717 /* SiriIntent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SiriIntent.entitlements; sourceTree = "<group>"; };
 		08813E5C213D507700830717 /* ConfigViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigViewController.swift; sourceTree = "<group>"; };
-		088185C220A4688200F07AFF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		088DC900200FCCA00095D552 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		089B4F7420C03A0300DDEAF3 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		089B4F7620C10FD600DDEAF3 /* HomePageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageHelper.swift; sourceTree = "<group>"; };
 		089B4F7820C1144F00DDEAF3 /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
 		089B4F7A20C116D600DDEAF3 /* Payment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payment.swift; sourceTree = "<group>"; };
+		08A27BBA221A98F300E92B5F /* MOLPayXDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MOLPayXDK.bundle; sourceTree = "<group>"; };
+		08A27BBB221A98F500E92B5F /* MOLPayXDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MOLPayXDK.framework; sourceTree = "<group>"; };
 		08A39D9F20B5BB8100314935 /* RideStatusView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RideStatusView.xib; sourceTree = "<group>"; };
 		08A39DA120B5BB9300314935 /* RideStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideStatusView.swift; sourceTree = "<group>"; };
 		08A50C412109B6B100CCDDA8 /* ReasonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReasonView.swift; sourceTree = "<group>"; };
@@ -402,9 +412,14 @@
 		08BF24BA20BD71F3003A4B96 /* ChangeResetPasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeResetPasswordController.swift; sourceTree = "<group>"; };
 		08BF24BD20BD80AE003A4B96 /* UserBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBase.swift; sourceTree = "<group>"; };
 		08BF24BF20BD864C003A4B96 /* Default.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Default.swift; sourceTree = "<group>"; };
+		08C1D8C322251EA100F73F70 /* TextFieldEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldEffects.swift; sourceTree = "<group>"; };
+		08C1D8C422251EA300F73F70 /* TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		08C37A812216C247005AE4B5 /* termscondition.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = termscondition.xib; sourceTree = "<group>"; };
+		08C37A832216C264005AE4B5 /* termscondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = termscondition.swift; sourceTree = "<group>"; };
 		08C8F2262004A60A0065CE24 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		08C9E90D20D244F7002928EA /* Rating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
 		08CA2F7B20D927DC00F99FCA /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		08CD69FA2227C19A00C58836 /* ReferralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralViewController.swift; sourceTree = "<group>"; };
 		08CEA1AA2073B47F00553DE2 /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		08CEB1342105A1B000AC217A /* CardEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardEntity.swift; sourceTree = "<group>"; };
 		08CEB1362105AF2F00AC217A /* AddCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardViewController.swift; sourceTree = "<group>"; };
@@ -494,8 +509,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				08147B7F208A1A9700C5CFD3 /* SafariServices.framework in Frameworks */,
+				083D241D22042FFE00B4A7E0 /* MOLPayXDK.framework in Frameworks */,
 				080FB9D820BC452B008C23F5 /* AccountKit.framework in Frameworks */,
 				08ED0E4E206CF12F0016732B /* PushKit.framework in Frameworks */,
+				08A27BBD221A98F600E92B5F /* MOLPayXDK.framework in Frameworks */,
 				345481F34FE8F4E422FE29BC /* Pods_TranxitUser.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -683,9 +700,9 @@
 		082D1B6F209311950000B7C8 /* TextField */ = {
 			isa = PBXGroup;
 			children = (
+				08C1D8C422251EA300F73F70 /* TextField.swift */,
+				08C1D8C322251EA100F73F70 /* TextFieldEffects.swift */,
 				082D1B7D2093159A0000B7C8 /* HoshiTextField.swift */,
-				082D1B7C209315990000B7C8 /* TextFieldEffects.swift */,
-				0855521420039E91002B01BC /* TextField.swift */,
 			);
 			name = TextField;
 			sourceTree = "<group>";
@@ -938,6 +955,16 @@
 			name = LocationHeaderCell;
 			sourceTree = "<group>";
 		};
+		083D241922042FCE00B4A7E0 /* Molpay */ = {
+			isa = PBXGroup;
+			children = (
+				083D241A22042FFE00B4A7E0 /* MOLPayXDK.bundle */,
+				083D241B22042FFE00B4A7E0 /* MOLPayXDK.framework */,
+				081FA37E22057CCB005C5F82 /* MolpayBridge.h */,
+			);
+			name = Molpay;
+			sourceTree = "<group>";
+		};
 		083DA4B520D0FD2100DD473E /* YourTrips Detail */ = {
 			isa = PBXGroup;
 			children = (
@@ -1093,6 +1120,15 @@
 			name = "Social Login";
 			sourceTree = "<group>";
 		};
+		0871AC572215AEA000ED89FA /* Terms&Conditions */ = {
+			isa = PBXGroup;
+			children = (
+				08C37A832216C264005AE4B5 /* termscondition.swift */,
+				08C37A812216C247005AE4B5 /* termscondition.xib */,
+			);
+			name = "Terms&Conditions";
+			sourceTree = "<group>";
+		};
 		0875010120D7D4EC00CFA858 /* SiriIntent */ = {
 			isa = PBXGroup;
 			children = (
@@ -1182,6 +1218,7 @@
 		08B7DC70209A1487002CF17A /* Main StoryBoard */ = {
 			isa = PBXGroup;
 			children = (
+				08CD69F92227C18900C58836 /* Referral */,
 				082C442420E7AE0200A7C892 /* Chat  */,
 				0875010E20D7F1EF00CFA858 /* OfflineBooking */,
 				083DA4B520D0FD2100DD473E /* YourTrips Detail */,
@@ -1231,6 +1268,14 @@
 				08BF24BA20BD71F3003A4B96 /* ChangeResetPasswordController.swift */,
 			);
 			name = "ChangeReset Passsword";
+			sourceTree = "<group>";
+		};
+		08CD69F92227C18900C58836 /* Referral */ = {
+			isa = PBXGroup;
+			children = (
+				08CD69FA2227C19A00C58836 /* ReferralViewController.swift */,
+			);
+			name = Referral;
 			sourceTree = "<group>";
 		};
 		08E2B21F20C9583D002E689B /* CoreData */ = {
@@ -1428,8 +1473,8 @@
 		8871FBDF1FE7EB48002335D5 /* Plist Files */ = {
 			isa = PBXGroup;
 			children = (
+				0840E90D22364C7100E894CA /* GoogleService-Info.plist */,
 				08FA70A920E3E61C009B060A /* Info.plist */,
-				088185C220A4688200F07AFF /* GoogleService-Info.plist */,
 			);
 			name = "Plist Files";
 			sourceTree = "<group>";
@@ -1449,6 +1494,8 @@
 			isa = PBXGroup;
 			children = (
 				0875010B20D7D56400CFA858 /* User.entitlements */,
+				08A27BBA221A98F300E92B5F /* MOLPayXDK.bundle */,
+				08A27BBB221A98F500E92B5F /* MOLPayXDK.framework */,
 				8894E2221FE7D7980097B4B3 /* TranxitSwift */,
 				0875010120D7D4EC00CFA858 /* SiriIntent */,
 				8894E2211FE7D7980097B4B3 /* Products */,
@@ -1469,6 +1516,7 @@
 		8894E2221FE7D7980097B4B3 /* TranxitSwift */ = {
 			isa = PBXGroup;
 			children = (
+				083D241922042FCE00B4A7E0 /* Molpay */,
 				8871FBD31FE7DC76002335D5 /* Protocols */,
 				8894E2601FE7D9A00097B4B3 /* Common */,
 				8894E2521FE7D7F20097B4B3 /* VIPER */,
@@ -1570,6 +1618,7 @@
 		8894E25D1FE7D9170097B4B3 /* XIB */ = {
 			isa = PBXGroup;
 			children = (
+				0871AC572215AEA000ED89FA /* Terms&Conditions */,
 				0811B17020E7B27900B78323 /* Chat */,
 				085361A220B8306F001DD97C /* Passbook */,
 				083617CA20B714BF009C9658 /* YourTrips */,
@@ -1700,7 +1749,7 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -1710,7 +1759,7 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
-								enabled = 1;
+								enabled = 0;
 							};
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -1762,11 +1811,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				08EA70CD2147D18E00079908 /* TipsView.xib in Resources */,
+				0840E90E22364C7100E894CA /* GoogleService-Info.plist in Resources */,
 				08FA708A20E3CAA3009B060A /* User.storyboard in Resources */,
 				080FB9D920BC452B008C23F5 /* AccountKitStrings.bundle in Resources */,
 				08001A0C203C241E0076D324 /* countryCodes.json in Resources */,
 				08BE879720DA421B00876C93 /* Map_style.json in Resources */,
 				08A50C442109B6CF00CCDDA8 /* ReasonView.xib in Resources */,
+				083D241C22042FFE00B4A7E0 /* MOLPayXDK.bundle in Resources */,
 				08B8F43B2115EBCF0055FB82 /* bouncy_mapmaker.json in Resources */,
 				0811B16F20E7B12A00B78323 /* mesageTone.wav in Resources */,
 				8894E22B1FE7D7980097B4B3 /* Assets.xcassets in Resources */,
@@ -1785,13 +1836,14 @@
 				0811B17720E7B2AD00B78323 /* ImageCellReciever.xib in Resources */,
 				082F77CD20A5A13900D6474B /* ServiceSelectionView.xib in Resources */,
 				08E9675E20D2C1B80077DB4F /* RateView.xib in Resources */,
+				08C37A822216C247005AE4B5 /* termscondition.xib in Resources */,
 				083617BD20B6C756009C9658 /* RatingView.xib in Resources */,
 				08FA708720E3CA99009B060A /* Launch.storyboard in Resources */,
 				083A59B220A4351D00D64574 /* LocationHeaderTableViewCell.xib in Resources */,
 				085361A620B8308A001DD97C /* PassbookTableViewCell.xib in Resources */,
 				08FA70AC20E3E695009B060A /* Main.storyboard in Resources */,
 				082D1B9920933D300000B7C8 /* WalkThroughView.xib in Resources */,
-				088185C320A4688200F07AFF /* GoogleService-Info.plist in Resources */,
+				08A27BBC221A98F600E92B5F /* MOLPayXDK.bundle in Resources */,
 				083617B620B6AE3A009C9658 /* InvoiceView.xib in Resources */,
 				0881352321527DD800DA668E /* search.json in Resources */,
 				08001A0D203C241E0076D324 /* CountryPicker.bundle in Resources */,
@@ -1858,6 +1910,7 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/Cache/Cache.framework",
+				"${BUILT_PRODUCTS_DIR}/CountryList/CountryList.framework",
 				"${BUILT_PRODUCTS_DIR}/CreditCardForm/CreditCardForm.framework",
 				"${BUILT_PRODUCTS_DIR}/DateTimePicker/DateTimePicker.framework",
 				"${BUILT_PRODUCTS_DIR}/DynamicBlurView/DynamicBlurView.framework",
@@ -1867,7 +1920,6 @@
 				"${BUILT_PRODUCTS_DIR}/FacebookLogin/FacebookLogin.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/Hue/Hue.framework",
 				"${BUILT_PRODUCTS_DIR}/IHKeyboardAvoiding/IHKeyboardAvoiding.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/ImagePicker/ImagePicker.framework",
@@ -1885,6 +1937,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cache.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CountryList.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CreditCardForm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DateTimePicker.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DynamicBlurView.framework",
@@ -1894,7 +1947,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookLogin.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hue.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IHKeyboardAvoiding.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImagePicker.framework",
@@ -1959,8 +2011,9 @@
 				08DDE667209361F2009FEBC6 /* WalkThroughViewController.swift in Sources */,
 				38492B3C2000F78C001830AD /* GradientView.swift in Sources */,
 				083617B820B6AE49009C9658 /* InvoiceView.swift in Sources */,
-				0855521520039E91002B01BC /* TextField.swift in Sources */,
+				08C1D8C622251EA300F73F70 /* TextField.swift in Sources */,
 				082745E820C2A06B00C6F8F3 /* YourTripModelResponse.swift in Sources */,
+				08CD69FB2227C19A00C58836 /* ReferralViewController.swift in Sources */,
 				082D1B9620933C890000B7C8 /* WalkThroughView.swift in Sources */,
 				082C442020E7913A00A7C892 /* FloatyManager.swift in Sources */,
 				08FA708520E3C9A0009B060A /* RideNowView.swift in Sources */,
@@ -1986,7 +2039,9 @@
 				08DDE6692093633B009FEBC6 /* WalkThroughPreviewController.swift in Sources */,
 				0809321A20A08E0200B88318 /* Profile.swift in Sources */,
 				08BAFC602094B495002292C0 /* ForgotPasswordViewController.swift in Sources */,
+				08C1D8C522251EA300F73F70 /* TextFieldEffects.swift in Sources */,
 				086BAF6220078A200087F15A /* ErrorMessages.swift in Sources */,
+				08C37A842216C264005AE4B5 /* termscondition.swift in Sources */,
 				084577612073614300E890F5 /* AVPlayerHelper.swift in Sources */,
 				08CEA1AB2073B47F00553DE2 /* Application.swift in Sources */,
 				38492B362000F65E001830AD /* View.swift in Sources */,
@@ -2082,7 +2137,6 @@
 				082C442220E7913A00A7C892 /* FloatyViewController.swift in Sources */,
 				082D1B92209333F10000B7C8 /* FontHelper.swift in Sources */,
 				08A8821520C572510088BC5A /* Coupons.swift in Sources */,
-				082D1B7E2093159A0000B7C8 /* TextFieldEffects.swift in Sources */,
 				8833895D1FE8FC22006B6C05 /* Identifiers.swift in Sources */,
 				08EA70CF2147D1A200079908 /* ViewTips.swift in Sources */,
 				08BE879E20DA429800876C93 /* Home+CoreDataClass.swift in Sources */,
@@ -2155,15 +2209,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = YES;
-				CODE_SIGN_ENTITLEMENTS = SiriIntent/SiriIntent.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = QLVQQ74552;
+				DEVELOPMENT_TEAM = F6FK8J95C4;
 				INFOPLIST_FILE = SiriIntent/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.appoets.tranxit.user.SiriIntent;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ciaoz.user.SiriIntent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
@@ -2175,15 +2228,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = YES;
-				CODE_SIGN_ENTITLEMENTS = SiriIntent/SiriIntent.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = QLVQQ74552;
+				DEVELOPMENT_TEAM = F6FK8J95C4;
 				INFOPLIST_FILE = SiriIntent/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.appoets.tranxit.user.SiriIntent;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ciaoz.user.SiriIntent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
@@ -2315,20 +2367,21 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = QLVQQ74552;
+				DEVELOPMENT_TEAM = F6FK8J95C4;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/TranxitSwift",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/TranxitSwift/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.appoets.tranxit.user;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ciaoz.user;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/TranxitSwift/MolpayBridge.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -2346,19 +2399,20 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = QLVQQ74552;
+				DEVELOPMENT_TEAM = F6FK8J95C4;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/TranxitSwift",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/TranxitSwift/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.appoets.tranxit.user;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ciaoz.user;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/TranxitSwift/MolpayBridge.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

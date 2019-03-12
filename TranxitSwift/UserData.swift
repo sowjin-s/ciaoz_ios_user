@@ -27,6 +27,11 @@ class UserData : UserBase {
     var device_id : String?
     var otp : Int?
     var measurement : String?
+    var emergency_contact_no : String?
+    var ic_number: String?
+    var referral_code: String?
+    var country_code: String?
+    var emergency_country_code: String?
   
 }
 

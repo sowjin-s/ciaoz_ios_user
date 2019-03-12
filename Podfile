@@ -8,8 +8,8 @@ target 'TranxitUser' do
     pod 'Alamofire'
     pod 'KWDrawerController', '~> 4.1.6'
     #pod 'SwiftLint'
-    pod 'GoogleMaps'
-    pod 'GooglePlaces'
+    pod 'GoogleMaps', '~> 3.0.3'
+    pod 'GooglePlaces', '~> 3.0.3'
     pod 'lottie-ios'
     pod 'DateTimePicker'
     pod 'PopupDialog', '~> 0.7'
@@ -31,6 +31,7 @@ target 'TranxitUser' do
     pod 'FacebookLogin'
     pod 'Stripe'
     pod 'CreditCardForm'
+    pod 'CountryList'
 
 #  target 'UserTests' do
 #    inherit! :search_paths

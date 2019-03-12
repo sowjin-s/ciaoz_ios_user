@@ -22,3 +22,20 @@ struct WalletTransaction : JSONSerializable {
     var created_at : String?
     var transaction_desc : String?
 }
+
+
+struct MolpayEntity : JSONSerializable {
+    var message : String?
+    var amount : String?
+    var transaction_id : Int?
+    var tips: Float?
+    var user_request_id : Int?
+}
+
+struct walletModel : JSONSerializable {
+    var wallet_amount : String?
+}
+
+struct referralModel : JSONSerializable {
+    var referral_code : String?
+}

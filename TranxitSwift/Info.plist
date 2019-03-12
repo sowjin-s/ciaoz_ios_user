@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>AccountKitClientToken</key>
-	<string>3f73b9bdd9f499561e32e834e7dcd1f8</string>
+	<string>f914729aa7a8774867ff141e81989aa2</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Tranxit</string>
+	<string>Ciaoz</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIcons</key>
@@ -23,7 +23,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>3.0.5</string>
+	<string>1.0.0</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -31,7 +31,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.405772036882-d1q67d1pf8isrpb5hhfce9ajds3ak9i3</string>
+				<string>com.googleusercontent.apps.854454072010-e1cqr9icp8sg4h9lrs14dietjlgv7r8a</string>
 			</array>
 		</dict>
 		<dict>
@@ -39,8 +39,8 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb227306957774573</string>
-				<string>ak227306957774573</string>
+				<string>fb540737373100630</string>
+				<string>ak540737373100630</string>
 			</array>
 		</dict>
 		<dict>
@@ -53,11 +53,11 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>5</string>
 	<key>FacebookAppID</key>
-	<string>227306957774573</string>
+	<string>540737373100630</string>
 	<key>FacebookDisplayName</key>
-	<string>Tranxit</string>
+	<string>Ciaoz</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>

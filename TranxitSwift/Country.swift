@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Country: Decodable {
+struct CountryInfo: Decodable {
     
     var name : String
     var dial_code : String

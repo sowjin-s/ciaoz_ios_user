@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1000"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C224BE304A8DBA02274DEAC0BD95A5BF"
+               BlueprintIdentifier = "B943EE74B9B95DC3431F95E923EA55A8"
                BuildableName = "CreditCardForm.bundle"
                BlueprintName = "CreditCardForm-CreditCardForm"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "C224BE304A8DBA02274DEAC0BD95A5BF"
+            BlueprintIdentifier = "B943EE74B9B95DC3431F95E923EA55A8"
             BuildableName = "CreditCardForm.bundle"
             BlueprintName = "CreditCardForm-CreditCardForm"
             ReferencedContainer = "container:Pods.xcodeproj">

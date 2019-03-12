@@ -51,18 +51,20 @@ class InvoiceView: UIView {
     private var paymentType : PaymentType = .NONE { // Check Payment Type
         didSet {
             if paymentType != oldValue {
-                let paymentString = paymentType == .CASH ? PaymentType.CASH.rawValue.localize() : (self.selectedCard?.last_four==nil) ? PaymentType.CARD.rawValue.localize() : "XXXX-\(String.removeNil(self.selectedCard?.last_four))"
+                let paymentString = paymentType == .CASH ? PaymentType.CASH.rawValue.localize() : PaymentType.MOLPAY.rawValue.localize()
                 let text = "\(Constants.string.payment.localize()):\(paymentString)"
                 self.labelPaymentType.text = text
                 self.labelPaymentType.attributeColor = .secondary
                 self.labelPaymentType.startLocation = ((text.count)-(paymentType.rawValue.localize().count))
                 self.labelPaymentType.length = paymentType.rawValue.localize().count
-                if (User.main.isCardAllowed == false){
+               /* if (User.main.isCardAllowed == false){
                     self.buttonChangePayment.isHidden = true
                 }else {
                     self.buttonChangePayment.isHidden = (isShowingRecipt && User.main.isCardAllowed)
-                }
-                self.viewTips.isHidden = !(self.paymentType == .CARD || isShowingRecipt)
+                }*/
+                self.buttonChangePayment.isHidden = false
+                //self.viewTips.isHidden = !(self.paymentType == .CARD || isShowingRecipt)
+                self.viewTips.isHidden = false
                 self.viewTips.isUserInteractionEnabled = !isShowingRecipt // Disable userInteraction to Tips if from Past trips
             }
         }

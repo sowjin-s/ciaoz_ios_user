@@ -23,6 +23,9 @@ class WalletViewController: UIViewController {
     @IBOutlet private weak var buttonChange : UIButton!
     
     private var selectedCardEntity : CardEntity?
+    var isPaymentInstructionPresent: Bool = false
+    var isCloseButtonClick: Bool = false
+    var mp = MOLPayLib()
     
     private var isWalletEnabled : Bool = false {
         didSet{
@@ -56,7 +59,9 @@ class WalletViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = false
-        self.isWalletAvailable = User.main.isCardAllowed
+        //self.isWalletAvailable = User.main.isCardAllowed
+        self.isWalletAvailable = true
+        
         self.initalLoads()
     }
     
@@ -74,7 +79,8 @@ extension WalletViewController {
     private func initalLoads() {
         
         self.setWalletBalance()
-        self.presenter?.get(api: .getProfile, parameters: nil)
+        //self.presenter?.get(api: .getProfile, parameters: nil)
+        self.presenter?.get(api: .wallet, parameters: nil)
         self.view.dismissKeyBoardonTap()
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.backButtonClick))
         self.navigationItem.title = Constants.string.wallet.localize()
@@ -86,9 +92,10 @@ extension WalletViewController {
             button.setTitle(String.removeNil(String.removeNil(User.main.currency)+" \(button.tag)"), for: .normal)
         }
         self.buttonChange.addTarget(self, action: #selector(self.buttonChangeCardAction), for: .touchUpInside)
-        self.isWalletEnabled = false
+        //self.isWalletEnabled = false
+        self.isWalletEnabled = true
         KeyboardAvoiding.avoidingView = self.view
-        self.presenter?.get(api: .getCards, parameters: nil)
+        //self.presenter?.get(api: .getCards, parameters: nil)
     }
     
     // MARK:- Set Designs
@@ -113,8 +120,11 @@ extension WalletViewController {
     
     private func setCardDetails() {
         if let lastFour = self.selectedCardEntity?.last_four {
-           self.labelCard.text = "XXXX-XXXX-XXXX-"+lastFour
+          // self.labelCard.text = "XXXX-XXXX-XXXX-"+lastFour
+            self.labelCard.text = "MolPay"
+            print(lastFour)
         }
+        self.labelCard.text = "MolPay"
     }
     
     
@@ -124,14 +134,15 @@ extension WalletViewController {
             self.view.make(toast: Constants.string.enterValidAmount.localize())
             return
         }
-        guard self.selectedCardEntity != nil else{
+        /* guard self.selectedCardEntity != nil else{
             return
-        }
+        }*/
         self.loader.isHidden = false
-        let cardId = self.selectedCardEntity?.card_id
+        /* let cardId = self.selectedCardEntity?.card_id
         self.selectedCardEntity?.strCardID = cardId
         self.selectedCardEntity?.amount = text
-        self.presenter?.post(api: Base.addMoney, data: self.selectedCardEntity?.toData())
+        self.presenter?.post(api: Base.addMoney, data: self.selectedCardEntity?.toData()) */
+        self.addamount(amount: text)
     }
     
     // MARK:- Change Card Action
@@ -149,7 +160,6 @@ extension WalletViewController {
             let navigation = UINavigationController(rootViewController: vc)
             self.present(navigation, animated: true, completion: nil)
         }
-        
     }
     
     
@@ -195,12 +205,13 @@ extension WalletViewController : PostViewProtocol {
         self.selectedCardEntity = data.first
         DispatchQueue.main.async {
             self.setCardDetails()
-            self.isWalletEnabled = !data.isEmpty
-            if data.isEmpty && User.main.isCardAllowed {
+            //self.isWalletEnabled = !data.isEmpty
+            self.isWalletEnabled =  true
+           /* if data.isEmpty && User.main.isCardAllowed {
                 showAlert(message: Constants.string.addCard.localize(), okHandler: {
                    self.push(id: Storyboard.Ids.AddCardViewController, animation: true)
                 }, cancelHandler: nil, fromView: self)
-            }
+            } */
         }
     }
    
@@ -213,6 +224,98 @@ extension WalletViewController : PostViewProtocol {
             self.textFieldAmount.text = nil
             UIApplication.shared.keyWindow?.makeToast(data?.message)
         }
+    }
+    
+    func getWalletMolpay(api: Base, data: MolpayEntity) {
+        DispatchQueue.main.async {
+            self.dismiss(animated: true);
+            self.loader.isHidden = true
+            self.textFieldAmount.text = nil
+            UIApplication.shared.keyWindow?.makeToast(data.message)
+        }
+    }
+    
+    func getWallet(api: Base, data: walletModel) {
+        User.main.wallet_balance = Float(data.wallet_amount ?? "")
+        storeInUserDefaults()
+        DispatchQueue.main.async {
+            self.loader.isHidden = true
+            self.setWalletBalance()
+        }
+    }
+    
+}
+
+extension WalletViewController: MOLPayLibDelegate {
+    func transactionResult(_ result: [AnyHashable : Any]!) {
+        print("transactionResult result = \(String(describing: result))")
+        if(result["status_code"] as? String == "11"){
+            self.dismiss(animated: true); // to your failed page
+        }else if(result["status_code"] as? String == "00"){
+            print("success")
+            var params = MolpayEntity()
+            params.amount = result["amount"] as? String
+            params.transaction_id = result["txn_ID"] as? Int
+            print(params)
+            self.presenter?.post(api: .molpay, data: params.toData())
+            //self.dismiss(animated: true); // to your success page
+            self.loader.isHidden = true
+        }else{
+            self.dismiss(animated: true); //others
+            self.loader.isHidden = true
+        }
+    }
+    
+    func addamount(amount: String){
+        
+        self.isPaymentInstructionPresent = false
+        self.isCloseButtonClick = false
+        
+        let paymentRequestDict: [String:Any] = [
+            "mp_amount": amount,
+            "mp_username": "api_SB_ciaoz2u",
+            "mp_password": "api_Cu2z211aiC#",
+            "mp_merchant_ID": "SB_ciaoz2u",
+            "mp_app_name": "ciaoz2u",
+            "mp_verification_key": "78d6446bcb253e24c9fbbbb74b82bccd",
+            "mp_order_ID": "1",
+            "mp_currency": "MYR",
+            "mp_country": "MY",
+            "mp_channel": "",
+            "mp_bill_description": "Test Check",
+            "mp_bill_name": "Ranjith",
+            "mp_bill_email": "email@domain.com",
+            "mp_bill_mobile": "+1234567",
+            "mp_channel_editing": NSNumber.init(booleanLiteral:false),
+            "mp_editing_enabled": NSNumber.init(booleanLiteral:false),
+            "mp_dev_mode": NSNumber.init(booleanLiteral:true),
+            "mp_transaction_id": "",
+            "mp_request_type": "",
+            "mp_sandbox_mode": NSNumber.init(booleanLiteral:true)
+        ]
+        self.mp = MOLPayLib(delegate:self, andPaymentDetails: paymentRequestDict)
+        
+        self.mp.navigationItem.rightBarButtonItem = UIBarButtonItem(
+            title: "Close",
+            style: .plain,
+            target: self,
+            action: #selector(self.closemolpay)
+        )
+        self.mp.navigationItem.hidesBackButton = true
+        
+        let nc = UINavigationController()
+        nc.viewControllers = [mp]
+        
+        self.present(nc, animated: false) {
+            print("---presented")
+        }
+    }
+    
+    @IBAction func closemolpay(sender: UIBarButtonItem) {
+        // Closes MOLPay
+        self.mp.closemolpay()
+        isCloseButtonClick = true
+        print("---Close: \(NSNumber.init(booleanLiteral: true))")
     }
     
 }

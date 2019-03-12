@@ -60,6 +60,30 @@ extension Presenter : PostPresenterInputProtocol {
 //MARK:- Implementation PostPresenterOutputProtocol
 
 extension Presenter : PostPresenterOutputProtocol {
+    
+//    func sendCouponWfallet(api: Base, data: Data) {
+//        <#code#>
+//    }
+//    
+
+    func sendreferral(api: Base, data: Data) {
+        controller?.getReferral(api: api, data: PresenterProcessor.shared.getReferralAPI(data: data)!)
+    }
+//    
+//    func referal(api: Base, data: Data) {        
+//        controller?.Conreferal(api: api, data: PresenterProcessor.shared.getReferralAPI(data: data)!)
+//    }
+//    
+    
+    func sendWallet(api: Base, data: Data) {
+        controller?.getWallet(api: api, data: PresenterProcessor.shared.getWalletAPI(data: data)!)
+    }
+    
+    
+    func sendWalletMolpay(api: Base, data: Data) {
+        controller?.getWalletMolpay(api: api, data: PresenterProcessor.shared.getMolpayWalletAPI(data: data)!)
+    }
+    
     func sendHelpAPI(api: Base, data: Data) {
         controller?.getHelp(api: api, data: PresenterProcessor.shared.getHelpAPI(data: data)!)
     }
@@ -121,7 +145,6 @@ extension Presenter : PostPresenterOutputProtocol {
     func sendWalletEntity(api: Base, data: Data) {
         controller?.getWalletEntity(api: api, data: PresenterProcessor.shared.getWalletEntity(data: data))
     }
-    
     
 }
 

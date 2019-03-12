@@ -25,6 +25,7 @@ class SideBarTableViewController: UITableViewController {
                                Constants.string.passbook,
                                Constants.string.settings,
                                Constants.string.help,
+                               Constants.string.referral,
                                Constants.string.share,
                                Constants.string.becomeADriver,
                                Constants.string.logout]
@@ -165,10 +166,12 @@ extension SideBarTableViewController {
         case (0,6):
             self.push(to: Storyboard.Ids.HelpViewController)
         case (0,7):
-            (self.drawerController?.getViewController(for: .none)?.children.first as? HomeViewController)?.share(items: ["\(AppName)", URL.init(string: baseUrl)!])
+            self.push(to: Storyboard.Ids.ReferralViewController)
         case (0,8):
-            Common.open(url: driverUrl)
+            (self.drawerController?.getViewController(for: .none)?.children.first as? HomeViewController)?.share(items: ["\(AppName)", URL.init(string: baseUrl)!])
         case (0,9):
+            Common.open(url: driverUrl)
+        case (0,10):
             self.logout()
             
         default:

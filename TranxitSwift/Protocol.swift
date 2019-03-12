@@ -144,6 +144,9 @@ protocol PostPresenterOutputProtocol : class {
     func sendWalletEntity(api : Base, data: Data)
     func sendPromocodeList(api : Base, data: Data)
     func sendHelpAPI(api : Base, data: Data)
+    func sendWalletMolpay(api : Base, data: Data)
+    func sendWallet(api : Base, data: Data)
+    func sendreferral(api : Base, data: Data)
 }
 
 
@@ -168,7 +171,9 @@ protocol PostViewProtocol : class {
     func getWalletEntity(api : Base, data : WalletEntity?)
     func getPromocodeList(api : Base, data : [PromocodeEntity])
     func getHelp(api : Base, data : HelpEntity)
-    
+    func getWalletMolpay(api : Base, data : MolpayEntity)
+    func getWallet(api : Base, data : walletModel)
+    func getReferral(api: Base, data: referralModel)
 }
 
 
@@ -200,7 +205,11 @@ extension PostViewProtocol {
     func getWalletEntity(api : Base, data : WalletEntity?) {return}
     func getPromocodeList(api : Base, data : [PromocodeEntity]) {return}
     func getHelp(api : Base, data : HelpEntity) {return}
-    
+    func getWalletMolpay(api : Base, data : MolpayEntity){return}
+    func getWallet(api : Base, data : walletModel){return}
+    func getReferral(api: Base, data: referralModel) { return }
+
+
 }
 
 

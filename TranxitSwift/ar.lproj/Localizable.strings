@@ -172,7 +172,7 @@
 "No thanks, I'll try later"     =    "لا شكرا، سأحاول في وقت لاحق";
 "I need a cab @"     =    "أحتاج سيارة أجرة @";
 "(Please donot edit this SMS. Standard SMS charges of Rs.3 per SMS may apply)"     =    "(يرجى متأكدا تحرير هذا SMS. رسوم SMS نموذجية من Rs.3 في أن يقدم طلبا SMS)";
-"TRANXIT Enterprise © 2018"     =    "TRANXIT المؤسسة © 2018";
+"Ciaoz Enterprise © 2018"     =    "Ciaoz المؤسسة © 2018";
 "miles"     =    "اميال";
 "Please try again"     =    "حاول مرة اخرى";
 "ADD COUPON"     =    "أضف عرض";
@@ -229,7 +229,12 @@
 "DISTANCEHOUR" = "المسافة / ساعة";
 
 
-
+"You don't have referral code to share"="ليس لديك رمز إحالة للمشاركة";
+"SHARE"="شارك";
+"Refer your friends to drive!"="اطلب من أصدقائك قيادة السيارة!";
+"Referral"="إحالة";
+"Referral Code"="كود الإحالة";
+"Share your referral Code"="مشاركة رمز الإحالة الخاص بك";
 
 
 

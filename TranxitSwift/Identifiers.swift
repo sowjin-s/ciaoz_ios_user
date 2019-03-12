@@ -28,6 +28,7 @@ struct Storyboard {
     let CouponViewController = "CouponViewController"
     let WalletViewController = "WalletViewController"
     let HelpViewController = "HelpViewController"
+    let ReferralViewController = "ReferralViewController"
     let SettingTableViewController = "SettingTableViewController"
     let ChangeResetPasswordController = "ChangeResetPasswordController"
     let YourTripsDetailViewController = "YourTripsDetailViewController"
@@ -67,6 +68,8 @@ struct XIB {
     let CouponCollectionViewCell = "CouponCollectionViewCell"
     let CouponView = "CouponView"
     let PassbookWalletTransaction = "PassbookWalletTransaction"
+    let TermsConditions = "termscondition"
+
 }
 
 

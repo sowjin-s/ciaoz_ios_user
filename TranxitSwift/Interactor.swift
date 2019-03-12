@@ -83,6 +83,17 @@ extension Interactor : PostInteractorOutputProtocol {
             self.presenter?.sendPromocodeList(api: api, data: response)
         case .help :
             self.presenter?.sendHelpAPI(api: api, data: response)
+            
+        case .molpay, .payride:
+            self.presenter?.sendWalletMolpay(api: api, data: response)
+            
+        case .wallet:
+            self.presenter?.sendWallet(api: api, data: response)
+            
+        case .referral:
+            self.presenter?.sendreferral(api: api, data: response)
+            //self.presenter?.referal(api: api, data: response)
+            
         default :
             break
             

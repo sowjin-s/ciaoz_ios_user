@@ -47,13 +47,13 @@ class Common {
     
     //MARK:- Get Countries from JSON
     
-    class func getCountries()->[Country]{
+    class func getCountries()->[CountryInfo]{
         
-        var source = [Country]()
+        var source = [CountryInfo]()
         
         if let data = NSData(contentsOfFile: Bundle.main.path(forResource: "countryCodes", ofType: "json") ?? "") as Data? {
             do{
-                source = try JSONDecoder().decode([Country].self, from: data)
+                source = try JSONDecoder().decode([CountryInfo].self, from: data)
                 
             } catch let err {
                 print(err.localizedDescription)

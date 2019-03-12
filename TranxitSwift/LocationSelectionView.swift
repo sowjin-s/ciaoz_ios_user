@@ -214,9 +214,9 @@ extension LocationSelectionView : UITableViewDataSource, UITableViewDelegate {
             
             self.autoFill(with: (datasource[indexPath.row].attributedFullText.string, LocationCoordinate(latitude: 0, longitude: 0)))
             
-            if datasource.count > indexPath.row, let placeID = datasource[indexPath.row].placeID{
+            if datasource.count > indexPath.row{
                 
-                GMSPlacesClient.shared().lookUpPlaceID(placeID) { (place, error) in
+                GMSPlacesClient.shared().lookUpPlaceID(datasource[indexPath.row].placeID) { (place, error) in
                     
                     if error != nil {
                         
@@ -271,7 +271,7 @@ extension LocationSelectionView : UITableViewDataSource, UITableViewDelegate {
             if let tableCell = self.tableViewBottom.dequeueReusableCell(withIdentifier: XIB.Names.LocationTableViewCell, for: indexPath) as? LocationTableViewCell, datasource.count>indexPath.row{
                 tableCell.imageLocationPin.image = #imageLiteral(resourceName: "ic_location_pin")
                 let placesClient = GMSPlacesClient.shared()
-                placesClient.lookUpPlaceID(datasource[indexPath.row].placeID!, callback: { (place, error) -> Void in
+                placesClient.lookUpPlaceID(datasource[indexPath.row].placeID, callback: { (place, error) -> Void in
                     if let error = error {
                         print("lookup place id query error: \(error.localizedDescription)")
                         return

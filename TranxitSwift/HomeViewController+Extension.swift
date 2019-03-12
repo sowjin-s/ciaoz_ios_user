@@ -321,9 +321,14 @@ extension HomeViewController {
                 let requestObj = Request()
                 requestObj.request_id = request.id
                 if tipsAmount>0 {
-                 requestObj.tips = (Float(Int(tipsAmount*100))/100)
+                    requestObj.tips = (Float(Int(tipsAmount*100))/100)
+                    self.tips = requestObj.tips
                 }
                 self.presenter?.post(api: .payNow, data: requestObj.toData())
+                print(request.payment?.payable as Any)
+                print(Float(Int(tipsAmount*100))/100)
+                let totalamount = (request.payment?.payable ?? 0) + (Float(Int(tipsAmount*100))/100)
+                self.payMolpay(Amount: totalamount)
             }
             self.invoiceView?.onDoneClick = { onClick in
                 self.showRatingView(with: request)
@@ -335,10 +340,12 @@ extension HomeViewController {
                     vc.isChangingPayment = true
                     vc.isShowCash = false
                     vc.onclickPayment = { (paymentTypeEntity , cardEntity) in
-                        if paymentTypeEntity == .CARD, cardEntity != nil {
-                            completion(cardEntity!)
-                            self.updatePaymentType(with: cardEntity!)
-                        }
+//                        if paymentTypeEntity == .CARD, cardEntity != nil {
+//                            completion(cardEntity!)
+//                            self.updatePaymentType(with: cardEntity!)
+//                        }
+                       // self.updatePaymentType(with: CardEntity)
+                        self.updatePaymentType(with: paymentTypeEntity)
                     }
                     let navigation = UINavigationController(rootViewController: vc)
                     self.present(navigation, animated: true, completion: nil)
@@ -593,14 +600,14 @@ extension HomeViewController {
                 if request.use_wallet == 1 {
                     if request.paid == 0 {
                         self.showInvoiceView(with: request)
-                    }else{
+                    } else{
                         if isInvoiceShowed {
                             self.showRatingView(with: request)
                         }else{
                             self.showInvoiceView(with: request)
                         }
                     }
-                }else{
+                } else {
                     if isInvoiceShowed {
                         self.showRatingView(with: request)
                     }else{
@@ -613,7 +620,31 @@ extension HomeViewController {
 //
 //                    }
                 }
-            }else{
+            }else if request.payment_mode == .MOLPAY {
+                
+                if request.use_wallet == 1 {
+                    if request.paid == 0 {
+                        self.showInvoiceView(with: request)
+                    } else {
+                        if isInvoiceShowed  {
+                            self.showRatingView(with: request)
+                        }else{
+                            self.showInvoiceView(with: request) //showing invoice for user to interact
+                        }
+                    }
+                } else {
+                    if request.paid == 0 {
+                        self.showInvoiceView(with: request)
+                    } else {
+                        if isInvoiceShowed  {
+                            self.showRatingView(with: request)
+                        }else{
+                            self.showInvoiceView(with: request) //showing invoice for user to interact
+                        }
+                    }
+                }
+                
+            } else {
                 if request.use_wallet == 1 {
                     if request.paid == 0 {
                         self.showInvoiceView(with: request)
@@ -632,6 +663,9 @@ extension HomeViewController {
                     }
                 }
             }
+            
+            
+            
            /* if request.paid == 1 && (!isRateViewShowed) {
                 self.showInvoiceView(with: request)
 //                }else{
@@ -811,8 +845,83 @@ extension HomeViewController {
             }
         })
     }
-        
     
+}
+
+extension HomeViewController {
+
+    func transactionResult(_ result: [AnyHashable : Any]!) {
+        print("transactionResult result = \(String(describing: result))")
+        if(result["status_code"] as? String == "11"){
+            self.dismiss(animated: true); // to your failed page
+        }else if(result["status_code"] as? String == "00"){
+            print("success")
+            print(result["amount"] ?? 0)
+            print(result["txn_ID"] ?? 0)
+            var params = MolpayEntity()
+            params.user_request_id = self.currentRequestId
+            params.transaction_id = result["txn_ID"] as? Int
+            params.tips = self.tips
+            print(params)
+            self.presenter?.post(api: .payride, data: params.toData())
+            self.dismiss(animated: true); // to your success page
+        }else{
+            self.dismiss(animated: true); //others
+        }
+    }
+    
+    //MARK:- MOLPAY
+    func payMolpay(Amount: Float){
+        
+        self.isPaymentInstructionPresent = false
+        self.isCloseButtonClick = false
+        
+        let paymentRequestDict: [String:Any] = [
+            "mp_amount": Amount,
+            "mp_username": "api_SB_ciaoz2u",
+            "mp_password": "api_Cu2z211aiC#",
+            "mp_merchant_ID": "SB_ciaoz2u",
+            "mp_app_name": "ciaoz2u",
+            "mp_verification_key": "78d6446bcb253e24c9fbbbb74b82bccd",
+            "mp_order_ID": "1",
+            "mp_currency": "RM",
+            "mp_country": "MY",
+            "mp_channel": "",
+            "mp_bill_description": "Payment",
+            "mp_bill_name": "Ranjith",
+            "mp_bill_email": "email@domain.com",
+            "mp_bill_mobile": "+1234567",
+            "mp_channel_editing": NSNumber.init(booleanLiteral:false),
+            "mp_editing_enabled": NSNumber.init(booleanLiteral:false),
+            "mp_dev_mode": NSNumber.init(booleanLiteral:true),
+            "mp_transaction_id": "",
+            "mp_request_type": "",
+            "mp_sandbox_mode": NSNumber.init(booleanLiteral:true)
+        ]
+        self.mp = MOLPayLib(delegate:self, andPaymentDetails: paymentRequestDict)
+        
+        self.mp.navigationItem.rightBarButtonItem = UIBarButtonItem(
+            title: "Close",
+            style: .plain,
+            target: self,
+            action: #selector(self.closemolpay)
+        )
+        self.mp.navigationItem.hidesBackButton = true
+        
+        let nc = UINavigationController()
+        nc.viewControllers = [mp]
+        
+        self.present(nc, animated: false) {
+            print("---presented")
+        }
+    }
+    
+    @IBAction func closemolpay(sender: UIBarButtonItem) {
+        // Closes MOLPay
+        self.mp.closemolpay()
+        isCloseButtonClick = true
+        print("---Close: \(NSNumber.init(booleanLiteral: true))")
+    }
     
 }
 

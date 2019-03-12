@@ -40,6 +40,7 @@ struct Constants {
     let walkthrough = "Walkthrough"
     let signIn = "SIGN IN"
     let signUp = "SIGNUP"
+    let termsconditions = "I have read and agreed the Terms & Conditions"
     let orConnectWithSocial = "Or connect with social"
     let changePassword = "Change Password"
     let resetPassword = "Reset Password"
@@ -53,6 +54,8 @@ struct Constants {
     let schedule = "Schedule"
     let drivers = "Drivers"
     let country = "Country"
+    let icnumber = "IC Number"
+    let emergencycontact = "Emergency Contact"
     let timeZone = "Time Zone"
     let referalCode = "Referral Code"
     let business = "Business"
@@ -78,6 +81,7 @@ struct Constants {
     let wallet = "Wallet"
     let passbook = "Passbook"
     let settings = "Settings"
+    let referral = "Referral"
     let help = "Help"
     let share = "Share"
     let inviteReferral = "Invite Referral"
@@ -125,6 +129,7 @@ struct Constants {
     let timeTaken = "Time Taken"
     let baseFare = "Base Fare"
     let cash = "Cash"
+    let molpay = "MolPay"
     let paynow = "Pay Now"
     let rateyourtrip = "Rate your trip with"
     let writeYourComments = "Write your comments"
@@ -236,6 +241,12 @@ struct Constants {
     let DISTANCE = "DISTANCE"
     let DISTANCEMIN = "DISTANCEMIN"
     let DISTANCEHOUR = "DISTANCEHOUR"
+    let referralCodeError = "You don't have referral code to share"
+    let sharereferral = "Share your referral Code"
+    let referralCode = "Referral Code"
+    let referYourFriend = "Refer your friends to drive!"
+
+
 }
 
 
@@ -254,6 +265,7 @@ enum  PaymentType : String, Codable {
     
     case CASH = "CASH"
     case CARD = "CARD"
+    case MOLPAY = "MOLPAY"
     case NONE = "NONE"
     
     var image : UIImage? {
@@ -265,6 +277,8 @@ enum  PaymentType : String, Codable {
             name = "money_icon"
         case .NONE :
             name = "ic_error"
+        case .MOLPAY:
+            name = "molpay"
         }
       return UIImage(named: name)
    }

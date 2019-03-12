@@ -44,6 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.startReachabilityChecking()
          }
          self.checkUpdates()
+        FirebaseHelper.shared.initializeDB()
          return true
     }
     
@@ -245,6 +246,7 @@ extension AppDelegate {
             (UIApplication.topViewController() as? OfflineBookingViewController)?.dismiss(animated: true, completion: nil)
         }
     }
+    
     
 }
 
