@@ -50,6 +50,7 @@ class Request : JSONSerializable {
     var promocode_id : Int?
     var unit : String?
     var is_scheduled : Bool?
+    var lady_drive : String?
   /*
     enum CodingKeys: String, CodingKey {
         
@@ -114,6 +115,7 @@ class Request : JSONSerializable {
         paid = try? values.decode(Int.self, forKey: .paid)
         unit = try? values.decode(String.self, forKey: .unit)
         is_scheduled = (try? values.decode(String.self, forKey: .is_scheduled) == "YES")
+        lady_drive = try? values.decode(String.self, forKey: .lady_drive)
     }
  
     init() {   }

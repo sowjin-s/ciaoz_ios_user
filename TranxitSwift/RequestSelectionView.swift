@@ -16,6 +16,7 @@ class RequestSelectionView: UIView {
     @IBOutlet private weak var buttonScheduleRide : UIButton!
     @IBOutlet private weak var buttonRideNow : UIButton!
     @IBOutlet private weak var viewUseWallet : UIView!
+    @IBOutlet private weak var ViewLadyDriver: UIView!
     @IBOutlet private weak var labelEstimationFareString : UILabel!
     @IBOutlet private weak var labelEstimationFare : UILabel!
     @IBOutlet private weak var labelCouponString : UILabel!
@@ -25,6 +26,15 @@ class RequestSelectionView: UIView {
     @IBOutlet private weak var imageViewModal : UIImageView!
     @IBOutlet private weak var viewImageModalBg : UIView!
     @IBOutlet private weak var labelWalletBalance : UILabel!
+    
+    @IBOutlet private weak var labelLadyDriverYes : UILabel!
+    @IBOutlet private weak var labelLadyDriverNo : UILabel!
+    @IBOutlet private weak var viewLadyDriverYes : UIView!
+    @IBOutlet private weak var viewLadyDriverNo : UIView!
+    @IBOutlet private weak var labelLadyDriver : UILabel!
+    @IBOutlet private weak var imageLadyDriverNo: UIImageView!
+    @IBOutlet private weak var imageLadyDriverYes : UIImageView!
+
     
     var scheduleAction : ((Service)->())?
     var rideNowAction : ((Service)->())?
@@ -93,6 +103,19 @@ class RequestSelectionView: UIView {
     
     private var service : Service?
     
+    
+    var isladydriverselected: Bool = false {
+        didSet{
+            if isladydriverselected == true {
+                imageLadyDriverYes.image = #imageLiteral(resourceName: "radioselected").withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+                imageLadyDriverNo.image = #imageLiteral(resourceName: "uncheck_icon").withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+            } else {
+                imageLadyDriverNo.image = #imageLiteral(resourceName: "radioselected").withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+                imageLadyDriverYes.image = #imageLiteral(resourceName: "uncheck_icon").withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+            }
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.initialLoads()
@@ -112,6 +135,7 @@ extension RequestSelectionView {
     
     private func initialLoads() {
         self.backgroundColor = .clear
+        self.isladydriverselected = false
         self.isWalletChecked = false
         self.localize()
         self.setDesign()
@@ -126,6 +150,10 @@ extension RequestSelectionView {
 //        self.buttonChangePayment.isHidden = !(User.main.isCashAllowed && User.main.isCardAllowed) // Change button enabled only if both payment modes are enabled
         self.buttonChangePayment.addTarget(self, action: #selector(self.buttonChangePaymentAction), for: .touchUpInside)
         self.buttonCoupon.addTarget(self, action: #selector(self.buttonCouponAction), for: .touchUpInside)
+        let ladyDriverYes = UITapGestureRecognizer(target: self, action: #selector(self.tapLadyDriverYes(_:)))
+        self.viewLadyDriverYes.addGestureRecognizer(ladyDriverYes)
+        let ladyDriverNo = UITapGestureRecognizer(target: self, action: #selector(self.tapLadyDriverNo(_:)))
+        self.viewLadyDriverNo.addGestureRecognizer(ladyDriverNo)
         self.isPromocodeEnabled = false
         self.presenter?.get(api: .promocodes, parameters: nil)
     }
@@ -145,6 +173,9 @@ extension RequestSelectionView {
         Common.setFont(to: buttonChangePayment)
         Common.setFont(to: buttonCoupon)
         Common.setFont(to: labelWalletBalance, isTitle: true)
+        Common.setFont(to: labelLadyDriver)
+        Common.setFont(to: labelLadyDriverYes)
+        Common.setFont(to: labelLadyDriverNo)
         
     }
     
@@ -169,6 +200,20 @@ extension RequestSelectionView {
         self.paymentType = User.main.isCashAllowed ? .CASH :( User.main.isCardAllowed ? .MOLPAY : .NONE)
         self.imageViewModal.setImage(with: values.image, placeHolder: #imageLiteral(resourceName: "CarplaceHolder"))
         self.labelWalletBalance.text = "\(String.removeNil(User.main.currency)) \(Formatter.shared.limit(string: "\(Float.removeNil(self.service?.pricing?.wallet_balance))", maximumDecimal: 2))"
+    }
+    
+    // MARK:- Lady Driver Yes
+
+    @objc func tapLadyDriverYes(_ sender: UITapGestureRecognizer) {
+        //print("Please Help!")
+        self.isladydriverselected = true
+    }
+    
+    // MARK:- Lady Driver No
+
+    @objc func tapLadyDriverNo(_ sender: UITapGestureRecognizer) {
+        //print("Please Help!")
+        self.isladydriverselected = false
     }
     
     func setEstimationFare(amount : Float?) {

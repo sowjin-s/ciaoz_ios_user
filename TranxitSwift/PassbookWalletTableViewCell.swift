@@ -40,7 +40,7 @@ extension PassbookWalletTableViewCell {
         self.labelTransactionId.text = value.transaction_alias
         self.labelAmount.text = Constants.string.amount.localize()+" : "+"\(User.main.currency ?? .Empty) \(Formatter.shared.limit(string: "\(value.amount ?? 0)", maximumDecimal: 2))"
         self.labelAmount.startLocation = 0
-        self.labelAmount.length = Constants.string.amount.localize().count-1
+        self.labelAmount.length = Constants.string.amount.localize().count
         self.labelBalance.text = Constants.string.balance.localize()+" : "+"\(User.main.currency ?? .Empty) \(Formatter.shared.limit(string: "\(value.close_balance ?? 0)", maximumDecimal: 2))"
         self.labelBalance.startLocation = 0
         self.labelBalance.length = Constants.string.balance.localize().count
