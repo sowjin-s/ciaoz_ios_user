@@ -153,6 +153,7 @@ extension SignUpUserTableViewController: UIWebViewDelegate {
         self.countryList.delegate = self
         if let countryCode = (Locale.current as NSLocale).object(forKey: .countryCode) as? String {
             countrycode.setTitle("+" + getCountryCallingCode(countryRegionCode: countryCode), for: .normal)
+            emergency_country_code = "+" + getCountryCallingCode(countryRegionCode: countryCode)
         }
         
     }
