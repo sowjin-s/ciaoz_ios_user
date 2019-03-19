@@ -92,7 +92,7 @@ extension RateView {
             }
         }
         self.labelBaseFare.text = String.removeNil(User.main.currency)+"\(Formatter.shared.limit(string: "\(values?.pricing?.base_price ?? 0)", maximumDecimal: 2))"
-        self.labelFare.text = String.removeNil(User.main.currency)+"\(Formatter.shared.limit(string: "\(values?.price ?? "")", maximumDecimal: 2))" //"\(values?.pricing?.estimated_fare ?? 0)"
+        self.labelFare.text = String.removeNil(User.main.currency)+"\(Formatter.shared.limit(string: "\(values?.price ?? 0)", maximumDecimal: 2))" //"\(values?.pricing?.estimated_fare ?? 0)"
         
         self.labelFareType.text = values?.calculator?.rawValue.localize() ?? "-"
         self.labelCapacity.text = "1 - \(values?.capacity ?? 0)"

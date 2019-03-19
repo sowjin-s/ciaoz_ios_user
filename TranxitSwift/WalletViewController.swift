@@ -95,6 +95,7 @@ extension WalletViewController {
         //self.isWalletEnabled = false
         self.isWalletEnabled = true
         KeyboardAvoiding.avoidingView = self.view
+        self.setCardDetails()
         //self.presenter?.get(api: .getCards, parameters: nil)
     }
     
@@ -251,6 +252,7 @@ extension WalletViewController: MOLPayLibDelegate {
         print("transactionResult result = \(String(describing: result))")
         if(result["status_code"] as? String == "11"){
             self.dismiss(animated: true); // to your failed page
+            UIApplication.shared.keyWindow?.makeToast("Payment Failed")
         }else if(result["status_code"] as? String == "00"){
             print("success")
             var params = MolpayEntity()
@@ -260,9 +262,14 @@ extension WalletViewController: MOLPayLibDelegate {
             self.presenter?.post(api: .molpay, data: params.toData())
             //self.dismiss(animated: true); // to your success page
             self.loader.isHidden = true
+            UIApplication.shared.keyWindow?.makeToast("Payment Success")
+        }else if(result["status_code"] as? String == "22"){
+            UIApplication.shared.keyWindow?.makeToast("Payment Pending")
+            self.dismiss(animated: true); //others
         }else{
             self.dismiss(animated: true); //others
             self.loader.isHidden = true
+            UIApplication.shared.keyWindow?.makeToast("Payment Failed")
         }
     }
     
@@ -278,14 +285,14 @@ extension WalletViewController: MOLPayLibDelegate {
             "mp_merchant_ID": "SB_ciaoz2u",
             "mp_app_name": "ciaoz2u",
             "mp_verification_key": "78d6446bcb253e24c9fbbbb74b82bccd",
-            "mp_order_ID": "1",
+            "mp_order_ID": User.main.id ?? 0,
             "mp_currency": "MYR",
             "mp_country": "MY",
             "mp_channel": "",
-            "mp_bill_description": "Test Check",
-            "mp_bill_name": "Ranjith",
-            "mp_bill_email": "email@domain.com",
-            "mp_bill_mobile": "+1234567",
+            "mp_bill_description": "Wallet",
+            "mp_bill_name": User.main.firstName ?? "",
+            "mp_bill_email": User.main.email ?? "",
+            "mp_bill_mobile": User.main.mobile ?? "",
             "mp_channel_editing": NSNumber.init(booleanLiteral:false),
             "mp_editing_enabled": NSNumber.init(booleanLiteral:false),
             "mp_dev_mode": NSNumber.init(booleanLiteral:true),

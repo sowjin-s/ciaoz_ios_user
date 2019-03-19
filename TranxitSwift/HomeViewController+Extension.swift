@@ -885,25 +885,25 @@ extension HomeViewController {
         
         let paymentRequestDict: [String:Any] = [
             "mp_amount": Amount,
-            "mp_username": "ONG CHIN KEONG",
-            "mp_password": "ideAL593tec@",
-            "mp_merchant_ID": "ciaoz2u",
-            "mp_app_name": "Ciaoz",
-            "mp_verification_key": "6a40bda87b900ef8a7ece803b2ffa41f",
+            "mp_username": "api_SB_ciaoz2u",
+            "mp_password": "api_Cu2z211aiC#",
+            "mp_merchant_ID": "SB_ciaoz2u",
+            "mp_app_name": "ciaoz2u",
+            "mp_verification_key": "78d6446bcb253e24c9fbbbb74b82bccd",
             "mp_order_ID": "\(currentRequestId)",
             "mp_currency": "RM",
             "mp_country": "MY",
             "mp_channel": "multi",
-            "mp_bill_description": "Payment",
-            "mp_bill_name": "\(String(describing: User.main.firstName))",
-            "mp_bill_email": "\(String(describing: User.main.email))",
-            "mp_bill_mobile": "\(String(describing: User.main.mobile))",
+            "mp_bill_description": "Ride Amount",
+            "mp_bill_name": User.main.firstName ?? "",
+            "mp_bill_email": User.main.email ?? "",
+            "mp_bill_mobile": User.main.mobile ?? "",
             "mp_channel_editing": NSNumber.init(booleanLiteral:false),
             "mp_editing_enabled": NSNumber.init(booleanLiteral:false),
             "mp_dev_mode": NSNumber.init(booleanLiteral:true),
             "mp_transaction_id": "",
             "mp_request_type": "",
-            "mp_sandbox_mode": NSNumber.init(booleanLiteral:true)
+            "mp_sandbox_mode": NSNumber.init(booleanLiteral:false)
         ]
         self.mp = MOLPayLib(delegate:self, andPaymentDetails: paymentRequestDict)
         

@@ -13,8 +13,6 @@
 		0802718720A2DBE200EAE8C8 /* LocationSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0802718620A2DBE200EAE8C8 /* LocationSelectionView.swift */; };
 		0802718920A2DC0100EAE8C8 /* LocationSelectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0802718820A2DC0100EAE8C8 /* LocationSelectionView.xib */; };
 		0802718B20A2FF1600EAE8C8 /* GoogleMapsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0802718A20A2FF1600EAE8C8 /* GoogleMapsHelper.swift */; };
-		0802AF8720D9535800A8AA1B /* RideRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0802AF8620D9535800A8AA1B /* RideRequestHandler.swift */; };
-		0802AF8A20D9551E00A8AA1B /* ApiList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8871FBDC1FE7DDDF002335D5 /* ApiList.swift */; };
 		0805BDBE209C41AF00ACDC38 /* LocationSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805BDBD209C41AF00ACDC38 /* LocationSelectionViewController.swift */; };
 		0805BDC1209C504900ACDC38 /* SignUpUserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805BDC0209C504900ACDC38 /* SignUpUserTableViewController.swift */; };
 		0805BDC3209C54F900ACDC38 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805BDC2209C54F900ACDC38 /* ProfileViewController.swift */; };
@@ -119,13 +117,10 @@
 		086BAF6220078A200087F15A /* ErrorMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BAF6120078A200087F15A /* ErrorMessages.swift */; };
 		086BAF6420078E220087F15A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BAF6320078E220087F15A /* ViewController.swift */; };
 		086C90132099F34A002CD9B1 /* SocialLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086C90122099F34A002CD9B1 /* SocialLoginViewController.swift */; };
-		0875010320D7D4EC00CFA858 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875010220D7D4EC00CFA858 /* IntentHandler.swift */; };
-		0875010720D7D4EC00CFA858 /* SiriIntent.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0875010020D7D4EC00CFA858 /* SiriIntent.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0875011020D7F22F00CFA858 /* OfflineBookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875010F20D7F22F00CFA858 /* OfflineBookingViewController.swift */; };
 		087DCFAE2077920A0040BDBB /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087DCFAD2077920A0040BDBB /* Sequence.swift */; };
 		0881352321527DD800DA668E /* search.json in Resources */ = {isa = PBXBuildFile; fileRef = 0881352221527DD800DA668E /* search.json */; };
 		08813E57213D146B00830717 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08813E56213D146B00830717 /* UserDefaultsKeys.swift */; };
-		08813E58213D147800830717 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08813E56213D146B00830717 /* UserDefaultsKeys.swift */; };
 		08813E5D213D507700830717 /* ConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08813E5C213D507700830717 /* ConfigViewController.swift */; };
 		088DC901200FCCA00095D552 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088DC900200FCCA00095D552 /* ViewExtension.swift */; };
 		089B4F7520C03A0300DDEAF3 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B4F7420C03A0300DDEAF3 /* Request.swift */; };
@@ -221,16 +216,6 @@
 		8894E22B1FE7D7980097B4B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8894E22A1FE7D7980097B4B3 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		0875010520D7D4EC00CFA858 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8894E2181FE7D7980097B4B3 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 087500FF20D7D4EC00CFA858;
-			remoteInfo = SiriIntent;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		08032BD42048133E006BFC4E /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -248,7 +233,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				0875010720D7D4EC00CFA858 /* SiriIntent.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -373,7 +357,6 @@
 		086BAF6320078E220087F15A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		086C90122099F34A002CD9B1 /* SocialLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginViewController.swift; sourceTree = "<group>"; };
 		087500CF20D7D27600CFA858 /* IntentsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IntentsUI.framework; path = System/Library/Frameworks/IntentsUI.framework; sourceTree = SDKROOT; };
-		0875010020D7D4EC00CFA858 /* SiriIntent.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SiriIntent.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		0875010220D7D4EC00CFA858 /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
 		0875010420D7D4EC00CFA858 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0875010B20D7D56400CFA858 /* User.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = User.entitlements; sourceTree = "<group>"; };
@@ -497,13 +480,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		087500FD20D7D4EC00CFA858 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		8894E21D1FE7D7980097B4B3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1508,7 +1484,6 @@
 			isa = PBXGroup;
 			children = (
 				8894E2201FE7D7980097B4B3 /* TranxitUser.app */,
-				0875010020D7D4EC00CFA858 /* SiriIntent.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1692,23 +1667,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		087500FF20D7D4EC00CFA858 /* SiriIntent */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 0875010820D7D4EC00CFA858 /* Build configuration list for PBXNativeTarget "SiriIntent" */;
-			buildPhases = (
-				087500FC20D7D4EC00CFA858 /* Sources */,
-				087500FD20D7D4EC00CFA858 /* Frameworks */,
-				087500FE20D7D4EC00CFA858 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = SiriIntent;
-			productName = SiriIntent;
-			productReference = 0875010020D7D4EC00CFA858 /* SiriIntent.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 		8894E21F1FE7D7980097B4B3 /* TranxitUser */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8894E2481FE7D7980097B4B3 /* Build configuration list for PBXNativeTarget "TranxitUser" */;
@@ -1726,7 +1684,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				0875010620D7D4EC00CFA858 /* PBXTargetDependency */,
 			);
 			name = TranxitUser;
 			productName = Centros_Camprios;
@@ -1743,16 +1700,6 @@
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = Appoets;
 				TargetAttributes = {
-					087500FF20D7D4EC00CFA858 = {
-						CreatedOnToolsVersion = 9.4;
-						LastSwiftMigration = 1000;
-						ProvisioningStyle = Automatic;
-						SystemCapabilities = {
-							com.apple.ApplicationGroups.iOS = {
-								enabled = 0;
-							};
-						};
-					};
 					8894E21F1FE7D7980097B4B3 = {
 						CreatedOnToolsVersion = 9.2;
 						LastSwiftMigration = 1000;
@@ -1768,7 +1715,7 @@
 								enabled = 1;
 							};
 							com.apple.Siri = {
-								enabled = 1;
+								enabled = 0;
 							};
 							com.apple.VPNLite = {
 								enabled = 0;
@@ -1793,19 +1740,11 @@
 			projectRoot = "";
 			targets = (
 				8894E21F1FE7D7980097B4B3 /* TranxitUser */,
-				087500FF20D7D4EC00CFA858 /* SiriIntent */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		087500FE20D7D4EC00CFA858 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		8894E21E1FE7D7980097B4B3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1985,17 +1924,6 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		087500FC20D7D4EC00CFA858 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				08813E58213D147800830717 /* UserDefaultsKeys.swift in Sources */,
-				0802AF8720D9535800A8AA1B /* RideRequestHandler.swift in Sources */,
-				0875010320D7D4EC00CFA858 /* IntentHandler.swift in Sources */,
-				0802AF8A20D9551E00A8AA1B /* ApiList.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		8894E21C1FE7D7980097B4B3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2158,14 +2086,6 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		0875010620D7D4EC00CFA858 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 087500FF20D7D4EC00CFA858 /* SiriIntent */;
-			targetProxy = 0875010520D7D4EC00CFA858 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin PBXVariantGroup section */
 		08D752DC215523A200250E92 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
@@ -2205,44 +2125,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		0875010920D7D4EC00CFA858 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F6FK8J95C4;
-				INFOPLIST_FILE = SiriIntent/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ciaoz.user.SiriIntent;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Debug;
-		};
-		0875010A20D7D4EC00CFA858 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F6FK8J95C4;
-				INFOPLIST_FILE = SiriIntent/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ciaoz.user.SiriIntent;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Release;
-		};
 		8894E2461FE7D7980097B4B3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2421,15 +2303,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0875010820D7D4EC00CFA858 /* Build configuration list for PBXNativeTarget "SiriIntent" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0875010920D7D4EC00CFA858 /* Debug */,
-				0875010A20D7D4EC00CFA858 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		8894E21B1FE7D7980097B4B3 /* Build configuration list for PBXProject "TranxitSwift" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

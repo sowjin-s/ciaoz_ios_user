@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.appearence()
         self.google()
         self.IQKeyboard()
-        self.siri()
+        //self.siri()
         self.registerPush(forApp: application)
         self.stripe()
          window?.rootViewController = Router.setWireFrame()
@@ -177,14 +177,14 @@ extension AppDelegate {
         IQKeyboardManager.sharedManager().enable = false
     }
     
-    private func siri() {
+    /*private func siri() {
         
         if INPreferences.siriAuthorizationStatus() != .authorized {
             INPreferences.requestSiriAuthorization { (status) in
                 print("Is Siri Authorized  -",status == .authorized)
             }
         }
-    }
+    }*/
     
     //MARK:- Stripe
     

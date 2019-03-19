@@ -870,7 +870,7 @@ extension HomeViewController {
                 request.distance = "\(service.pricing?.distance ?? 0)"
                 request.use_wallet = service.pricing?.useWallet
                 request.card_id = entity?.card_id
-                request.lady_drive = (self.estimationFareView?.isladydriverselected)! ? "Yes" : "No"
+                request.lady_driver = (self.estimationFareView?.isladydriverselected)! ? "Yes" : "No"
                 if isScheduled {
                     if let dateString = Formatter.shared.getString(from: scheduleDate, format: DateFormat.list.ddMMyyyyhhmma) {
                         let dateArray = dateString.components(separatedBy: " ")

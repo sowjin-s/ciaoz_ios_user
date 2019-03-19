@@ -334,7 +334,7 @@ enum Language : String, Codable, CaseIterable {
         }
     }
     
-    static var count: Int{ return 2 }
+    static var count: Int{ return 1 }
 }
 
 

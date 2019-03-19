@@ -845,7 +845,8 @@
                                         <rect key="frame" x="16" y="412" width="288" height="35"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZZK-X8-Fpj">
-                                                <rect key="frame" x="37" y="21" width="0.0" height="0.0"/>
+                                                <rect key="frame" x="37" y="12.5" width="173" height="17"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -871,10 +872,12 @@
                                             <constraint firstItem="c3F-4X-P3V" firstAttribute="height" secondItem="Wef-DI-wcp" secondAttribute="height" multiplier="1:2" id="MrT-07-G2F"/>
                                             <constraint firstItem="c3F-4X-P3V" firstAttribute="width" secondItem="Wef-DI-wcp" secondAttribute="height" multiplier="1:2" id="NtO-4W-uDb"/>
                                             <constraint firstItem="ZZK-X8-Fpj" firstAttribute="leading" secondItem="c3F-4X-P3V" secondAttribute="trailing" constant="8" id="OTP-EZ-VkX"/>
+                                            <constraint firstItem="ZZK-X8-Fpj" firstAttribute="width" secondItem="Wef-DI-wcp" secondAttribute="width" multiplier="0.6" id="Oho-6s-lq7"/>
                                             <constraint firstItem="YRa-2v-PqF" firstAttribute="centerY" secondItem="Wef-DI-wcp" secondAttribute="centerY" id="Z7B-Nk-AQo"/>
                                             <constraint firstItem="YRa-2v-PqF" firstAttribute="leading" secondItem="ZZK-X8-Fpj" secondAttribute="trailing" constant="8" id="aSs-tY-kUT"/>
                                             <constraint firstItem="c3F-4X-P3V" firstAttribute="leading" secondItem="Wef-DI-wcp" secondAttribute="leading" constant="8" id="azF-Q9-M4z"/>
                                             <constraint firstItem="c3F-4X-P3V" firstAttribute="centerY" secondItem="Wef-DI-wcp" secondAttribute="centerY" id="c1t-Ca-x0f"/>
+                                            <constraint firstItem="ZZK-X8-Fpj" firstAttribute="height" secondItem="Wef-DI-wcp" secondAttribute="height" multiplier="0.4" id="gm2-6f-olM"/>
                                             <constraint firstAttribute="trailing" secondItem="YRa-2v-PqF" secondAttribute="trailing" id="hFd-FR-urZ"/>
                                             <constraint firstItem="ZZK-X8-Fpj" firstAttribute="centerY" secondItem="Wef-DI-wcp" secondAttribute="centerY" id="hK0-g1-IVj"/>
                                         </constraints>

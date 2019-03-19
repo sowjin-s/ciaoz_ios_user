@@ -78,7 +78,7 @@ extension ProfileViewController {
     
     private func initialLoads() {
         
-        self.countrycode.addTarget(self, action: #selector(self.ChangeCountryCode), for: .touchUpInside)
+        //self.countrycode.addTarget(self, action: #selector(self.ChangeCountryCode), for: .touchUpInside)
         self.countryList.delegate = self
         
         self.viewPersonal.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.setTripTypeAction(sender:))))
@@ -121,7 +121,7 @@ extension ProfileViewController {
         self.textFieldLast.text = User.main.lastName
         self.textFieldEmail.text = User.main.email
         self.textFieldPhone.text = User.main.mobile
-        self.countrycode.setTitle(User.main.country_code, for: .normal)
+        //self.countrycode.setTitle(User.main.country_code, for: .normal)
         self.country_code = User.main.country_code
     }
     
@@ -147,8 +147,8 @@ extension ProfileViewController {
         Common.setFont(to: labelBusiness)
         Common.setFont(to: labelPersonal)
         Common.setFont(to: labelTripType)
-        Common.setFont(to: countrycode)
-        countrycode.tintColor = UIColor.black
+        //Common.setFont(to: countrycode)
+        //countrycode.tintColor = UIColor.black
     }
     
     // MARK:- Show Image

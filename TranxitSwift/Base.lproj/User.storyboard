@@ -212,16 +212,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qOl-Zw-BWs">
-                                <rect key="frame" x="0.0" y="368" width="414" height="20"/>
+                                <rect key="frame" x="0.0" y="367.33333333333331" width="414" height="21.666666666666686"/>
                                 <fontDescription key="fontDescription" name="ClanPro-Medium" family="Clan Pro" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9bf-fR-R9y">
-                                <rect key="frame" x="62" y="80" width="290" height="272"/>
+                                <rect key="frame" x="62" y="80" width="290" height="271.33333333333331"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LMa-9h-IWr">
-                                <rect key="frame" x="20" y="404" width="374" height="20.333333333333314"/>
+                                <rect key="frame" x="20" y="405" width="374" height="20.333333333333314"/>
                                 <attributedString key="attributedText">
                                     <fragment content="label">
                                         <attributes>
@@ -709,7 +709,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xt8-gp-uei" customClass="HoshiTextField" customModule="TranxitUser" customModuleProvider="target">
-                                                    <rect key="frame" x="66" y="13" width="335" height="60"/>
+                                                    <rect key="frame" x="8" y="13" width="398" height="60"/>
                                                     <color key="textColor" red="0.039215686270000001" green="0.058823529409999999" blue="0.10980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
@@ -719,21 +719,12 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </textField>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="epM-gF-6ZM">
-                                                    <rect key="frame" x="16" y="15" width="46" height="50"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="46" id="RRA-vY-C6B"/>
-                                                    </constraints>
-                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="epM-gF-6ZM" firstAttribute="height" secondItem="xt8-gp-uei" secondAttribute="height" constant="-10" id="5Wc-z0-t8k"/>
-                                                <constraint firstAttribute="trailing" secondItem="xt8-gp-uei" secondAttribute="trailing" constant="13" id="Nlk-iX-1sJ"/>
-                                                <constraint firstAttribute="bottom" secondItem="xt8-gp-uei" secondAttribute="bottom" constant="8" id="ayF-NC-5OS"/>
-                                                <constraint firstItem="xt8-gp-uei" firstAttribute="top" secondItem="2n9-Zu-7qs" secondAttribute="top" constant="13" id="cZl-no-n7W"/>
-                                                <constraint firstItem="epM-gF-6ZM" firstAttribute="leading" secondItem="2n9-Zu-7qs" secondAttribute="leading" constant="16" id="eXc-41-SU8"/>
-                                                <constraint firstItem="epM-gF-6ZM" firstAttribute="centerY" secondItem="xt8-gp-uei" secondAttribute="centerY" constant="-3" id="meg-yW-FFt"/>
-                                                <constraint firstItem="xt8-gp-uei" firstAttribute="leading" secondItem="epM-gF-6ZM" secondAttribute="trailing" constant="4" id="zyp-QV-mSc"/>
+                                                <constraint firstItem="xt8-gp-uei" firstAttribute="top" secondItem="2n9-Zu-7qs" secondAttribute="top" constant="13" id="QIl-VO-9ZO"/>
+                                                <constraint firstAttribute="bottom" secondItem="xt8-gp-uei" secondAttribute="bottom" constant="8" id="ltY-W7-RFg"/>
+                                                <constraint firstAttribute="trailing" secondItem="xt8-gp-uei" secondAttribute="trailing" constant="8" id="rov-uQ-TbH"/>
+                                                <constraint firstItem="xt8-gp-uei" firstAttribute="leading" secondItem="2n9-Zu-7qs" secondAttribute="leading" constant="8" id="t1b-Ha-Cl5"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -907,7 +898,6 @@
                     <connections>
                         <outlet property="buttonChangePassword" destination="ENL-XW-BgV" id="mnz-Ev-tI7"/>
                         <outlet property="buttonSave" destination="HLi-bv-tQq" id="70w-RM-4bU"/>
-                        <outlet property="countrycode" destination="epM-gF-6ZM" id="ntO-FE-XIc"/>
                         <outlet property="imageViewBusiness" destination="Qmv-S9-oxd" id="yWO-Mj-sAl"/>
                         <outlet property="imageViewEdit" destination="3Ig-4F-UiS" id="cRW-Rr-qDz"/>
                         <outlet property="imageViewPersonal" destination="ffi-pN-52A" id="6tF-NX-kxg"/>
@@ -1287,7 +1277,7 @@
                                                     </constraints>
                                                     <color key="textColor" red="0.039215686270000001" green="0.058823529409999999" blue="0.10980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                    <textInputTraits key="textInputTraits"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
                                                             <color key="value" red="0.69404077529999997" green="0.69416195150000004" blue="0.69403314589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
