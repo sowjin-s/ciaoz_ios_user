@@ -291,7 +291,7 @@ extension WalletViewController: MOLPayLibDelegate {
             "mp_dev_mode": NSNumber.init(booleanLiteral:true),
             "mp_transaction_id": "",
             "mp_request_type": "",
-            "mp_sandbox_mode": NSNumber.init(booleanLiteral:true)
+            "mp_sandbox_mode": NSNumber.init(booleanLiteral:false)
         ]
         self.mp = MOLPayLib(delegate:self, andPaymentDetails: paymentRequestDict)
         

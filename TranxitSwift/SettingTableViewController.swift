@@ -13,7 +13,7 @@ class SettingTableViewController: UITableViewController {
     
     private let tableCellId = "tableCellid"
     private let languageCellId = "LanguageSelection"
-    private var numberOfRows = 2
+    private var numberOfRows = 1
     
     private let header = [Constants.string.changeLanguage, Constants.string.favourites, .Empty]
     

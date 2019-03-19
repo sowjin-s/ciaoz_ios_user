@@ -144,7 +144,7 @@ extension RideStatusView {
             }
         }
         
-        Cache.image(forUrl: values.service?.image) { (image) in
+        Cache.image(forUrl: values.service_type?.image) { (image) in
             if image != nil {
                 DispatchQueue.main.async {
                     self.imageViewService.image = image
@@ -154,7 +154,7 @@ extension RideStatusView {
         
         self.labelProviderName.text = String.removeNil(values.provider?.first_name)+" "+String.removeNil(values.provider?.last_name)
         self.viewRating.rating = Float(values.provider?.rating ?? "0") ?? 0
-        self.labelServiceName.text = values.service?.name
+        self.labelServiceName.text = values.service_type?.name
         self.labelServiceNumber.text = values.provider_service?.service_number
         self.labelServiceDescription.text = values.provider_service?.service_model
         self.labelOtp.text = " \(Constants.string.otp.localize()+": "+String.removeNil(values.otp)) "

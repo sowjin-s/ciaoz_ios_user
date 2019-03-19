@@ -14,7 +14,7 @@ class Request : JSONSerializable {
     var s_longitude : Double?
     var d_latitude : Double?
     var d_longitude : Double?
-    var service_type : Int?
+    var service_type_id : Int?
     var distance : String?
     var distanceInt : Float?
     var payment_mode : PaymentType?
@@ -31,7 +31,7 @@ class Request : JSONSerializable {
     var travel_time : String?
     var status : RideStatus?
     var provider : Provider?
-    var service : Service?
+    var service_type : Service?
     var provider_service : Service?
     var payment : Payment?
     var otp : String?
@@ -94,8 +94,8 @@ class Request : JSONSerializable {
         provider = try? values.decode(Provider.self, forKey: .provider)
         distance = try? values.decode(String.self, forKey: .distance)
         distanceInt = try? values.decode(Float.self, forKey: .distance)
-        service = try? values.decode(Service.self, forKey: .service_type)
-        service_type =  try? values.decode(Int.self, forKey: .service_type)
+        service_type = try? values.decode(Service.self, forKey: .service_type)
+        service_type_id =  try? values.decode(Int.self, forKey: .service_type_id)
         schedule_date = try? values.decode(String.self, forKey: .schedule_date)
         schedule_time = try? values.decode(String.self, forKey: .schedule_time)
         request_id = try? values.decode(Int.self, forKey: .request_id)
@@ -124,3 +124,24 @@ class Request : JSONSerializable {
     
 }
 
+
+class newRequest: JSONSerializable {
+    
+    var s_latitude : Double?
+    var s_longitude : Double?
+    var d_latitude : Double?
+    var d_longitude : Double?
+    var service_type : Int?
+    var distance : String?
+    var payment_mode : PaymentType?
+    var card_id : String?
+    var s_address : String?
+    var d_address : String?
+    var use_wallet : Int?
+    var schedule_date : String?
+    var schedule_time : String?
+    var is_scheduled : Bool?
+    var lady_drive : String?
+    var promocode_id : Int?
+
+}

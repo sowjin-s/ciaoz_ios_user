@@ -10,7 +10,7 @@ import UIKit
 
 let AppName = "Ciaoz"
 var deviceTokenString = Constants.string.noDevice
-let googleMapKey = "AIzaSyCgdb3ysotP9U1qUU0IAkYoeeJfLzxfPb0"
+let googleMapKey = "AIzaSyCuztOWf_wtk8dw6yB7nltgAODvOUogPqw"
 let appSecretKey = "z7uxjxYKkltLp87J92sDHZqM4igMXzYNb1xEWwlt"
 let appClientId = 2
 let defaultMapLocation = LocationCoordinate(latitude: 13.009245, longitude: 80.212929)

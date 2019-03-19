@@ -176,7 +176,8 @@ extension HomeViewController {
         let isWalletAvailable = User.main.wallet_balance != 0
         let heightPadding : CGFloat = (isWalletAvailable ? 0 : 40)
         self.estimationFareView = Bundle.main.loadNibNamed(XIB.Names.RequestSelectionView, owner: self, options: [:])?.first as? RequestSelectionView
-        self.estimationFareView?.frame = CGRect(x: 0, y: self.view.frame.height-(self.estimationFareView!.bounds.height-heightPadding), width: self.view.frame.width, height: self.estimationFareView!.frame.height-heightPadding)
+        self.estimationFareView?.frame = CGRect(x: 0, y: self.view.frame.height-(self.estimationFareView!.bounds.height), width: self.view.frame.width, height: self.estimationFareView!.frame.height)
+        print(self.estimationFareView!.frame.height-heightPadding)
         self.estimationFareView?.show(with: .bottom, completion: nil)
         self.view.addSubview(self.estimationFareView!)
         self.estimationFareView?.scheduleAction = { [weak self] service in
@@ -320,6 +321,7 @@ extension HomeViewController {
                 self.loader.isHidden = false
                 let requestObj = Request()
                 requestObj.request_id = request.id
+                requestObj.payment_mode = request.payment_mode
                 if tipsAmount>0 {
                     requestObj.tips = (Float(Int(tipsAmount*100))/100)
                     self.tips = requestObj.tips
@@ -853,6 +855,7 @@ extension HomeViewController {
     func transactionResult(_ result: [AnyHashable : Any]!) {
         print("transactionResult result = \(String(describing: result))")
         if(result["status_code"] as? String == "11"){
+            UIApplication.shared.keyWindow?.makeToast("Payment Failed")
             self.dismiss(animated: true); // to your failed page
         }else if(result["status_code"] as? String == "00"){
             print("success")
@@ -865,7 +868,11 @@ extension HomeViewController {
             print(params)
             self.presenter?.post(api: .payride, data: params.toData())
             self.dismiss(animated: true); // to your success page
+        }else if(result["status_code"] as? String == "22"){
+            UIApplication.shared.keyWindow?.makeToast("Payment Pending")
+            self.dismiss(animated: true); //others
         }else{
+            UIApplication.shared.keyWindow?.makeToast("Payment Failed")
             self.dismiss(animated: true); //others
         }
     }
@@ -878,19 +885,19 @@ extension HomeViewController {
         
         let paymentRequestDict: [String:Any] = [
             "mp_amount": Amount,
-            "mp_username": "api_SB_ciaoz2u",
-            "mp_password": "api_Cu2z211aiC#",
-            "mp_merchant_ID": "SB_ciaoz2u",
-            "mp_app_name": "ciaoz2u",
-            "mp_verification_key": "78d6446bcb253e24c9fbbbb74b82bccd",
-            "mp_order_ID": "1",
+            "mp_username": "ONG CHIN KEONG",
+            "mp_password": "ideAL593tec@",
+            "mp_merchant_ID": "ciaoz2u",
+            "mp_app_name": "Ciaoz",
+            "mp_verification_key": "6a40bda87b900ef8a7ece803b2ffa41f",
+            "mp_order_ID": "\(currentRequestId)",
             "mp_currency": "RM",
             "mp_country": "MY",
-            "mp_channel": "",
+            "mp_channel": "multi",
             "mp_bill_description": "Payment",
-            "mp_bill_name": "Ranjith",
-            "mp_bill_email": "email@domain.com",
-            "mp_bill_mobile": "+1234567",
+            "mp_bill_name": "\(String(describing: User.main.firstName))",
+            "mp_bill_email": "\(String(describing: User.main.email))",
+            "mp_bill_mobile": "\(String(describing: User.main.mobile))",
             "mp_channel_editing": NSNumber.init(booleanLiteral:false),
             "mp_editing_enabled": NSNumber.init(booleanLiteral:false),
             "mp_dev_mode": NSNumber.init(booleanLiteral:true),
@@ -919,6 +926,8 @@ extension HomeViewController {
     @IBAction func closemolpay(sender: UIBarButtonItem) {
         // Closes MOLPay
         self.mp.closemolpay()
+        UIApplication.shared.keyWindow?.makeToast("Payment Failed")
+        self.dismiss(animated: true); //others
         isCloseButtonClick = true
         print("---Close: \(NSNumber.init(booleanLiteral: true))")
     }

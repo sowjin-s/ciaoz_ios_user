@@ -27,6 +27,7 @@ class Profile : JSONSerializable {
     var stripe_secret_key : String?
     var stripe_publishable_key : String?
     var login_by:String?
+    var country_code: String?
     
     required init(from decoder: Decoder) throws {
         
@@ -52,6 +53,7 @@ class Profile : JSONSerializable {
         stripe_secret_key = try? values.decode(String.self, forKey: .stripe_secret_key)
         stripe_publishable_key = try? values.decode(String.self, forKey: .stripe_publishable_key)
         login_by = try? values.decode(String.self, forKey: .login_by)
+        country_code = try? values.decode(String.self, forKey: .country_code)
     }
     
     init() {

@@ -24,6 +24,7 @@ class Service : JSONSerializable {
     var calculator : ServiceCalculator?
     var promocode : PromocodeEntity?
     var price : String?
+    var service_type: Int?
     
 }
 

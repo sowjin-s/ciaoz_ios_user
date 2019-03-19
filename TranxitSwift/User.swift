@@ -30,8 +30,9 @@ class User : NSObject, NSCoding, JSONSerializable {
     var isCardAllowed : Bool
     var measurement : String?
     var stripeKey : String?
+    var country_code: String?
     
-    init(id : Int?, accessToken : String?, firstName : String?, lastName : String?, mobile : String?, email : String?, currency : String?, picture : String?, refreshToken : String?, walletBalance : Float?, sos : String?, loginType : String?, dispatcherNumber : String?, isCardAllowed : Bool, isCashAllowed : Bool, measurement : String?, stripeKey : String?){
+    init(id : Int?, accessToken : String?, firstName : String?, lastName : String?, mobile : String?, email : String?, currency : String?, picture : String?, refreshToken : String?, walletBalance : Float?, sos : String?, loginType : String?, dispatcherNumber : String?, isCardAllowed : Bool, isCashAllowed : Bool, measurement : String?, stripeKey : String?, country_code : String? ){
                 
         self.id = id
         self.accessToken = accessToken
@@ -50,11 +51,12 @@ class User : NSObject, NSCoding, JSONSerializable {
         self.isCashAllowed = isCashAllowed
         self.measurement = measurement
         self.stripeKey = stripeKey
+        self.country_code = country_code
     }
     
     convenience
     override init(){
-        self.init(id: nil, accessToken: nil, firstName : nil, lastName : nil, mobile : nil, email : nil, currency : nil, picture : nil, refreshToken : nil, walletBalance : nil, sos : nil, loginType : nil,dispatcherNumber : nil, isCardAllowed: false, isCashAllowed : true, measurement : "km", stripeKey : nil)
+        self.init(id: nil, accessToken: nil, firstName : nil, lastName : nil, mobile : nil, email : nil, currency : nil, picture : nil, refreshToken : nil, walletBalance : nil, sos : nil, loginType : nil,dispatcherNumber : nil, isCardAllowed: false, isCashAllowed : true, measurement : "km", stripeKey : nil, country_code: nil)
     }
     
     
@@ -77,8 +79,9 @@ class User : NSObject, NSCoding, JSONSerializable {
         let isCashAllowed = aDecoder.decodeBool(forKey: Keys.list.cash)
         let measurement = aDecoder.decodeObject(forKey: Keys.list.measurement) as? String
         let stripeKey = aDecoder.decodeObject(forKey: Keys.list.stripe) as? String
+        let country_code = aDecoder.decodeObject(forKey: Keys.list.country_code) as? String
         
-        self.init(id: id, accessToken : accessToken, firstName : firstName, lastName : lastName, mobile : mobile, email: email, currency : currency, picture : picture, refreshToken : refreshToken, walletBalance : walletBalance, sos : sos,loginType : loginType, dispatcherNumber : dispatcherNumber, isCardAllowed : isCardAllowed, isCashAllowed : isCashAllowed, measurement : measurement, stripeKey : stripeKey)
+        self.init(id: id, accessToken : accessToken, firstName : firstName, lastName : lastName, mobile : mobile, email: email, currency : currency, picture : picture, refreshToken : refreshToken, walletBalance : walletBalance, sos : sos,loginType : loginType, dispatcherNumber : dispatcherNumber, isCardAllowed : isCardAllowed, isCashAllowed : isCashAllowed, measurement : measurement, stripeKey : stripeKey, country_code : country_code)
         
     }
     
@@ -102,6 +105,7 @@ class User : NSObject, NSCoding, JSONSerializable {
         aCoder.encode(self.isCardAllowed, forKey: Keys.list.card)
         aCoder.encode(self.measurement, forKey: Keys.list.measurement)
         aCoder.encode(self.stripeKey, forKey: Keys.list.stripe)
+        aCoder.encode(self.stripeKey, forKey: Keys.list.country_code)
     }
     
     

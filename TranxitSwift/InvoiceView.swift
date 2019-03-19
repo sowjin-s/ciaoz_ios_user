@@ -210,7 +210,7 @@ extension InvoiceView {
         
         self.labelTimeTaken.text = "\(String.removeNil(request.travel_time)) \(Constants.string.mins.localize())"
         self.paymentType = request.payment_mode ?? .NONE
-        self.serviceCalculator = request.service?.calculator ?? .NONE
+        self.serviceCalculator = request.service_type?.calculator ?? .NONE
         self.isUsingWallet = (request.payment?.wallet ?? 0)>0
         self.isDiscountApplied = (request.payment?.discount ?? 0)>0
         // Set Amount to Label

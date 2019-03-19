@@ -62,7 +62,7 @@ class YourTripCell: UITableViewCell {
     
     func set(values : Request) {
         self.requestId = values.id
-        Cache.image(forUrl: values.service?.image) { (image) in
+        Cache.image(forUrl: values.service_type?.image) { (image) in
             if image != nil {
                 DispatchQueue.main.async {
                     self.upCommingCarImage.image = image
@@ -81,7 +81,7 @@ class YourTripCell: UITableViewCell {
         }
         
         self.upCommingBookingIDLlabel.text = Constants.string.bookingId.localize()+": "+String.removeNil(values.booking_id)
-        self.upCommingCarName.text = values.service?.name
+        self.upCommingCarName.text = values.service_type?.name
         self.upCommingCarName.isHidden = isPastButton
         
         if let dateObject = Formatter.shared.getDate(from: isPastButton ? values.assigned_at : values.schedule_at, format: DateFormat.list.yyyy_mm_dd_HH_MM_ss),
@@ -92,7 +92,7 @@ class YourTripCell: UITableViewCell {
             self.upCommingDateLabel.text = dateString+" \(Constants.string.at.localize()) "+timeString
         }
         if self.isPastButton {
-            self.labelModel.text = values.service?.name
+            self.labelModel.text = values.service_type?.name
             self.labelPrice.text = "\(String.removeNil(User.main.currency)) \(Float.removeNil(values.payment?.total))"
         }
     }

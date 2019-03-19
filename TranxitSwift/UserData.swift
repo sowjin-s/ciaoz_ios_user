@@ -32,7 +32,7 @@ class UserData : UserBase {
     var referral_code: String?
     var country_code: String?
     var emergency_country_code: String?
-  
+    var gender: String?
 }
 
 class ForgotResponse : JSONSerializable {

@@ -865,7 +865,7 @@ extension HomeViewController {
                 request.d_address = self.destinationLocationDetail?.address
                 request.d_latitude = self.destinationLocationDetail?.coordinate.latitude
                 request.d_longitude = self.destinationLocationDetail?.coordinate.longitude
-                request.service_type = service.id
+                request.service_type_id = service.id
                 request.payment_mode = paymentType
                 request.distance = "\(service.pricing?.distance ?? 0)"
                 request.use_wallet = service.pricing?.useWallet

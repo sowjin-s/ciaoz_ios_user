@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CountryList
 
 class ProfileViewController: UITableViewController {
     
@@ -26,21 +27,19 @@ class ProfileViewController: UITableViewController {
     @IBOutlet private weak var imageViewPersonal : UIImageView!
     @IBOutlet private weak var viewBusiness : UIView!
     @IBOutlet private weak var viewPersonal : UIView!
-    
+    @IBOutlet private weak var countrycode: UIButton!
     
     private var tripType :TripType = .Business { // Store Radio option TripType
-        
         didSet {
-            
             self.imageViewBusiness.image = tripType == .Business ? #imageLiteral(resourceName: "radio-on-button") : #imageLiteral(resourceName: "circle-shape-outline")
             self.imageViewPersonal.image = tripType == .Personal ? #imageLiteral(resourceName: "radio-on-button") : #imageLiteral(resourceName: "circle-shape-outline")
-            
         }
-        
     }
     
     private var changedImage : UIImage?
-    
+    private var countryList = CountryList()
+    private var country_code: String? = ""
+
     private lazy var loader : UIView = {
        
         return createActivityIndicator(UIScreen.main.focusedView ?? self.view)
@@ -78,6 +77,9 @@ class ProfileViewController: UITableViewController {
 extension ProfileViewController {
     
     private func initialLoads() {
+        
+        self.countrycode.addTarget(self, action: #selector(self.ChangeCountryCode), for: .touchUpInside)
+        self.countryList.delegate = self
         
         self.viewPersonal.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.setTripTypeAction(sender:))))
         self.viewBusiness.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.setTripTypeAction(sender:))))
@@ -119,6 +121,8 @@ extension ProfileViewController {
         self.textFieldLast.text = User.main.lastName
         self.textFieldEmail.text = User.main.email
         self.textFieldPhone.text = User.main.mobile
+        self.countrycode.setTitle(User.main.country_code, for: .normal)
+        self.country_code = User.main.country_code
     }
     
     //MARK:- Set Designs
@@ -143,6 +147,8 @@ extension ProfileViewController {
         Common.setFont(to: labelBusiness)
         Common.setFont(to: labelPersonal)
         Common.setFont(to: labelTripType)
+        Common.setFont(to: countrycode)
+        countrycode.tintColor = UIColor.black
     }
     
     // MARK:- Show Image
@@ -155,6 +161,14 @@ extension ProfileViewController {
                 self.changedImage = self.imageViewProfile.image
             }
         }
+    }
+    
+    // MARK:- Country Code
+
+    @IBAction private func ChangeCountryCode() {
+        
+        let navController = UINavigationController(rootViewController: countryList)
+        self.present(navController, animated: true, completion: nil)
     }
     
     
@@ -207,6 +221,7 @@ extension ProfileViewController {
         profile.first_name = firstName
         profile.last_name = lastName
         profile.mobile = mobile
+        profile.country_code = country_code
         
         var json = profile.JSONRepresentation
         json.removeValue(forKey: "id")
@@ -317,6 +332,17 @@ extension ProfileViewController : PostViewProtocol {
         }
         
     }
+}
+
+//MARK:- Country List Delegate
+
+extension ProfileViewController : CountryListDelegate {
     
+    func selectedCountry(country: Country) {
+        self.countrycode.setTitle("+" + country.phoneExtension, for: .normal)
+        //self.userInfo?.emergency_country_code = "+" + country.phoneExtension
+        country_code = "+\(country.phoneExtension)"
+        print(country_code ?? "")
+    }
     
 }

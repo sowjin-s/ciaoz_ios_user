@@ -29,7 +29,15 @@ class SignUpUserTableViewController: UITableViewController {
     @IBOutlet private weak var checkboxbtn: UIButton!
     @IBOutlet private weak var countrycode: UIButton!
 
-   // @IBOutlet var referralCodeText: HoshiTextField!
+    @IBOutlet private weak var genderTitleLbl: Label!
+    @IBOutlet private weak var femaleLbl: UILabel!
+    @IBOutlet private weak var maleLbl: UILabel!
+    @IBOutlet private weak var maleView: UIView!
+    @IBOutlet private weak var femaleView: UIView!
+    @IBOutlet private weak var imagefemale: UIImageView!
+    @IBOutlet private weak var imagemale: UIImageView!
+
+    // @IBOutlet var referralCodeText: HoshiTextField!
     
    // @IBOutlet var businessLabel: UILabel!
    // @IBOutlet var outStationLabel: UILabel!
@@ -85,6 +93,18 @@ class SignUpUserTableViewController: UITableViewController {
         }
     }
     
+    var isGenderSelected: Bool = false {
+        didSet{
+            if isGenderSelected == true {
+                imagefemale.image = #imageLiteral(resourceName: "radioselected").withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+                imagemale.image = #imageLiteral(resourceName: "uncheck_icon").withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+            } else {
+                imagemale.image = #imageLiteral(resourceName: "radioselected").withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+                imagefemale.image = #imageLiteral(resourceName: "uncheck_icon").withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+            }
+        }
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -136,6 +156,9 @@ extension SignUpUserTableViewController: UIWebViewDelegate {
         Common.setFont(to: termsbtn)
         Common.setFont(to: referralCodeText)
         Common.setFont(to: countrycode)
+        Common.setFont(to: genderTitleLbl, isTitle: false, size:13.0)
+        Common.setFont(to: maleLbl)
+        Common.setFont(to: femaleLbl)
 
         termsbtn.tintColor = UIColor.black
         //let image = #imageLiteral(resourceName: "check-box-empty").withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
@@ -150,12 +173,18 @@ extension SignUpUserTableViewController: UIWebViewDelegate {
         self.termsbtn.addTarget(self, action: #selector(self.termsAction), for: .touchUpInside)
         self.countrycode.addTarget(self, action: #selector(self.ChangeCountryCode), for: .touchUpInside)
         self.isChecked = false
+        self.isGenderSelected = false
         self.countryList.delegate = self
         if let countryCode = (Locale.current as NSLocale).object(forKey: .countryCode) as? String {
             countrycode.setTitle("+" + getCountryCallingCode(countryRegionCode: countryCode), for: .normal)
             emergency_country_code = "+" + getCountryCallingCode(countryRegionCode: countryCode)
         }
         
+        let gendermale = UITapGestureRecognizer(target: self, action: #selector(self.gender(_:)))
+        self.maleView.addGestureRecognizer(gendermale)
+        let genderfemale = UITapGestureRecognizer(target: self, action: #selector(self.gender(_:)))
+        self.femaleView.addGestureRecognizer(genderfemale)
+
     }
     
     @IBAction private func termsAction() {
@@ -167,6 +196,18 @@ extension SignUpUserTableViewController: UIWebViewDelegate {
         self.view.addSubview(TermsConditionsView!)
         self.TermsConditionsView?.webpage.loadRequest(NSURLRequest(url: NSURL(string: "http://staging.ciaoz2u.com/privacy")! as URL) as URLRequest)
     }
+    
+    // MARK:- Gender
+    
+    @objc func gender(_ sender: UITapGestureRecognizer) {
+
+        if isGenderSelected == false{
+            self.isGenderSelected = true
+        }else if isGenderSelected == true{
+            self.isGenderSelected = false
+        }
+    }
+
 
     
     @objc private func checkboxAction(sender: UIButton) {
@@ -297,7 +338,8 @@ extension SignUpUserTableViewController: UIWebViewDelegate {
             self.showToast(string: ErrorMessage.list.termscondition.localize())
             return
         }
-        userInfo =  MakeJson.signUp(loginBy: .manual, email: email, password: password, socialId: nil, firstName: firstName, lastName: lastName, mobile: mobile, emergencycontact: emergencycontact, icnumber: icnumber, referral_code: self.referralCodeText.text, emergency_country_code: emergency_country_code, country_code: "")
+        
+        userInfo =  MakeJson.signUp(loginBy: .manual, email: email, password: password, socialId: nil, firstName: firstName, lastName: lastName, mobile: mobile, emergencycontact: emergencycontact, icnumber: icnumber, referral_code: self.referralCodeText.text, emergency_country_code: emergency_country_code, country_code: "", gender: (isGenderSelected == false) ? "Male" : "Female" )
        /* guard let country = countryText.text, country.isEmpty else {
             UIApplication.shared.keyWindow?.makeToast(ErrorMessage.list.enterCountry)
             return
@@ -321,7 +363,6 @@ extension SignUpUserTableViewController: UIWebViewDelegate {
        self.prepareLogin(viewcontroller: accountKitVC!)
        self.present(accountKitVC!, animated: true, completion: nil)
       
-        
     }
     
     private func validateEmail()->String? {
