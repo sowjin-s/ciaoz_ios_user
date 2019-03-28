@@ -61,19 +61,11 @@ extension Presenter : PostPresenterInputProtocol {
 
 extension Presenter : PostPresenterOutputProtocol {
     
-//    func sendCouponWfallet(api: Base, data: Data) {
-//        <#code#>
-//    }
-//    
 
     func sendreferral(api: Base, data: Data) {
         controller?.getReferral(api: api, data: PresenterProcessor.shared.getReferralAPI(data: data)!)
     }
-//    
-//    func referal(api: Base, data: Data) {        
-//        controller?.Conreferal(api: api, data: PresenterProcessor.shared.getReferralAPI(data: data)!)
-//    }
-//    
+
     
     func sendWallet(api: Base, data: Data) {
         controller?.getWallet(api: api, data: PresenterProcessor.shared.getWalletAPI(data: data)!)
@@ -144,6 +136,15 @@ extension Presenter : PostPresenterOutputProtocol {
     
     func sendWalletEntity(api: Base, data: Data) {
         controller?.getWalletEntity(api: api, data: PresenterProcessor.shared.getWalletEntity(data: data))
+    }
+    
+    func sendVerifiedMobile(api: Base, data: Data) {
+        controller?.getVerifiedMobile(api: api, data: PresenterProcessor.shared.verifyMobile(data: data)!)
+    }
+    
+    func sendPayments(api: Base,data: Data) {
+        controller?.getPayments(api: api, data: PresenterProcessor.shared.payments(data: data)!)
+
     }
     
 }

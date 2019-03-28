@@ -81,6 +81,8 @@ enum Base : String{
     case wallet = "/api/user/user_wallet_amount"
     case payride = "/api/user/updateMolpayTransaction"
     case referral = "/api/user/referral_code"
+    case verifyMobile = "/check_mobile"
+    case paymentType = "/payment_options"
     
     init(fromRawValue: String){
         self = Base(rawValue: fromRawValue) ?? .signUp

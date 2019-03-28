@@ -15,6 +15,8 @@ class ReferralViewController: UIViewController {
     @IBOutlet private var referraltextLabel : UILabel!
     @IBOutlet private var referralCodeLabel : UILabel!
     @IBOutlet private weak var buttonShare : UIButton!
+    @IBOutlet private weak var buttonCopy : UIButton!
+
 
     private lazy var loader  : UIView = {
         return createActivityIndicator(UIApplication.shared.keyWindow ?? self.view)
@@ -54,14 +56,25 @@ extension ReferralViewController {
         self.localize()
         self.getFromApi()
         self.buttonShare.addTarget(self, action: #selector(self.buttonShareAction), for: .touchUpInside)
+        self.buttonCopy.addTarget(self, action: #selector(self.copyAction), for: .touchUpInside)
+
 
     }
     
     // MARK:- Localize
     private func localize() {
         self.buttonShare.setTitle(Constants.string.share.uppercased().localize(), for: .normal)
+        self.buttonCopy.setTitle(Constants.string.copyText.uppercased().localize(), for: .normal)
         self.referraltitleLabel.text = Constants.string.referYourFriend.localize()
         self.referraltextLabel.text = Constants.string.sharereferral.localize()
+    }
+    
+    
+    @objc func copyAction(){
+    
+        UIPasteboard.general.string = referralCodeLabel.text
+        self.view.makeToast("COPIED")
+        
     }
     
     @IBAction private func buttonShareAction() {

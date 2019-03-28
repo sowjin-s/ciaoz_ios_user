@@ -17,11 +17,11 @@ class MakeJson {
         let userDataObject = UserData()
         userDataObject.device_id = UUID().uuidString
         userDataObject.device_token = deviceTokenString
-        userDataObject.device_type = .ios
+        userDataObject.device_type = DeviceType.ios.rawValue
         userDataObject.email = email
         userDataObject.first_name = firstName
         userDataObject.last_name = lastName
-        userDataObject.login_by = loginBy
+        userDataObject.login_by = LoginType.manual.rawValue
         userDataObject.mobile = mobile 
         userDataObject.password = password
         userDataObject.social_unique_id = socialId

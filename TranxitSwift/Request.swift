@@ -51,6 +51,9 @@ class Request : JSONSerializable {
     var unit : String?
     var is_scheduled : Bool?
     var lady_driver : String?
+    
+    var type: String?
+    var mobile: String?
   /*
     enum CodingKeys: String, CodingKey {
         

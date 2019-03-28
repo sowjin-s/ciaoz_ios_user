@@ -113,6 +113,17 @@ class PresenterProcessor {
     func getReferralAPI(data : Data)->referralModel? {
         return data.getDecodedObject(from: referralModel.self)
     }
+    
+    //MARK:- Verify Mobile number
+    func verifyMobile(data: Data)-> successLog?{
+        return data.getDecodedObject(from: successLog.self)
+    }
+    
+    //MARK:- Payment Types
+    func payments(data: Data)-> Payment?{
+        return data.getDecodedObject(from: Payment.self)
+    }
+    
 }
 
 

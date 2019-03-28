@@ -88,7 +88,8 @@ class Common {
         User.main.dispatcherNumber = profile?.app_contact
         User.main.measurement = profile?.measurement
         User.main.country_code = profile?.country_code
-        
+        User.main.gender = profile?.gender
+
         if let language = profile?.language {
             UserDefaults.standard.set(language.rawValue, forKey: Keys.list.language)
             setLocalization(language: language)

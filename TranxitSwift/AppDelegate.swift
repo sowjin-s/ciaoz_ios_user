@@ -1,5 +1,6 @@
 
 
+
 //
 //  AppDelegate.swift
 //  Centros_Camprios
@@ -250,4 +251,34 @@ extension AppDelegate {
     
 }
 
+extension AppDelegate {
+    
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        
+        //https://app.ciaoz2u.com/
+        
+        guard let url = userActivity.webpageURL else {
+            
+            print("open appstore")
+            
+            let link = NSURL(string: "https://itunes.apple.com/us/app/taxialaan-iraq/id1163307707?mt=8")
+            return false
+            
+        }
+        
+       // guard let viewController = navigator.getDestination(for: url) else {
+            
+           // application.open(url)
+            
+//            return false
+//        }
+        
+//        window?.rootViewController = viewController
+//
+//        window?.makeKeyAndVisible()
+        
+        return true
+    }
+    
+}
 

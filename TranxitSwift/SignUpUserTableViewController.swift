@@ -15,13 +15,9 @@ class SignUpUserTableViewController: UITableViewController {
     @IBOutlet var firstNameText: HoshiTextField!
     @IBOutlet var emailtext: HoshiTextField!
     @IBOutlet var lastNameText: HoshiTextField!
-    
     @IBOutlet var passwordText: HoshiTextField!
-    
     @IBOutlet var confirmPwdText: HoshiTextField!
-    
     @IBOutlet var countryText: HoshiTextField!
-    
     @IBOutlet var timeZone: HoshiTextField!
     @IBOutlet var referralCodeText: HoshiTextField!
 
@@ -36,6 +32,10 @@ class SignUpUserTableViewController: UITableViewController {
     @IBOutlet private weak var femaleView: UIView!
     @IBOutlet private weak var imagefemale: UIImageView!
     @IBOutlet private weak var imagemale: UIImageView!
+    @IBOutlet private weak var imageProfile: UIImageView!
+    @IBOutlet private weak var viewProfile: UIView!
+
+
 
     // @IBOutlet var referralCodeText: HoshiTextField!
     
@@ -50,6 +50,7 @@ class SignUpUserTableViewController: UITableViewController {
     @IBOutlet var nextView: UIView!
     
     @IBOutlet var nextImage: UIImageView!
+    
     
     var TermsConditionsView : termscondition?
     var rideNow : RideNowView?
@@ -70,8 +71,10 @@ class SignUpUserTableViewController: UITableViewController {
         }
     } */
     
-    
-    private var userInfo : UserData?
+    var mobile: String?
+    var code: String?
+    private var changedImage : UIImage?
+    //private var userInfo : Signup?
     private var emergency_country_code: String? = ""
     private var accountKit : AKFAccountKit?
     
@@ -108,7 +111,7 @@ class SignUpUserTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setNavigationcontroller()        
+        self.setNavigationcontroller()
         self.setDesign()
         self.initialloads()
     }
@@ -168,7 +171,7 @@ extension SignUpUserTableViewController: UIWebViewDelegate {
     }
     
     private func initialloads(){
-        
+        self.phoneNumber.text = mobile
         self.checkboxbtn.addTarget(self, action: #selector(self.checkboxAction), for: .touchUpInside)
         self.termsbtn.addTarget(self, action: #selector(self.termsAction), for: .touchUpInside)
         self.countrycode.addTarget(self, action: #selector(self.ChangeCountryCode), for: .touchUpInside)
@@ -184,7 +187,7 @@ extension SignUpUserTableViewController: UIWebViewDelegate {
         self.maleView.addGestureRecognizer(gendermale)
         let genderfemale = UITapGestureRecognizer(target: self, action: #selector(self.gender(_:)))
         self.femaleView.addGestureRecognizer(genderfemale)
-
+        self.viewProfile.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.changeImage)))
     }
     
     @IBAction private func termsAction() {
@@ -194,7 +197,7 @@ extension SignUpUserTableViewController: UIWebViewDelegate {
         self.TermsConditionsView?.frame = CGRect(x: 0, y: 0, width: (self.view.frame.width), height: (self.view.frame.height - 140))
         self.TermsConditionsView?.clipsToBounds = false
         self.view.addSubview(TermsConditionsView!)
-        self.TermsConditionsView?.webpage.loadRequest(NSURLRequest(url: NSURL(string: "http://staging.ciaoz2u.com/privacy")! as URL) as URLRequest)
+        self.TermsConditionsView?.webpage.loadRequest(NSURLRequest(url: NSURL(string: "http://app.ciaoz2u.com/privacy")! as URL) as URLRequest)
     }
     
     // MARK:- Gender
@@ -302,44 +305,77 @@ extension SignUpUserTableViewController: UIWebViewDelegate {
         guard let email = self.validateEmail() else { return }
         
         guard let firstName = self.firstNameText.text, !firstName.isEmpty else {
-            self.showToast(string: ErrorMessage.list.enterFirstName.localize())
+            UIApplication.shared.keyWindow?.makeToast(ErrorMessage.list.enterFirstName.localize())
             return
         }
         guard let lastName = lastNameText.text, !lastName.isEmpty else {
-            self.showToast(string: ErrorMessage.list.enterLastName.localize())
+            UIApplication.shared.keyWindow?.makeToast(ErrorMessage.list.enterLastName.localize())
             return
         }
        
         guard let phoneNumber = phoneNumber.text, !phoneNumber.isEmpty, let mobile = Int(phoneNumber)  else {
-            self.showToast(string: ErrorMessage.list.enterMobileNumber.localize())
+            UIApplication.shared.keyWindow?.makeToast(ErrorMessage.list.enterMobileNumber.localize())
             return
         }
         guard let password = passwordText.text, !password.isEmpty, password.count>=6 else {
-             self.showToast(string: ErrorMessage.list.enterPassword.localize())
+            UIApplication.shared.keyWindow?.makeToast(ErrorMessage.list.enterPassword.localize())
             return
         }
         guard let confirmPwd = confirmPwdText.text, !confirmPwd.isEmpty else {
-             self.showToast(string: ErrorMessage.list.enterConfirmPassword.localize())
+            UIApplication.shared.keyWindow?.makeToast(ErrorMessage.list.enterConfirmPassword.localize())
             return
         }
         guard confirmPwd == password else {
-            self.showToast(string: ErrorMessage.list.passwordDonotMatch.localize())
+            UIApplication.shared.keyWindow?.makeToast(ErrorMessage.list.passwordDonotMatch.localize())
             return
         }
-        guard let icnumber = self.countryText.text, !icnumber.isEmpty else {
-            self.showToast(string: ErrorMessage.list.entericnumber.localize())
+        guard let icnumber = self.countryText.text, !icnumber.isEmpty, icnumber.count==12 else {
+            UIApplication.shared.keyWindow?.makeToast(ErrorMessage.list.entericnumber.localize())
             return
         }
+        
+        
         guard let emergencycontact = self.timeZone.text, !emergencycontact.isEmpty else {
-            self.showToast(string: ErrorMessage.list.enteremergencycontact.localize())
+            UIApplication.shared.keyWindow?.makeToast(ErrorMessage.list.enteremergencycontact.localize())
             return
         }
         guard isChecked != false else{
             self.showToast(string: ErrorMessage.list.termscondition.localize())
+            UIApplication.shared.keyWindow?.makeToast(ErrorMessage.list.termscondition.localize())
             return
         }
         
-        userInfo =  MakeJson.signUp(loginBy: .manual, email: email, password: password, socialId: nil, firstName: firstName, lastName: lastName, mobile: mobile, emergencycontact: emergencycontact, icnumber: icnumber, referral_code: self.referralCodeText.text, emergency_country_code: emergency_country_code, country_code: "", gender: (isGenderSelected == false) ? "Male" : "Female" )
+        let userInfo = Signup()
+        userInfo.login_by = LoginType.manual.rawValue
+        userInfo.device_id = UUID().uuidString
+        userInfo.device_type = DeviceType.ios.rawValue
+        userInfo.device_token = deviceTokenString
+        userInfo.email = emailtext.text
+        userInfo.first_name = firstName
+        userInfo.last_name = lastName
+        userInfo.mobile = phoneNumber
+        userInfo.password = password
+        userInfo.emergency_contact_no = emergencycontact
+        userInfo.ic_number = icnumber
+        userInfo.referral_code = self.referralCodeText.text
+        userInfo.emergency_country_code = emergency_country_code
+        userInfo.country_code = code
+        userInfo.gender = (isGenderSelected == false) ? .Male : .Female
+
+        
+//        userInfo =  MakeJson.signUp(loginBy: .manual, email: email, password: password, socialId: nil, firstName: firstName, lastName: lastName, mobile: mobile, emergencycontact: emergencycontact, icnumber: icnumber, referral_code: self.referralCodeText.text, emergency_country_code: emergency_country_code, country_code: code, gender: (isGenderSelected == false) ? "Male" : "Female" )
+        
+        if self.changedImage != nil, let dataImg = self.changedImage!.pngData() {
+           
+            self.loader.isHidden = false
+            self.presenter?.post(api: .signUp, imageData: [WebConstants.string.picture : dataImg], parameters: userInfo.JSONRepresentation)
+            
+        } else {
+            self.loader.isHidden = false
+            self.presenter?.post(api: .signUp, data: userInfo.toData())
+
+        }
+        
        /* guard let country = countryText.text, country.isEmpty else {
             UIApplication.shared.keyWindow?.makeToast(ErrorMessage.list.enterCountry)
             return
@@ -356,12 +392,12 @@ extension SignUpUserTableViewController: UIWebViewDelegate {
         //self.presenter?.post(api: .signUp, data: MakeJson. )
        // self.present(id: Storyboard.Ids.DrawerController, animation: true)
 
-       self.accountKit = AKFAccountKit(responseType: .accessToken)
-       let akPhone = AKFPhoneNumber(countryCode: "in", phoneNumber: phoneNumber)
-       let accountKitVC = accountKit?.viewControllerForPhoneLogin(with: akPhone, state: UUID().uuidString)
-       accountKitVC!.enableSendToFacebook = true
-       self.prepareLogin(viewcontroller: accountKitVC!)
-       self.present(accountKitVC!, animated: true, completion: nil)
+//       self.accountKit = AKFAccountKit(responseType: .accessToken)
+//       let akPhone = AKFPhoneNumber(countryCode: "in", phoneNumber: phoneNumber)
+//       let accountKitVC = accountKit?.viewControllerForPhoneLogin(with: akPhone, state: UUID().uuidString)
+//       accountKitVC!.enableSendToFacebook = true
+//       self.prepareLogin(viewcontroller: accountKitVC!)
+//       self.present(accountKitVC!, animated: true, completion: nil)
       
     }
     
@@ -380,14 +416,25 @@ extension SignUpUserTableViewController: UIWebViewDelegate {
     }
     
 
-    private func prepareLogin(viewcontroller : UIViewController&AKFViewController) {
-        
-        viewcontroller.delegate = self
-        viewcontroller.uiManager = AKFSkinManager(skinType: .contemporary, primaryColor: .primary)
-        viewcontroller.uiManager.theme?()?.buttonTextColor = .white
-        
-    }
+//    private func prepareLogin(viewcontroller : UIViewController&AKFViewController) {
+//        
+//        viewcontroller.delegate = self
+//        viewcontroller.uiManager = AKFSkinManager(skinType: .contemporary, primaryColor: .primary)
+//        viewcontroller.uiManager.theme?()?.buttonTextColor = .white
+//        
+//    }
     
+    // MARK:- Show Image
+    
+    @IBAction private func changeImage(){
+        
+        self.showImage { (image) in
+            if image != nil {
+                self.imageProfile.image = image?.resizeImage(newWidth: 200)
+                self.changedImage = self.imageProfile.image
+            }
+        }
+    }
     
     
     //MARK:- Show Custom Toast
@@ -426,7 +473,7 @@ extension SignUpUserTableViewController : PostViewProtocol {
         }
         DispatchQueue.main.async {
             self.loader.isHidden = true
-            self.showToast(string: message)
+            UIApplication.shared.keyWindow?.makeToast(message)
         }
         
     }
@@ -477,46 +524,46 @@ extension SignUpUserTableViewController : PostViewProtocol {
 
 //MARK:- AKFViewControllerDelegate
 
-extension SignUpUserTableViewController : AKFViewControllerDelegate {
-    
-    func viewControllerDidCancel(_ viewController: (UIViewController & AKFViewController)!) {
-        viewController.dismiss(animated: true, completion: nil)
-    }
-    
-    func viewController(_ viewController: (UIViewController & AKFViewController)!, didFailWithError error: Error!) {
-        viewController.dismiss(animated: true, completion: nil)
-    }
-    
-    func viewController(_ viewController: (UIViewController & AKFViewController)!, didCompleteLoginWith accessToken: AKFAccessToken!, state: String!) {
-        func dismiss() {
-            viewController.dismiss(animated: true) { }
-            self.loader.isHidden = false
-            self.presenter?.post(api: .signUp, data: self.userInfo?.toData())
-        }
-        if accountKit != nil {
-            accountKit!.requestAccount({ (account, error) in
-                if let phoneNumber = account?.phoneNumber {
-                    var mobileString = phoneNumber.stringRepresentation()
-                    if mobileString.hasPrefix("+") {
-                        mobileString.removeFirst()
-                        if let mobileInt = Int(mobileString) {
-                            self.userInfo?.mobile = mobileInt
-                            self.userInfo?.country_code = "+\(account?.phoneNumber?.countryCode ?? "")"
-                        }
-                    }
-                }
-                dismiss()
-                return
-                //print("--->>",account?.phoneNumber.)
-               // print("--->>>",error)
-            })
-        }else {
-            dismiss()
-        }
-        
-    }
-    
-}
+//extension SignUpUserTableViewController : AKFViewControllerDelegate {
+//
+//    func viewControllerDidCancel(_ viewController: (UIViewController & AKFViewController)!) {
+//        viewController.dismiss(animated: true, completion: nil)
+//    }
+//
+//    func viewController(_ viewController: (UIViewController & AKFViewController)!, didFailWithError error: Error!) {
+//        viewController.dismiss(animated: true, completion: nil)
+//    }
+//
+//    func viewController(_ viewController: (UIViewController & AKFViewController)!, didCompleteLoginWith accessToken: AKFAccessToken!, state: String!) {
+//        func dismiss() {
+//            viewController.dismiss(animated: true) { }
+//            self.loader.isHidden = false
+////            self.presenter?.post(api: .signUp, data: self.userInfo?.toData())
+//        }
+//        if accountKit != nil {
+//            accountKit!.requestAccount({ (account, error) in
+//                if let phoneNumber = account?.phoneNumber {
+//                    var mobileString = phoneNumber.stringRepresentation()
+//                    if mobileString.hasPrefix("+") {
+//                        mobileString.removeFirst()
+//                        if let mobileInt = Int(mobileString) {
+//                            self.userInfo?.mobile = mobileInt
+//                            self.userInfo?.country_code = "+\(account?.phoneNumber?.countryCode ?? "")"
+//                        }
+//                    }
+//                }
+//                dismiss()
+//                return
+//                //print("--->>",account?.phoneNumber.)
+//               // print("--->>>",error)
+//            })
+//        }else {
+//            dismiss()
+//        }
+//
+//    }
+//
+//}
 
 // MARK:- UITextFieldDelegate
 

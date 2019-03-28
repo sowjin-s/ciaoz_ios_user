@@ -15,11 +15,12 @@ class PaymentViewController: UITableViewController {
     @IBOutlet private var buttonAddPayments : UIButton!
     
     private let tableCellId = "tableCellId"
-    
     private var headers = [Constants.string.paymentMethods] //Constants.string.yourCards
     private var totalCount = [Int:Int]()
    
     // Boolean for Card selection whether to show or not
+    
+    var paymentTypes: [String]? = []
     var isShowCash = true
     var isChangingPayment = false
     var paymentTypeStr = ""
@@ -66,6 +67,7 @@ extension PaymentViewController {
         self.navigationItem.title = Constants.string.payment.localize()
         self.setDesign()
         self.buttonAddPayments.addTarget(self, action: #selector(self.buttonPaymentAction), for: .touchUpInside)
+        self.presenter?.get(api: .paymentType, parameters: nil)
     }
     
     @IBAction private func backButtonAction() {
@@ -92,7 +94,7 @@ extension PaymentViewController {
         let isShowCashRow = (!User.main.isCashAllowed || !isShowCash) ? 0 : 1
         totalCount.updateValue(isShowCashRow, forKey: cashSection) // Cash rows
         totalCount.updateValue(0, forKey: cardSection) // Card Row
-        totalCount.updateValue(1, forKey: MolpaySection) // Molpay Row
+        totalCount.updateValue( (self.paymentTypes?.contains(PaymentType.MOLPAY.rawValue))! ? 1 : 0, forKey: MolpaySection) // Molpay Row
     }
     
     
@@ -257,6 +259,15 @@ extension PaymentViewController : PostViewProtocol {
             UIApplication.shared.keyWindow?.makeToast(message)
             self.presenter?.get(api: .getCards, parameters: nil)
         }
+    }
+    
+    func getPayments(api: Base, data: Payment?) {
+        self.loader.isHideInMainThread(true)
+        if data != nil {
+            self.paymentTypes = data?.payment_options
+            self.validatePaymentModes()
+        }
+        self.tableView.reloadInMainThread()
     }
 }
 

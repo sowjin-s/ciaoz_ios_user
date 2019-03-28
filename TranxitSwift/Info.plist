@@ -51,6 +51,16 @@
 				<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>https://app.ciaoz2u.com</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>https://itunes.apple.com/us/app/taxialaan-iraq/id1163307707?mt=8</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1.2</string>

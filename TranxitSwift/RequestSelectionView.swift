@@ -137,6 +137,7 @@ extension RequestSelectionView {
         self.backgroundColor = .clear
         self.isladydriverselected = false
         self.isWalletChecked = false
+        self.ViewLadyDriver.isHidden = (User.main.gender == Gender.Male.rawValue) ? true : false
         self.localize()
         self.setDesign()
         self.viewUseWallet.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.useWalletAction)))
@@ -150,10 +151,8 @@ extension RequestSelectionView {
 //        self.buttonChangePayment.isHidden = !(User.main.isCashAllowed && User.main.isCardAllowed) // Change button enabled only if both payment modes are enabled
         self.buttonChangePayment.addTarget(self, action: #selector(self.buttonChangePaymentAction), for: .touchUpInside)
         self.buttonCoupon.addTarget(self, action: #selector(self.buttonCouponAction), for: .touchUpInside)
-        let ladyDriverYes = UITapGestureRecognizer(target: self, action: #selector(self.tapLadyDriverYes(_:)))
-        self.viewLadyDriverYes.addGestureRecognizer(ladyDriverYes)
-        let ladyDriverNo = UITapGestureRecognizer(target: self, action: #selector(self.tapLadyDriverNo(_:)))
-        self.viewLadyDriverNo.addGestureRecognizer(ladyDriverNo)
+        self.viewLadyDriverYes.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapLadyDriverYes(_:))))
+        self.viewLadyDriverNo.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapLadyDriverNo(_:))))
         self.isPromocodeEnabled = false
         self.presenter?.get(api: .promocodes, parameters: nil)
     }

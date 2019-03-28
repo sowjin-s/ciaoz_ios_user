@@ -12,3 +12,9 @@ struct ErrorLogger : Decodable {
     
     var error : String?
 }
+
+struct successLog: JSONSerializable {
+    
+    var status: Int?
+    var message: String?
+}

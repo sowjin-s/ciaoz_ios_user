@@ -92,7 +92,12 @@ extension Interactor : PostInteractorOutputProtocol {
             
         case .referral:
             self.presenter?.sendreferral(api: api, data: response)
-            //self.presenter?.referal(api: api, data: response)
+            
+        case .verifyMobile:
+            self.presenter?.sendVerifiedMobile(api: api, data: response)
+            
+        case .paymentType:
+            self.presenter?.sendPayments(api: api, data: response)
             
         default :
             break
