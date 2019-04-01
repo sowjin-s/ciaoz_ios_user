@@ -55,6 +55,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
+<<<<<<< HEAD
 			<string></string>
 			<key>CFBundleURLSchemes</key>
 			<array/>
@@ -67,6 +68,12 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.ciaoz.user</string>
+=======
+			<string>https://app.ciaoz2u.com</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>https://itunes.apple.com/us/app/taxialaan-iraq/id1163307707?mt=8</string>
+>>>>>>> 3ef20e3f9c628c87ac112db8d45482f345ed1c03
 			</array>
 		</dict>
 	</array>

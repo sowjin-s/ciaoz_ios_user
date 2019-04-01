@@ -271,8 +271,7 @@ extension AppDelegate {
     
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         
-        Branch.getInstance().continue(userActivity)
-        
+        Branch.getInstance().continue(userActivity)        
         return true
     }
     
@@ -299,4 +298,5 @@ extension AppDelegate {
 //
 //
 //}
+
 

@@ -79,7 +79,6 @@ extension ReferralViewController {
         
     }
     
-  
 
     @IBAction private func buttonShareAction() {
         

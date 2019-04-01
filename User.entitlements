@@ -6,10 +6,14 @@
 	<string>development</string>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
+<<<<<<< HEAD
 		<string>applinks:app.ciaozuser.com</string>
 		<string>applinks:ciaozuser-alternate.app.link</string>
 		<string>applinks:ciaozuser.test-app.link</string>
 		<string>applinks:ciaozuser-alternate.test-app.link</string>
+=======
+		<string>applinks:app.ciaoz2u.com</string>
+>>>>>>> 3ef20e3f9c628c87ac112db8d45482f345ed1c03
 	</array>
 </dict>
 </plist>

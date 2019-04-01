@@ -173,6 +173,7 @@ extension SignUpUserTableViewController: UIWebViewDelegate {
     private func initialloads(){
         let val = UserDefaults.standard.value(forKey: "referralToken") as? String
         self.referralCodeText.text = val
+
         self.phoneNumber.text = mobile
         self.checkboxbtn.addTarget(self, action: #selector(self.checkboxAction), for: .touchUpInside)
         self.termsbtn.addTarget(self, action: #selector(self.termsAction), for: .touchUpInside)
@@ -319,7 +320,7 @@ extension SignUpUserTableViewController: UIWebViewDelegate {
             UIApplication.shared.keyWindow?.makeToast(ErrorMessage.list.enterMobileNumber.localize())
             return
         }
-        guard let password = passwordText.text, !password.isEmpty, password.count>=4 && password.count<=18 else {
+        guard let password = passwordText.text, !password.isEmpty else {
             UIApplication.shared.keyWindow?.makeToast(ErrorMessage.list.enterPassword.localize())
             return
         }
@@ -330,6 +331,7 @@ extension SignUpUserTableViewController: UIWebViewDelegate {
             }
             return
         }
+ 
         guard let confirmPwd = confirmPwdText.text, !confirmPwd.isEmpty else {
             UIApplication.shared.keyWindow?.makeToast(ErrorMessage.list.enterConfirmPassword.localize())
             return
@@ -358,8 +360,6 @@ extension SignUpUserTableViewController: UIWebViewDelegate {
             UIApplication.shared.keyWindow?.makeToast(ErrorMessage.list.enterReferralCode)
             return
         }*/
-        
-        
         
         let userInfo = Signup()
         userInfo.login_by = LoginType.manual.rawValue
