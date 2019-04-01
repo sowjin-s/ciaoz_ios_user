@@ -135,6 +135,13 @@ extension ChangeResetPasswordController {
             }
             return
         }
+        guard newPassword.count>=4 && newPassword.count<=18 else {
+            self.view.make(toast: Constants.string.enterValidpassword.localize()) {
+                self.textFieldNewPassword.becomeFirstResponder()
+            }
+            return
+        }
+        
         
         guard  let confirmPassword = self.textFieldNewPassword.text, !confirmPassword.isEmpty else {
             self.view.make(toast: Constants.string.enterConfirmPassword.localize()) {

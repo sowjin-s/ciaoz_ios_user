@@ -106,6 +106,7 @@
 		085F4DDF21367E5100648591 /* clanpro_medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 085F4DDC21367E4C00648591 /* clanpro_medium.otf */; };
 		085F4DE021367E5100648591 /* clanpro_narrnews.otf in Resources */ = {isa = PBXBuildFile; fileRef = 085F4DDD21367E4E00648591 /* clanpro_narrnews.otf */; };
 		085F4DE121367E5100648591 /* clanpro_book.otf in Resources */ = {isa = PBXBuildFile; fileRef = 085F4DDE21367E5000648591 /* clanpro_book.otf */; };
+		0863D9ED224A299800E6F6AA /* SignUpEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0863D9EC224A299800E6F6AA /* SignUpEntity.swift */; };
 		08641D8F20A1B51C00AA0D1F /* CircularTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08641D8E20A1B51C00AA0D1F /* CircularTransition.swift */; };
 		086545652162062100BF546D /* PassbookWalletTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086545642162062100BF546D /* PassbookWalletTableViewCell.swift */; };
 		0865456721620A3500BF546D /* PassbookWalletTransaction.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0865456621620A3500BF546D /* PassbookWalletTransaction.xib */; };
@@ -345,6 +346,7 @@
 		085F4DDC21367E4C00648591 /* clanpro_medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = clanpro_medium.otf; sourceTree = "<group>"; };
 		085F4DDD21367E4E00648591 /* clanpro_narrnews.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = clanpro_narrnews.otf; sourceTree = "<group>"; };
 		085F4DDE21367E5000648591 /* clanpro_book.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = clanpro_book.otf; sourceTree = "<group>"; };
+		0863D9EC224A299800E6F6AA /* SignUpEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEntity.swift; sourceTree = "<group>"; };
 		08641D8E20A1B51C00AA0D1F /* CircularTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularTransition.swift; sourceTree = "<group>"; };
 		086545642162062100BF546D /* PassbookWalletTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassbookWalletTableViewCell.swift; sourceTree = "<group>"; };
 		0865456621620A3500BF546D /* PassbookWalletTransaction.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PassbookWalletTransaction.xib; sourceTree = "<group>"; };
@@ -1569,6 +1571,7 @@
 				085161D4214FE30E00EF474E /* PromocodeEntity.swift */,
 				08D752D821551E9900250E92 /* LanguageEntity.swift */,
 				180240D321C39026008DD9F3 /* LocationEntity.swift */,
+				0863D9EC224A299800E6F6AA /* SignUpEntity.swift */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -1714,6 +1717,9 @@
 							com.apple.Push = {
 								enabled = 1;
 							};
+							com.apple.SafariKeychain = {
+								enabled = 1;
+							};
 							com.apple.Siri = {
 								enabled = 0;
 							};
@@ -1821,7 +1827,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-TranxitUser/Pods-TranxitUser-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-TranxitUser/Pods-TranxitUser-resources.sh",
 				"${PODS_ROOT}/GoogleAuthUtilities/Frameworks/frameworks/GoogleAuthUtilities.framework/Resources/GTMOAuth2ViewTouch.xib",
 				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
 				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
@@ -1836,7 +1842,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TranxitUser/Pods-TranxitUser-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TranxitUser/Pods-TranxitUser-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		36FE41E08BB6523989DD5A96 /* [CP] Embed Pods Frameworks */ = {
@@ -1845,9 +1851,10 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-TranxitUser/Pods-TranxitUser-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-TranxitUser/Pods-TranxitUser-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/Branch/Branch.framework",
 				"${BUILT_PRODUCTS_DIR}/Cache/Cache.framework",
 				"${BUILT_PRODUCTS_DIR}/CountryList/CountryList.framework",
 				"${BUILT_PRODUCTS_DIR}/CreditCardForm/CreditCardForm.framework",
@@ -1875,6 +1882,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Branch.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cache.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CountryList.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CreditCardForm.framework",
@@ -1900,7 +1908,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TranxitUser/Pods-TranxitUser-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TranxitUser/Pods-TranxitUser-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6A0977DD909CB4AE31517B11 /* [CP] Check Pods Manifest.lock */ = {
@@ -2010,6 +2018,7 @@
 				086BAF6420078E220087F15A /* ViewController.swift in Sources */,
 				8894801F1FECE2CA006AF5A9 /* Label.swift in Sources */,
 				082C441F20E7913A00A7C892 /* FloatyItem.swift in Sources */,
+				0863D9ED224A299800E6F6AA /* SignUpEntity.swift in Sources */,
 				082F77D120A5AA2200D6474B /* ServiceSelectionCollectionViewCell.swift in Sources */,
 				085161D5214FE30E00EF474E /* PromocodeEntity.swift in Sources */,
 				08A8823620C6DEBE0088BC5A /* KeyboardHelper.swift in Sources */,

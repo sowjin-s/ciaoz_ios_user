@@ -128,8 +128,8 @@ extension SocialLoginViewController {
         user.accessToken = accessToken
         user.device_id = UUID().uuidString
         user.device_token = deviceTokenString
-        user.device_type = .ios
-        user.login_by = loginBy
+        user.device_type = DeviceType.ios.rawValue
+        user.login_by = LoginType.manual.rawValue
         user.mobile = phoneNumber
         let apiType : Base = isfaceBook ? .facebookLogin : .googleLogin
         self.presenter?.post(api: apiType, data: user.toData())

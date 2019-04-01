@@ -34,4 +34,5 @@ struct Keys {
     let measurement = "measurement"
     let stripe = "stripe"
     let country_code = "country_code"
+    let gender = "gender"
 }

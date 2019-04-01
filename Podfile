@@ -32,6 +32,8 @@ target 'TranxitUser' do
     pod 'Stripe'
     pod 'CreditCardForm'
     pod 'CountryList'
+    
+    pod 'Branch'
 
 #  target 'UserTests' do
 #    inherit! :search_paths

@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "869F18980EBD2A7F1D7B94477AB84C98"
+               BuildableName = "CreditCardForm.framework"
                BlueprintName = "CreditCardForm"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "CreditCardForm.framework">
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F68744912F70E9F3D9693A036BFF07C7"
+               BuildableName = "CountryList.framework"
                BlueprintName = "CountryList"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "CountryList.framework">
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

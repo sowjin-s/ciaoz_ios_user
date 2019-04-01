@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1242B109DCC0F721F0AECE3B80A3738F"
+               BuildableName = "KWDrawerController.framework"
                BlueprintName = "KWDrawerController"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "KWDrawerController.framework">
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

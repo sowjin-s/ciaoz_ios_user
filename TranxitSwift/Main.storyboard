@@ -2251,23 +2251,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hmN-Vo-p6n">
-                                <rect key="frame" x="8" y="497" width="304" height="53"/>
-                                <color key="backgroundColor" red="0.56078431370000004" green="0.47058823529999999" blue="0.78039215689999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="53" id="POf-jb-Pcm"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="eej-Nx-QiE"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="14"/>
-                                <state key="normal" title="SHARE">
-                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="backgroundColorId">
-                                        <integer key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8P3-iq-YHa">
                                 <rect key="frame" x="190.5" y="120" width="121.5" height="21"/>
                                 <constraints>
@@ -2282,6 +2265,50 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eaB-5e-Jff">
+                                <rect key="frame" x="10" y="498" width="300" height="50"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="3bb-sI-wb9">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="50"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aYa-Gc-7L8">
+                                                <rect key="frame" x="0.0" y="0.0" width="145" height="50"/>
+                                                <color key="backgroundColor" red="0.56078431370000004" green="0.47058823529999999" blue="0.78039215689999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="14"/>
+                                                <state key="normal" title="COPY">
+                                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="backgroundColorId">
+                                                        <integer key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oRE-ak-Qya">
+                                                <rect key="frame" x="155" y="0.0" width="145" height="50"/>
+                                                <color key="backgroundColor" red="0.56078431370000004" green="0.47058823529999999" blue="0.78039215689999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="14"/>
+                                                <state key="normal" title="SHARE">
+                                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="backgroundColorId">
+                                                        <integer key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="1Cs-mB-DGt"/>
+                                    <constraint firstItem="3bb-sI-wb9" firstAttribute="leading" secondItem="eaB-5e-Jff" secondAttribute="leading" id="STg-Rx-Ctr"/>
+                                    <constraint firstItem="3bb-sI-wb9" firstAttribute="top" secondItem="eaB-5e-Jff" secondAttribute="top" id="d9n-23-Xmz"/>
+                                    <constraint firstAttribute="bottom" secondItem="3bb-sI-wb9" secondAttribute="bottom" id="he6-Dl-c8a"/>
+                                    <constraint firstAttribute="trailing" secondItem="3bb-sI-wb9" secondAttribute="trailing" id="irC-jd-mJ9"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -2289,19 +2316,21 @@
                             <constraint firstItem="Irr-Cz-ymT" firstAttribute="trailing" secondItem="8P3-iq-YHa" secondAttribute="trailing" constant="8" id="BVO-uI-EMk"/>
                             <constraint firstItem="74l-Qc-kpe" firstAttribute="leading" secondItem="Irr-Cz-ymT" secondAttribute="leading" constant="8" id="DiP-Qk-1EC"/>
                             <constraint firstItem="8P3-iq-YHa" firstAttribute="top" secondItem="74l-Qc-kpe" secondAttribute="bottom" constant="24" id="J0P-Br-K0w"/>
-                            <constraint firstItem="hmN-Vo-p6n" firstAttribute="leading" secondItem="Irr-Cz-ymT" secondAttribute="leading" constant="8" id="O1g-Hr-mW5"/>
                             <constraint firstItem="NfT-mk-TQI" firstAttribute="leading" secondItem="Irr-Cz-ymT" secondAttribute="leading" constant="8" id="OyZ-6c-MIl"/>
-                            <constraint firstItem="Irr-Cz-ymT" firstAttribute="bottom" secondItem="hmN-Vo-p6n" secondAttribute="bottom" constant="18" id="TLx-jH-BPM"/>
-                            <constraint firstItem="Irr-Cz-ymT" firstAttribute="trailing" secondItem="hmN-Vo-p6n" secondAttribute="trailing" constant="8" id="Zgm-Sx-tKe"/>
+                            <constraint firstItem="Irr-Cz-ymT" firstAttribute="bottom" secondItem="eaB-5e-Jff" secondAttribute="bottom" constant="20" id="RcA-D7-14z"/>
+                            <constraint firstItem="Irr-Cz-ymT" firstAttribute="trailing" secondItem="eaB-5e-Jff" secondAttribute="trailing" constant="10" id="b6N-qc-Ys0"/>
                             <constraint firstItem="74l-Qc-kpe" firstAttribute="top" secondItem="Irr-Cz-ymT" secondAttribute="top" constant="20" id="ifY-HQ-YCf"/>
                             <constraint firstItem="8P3-iq-YHa" firstAttribute="leading" secondItem="NfT-mk-TQI" secondAttribute="trailing" constant="8" id="jv5-Nn-NxQ"/>
+                            <constraint firstItem="eaB-5e-Jff" firstAttribute="leading" secondItem="Irr-Cz-ymT" secondAttribute="leading" constant="10" id="ke4-rj-ymQ"/>
                             <constraint firstItem="Irr-Cz-ymT" firstAttribute="trailing" secondItem="74l-Qc-kpe" secondAttribute="trailing" constant="8" id="mdz-Qm-ycS"/>
+                            <constraint firstItem="eaB-5e-Jff" firstAttribute="centerX" secondItem="Irr-Cz-ymT" secondAttribute="centerX" id="tO1-xF-aVQ"/>
                             <constraint firstItem="8P3-iq-YHa" firstAttribute="width" secondItem="74l-Qc-kpe" secondAttribute="width" multiplier="0.4" id="yah-pb-QqT"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Irr-Cz-ymT"/>
                     </view>
                     <connections>
-                        <outlet property="buttonShare" destination="hmN-Vo-p6n" id="Zmx-Q0-lmQ"/>
+                        <outlet property="buttonCopy" destination="aYa-Gc-7L8" id="AU8-uZ-QLf"/>
+                        <outlet property="buttonShare" destination="oRE-ak-Qya" id="eHT-9j-OGj"/>
                         <outlet property="referralCodeLabel" destination="8P3-iq-YHa" id="VTk-BD-JEd"/>
                         <outlet property="referraltextLabel" destination="NfT-mk-TQI" id="91y-K2-snz"/>
                         <outlet property="referraltitleLabel" destination="74l-Qc-kpe" id="3IA-IA-5S5"/>

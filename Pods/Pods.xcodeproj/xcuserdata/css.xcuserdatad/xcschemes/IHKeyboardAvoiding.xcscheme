@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7A2876118F66A5C51DE323A15F47B53D"
+               BuildableName = "IHKeyboardAvoiding.framework"
                BlueprintName = "IHKeyboardAvoiding"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "IHKeyboardAvoiding.framework">
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

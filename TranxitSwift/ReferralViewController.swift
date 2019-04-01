@@ -8,6 +8,7 @@
 //
 
 import UIKit
+import Branch
 
 class ReferralViewController: UIViewController {
 
@@ -15,7 +16,9 @@ class ReferralViewController: UIViewController {
     @IBOutlet private var referraltextLabel : UILabel!
     @IBOutlet private var referralCodeLabel : UILabel!
     @IBOutlet private weak var buttonShare : UIButton!
-
+    @IBOutlet private weak var buttonCopy : UIButton!
+    private var referalURL : String?
+    
     private lazy var loader  : UIView = {
         return createActivityIndicator(UIApplication.shared.keyWindow ?? self.view)
     }()
@@ -47,6 +50,7 @@ extension ReferralViewController {
     // MARK:- Initial Loads
     private func initialLoads() {
         
+       // self.createShareLink()
         self.navigationController?.isNavigationBarHidden = false
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(self.backButtonClick))
         self.navigationItem.title = Constants.string.referral.localize()
@@ -54,16 +58,29 @@ extension ReferralViewController {
         self.localize()
         self.getFromApi()
         self.buttonShare.addTarget(self, action: #selector(self.buttonShareAction), for: .touchUpInside)
+        self.buttonCopy.addTarget(self, action: #selector(self.copyAction), for: .touchUpInside)
+
 
     }
     
     // MARK:- Localize
     private func localize() {
         self.buttonShare.setTitle(Constants.string.share.uppercased().localize(), for: .normal)
+        self.buttonCopy.setTitle(Constants.string.copyText.uppercased().localize(), for: .normal)
         self.referraltitleLabel.text = Constants.string.referYourFriend.localize()
         self.referraltextLabel.text = Constants.string.sharereferral.localize()
     }
     
+    
+    @objc func copyAction(){
+    
+        UIPasteboard.general.string = referralCodeLabel.text
+        self.view.makeToast("COPIED")
+        
+    }
+    
+  
+
     @IBAction private func buttonShareAction() {
         
         guard let code = referralCodeLabel.text, !code.isEmpty else {
@@ -72,19 +89,47 @@ extension ReferralViewController {
             return
         }
         
-        // text to share
-        let text = "Use Referral Code \(self.referralCodeLabel.text ?? "")"
+     
+        let buo = BranchUniversalObject.init(canonicalIdentifier: "content/12345")
+        buo.title = "Ciaoz User"
+        //buo.contentDescription = "Your friend invited you to download"
+       // buo.imageUrl = "https://lorempixel.com/400/400"
+        //buo.publiclyIndex = true
+        //buo.locallyIndex = true
+        buo.contentMetadata.customMetadata["referral"] = self.referralCodeLabel.text
         
-        // set up activity view controller
-        let textToShare = [ text ]
-        let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
-        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+        let lp: BranchLinkProperties = BranchLinkProperties()
+        lp.channel = "facebook"
+        lp.feature = "sharing"
+       
+        buo.getShortUrl(with: lp) { (url, error) in
+            print(url ?? "")
+            let text = "Your friend invited you to download CiaozUser" + " " + url!
+            self.referalURL = text
+            
+            // set up activity view controller
+            let textToShare: [Any] = [self.referalURL!]
+            self.share(items: textToShare)
+        }
         
-        // exclude some activity types from the list (optional)
-        //activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop, UIActivity.ActivityType.postToFacebook]
+//        buo.showShareSheet(with: lp,andShareText: referalURL,from: self) { (activityType, completed) in
+//            if (completed) {
+//                print(String(format: "Completed sharing to %@", activityType!))
+//            } else {
+//                print("Link sharing cancelled")
+//            }
+//        }
         
-        // present the view controller
-        self.present(activityViewController, animated: true, completion: nil)
+        
+    }
+    
+    // MARK:- Share Items
+    
+    func share(items : [Any]) {
+        
+        let activityController = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        self.present(activityController, animated: true, completion: nil)
+        
     }
     
     

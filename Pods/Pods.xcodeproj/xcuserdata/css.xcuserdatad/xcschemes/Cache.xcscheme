@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CCDE4F4A0029CD419EC12F69669401CB"
+               BuildableName = "Cache.framework"
                BlueprintName = "Cache"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "Cache.framework">
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

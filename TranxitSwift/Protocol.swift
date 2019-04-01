@@ -147,6 +147,9 @@ protocol PostPresenterOutputProtocol : class {
     func sendWalletMolpay(api : Base, data: Data)
     func sendWallet(api : Base, data: Data)
     func sendreferral(api : Base, data: Data)
+    func sendVerifiedMobile(api : Base, data: Data)
+    func sendPayments(api: Base, data: Data)
+
 }
 
 
@@ -174,6 +177,9 @@ protocol PostViewProtocol : class {
     func getWalletMolpay(api : Base, data : MolpayEntity)
     func getWallet(api : Base, data : walletModel)
     func getReferral(api: Base, data: referralModel)
+    func getVerifiedMobile(api: Base, data: successLog?)
+    func getPayments(api: Base, data: Payment?)
+
 }
 
 
@@ -208,7 +214,8 @@ extension PostViewProtocol {
     func getWalletMolpay(api : Base, data : MolpayEntity){return}
     func getWallet(api : Base, data : walletModel){return}
     func getReferral(api: Base, data: referralModel) { return }
-
+    func getVerifiedMobile(api: Base, data: successLog?) { return }
+    func getPayments(api: Base, data: Payment?) { return }
 
 }
 

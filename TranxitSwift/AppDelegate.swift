@@ -1,5 +1,6 @@
 
 
+
 //
 //  AppDelegate.swift
 //  Centros_Camprios
@@ -20,6 +21,7 @@ import Fabric
 import Firebase
 import Google
 import Stripe
+import Branch
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -27,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     private var reachability : Reachability?
     static let shared = AppDelegate()
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
        
         FirebaseApp.configure()
@@ -45,6 +47,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          }
          self.checkUpdates()
         FirebaseHelper.shared.initializeDB()
+        
+        
+        // if you are using the TEST key
+        //Branch.setUseTestBranchKey(true)
+        // listener for Branch Deep Link data
+        Branch.getInstance().initSession(launchOptions: launchOptions) { (params, error) in
+            // do stuff with deep link data (nav to page, display content, etc)
+            let code = params?["referral"] as? String ?? ""
+            UserDefaults.standard.set(code , forKey: "referralToken")
+            UserDefaults.standard.synchronize()
+        }
          return true
     }
     
@@ -168,6 +181,10 @@ extension AppDelegate {
     
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        
+        
+        Branch.getInstance().application(app, open: url, options: options)
+
         return GIDSignIn.sharedInstance().handle(url as URL?,
                                                  sourceApplication: options[.sourceApplication] as? String,
                                                  annotation: options[.annotation])
@@ -250,4 +267,36 @@ extension AppDelegate {
     
 }
 
+extension AppDelegate {
+    
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        
+        Branch.getInstance().continue(userActivity)
+        
+        return true
+    }
+    
+}
+
+//extension AppDelegate {
+//
+//
+////    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+////        Branch.getInstance().application(app, open: url, options: options)
+////        return true
+////    }
+//
+////    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+////        // handler for Universal Links
+////        Branch.getInstance().continue(userActivity)
+////        return true
+////    }
+//
+//    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+//        // handler for Push Notifications
+//        //Branch.getInstance().handlePushNotification(userInfo)
+//    }
+//
+//
+//}
 

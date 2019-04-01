@@ -54,10 +54,10 @@ struct Constants {
     let schedule = "Schedule"
     let drivers = "Drivers"
     let country = "Country"
-    let icnumber = "IC Number"
+    let icnumber = "NRIC No/Passport No"
     let emergencycontact = "Emergency Contact"
     let timeZone = "Time Zone"
-    let referalCode = "Referral Code"
+    let referalCode = "Double your reward when using invitation code"
     let business = "Business"
     let emailPlaceHolder = "name@example.com"
     let email = "Email"
@@ -66,6 +66,7 @@ struct Constants {
     let welcomeBackPassword = "Welcome back, sign in to continue"
     let enterPassword = "Enter Password"
     let enterNewpassword = "Enter New Password"
+    let enterValidpassword = "Password must be minimum 4 characters ,maximum 18 characters"
     let enterConfirmPassword = "Enter Confirm Password"
     let password = "Password"
     let newPassword = "New Password"
@@ -84,6 +85,8 @@ struct Constants {
     let referral = "Referral"
     let help = "Help"
     let share = "Share"
+    let copyText = "Copy Referral"
+    let inviteFriend = "Invite your friend now!"
     let inviteReferral = "Invite Referral"
     let faqSupport = "FAQ Support"
     let termsAndConditions = "Terms and Conditions"
@@ -382,4 +385,10 @@ enum ServiceCalculator : String, Codable {
 enum Vibration : UInt {
     case weak = 1519
     case threeBooms = 1107
+}
+
+enum Gender : String, Codable {
+    
+    case Male = "MALE"
+    case Female = "FEMALE"
 }

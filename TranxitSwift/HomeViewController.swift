@@ -187,43 +187,45 @@
 extension HomeViewController {
    
     private func initialLoads() {
-            
-            self.addMapView()
-            self.getFavouriteLocations()
-            self.viewSideMenu.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sideMenuAction)))
-            self.navigationController?.isNavigationBarHidden = true
-            self.viewFavouriteDestination.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.favouriteLocationAction(sender:))))
-            self.viewFavouriteSource.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.favouriteLocationAction(sender:))))
-            [self.viewSourceLocation, self.viewDestinationLocation].forEach({ $0.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.locationTapAction(sender:))))})
-            self.currentLocation.bind(listener: { (locationCoordinate) in
-                // TODO:- Handle Current Location
-                if locationCoordinate != nil {
-                    self.mapViewHelper?.moveTo(location: locationCoordinate!, with: self.viewMapOuter.center)
-                }
-            })
-            self.viewCurrentLocation.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.getCurrentLocation)))
-            self.sourceLocationDetail?.bind(listener: { (locationDetail) in
-//                if locationDetail == nil {
-//                    self.isSourceFavourited = false
-//                }
-                DispatchQueue.main.async {
-                    self.isSourceFavourited = false // reset favourite location on change
-                    self.textFieldSourceLocation.text = locationDetail?.address
-                }
-            })
-            self.viewDestinationLocation.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
-            self.checkForProviderStatus()
-            self.buttonSOS.isHidden = true
-            self.buttonSOS.addTarget(self, action: #selector(self.buttonSOSAction), for: .touchUpInside)
-            self.setDesign()
-            NotificationCenter.default.addObserver(self, selector: #selector(self.observer(notification:)), name: .providers, object: nil)
-            NotificationCenter.default.addObserver(self, selector: #selector(self.networkChanged(notification:)), name: NSNotification.Name.reachabilityChanged, object: nil)
+
+        print(UserDefaults.standard.value(forKey: "referralToken") as? String)
         
-//            NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShowRateView(info:)), name: .UIKeyboardWillShow, object: nil)
-//            NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHideRateView(info:)), name: .UIKeyboardWillHide, object: nil)      }
-            self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-            self.presenter?.get(api: .getProfile, parameters: nil)
-        }
+        self.addMapView()
+        self.getFavouriteLocations()
+        self.viewSideMenu.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.sideMenuAction)))
+        self.navigationController?.isNavigationBarHidden = true
+        self.viewFavouriteDestination.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.favouriteLocationAction(sender:))))
+        self.viewFavouriteSource.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.favouriteLocationAction(sender:))))
+        [self.viewSourceLocation, self.viewDestinationLocation].forEach({ $0.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.locationTapAction(sender:))))})
+        self.currentLocation.bind(listener: { (locationCoordinate) in
+            // TODO:- Handle Current Location
+            if locationCoordinate != nil {
+                self.mapViewHelper?.moveTo(location: locationCoordinate!, with: self.viewMapOuter.center)
+            }
+        })
+        self.viewCurrentLocation.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.getCurrentLocation)))
+        self.sourceLocationDetail?.bind(listener: { (locationDetail) in
+            //                if locationDetail == nil {
+            //                    self.isSourceFavourited = false
+            //                }
+            DispatchQueue.main.async {
+                self.isSourceFavourited = false // reset favourite location on change
+                self.textFieldSourceLocation.text = locationDetail?.address
+            }
+        })
+        self.viewDestinationLocation.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
+        self.checkForProviderStatus()
+        self.buttonSOS.isHidden = true
+        self.buttonSOS.addTarget(self, action: #selector(self.buttonSOSAction), for: .touchUpInside)
+        self.setDesign()
+        NotificationCenter.default.addObserver(self, selector: #selector(self.observer(notification:)), name: .providers, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.networkChanged(notification:)), name: NSNotification.Name.reachabilityChanged, object: nil)
+        
+        //            NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShowRateView(info:)), name: .UIKeyboardWillShow, object: nil)
+        //            NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHideRateView(info:)), name: .UIKeyboardWillHide, object: nil)      }
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        self.presenter?.get(api: .getProfile, parameters: nil)
+    }
     
     // MARK:- View Will appear
     

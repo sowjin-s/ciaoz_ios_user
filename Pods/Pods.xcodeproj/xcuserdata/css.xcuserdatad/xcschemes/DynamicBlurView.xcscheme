@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "259FA497B621B18FB2921DA18AA46AC2"
+               BuildableName = "DynamicBlurView.framework"
                BlueprintName = "DynamicBlurView"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "DynamicBlurView.framework">
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

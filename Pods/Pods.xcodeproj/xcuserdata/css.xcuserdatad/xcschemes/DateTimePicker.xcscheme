@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "ED9B0972B59832BCC0975ABB97127BEE"
+               BuildableName = "DateTimePicker.framework"
                BlueprintName = "DateTimePicker"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "DateTimePicker.framework">
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
