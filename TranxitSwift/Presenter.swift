@@ -146,6 +146,10 @@ extension Presenter : PostPresenterOutputProtocol {
         controller?.getPayments(api: api, data: PresenterProcessor.shared.payments(data: data)!)
 
     }
+
+    func sendSOS(api: Base,data: Data){
+        controller?.getSOS(api: api, data: PresenterProcessor.shared.sosDetails(data: data))
+    }
     
 }
 

@@ -119,7 +119,7 @@ public class CountryList: UIViewController, UITableViewDelegate, UITableViewData
         return cell
     }
     
-    func handleCancel() {
+    @objc func handleCancel() {
         self.dismiss(animated: true, completion: nil)
     }
 }

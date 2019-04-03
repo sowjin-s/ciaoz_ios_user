@@ -129,6 +129,7 @@
         var rideNowView : RideNowView?
         var floatyButton : Floaty?
         var reasonView : ReasonView?
+        var sosView: SOSView?
         
         lazy var loader  : UIView = {
             return createActivityIndicator(self.view)
@@ -1023,6 +1024,14 @@ extension HomeViewController {
         func getProfile(api: Base, data: Profile?) {
             Common.storeUserData(from: data)
             storeInUserDefaults()
+        }
+        
+        func getSOS(api: Base, data: sosModel?) {
+            self.loader.isHideInMainThread(true)
+            if data != nil {
+                self.showSosView(with: data!)
+                
+            }
         }
         
     }

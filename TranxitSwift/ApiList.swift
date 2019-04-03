@@ -83,6 +83,7 @@ enum Base : String{
     case referral = "/api/user/referral_code"
     case verifyMobile = "/check_mobile"
     case paymentType = "/payment_options"
+    case sos = "/api/user/user_sos"
     
     init(fromRawValue: String){
         self = Base(rawValue: fromRawValue) ?? .signUp

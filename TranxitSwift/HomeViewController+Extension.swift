@@ -407,6 +407,54 @@ extension HomeViewController {
         }
     }
     
+    // MARK:- Show SOS View
+    
+    func showSosView(with detail: sosModel) {
+        
+        guard self.sosView == nil else {
+            print("return")
+            return
+        }
+        if let sos = Bundle.main.loadNibNamed(XIB.Names.SOSView, owner: self, options: [:])?.first as? SOSView {
+            NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShowRateView(info:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHideRateView(info:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+            self.viewAddressOuter.isHidden = true
+            self.viewLocationButtons.isHidden = true
+            //sos.frame = CGRect(origin: CGPoint(x: 0, y: self.view.frame.height-sos.frame.height), size: CGSize(width: self.view.frame.width, height: sos.frame.height))
+            sos.frame = self.view.bounds
+            sos.set(value: detail)
+            sosView = sos
+            self.view.addSubview(sosView!)
+            sosView?.show(with: .bottom, completion: nil)
+        }
+        sosView?.set(value:detail)
+        sosView?.onClickCall = { (sos) in
+            
+            showAlert(message: Constants.string.wouldyouLiketoMakeaSOSCall.localize(), okHandler: {
+                self.removeSOSView()
+                Common.call(to: "\(sos ?? "911")")
+                
+            }, cancelHandler: {
+                
+            }, fromView: self)
+        }
+        
+        sosView?.onClickCancel = {() in
+            
+            self.removeSOSView()
+        }
+    }
+    
+    // MARK:- Remove SOS View
+    
+    func removeSOSView() {
+
+        self.sosView?.dismissView(onCompletion: {
+            self.sosView = nil
+            riderStatus = .pickedup
+        })
+    }
+    
     
     // MARK:- Remove RideStatus View
     
@@ -783,12 +831,9 @@ extension HomeViewController {
     
     @IBAction func buttonSOSAction() {
         
-        showAlert(message: Constants.string.wouldyouLiketoMakeaSOSCall.localize(), okHandler: {
-            Common.call(to: "\(User.main.sos ?? "911")")
-        }, cancelHandler: {
-            
-        }, fromView: self)
-        
+        let req = sosModel()
+        req.user_request_id = self.currentRequestId
+        self.presenter?.post(api: .sos, data: req.toData())
     }
     
     // MARK:- Provider Location Marker

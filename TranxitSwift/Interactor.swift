@@ -99,6 +99,9 @@ extension Interactor : PostInteractorOutputProtocol {
         case .paymentType:
             self.presenter?.sendPayments(api: api, data: response)
             
+        case .sos:
+            self.presenter?.sendSOS(api: api, data: response)
+            
         default :
             break
             

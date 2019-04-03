@@ -148,3 +148,25 @@ class newRequest: JSONSerializable {
     var promocode_id : Int?
 
 }
+
+class sosModel: JSONSerializable {
+  
+    var user_request_id: Int?
+    var sos: SOS?
+    
+}
+
+class SOS: JSONSerializable{
+
+    var name: String?
+    var ic_number: String?
+    var emergency_contact: String?
+    var email: String?
+    var driver_name: String?
+    var driver_contact: String?
+    var driver_vehicle: String?
+//    var customer_service: String?
+//    var safety_authority: String?
+
+    
+}

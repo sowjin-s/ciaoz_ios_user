@@ -69,7 +69,8 @@ struct XIB {
     let CouponView = "CouponView"
     let PassbookWalletTransaction = "PassbookWalletTransaction"
     let TermsConditions = "termscondition"
-
+    let SOSView = "SOSView"
+    
 }
 
 

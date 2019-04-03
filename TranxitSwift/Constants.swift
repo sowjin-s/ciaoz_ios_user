@@ -96,6 +96,7 @@ struct Constants {
     let first = "First Name"
     let last = "Last Name"
     let phoneNumber = "Phone Number"
+    let contactNo = "Contact no"
     let tripType = "Trip Trip"
     let personal = "Personal"
     let save = "save"
@@ -246,8 +247,12 @@ struct Constants {
     let DISTANCEHOUR = "DISTANCEHOUR"
     let referralCodeError = "You don't have referral code to share"
     let sharereferral = "Share your referral Code"
-    let referralCode = "Referral Code"
+    let referralCode = "Double your reward when using Invitation code"
     let referYourFriend = "Refer your friends to drive!"
+    let SOSAlert = "SOS Alert"
+    let familycontact = "Family Contact"
+    let customerService = "Customer Service"
+    let safetyAuth = "Safety Authority"
 
 
 }

@@ -124,6 +124,11 @@ class PresenterProcessor {
         return data.getDecodedObject(from: Payment.self)
     }
     
+    //MARK:- sos
+    func sosDetails(data: Data)-> sosModel?{
+        return data.getDecodedObject(from: sosModel.self)
+    }
+    
 }
 
 

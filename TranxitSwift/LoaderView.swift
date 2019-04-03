@@ -31,8 +31,7 @@ class LoaderView: UIView {
         super.awakeFromNib()
         self.initialLoads()
         self.setDesign()
-    }
-   
+    }   
 }
 
 extension LoaderView {

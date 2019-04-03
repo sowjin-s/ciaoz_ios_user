@@ -149,6 +149,7 @@ protocol PostPresenterOutputProtocol : class {
     func sendreferral(api : Base, data: Data)
     func sendVerifiedMobile(api : Base, data: Data)
     func sendPayments(api: Base, data: Data)
+    func sendSOS(api: Base, data: Data)
 
 }
 
@@ -179,6 +180,7 @@ protocol PostViewProtocol : class {
     func getReferral(api: Base, data: referralModel)
     func getVerifiedMobile(api: Base, data: successLog?)
     func getPayments(api: Base, data: Payment?)
+    func getSOS(api: Base, data: sosModel?)
 
 }
 
@@ -216,11 +218,12 @@ extension PostViewProtocol {
     func getReferral(api: Base, data: referralModel) { return }
     func getVerifiedMobile(api: Base, data: successLog?) { return }
     func getPayments(api: Base, data: Payment?) { return }
+    func getSOS(api: Base, data: sosModel?) { return }
 
 }
 
 
 
-protocol RerouteDelegate: class {
-    func doReroute()
-}
+//protocol RerouteDelegate: class {
+//    func doReroute()
+//}

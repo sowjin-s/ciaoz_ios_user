@@ -135,7 +135,7 @@ extension ChangeResetPasswordController {
             }
             return
         }
-        guard newPassword.count>=4 && newPassword.count<=18 else {
+        guard newPassword.count>=6 && newPassword.count<=18 else {
             self.view.make(toast: Constants.string.enterValidpassword.localize()) {
                 self.textFieldNewPassword.becomeFirstResponder()
             }

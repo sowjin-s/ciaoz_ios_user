@@ -36,6 +36,8 @@
 		08147B81208A23F600C5CFD3 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08147B80208A23F600C5CFD3 /* Bundle.swift */; };
 		081548FC20A1DEA2004D0F7D /* heart.json in Resources */ = {isa = PBXBuildFile; fileRef = 081548FB20A1DEA2004D0F7D /* heart.json */; };
 		081548FE20A1DF66004D0F7D /* LottieHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081548FD20A1DF66004D0F7D /* LottieHelper.swift */; };
+		081D085622537100002D3982 /* SOSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081D085522537100002D3982 /* SOSView.swift */; };
+		081D085822539404002D3982 /* SOSView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081D085722539404002D3982 /* SOSView.xib */; };
 		081E9CF520BFCC0E004C6884 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081E9CF420BFCC0E004C6884 /* Service.swift */; };
 		081E9CF920BFFB6C004C6884 /* EstimateFareRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081E9CF820BFFB6C004C6884 /* EstimateFareRequest.swift */; };
 		081E9CFB20BFFB88004C6884 /* EstimateFare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081E9CFA20BFFB88004C6884 /* EstimateFare.swift */; };
@@ -274,6 +276,8 @@
 		08147B80208A23F600C5CFD3 /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		081548FB20A1DEA2004D0F7D /* heart.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = heart.json; sourceTree = "<group>"; };
 		081548FD20A1DF66004D0F7D /* LottieHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieHelper.swift; sourceTree = "<group>"; };
+		081D085522537100002D3982 /* SOSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SOSView.swift; sourceTree = "<group>"; };
+		081D085722539404002D3982 /* SOSView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SOSView.xib; sourceTree = "<group>"; };
 		081E9CF420BFCC0E004C6884 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		081E9CF820BFFB6C004C6884 /* EstimateFareRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EstimateFareRequest.swift; sourceTree = "<group>"; };
 		081E9CFA20BFFB88004C6884 /* EstimateFare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimateFare.swift; sourceTree = "<group>"; };
@@ -587,6 +591,15 @@
 			name = Lottie;
 			sourceTree = "<group>";
 		};
+		081D0854225370EC002D3982 /* SOS */ = {
+			isa = PBXGroup;
+			children = (
+				081D085722539404002D3982 /* SOSView.xib */,
+				081D085522537100002D3982 /* SOSView.swift */,
+			);
+			name = SOS;
+			sourceTree = "<group>";
+		};
 		0823428620AD772E0055DDF8 /* LoaderView */ = {
 			isa = PBXGroup;
 			children = (
@@ -599,6 +612,7 @@
 		0826C13420B0119E0005D0D8 /* HomePage */ = {
 			isa = PBXGroup;
 			children = (
+				081D0854225370EC002D3982 /* SOS */,
 				08A50C402109AB5300CCDDA8 /* CancelReason */,
 				083617B920B6C71F009C9658 /* RatingView */,
 				083617B420B6AE19009C9658 /* Invoice */,
@@ -1799,6 +1813,7 @@
 				082F77D220A5AA2200D6474B /* ServiceSelectionCollectionViewCell.xib in Resources */,
 				083617CD20B714CE009C9658 /* YourTripCell.xib in Resources */,
 				085F4DDF21367E5100648591 /* clanpro_medium.otf in Resources */,
+				081D085822539404002D3982 /* SOSView.xib in Resources */,
 				08A39DA020B5BB8100314935 /* RideStatusView.xib in Resources */,
 				081548FC20A1DEA2004D0F7D /* heart.json in Resources */,
 				085F4DE121367E5100648591 /* clanpro_book.otf in Resources */,
@@ -2024,6 +2039,7 @@
 				08A8823620C6DEBE0088BC5A /* KeyboardHelper.swift in Sources */,
 				0811B17A20E7B2AD00B78323 /* ChatCell.swift in Sources */,
 				083A59B120A4351D00D64574 /* LocationHeaderTableViewCell.swift in Sources */,
+				081D085622537100002D3982 /* SOSView.swift in Sources */,
 				086BAF5720076E0D0087F15A /* MakeJson.swift in Sources */,
 				08A50C472109B78A00CCDDA8 /* CancelListTableViewCell.swift in Sources */,
 				086606E62005144400A79566 /* ImageView.swift in Sources */,

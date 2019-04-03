@@ -325,7 +325,7 @@ extension SignUpUserTableViewController: UIWebViewDelegate {
             return
         }
         
-        guard password.count>=4 && password.count<=18 else {
+        guard password.count>=6 && password.count<=18 else {
             self.view.make(toast: Constants.string.enterValidpassword.localize()) {
                 self.passwordText.becomeFirstResponder()
             }
