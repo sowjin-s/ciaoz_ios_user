@@ -66,7 +66,7 @@ struct Constants {
     let welcomeBackPassword = "Welcome back, sign in to continue"
     let enterPassword = "Enter Password"
     let enterNewpassword = "Enter New Password"
-    let enterValidpassword = "Password must be minimum 4 characters ,maximum 18 characters"
+    let enterValidpassword = "Password must be minimum 6 characters ,maximum 18 characters"
     let enterConfirmPassword = "Enter Confirm Password"
     let password = "Password"
     let newPassword = "New Password"

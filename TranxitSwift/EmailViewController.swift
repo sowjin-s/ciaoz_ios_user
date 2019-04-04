@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AccountKit
 
 class EmailViewController: UIViewController {
     
@@ -16,7 +17,14 @@ class EmailViewController: UIViewController {
     @IBOutlet private var scrollView : UIScrollView!
     @IBOutlet private var viewScroll : UIView!
     
-    var isHideLeftBarButton = false
+   
+    private lazy var  loader = {
+        return createActivityIndicator(UIApplication.shared.keyWindow ?? self.view)
+    }()
+    
+    private var mobile: String?
+    private var countryCode: String?
+     var isHideLeftBarButton = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -130,12 +138,15 @@ extension EmailViewController {
     
     @IBAction private func createAccountAction(){
         
-        self.push(id: Storyboard.Ids.SignUpTableViewController, animation: true)
-        
+        self.showAccountKit { (ph,code) in
+            self.mobile = ph
+            self.countryCode = code
+            let verify = Request()
+            verify.mobile = ph
+            verify.type = "user"
+            self.presenter?.post(api: .verifyMobile, data: verify.toData())
+        }
     }
-    
-    
-    
 }
 
 extension EmailViewController : UITextFieldDelegate {
@@ -159,3 +170,25 @@ extension EmailViewController : UITextFieldDelegate {
     
 }
 
+extension EmailViewController : PostViewProtocol {
+    
+    func onError(api: Base, message: String, statusCode code: Int) {
+        
+    }
+    
+    func getVerifiedMobile(api: Base, data: successLog?) {
+        self.loader.isHidden = true
+        if data?.status != 0 {
+            DispatchQueue.main.async {
+                self.view.make(toast: "Mobile number Already Exists")
+            }
+        } else {
+            self.view.make(toast: "Mobile number Verified")
+            let signup = Router.user.instantiateViewController(withIdentifier: Storyboard.Ids.SignUpTableViewController) as? SignUpUserTableViewController
+            signup?.mobile = mobile
+            signup?.code = countryCode
+            self.navigationController?.pushViewController(signup!, animated: true)
+        }
+    }
+    
+}

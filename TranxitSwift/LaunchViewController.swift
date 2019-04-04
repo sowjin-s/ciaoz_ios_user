@@ -24,9 +24,7 @@ class LaunchViewController: UIViewController {
     
     private var mobile: String?
     private var countryCode: String?
-    private var accountKit : AKFAccountKit?
-   
-   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initialLoads()
@@ -96,8 +94,14 @@ extension LaunchViewController {
     
     @IBAction private func buttonSignUpAction() {
         
-        //self.push(id: Storyboard.Ids.SignUpTableViewController, animation: true)
-        self.setupAccountKit()
+        self.showAccountKit { (ph,code) in
+            self.mobile = ph
+            self.countryCode = code
+            let verify = Request()
+            verify.mobile = ph
+            verify.type = "user"
+            self.presenter?.post(api: .verifyMobile, data: verify.toData())
+        }
     }
     
     @IBAction private func buttonSocialLoginAction(){
@@ -105,27 +109,6 @@ extension LaunchViewController {
         self.push(id: Storyboard.Ids.SocialLoginViewController, animation: true)
         
     }
-    
-    
-    private func setupAccountKit(){
-        
-        self.accountKit = AKFAccountKit(responseType: .accessToken)
-        let akPhone = AKFPhoneNumber(countryCode: "+60", phoneNumber: "")
-        let accountKitVC = accountKit?.viewControllerForPhoneLogin(with: akPhone, state: UUID().uuidString)
-        accountKitVC!.enableSendToFacebook = true
-        self.prepareLogin(viewcontroller: accountKitVC!)
-        self.present(accountKitVC!, animated: true, completion: nil)
-    }
-    
-    private func prepareLogin(viewcontroller : UIViewController&AKFViewController) {
-        
-        viewcontroller.delegate = self
-        viewcontroller.uiManager = AKFSkinManager(skinType: .contemporary, primaryColor: .primary)
-        viewcontroller.uiManager.theme?()?.buttonTextColor = .white
-        
-    }
-    
-  
 }
 
 extension LaunchViewController : PostViewProtocol {
@@ -161,49 +144,3 @@ extension LaunchViewController : UIScrollViewDelegate {
     }
 }
 
-//MARK:- AKFViewControllerDelegate
-
-extension LaunchViewController : AKFViewControllerDelegate {
-    
-    func viewControllerDidCancel(_ viewController: (UIViewController & AKFViewController)!) {
-        viewController.dismiss(animated: true, completion: nil)
-    }
-    
-    func viewController(_ viewController: (UIViewController & AKFViewController)!, didFailWithError error: Error!) {
-        viewController.dismiss(animated: true, completion: nil)
-    }
-    
-    func viewController(_ viewController: (UIViewController & AKFViewController)!, didCompleteLoginWith accessToken: AKFAccessToken!, state: String!) {
-        func dismiss() {
-            viewController.dismiss(animated: true) { }
-            self.loader.isHidden = false
-            //self.presenter?.post(api: .signUp, data: self.userInfo?.toData())
-        }
-        if accountKit != nil {
-            accountKit!.requestAccount({ (account, error) in
-                if let phoneNumber = account?.phoneNumber?.phoneNumber {
-                    //var mobileString = phoneNumber.stringRepresentation()
-//                    if mobileString.hasPrefix("+") {
-//                        mobileString.removeFirst()
-                    
-                        self.mobile = phoneNumber
-                        self.countryCode = "+\(account?.phoneNumber?.countryCode ?? "")"
-                       // if let mobileInt = Int(mobileString) {
-                            let verify = Request()
-                            verify.mobile = phoneNumber
-                            verify.type = "user"
-                            self.presenter?.post(api: .verifyMobile, data: verify.toData())
-                            //self.userInfo?.country_code = "+\(account?.phoneNumber?.countryCode ?? "")"
-                        //}
-                   // }
-                }
-                dismiss()
-                return
-            })
-        }else {
-            dismiss()
-        }
-        
-    }
-    
-}

@@ -74,9 +74,7 @@ class SignUpUserTableViewController: UITableViewController {
     var mobile: String?
     var code: String?
     private var changedImage : UIImage?
-    //private var userInfo : Signup?
     private var emergency_country_code: String? = ""
-    private var accountKit : AKFAccountKit?
     
     private lazy var  loader = {
         return createActivityIndicator(UIApplication.shared.keyWindow ?? self.view)
@@ -173,7 +171,7 @@ extension SignUpUserTableViewController: UIWebViewDelegate {
     private func initialloads(){
         let val = UserDefaults.standard.value(forKey: "referralToken") as? String
         self.referralCodeText.text = val
-
+        self.setupAccountkit()
         self.phoneNumber.text = mobile
         self.checkboxbtn.addTarget(self, action: #selector(self.checkboxAction), for: .touchUpInside)
         self.termsbtn.addTarget(self, action: #selector(self.termsAction), for: .touchUpInside)
@@ -417,6 +415,16 @@ extension SignUpUserTableViewController: UIWebViewDelegate {
       
     }
     
+    func setupAccountkit() {
+        
+//        self.accountKit = AKFAccountKit(responseType: .accessToken)
+//        let akPhone = AKFPhoneNumber(countryCode: "in", phoneNumber: "")
+//        let accountKitVC = accountKit?.viewControllerForPhoneLogin(with: akPhone, state: UUID().uuidString)
+//        accountKitVC!.enableSendToFacebook = true
+//        self.prepareLogin(viewcontroller: accountKitVC!)
+//        self.present(accountKitVC!, animated: true, completion: nil)
+    }
+    
     private func validateEmail()->String? {
         guard let email = emailtext.text?.trimmingCharacters(in: .whitespaces), !email.isEmpty else {
             self.showToast(string: ErrorMessage.list.enterEmail.localize())
@@ -433,11 +441,11 @@ extension SignUpUserTableViewController: UIWebViewDelegate {
     
 
 //    private func prepareLogin(viewcontroller : UIViewController&AKFViewController) {
-//        
+//
 //        viewcontroller.delegate = self
 //        viewcontroller.uiManager = AKFSkinManager(skinType: .contemporary, primaryColor: .primary)
 //        viewcontroller.uiManager.theme?()?.buttonTextColor = .white
-//        
+//
 //    }
     
     // MARK:- Show Image
@@ -508,34 +516,24 @@ extension SignUpUserTableViewController : PostViewProtocol {
             return
             
         }
-        /*else if api == .getProfile {
-            Common.storeUserData(from: data)
-            storeInUserDefaults()
-            self.navigationController?.present(id: Storyboard.Ids.DrawerController, animation: true)
-        } else {
-            loader.isHideInMainThread(true)
-        } */
+
     }
-    
-   /* func getOath(api: Base, data: LoginRequest?) {
-     
-        loader.isHideInMainThread(true)
-        if api == .login, let accessToken = data?.access_token {
-            
-            User.main.accessToken = accessToken
-            storeInUserDefaults()
-            self.presenter?.get(api: .getProfile, parameters: nil)
-            //let drawer = Router.main.instantiateViewController(withIdentifier: Storyboard.Ids.DrawerController)
-//            let window = UIWindow(frame: UIScreen.main.bounds)
-//            UIApplication.shared.windows.last?.rootViewController?.popOrDismiss(animation: true)
-//            let navigationController = Router.main.instantiateViewController(withIdentifier: Storyboard.Ids.DrawerController)
-//            window.rootViewController = navigationController
-//            window.makeKeyAndVisible()
-            
-        }
-        
-    } */
-    
+//
+//    func getVerifiedMobile(api: Base, data: successLog?) {
+//        self.loader.isHidden = true
+//        if data?.status != 0 {
+//            DispatchQueue.main.async {
+//                self.view.make(toast: "Mobile number Already Exists")
+//            }
+//        } else {
+//            self.view.make(toast: "Mobile number Verified")
+//           /* let signup = Router.user.instantiateViewController(withIdentifier: Storyboard.Ids.SignUpTableViewController) as? SignUpUserTableViewController
+//            signup?.mobile = mobile
+//            signup?.code = countryCode
+//            self.navigationController?.pushViewController(signup!, animated: true)*/
+//        }
+//    }
+//
 }
 
 //MARK:- AKFViewControllerDelegate
@@ -554,24 +552,22 @@ extension SignUpUserTableViewController : PostViewProtocol {
 //        func dismiss() {
 //            viewController.dismiss(animated: true) { }
 //            self.loader.isHidden = false
-////            self.presenter?.post(api: .signUp, data: self.userInfo?.toData())
+//            //self.presenter?.post(api: .signUp, data: self.userInfo?.toData())
 //        }
 //        if accountKit != nil {
 //            accountKit!.requestAccount({ (account, error) in
-//                if let phoneNumber = account?.phoneNumber {
-//                    var mobileString = phoneNumber.stringRepresentation()
-//                    if mobileString.hasPrefix("+") {
-//                        mobileString.removeFirst()
-//                        if let mobileInt = Int(mobileString) {
-//                            self.userInfo?.mobile = mobileInt
-//                            self.userInfo?.country_code = "+\(account?.phoneNumber?.countryCode ?? "")"
-//                        }
-//                    }
+//                if let phoneNumber = account?.phoneNumber?.phoneNumber {
+//                    //self.mobile = phoneNumber
+//                    //self.countryCode = "+\(account?.phoneNumber?.countryCode ?? "")"
+//
+//                    let verify = Request()
+//                    verify.mobile = phoneNumber
+//                    verify.type = "user"
+//                    self.presenter?.post(api: .verifyMobile, data: verify.toData())
+//
 //                }
 //                dismiss()
 //                return
-//                //print("--->>",account?.phoneNumber.)
-//               // print("--->>>",error)
 //            })
 //        }else {
 //            dismiss()
@@ -608,42 +604,7 @@ extension SignUpUserTableViewController : UITextFieldDelegate {
             }
         }
     }
-    
-//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//
-//       // let count = range.length-range.location
-//
-//        if textField == passwordText {
-//            let isEditable = Int.removeNil(passwordText.text?.count)<passwordLengthMax
-//            passwordText.borderActiveColor = isEditable ? .primary : .red
-//            passwordText.borderInactiveColor = isEditable ? .lightGray : .red
-//          return isEditable
-//        }
-//        return true
-//    }
-    
-//    private func textField(textField : HoshiTextField, count : Int) {
-//
-//        if textField == passwordText {
-//            let isEditable = Int.removeNil(passwordText.text?.count)<passwordLengthMax
-//            passwordText.borderActiveColor = isEditable ? .primary : .red
-//            passwordText.borderInactiveColor = isEditable ? .lightGray : .red
-//            return isEditable
-//        }
-//
-//    }
-    
 }
-
-
-//extension SignUpUserTableViewController {
-//
-//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//
-//
-//    }
-//
-//}
 
 
 //MARK:- Country List Delegate

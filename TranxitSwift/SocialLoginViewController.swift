@@ -116,7 +116,7 @@ extension SocialLoginViewController {
             case .success(_ , _, let accessToken):
                 print(accessToken)
                 self.accessToken = accessToken.authenticationToken
-                self.accountKit()
+               // self.accountKit()
                 break
             }
         }
@@ -137,56 +137,56 @@ extension SocialLoginViewController {
     }
     
     
-    private func accountKit(){
-        let accountKit = AKFAccountKit(responseType: .accessToken)
-        let accountKitVC = accountKit.viewControllerForPhoneLogin()
-        accountKitVC.enableSendToFacebook = true
-        self.prepareLogin(viewcontroller: accountKitVC)
-        self.present(accountKitVC, animated: true, completion: nil)
-    }
-    
-    private func prepareLogin(viewcontroller : UIViewController&AKFViewController) {
-        
-        viewcontroller.delegate = self
-        viewcontroller.uiManager = AKFSkinManager(skinType: .contemporary, primaryColor: .primary)
-    }
+//    private func accountKit(){
+//        let accountKit = AKFAccountKit(responseType: .accessToken)
+//        let accountKitVC = accountKit.viewControllerForPhoneLogin()
+//        accountKitVC.enableSendToFacebook = true
+//        self.prepareLogin(viewcontroller: accountKitVC)
+//        self.present(accountKitVC, animated: true, completion: nil)
+//    }
+//
+//    private func prepareLogin(viewcontroller : UIViewController&AKFViewController) {
+//
+//        viewcontroller.delegate = self
+//        viewcontroller.uiManager = AKFSkinManager(skinType: .contemporary, primaryColor: .primary)
+//    }
     
 }
 
 // MARK:- AKFViewControllerDelegate
-extension SocialLoginViewController : AKFViewControllerDelegate {
-    
-    func viewControllerDidCancel(_ viewController: (UIViewController & AKFViewController)!) {
-        viewController.dismiss(animated: true, completion: nil)
-    }
-    
-    func viewController(_ viewController: (UIViewController & AKFViewController)!, didFailWithError error: Error!) {
-        viewController.dismiss(animated: true, completion: nil)
-    }
-    
-    func viewController(_ viewController: (UIViewController & AKFViewController)!, didCompleteLoginWith accessToken: AKFAccessToken!, state: String!) {
-        print(state)
-        viewController.dismiss(animated: true) {
-            //self.loader.isHidden = false
-            //self.presenter?.post(api: .signUp, data: self.userSignUpInfo?.toData())
-            
-            AKFAccountKit(responseType: AKFResponseType.accessToken).requestAccount({ (account, error) in
-                
-                // self.accessToken = accessToken as! String
-                guard let number = account?.phoneNumber?.phoneNumber, let code = account?.phoneNumber?.countryCode, let numberInt = Int(code+number) else {
-                    self.onError(api: .addPromocode, message: .Empty, statusCode: 0)
-                    return
-                }
-                
-                let loginBy : LoginType = self.isfaceBook ? .facebook : .google
-                self.loadAPI(accessToken: self.accessToken, phoneNumber: numberInt, loginBy: loginBy)
-                
-            })
-            
-        }
-        
-    }
-}
+//extension SocialLoginViewController : AKFViewControllerDelegate {
+//
+//    func viewControllerDidCancel(_ viewController: (UIViewController & AKFViewController)!) {
+//        viewController.dismiss(animated: true, completion: nil)
+//    }
+//
+//    func viewController(_ viewController: (UIViewController & AKFViewController)!, didFailWithError error: Error!) {
+//        viewController.dismiss(animated: true, completion: nil)
+//    }
+//
+//    func viewController(_ viewController: (UIViewController & AKFViewController)!, didCompleteLoginWith accessToken: AKFAccessToken!, state: String!) {
+//        print(state)
+//        viewController.dismiss(animated: true) {
+//            //self.loader.isHidden = false
+//            //self.presenter?.post(api: .signUp, data: self.userSignUpInfo?.toData())
+//
+//            AKFAccountKit(responseType: AKFResponseType.accessToken).requestAccount({ (account, error) in
+//
+//                // self.accessToken = accessToken as! String
+//                guard let number = account?.phoneNumber?.phoneNumber, let code = account?.phoneNumber?.countryCode, let numberInt = Int(code+number) else {
+//                    self.onError(api: .addPromocode, message: .Empty, statusCode: 0)
+//                    return
+//                }
+//
+//                let loginBy : LoginType = self.isfaceBook ? .facebook : .google
+//                self.loadAPI(accessToken: self.accessToken, phoneNumber: numberInt, loginBy: loginBy)
+//
+//            })
+//
+//        }
+//
+//    }
+//}
 
 // MARK:- TableView
 
@@ -237,7 +237,7 @@ extension SocialLoginViewController : GIDSignInDelegate, GIDSignInUIDelegate{
         }
         self.accessToken = user.authentication.accessToken
         print(user.profile, error)
-        accountKit()
+        //accountKit()
         //  UserData.main.set(name: String.removeNil(user.profile.name), email: String.removeNil(user.profile.email),image: String.removeNil(user.profile.imageURL(withDimension: 50).absoluteString))
         
     }

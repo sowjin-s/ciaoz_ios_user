@@ -141,6 +141,7 @@
 		08A8821320C512760088BC5A /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A8821220C512760088BC5A /* LocationService.swift */; };
 		08A8821520C572510088BC5A /* Coupons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A8821420C572510088BC5A /* Coupons.swift */; };
 		08A8823620C6DEBE0088BC5A /* KeyboardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A8823520C6DEBE0088BC5A /* KeyboardHelper.swift */; };
+		08B3ECD32254E9740096ACED /* AccountKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B3ECD22254E9740096ACED /* AccountKit.swift */; };
 		08B73D0420947C5C00B60F74 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B73D0320947C5C00B60F74 /* PasswordViewController.swift */; };
 		08B7DC72209A14A1002CF17A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B7DC71209A14A1002CF17A /* HomeViewController.swift */; };
 		08B7DC75209A14E0002CF17A /* SideBarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B7DC74209A14E0002CF17A /* SideBarTableViewController.swift */; };
@@ -388,6 +389,7 @@
 		08A8821220C512760088BC5A /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		08A8821420C572510088BC5A /* Coupons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coupons.swift; sourceTree = "<group>"; };
 		08A8823520C6DEBE0088BC5A /* KeyboardHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHelper.swift; sourceTree = "<group>"; };
+		08B3ECD22254E9740096ACED /* AccountKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountKit.swift; sourceTree = "<group>"; };
 		08B73D0320947C5C00B60F74 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		08B7DC71209A14A1002CF17A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		08B7DC74209A14E0002CF17A /* SideBarTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarTableViewController.swift; sourceTree = "<group>"; };
@@ -1656,6 +1658,7 @@
 				8871FBDF1FE7EB48002335D5 /* Plist Files */,
 				08F3CBBC202471CB00F5EEDF /* Global */,
 				08583BF5211C17DF00B5ABC0 /* Store.swift */,
+				08B3ECD22254E9740096ACED /* AccountKit.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -1975,6 +1978,7 @@
 				08F3CBC02024720A00F5EEDF /* Formatter.swift in Sources */,
 				087DCFAE2077920A0040BDBB /* Sequence.swift in Sources */,
 				08BE879C20DA429800876C93 /* Home+CoreDataProperties.swift in Sources */,
+				08B3ECD32254E9740096ACED /* AccountKit.swift in Sources */,
 				084182B5200F508900527D0D /* TableView.swift in Sources */,
 				08C9E90E20D244F7002928EA /* Rating.swift in Sources */,
 				082C442620E7AE0E00A7C892 /* SingleChatController.swift in Sources */,

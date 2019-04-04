@@ -21,6 +21,8 @@ class PasswordViewController: UIViewController {
         return createActivityIndicator(self.view)
     }()
 
+    private var mobile: String?
+    private var countryCode: String?
     private var email : String?
     
     override func viewDidLoad() {
@@ -138,8 +140,14 @@ extension PasswordViewController {
 
     @IBAction private func createAccountAction() {
         
-        self.push(id: Storyboard.Ids.SignUpTableViewController, animation: true)
-
+        self.showAccountKit { (ph,code) in
+            self.mobile = ph
+            self.countryCode = code
+            let verify = Request()
+            verify.mobile = ph
+            verify.type = "user"
+            self.presenter?.post(api: .verifyMobile, data: verify.toData())
+        }
         
     }
     
@@ -223,5 +231,19 @@ extension PasswordViewController : PostViewProtocol {
         })
     }
     
+    func getVerifiedMobile(api: Base, data: successLog?) {
+        self.loader.isHidden = true
+        if data?.status != 0 {
+            DispatchQueue.main.async {
+                self.view.make(toast: "Mobile number Already Exists")
+            }
+        } else {
+            self.view.make(toast: "Mobile number Verified")
+            let signup = Router.user.instantiateViewController(withIdentifier: Storyboard.Ids.SignUpTableViewController) as? SignUpUserTableViewController
+            signup?.mobile = mobile
+            signup?.code = countryCode
+            self.navigationController?.pushViewController(signup!, animated: true)
+        }
+    }
     
 }

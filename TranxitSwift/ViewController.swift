@@ -1,13 +1,18 @@
 
 import UIKit
 import Foundation
+import AccountKit
 
 private var bottomConstraint : NSLayoutConstraint?
 private var imageCompletion : ((UIImage?)->())?
 private var constraintValue : CGFloat = 0
+private var accountKit : AKFAccountKit?
+private var AKCompletion: ((String?,String?)->())?
+
 
 extension UIViewController {
     
+   
     func setPresenter(){
         
         if let view = self as? PostViewProtocol {
@@ -87,6 +92,24 @@ extension UIViewController {
         
     }
     
+    
+    //MARK:- Accountkit
+    func showAccountKit(with completion : @escaping ((String?,String?)->())) {
+        accountKit = AKFAccountKit(responseType: .accessToken)
+        let akPhone = AKFPhoneNumber(countryCode: "+60", phoneNumber: "")
+        let accountKitVC = accountKit?.viewControllerForPhoneLogin(with: akPhone, state: UUID().uuidString)
+        accountKitVC!.enableSendToFacebook = true
+        prepareLogin(viewcontroller: accountKitVC!)
+        AKCompletion = completion
+        present(accountKitVC!, animated: true, completion: nil)
+    }
+    
+    
+    func prepareLogin(viewcontroller : UIViewController&AKFViewController) {
+        viewcontroller.delegate = self
+        viewcontroller.uiManager = AKFSkinManager(skinType: .contemporary, primaryColor: .primary)
+        viewcontroller.uiManager.theme?()?.buttonTextColor = .white
+    }
    
     //MARK:- Add observers
     
@@ -267,4 +290,48 @@ fileprivate func convertToOptionalCATransitionSubtype(_ input: String?) -> CATra
 // Helper function inserted by Swift 4.2 migrator.
 fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
 	return input.rawValue
+}
+
+
+
+
+extension UIViewController : AKFViewControllerDelegate {
+    
+    public func viewControllerDidCancel(_ viewController: (UIViewController & AKFViewController)!) {
+        viewController.dismiss(animated: true, completion: nil)
+    }
+    
+    public func viewController(_ viewController: (UIViewController & AKFViewController)!, didFailWithError error: Error!) {
+        viewController.dismiss(animated: true, completion: nil)
+    }
+    
+    public func viewController(_ viewController: (UIViewController & AKFViewController)!, didCompleteLoginWith accessToken: AKFAccessToken!, state: String!) {
+        func dismiss() {
+            viewController.dismiss(animated: true) {}
+        }
+        if accountKit != nil {
+            accountKit!.requestAccount({ (account, error) in
+                if let phoneNumber = account?.phoneNumber?.phoneNumber {
+                    
+                    let phone = phoneNumber
+                    let code = "+\(account?.phoneNumber?.countryCode ?? "")"
+                   /* self.mobile = phoneNumber
+                    self.countryCode = "+\(account?.phoneNumber?.countryCode ?? "")"
+                    let verify = Request()
+                    verify.mobile = phoneNumber
+                    verify.type = "user"
+                    self.presenter?.post(api: .verifyMobile, data: verify.toData())*/
+                    AKCompletion?(phone,code)
+                    
+                    
+                }
+                dismiss()
+                return
+            })
+        }else {
+            dismiss()
+        }
+        
+    }
+    
 }
