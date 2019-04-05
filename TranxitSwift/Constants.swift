@@ -383,6 +383,7 @@ enum ServiceCalculator : String, Codable {
     case DISTANCEMIN
     case DISTANCEHOUR
     case NONE
+    case ESTIMATED_DISTANCE_MINUTE
 }
 
 

@@ -54,6 +54,11 @@ class Request : JSONSerializable {
     
     var type: String?
     var mobile: String?
+    
+    var estimated_fare : String?
+    var estimated_distance: String?
+    var estimated_time: String?
+    
   /*
     enum CodingKeys: String, CodingKey {
         

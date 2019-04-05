@@ -69,7 +69,6 @@
 		082F77D120A5AA2200D6474B /* ServiceSelectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082F77CF20A5AA2200D6474B /* ServiceSelectionCollectionViewCell.swift */; };
 		082F77D220A5AA2200D6474B /* ServiceSelectionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082F77D020A5AA2200D6474B /* ServiceSelectionCollectionViewCell.xib */; };
 		083617B320B6943A009C9658 /* FloatRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083617B220B6943A009C9658 /* FloatRatingView.swift */; };
-		083617B620B6AE3A009C9658 /* InvoiceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083617B520B6AE3A009C9658 /* InvoiceView.xib */; };
 		083617B820B6AE49009C9658 /* InvoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083617B720B6AE49009C9658 /* InvoiceView.swift */; };
 		083617BB20B6C743009C9658 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083617BA20B6C743009C9658 /* RatingView.swift */; };
 		083617BD20B6C756009C9658 /* RatingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083617BC20B6C756009C9658 /* RatingView.xib */; };
@@ -85,7 +84,6 @@
 		083A59B120A4351D00D64574 /* LocationHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083A59AF20A4351D00D64574 /* LocationHeaderTableViewCell.swift */; };
 		083A59B220A4351D00D64574 /* LocationHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083A59B020A4351D00D64574 /* LocationHeaderTableViewCell.xib */; };
 		083A59B520A454F800D64574 /* GooglePlacesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083A59B420A454F800D64574 /* GooglePlacesHelper.swift */; };
-		083D241C22042FFE00B4A7E0 /* MOLPayXDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 083D241A22042FFE00B4A7E0 /* MOLPayXDK.bundle */; };
 		083D241D22042FFE00B4A7E0 /* MOLPayXDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 083D241B22042FFE00B4A7E0 /* MOLPayXDK.framework */; };
 		083DA4B920D0FF5B00DD473E /* YourTripsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083DA4B820D0FF5B00DD473E /* YourTripsDetailViewController.swift */; };
 		0840E90E22364C7100E894CA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0840E90D22364C7100E894CA /* GoogleService-Info.plist */; };
@@ -130,7 +128,6 @@
 		089B4F7720C10FD600DDEAF3 /* HomePageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B4F7620C10FD600DDEAF3 /* HomePageHelper.swift */; };
 		089B4F7920C1144F00DDEAF3 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B4F7820C1144F00DDEAF3 /* Provider.swift */; };
 		089B4F7B20C116D600DDEAF3 /* Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B4F7A20C116D600DDEAF3 /* Payment.swift */; };
-		08A27BBC221A98F600E92B5F /* MOLPayXDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 08A27BBA221A98F300E92B5F /* MOLPayXDK.bundle */; };
 		08A27BBD221A98F600E92B5F /* MOLPayXDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08A27BBB221A98F500E92B5F /* MOLPayXDK.framework */; };
 		08A39DA020B5BB8100314935 /* RideStatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08A39D9F20B5BB8100314935 /* RideStatusView.xib */; };
 		08A39DA220B5BB9300314935 /* RideStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A39DA120B5BB9300314935 /* RideStatusView.swift */; };
@@ -145,7 +142,6 @@
 		08B73D0420947C5C00B60F74 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B73D0320947C5C00B60F74 /* PasswordViewController.swift */; };
 		08B7DC72209A14A1002CF17A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B7DC71209A14A1002CF17A /* HomeViewController.swift */; };
 		08B7DC75209A14E0002CF17A /* SideBarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B7DC74209A14E0002CF17A /* SideBarTableViewController.swift */; };
-		08B8F43B2115EBCF0055FB82 /* bouncy_mapmaker.json in Resources */ = {isa = PBXBuildFile; fileRef = 08B8F43A2115EBCF0055FB82 /* bouncy_mapmaker.json */; };
 		08BAFC602094B495002292C0 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BAFC5F2094B495002292C0 /* ForgotPasswordViewController.swift */; };
 		08BE879720DA421B00876C93 /* Map_style.json in Resources */ = {isa = PBXBuildFile; fileRef = 08BE879620DA421B00876C93 /* Map_style.json */; };
 		08BE879C20DA429800876C93 /* Home+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BE879820DA429700876C93 /* Home+CoreDataProperties.swift */; };
@@ -196,6 +192,7 @@
 		08FA70AC20E3E695009B060A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08FA70AB20E3E695009B060A /* Main.storyboard */; };
 		08FA91A120EA7C6700723B26 /* FirebaseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FA919F20EA7C6700723B26 /* FirebaseConstants.swift */; };
 		08FA91A220EA7C6700723B26 /* FirebaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FA91A020EA7C6700723B26 /* FirebaseHelper.swift */; };
+		08FAA7402257946000D2E7A8 /* InvoiceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08FAA73F2257946000D2E7A8 /* InvoiceView.xib */; };
 		180240D421C39026008DD9F3 /* LocationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180240D321C39026008DD9F3 /* LocationEntity.swift */; };
 		18D7C04121C11EB7009065ED /* HelpEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D7C04021C11EB7009065ED /* HelpEntity.swift */; };
 		345481F34FE8F4E422FE29BC /* Pods_TranxitUser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11262F3AD017B98534D5D64C /* Pods_TranxitUser.framework */; };
@@ -312,7 +309,6 @@
 		082F77CF20A5AA2200D6474B /* ServiceSelectionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceSelectionCollectionViewCell.swift; sourceTree = "<group>"; };
 		082F77D020A5AA2200D6474B /* ServiceSelectionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceSelectionCollectionViewCell.xib; sourceTree = "<group>"; };
 		083617B220B6943A009C9658 /* FloatRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatRatingView.swift; sourceTree = "<group>"; };
-		083617B520B6AE3A009C9658 /* InvoiceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InvoiceView.xib; sourceTree = "<group>"; };
 		083617B720B6AE49009C9658 /* InvoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceView.swift; sourceTree = "<group>"; };
 		083617BA20B6C743009C9658 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		083617BC20B6C756009C9658 /* RatingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RatingView.xib; sourceTree = "<group>"; };
@@ -455,6 +451,7 @@
 		08FA70AB20E3E695009B060A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		08FA919F20EA7C6700723B26 /* FirebaseConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseConstants.swift; sourceTree = "<group>"; };
 		08FA91A020EA7C6700723B26 /* FirebaseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseHelper.swift; sourceTree = "<group>"; };
+		08FAA73F2257946000D2E7A8 /* InvoiceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvoiceView.xib; sourceTree = "<group>"; };
 		0B49CCFC0DC564068D0BC9C5 /* Pods-UserUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UserUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UserUITests/Pods-UserUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		11262F3AD017B98534D5D64C /* Pods_TranxitUser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TranxitUser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		125CF2125C22EBE6A0F5F76F /* Pods_UserUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UserUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -864,7 +861,7 @@
 			isa = PBXGroup;
 			children = (
 				08EA70CB2147D17500079908 /* Tips */,
-				083617B520B6AE3A009C9658 /* InvoiceView.xib */,
+				08FAA73F2257946000D2E7A8 /* InvoiceView.xib */,
 				083617B720B6AE49009C9658 /* InvoiceView.swift */,
 			);
 			name = Invoice;
@@ -1779,8 +1776,6 @@
 				08001A0C203C241E0076D324 /* countryCodes.json in Resources */,
 				08BE879720DA421B00876C93 /* Map_style.json in Resources */,
 				08A50C442109B6CF00CCDDA8 /* ReasonView.xib in Resources */,
-				083D241C22042FFE00B4A7E0 /* MOLPayXDK.bundle in Resources */,
-				08B8F43B2115EBCF0055FB82 /* bouncy_mapmaker.json in Resources */,
 				0811B16F20E7B12A00B78323 /* mesageTone.wav in Resources */,
 				8894E22B1FE7D7980097B4B3 /* Assets.xcassets in Resources */,
 				083A59AB20A434E000D64574 /* LocationTableViewCell.xib in Resources */,
@@ -1799,14 +1794,13 @@
 				082F77CD20A5A13900D6474B /* ServiceSelectionView.xib in Resources */,
 				08E9675E20D2C1B80077DB4F /* RateView.xib in Resources */,
 				08C37A822216C247005AE4B5 /* termscondition.xib in Resources */,
+				08FAA7402257946000D2E7A8 /* InvoiceView.xib in Resources */,
 				083617BD20B6C756009C9658 /* RatingView.xib in Resources */,
 				08FA708720E3CA99009B060A /* Launch.storyboard in Resources */,
 				083A59B220A4351D00D64574 /* LocationHeaderTableViewCell.xib in Resources */,
 				085361A620B8308A001DD97C /* PassbookTableViewCell.xib in Resources */,
 				08FA70AC20E3E695009B060A /* Main.storyboard in Resources */,
 				082D1B9920933D300000B7C8 /* WalkThroughView.xib in Resources */,
-				08A27BBC221A98F600E92B5F /* MOLPayXDK.bundle in Resources */,
-				083617B620B6AE3A009C9658 /* InvoiceView.xib in Resources */,
 				0881352321527DD800DA668E /* search.json in Resources */,
 				08001A0D203C241E0076D324 /* CountryPicker.bundle in Resources */,
 				0826C13620B011C80005D0D8 /* RequestSelectionView.xib in Resources */,

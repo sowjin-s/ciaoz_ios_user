@@ -93,7 +93,9 @@ extension Data {
             
             print("Manually parsed  ", (try? JSONSerialization.jsonObject(with: self, options: .allowFragments)) ?? "nil")
             
-            print("Error in Decoding OBject ", error.localizedDescription)
+           // print("Error in Decoding OBject ", error.localizedDescription)
+            
+            print(error)
             return nil
         }
         
