@@ -42,8 +42,7 @@ class RequestSelectionView: UIView {
     var onclickCoupon : ((_ couponList : [PromocodeEntity],_ selected : PromocodeEntity?, _ promo : ((PromocodeEntity?)->())?)->Void)?
     var selectedCoupon : PromocodeEntity? { // Selected Promocode
         didSet{
-            if let percentage = selectedCoupon?.percentage, let maxAmount = selectedCoupon?.max_amount, let fare = self.service?.pricing?.estimated_fare{
-                
+            if let percentage = selectedCoupon?.value, let maxAmount = selectedCoupon?.max_amount, let fare = self.service?.pricing?.estimated_fare{
                 let discount = fare*(percentage/100)
                 let discountAmount = discount > maxAmount ? maxAmount : discount
                 self.setEstimationFare(amount: fare-discountAmount)
@@ -236,6 +235,7 @@ extension RequestSelectionView {
     @IBAction private func buttonCouponAction() {
         self.onclickCoupon?( self.availablePromocodes,self.selectedCoupon, { [weak self] selectedCouponCode in  // send Available couponlist and get the selected coupon entity
             self?.selectedCoupon = selectedCouponCode
+            let amount =
             self?.isPromocodeEnabled = true
             })
     }

@@ -6,17 +6,79 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TranxitSwift/SocialLoginViewController.swift"
-            timestampString = "576059999.755324"
+            filePath = "TranxitSwift/RequestSelectionView.swift"
+            timestampString = "578229007.69491"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "190"
-            endingLineNumber = "190"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "selectedCoupon"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TranxitUser.RequestSelectionView.selectedCoupon.modify : Swift.Optional&lt;TranxitUser.PromocodeEntity&gt;"
+                  moduleName = "TranxitUser"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/css/Documents/Suganya/Working%20Projects/Ciaoz/ciaoz_ios_user/TranxitSwift/RequestSelectionView.swift"
+                  timestampString = "578229008.345769"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "68">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TranxitUser.RequestSelectionView.selectedCoupon.modify : Swift.Optional&lt;TranxitUser.PromocodeEntity&gt; with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "TranxitUser"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/css/Documents/Suganya/Working%20Projects/Ciaoz/ciaoz_ios_user/TranxitSwift/RequestSelectionView.swift"
+                  timestampString = "578229008.351529"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "36">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TranxitUser.RequestSelectionView.init(frame: __C.CGRect) -&gt; TranxitUser.RequestSelectionView"
+                  moduleName = "TranxitUser"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/css/Documents/Suganya/Working%20Projects/Ciaoz/ciaoz_ios_user/TranxitSwift/RequestSelectionView.swift"
+                  timestampString = "578229008.356711"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "2052">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TranxitUser.RequestSelectionView.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;TranxitUser.RequestSelectionView&gt;"
+                  moduleName = "TranxitUser"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/css/Documents/Suganya/Working%20Projects/Ciaoz/ciaoz_ios_user/TranxitSwift/RequestSelectionView.swift"
+                  timestampString = "578229008.359153"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "2016">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -25,14 +87,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TranxitSwift/HomeViewController.swift"
-            timestampString = "576164626.49266"
+            filePath = "TranxitSwift/RequestSelectionView.swift"
+            timestampString = "578229007.695822"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "879"
-            endingLineNumber = "879"
-            landmarkName = "createRequest(for:isScheduled:scheduleDate:cardEntity:paymentType:)"
-            landmarkType = "7">
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "selectedCoupon"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -41,14 +103,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TranxitSwift/JsonSerializing.swift"
-            timestampString = "576165006.589872"
+            filePath = "TranxitSwift/RequestSelectionView.swift"
+            timestampString = "578229007.696228"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
-            landmarkName = "getDecodedObject(from:)"
-            landmarkType = "7">
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "selectedCoupon"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -57,46 +119,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TranxitSwift/JsonSerializing.swift"
-            timestampString = "576165006.58998"
+            filePath = "TranxitSwift/RequestSelectionView.swift"
+            timestampString = "578229007.69661"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "99"
-            endingLineNumber = "99"
-            landmarkName = "getDecodedObject(from:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TranxitSwift/HomeViewController+Extension.swift"
-            timestampString = "576165006.590024"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "280"
-            endingLineNumber = "280"
-            landmarkName = "unknown"
-            landmarkType = "0">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TranxitSwift/HomeViewController+Extension.swift"
-            timestampString = "576165006.590412"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "284"
-            endingLineNumber = "284"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "52"
+            endingLineNumber = "52"
+            landmarkName = "selectedCoupon"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

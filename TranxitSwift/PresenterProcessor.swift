@@ -85,7 +85,7 @@ class PresenterProcessor {
     // MARK:- Send Promocodes
     
     func getPromocodes(data : Data)->[PromocodeEntity] {
-        return data.getDecodedObject(from: PromoCodeList.self)?.promo_list ?? []
+        return data.getDecodedObject(from: [PromocodeEntity].self) ?? []
     }
     
     // MARK:- Help
@@ -127,6 +127,11 @@ class PresenterProcessor {
     //MARK:- sos
     func sosDetails(data: Data)-> sosModel?{
         return data.getDecodedObject(from: sosModel.self)
+    }
+    
+    //MARK:- sos
+    func locationInfo(data: Data)-> [userLocation]?{
+        return data.getDecodedObject(from: [userLocation].self)
     }
     
 }

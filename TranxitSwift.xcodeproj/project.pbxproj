@@ -119,6 +119,9 @@
 		086BAF6420078E220087F15A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BAF6320078E220087F15A /* ViewController.swift */; };
 		086C90132099F34A002CD9B1 /* SocialLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086C90122099F34A002CD9B1 /* SocialLoginViewController.swift */; };
 		0875011020D7F22F00CFA858 /* OfflineBookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875010F20D7F22F00CFA858 /* OfflineBookingViewController.swift */; };
+		087C671122742FEA00986B12 /* CustomPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 087C670F22742FEA00986B12 /* CustomPicker.xib */; };
+		087C671222742FEA00986B12 /* CustomPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087C671022742FEA00986B12 /* CustomPicker.swift */; };
+		087C6714227430D900986B12 /* userLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087C6713227430D900986B12 /* userLocation.swift */; };
 		087DCFAE2077920A0040BDBB /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087DCFAD2077920A0040BDBB /* Sequence.swift */; };
 		0881352321527DD800DA668E /* search.json in Resources */ = {isa = PBXBuildFile; fileRef = 0881352221527DD800DA668E /* search.json */; };
 		08813E57213D146B00830717 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08813E56213D146B00830717 /* UserDefaultsKeys.swift */; };
@@ -364,6 +367,9 @@
 		0875010420D7D4EC00CFA858 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0875010B20D7D56400CFA858 /* User.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = User.entitlements; sourceTree = "<group>"; };
 		0875010F20D7F22F00CFA858 /* OfflineBookingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineBookingViewController.swift; sourceTree = "<group>"; };
+		087C670F22742FEA00986B12 /* CustomPicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomPicker.xib; sourceTree = "<group>"; };
+		087C671022742FEA00986B12 /* CustomPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPicker.swift; sourceTree = "<group>"; };
+		087C6713227430D900986B12 /* userLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userLocation.swift; sourceTree = "<group>"; };
 		087DCFAD2077920A0040BDBB /* Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequence.swift; sourceTree = "<group>"; };
 		0881352221527DD800DA668E /* search.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = search.json; sourceTree = "<group>"; };
 		08813E56213D146B00830717 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
@@ -1139,6 +1145,15 @@
 			name = OfflineBooking;
 			sourceTree = "<group>";
 		};
+		087C670E22742FB300986B12 /* pickerView */ = {
+			isa = PBXGroup;
+			children = (
+				087C671022742FEA00986B12 /* CustomPicker.swift */,
+				087C670F22742FEA00986B12 /* CustomPicker.xib */,
+			);
+			name = pickerView;
+			sourceTree = "<group>";
+		};
 		08813E5B213D505F00830717 /* Config */ = {
 			isa = PBXGroup;
 			children = (
@@ -1585,6 +1600,7 @@
 				08D752D821551E9900250E92 /* LanguageEntity.swift */,
 				180240D321C39026008DD9F3 /* LocationEntity.swift */,
 				0863D9EC224A299800E6F6AA /* SignUpEntity.swift */,
+				087C6713227430D900986B12 /* userLocation.swift */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -1609,6 +1625,7 @@
 		8894E25D1FE7D9170097B4B3 /* XIB */ = {
 			isa = PBXGroup;
 			children = (
+				087C670E22742FB300986B12 /* pickerView */,
 				0871AC572215AEA000ED89FA /* Terms&Conditions */,
 				0811B17020E7B27900B78323 /* Chat */,
 				085361A220B8306F001DD97C /* Passbook */,
@@ -1797,6 +1814,7 @@
 				08FAA7402257946000D2E7A8 /* InvoiceView.xib in Resources */,
 				083617BD20B6C756009C9658 /* RatingView.xib in Resources */,
 				08FA708720E3CA99009B060A /* Launch.storyboard in Resources */,
+				087C671122742FEA00986B12 /* CustomPicker.xib in Resources */,
 				083A59B220A4351D00D64574 /* LocationHeaderTableViewCell.xib in Resources */,
 				085361A620B8308A001DD97C /* PassbookTableViewCell.xib in Resources */,
 				08FA70AC20E3E695009B060A /* Main.storyboard in Resources */,
@@ -1871,6 +1889,7 @@
 				"${BUILT_PRODUCTS_DIR}/CountryList/CountryList.framework",
 				"${BUILT_PRODUCTS_DIR}/CreditCardForm/CreditCardForm.framework",
 				"${BUILT_PRODUCTS_DIR}/DateTimePicker/DateTimePicker.framework",
+				"${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework",
 				"${BUILT_PRODUCTS_DIR}/DynamicBlurView/DynamicBlurView.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
@@ -1899,6 +1918,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CountryList.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CreditCardForm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DateTimePicker.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DropDown.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DynamicBlurView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
@@ -1965,6 +1985,7 @@
 				082D1B9620933C890000B7C8 /* WalkThroughView.swift in Sources */,
 				082C442020E7913A00A7C892 /* FloatyManager.swift in Sources */,
 				08FA708520E3C9A0009B060A /* RideNowView.swift in Sources */,
+				087C671222742FEA00986B12 /* CustomPicker.swift in Sources */,
 				083617C620B70FF9009C9658 /* HelpViewController.swift in Sources */,
 				08BF24C020BD864C003A4B96 /* Default.swift in Sources */,
 				08BE879F20DA429800876C93 /* Work+CoreDataClass.swift in Sources */,
@@ -2032,6 +2053,7 @@
 				8894801F1FECE2CA006AF5A9 /* Label.swift in Sources */,
 				082C441F20E7913A00A7C892 /* FloatyItem.swift in Sources */,
 				0863D9ED224A299800E6F6AA /* SignUpEntity.swift in Sources */,
+				087C6714227430D900986B12 /* userLocation.swift in Sources */,
 				082F77D120A5AA2200D6474B /* ServiceSelectionCollectionViewCell.swift in Sources */,
 				085161D5214FE30E00EF474E /* PromocodeEntity.swift in Sources */,
 				08A8823620C6DEBE0088BC5A /* KeyboardHelper.swift in Sources */,

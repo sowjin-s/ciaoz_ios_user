@@ -39,7 +39,7 @@ class GooglePlacesHelper : NSObject {
     
     // MARK:- Get Google Auto Complete
     
-    func getGoogleAutoComplete(completion : @escaping ((GMSPlace)->Void)){
+    func getGoogleAutoComplete(completion : @escaping ((GMSPlace)->Void)) {
         
         self.gmsAutoComplete = GMSAutocompleteViewController()
         self.gmsAutoComplete?.autocompleteFilter = filter

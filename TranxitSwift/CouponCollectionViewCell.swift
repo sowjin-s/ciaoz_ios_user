@@ -45,7 +45,7 @@ extension CouponCollectionViewCell {
     private func localize() {
         self.buttonApply.addTarget(self, action: #selector(self.buttonApplyAction), for: .touchUpInside)
         self.labelCouponCode.textColor = .black
-        self.labelValidity.textColor = .lightGray
+        //self.labelValidity.textColor = .lightGray
         self.labelCouponDescription.textColor = .gray
         self.buttonApply.setTitleColor(.secondary, for: .normal)
     }
@@ -54,7 +54,7 @@ extension CouponCollectionViewCell {
         
         Common.setFont(to: labelCouponCode, isTitle: true)
         Common.setFont(to: labelCouponDescription, isTitle: true)
-        Common.setFont(to: labelValidity)
+        //Common.setFont(to: labelValidity)
         Common.setFont(to: buttonApply, isTitle: true)
     }
     
@@ -64,9 +64,9 @@ extension CouponCollectionViewCell {
         self.values = values
         self.labelCouponCode.text = self.values?.promo_code
         self.labelCouponDescription.text = self.values?.promo_description
-        if let dateObject = Formatter.shared.getDate(from: self.values?.expiration, format: DateFormat.list.yyyy_mm_dd_HH_MM_ss){
+       /* if let dateObject = Formatter.shared.getDate(from: self.values?.expiration, format: DateFormat.list.yyyy_mm_dd_HH_MM_ss){
             self.labelValidity.text =  Constants.string.validity.localize()+" : "+"\(Formatter.shared.getString(from: dateObject, format: DateFormat.list.dd_MM_yyyy) ?? .Empty)"
-        }
+        }*/
         self.buttonApply.isHidden = isHideApplyButton
 
     }

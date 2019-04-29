@@ -27,5 +27,9 @@ struct ErrorMessage {
     let termscondition = "Agree Terms & Conditions"
     let enterConfirmPassword = "Enter Confirm Password"
     let passwordDonotMatch = "Password and Confirm password donot match"
+    let enterCity = "Choose City"
+    let enterState = "Choose State"
+    let enterPostal = "Choose Postal"
 
+    
 }

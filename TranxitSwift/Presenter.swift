@@ -151,6 +151,10 @@ extension Presenter : PostPresenterOutputProtocol {
         controller?.getSOS(api: api, data: PresenterProcessor.shared.sosDetails(data: data))
     }
     
+    func sendPlaceInfo(api: Base, data: Data) {
+        controller?.getPlaceInfo(api: api, data: PresenterProcessor.shared.locationInfo(data: data))
+    }
+    
 }
 
 

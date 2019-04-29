@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3D03B0144FB3CAAD2A20FAD188003FA7"
+               BlueprintIdentifier = "2039005230942C439110F5A46834A3F2"
                BuildableName = "Pods_TranxitUser.framework"
                BlueprintName = "Pods-TranxitUser"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3D03B0144FB3CAAD2A20FAD188003FA7"
+            BlueprintIdentifier = "2039005230942C439110F5A46834A3F2"
             BuildableName = "Pods_TranxitUser.framework"
             BlueprintName = "Pods-TranxitUser"
             ReferencedContainer = "container:Pods.xcodeproj">

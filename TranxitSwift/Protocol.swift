@@ -150,6 +150,7 @@ protocol PostPresenterOutputProtocol : class {
     func sendVerifiedMobile(api : Base, data: Data)
     func sendPayments(api: Base, data: Data)
     func sendSOS(api: Base, data: Data)
+    func sendPlaceInfo(api: Base, data: Data)
 
 }
 
@@ -181,6 +182,8 @@ protocol PostViewProtocol : class {
     func getVerifiedMobile(api: Base, data: successLog?)
     func getPayments(api: Base, data: Payment?)
     func getSOS(api: Base, data: sosModel?)
+    func getPlaceInfo(api: Base, data: [userLocation]?)
+
 
 }
 
@@ -219,6 +222,8 @@ extension PostViewProtocol {
     func getVerifiedMobile(api: Base, data: successLog?) { return }
     func getPayments(api: Base, data: Payment?) { return }
     func getSOS(api: Base, data: sosModel?) { return }
+    func getPlaceInfo(api: Base, data: [userLocation]?) {return}
+
 
 }
 

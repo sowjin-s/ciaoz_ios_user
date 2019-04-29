@@ -70,6 +70,7 @@ struct XIB {
     let PassbookWalletTransaction = "PassbookWalletTransaction"
     let TermsConditions = "termscondition"
     let SOSView = "SOSView"
+    let CustomPicker = "CustomPicker"
     
 }
 

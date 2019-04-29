@@ -23,6 +23,9 @@ class Signup : JSONSerializable {
     var ic_number: String?
     var country_code: String?
     var emergency_country_code: String?
-    var gender: Gender?
+    var gender: String?
     var referral_code: String?
+    var state_id: Int?
+    var city_id: Int?
+    var postalcode_id: Int?
 }

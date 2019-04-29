@@ -34,6 +34,7 @@ target 'TranxitUser' do
     pod 'CountryList'
     
     pod 'Branch'
+    pod 'DropDown'
 
 #  target 'UserTests' do
 #    inherit! :search_paths

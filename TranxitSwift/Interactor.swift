@@ -102,6 +102,9 @@ extension Interactor : PostInteractorOutputProtocol {
         case .sos:
             self.presenter?.sendSOS(api: api, data: response)
             
+        case .getCities,.getPostal,.getStates:
+            self.presenter?.sendPlaceInfo(api: api, data: response)
+            
         default :
             break
             

@@ -84,6 +84,9 @@ enum Base : String{
     case verifyMobile = "/check_mobile"
     case paymentType = "/payment_options"
     case sos = "/api/user/user_sos"
+    case getCities = "/get_cities"
+    case getPostal = "/get_postalcodes"
+    case getStates = "/get_states"
     
     init(fromRawValue: String){
         self = Base(rawValue: fromRawValue) ?? .signUp

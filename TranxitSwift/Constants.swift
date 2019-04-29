@@ -253,7 +253,9 @@ struct Constants {
     let familycontact = "Family Contact"
     let customerService = "Customer Service"
     let safetyAuth = "Safety Authority"
-
+    let city = "City"
+    let state = "State"
+    let postal = "PostalCode"
 
 }
 

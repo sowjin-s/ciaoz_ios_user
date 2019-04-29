@@ -9,6 +9,7 @@
 import UIKit
 import AccountKit
 import CountryList
+import DropDown
 
 class SignUpUserTableViewController: UITableViewController {
     
@@ -20,6 +21,14 @@ class SignUpUserTableViewController: UITableViewController {
     @IBOutlet var countryText: HoshiTextField!
     @IBOutlet var timeZone: HoshiTextField!
     @IBOutlet var referralCodeText: HoshiTextField!
+    
+    @IBOutlet var txtState: HoshiTextField!
+    @IBOutlet var txtCity: HoshiTextField!
+    @IBOutlet var txtPostal: HoshiTextField!
+    
+    @IBOutlet private weak var viewState: UIView!
+    @IBOutlet private weak var viewCity: UIView!
+    @IBOutlet private weak var viewPostal: UIView!
 
     @IBOutlet private weak var termsbtn: UIButton!
     @IBOutlet private weak var checkboxbtn: UIButton!
@@ -55,6 +64,7 @@ class SignUpUserTableViewController: UITableViewController {
     var TermsConditionsView : termscondition?
     var rideNow : RideNowView?
     private var countryList = CountryList()
+    private let dropDown = DropDown()
 
     
    // @IBOutlet var BusinessView: UIView!
@@ -73,8 +83,15 @@ class SignUpUserTableViewController: UITableViewController {
     
     var mobile: String?
     var code: String?
+    var postalCodeId: Int? = 0
+    var cityId: Int? = 0
+    var stateId: Int? = 0
     private var changedImage : UIImage?
     private var emergency_country_code: String? = ""
+    private var cityArray = [userLocation]()
+    private var stateArray = [userLocation]()
+    private var postalArray = [userLocation]()
+
     
     private lazy var  loader = {
         return createActivityIndicator(UIApplication.shared.keyWindow ?? self.view)
@@ -160,6 +177,9 @@ extension SignUpUserTableViewController: UIWebViewDelegate {
         Common.setFont(to: genderTitleLbl, isTitle: false, size:13.0)
         Common.setFont(to: maleLbl)
         Common.setFont(to: femaleLbl)
+        [self.txtPostal,self.txtState,self.txtCity].forEach {
+            Common.setFont(to: $0!)
+        }
 
         termsbtn.tintColor = UIColor.black
         //let image = #imageLiteral(resourceName: "check-box-empty").withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
@@ -171,7 +191,7 @@ extension SignUpUserTableViewController: UIWebViewDelegate {
     private func initialloads(){
         let val = UserDefaults.standard.value(forKey: "referralToken") as? String
         self.referralCodeText.text = val
-        self.setupAccountkit()
+        self.getPlaceDetails()
         self.phoneNumber.text = mobile
         self.checkboxbtn.addTarget(self, action: #selector(self.checkboxAction), for: .touchUpInside)
         self.termsbtn.addTarget(self, action: #selector(self.termsAction), for: .touchUpInside)
@@ -235,6 +255,10 @@ extension SignUpUserTableViewController: UIWebViewDelegate {
         self.referralCodeText.placeholder = Constants.string.referralCode.localize()
         self.timeZone.placeholder = Constants.string.emergencycontact.localize()
         self.termsbtn.setTitle(Constants.string.termsconditions.localize(), for: .normal)
+        self.txtCity.placeholder = Constants.string.city.localize()
+        self.txtState.placeholder = Constants.string.state.localize()
+        self.txtPostal.placeholder = Constants.string.postal.localize()
+        
 
 //        self.referralCodeText.placeholder = Constants.string.referalCode.localize()
 //        self.businessLabel.text = Constants.string.business.localize()
@@ -304,7 +328,7 @@ extension SignUpUserTableViewController: UIWebViewDelegate {
         //sender.view?.addPressAnimation()
         self.view.endEditingForce()
         guard let email = self.validateEmail() else { return }
-        
+
         guard let firstName = self.firstNameText.text, !firstName.isEmpty else {
             UIApplication.shared.keyWindow?.makeToast(ErrorMessage.list.enterFirstName.localize())
             return
@@ -313,7 +337,7 @@ extension SignUpUserTableViewController: UIWebViewDelegate {
             UIApplication.shared.keyWindow?.makeToast(ErrorMessage.list.enterLastName.localize())
             return
         }
-       
+
         guard let phoneNumber = phoneNumber.text, !phoneNumber.isEmpty, let mobile = Int(phoneNumber)  else {
             UIApplication.shared.keyWindow?.makeToast(ErrorMessage.list.enterMobileNumber.localize())
             return
@@ -322,14 +346,14 @@ extension SignUpUserTableViewController: UIWebViewDelegate {
             UIApplication.shared.keyWindow?.makeToast(ErrorMessage.list.enterPassword.localize())
             return
         }
-        
+
         guard password.count>=6 && password.count<=18 else {
             self.view.make(toast: Constants.string.enterValidpassword.localize()) {
                 self.passwordText.becomeFirstResponder()
             }
             return
         }
- 
+
         guard let confirmPwd = confirmPwdText.text, !confirmPwd.isEmpty else {
             UIApplication.shared.keyWindow?.makeToast(ErrorMessage.list.enterConfirmPassword.localize())
             return
@@ -342,15 +366,33 @@ extension SignUpUserTableViewController: UIWebViewDelegate {
             UIApplication.shared.keyWindow?.makeToast(ErrorMessage.list.entericnumber.localize())
             return
         }
-        
-        
+
+
         guard let emergencycontact = self.timeZone.text, !emergencycontact.isEmpty else {
             UIApplication.shared.keyWindow?.makeToast(ErrorMessage.list.enteremergencycontact.localize())
             return
         }
         guard isChecked != false else{
-            self.showToast(string: ErrorMessage.list.termscondition.localize())
+//            self.showToast(string: ErrorMessage.list.termscondition.localize())
             UIApplication.shared.keyWindow?.makeToast(ErrorMessage.list.termscondition.localize())
+            return
+        }
+
+        guard let city = self.txtCity.text, city.trimmingCharacters(in: .whitespacesAndNewlines).count > 1 else {
+            txtCity.shake()
+            UIApplication.shared.keyWindow?.make(toast: ErrorMessage.list.enterCity.localize())
+            return
+        }
+
+        guard let state = self.txtState.text, state.trimmingCharacters(in: .whitespacesAndNewlines).count > 1 else {
+            txtState.shake()
+            UIApplication.shared.keyWindow?.make(toast: ErrorMessage.list.enterState.localize())
+            return
+        }
+
+        guard let postal = self.txtPostal.text, postal.trimmingCharacters(in: .whitespacesAndNewlines).count > 1 else {
+            txtPostal.shake()
+            UIApplication.shared.keyWindow?.make(toast: ErrorMessage.list.enterPostal.localize())
             return
         }
         
@@ -371,10 +413,32 @@ extension SignUpUserTableViewController: UIWebViewDelegate {
         userInfo.password = password
         userInfo.emergency_contact_no = emergencycontact
         userInfo.ic_number = icnumber
-        userInfo.referral_code = self.referralCodeText.text
+        userInfo.referral_code = (!self.referralCodeText.text!.isEmpty ? "" : self.referralCodeText.text)
         userInfo.emergency_country_code = emergency_country_code
         userInfo.country_code = code
-        userInfo.gender = (isGenderSelected == false) ? .Male : .Female
+        userInfo.gender = (isGenderSelected == false) ? Gender.Male.rawValue : Gender.Female.rawValue
+        userInfo.state_id = stateId
+        userInfo.city_id = cityId
+        userInfo.postalcode_id = postalCodeId
+        
+//        userInfo.login_by = "manual"
+//        userInfo.device_id = UUID().uuidString
+//        userInfo.device_type = DeviceType.ios.rawValue
+//        userInfo.device_token = deviceTokenString
+//        userInfo.email = emailtext.text
+//        userInfo.first_name = "firstName"
+//        userInfo.last_name = "lastName"
+//        userInfo.mobile = "123475677"
+//        userInfo.password = "password"
+//        userInfo.emergency_contact_no = "emergencycontact"
+//        userInfo.ic_number = "icnumber"
+//        userInfo.referral_code = (!self.referralCodeText.text!.isEmpty ? "" : self.referralCodeText.text)
+//        userInfo.emergency_country_code = "emergency_country_code"
+//        userInfo.country_code = code
+//        userInfo.gender =  (isGenderSelected == false) ? Gender.Male.rawValue : Gender.Female.rawValue
+//        userInfo.state_id = 0
+//        userInfo.city_id = 0
+//        userInfo.postalcode_id = 0
 
         
 //        userInfo =  MakeJson.signUp(loginBy: .manual, email: email, password: password, socialId: nil, firstName: firstName, lastName: lastName, mobile: mobile, emergencycontact: emergencycontact, icnumber: icnumber, referral_code: self.referralCodeText.text, emergency_country_code: emergency_country_code, country_code: code, gender: (isGenderSelected == false) ? "Male" : "Female" )
@@ -415,16 +479,6 @@ extension SignUpUserTableViewController: UIWebViewDelegate {
       
     }
     
-    func setupAccountkit() {
-        
-//        self.accountKit = AKFAccountKit(responseType: .accessToken)
-//        let akPhone = AKFPhoneNumber(countryCode: "in", phoneNumber: "")
-//        let accountKitVC = accountKit?.viewControllerForPhoneLogin(with: akPhone, state: UUID().uuidString)
-//        accountKitVC!.enableSendToFacebook = true
-//        self.prepareLogin(viewcontroller: accountKitVC!)
-//        self.present(accountKitVC!, animated: true, completion: nil)
-    }
-    
     private func validateEmail()->String? {
         guard let email = emailtext.text?.trimmingCharacters(in: .whitespaces), !email.isEmpty else {
             self.showToast(string: ErrorMessage.list.enterEmail.localize())
@@ -440,13 +494,6 @@ extension SignUpUserTableViewController: UIWebViewDelegate {
     }
     
 
-//    private func prepareLogin(viewcontroller : UIViewController&AKFViewController) {
-//
-//        viewcontroller.delegate = self
-//        viewcontroller.uiManager = AKFSkinManager(skinType: .contemporary, primaryColor: .primary)
-//        viewcontroller.uiManager.theme?()?.buttonTextColor = .white
-//
-//    }
     
     // MARK:- Show Image
     
@@ -458,6 +505,45 @@ extension SignUpUserTableViewController: UIWebViewDelegate {
                 self.changedImage = self.imageProfile.image
             }
         }
+    }
+    
+    //MARK:- To get place details
+    private func getPlaceDetails(){
+        self.presenter?.get(api: .getCities, parameters: nil)
+        self.presenter?.get(api: .getStates, parameters: nil)
+        self.presenter?.get(api: .getPostal, parameters: nil)
+    }
+    
+    //MARK:- pick location info
+     private func getDataDropDown(_ textField: UITextField) -> ([String],[userLocation]) {
+        
+        switch textField {
+        case txtCity:
+            var datasource: [String] = []
+
+            self.cityArray.forEach {
+                datasource.append($0.name ?? "")
+            }
+            return (datasource,cityArray)
+        case txtState:
+            var datasource: [String] = []
+
+            self.stateArray.forEach {
+                datasource.append($0.name ?? "")
+            }
+            return (datasource,stateArray)
+        case txtPostal:
+            var datasource: [String] = []
+
+            self.postalArray.forEach {
+                datasource.append($0.postalcode ?? "")
+            }
+            return (datasource,postalArray)
+            
+        default:
+            return ([],[])
+        }
+        return ([],[])
     }
     
     
@@ -518,6 +604,21 @@ extension SignUpUserTableViewController : PostViewProtocol {
         }
 
     }
+    
+    func getPlaceInfo(api: Base, data: [userLocation]?) {
+        
+        loader.isHideInMainThread(true)
+        
+        if api == .getCities {
+            self.cityArray = data ?? []
+        } else if api == .getStates {
+            self.stateArray = data ?? []
+
+        }else {
+            self.postalArray = data ?? []
+        }
+    }
+    
 //
 //    func getVerifiedMobile(api: Base, data: successLog?) {
 //        self.loader.isHidden = true
@@ -588,7 +689,33 @@ extension SignUpUserTableViewController : UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         (textField as? HoshiTextField)?.borderActiveColor = .primary
         if textField == emailtext {
-        textField.placeholder = Constants.string.email.localize() }
+        textField.placeholder = Constants.string.email.localize()
+        }
+        
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+      
+        if textField == txtCity || textField == txtState || textField == txtPostal {
+            dropDown.anchorView = textField
+            dropDown.dataSource = getDataDropDown(textField).0
+            let arr = getDataDropDown(textField).1
+            dropDown.selectionAction = { [weak self] (index, item) in
+                textField.text = item // assign selected item
+                if textField == self?.txtCity   {
+                  self?.cityId = arr[index].id
+                } else if textField == self?.txtState {
+                   self?.stateId = arr[index].id
+                } else {
+                   self?.postalCodeId = arr[index].id
+                }
+            }
+            DropDown.setupDefaultAppearance()
+            dropDown.cellNib = UINib(nibName: "DropDownCell", bundle: Bundle(for: DropDownCell.self))
+            dropDown.show()
+            return false
+        }
+        return true
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -619,3 +746,4 @@ extension SignUpUserTableViewController : CountryListDelegate {
     }
     
 }
+
