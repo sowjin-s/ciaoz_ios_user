@@ -20,6 +20,7 @@ class EstimateFare : JSONSerializable {
     var useWallet : Int?
     var base_price : Float?
     var service_type : Int?
+    var estimated_fare_surge: Float?
     
    /* required init(from decoder: Decoder) throws {
         

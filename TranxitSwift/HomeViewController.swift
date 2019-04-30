@@ -878,7 +878,8 @@ extension HomeViewController {
                 request.estimated_distance = "\(service.pricing?.distance ?? 0)"
                 request.estimated_fare = "\(service.pricing?.estimated_fare ?? 0)"
                 request.estimated_time = "\(service.pricing?.time ?? "0 mins")"
-                
+                request.estimated_fare_surge = "\(service.pricing?.estimated_fare_surge ?? 0)"
+
                 if isScheduled {
                     if let dateString = Formatter.shared.getString(from: scheduleDate, format: DateFormat.list.ddMMyyyyhhmma) {
                         let dateArray = dateString.components(separatedBy: " ")

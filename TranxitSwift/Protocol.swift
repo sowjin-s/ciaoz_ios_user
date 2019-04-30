@@ -151,6 +151,7 @@ protocol PostPresenterOutputProtocol : class {
     func sendPayments(api: Base, data: Data)
     func sendSOS(api: Base, data: Data)
     func sendPlaceInfo(api: Base, data: Data)
+    func sendApplyPromo(api: Base, data: Data)
 
 }
 
@@ -183,6 +184,7 @@ protocol PostViewProtocol : class {
     func getPayments(api: Base, data: Payment?)
     func getSOS(api: Base, data: sosModel?)
     func getPlaceInfo(api: Base, data: [userLocation]?)
+    func getApplyPromo(api: Base, data: ApplyPromo?)
 
 
 }
@@ -223,12 +225,6 @@ extension PostViewProtocol {
     func getPayments(api: Base, data: Payment?) { return }
     func getSOS(api: Base, data: sosModel?) { return }
     func getPlaceInfo(api: Base, data: [userLocation]?) {return}
-
+    func getApplyPromo(api: Base, data: ApplyPromo?) {return}
 
 }
-
-
-
-//protocol RerouteDelegate: class {
-//    func doReroute()
-//}

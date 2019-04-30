@@ -134,6 +134,11 @@ class PresenterProcessor {
         return data.getDecodedObject(from: [userLocation].self)
     }
     
+    //MARK:- sos
+    func promo(data: Data)-> ApplyPromo?{
+        return data.getDecodedObject(from: ApplyPromo.self)
+    }
+    
 }
 
 

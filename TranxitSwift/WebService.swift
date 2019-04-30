@@ -286,10 +286,6 @@ class Webservice : PostWebServiceProtocol {
         urlRequest?.addValue(WebConstants.string.XMLHttpRequest, forHTTPHeaderField: WebConstants.string.X_Requested_With)
         urlRequest?.addValue(WebConstants.string.bearer+String.removeNil(User.main.accessToken), forHTTPHeaderField: WebConstants.string.Authorization)
         
-        if api == .promocodes {
-            urlRequest?.setValue(nil, forHTTPHeaderField: WebConstants.string.X_Requested_With)
-        }
-        
 
         Alamofire.request(urlRequest!).validate(statusCode: StatusCode.success.rawValue..<StatusCode.multipleResponse.rawValue).responseJSON { (response) in
             let api = response.request?.value(forHTTPHeaderField: WebConstants.string.secretKey) ?? .Empty

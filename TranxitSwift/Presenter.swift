@@ -155,6 +155,10 @@ extension Presenter : PostPresenterOutputProtocol {
         controller?.getPlaceInfo(api: api, data: PresenterProcessor.shared.locationInfo(data: data))
     }
     
+    func sendApplyPromo(api: Base, data: Data) {
+        controller?.getApplyPromo(api: api, data: PresenterProcessor.shared.promo(data: data))
+    }
+    
 }
 
 

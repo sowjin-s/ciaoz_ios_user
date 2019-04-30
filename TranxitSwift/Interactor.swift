@@ -105,6 +105,9 @@ extension Interactor : PostInteractorOutputProtocol {
         case .getCities,.getPostal,.getStates:
             self.presenter?.sendPlaceInfo(api: api, data: response)
             
+        case .applyPromo:
+            self.presenter?.sendApplyPromo(api: api, data: response)
+            
         default :
             break
             

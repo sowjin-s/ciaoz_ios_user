@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import os.log
 
 class RequestSelectionView: UIView {
     
@@ -19,6 +20,7 @@ class RequestSelectionView: UIView {
     @IBOutlet private weak var ViewLadyDriver: UIView!
     @IBOutlet private weak var labelEstimationFareString : UILabel!
     @IBOutlet private weak var labelEstimationFare : UILabel!
+    @IBOutlet private weak var labelCouponFare : UILabel!
     @IBOutlet private weak var labelCouponString : UILabel!
     @IBOutlet private weak var labelPaymentMode : Label!
     @IBOutlet private weak var buttonChangePayment : UIButton!
@@ -40,15 +42,32 @@ class RequestSelectionView: UIView {
     var rideNowAction : ((Service)->())?
     var paymentChangeClick : ((_ completion : @escaping ((CardEntity?)->()))->Void)?
     var onclickCoupon : ((_ couponList : [PromocodeEntity],_ selected : PromocodeEntity?, _ promo : ((PromocodeEntity?)->())?)->Void)?
-    var selectedCoupon : PromocodeEntity? { // Selected Promocode
+    var selectedCoupon : PromocodeEntity?
+//    { // Selected Promocode
+//        didSet{
+//            /*if let percentage = selectedCoupon?.value, let maxAmount = selectedCoupon?.max_amount, let fare = self.service?.pricing?.estimated_fare{
+//                let discount = fare*(percentage/100)
+//                let discountAmount = discount > maxAmount ? maxAmount : discount
+//                self.setEstimationFare(amount: fare-discountAmount)
+//
+//            } else {
+//                self.setEstimationFare(amount: self.service?.pricing?.estimated_fare)
+//            } */
+//
+//            if let strikeOut = selectedCoupon?.strike_out, strikeOut != 0 {
+//                self.setEstimationFare(amount: selectedCoupon?.amount,isStrike: true)
+//            } else {
+//                self.setEstimationFare(amount: selectedCoupon?.amount,isStrike: false)
+//            }
+//        }
+//    }
+    
+    var appliedPromo: ApplyPromo?{
         didSet{
-            if let percentage = selectedCoupon?.value, let maxAmount = selectedCoupon?.max_amount, let fare = self.service?.pricing?.estimated_fare{
-                let discount = fare*(percentage/100)
-                let discountAmount = discount > maxAmount ? maxAmount : discount
-                self.setEstimationFare(amount: fare-discountAmount)
-                
+            if let strikeOut = appliedPromo?.strike_out, strikeOut != 0 {
+                self.setEstimationFare(amount: appliedPromo?.amount,isStrike: true)
             } else {
-                self.setEstimationFare(amount: self.service?.pricing?.estimated_fare)
+                self.setEstimationFare(amount: appliedPromo?.amount,isStrike: false)
             }
         }
     }
@@ -166,6 +185,7 @@ extension RequestSelectionView {
         Common.setFont(to: labelUseWalletString)
         Common.setFont(to: labelEstimationFareString, isTitle: true)
         Common.setFont(to: labelEstimationFare, isTitle: true)
+        Common.setFont(to: labelCouponFare, isTitle: true)
         Common.setFont(to: labelCouponString)
         Common.setFont(to: labelPaymentMode)
         Common.setFont(to: buttonChangePayment)
@@ -194,7 +214,7 @@ extension RequestSelectionView {
     func setValues(values : Service) {
         self.service = values
         self.viewUseWallet.isHidden = !(Float.removeNil(self.service?.pricing?.wallet_balance)>0)
-        self.setEstimationFare(amount: self.service?.pricing?.estimated_fare)
+        self.setEstimationFare(amount: self.service?.pricing?.estimated_fare, isStrike: false)
         self.paymentType = User.main.isCashAllowed ? .CASH :( User.main.isCardAllowed ? .MOLPAY : .NONE)
         self.imageViewModal.setImage(with: values.image, placeHolder: #imageLiteral(resourceName: "CarplaceHolder"))
         self.labelWalletBalance.text = "\(String.removeNil(User.main.currency)) \(Formatter.shared.limit(string: "\(Float.removeNil(self.service?.pricing?.wallet_balance))", maximumDecimal: 2))"
@@ -214,8 +234,24 @@ extension RequestSelectionView {
         self.isladydriverselected = false
     }
     
-    func setEstimationFare(amount : Float?) {
-        self.labelEstimationFare.text = "\(User.main.currency ?? .Empty) \(Formatter.shared.limit(string: "\(amount ?? 0)", maximumDecimal: 2))"
+    func setEstimationFare(amount : Float?,isStrike: Bool?) {
+        //self.labelEstimationFare.text = "\(User.main.currency ?? .Empty) \(Formatter.shared.limit(string: "\(amount ?? 0)", maximumDecimal: 2))"
+        var attrStr = NSMutableAttributedString()
+        if isStrike! { //if promoAmount more than estimated fare
+            
+            self.labelCouponFare.isHidden = false
+            let val = self.service?.pricing?.estimated_fare
+            attrStr = NSMutableAttributedString(string: "\(User.main.currency ?? .Empty) \(Formatter.shared.limit(string: "\(val ?? 0)", maximumDecimal: 2))")
+            attrStr.addAttribute(NSAttributedString.Key.strikethroughStyle, value: NSNumber(value: NSUnderlineStyle.single.rawValue), range: NSMakeRange(0, attrStr.length))
+            attrStr.addAttribute(NSAttributedString.Key.strikethroughColor, value: UIColor.darkGray, range: NSMakeRange(0, attrStr.length))
+            
+            self.labelEstimationFare.attributedText = attrStr
+            self.labelCouponFare.text = "\(User.main.currency ?? .Empty) \(Formatter.shared.limit(string: "\(amount ?? 0)", maximumDecimal: 2))"
+        } else { //
+            self.labelEstimationFare.attributedText = NSMutableAttributedString(string:"\(User.main.currency ?? .Empty) \(Formatter.shared.limit(string: "\(amount ?? 0)", maximumDecimal: 2))")
+            self.labelCouponFare.isHidden = true
+        }
+        
     }
     
     @IBAction private func buttonScheduleAction(){
@@ -234,10 +270,17 @@ extension RequestSelectionView {
     }
     @IBAction private func buttonCouponAction() {
         self.onclickCoupon?( self.availablePromocodes,self.selectedCoupon, { [weak self] selectedCouponCode in  // send Available couponlist and get the selected coupon entity
+            if selectedCouponCode != nil {
+                var request = ApplyPromo()
+                request.estimated_fare_surge = self?.service?.pricing?.estimated_fare_surge
+                request.promocode_id = selectedCouponCode?.id
+                self?.presenter?.post(api: .applyPromo, data: request.toData())
+            } else { //set previous estimated value if promo removed.
+                self?.setEstimationFare(amount: self?.service?.pricing?.estimated_fare,isStrike: false)
+            }
             self?.selectedCoupon = selectedCouponCode
-            let amount =
             self?.isPromocodeEnabled = true
-            })
+        })
     }
     @IBAction private func buttonChangePaymentAction() {
         self.paymentChangeClick?({ [weak self] selectedCard in
@@ -256,5 +299,16 @@ extension RequestSelectionView : PostViewProtocol {
     func getPromocodeList(api: Base, data: [PromocodeEntity]) {
         self.availablePromocodes = data
     }
+    
+    func getApplyPromo(api: Base, data: ApplyPromo?) {
+        if data != nil {
+            self.appliedPromo = data!
+        }
+        
+        self.appliedPromo = data
+        //self.selectedCoupon = data
+       // self.isPromocodeEnabled = true
+    }
+    
 }
 

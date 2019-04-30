@@ -58,6 +58,7 @@ class Request : JSONSerializable {
     var estimated_fare : String?
     var estimated_distance: String?
     var estimated_time: String?
+    var estimated_fare_surge : String?
     
   /*
     enum CodingKeys: String, CodingKey {
