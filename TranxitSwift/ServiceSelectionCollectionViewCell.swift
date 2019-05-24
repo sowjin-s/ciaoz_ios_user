@@ -56,7 +56,7 @@ class ServiceSelectionCollectionViewCell: UICollectionViewCell {
             return nil
             }() : nil
         self.labelETA.text =  isSelected ? {
-            if let fare = self.service?.pricing?.estimated_fare {
+            if let fare = self.service?.pricing?.estimated_fare_surge {
                 return "\(String.removeNil(User.main.currency))\(Formatter.shared.limit(string: "\(fare)", maximumDecimal: 2))"
             }
             return nil

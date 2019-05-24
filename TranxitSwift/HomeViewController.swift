@@ -877,7 +877,7 @@ extension HomeViewController {
                 
                 request.estimated_distance = "\(service.pricing?.distance ?? 0)"
                 request.estimated_fare = "\(service.pricing?.estimated_fare ?? 0)"
-                request.estimated_time = "\(service.pricing?.time ?? "0 mins")"
+                request.estimated_time = "\(service.pricing?.estimated_time ?? 0)"
                 request.estimated_fare_surge = "\(service.pricing?.estimated_fare_surge ?? 0)"
 
                 if isScheduled {

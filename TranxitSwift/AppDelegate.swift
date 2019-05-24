@@ -54,6 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // listener for Branch Deep Link data
         Branch.getInstance().initSession(launchOptions: launchOptions) { (params, error) in
             // do stuff with deep link data (nav to page, display content, etc)
+            print(params)
             let code = params?["referral"] as? String ?? ""
             UserDefaults.standard.set(code , forKey: "referralToken")
             UserDefaults.standard.synchronize()

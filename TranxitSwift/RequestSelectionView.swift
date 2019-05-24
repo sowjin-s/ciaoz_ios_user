@@ -214,7 +214,7 @@ extension RequestSelectionView {
     func setValues(values : Service) {
         self.service = values
         self.viewUseWallet.isHidden = !(Float.removeNil(self.service?.pricing?.wallet_balance)>0)
-        self.setEstimationFare(amount: self.service?.pricing?.estimated_fare, isStrike: false)
+        self.setEstimationFare(amount: self.service?.pricing?.estimated_fare_surge, isStrike: false)
         self.paymentType = User.main.isCashAllowed ? .CASH :( User.main.isCardAllowed ? .MOLPAY : .NONE)
         self.imageViewModal.setImage(with: values.image, placeHolder: #imageLiteral(resourceName: "CarplaceHolder"))
         self.labelWalletBalance.text = "\(String.removeNil(User.main.currency)) \(Formatter.shared.limit(string: "\(Float.removeNil(self.service?.pricing?.wallet_balance))", maximumDecimal: 2))"
@@ -240,7 +240,7 @@ extension RequestSelectionView {
         if isStrike! { //if promoAmount more than estimated fare
             
             self.labelCouponFare.isHidden = false
-            let val = self.service?.pricing?.estimated_fare
+            let val = self.service?.pricing?.estimated_fare_surge
             attrStr = NSMutableAttributedString(string: "\(User.main.currency ?? .Empty) \(Formatter.shared.limit(string: "\(val ?? 0)", maximumDecimal: 2))")
             attrStr.addAttribute(NSAttributedString.Key.strikethroughStyle, value: NSNumber(value: NSUnderlineStyle.single.rawValue), range: NSMakeRange(0, attrStr.length))
             attrStr.addAttribute(NSAttributedString.Key.strikethroughColor, value: UIColor.darkGray, range: NSMakeRange(0, attrStr.length))
@@ -276,7 +276,8 @@ extension RequestSelectionView {
                 request.promocode_id = selectedCouponCode?.id
                 self?.presenter?.post(api: .applyPromo, data: request.toData())
             } else { //set previous estimated value if promo removed.
-                self?.setEstimationFare(amount: self?.service?.pricing?.estimated_fare,isStrike: false)
+                let value = self?.service?.pricing?.estimated_fare_surge
+                self?.setEstimationFare(amount: value,isStrike: false)
             }
             self?.selectedCoupon = selectedCouponCode
             self?.isPromocodeEnabled = true

@@ -73,13 +73,11 @@ extension ReferralViewController {
     
     
     @objc func copyAction(){
-    
         UIPasteboard.general.string = referralCodeLabel.text
         self.view.makeToast("COPIED")
-        
     }
     
-
+    
     @IBAction private func buttonShareAction() {
         
         guard let code = referralCodeLabel.text, !code.isEmpty else {
@@ -91,10 +89,6 @@ extension ReferralViewController {
      
         let buo = BranchUniversalObject.init(canonicalIdentifier: "content/12345")
         buo.title = "Ciaoz User"
-        //buo.contentDescription = "Your friend invited you to download"
-       // buo.imageUrl = "https://lorempixel.com/400/400"
-        //buo.publiclyIndex = true
-        //buo.locallyIndex = true
         buo.contentMetadata.customMetadata["referral"] = self.referralCodeLabel.text
         
         let lp: BranchLinkProperties = BranchLinkProperties()
@@ -105,21 +99,9 @@ extension ReferralViewController {
             print(url ?? "")
             let text = "Your friend invited you to download CiaozUser" + " " + url!
             self.referalURL = text
-            
-            // set up activity view controller
-            let textToShare: [Any] = [self.referalURL!]
+            let textToShare: [Any] = [self.referalURL! , "/\(self.referralCodeLabel.text!)"]
             self.share(items: textToShare)
         }
-        
-//        buo.showShareSheet(with: lp,andShareText: referalURL,from: self) { (activityType, completed) in
-//            if (completed) {
-//                print(String(format: "Completed sharing to %@", activityType!))
-//            } else {
-//                print("Link sharing cancelled")
-//            }
-//        }
-        
-        
     }
     
     // MARK:- Share Items
@@ -130,7 +112,6 @@ extension ReferralViewController {
         self.present(activityController, animated: true, completion: nil)
         
     }
-    
     
     // MARK:- Set Design
     private func setDesign () {
@@ -143,10 +124,8 @@ extension ReferralViewController {
     
     // MARK:- Get Data From Api
     private func getFromApi() {
-        
         self.loader.isHideInMainThread(false)
         self.presenter?.get(api: .referral, parameters: nil)
-
     }
     
     
@@ -157,7 +136,6 @@ extension ReferralViewController {
 extension ReferralViewController : PostViewProtocol  {
     
     func onError(api: Base, message: String, statusCode code: Int) {
-        print("shgdhjs")
         DispatchQueue.main.async {
             self.loader.isHidden = true
             showAlert(message: message, okHandler: nil, fromView: self)
@@ -167,7 +145,6 @@ extension ReferralViewController : PostViewProtocol  {
     func getReferral(api: Base, data: referralModel) {
         DispatchQueue.main.async {
             self.loader.isHidden = true
-            print("skdhj")
             self.referralCodeLabel.text = data.referral_code
         }
     }

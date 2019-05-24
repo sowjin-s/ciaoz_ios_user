@@ -11,6 +11,7 @@ import Foundation
 class EstimateFare : JSONSerializable {
     
     var estimated_fare : Float?
+    var estimated_time : Float?
     var distance : Float?
     var time : String?
     var surge_value : String?

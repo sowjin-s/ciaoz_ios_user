@@ -177,9 +177,9 @@ extension SignUpUserTableViewController: UIWebViewDelegate {
         Common.setFont(to: genderTitleLbl, isTitle: false, size:13.0)
         Common.setFont(to: maleLbl)
         Common.setFont(to: femaleLbl)
-        [self.txtPostal,self.txtState,self.txtCity].forEach {
-            Common.setFont(to: $0!)
-        }
+//        [self.txtPostal,self.txtState,self.txtCity].forEach {
+//            Common.setFont(to: $0!)
+//        }
 
         termsbtn.tintColor = UIColor.black
         //let image = #imageLiteral(resourceName: "check-box-empty").withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
@@ -191,7 +191,8 @@ extension SignUpUserTableViewController: UIWebViewDelegate {
     private func initialloads(){
         let val = UserDefaults.standard.value(forKey: "referralToken") as? String
         self.referralCodeText.text = val
-        self.getPlaceDetails()
+        self.referralCodeText.text = "sdfghjksdfghjk"
+       // self.getPlaceDetails()
         self.phoneNumber.text = mobile
         self.checkboxbtn.addTarget(self, action: #selector(self.checkboxAction), for: .touchUpInside)
         self.termsbtn.addTarget(self, action: #selector(self.termsAction), for: .touchUpInside)
@@ -255,14 +256,9 @@ extension SignUpUserTableViewController: UIWebViewDelegate {
         self.referralCodeText.placeholder = Constants.string.referralCode.localize()
         self.timeZone.placeholder = Constants.string.emergencycontact.localize()
         self.termsbtn.setTitle(Constants.string.termsconditions.localize(), for: .normal)
-        self.txtCity.placeholder = Constants.string.city.localize()
-        self.txtState.placeholder = Constants.string.state.localize()
-        self.txtPostal.placeholder = Constants.string.postal.localize()
-        
-
-//        self.referralCodeText.placeholder = Constants.string.referalCode.localize()
-//        self.businessLabel.text = Constants.string.business.localize()
-//        self.personalLabel.text = Constants.string.personal.localize()
+//        self.txtCity.placeholder = Constants.string.city.localize()
+//        self.txtState.placeholder = Constants.string.state.localize()
+//        self.txtPostal.placeholder = Constants.string.postal.localize()
         
     }
     
@@ -378,7 +374,7 @@ extension SignUpUserTableViewController: UIWebViewDelegate {
             return
         }
 
-        guard let city = self.txtCity.text, city.trimmingCharacters(in: .whitespacesAndNewlines).count > 1 else {
+      /*  guard let city = self.txtCity.text, city.trimmingCharacters(in: .whitespacesAndNewlines).count > 1 else {
             txtCity.shake()
             UIApplication.shared.keyWindow?.make(toast: ErrorMessage.list.enterCity.localize())
             return
@@ -394,7 +390,7 @@ extension SignUpUserTableViewController: UIWebViewDelegate {
             txtPostal.shake()
             UIApplication.shared.keyWindow?.make(toast: ErrorMessage.list.enterPostal.localize())
             return
-        }
+        } */
         
       /*  guard let referralCode = referralCodeText.text, referralCode.isEmpty else {
             UIApplication.shared.keyWindow?.makeToast(ErrorMessage.list.enterReferralCode)
@@ -417,31 +413,9 @@ extension SignUpUserTableViewController: UIWebViewDelegate {
         userInfo.emergency_country_code = emergency_country_code
         userInfo.country_code = code
         userInfo.gender = (isGenderSelected == false) ? Gender.Male.rawValue : Gender.Female.rawValue
-        userInfo.state_id = stateId
-        userInfo.city_id = cityId
-        userInfo.postalcode_id = postalCodeId
-        
-//        userInfo.login_by = "manual"
-//        userInfo.device_id = UUID().uuidString
-//        userInfo.device_type = DeviceType.ios.rawValue
-//        userInfo.device_token = deviceTokenString
-//        userInfo.email = emailtext.text
-//        userInfo.first_name = "firstName"
-//        userInfo.last_name = "lastName"
-//        userInfo.mobile = "123475677"
-//        userInfo.password = "password"
-//        userInfo.emergency_contact_no = "emergencycontact"
-//        userInfo.ic_number = "icnumber"
-//        userInfo.referral_code = (!self.referralCodeText.text!.isEmpty ? "" : self.referralCodeText.text)
-//        userInfo.emergency_country_code = "emergency_country_code"
-//        userInfo.country_code = code
-//        userInfo.gender =  (isGenderSelected == false) ? Gender.Male.rawValue : Gender.Female.rawValue
-//        userInfo.state_id = 0
-//        userInfo.city_id = 0
-//        userInfo.postalcode_id = 0
-
-        
-//        userInfo =  MakeJson.signUp(loginBy: .manual, email: email, password: password, socialId: nil, firstName: firstName, lastName: lastName, mobile: mobile, emergencycontact: emergencycontact, icnumber: icnumber, referral_code: self.referralCodeText.text, emergency_country_code: emergency_country_code, country_code: code, gender: (isGenderSelected == false) ? "Male" : "Female" )
+//        userInfo.state_id = stateId
+//        userInfo.city_id = cityId
+//        userInfo.postalcode_id = postalCodeId
         
         if self.changedImage != nil, let dataImg = self.changedImage!.pngData() {
            
@@ -694,7 +668,7 @@ extension SignUpUserTableViewController : UITextFieldDelegate {
         
     }
     
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+   /* func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
       
         if textField == txtCity || textField == txtState || textField == txtPostal {
             dropDown.anchorView = textField
@@ -716,7 +690,7 @@ extension SignUpUserTableViewController : UITextFieldDelegate {
             return false
         }
         return true
-    }
+    }*/
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         (textField as? HoshiTextField)?.borderActiveColor = .lightGray
