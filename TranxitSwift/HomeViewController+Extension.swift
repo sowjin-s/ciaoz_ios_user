@@ -183,6 +183,10 @@ extension HomeViewController {
                 self?.removeCouponView()
             })
         }
+        self.estimationFareView?.airportFareAction = {
+            print("showairport fare")
+            self.showAirportFare(with: service.pricing!)
+        }
      }
      //self.getEstimateFareFor(serviceId: service?.id)
      self.estimationFareView?.setValues(values: service)
@@ -198,6 +202,30 @@ extension HomeViewController {
         })
         self.estimationFareView = nil
      }
+    
+    
+    //MARK:- show Airport fare
+    func showAirportFare(with fare: EstimateFare) {
+        guard self.sosView == nil else {
+            print("return")
+            return
+        }
+        if let sos = Bundle.main.loadNibNamed(XIB.Names.SOSView, owner: self, options: [:])?.first as? SOSView {
+            NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShowRateView(info:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHideRateView(info:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+            sos.frame = self.view.bounds
+            sos.showAirportFare = true
+            sos.setAirportFare(with: fare)
+            sosView = sos
+            self.view.addSubview(sosView!)
+            sosView?.show(with: .bottom, completion: nil)
+        }
+        sosView?.onClickCancel = {() in            
+            self.sosView?.dismissView(onCompletion: {
+                self.sosView = nil
+            })
+        }
+    }
     
     
     // MARK:- Show Coupon View
@@ -395,7 +423,6 @@ extension HomeViewController {
             NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHideRateView(info:)), name: UIResponder.keyboardWillHideNotification, object: nil)
             self.viewAddressOuter.isHidden = true
             self.viewLocationButtons.isHidden = true
-            //sos.frame = CGRect(origin: CGPoint(x: 0, y: self.view.frame.height-sos.frame.height), size: CGSize(width: self.view.frame.width, height: sos.frame.height))
             sos.frame = self.view.bounds
             sos.set(value: detail)
             sosView = sos

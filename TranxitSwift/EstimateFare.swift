@@ -22,6 +22,8 @@ class EstimateFare : JSONSerializable {
     var base_price : Float?
     var service_type : Int?
     var estimated_fare_surge: Float?
+    var is_airport_location: String?
+    var airport_fares: [AirportFare]?
     
    /* required init(from decoder: Decoder) throws {
         
@@ -61,5 +63,13 @@ class EstimateFare : JSONSerializable {
     
     
 }
+
+class AirportFare : JSONSerializable {
+    
+    var price: String?
+    var radius: String?
+    
+}
+
 
 

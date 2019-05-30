@@ -45,7 +45,6 @@ extension CouponCollectionViewCell {
     private func localize() {
         self.buttonApply.addTarget(self, action: #selector(self.buttonApplyAction), for: .touchUpInside)
         self.labelCouponCode.textColor = .black
-        //self.labelValidity.textColor = .lightGray
         self.labelCouponDescription.textColor = .gray
         self.buttonApply.setTitleColor(.secondary, for: .normal)
     }
@@ -54,7 +53,6 @@ extension CouponCollectionViewCell {
         
         Common.setFont(to: labelCouponCode, isTitle: true)
         Common.setFont(to: labelCouponDescription, isTitle: true)
-        //Common.setFont(to: labelValidity)
         Common.setFont(to: buttonApply, isTitle: true)
     }
     

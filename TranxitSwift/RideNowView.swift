@@ -279,7 +279,6 @@ extension RideNowView {
             estimateFare.d_latitude = self.destinationCoordinate.latitude
             estimateFare.d_longitude = self.destinationCoordinate.longitude
             estimateFare.service_type = serviceId
-           // print("\nselected ---",self.presenter)
             self.presenter?.get(api: .estimateFare, parameters: estimateFare.JSONRepresentation)
         }
         self.resetProgressView()

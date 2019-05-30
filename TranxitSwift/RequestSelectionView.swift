@@ -24,6 +24,9 @@ class RequestSelectionView: UIView {
     @IBOutlet private weak var labelCouponString : UILabel!
     @IBOutlet private weak var labelPaymentMode : Label!
     @IBOutlet private weak var buttonChangePayment : UIButton!
+    @IBOutlet private weak var labelAirportString : Label!
+    @IBOutlet private weak var buttonViewAirportFare : UIButton!
+    @IBOutlet private weak var viewAirportFare : UIView!
     @IBOutlet private weak var buttonCoupon : UIButton!
     @IBOutlet private weak var imageViewModal : UIImageView!
     @IBOutlet private weak var viewImageModalBg : UIView!
@@ -40,6 +43,7 @@ class RequestSelectionView: UIView {
     
     var scheduleAction : ((Service)->())?
     var rideNowAction : ((Service)->())?
+    var airportFareAction : (()->())?
     var paymentChangeClick : ((_ completion : @escaping ((CardEntity?)->()))->Void)?
     var onclickCoupon : ((_ couponList : [PromocodeEntity],_ selected : PromocodeEntity?, _ promo : ((PromocodeEntity?)->())?)->Void)?
     var selectedCoupon : PromocodeEntity?
@@ -168,6 +172,7 @@ extension RequestSelectionView {
         }*/
 //        self.buttonChangePayment.isHidden = !(User.main.isCashAllowed && User.main.isCardAllowed) // Change button enabled only if both payment modes are enabled
         self.buttonChangePayment.addTarget(self, action: #selector(self.buttonChangePaymentAction), for: .touchUpInside)
+        self.buttonViewAirportFare.addTarget(self, action: #selector(self.buttonAirportFareAction), for: .touchUpInside)
         self.buttonCoupon.addTarget(self, action: #selector(self.buttonCouponAction), for: .touchUpInside)
         self.viewLadyDriverYes.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapLadyDriverYes(_:))))
         self.viewLadyDriverNo.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapLadyDriverNo(_:))))
@@ -189,6 +194,8 @@ extension RequestSelectionView {
         Common.setFont(to: labelCouponString)
         Common.setFont(to: labelPaymentMode)
         Common.setFont(to: buttonChangePayment)
+        Common.setFont(to: labelAirportString)
+        Common.setFont(to: buttonViewAirportFare)
         Common.setFont(to: buttonCoupon)
         Common.setFont(to: labelWalletBalance, isTitle: true)
         Common.setFont(to: labelLadyDriver)
@@ -201,18 +208,20 @@ extension RequestSelectionView {
     // MARK:- Localize
     
     private func localize() {
-        
         self.labelUseWalletString.text = Constants.string.useWalletAmount.localize()
         self.buttonScheduleRide.setTitle(Constants.string.scheduleRide.localize().uppercased(), for: .normal)
         self.buttonRideNow.setTitle(Constants.string.rideNow.localize().uppercased(), for: .normal)
         self.labelEstimationFareString.text = Constants.string.estimatedFare.localize()
         self.labelCouponString.text = Constants.string.coupon.localize()
         self.buttonChangePayment.setTitle(Constants.string.change.localize().uppercased(), for: .normal)
+        self.labelAirportString.text = Constants.string.airportFare.localize()
+        self.buttonViewAirportFare.setTitle(Constants.string.viewFare.localize().uppercased(), for: .normal)
     }
     
     
     func setValues(values : Service) {
         self.service = values
+       // self.viewAirportFare.isHidden = (values.pricing?.is_airport_location?.lowercased() != "no") ? false : true
         self.viewUseWallet.isHidden = !(Float.removeNil(self.service?.pricing?.wallet_balance)>0)
         self.setEstimationFare(amount: self.service?.pricing?.estimated_fare_surge, isStrike: false)
         self.paymentType = User.main.isCashAllowed ? .CASH :( User.main.isCardAllowed ? .MOLPAY : .NONE)
@@ -288,6 +297,10 @@ extension RequestSelectionView {
             self?.selectedCard = selectedCard
         })
     }
+    
+    @IBAction private func buttonAirportFareAction() {
+        self.airportFareAction?()
+    }
 }
 
 // MARK:- PostViewProtocol
@@ -307,8 +320,7 @@ extension RequestSelectionView : PostViewProtocol {
         }
         
         self.appliedPromo = data
-        //self.selectedCoupon = data
-       // self.isPromocodeEnabled = true
+
     }
     
 }

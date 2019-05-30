@@ -16,10 +16,6 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xoh-Qz-hCC">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ney-vA-PIg">
                     <rect key="frame" x="10" y="217" width="355" height="233"/>
                     <subviews>
@@ -168,17 +164,59 @@
                         <constraint firstItem="aA7-CC-Dd8" firstAttribute="centerX" secondItem="ney-vA-PIg" secondAttribute="centerX" id="rXZ-hW-d3X"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TOy-G4-0Yo">
+                    <rect key="frame" x="16" y="167" width="343" height="333.5"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Airport Fare" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tVh-Zc-DBo">
+                            <rect key="frame" x="10" y="10" width="323" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="GkX-at-HUX"/>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="XUS-dd-gQf"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hOs-Df-kbo">
+                            <rect key="frame" x="0.0" y="56" width="343" height="277.5"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <outlet property="dataSource" destination="urG-hl-Pf4" id="b9w-j7-UJu"/>
+                                <outlet property="delegate" destination="urG-hl-Pf4" id="9JZ-dU-SHD"/>
+                            </connections>
+                        </tableView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="hOs-Df-kbo" firstAttribute="leading" secondItem="TOy-G4-0Yo" secondAttribute="leading" id="2o6-FZ-voJ"/>
+                        <constraint firstAttribute="trailing" secondItem="hOs-Df-kbo" secondAttribute="trailing" id="31K-Gp-sWI"/>
+                        <constraint firstItem="hOs-Df-kbo" firstAttribute="top" secondItem="tVh-Zc-DBo" secondAttribute="bottom" constant="16" id="GOY-WD-ugN"/>
+                        <constraint firstItem="tVh-Zc-DBo" firstAttribute="leading" secondItem="TOy-G4-0Yo" secondAttribute="leading" constant="10" id="GaC-02-Sgy"/>
+                        <constraint firstAttribute="bottom" secondItem="hOs-Df-kbo" secondAttribute="bottom" id="USz-4t-BrT"/>
+                        <constraint firstItem="tVh-Zc-DBo" firstAttribute="top" secondItem="TOy-G4-0Yo" secondAttribute="top" constant="10" id="qrZ-w6-tJ3"/>
+                        <constraint firstAttribute="trailing" secondItem="tVh-Zc-DBo" secondAttribute="trailing" constant="10" id="rmX-7I-tEC"/>
+                    </constraints>
+                </view>
+                <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xoh-Qz-hCC">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="H4M-yk-CRE" firstAttribute="trailing" secondItem="TOy-G4-0Yo" secondAttribute="trailing" constant="16" id="5I8-Jj-WBX"/>
                 <constraint firstItem="xoh-Qz-hCC" firstAttribute="bottom" secondItem="H4M-yk-CRE" secondAttribute="bottom" id="CsV-zc-EhM"/>
                 <constraint firstItem="ney-vA-PIg" firstAttribute="centerY" secondItem="urG-hl-Pf4" secondAttribute="centerY" id="Dy4-0s-llx"/>
                 <constraint firstItem="ney-vA-PIg" firstAttribute="centerX" secondItem="urG-hl-Pf4" secondAttribute="centerX" id="EpD-iO-q6G"/>
+                <constraint firstItem="TOy-G4-0Yo" firstAttribute="height" secondItem="xoh-Qz-hCC" secondAttribute="height" multiplier="0.5" id="IpY-s9-u9z"/>
                 <constraint firstItem="H4M-yk-CRE" firstAttribute="trailing" secondItem="ney-vA-PIg" secondAttribute="trailing" constant="10" id="SDH-wp-Tdb"/>
+                <constraint firstItem="TOy-G4-0Yo" firstAttribute="centerY" secondItem="xoh-Qz-hCC" secondAttribute="centerY" id="X2g-9w-1AB"/>
                 <constraint firstItem="ney-vA-PIg" firstAttribute="height" secondItem="xoh-Qz-hCC" secondAttribute="height" multiplier="0.35" id="d5O-tp-rBm"/>
+                <constraint firstItem="TOy-G4-0Yo" firstAttribute="centerX" secondItem="xoh-Qz-hCC" secondAttribute="centerX" id="d8g-6h-RMv"/>
                 <constraint firstItem="ney-vA-PIg" firstAttribute="leading" secondItem="H4M-yk-CRE" secondAttribute="leading" constant="10" id="dGo-Sb-yMO"/>
                 <constraint firstItem="ney-vA-PIg" firstAttribute="centerX" secondItem="xoh-Qz-hCC" secondAttribute="centerX" id="gg4-gc-W1T"/>
                 <constraint firstItem="xoh-Qz-hCC" firstAttribute="leading" secondItem="urG-hl-Pf4" secondAttribute="leading" id="j4M-Av-rRi"/>
+                <constraint firstItem="TOy-G4-0Yo" firstAttribute="leading" secondItem="H4M-yk-CRE" secondAttribute="leading" constant="16" id="lfb-lH-De5"/>
                 <constraint firstItem="ney-vA-PIg" firstAttribute="centerY" secondItem="xoh-Qz-hCC" secondAttribute="centerY" id="vdR-Cx-lkR"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="H4M-yk-CRE"/>
@@ -188,10 +226,15 @@
                 <outlet property="btnSafety" destination="f9g-Er-FNH" id="qtc-GN-VgR"/>
                 <outlet property="btnService" destination="quW-V8-MsT" id="tm5-ci-hSC"/>
                 <outlet property="btnfamily" destination="O59-a2-5cw" id="d3N-6o-7EV"/>
+                <outlet property="fareTblVw" destination="hOs-Df-kbo" id="zco-LS-Pt0"/>
+                <outlet property="labelAirportTitle" destination="tVh-Zc-DBo" id="mu4-Hf-ldQ"/>
                 <outlet property="labelSafety" destination="HfF-yR-kQJ" id="qcB-RJ-EZC"/>
                 <outlet property="labelService" destination="jqm-kQ-M9k" id="2hH-DZ-J3b"/>
                 <outlet property="labelTitle" destination="aA7-CC-Dd8" id="GXh-Aq-gUs"/>
                 <outlet property="labelfamily" destination="boE-Jb-y6c" id="J52-bf-27R"/>
+                <outlet property="viewBg" destination="xoh-Qz-hCC" id="QmX-MJ-BJY"/>
+                <outlet property="viewFare" destination="TOy-G4-0Yo" id="0hI-Hn-wxJ"/>
+                <outlet property="viewSOS" destination="ney-vA-PIg" id="DUA-dC-uUw"/>
             </connections>
             <point key="canvasLocation" x="138.40000000000001" y="152.47376311844079"/>
         </view>

@@ -19,11 +19,20 @@ class SOSView: UIView {
     @IBOutlet private weak var labelService: UILabel!
     @IBOutlet private weak var labelSafety : UILabel!
     @IBOutlet private weak var labelTitle : UILabel!
+    @IBOutlet private weak var labelAirportTitle : UILabel!
+    @IBOutlet private weak var fareTblVw : UITableView!
+    @IBOutlet private weak var viewFare : UIView!
+    @IBOutlet private weak var viewSOS : UIView!
+    @IBOutlet private weak var viewBg : UIView!
+    
     private var sosInfo: sosModel?
     private var contactArray = [String]()
     private var customerService: String?
     private var safetyAuth: String?
     private var selectedSos: String?
+    var showAirportFare: Bool?
+    var fareinfo: [AirportFare]?
+    
     
     let select = #imageLiteral(resourceName: "radioselected").withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
     let unselect = #imageLiteral(resourceName: "uncheck_icon").withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
@@ -57,6 +66,7 @@ class SOSView: UIView {
         self.initialLoads()
         self.localize()
         self.setDesign()
+        self.fareTblVw.reloadData()
     }
 
 }
@@ -64,8 +74,10 @@ class SOSView: UIView {
 extension SOSView {
     
     private func initialLoads() {
-        
+        self.fareTblVw.delegate = self
+        self.fareTblVw.dataSource = self
         self.choosenSOS = 0
+        self.viewBg.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.closeAction)))
         [self.btnCancel,self.btnCall].forEach { $0?.addTarget(self, action: #selector(self.buttonAction(sender:)), for: .touchUpInside)}
         [self.btnfamily,self.btnSafety,btnService].forEach { $0?.addTarget(self, action: #selector(self.choosenSOS(sender:)), for: .touchUpInside)}
     }
@@ -73,12 +85,25 @@ extension SOSView {
     func set(value: sosModel) {
         
         self.sosInfo = value
-     
+        self.viewFare.isHidden = true
+        self.viewSOS.isHidden = false
         self.contactArray.append(value.sos?.emergency_contact ?? "")
         self.contactArray.append("911")
         self.contactArray.append("911")
         self.selectedSos = contactArray[choosenSOS]
     }
+    
+    //MARK:- Airport fare
+    func setAirportFare(with value: EstimateFare?) {
+        self.viewFare.isHidden = !showAirportFare!
+        self.viewSOS.isHidden = true
+        if value != nil {
+            self.fareinfo = value!.airport_fares
+            print(fareinfo)
+        }
+        self.fareTblVw.reloadData()
+    }
+    
     
     private func setDesign() {
         [self.btnCancel,self.btnCall].forEach { Common.setFont(to: $0!,isTitle: true)}
@@ -89,6 +114,7 @@ extension SOSView {
     
     private func localize() {
         self.labelTitle.text = Constants.string.SOSAlert.localize()
+        self.labelAirportTitle.text = Constants.string.airportFare.localize()
         self.labelfamily.text = Constants.string.familycontact.localize()
         self.labelSafety.text = Constants.string.safetyAuth.localize()
         self.labelService.text = Constants.string.customerService.localize()
@@ -108,12 +134,38 @@ extension SOSView {
         
     }
     
-    func getSOS(){}
-    
     @objc private func choosenSOS(sender: UIButton){
         
         self.choosenSOS = sender.tag
         self.selectedSos = contactArray[choosenSOS]
         
     }
+    @objc private func closeAction(){
+        
+       self.onClickCancel?()
+        
+    }
+    
+    
+}
+
+extension SOSView : UITableViewDataSource,UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return fareinfo?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell()
+        let value  = "Driver \(self.fareinfo?[indexPath.row].radius ?? "0") \(User.main.currency ?? .Empty) \(self.fareinfo?[indexPath.row].price ?? "0")"
+        cell.textLabel!.text = value
+        cell.selectionStyle = .none
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60.0
+    }
+    
+
 }

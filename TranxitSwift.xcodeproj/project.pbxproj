@@ -111,6 +111,7 @@
 		086545652162062100BF546D /* PassbookWalletTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086545642162062100BF546D /* PassbookWalletTableViewCell.swift */; };
 		0865456721620A3500BF546D /* PassbookWalletTransaction.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0865456621620A3500BF546D /* PassbookWalletTransaction.xib */; };
 		086606E62005144400A79566 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086606E52005144400A79566 /* ImageView.swift */; };
+		086939E9229FC5D0001CDB53 /* airportFare.xib in Resources */ = {isa = PBXBuildFile; fileRef = 086939E8229FC5D0001CDB53 /* airportFare.xib */; };
 		086BAF5720076E0D0087F15A /* MakeJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BAF5620076E0D0087F15A /* MakeJson.swift */; };
 		086BAF5C200777890087F15A /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BAF5B200777890087F15A /* Global.swift */; };
 		086BAF5E200778200087F15A /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BAF5D200778200087F15A /* Toast.swift */; };
@@ -355,6 +356,7 @@
 		086545642162062100BF546D /* PassbookWalletTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassbookWalletTableViewCell.swift; sourceTree = "<group>"; };
 		0865456621620A3500BF546D /* PassbookWalletTransaction.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PassbookWalletTransaction.xib; sourceTree = "<group>"; };
 		086606E52005144400A79566 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
+		086939E8229FC5D0001CDB53 /* airportFare.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = airportFare.xib; sourceTree = "<group>"; };
 		086BAF5620076E0D0087F15A /* MakeJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeJson.swift; sourceTree = "<group>"; };
 		086BAF5B200777890087F15A /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		086BAF5D200778200087F15A /* Toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
@@ -617,6 +619,7 @@
 		0826C13420B0119E0005D0D8 /* HomePage */ = {
 			isa = PBXGroup;
 			children = (
+				086939E7229FC586001CDB53 /* airportFare */,
 				081D0854225370EC002D3982 /* SOS */,
 				08A50C402109AB5300CCDDA8 /* CancelReason */,
 				083617B920B6C71F009C9658 /* RatingView */,
@@ -1083,6 +1086,14 @@
 				08641D8E20A1B51C00AA0D1F /* CircularTransition.swift */,
 			);
 			name = "Circular Transition";
+			sourceTree = "<group>";
+		};
+		086939E7229FC586001CDB53 /* airportFare */ = {
+			isa = PBXGroup;
+			children = (
+				086939E8229FC5D0001CDB53 /* airportFare.xib */,
+			);
+			name = airportFare;
 			sourceTree = "<group>";
 		};
 		086BAF5320076D870087F15A /* Api */ = {
@@ -1821,6 +1832,7 @@
 				082D1B9920933D300000B7C8 /* WalkThroughView.xib in Resources */,
 				0881352321527DD800DA668E /* search.json in Resources */,
 				08001A0D203C241E0076D324 /* CountryPicker.bundle in Resources */,
+				086939E9229FC5D0001CDB53 /* airportFare.xib in Resources */,
 				0826C13620B011C80005D0D8 /* RequestSelectionView.xib in Resources */,
 				0811B17920E7B2AD00B78323 /* ChatReciever.xib in Resources */,
 				0802718920A2DC0100EAE8C8 /* LocationSelectionView.xib in Resources */,

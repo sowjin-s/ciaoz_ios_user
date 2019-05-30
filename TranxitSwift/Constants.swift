@@ -256,6 +256,8 @@ struct Constants {
     let city = "City"
     let state = "State"
     let postal = "PostalCode"
+    let airportFare = "AirportFare"
+    let viewFare = "ViewFare"
 
 }
 
