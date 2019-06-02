@@ -18,6 +18,9 @@ class RequestSelectionView: UIView {
     @IBOutlet private weak var buttonRideNow : UIButton!
     @IBOutlet private weak var viewUseWallet : UIView!
     @IBOutlet private weak var ViewLadyDriver: UIView!
+    @IBOutlet private weak var viewAirportFare : UIView!
+    @IBOutlet weak var viewEstimateFare : UIView!
+    @IBOutlet weak var viewCoupon : UIView!
     @IBOutlet private weak var labelEstimationFareString : UILabel!
     @IBOutlet private weak var labelEstimationFare : UILabel!
     @IBOutlet private weak var labelCouponFare : UILabel!
@@ -26,7 +29,7 @@ class RequestSelectionView: UIView {
     @IBOutlet private weak var buttonChangePayment : UIButton!
     @IBOutlet private weak var labelAirportString : Label!
     @IBOutlet private weak var buttonViewAirportFare : UIButton!
-    @IBOutlet private weak var viewAirportFare : UIView!
+    
     @IBOutlet private weak var buttonCoupon : UIButton!
     @IBOutlet private weak var imageViewModal : UIImageView!
     @IBOutlet private weak var viewImageModalBg : UIView!
@@ -221,7 +224,6 @@ extension RequestSelectionView {
     
     func setValues(values : Service) {
         self.service = values
-       // self.viewAirportFare.isHidden = (values.pricing?.is_airport_location?.lowercased() != "no") ? false : true
         self.viewUseWallet.isHidden = !(Float.removeNil(self.service?.pricing?.wallet_balance)>0)
         self.setEstimationFare(amount: self.service?.pricing?.estimated_fare_surge, isStrike: false)
         self.paymentType = User.main.isCashAllowed ? .CASH :( User.main.isCardAllowed ? .MOLPAY : .NONE)

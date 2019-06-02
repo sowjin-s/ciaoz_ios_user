@@ -101,6 +101,7 @@ extension SOSView {
             self.fareinfo = value!.airport_fares
             print(fareinfo)
         }
+        self.fareTblVw.separatorStyle = .none
         self.fareTblVw.reloadData()
     }
     
@@ -121,6 +122,12 @@ extension SOSView {
         self.btnCall.setTitle(Constants.string.call.localize().uppercased(), for: .normal)
         self.btnCancel.setTitle(Constants.string.Cancel.uppercased(), for: .normal)
         [self.btnCall,self.btnCancel].forEach { $0?.backgroundColor = .primary}
+        Common.setFont(to: labelAirportTitle)
+        Common.setFont(to: labelService)
+        Common.setFont(to: labelAirportTitle)
+        Common.setFont(to: labelfamily)
+        Common.setFont(to: labelSafety)
+        
     }
     
     @objc private func buttonAction(sender:UIButton){
@@ -157,8 +164,9 @@ extension SOSView : UITableViewDataSource,UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        let value  = "Driver \(self.fareinfo?[indexPath.row].radius ?? "0") \(User.main.currency ?? .Empty) \(self.fareinfo?[indexPath.row].price ?? "0")"
+        let value  = "• Driver \(self.fareinfo?[indexPath.row].radius ?? "0") ---> \(User.main.currency ?? .Empty) \(self.fareinfo?[indexPath.row].price ?? "0")"
         cell.textLabel!.text = value
+        Common.setFont(to: cell.textLabel)
         cell.selectionStyle = .none
         return cell
     }

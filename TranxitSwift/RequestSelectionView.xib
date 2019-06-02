@@ -458,6 +458,8 @@
                 <outlet property="labelUseWalletString" destination="jF7-ZX-cIR" id="5pn-dR-HjE"/>
                 <outlet property="labelWalletBalance" destination="DeU-7J-ghQ" id="zxd-td-jjX"/>
                 <outlet property="viewAirportFare" destination="M4M-CX-J7z" id="dde-5s-Px8"/>
+                <outlet property="viewCoupon" destination="AYU-TM-w5O" id="Lbc-Rj-9Bo"/>
+                <outlet property="viewEstimateFare" destination="vwQ-0K-nhM" id="wXN-AC-k1E"/>
                 <outlet property="viewImageModalBg" destination="cmo-rN-ec2" id="cQK-Bh-4bC"/>
                 <outlet property="viewLadyDriverNo" destination="tJc-Oi-pgc" id="1ah-JV-pSQ"/>
                 <outlet property="viewLadyDriverYes" destination="6Pb-DV-kh3" id="t6g-uR-Mje"/>

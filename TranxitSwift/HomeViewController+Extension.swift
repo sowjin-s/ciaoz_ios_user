@@ -153,6 +153,11 @@ extension HomeViewController {
         self.estimationFareView?.frame = CGRect(x: 0, y: self.view.frame.height-(self.estimationFareView!.bounds.height), width: self.view.frame.width, height: self.estimationFareView!.frame.height)
         print(self.estimationFareView!.frame.height-heightPadding)
         self.estimationFareView?.show(with: .bottom, completion: nil)
+        
+        if service.pricing?.is_airport_location?.lowercased() == "yes" {
+            self.estimationFareView?.viewEstimateFare.isHidden = true
+            self.estimationFareView?.viewCoupon.isHidden = true
+        }
         self.view.addSubview(self.estimationFareView!)
         self.estimationFareView?.scheduleAction = { [weak self] service in
             self?.schedulePickerView(on: { (date) in
